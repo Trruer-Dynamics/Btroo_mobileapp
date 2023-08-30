@@ -22,8 +22,7 @@ import {
 } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
-import axios from "axios";
+
 import { useDispatch, useSelector } from "react-redux";
 import { apiUrl } from "../../constants";
 import {
@@ -39,7 +38,7 @@ import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import truncateStr from "../../components/functions/truncateStr";
 import Paginator from "../../components/screenComponents/swiping/Paginator";
 import FullModal from "../../components/modals/FullModal";
-import Paginator2 from "../../components/screenComponents/swiping/Paginator2";
+
 
 const Item2 = ({ item }) => {
   let imageUri = String(item[0]);

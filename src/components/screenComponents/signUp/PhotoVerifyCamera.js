@@ -68,8 +68,6 @@ const PhotoVerifyCamera = ({}) => {
           flash: flash,
         });
 
-        // console.log('img_path','file://'+ photo.path)
-
         if (photo.path) {
           finalLoad("file://" + photo.path);
         }

@@ -9,70 +9,70 @@
 9        android:targetSdkVersion="33" />
 10
 11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-11-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/debug/AndroidManifest.xml:5:5-77
-11-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/debug/AndroidManifest.xml:5:22-75
+11-->/Users/rahul/Desktop/Btroo_New/android/app/src/debug/AndroidManifest.xml:5:5-77
+11-->/Users/rahul/Desktop/Btroo_New/android/app/src/debug/AndroidManifest.xml:5:22-75
 12    <uses-permission android:name="android.permission.INTERNET" />
-12-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:4:5-67
-12-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:4:22-64
+12-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:4:5-67
+12-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:4:22-64
 13    <uses-permission android:name="android.permission.CAMERA" />
-13-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:5:9-69
-13-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:5:26-66
+13-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:5:9-69
+13-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:5:26-66
 14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-14-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:6:5-81
-14-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:6:22-78
+14-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:6:5-81
+14-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:6:22-78
 15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-15-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:7:5-79
-15-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:7:22-76
+15-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:7:5-79
+15-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:7:22-76
 16    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-16-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:8:5-76
-16-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:8:22-73
+16-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:8:5-76
+16-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:8:22-73
 17    <uses-permission android:name="android.permission.READ_SMS" />
-17-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:9:5-67
-17-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:9:22-64
+17-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:9:5-67
+17-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:9:22-64
 18    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-18-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:10:5-70
-18-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:10:22-67
+18-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:10:5-70
+18-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:10:22-67
 19    <uses-permission android:name="android.permission.VIBRATE" />
-19-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:12:9-69
-19-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:12:26-67
+19-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:12:9-69
+19-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:12:26-67
 20    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-20-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:13:5-81
-20-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:13:22-78
+20-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:13:5-81
+20-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:13:22-78
 21    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-21-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:14:5-77
-21-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:14:22-74
+21-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:14:5-77
+21-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:14:22-74
 22    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-22-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:15:5-79
-22-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:15:22-76
+22-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:15:5-79
+22-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:15:22-76
 23    <uses-permission android:name="android.permission.VIBRATE" />
-23-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:12:9-69
-23-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:12:26-67
+23-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:12:9-69
+23-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:12:26-67
 24    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 24-->[com.facebook.flipper:flipper:0.125.0] /Users/rahul/.gradle/caches/transforms-3/87e9e28f7203a27b2f2a5f52d412de1f/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:16:5-76
 24-->[com.facebook.flipper:flipper:0.125.0] /Users/rahul/.gradle/caches/transforms-3/87e9e28f7203a27b2f2a5f52d412de1f/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:16:22-73
 25    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-25-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
-25-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
+25-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-79
+25-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-76
 26    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required for react-native-email-link on Android 30+ -->
-26-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-68
-26-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-65
+26-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-68
+26-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:22-65
 27    <queries>
-27-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:15
+27-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:15
 28        <intent>
-28-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:18
+28-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:18
 29            <action android:name="android.intent.action.VIEW" />
-29-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-65
-29-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-62
+29-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-65
+29-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-62
 30
 31            <data android:scheme="mailto" />
-31-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-45
-31-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:19-42
+31-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-45
+31-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:19-42
 32        </intent>
 33        <intent>
-33-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-12:18
+33-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-12:18
 34            <action android:name="android.media.action.IMAGE_CAPTURE" />
-34-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-73
-34-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-70
+34-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-73
+34-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-70
 35        </intent>
 36        <intent>
 36-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:25:9-27:18
@@ -83,8 +83,8 @@
 39    </queries>
 40
 41    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-41-->[:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
-41-->[:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
+41-->[:react-native-fs] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
+41-->[:react-native-fs] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
 42    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 42-->[com.google.firebase:firebase-messaging:23.2.0] /Users/rahul/.gradle/caches/transforms-3/2f5e49a71744b025b44d81f552e573fb/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:28:5-82
 42-->[com.google.firebase:firebase-messaging:23.2.0] /Users/rahul/.gradle/caches/transforms-3/2f5e49a71744b025b44d81f552e573fb/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:28:22-79
@@ -152,227 +152,227 @@
 66-->[me.leolin:ShortcutBadger:1.1.22] /Users/rahul/.gradle/caches/transforms-3/3f12743e064b78d2af22204639dcde07/transformed/jetified-ShortcutBadger-1.1.22/AndroidManifest.xml:50:22-86
 67
 68    <application
-68-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:20:5-72:19
+68-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:20:5-72:19
 69        android:name="com.btroo.MainApplication"
-69-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:21:7-38
+69-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:21:7-38
 70        android:allowBackup="false"
-70-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:25:7-34
+70-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:25:7-34
 71        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 71-->[androidx.core:core:1.7.0] /Users/rahul/.gradle/caches/transforms-3/22259c929aa488117423d75d2a95510f/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
 72        android:debuggable="true"
 73        android:icon="@mipmap/ic_launcher"
-73-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:23:7-41
+73-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:23:7-41
 74        android:label="@string/app_name"
-74-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:22:7-39
+74-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:22:7-39
 75        android:roundIcon="@mipmap/ic_launcher_round"
-75-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:24:7-52
+75-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:24:7-52
 76        android:supportsRtl="true"
 76-->[com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradle/caches/transforms-3/ac268df81f11d2c191778ad4138dae4f/transformed/jetified-VideoCompressor-1a262bba37/AndroidManifest.xml:16:9-35
 77        android:theme="@style/AppTheme"
-77-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:27:7-38
+77-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:27:7-38
 78        android:usesCleartextTraffic="true" >
-78-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:26:7-42
+78-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:26:7-42
 79        <activity
-79-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/debug/AndroidManifest.xml:27:9-29:11
+79-->/Users/rahul/Desktop/Btroo_New/android/app/src/debug/AndroidManifest.xml:27:9-29:11
 80            android:name="com.facebook.react.devsupport.DevSettingsActivity"
-80-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/debug/AndroidManifest.xml:27:19-83
+80-->/Users/rahul/Desktop/Btroo_New/android/app/src/debug/AndroidManifest.xml:27:19-83
 81            android:exported="false" />
-81-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/debug/AndroidManifest.xml:27:84-108
+81-->/Users/rahul/Desktop/Btroo_New/android/app/src/debug/AndroidManifest.xml:27:84-108
 82        <activity
-82-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:28:7-40:18
+82-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:28:7-40:18
 83            android:name="com.btroo.MainActivity"
-83-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:29:9-37
+83-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:29:9-37
 84            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
-84-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:31:9-118
+84-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:31:9-118
 85            android:exported="true"
-85-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:35:9-32
+85-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:35:9-32
 86            android:label="@string/app_name"
-86-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:30:9-41
+86-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:30:9-41
 87            android:launchMode="singleTask"
-87-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:32:9-40
+87-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:32:9-40
 88            android:screenOrientation="portrait"
-88-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:33:1-37
+88-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:33:1-37
 89            android:windowSoftInputMode="adjustResize" >
-89-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:34:9-51
+89-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:34:9-51
 90            <intent-filter>
-90-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:36:9-39:25
+90-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:36:9-39:25
 91                <action android:name="android.intent.action.MAIN" />
-91-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:37:13-65
-91-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:37:21-62
+91-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:37:13-65
+91-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:37:21-62
 92
 93                <category android:name="android.intent.category.LAUNCHER" />
-93-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:38:13-73
-93-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:38:23-70
+93-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:38:13-73
+93-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:38:23-70
 94            </intent-filter>
 95        </activity>
 96
 97        <meta-data
-97-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:42:7-43:44
+97-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:42:7-43:44
 98            android:name="com.dieam.reactnativepushnotification.notification_foreground"
-98-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:42:19-95
+98-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:42:19-95
 99            android:value="false" /> <!-- Change the resource name to your App's accent color - or any other color you want -->
-99-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:43:21-42
+99-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:43:21-42
 100        <meta-data
-100-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:45:9-46:54
+100-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:45:9-46:54
 101            android:name="com.dieam.reactnativepushnotification.notification_color"
-101-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:45:21-92
+101-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:45:21-92
 102            android:resource="@color/white" /> <!-- or @android:color/{name} to use a standard color -->
-102-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:46:21-52
+102-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:46:21-52
 103        <receiver
-103-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:48:9-50:11
+103-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:48:9-50:11
 104            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions"
-104-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:48:19-105
+104-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:48:19-105
 105            android:exported="false" />
-105-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:49:9-33
+105-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:49:9-33
 106        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
-106-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:51:9-53:11
-106-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:51:19-107
+106-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:51:9-53:11
+106-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:51:19-107
 107        <receiver
-107-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:54:9-62:20
+107-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:54:9-62:20
 108            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver"
-108-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:54:19-115
+108-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:54:19-115
 109            android:exported="false" >
-109-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:55:12-36
+109-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:55:12-36
 110            <intent-filter>
-110-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:57:13-61:29
+110-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:57:13-61:29
 111                <action android:name="android.intent.action.BOOT_COMPLETED" />
-111-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:58:17-79
-111-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:58:25-76
+111-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:58:17-79
+111-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:58:25-76
 112                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-112-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:59:17-82
-112-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:59:25-79
+112-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:59:17-82
+112-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:59:25-79
 113                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
-113-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:60:17-81
-113-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:60:25-79
+113-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:60:17-81
+113-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:60:25-79
 114            </intent-filter>
 115        </receiver>
 116
 117        <service
-117-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:64:9-70:19
+117-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:64:9-70:19
 118            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
-118-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:65:13-107
+118-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:65:13-107
 119            android:exported="false" >
-119-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:66:13-37
+119-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:66:13-37
 120            <intent-filter>
-120-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:67:13-69:29
+120-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:67:13-69:29
 121                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-121-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:68:17-78
-121-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:68:25-75
+121-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:68:17-78
+121-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:68:25-75
 122            </intent-filter>
 123        </service>
 124
 125        <meta-data
-125-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-16:36
+125-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-16:36
 126            android:name="firebase_analytics_collection_enabled"
-126-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-65
+126-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-65
 127            android:value="true" />
-127-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-33
+127-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-33
 128        <meta-data
-128-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-19:37
+128-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-19:37
 129            android:name="firebase_analytics_collection_deactivated"
-129-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-69
+129-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-69
 130            android:value="false" />
-130-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-34
+130-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-34
 131        <meta-data
-131-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-22:36
+131-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:9-22:36
 132            android:name="google_analytics_adid_collection_enabled"
-132-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-68
+132-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-68
 133            android:value="true" />
-133-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-33
+133-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-33
 134        <meta-data
-134-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-25:36
+134-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:9-25:36
 135            android:name="google_analytics_ssaid_collection_enabled"
-135-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-69
+135-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:13-69
 136            android:value="true" />
-136-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-33
+136-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:13-33
 137        <meta-data
-137-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:9-28:36
+137-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:9-28:36
 138            android:name="google_analytics_default_allow_ad_personalization_signals"
-138-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-85
+138-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-85
 139            android:value="true" />
-139-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-33
+139-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-33
 140        <meta-data
-140-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:9-31:36
+140-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:9-31:36
 141            android:name="google_analytics_automatic_screen_reporting_enabled"
-141-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-79
+141-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-79
 142            android:value="true" />
-142-->[:react-native-firebase_analytics] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-33
+142-->[:react-native-firebase_analytics] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:31:13-33
 143
 144        <service
-144-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-16:40
+144-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:9-16:40
 145            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingHeadlessService"
-145-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-103
+145-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-103
 146            android:exported="false" />
-146-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
+146-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-37
 147        <service
-147-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-23:19
+147-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:9-23:19
 148            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingService"
-148-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-95
+148-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-95
 149            android:exported="false" >
-149-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-37
+149-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-37
 150            <intent-filter>
-150-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:67:13-69:29
+150-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:67:13-69:29
 151                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-151-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:68:17-78
-151-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:68:25-75
+151-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:68:17-78
+151-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:68:25-75
 152            </intent-filter>
 153        </service>
 154
 155        <receiver
-155-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-32:20
+155-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-32:20
 156            android:name="io.invertase.firebase.messaging.ReactNativeFirebaseMessagingReceiver"
-156-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-96
+156-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-96
 157            android:exported="true"
-157-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-36
+157-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-36
 158            android:permission="com.google.android.c2dm.permission.SEND" >
-158-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-73
+158-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-73
 159            <intent-filter>
-159-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-31:29
+159-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-31:29
 160                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-160-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-81
-160-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:25-78
+160-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-81
+160-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:25-78
 161            </intent-filter>
 162        </receiver>
 163
 164        <meta-data
-164-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:34:9-36:36
+164-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:34:9-36:36
 165            android:name="firebase_messaging_auto_init_enabled"
-165-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-64
+165-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:35:13-64
 166            android:value="true" />
-166-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-33
+166-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:36:13-33
 167        <meta-data
-167-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:37:9-39:32
+167-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:37:9-39:32
 168            android:name="com.google.firebase.messaging.default_notification_channel_id"
-168-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-89
+168-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:38:13-89
 169            android:value="" />
-169-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:39:13-29
+169-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:39:13-29
 170        <meta-data
-170-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:9-42:47
+170-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:40:9-42:47
 171            android:name="com.google.firebase.messaging.default_notification_color"
-171-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-84
+171-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:41:13-84
 172            android:resource="@color/white" />
-172-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:13-44
+172-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:42:13-44
 173        <meta-data
-173-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-13:36
+173-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-13:36
 174            android:name="app_data_collection_default_enabled"
-174-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-63
+174-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-63
 175            android:value="true" />
-175-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-33
+175-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-33
 176
 177        <service
-177-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-23:19
+177-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:9-23:19
 178            android:name="com.google.firebase.components.ComponentDiscoveryService"
-178-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-84
+178-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:16:13-84
 179            android:directBootAware="true"
-179-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-43
+179-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:17:13-43
 180            android:exported="false" >
-180-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
+180-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:13-37
 181            <meta-data
-181-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-22:85
+181-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-22:85
 182                android:name="com.google.firebase.components:io.invertase.firebase.app.ReactNativeFirebaseAppRegistrar"
-182-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:17-120
+182-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:17-120
 183                android:value="com.google.firebase.components.ComponentRegistrar" />
-183-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:22:17-82
+183-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:22:17-82
 184            <meta-data
 184-->[com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:69:13-71:85
 185                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
@@ -418,73 +418,73 @@
 205        </service>
 206
 207        <provider
-207-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-29:38
+207-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:9-29:38
 208            android:name="io.invertase.firebase.app.ReactNativeFirebaseAppInitProvider"
-208-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-88
+208-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-88
 209            android:authorities="com.btroo.reactnativefirebaseappinitprovider"
-209-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-86
+209-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:27:13-86
 210            android:exported="false"
-210-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-37
+210-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:13-37
 211            android:initOrder="99" />
-211-->[:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-35
+211-->[:react-native-firebase_app] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-35
 212        <provider
-212-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:9-26:20
+212-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:18:9-26:20
 213            android:name="com.reactnative.ivpusic.imagepicker.IvpusicImagePickerFileProvider"
-213-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-94
+213-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:19:13-94
 214            android:authorities="com.btroo.provider"
-214-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-60
+214-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:20:13-60
 215            android:exported="false"
-215-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-37
+215-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:21:13-37
 216            android:grantUriPermissions="true" >
-216-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-47
+216-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:22:13-47
 217            <meta-data
-217-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:78
+217-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:78
 218                android:name="android.support.FILE_PROVIDER_PATHS"
-218-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-67
+218-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-67
 219                android:resource="@xml/ivpusic_imagepicker_provider_paths" />
-219-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-75
+219-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-75
 220        </provider>
 221
 222        <activity
-222-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-30:72
+222-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:28:9-30:72
 223            android:name="com.yalantis.ucrop.UCropActivity"
-223-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-60
+223-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-60
 224            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-224-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-69
+224-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:13-69
 225
 226        <provider
-226-->[:react-native-image-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+226-->[:react-native-image-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 227            android:name="com.imagepicker.ImagePickerProvider"
-227-->[:react-native-image-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-63
+227-->[:react-native-image-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-63
 228            android:authorities="com.btroo.imagepickerprovider"
-228-->[:react-native-image-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-71
+228-->[:react-native-image-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-71
 229            android:exported="false"
-229-->[:react-native-image-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+229-->[:react-native-image-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
 230            android:grantUriPermissions="true" >
-230-->[:react-native-image-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+230-->[:react-native-image-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
 231            <meta-data
-231-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:78
+231-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:78
 232                android:name="android.support.FILE_PROVIDER_PATHS"
-232-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-67
+232-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-67
 233                android:resource="@xml/imagepicker_provider_paths" />
-233-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-75
+233-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-75
 234        </provider>
 235        <provider
-235-->[:react-native-share] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
+235-->[:react-native-share] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-18:20
 236            android:name="cl.json.RNShareFileProvider"
-236-->[:react-native-share] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-55
+236-->[:react-native-share] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-55
 237            android:authorities="com.btroo.rnshare.fileprovider"
-237-->[:react-native-share] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-72
+237-->[:react-native-share] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-72
 238            android:exported="false"
-238-->[:react-native-share] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+238-->[:react-native-share] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
 239            android:grantUriPermissions="true" >
-239-->[:react-native-share] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
+239-->[:react-native-share] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-share/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-47
 240            <meta-data
-240-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:78
+240-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:23:13-25:78
 241                android:name="android.support.FILE_PROVIDER_PATHS"
-241-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-67
+241-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:24:17-67
 242                android:resource="@xml/share_download_paths" />
-242-->[:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-75
+242-->[:react-native-image-crop-picker] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:25:17-75
 243        </provider>
 244
 245        <activity
@@ -502,8 +502,8 @@
 251            <intent-filter>
 251-->[com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:35:13-45:29
 252                <action android:name="android.intent.action.VIEW" />
-252-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-65
-252-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-62
+252-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-65
+252-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-62
 253
 254                <category android:name="android.intent.category.DEFAULT" />
 254-->[com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:38:17-76
@@ -513,11 +513,11 @@
 255-->[com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:27-75
 256
 257                <data
-257-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-45
+257-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-45
 258                    android:host="firebase.auth"
 259                    android:path="/"
 260                    android:scheme="genericidp" />
-260-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:19-42
+260-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:19-42
 261            </intent-filter>
 262        </activity>
 263        <activity
@@ -535,8 +535,8 @@
 269            <intent-filter>
 269-->[com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:53:13-63:29
 270                <action android:name="android.intent.action.VIEW" />
-270-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-65
-270-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-62
+270-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-65
+270-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-62
 271
 272                <category android:name="android.intent.category.DEFAULT" />
 272-->[com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:38:17-76
@@ -546,11 +546,11 @@
 273-->[com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:27-75
 274
 275                <data
-275-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-45
+275-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-45
 276                    android:host="firebase.auth"
 277                    android:path="/"
 278                    android:scheme="recaptcha" />
-278-->[:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:19-42
+278-->[:react-native-email-link] /Users/rahul/Desktop/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:19-42
 279            </intent-filter>
 280        </activity>
 281
@@ -563,10 +563,10 @@
 285            android:permission="com.google.android.c2dm.permission.SEND" >
 285-->[com.google.firebase:firebase-messaging:23.2.0] /Users/rahul/.gradle/caches/transforms-3/2f5e49a71744b025b44d81f552e573fb/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:34:13-73
 286            <intent-filter>
-286-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-31:29
+286-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-31:29
 287                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-287-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-81
-287-->[:react-native-firebase_messaging] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:25-78
+287-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:17-81
+287-->[:react-native-firebase_messaging] /Users/rahul/Desktop/Btroo_New/node_modules/@react-native-firebase/messaging/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:30:25-78
 288            </intent-filter>
 289        </receiver>
 290        <!--
@@ -582,10 +582,10 @@
 297            android:exported="false" >
 297-->[com.google.firebase:firebase-messaging:23.2.0] /Users/rahul/.gradle/caches/transforms-3/2f5e49a71744b025b44d81f552e573fb/transformed/jetified-firebase-messaging-23.2.0/AndroidManifest.xml:47:13-37
 298            <intent-filter android:priority="-500" >
-298-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:67:13-69:29
+298-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:67:13-69:29
 299                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-299-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:68:17-78
-299-->/Users/rahul/Desktop/BtrooProject/Btroo_New/android/app/src/main/AndroidManifest.xml:68:25-75
+299-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:68:17-78
+299-->/Users/rahul/Desktop/Btroo_New/android/app/src/main/AndroidManifest.xml:68:25-75
 300            </intent-filter>
 301        </service>
 302        <service

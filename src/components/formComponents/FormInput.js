@@ -127,8 +127,6 @@ const FormInput = ({
               let last = text.charAt(text.length - 1);
               let as_code = last.charCodeAt();
 
-              // console.log("last",last,typeof(as_code) ,as_code)
-
               let symbol_con =
                 (as_code > 32 && as_code < 48) ||
                 (as_code > 57 && as_code < 65) ||

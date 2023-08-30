@@ -92,20 +92,16 @@ const PhotoPositioning = ({ navigation, route }) => {
         cr = 0.027;
       }
 
-      // console.log("rt",rt, cr)
 
       let tx = scrn_width * rt * cr;
       // + diff * 0.03;
       // let tx = scrn_width - diff
 
-      // console.log("tx",tx)
       let pageX2 = pageX + diff;
       let percXp = (pageX / scrn_width) * 100;
       let percXpm = (pageX2 / scrn_width) * 100;
 
-      // console.log("translateX.value",translateX.value)
-      // console.log("percXp",percXp)
-
+      
       if (scale.value <= 2) {
         if (percXp > 2.7) {
           // rspW(5.1)
@@ -124,13 +120,11 @@ const PhotoPositioning = ({ navigation, route }) => {
       let heC = 178;
       let heCm = 115;
 
-      console.log(height);
+      
 
       const ty = rt_h * heC;
       const tym = rt_h * heCm + extTrm;
 
-      console.log("translateY.value", translateY.value);
-      // console.log("ty", ty)
 
       if (scale.value <= 2) {
         if (translateY.value > heC) {
@@ -219,8 +213,6 @@ const PhotoPositioning = ({ navigation, route }) => {
   const [hw, sethw] = useState(1);
 
   useLayoutEffect(() => {
-    // console.log("scr ", scrn_width, scrn_height)
-    // console.log("after",img_w,img_h)
 
     if (img_w < scrn_width) {
       setaw(scrn_width);
@@ -228,7 +220,7 @@ const PhotoPositioning = ({ navigation, route }) => {
     let sr = 1 + img_w / img_h;
 
     let mh = img_h * sr;
-    // console.log("sr",sr,mh)
+
     setah(mh);
   }, []);
 
