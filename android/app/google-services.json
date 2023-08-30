@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "724344904966",
+    "project_id": "btroo-2023",
+    "storage_bucket": "btroo-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724344904966:android:fa41bd429b236686635287",
+        "android_client_info": {
+          "package_name": "com.btroo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724344904966-jl3haceqc1ltcrr3cdt14viag6gb9e7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEjj8jYskqnyth09uQXOdQWZI3CGB21-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724344904966-jl3haceqc1ltcrr3cdt14viag6gb9e7b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "724344904966-67h6bulj9493h9bdn7lig905d1nr0u1d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.btroo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

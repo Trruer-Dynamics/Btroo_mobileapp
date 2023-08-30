@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>724344904966-g9uj8mmanuj8cljpgf4iqpkc822ro91f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.724344904966-g9uj8mmanuj8cljpgf4iqpkc822ro91f</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD6B1iFHRh1PWXbo__Zyzmbio-CRQGfv7E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>724344904966</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.TrruerDynamics.bTroo</string>
+	<key>PROJECT_ID</key>
+	<string>btroo-2023</string>
+	<key>STORAGE_BUCKET</key>
+	<string>btroo-2023.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:724344904966:ios:bbdbf452492461cc635287</string>
+</dict>
+</plist>
