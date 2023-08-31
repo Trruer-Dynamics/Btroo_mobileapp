@@ -107,7 +107,7 @@ const UserProvider = ({ children, navigationRef }) => {
       // setloading(false);
 
       console.log("removeToken error", error);
-      Alert.alert("Error", "Something Went Wrong");
+      // Alert.alert(" removeToken Error", "Something Went Wrong");
     }
   };
 
@@ -138,7 +138,7 @@ const UserProvider = ({ children, navigationRef }) => {
 
   useEffect(() => {
     console.log("is_session_expired", is_session_expired);
-    if (is_session_expired && DeviceToken != "") {
+    if (is_session_expired == true && DeviceToken != "") {
       // alert("Session Expired")
       removeToken();
       dispatch(setUserLoggined(false));
@@ -146,7 +146,7 @@ const UserProvider = ({ children, navigationRef }) => {
       dispatch(setProfiledata({}));
       dispatch(setProfileImgs([]));
       dispatch(setSessionExpired(false));
-      navigation.navigate("Intro");
+      // navigation.navigate("Intro");
 
       const resetAction = CommonActions.reset({
         index: 1,

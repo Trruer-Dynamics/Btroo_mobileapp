@@ -7,14 +7,14 @@ import {
   TouchableOpacity,
   Animated,
   Image,
-  ScrollView,
+  // ScrollView,
   Alert,
   StatusBar,
   TouchableWithoutFeedback,
   Pressable,
 } from "react-native";
 
-import { TouchableOpacity as TouchableOpacityG } from "react-native-gesture-handler";
+import { TouchableOpacity as TouchableOpacityG, ScrollView } from "react-native-gesture-handler";
 
 import React, {
   useEffect,
@@ -268,7 +268,7 @@ const SwipeCard = ({
   const rotate = swipe.x.interpolate({
     inputRange: [-100, 0, 100],
 
-    outputRange: ["-8deg", "0deg", "8deg"],
+    outputRange: ["-4deg", "0deg", "4deg"],
   });
 
   const likeOpacity = leftX.interpolate({
@@ -480,7 +480,7 @@ const SwipeCard = ({
   const [super_liked_profile, setsuper_liked_profile] = useState(false);
 
   useLayoutEffect(() => {
-    // console.log("\ncard_itm",card_itm.city)
+    console.log("\ncard_itm",isFirst)
     console.log("profilestatus", card_itm.profilestatus.profilestatus);
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
@@ -493,10 +493,15 @@ const SwipeCard = ({
         {
           backgroundColor: "#fff",
           position: "absolute",
-          width: "100%",
+          width: scrn_width,
           height: "100%",
           left: 0,
           top: 0,
+          // zIndex: Platform.OS == 'ios'?  mainIndex : 100 - mainIndex,
+          zIndex:  100 - mainIndex,
+          // zIndex:  mainIndex,
+
+
           transform: [
             {
               scale: !isFirst ? scaleValue : 1,
@@ -825,22 +830,23 @@ const SwipeCard = ({
 
             {/* Profile Details Area */}
 
+
             <ScrollView
               style={styles.profileDetailsCont}
+              // contentContainerStyle={{
+              //   flexGrow:1,
+              //   borderWidth:1,
+              //   borderColor:'red',
+              // }}
               bounces={false}
               showsVerticalScrollIndicator={false}
               scrollEventThrottle={300}
             >
-              <Pressable
+              <TouchableOpacityG
+              activeOpacity={1}
                 onLongPress={() => {
                   setbio_enlarge(true);
                 }}
-
-                //  onPress={
-                //   ()=>{
-                //    setbio_enlarge(true)
-                //  }
-                // }
               >
                 <View
                   style={{
@@ -1043,8 +1049,10 @@ const SwipeCard = ({
                     </View>
                   )}
                 </View>
-              </Pressable>
+              </TouchableOpacityG>
             </ScrollView>
+
+     
           </View>
 
           {/* Prompts Modal */}
@@ -1206,9 +1214,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // paddingHorizontal: rspW(2),
     width: rspW(86),
+    height: scrn_height,
     // height: rspH(70),
     // paddingBottom: rspH(30),
     marginTop: rspH(3.4),
+    // backgroundColor:'red',
     // marginBottom: rspH(Platform.OS == 'ios' ? 3.4 : 5.6),
   },
   profileDetailsSubCont: {

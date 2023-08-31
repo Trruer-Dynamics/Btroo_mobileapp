@@ -22,6 +22,8 @@ import React, {
   useCallback,
   useEffect,
   useContext,
+  memo,
+  useMemo,
 } from "react";
 import colors from "../../styles/colors";
 import {
@@ -178,8 +180,9 @@ const SwiperOr = ({}) => {
   const [warn_step, setwarn_step] = useState(0);
   const [redirect_to_settings, setredirect_to_settings] = useState(false);
   const [promptStep, setpromptStep] = useState(1);
-
+  
   const [profiles, setprofiles] = useState([]);
+
   const [empty_profile_call, setempty_profile_call] = useState(false);
 
   // Report Control
@@ -240,14 +243,17 @@ const SwiperOr = ({}) => {
 
     upY.setValue(0);
 
-    setprofiles((prevState) => prevState.slice(1));
+    setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
 
     swipe.setValue({ x: 0, y: 0 });
     // console.log('swippingcount', swippingcount);
     if (swippingcount >= 2) {
       setpromptTime(true);
     }
-  }, [swipe, swippingcount]);
+  },
+   [swipe, swippingcount]
+  //  []
+  );
 
   const handleChoiceButtons = useCallback(
     (direction) => {
@@ -583,9 +589,11 @@ const SwiperOr = ({}) => {
   const getFilterProfiles = async () => {
     console.log("\ngetFilterProfiles");
     setprofile_call(true);
-
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
     await axios
-      .get(apiUrl + "filter_user/" + profile_data.user.id + "?page=1")
+      .get(apiUrl + "filter_user/" + profile_data.user.id + "?page=1", {headers})
       .then((resp) => {
         // alert(`response ${Platform.OS}`)
         let resp_data = resp.data.data;
@@ -618,10 +626,13 @@ const SwiperOr = ({}) => {
 
   const getRejectedProfiles = async () => {
     setprofile_call(true);
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
 
     // alert('Profile Call', profile_call)
     await axios
-      .get(apiUrl + "swap_again/" + profile_data.user.id)
+      .get(apiUrl + "swap_again/" + profile_data.user.id,{headers})
       .then((resp) => {
         let resp_data = resp.data;
 
@@ -633,6 +644,7 @@ const SwiperOr = ({}) => {
           let active_profiles = resp_data.filter((v) => v.active == true);
           // console.log('active_profiles len', active_profiles.length);
           setprofiles(active_profiles);
+    
           setloading2(false);
         }
         // else {
@@ -659,6 +671,7 @@ const SwiperOr = ({}) => {
   }, [appStateVisible]);
 
   useEffect(() => {
+
     if (profiles.length == 0) {
       if (!empty_profile_call) {
         dispatch(setProfileRefresh(!profile_refresh));
@@ -866,9 +879,52 @@ const SwiperOr = ({}) => {
         }}
       >
         {!loading && !loading2 && !promptsmodalVisible ? (
-          <View style={{ flex: 1 }}>
-            {profiles
-              .map((item, idx) => {
+          <SafeAreaView style={{ 
+            flex: 1,
+          // height:scrn_height,
+          // width: scrn_width,
+          // position:'relative' 
+          }}>
+            <FlatList
+            pagingEnabled
+            // horizontal
+            // inverted
+            contentContainerStyle={{
+              flexGrow:1,
+              borderWidth:1,
+              borderColor: '#fff',
+            }}
+            bounces={false}
+            data={profiles}
+            keyExtractor={itm => itm.created_on}
+            renderItem={({item, index})=>{
+              const isFirst = index == profiles.length - 1;
+              console.log(Platform.OS, "isFirst",isFirst, index)
+              return(
+                <SwipeCard
+                
+                                    card_itm={item}
+                                    iconRotate={iconRotate}
+                                    iconTranslateX={iconTranslateX}
+                                    iconTranslateY={iconTranslateY}
+                                    handleChoiceButtons={handleChoiceButtons}
+                                    isFirst={isFirst}
+                                    swipe={swipe}
+                                    scaleValue={scaleValue}
+                                    leftX={leftX}
+                                    rightX={rightX}
+                                    upY={upY}
+                                    mainIndex={index}
+                                    setswippingcount={setswippingcount}
+                                    swippingcount={swippingcount}
+                                  />
+                              )
+            }}
+            />
+            {/* {profiles
+            .filter(v => profiles_ref.current.includes(v))
+            .map((item, idx) => {
+                // const newItem = useMemo(() => {return item}, [item])
                 const isFirst = idx === 0;
                 return (
                   <SwipeCard
@@ -889,8 +945,8 @@ const SwiperOr = ({}) => {
                   />
                 );
               })
-              .reverse()}
-          </View>
+              .reverse()} */}
+          </SafeAreaView>
         ) : (
           // Loading Container
           <View style={{ ...styles.container, alignItems: "center" }}>
@@ -941,6 +997,7 @@ const SwiperOr = ({}) => {
                   onPress={() => {
                     if (warn_step == 2) {
                       // setProfileRefresh(!profile_refresh);
+                      
                       getRejectedProfiles();
                     }
 
@@ -1042,7 +1099,7 @@ const SwiperOr = ({}) => {
   );
 };
 
-export default SwiperOr;
+export default memo(SwiperOr);
 
 const styles = StyleSheet.create({
   container: {

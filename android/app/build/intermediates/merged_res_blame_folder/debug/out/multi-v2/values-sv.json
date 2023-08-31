@@ -4,6 +4,23 @@
             "outputFile": "com.btroo.app-mergeDebugResources-46:/values-sv/values-sv.xml",
             "map": [
                 {
+                    "source": "/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/packaged_res/debug/values-sv/values-sv.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,111,171,227,286,330,391,439,499,551,597",
+                        "endColumns": "55,59,55,58,43,60,47,59,51,45,56",
+                        "endOffsets": "106,166,222,281,325,386,434,494,546,592,649"
+                    },
+                    "to": {
+                        "startLines": "37,57,58,111,112,113,114,115,116,119,120",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3167,5529,5589,9435,9494,9538,9599,9647,9707,9940,9986",
+                        "endColumns": "55,59,55,58,43,60,47,59,51,45,56",
+                        "endOffsets": "3218,5584,5640,9489,9533,9594,9642,9702,9754,9981,10038"
+                    }
+                },
+                {
                     "source": "/Users/rahul/.gradle/caches/transforms-3/22259c929aa488117423d75d2a95510f/transformed/core-1.7.0/res/values-sv/values-sv.xml",
                     "from": {
                         "startLines": "2",
@@ -18,23 +35,6 @@
                         "startOffsets": "9839",
                         "endColumns": "100",
                         "endOffsets": "9935"
-                    }
-                },
-                {
-                    "source": "/Users/rahul/Desktop/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/packaged_res/debug/values-sv/values-sv.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,111,171,227,286,330,391,439,499,551,597",
-                        "endColumns": "55,59,55,58,43,60,47,59,51,45,56",
-                        "endOffsets": "106,166,222,281,325,386,434,494,546,592,649"
-                    },
-                    "to": {
-                        "startLines": "37,57,58,111,112,113,114,115,116,119,120",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3167,5529,5589,9435,9494,9538,9599,9647,9707,9940,9986",
-                        "endColumns": "55,59,55,58,43,60,47,59,51,45,56",
-                        "endOffsets": "3218,5584,5640,9489,9533,9594,9642,9702,9754,9981,10038"
                     }
                 },
                 {
