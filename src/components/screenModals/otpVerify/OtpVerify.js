@@ -154,7 +154,9 @@ const OtpVerify = ({
 
       if (user_code == 400) {
         await setModalVisible(false);
-        Alert.alert("", "User Already Exist!\n Please Login.");
+        // Alert.alert("", "User Already Exist!\nPlease Login.");
+        Alert.alert("", "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account.");
+
       } else if (user_code == 200) {
         await dispatch(setSessionExpired(false));
         if (DeviceToken != "") {
@@ -413,52 +415,51 @@ const OtpVerify = ({
 
   // To verify sent otp
   const verifyOtp = async () => {
-    if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
-      setotperr(false);
-
-      dispatch(
-        setActiveUserLocationDetails({
-          ...active_user_location_details,
-          mobile: "+" + ph_code + "" + ph_no,
-        })
-      );
-
-      if (action == "login") {
-        userLogin(); // if action is login call login api
-      } else {
-        sendActiveUserDetails(); // if action is signup call signup api
-      }
-    } else {
-      setotperr(true); // if otp is invalid
-    }
-
-    // try {
-    //   setloading(true)
-    //   await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
-
-    //   // alert("Otp Verify Successfully")
-    //   console.log("\n Otp Verify Successfully")
-
+    // if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
     //   setotperr(false);
 
     //   dispatch(
     //     setActiveUserLocationDetails({
     //       ...active_user_location_details,
-    //       mobile: '+' + ph_code + '' + ph_no,
-    //     }),
+    //       mobile: "+" + ph_code + "" + ph_no,
+    //     })
     //   );
 
-    //   if (action == 'login') {
-    //     userLogin();
+    //   if (action == "login") {
+    //     userLogin(); // if action is login call login api
     //   } else {
-    //     sendActiveUserDetails();
+    //     sendActiveUserDetails(); // if action is signup call signup api
     //   }
-
-    // } catch (error) {
-    //   setloading(false)
-    //   console.log("otp verification failed", error)
-    //   setotperr(true)
+    // } else {
+    //   setotperr(true); // if otp is invalid
     // }
+
+    try {
+      setloading(true)
+      await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
+      
+      console.log("\n Otp Verify Successfully")
+
+      setotperr(false);
+
+      dispatch(
+        setActiveUserLocationDetails({
+          ...active_user_location_details,
+          mobile: '+' + ph_code + '' + ph_no,
+        }),
+      );
+
+      if (action == 'login') {
+        userLogin();
+      } else {
+        sendActiveUserDetails();
+      }
+
+    } catch (error) {
+      setloading(false)
+      console.log("otp verification failed", error)
+      setotperr(true)
+    }
   };
 
   // To resend OTP after 30 seconds
@@ -515,6 +516,7 @@ const OtpVerify = ({
         height: scrn_height,
       }}
     >
+      
       <TouchableOpacity
         activeOpacity={1}
         style={{
@@ -961,7 +963,7 @@ const styles = StyleSheet.create({
     lineHeight: rspF(2),
     color: colors.blue,
   },
-  counter_cont: {
+  counter_cont: { 
     alignSelf: "flex-end",
     marginBottom: rspH(1.2),
   },

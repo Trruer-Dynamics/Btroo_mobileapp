@@ -92,7 +92,7 @@ MERGED from [androidx.appcompat:appcompat:1.4.1] /Users/rahul/.gradle/caches/tra
 MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/rahul/.gradle/caches/transforms-3/1a35ed5105ed37ea853e05e916f991da/transformed/sqlite-framework-2.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.4.1] /Users/rahul/.gradle/caches/transforms-3/c70a285c3432c27aefea629febb2d434/transformed/jetified-appcompat-resources-1.4.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/rahul/.gradle/caches/transforms-3/6728a44bec59294e4fa02311258c49cd/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:17:1-40:12
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-iid:17.0.0] /Users/rahul/.gradle/caches/transforms-3/481dc29721caed0573831bcfdd8ccf63/transformed/jetified-play-services-iid-17.0.0/AndroidManifest.xml:17:1-28:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] /Users/rahul/.gradle/caches/transforms-3/0bd16382aec55a9c99f8449c92842946/transformed/jetified-play-services-auth-api-phone-18.0.1/AndroidManifest.xml:2:1-7:12
@@ -333,8 +333,8 @@ MERGED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.grad
 MERGED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradle/caches/transforms-3/ac268df81f11d2c191778ad4138dae4f/transformed/jetified-VideoCompressor-1a262bba37/AndroidManifest.xml:14:5-16:38
 MERGED from [com.google.android.material:material:1.1.0] /Users/rahul/.gradle/caches/transforms-3/dc5e3db9b39d80c5c0e8358f138d606d/transformed/material-1.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.1.0] /Users/rahul/.gradle/caches/transforms-3/dc5e3db9b39d80c5c0e8358f138d606d/transformed/material-1.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:22:5-38:19
-MERGED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-iid:17.0.0] /Users/rahul/.gradle/caches/transforms-3/481dc29721caed0573831bcfdd8ccf63/transformed/jetified-play-services-iid-17.0.0/AndroidManifest.xml:26:5-20
@@ -675,8 +675,8 @@ MERGED from [androidx.appcompat:appcompat-resources:1.4.1] /Users/rahul/.gradle/
 MERGED from [androidx.appcompat:appcompat-resources:1.4.1] /Users/rahul/.gradle/caches/transforms-3/c70a285c3432c27aefea629febb2d434/transformed/jetified-appcompat-resources-1.4.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/rahul/.gradle/caches/transforms-3/6728a44bec59294e4fa02311258c49cd/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/rahul/.gradle/caches/transforms-3/6728a44bec59294e4fa02311258c49cd/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:20:5-22:41
-MERGED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-iid:17.0.0] /Users/rahul/.gradle/caches/transforms-3/481dc29721caed0573831bcfdd8ccf63/transformed/jetified-play-services-iid-17.0.0/AndroidManifest.xml:20:5-44
@@ -1262,25 +1262,25 @@ ADDED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradl
 	android:name
 		ADDED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradle/caches/transforms-3/ac268df81f11d2c191778ad4138dae4f/transformed/jetified-VideoCompressor-1a262bba37/AndroidManifest.xml:11:22-77
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
-ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:23:9-27:75
+ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:25:13-46
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
 	android:exported
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:26:13-37
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
 	android:theme
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:27:13-72
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
 	android:name
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:24:13-93
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
 service#com.google.android.gms.auth.api.signin.RevocationBoundService
-ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:33:9-37:51
+ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
 	android:exported
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:35:13-36
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
 	android:visibleToInstantApps
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:37:13-48
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
 	android:permission
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:36:13-107
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
 	android:name
-		ADDED from [com.google.android.gms:play-services-auth:20.6.0] /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/AndroidManifest.xml:34:13-89
+		ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
 	android:exported
