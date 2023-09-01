@@ -215,7 +215,7 @@ const Info = ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     // To Set Title according to link press
-    if (heading == "Terms and Services") {
+    if (heading == "Terms of Services") {
       getTAS();
     } else if (heading == "Privacy Policy") {
       getPrivacyPolicy();

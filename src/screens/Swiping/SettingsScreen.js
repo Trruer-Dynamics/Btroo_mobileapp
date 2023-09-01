@@ -480,8 +480,15 @@ const SettingsScreen = ({ navigation }) => {
 
   const deleteAccount = async () => {
     // setloading(true)
+
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
+
     await axios
-      .delete(apiUrl + `delete_user/${profile_data.user.id}`)
+      .delete(apiUrl + `delete_user/${profile_data.user.id}`,{
+        headers
+      })
       .then((resp) => {
         // setloading(false)
         if (resp.data.code == 200) {
@@ -1013,7 +1020,7 @@ const SettingsScreen = ({ navigation }) => {
                 // onPress={()=> setcmodal(true)}
                 onPress={() => {
                   navigation.navigate("Info", {
-                    heading: "Terms and Services",
+                    heading: "Terms of Services",
                   });
                 }}
                 style={{
@@ -1023,7 +1030,7 @@ const SettingsScreen = ({ navigation }) => {
                 }}
               >
                 <Text style={{ ...styles.titleS, color: colors.black }}>
-                  Terms and Services
+                  Terms of Services
                 </Text>
               </TouchableOpacity>
 

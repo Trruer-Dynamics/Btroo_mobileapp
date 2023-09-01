@@ -1270,8 +1270,15 @@ const PicUpload = ({ navigation, route }) => {
   const confirmImageUploads = async () => {
     setmainloading(true);
 
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
     await axios
-      .get(apiUrl + "userimageupload/" + profile_data.user.id)
+      .get(apiUrl + "userimageupload/" + profile_data.user.id, {
+        headers
+      })
       .then((resp) => {
         setmainloading(false);
         if (resp.data.code == 200) {

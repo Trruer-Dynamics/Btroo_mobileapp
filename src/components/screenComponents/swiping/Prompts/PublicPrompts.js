@@ -62,41 +62,7 @@ const PublicPrompts = ({
 
   const dispatch = useDispatch();
 
-  const promptsFillingStart = async () => {
-    // setloading(true);
-    const url = apiUrl + "promptsfillingstarted/";
-
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      user_id: profile_data.user.id,
-    };
-
-    try {
-      const resp = await axios.post(url, data, { headers });
-
-      let status = resp.data.code;
-
-      if (status == 200) {
-      } else if (status == 401) {
-        dispatch(setSessionExpired(true));
-      } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
-      }
-    } catch (error) {
-      // setloading(false);
-      dispatch(setSessionExpired(true));
-      console.log("error", error);
-      Alert.alert("Error", "Something Went Wrong");
-    }
-  };
-
-  useLayoutEffect(() => {
-    promptsFillingStart();
-  }, []);
+  
 
   useEffect(() => {
     if (public_prompt1_a.length > 1 || public_prompt2_a.length > 1) {

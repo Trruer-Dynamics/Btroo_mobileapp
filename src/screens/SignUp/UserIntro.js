@@ -474,9 +474,13 @@ const UserIntro = ({ navigation }) => {
     let data = {
       location: city_search,
     };
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
 
+      "Content-Type": "application/json",
+    };
     await axios
-      .post(apiUrl + `GetLocation/?page=${page}`, data)
+      .post(apiUrl + `GetLocation/?page=${page}`, data, {headers})
       .then((resp) => {
         if (resp.data.code == 200) {
           setcity_refresh(false);

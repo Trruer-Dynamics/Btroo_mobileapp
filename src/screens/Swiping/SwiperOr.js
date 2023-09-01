@@ -688,10 +688,19 @@ const SwiperOr = ({}) => {
       user_id: profile_data.user.id,
     };
 
+    
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
     try {
       const response = await axios.post(
         apiUrl + "promptsfillingstarted/",
-        data
+        data,
+        {
+        headers
+        }
       );
       let resp_data = response.data;
 

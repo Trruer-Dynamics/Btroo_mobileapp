@@ -159,7 +159,7 @@ const OtpVerify = ({
         await dispatch(setSessionExpired(false));
         if (DeviceToken != "") {
           // save mobile device token in backend to send notification to specific device
-          sendDeviceToken(user_data.userprofile.id);
+          sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
         } else {
           alert("Device Token Empty");
         }
@@ -348,7 +348,7 @@ const OtpVerify = ({
         };
 
         if (DeviceToken != "") {
-          sendDeviceToken(user_data.userprofile.id,user_data.token.access);
+          sendDeviceToken(user_data.userprofile.id,user_data?.token?.access);
         } else {
           alert("Device Token Empty");
         }
@@ -608,7 +608,7 @@ const OtpVerify = ({
               borderColor:
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
-                  : otp1blr
+                  : otp1blr && otp1 != ""
                   ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp1blr ? "#fff" : "#F8F8F8",
@@ -650,7 +650,7 @@ const OtpVerify = ({
               borderColor:
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
-                  : otp2blr
+                  : otp2blr && otp2 != ""
                   ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp2blr ? "#fff" : "#F8F8F8",
@@ -693,7 +693,7 @@ const OtpVerify = ({
               borderColor:
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
-                  : otp3blr
+                  : otp3blr && otp3 != ""
                   ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp3blr ? "#fff" : "#F8F8F8",
@@ -737,7 +737,7 @@ const OtpVerify = ({
               borderColor:
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
-                  : otp4blr
+                  : otp4blr && otp4 != ""
                   ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp4blr ? "#fff" : "#F8F8F8",
@@ -781,7 +781,7 @@ const OtpVerify = ({
               borderColor:
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
-                  : otp5blr
+                  : otp5blr && otp5 != ""
                   ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp5blr ? "#fff" : "#F8F8F8",
@@ -824,7 +824,7 @@ const OtpVerify = ({
               borderColor:
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
-                  : otp6blr
+                  : otp6blr && otp6 != ""
                   ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp6blr ? "#fff" : "#F8F8F8",

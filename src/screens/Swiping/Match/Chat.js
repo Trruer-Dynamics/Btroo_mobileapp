@@ -496,9 +496,11 @@ const Chat = ({ profile }) => {
     setloading(true);
 
     let url = apiUrl + "chat_history/" + profile.chat_id + "/";
-
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
     await axios
-      .get(url)
+      .get(url,{headers})
       .then((resp) => {
         setloading(false);
 
