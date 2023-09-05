@@ -39,7 +39,6 @@ import truncateStr from "../../components/functions/truncateStr";
 import Paginator from "../../components/screenComponents/swiping/Paginator";
 import FullModal from "../../components/modals/FullModal";
 
-
 const Item2 = ({ item }) => {
   let imageUri = String(item[0]);
 
@@ -131,21 +130,19 @@ const ProfileMain = ({ navigation }) => {
 
       setinterest_list(usr_interest);
 
-      let pub_prompt = profile_data?.userpublicprompts;
-
-      let priv_prompt = profile_data?.userprivateprompts;
+      console.log("userprofile id", profile_data.userprofile.id);
+      console.log(
+        "profile_imgs",
+        profile_imgs.filter((v) => v[0] != "").length
+      );
+      let actv = profile_imgs.filter((v) => v[0] != "");
+      setactive_prf_imgs(actv);
 
       return () => {
         // Do something when the screen is unfocused
       };
-    }, [profile_data])
+    }, [profile_data, profile_imgs])
   );
-
-  useLayoutEffect(() => {
-    console.log("userprofile id", profile_data.userprofile.id);
-    let actv = profile_imgs.filter((v) => v[0] != "");
-    setactive_prf_imgs(actv);
-  }, []);
 
   // Full Screen Carosel Item Render Function
   const renderItem2 = ({ item, index }) => {

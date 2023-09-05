@@ -480,7 +480,7 @@ const UserIntro = ({ navigation }) => {
       "Content-Type": "application/json",
     };
     await axios
-      .post(apiUrl + `GetLocation/?page=${page}`, data, {headers})
+      .post(apiUrl + `GetLocation/?page=${page}`, data, { headers })
       .then((resp) => {
         if (resp.data.code == 200) {
           setcity_refresh(false);

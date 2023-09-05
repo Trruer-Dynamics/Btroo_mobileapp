@@ -92,7 +92,6 @@ const PhotoPositioning = ({ navigation, route }) => {
         cr = 0.027;
       }
 
-
       let tx = scrn_width * rt * cr;
       // + diff * 0.03;
       // let tx = scrn_width - diff
@@ -101,7 +100,6 @@ const PhotoPositioning = ({ navigation, route }) => {
       let percXp = (pageX / scrn_width) * 100;
       let percXpm = (pageX2 / scrn_width) * 100;
 
-      
       if (scale.value <= 2) {
         if (percXp > 2.7) {
           // rspW(5.1)
@@ -120,11 +118,8 @@ const PhotoPositioning = ({ navigation, route }) => {
       let heC = 178;
       let heCm = 115;
 
-      
-
       const ty = rt_h * heC;
       const tym = rt_h * heCm + extTrm;
-
 
       if (scale.value <= 2) {
         if (translateY.value > heC) {
@@ -213,7 +208,6 @@ const PhotoPositioning = ({ navigation, route }) => {
   const [hw, sethw] = useState(1);
 
   useLayoutEffect(() => {
-
     if (img_w < scrn_width) {
       setaw(scrn_width);
     }

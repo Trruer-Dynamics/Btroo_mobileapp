@@ -180,7 +180,7 @@ const SwiperOr = ({}) => {
   const [warn_step, setwarn_step] = useState(0);
   const [redirect_to_settings, setredirect_to_settings] = useState(false);
   const [promptStep, setpromptStep] = useState(1);
-  
+
   const [profiles, setprofiles] = useState([]);
 
   const [empty_profile_call, setempty_profile_call] = useState(false);
@@ -229,30 +229,31 @@ const SwiperOr = ({}) => {
     }).start(() => {});
   };
 
-  const removeCard = useCallback(() => {
-    console.log("removeCard");
+  const removeCard = useCallback(
+    () => {
+      console.log("removeCard");
 
-    scaleValue.setValue(0.9);
-    iconRotate.setValue(0);
-    iconTranslateX.setValue(0);
-    iconTranslateY.setValue(0);
+      scaleValue.setValue(0.9);
+      iconRotate.setValue(0);
+      iconTranslateX.setValue(0);
+      iconTranslateY.setValue(0);
 
-    leftX.setValue(0);
+      leftX.setValue(0);
 
-    rightX.setValue(0);
+      rightX.setValue(0);
 
-    upY.setValue(0);
+      upY.setValue(0);
 
-    setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
+      setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
 
-    swipe.setValue({ x: 0, y: 0 });
-    // console.log('swippingcount', swippingcount);
-    if (swippingcount >= 2) {
-      setpromptTime(true);
-    }
-  },
-   [swipe, swippingcount]
-  //  []
+      swipe.setValue({ x: 0, y: 0 });
+      // console.log('swippingcount', swippingcount);
+      if (swippingcount >= 2) {
+        setpromptTime(true);
+      }
+    },
+    [swipe, swippingcount]
+    //  []
   );
 
   const handleChoiceButtons = useCallback(
@@ -593,7 +594,9 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
     await axios
-      .get(apiUrl + "filter_user/" + profile_data.user.id + "?page=1", {headers})
+      .get(apiUrl + "filter_user/" + profile_data.user.id + "?page=1", {
+        headers,
+      })
       .then((resp) => {
         // alert(`response ${Platform.OS}`)
         let resp_data = resp.data.data;
@@ -632,7 +635,7 @@ const SwiperOr = ({}) => {
 
     // alert('Profile Call', profile_call)
     await axios
-      .get(apiUrl + "swap_again/" + profile_data.user.id,{headers})
+      .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
         let resp_data = resp.data;
 
@@ -644,7 +647,7 @@ const SwiperOr = ({}) => {
           let active_profiles = resp_data.filter((v) => v.active == true);
           // console.log('active_profiles len', active_profiles.length);
           setprofiles(active_profiles);
-    
+
           setloading2(false);
         }
         // else {
@@ -671,7 +674,6 @@ const SwiperOr = ({}) => {
   }, [appStateVisible]);
 
   useEffect(() => {
-
     if (profiles.length == 0) {
       if (!empty_profile_call) {
         dispatch(setProfileRefresh(!profile_refresh));
@@ -688,7 +690,6 @@ const SwiperOr = ({}) => {
       user_id: profile_data.user.id,
     };
 
-    
     const headers = {
       Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
@@ -699,7 +700,7 @@ const SwiperOr = ({}) => {
         apiUrl + "promptsfillingstarted/",
         data,
         {
-        headers
+          headers,
         }
       );
       let resp_data = response.data;
@@ -888,47 +889,48 @@ const SwiperOr = ({}) => {
         }}
       >
         {!loading && !loading2 && !promptsmodalVisible ? (
-          <SafeAreaView style={{ 
-            flex: 1,
-          // height:scrn_height,
-          // width: scrn_width,
-          // position:'relative' 
-          }}>
+          <SafeAreaView
+            style={{
+              flex: 1,
+              // height:scrn_height,
+              // width: scrn_width,
+              // position:'relative'
+            }}
+          >
             <FlatList
-            pagingEnabled
-            // horizontal
-            // inverted
-            contentContainerStyle={{
-              flexGrow:1,
-              borderWidth:1,
-              borderColor: '#fff',
-            }}
-            bounces={false}
-            data={profiles}
-            keyExtractor={itm => itm.created_on}
-            renderItem={({item, index})=>{
-              const isFirst = index == profiles.length - 1;
-              console.log(Platform.OS, "isFirst",isFirst, index)
-              return(
-                <SwipeCard
-                
-                                    card_itm={item}
-                                    iconRotate={iconRotate}
-                                    iconTranslateX={iconTranslateX}
-                                    iconTranslateY={iconTranslateY}
-                                    handleChoiceButtons={handleChoiceButtons}
-                                    isFirst={isFirst}
-                                    swipe={swipe}
-                                    scaleValue={scaleValue}
-                                    leftX={leftX}
-                                    rightX={rightX}
-                                    upY={upY}
-                                    mainIndex={index}
-                                    setswippingcount={setswippingcount}
-                                    swippingcount={swippingcount}
-                                  />
-                              )
-            }}
+              pagingEnabled
+              // horizontal
+              // inverted
+              contentContainerStyle={{
+                flexGrow: 1,
+                borderWidth: 1,
+                borderColor: "#fff",
+              }}
+              bounces={false}
+              data={profiles}
+              keyExtractor={(itm) => itm.created_on}
+              renderItem={({ item, index }) => {
+                const isFirst = index == profiles.length - 1;
+                console.log(Platform.OS, "isFirst", isFirst, index);
+                return (
+                  <SwipeCard
+                    card_itm={item}
+                    iconRotate={iconRotate}
+                    iconTranslateX={iconTranslateX}
+                    iconTranslateY={iconTranslateY}
+                    handleChoiceButtons={handleChoiceButtons}
+                    isFirst={isFirst}
+                    swipe={swipe}
+                    scaleValue={scaleValue}
+                    leftX={leftX}
+                    rightX={rightX}
+                    upY={upY}
+                    mainIndex={index}
+                    setswippingcount={setswippingcount}
+                    swippingcount={swippingcount}
+                  />
+                );
+              }}
             />
             {/* {profiles
             .filter(v => profiles_ref.current.includes(v))
@@ -1006,7 +1008,7 @@ const SwiperOr = ({}) => {
                   onPress={() => {
                     if (warn_step == 2) {
                       // setProfileRefresh(!profile_refresh);
-                      
+
                       getRejectedProfiles();
                     }
 

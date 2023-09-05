@@ -46,6 +46,7 @@ import messaging from "@react-native-firebase/messaging";
 import Test from "./Test";
 import axios from "axios";
 import { apiUrl } from "./src/constants";
+import { getHash, startOtpListener } from "react-native-otp-verify";
 
 AntDesign.loadFont()
   .then()
@@ -130,6 +131,40 @@ const App = () => {
       StatusBar.setBackgroundColor(status_bg ? status_bg : "#fff");
     }
   }, [status_bg, statusBarArg]);
+
+  const getAppHash = () => {
+    getHash()
+      .then((hash) => {
+        console.log("App Hash", hash[0]);
+      })
+      .catch((err) => {
+        console.log("err while hash", err);
+      });
+  };
+
+  const listenOtp = () => {
+    try {
+      startOtpListener((message) => {
+        const otp = /(\d{6})/g.exec(message)[1];
+        console.log("otp", otp);
+        console.log("message", message);
+      });
+    } catch (err) {
+      console.log("err", err);
+    }
+  };
+
+  const smsSetup = useCallback(() => {
+    if (Platform.OS == "android") {
+      getAppHash();
+      // listenOtp()
+    }
+  }, []);
+
+  // get Hash Code for SMS
+  useLayoutEffect(() => {
+    smsSetup();
+  }, []);
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(

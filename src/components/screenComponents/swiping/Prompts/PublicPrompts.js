@@ -62,8 +62,6 @@ const PublicPrompts = ({
 
   const dispatch = useDispatch();
 
-  
-
   useEffect(() => {
     if (public_prompt1_a.length > 1 || public_prompt2_a.length > 1) {
       seterror("");
@@ -89,8 +87,6 @@ const PublicPrompts = ({
       seterror("");
       setpromptStep(3);
     }
-
-   
   };
 
   return (
@@ -141,7 +137,6 @@ const PublicPrompts = ({
                 </View>
 
                 <View>
-                  
                   <AutoGrowingTextInput
                     maxLength={250}
                     placeholder="Type your answer"

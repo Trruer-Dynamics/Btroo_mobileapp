@@ -44,6 +44,8 @@ const initialState = {
     ["", "", true, "9", ""],
   ],
 
+  profile_imgs_pos: { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8 },
+
   csignup_screen: "MobileNo",
 };
 
@@ -72,35 +74,30 @@ export const authenticationSlice = createSlice({
     setProfileImgs: (state, action) => {
       state.profile_imgs = action.payload;
     },
-
+    setProfileImgsPos: (state, action) => {
+      state.profile_imgs_pos = action.payload;
+    },
     setActiveUserLocationDetails: (state, action) => {
       state.active_user_location_details = action.payload;
     },
-
     setAccessToken: (state, action) => {
       state.access_token = action.payload;
     },
-
     setStatusBarArgs: (state, action) => {
       state.statusBarArg = action.payload;
     },
-
     setUserLoggined: (state, action) => {
       state.user_loggined = action.payload;
     },
-
     setPromptFillingStart: (state, action) => {
       state.is_promptsfillingstarted = action.payload;
     },
-
     setPromptFillingComplete: (state, action) => {
       state.is_promptsfillingcomplete = action.payload;
     },
-
     setProfileRevealed: (state, action) => {
       state.is_profile_revealed = action.payload;
     },
-
     setSocketClose: (state, action) => {
       state.is_socket_closed = action.payload;
     },
@@ -123,6 +120,7 @@ export const {
   setAccessToken,
   setStatusBarArgs,
   setProfileImgs,
+  setProfileImgsPos,
   setUserLoggined,
   setPromptFillingStart,
   setPromptFillingComplete,

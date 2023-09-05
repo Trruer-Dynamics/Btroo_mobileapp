@@ -158,7 +158,7 @@ const Match = () => {
     };
 
     try {
-      const resp = await axios.post(url, data, {headers});
+      const resp = await axios.post(url, data, { headers });
       setloading(false);
 
       let code = resp.data.code;
@@ -262,12 +262,12 @@ const Match = () => {
       "&timestamp=" +
       fn_date;
 
-      const headers = {
-        Authorization: `Bearer ${access_token}`,
-      };
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
 
     await axios
-      .get(url,{headers})
+      .get(url, { headers })
       .then((resp) => {
         let code = resp.data.code;
 

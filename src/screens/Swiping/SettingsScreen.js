@@ -486,8 +486,8 @@ const SettingsScreen = ({ navigation }) => {
     };
 
     await axios
-      .delete(apiUrl + `delete_user/${profile_data.user.id}`,{
-        headers
+      .delete(apiUrl + `delete_user/${profile_data.user.id}`, {
+        headers,
       })
       .then((resp) => {
         // setloading(false)

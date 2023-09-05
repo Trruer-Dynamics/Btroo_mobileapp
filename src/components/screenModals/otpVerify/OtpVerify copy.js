@@ -212,7 +212,7 @@ const OtpVerify = ({
     }
   };
 
-  const sendDeviceToken = async (prof_id,access_token) => {
+  const sendDeviceToken = async (prof_id, access_token) => {
     setloading(true);
     const data = {
       userprofile_id: prof_id,
@@ -224,8 +224,8 @@ const OtpVerify = ({
     };
 
     try {
-      const response = await axios.post(apiUrl + "device_token/", data,{
-        headers
+      const response = await axios.post(apiUrl + "device_token/", data, {
+        headers,
       });
       let user_data = response.data.data;
       let status_code = response.data.code;
@@ -348,7 +348,7 @@ const OtpVerify = ({
         };
 
         if (DeviceToken != "") {
-          sendDeviceToken(user_data.userprofile.id,user_data?.token?.access);
+          sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
         } else {
           alert("Device Token Empty");
         }
@@ -515,7 +515,6 @@ const OtpVerify = ({
         height: scrn_height,
       }}
     >
-      
       <TouchableOpacity
         activeOpacity={1}
         style={{

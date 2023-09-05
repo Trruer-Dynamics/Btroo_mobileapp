@@ -65,6 +65,9 @@ const MobileNo = ({ navigation, route }) => {
     // to check user already available
     try {
       const response = await axios.post(apiUrl + "logincheck/", data);
+
+      console.log("response", response.data);
+
       setloading(false);
 
       if (response.data.data == true) {
@@ -156,12 +159,12 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
 
-      setconfirm(confirmation);
-      console.log('\n')
-      console.log("confirmation",JSON.stringify(confirmation))
-      console.log('\n')
+      // setconfirm(confirmation);
+      // console.log('\n')
+      // console.log("confirmation",JSON.stringify(confirmation))
+      // console.log('\n')
 
       setOtpShowBox(true);
 

@@ -1790,10 +1790,10 @@ library {
   maven_library {
     groupId: "com.google.android.gms"
     artifactId: "play-services-auth"
-    version: "20.6.0"
+    version: "20.7.0"
   }
   digests {
-    sha256: "\363\t\252\313D\300\355#S\314\n4\252\207\355?\321\036\372\v\356\271*\243\325\233<\267\3629\"\272"
+    sha256: "\025\004\224\327\240R\253\252\254\233\270)\242\214\212\322j\303\312Y\305v\301ig\275\276(\252\252N\026"
   }
   repo_index {
     value: 2

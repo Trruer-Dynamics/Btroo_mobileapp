@@ -14,7 +14,10 @@ import {
   Pressable,
 } from "react-native";
 
-import { TouchableOpacity as TouchableOpacityG, ScrollView } from "react-native-gesture-handler";
+import {
+  TouchableOpacity as TouchableOpacityG,
+  ScrollView,
+} from "react-native-gesture-handler";
 
 import React, {
   useEffect,
@@ -480,7 +483,7 @@ const SwipeCard = ({
   const [super_liked_profile, setsuper_liked_profile] = useState(false);
 
   useLayoutEffect(() => {
-    console.log("\ncard_itm",isFirst)
+    console.log("\ncard_itm", isFirst);
     console.log("profilestatus", card_itm.profilestatus.profilestatus);
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
@@ -498,9 +501,8 @@ const SwipeCard = ({
           left: 0,
           top: 0,
           // zIndex: Platform.OS == 'ios'?  mainIndex : 100 - mainIndex,
-          zIndex:  100 - mainIndex,
+          zIndex: 100 - mainIndex,
           // zIndex:  mainIndex,
-
 
           transform: [
             {
@@ -830,7 +832,6 @@ const SwipeCard = ({
 
             {/* Profile Details Area */}
 
-
             <ScrollView
               style={styles.profileDetailsCont}
               // contentContainerStyle={{
@@ -843,7 +844,7 @@ const SwipeCard = ({
               scrollEventThrottle={300}
             >
               <TouchableOpacityG
-              activeOpacity={1}
+                activeOpacity={1}
                 onLongPress={() => {
                   setbio_enlarge(true);
                 }}
@@ -1051,8 +1052,6 @@ const SwipeCard = ({
                 </View>
               </TouchableOpacityG>
             </ScrollView>
-
-     
           </View>
 
           {/* Prompts Modal */}

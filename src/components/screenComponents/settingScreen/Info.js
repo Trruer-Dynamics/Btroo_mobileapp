@@ -66,6 +66,9 @@ const Info = ({ navigation, route }) => {
     await axios
       .get(apiUrl + `get_terms_of_services/`)
       .then((resp) => {
+        console.log("\n");
+        console.log("Terms and Services", resp);
+        console.log("\n");
         setloading(false);
         if (resp.status == 200) {
           setpara(resp.data.data.text);

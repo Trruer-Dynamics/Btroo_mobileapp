@@ -500,7 +500,7 @@ const Chat = ({ profile }) => {
       Authorization: `Bearer ${access_token}`,
     };
     await axios
-      .get(url,{headers})
+      .get(url, { headers })
       .then((resp) => {
         setloading(false);
 

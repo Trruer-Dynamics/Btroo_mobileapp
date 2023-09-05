@@ -106,7 +106,7 @@ const Intro = () => {
                     });
                   }}
                 >
-                  Terms of service.
+                  Terms and service.
                 </Text>{" "}
                 Learn how we {"\n"}process your data in our{" "}
                 <Text
@@ -176,6 +176,7 @@ const Intro = () => {
                   );
 
                   navigation.navigate("MobileNo", { action: "login" });
+                  // navigation.navigate("PicUpload");
                 }}
                 style={[
                   styles.button,

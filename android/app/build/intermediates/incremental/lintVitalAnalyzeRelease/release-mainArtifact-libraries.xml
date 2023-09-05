@@ -1594,10 +1594,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="com.google.android.gms:play-services-auth:20.6.0@aar"
-      jars="/Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/jars/classes.jar"
-      resolved="com.google.android.gms:play-services-auth:20.6.0"
-      folder="/Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0"
+      name="com.google.android.gms:play-services-auth:20.7.0@aar"
+      jars="/Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/jars/classes.jar"
+      resolved="com.google.android.gms:play-services-auth:20.7.0"
+      folder="/Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

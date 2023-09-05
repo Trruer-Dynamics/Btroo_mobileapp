@@ -68,8 +68,9 @@ import { UserContext } from "../../context/user";
 import AutoGrowingTextInput from "react-native-autogrow-textinput-ts";
 import { Image as CompImage } from "react-native-compressor";
 import { stat } from "react-native-fs";
-
-const mainBoxSize = rspW(84);
+import Draggable from "../../components/screenComponents/picUpload/draggable";
+import Box from "../../components/screenComponents/picUpload/box";
+import _ from "lodash";
 
 const EditProfile = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -92,72 +93,66 @@ const EditProfile = ({ navigation }) => {
 
   const [changes_made, setchanges_made] = useState(false);
 
-  // Drag States And Functions
+  // draggable positions
+  const [pic_list, setpic_list] = useState([]);
+  const positions = useSharedValue(
+    Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx })))
+  );
+  const [pos_change, setpos_change] = useState(false);
 
-  const [pic1, setpic1] = useState(["", "", true, "1", ""]);
-  const [pic2, setpic2] = useState(["", "", false, "2", ""]);
-  const [pic3, setpic3] = useState(["", "", false, "3", ""]);
-  const [pic4, setpic4] = useState(["", "", false, "4", ""]);
-  const [pic5, setpic5] = useState(["", "", false, "5", ""]);
-  const [pic6, setpic6] = useState(["", "", false, "6", ""]);
-  const [pic7, setpic7] = useState(["", "", false, "7", ""]);
-  const [pic8, setpic8] = useState(["", "", false, "8", ""]);
-  const [pic9, setpic9] = useState(["", "", false, "9", ""]);
-
-  const prior = useSharedValue(0);
-
-  const x = useSharedValue(0);
-  const y = useSharedValue(0);
-  const drgE1 = useSharedValue(true);
-
-  const x2 = useSharedValue(0);
-  const y2 = useSharedValue(0);
-  const drgE2 = useSharedValue(true);
-
-  const x3 = useSharedValue(0);
-  const y3 = useSharedValue(0);
-  const drgE3 = useSharedValue(true);
-
-  const x4 = useSharedValue(0);
-  const y4 = useSharedValue(0);
-  const drgE4 = useSharedValue(true);
-
-  const x5 = useSharedValue(0);
-  const y5 = useSharedValue(0);
-  const drgE5 = useSharedValue(true);
-
-  const x6 = useSharedValue(0);
-  const y6 = useSharedValue(0);
-  const drgE6 = useSharedValue(true);
-
-  const x7 = useSharedValue(0);
-  const y7 = useSharedValue(0);
-  const drgE7 = useSharedValue(true);
-
-  const x8 = useSharedValue(0);
-  const y8 = useSharedValue(0);
-  const drgE8 = useSharedValue(true);
-
-  const x9 = useSharedValue(0);
-  const y9 = useSharedValue(0);
-  const drgE9 = useSharedValue(true);
-
-  const changeImgPosition = async (img_id_1, pos_1, img_id_2, pos_2) => {
+  const changeImgPosition = async () => {
+    // Set the API endpoint URL
     setloading(true);
     const url = apiUrl + "image_Position/";
+
+    // Set the headers and token
+
     const headers = {
       Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
     };
 
     const data = {
-      image_id_1: img_id_1,
-      position_1: pos_1,
-      image_id_2: img_id_2,
-      position_2: pos_2,
+      image_id_1: pic_list[0][4] != "" ? pic_list[0][4] : null,
+      position_1: pic_list[0][4] != "" ? positions.value[0] : null,
+
+      image_id_2: pic_list[1][4] != "" ? pic_list[1][4] : null,
+      position_2: pic_list[1][4] != "" ? positions.value[1] : null,
+
+      image_id_3: pic_list[2][4] != "" ? pic_list[2][4] : null,
+      position_3: pic_list[2][4] != "" ? positions.value[2] : null,
+
+      image_id_4: pic_list[3][4] != "" ? pic_list[3][4] : null,
+      position_4: pic_list[3][4] != "" ? positions.value[3] : null,
+
+      image_id_5: pic_list[4][4] != "" ? pic_list[4][4] : null,
+      position_5: pic_list[4][4] != "" ? positions.value[4] : null,
+
+      image_id_6: pic_list[5][4] != "" ? pic_list[5][4] : null,
+      position_6: pic_list[5][4] != "" ? positions.value[5] : null,
+
+      image_id_7: pic_list[6][4] != "" ? pic_list[6][4] : null,
+      position_7: pic_list[6][4] != "" ? positions.value[6] : null,
+
+      image_id_8: pic_list[7][4] != "" ? pic_list[7][4] : null,
+      position_8: pic_list[7][4] != "" ? positions.value[7] : null,
+
+      image_id_9: pic_list[8][4] != "" ? pic_list[8][4] : null,
+      position_9: pic_list[8][4] != "" ? positions.value[8] : null,
     };
 
-    console.log("data", data);
+    let up_pos_lis = _.cloneDeep(pic_list);
+    for (let t = 0; t < up_pos_lis.length; t++) {
+      const ele = up_pos_lis[t];
+      ele[3] = positions.value[t];
+      console.log("\n ele", ele);
+    }
+
+    up_pos_lis = up_pos_lis.sort((a, b) => a[3] - b[3]);
+
+    // console.log("up_pos_lis",up_pos_lis)
+
+    // console.log("data",data)
 
     try {
       const resp = await axios.post(url, data, { headers });
@@ -165,1089 +160,25 @@ const EditProfile = ({ navigation }) => {
 
       let code = resp.data.code;
       let user_data = resp.data.data;
-
-      console.log("change pose code", code);
+      console.log("user_data", user_data);
       if (code == 200) {
-        // console.log("user_data",user_data)
+        //
+        // dispatch(setProfileImgsPos(positions.value))
+        await dispatch(setProfileImgs(up_pos_lis));
+        // confirmImageUploads()
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert(
-          "changeImgPosition Error",
-          "Some Error Occur" + JSON.stringify(resp.data.data)
-        );
+        Alert.alert("Error", "pos Some Error Occur" + resp.data.data);
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("changeImgPosition error", error);
-      Alert.alert("changeImgPosition Error catch", "Something Went Wrong");
+      console.log("error", error);
+
+      Alert.alert("Error", "Something Went Wrong");
     }
   };
-
-  const changePos = async (no1, no2) => {
-    let tmp_l = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9];
-
-    let prc1 = tmp_l[no1];
-    let prc2 = tmp_l[no2];
-
-    if (prc2[0] != "") {
-      let tmp2 = tmp_l[no1];
-      tmp_l[no1] = tmp_l[no2];
-      tmp_l[no2] = tmp2;
-
-      await dispatch(setProfileImgs(tmp_l));
-      await atLast(tmp_l);
-    }
-
-    let img_id_1 = tmp_l[no1][4];
-    let img_id_2 = tmp_l[no2][4];
-
-    let pos_1 = tmp_l[no1][3];
-    let pos_2 = tmp_l[no2][3];
-
-    if (prc2[0] != "") {
-      changeImgPosition(img_id_1, pos_1, img_id_2, pos_2);
-    }
-  };
-
-  const timeR1 = () => {
-    if (x.value == 0 && pic1[0] != "") {
-      drgE1.value = true;
-    } else {
-      drgE1.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 1;
-    }
-  };
-  const timeR2 = () => {
-    if (x2.value == 0 && pic2[0] != "") {
-      drgE2.value = true;
-    } else {
-      drgE2.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 2;
-    }
-  };
-  const timeR3 = () => {
-    if (x3.value == 0 && pic3[0] != "") {
-      drgE3.value = true;
-    } else {
-      drgE3.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 3;
-    }
-  };
-  const timeR4 = () => {
-    if (x4.value == 0 && pic4[0] != "") {
-      drgE4.value = true;
-    } else {
-      drgE4.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 4;
-    }
-  };
-  const timeR5 = () => {
-    if (x5.value == 0 && pic5[0] != "") {
-      drgE5.value = true;
-    } else {
-      drgE5.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 5;
-    }
-  };
-  const timeR6 = () => {
-    if (x6.value == 0 && pic6[0] != "") {
-      drgE6.value = true;
-    } else {
-      drgE6.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 6;
-    }
-  };
-  const timeR7 = () => {
-    if (x7.value == 0 && pic7[0] != "") {
-      drgE7.value = true;
-    } else {
-      drgE7.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 7;
-    }
-  };
-  const timeR8 = () => {
-    if (x8.value == 0 && pic8[0] != "") {
-      drgE8.value = true;
-    } else {
-      drgE8.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 8;
-    }
-  };
-  const timeR9 = () => {
-    if (x9.value == 0 && pic9[0] != "") {
-      drgE9.value = true;
-    } else {
-      drgE9.value = false;
-    }
-    if (prior.value == 0) {
-      prior.value = 9;
-    }
-  };
-
-  const gestureHandler1 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x.value;
-      c.startY = y.value;
-      runOnJS(timeR1)();
-    },
-    onActive: (e, c) => {
-      if (drgE1.value && prior.value == 1) {
-        let maxDragX = mainBoxSize / 1.5;
-        let maxDragY = mainBoxSize / 1.5;
-
-        if (
-          e.translationX > 0 &&
-          e.translationY > 0 &&
-          e.translationX < maxDragX + 4 &&
-          e.translationY < maxDragY
-        ) {
-          x.value = c.startX + e.translationX;
-          y.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x.value > mainBoxSize / 6 + 4 &&
-        x.value <= mainBoxSize / 2 + 8 &&
-        y.value <= mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(0, 1);
-      }
-
-      // 3
-      if (x.value > mainBoxSize / 2 + 8 && y.value <= mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(0, 2);
-      }
-
-      // 4
-      if (
-        x.value <= mainBoxSize / 6 + 4 &&
-        y.value > mainBoxSize / 6 + 4 &&
-        y.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(0, 3);
-      }
-
-      // 7
-      if (x.value <= mainBoxSize / 6 + 4 && y.value > mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(0, 6);
-      }
-
-      // 5
-      if (
-        x.value > mainBoxSize / 6 + 4 &&
-        x.value <= mainBoxSize / 2 + 8 &&
-        y.value > mainBoxSize / 6 + 4 &&
-        y.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(0, 4);
-      }
-
-      // 9
-      if (x.value > mainBoxSize / 2 + 8 && y.value > mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(0, 8);
-      }
-
-      // 8
-      if (
-        x.value > mainBoxSize / 6 + 4 &&
-        x.value < mainBoxSize / 2 + 8 &&
-        y.value > mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(0, 7);
-      }
-
-      // 6
-      if (
-        x.value > mainBoxSize / 2 + 8 &&
-        y.value > mainBoxSize / 6 + 4 &&
-        y.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(0, 5);
-      }
-
-      x.value = withTiming(0, { duration: 300 });
-      y.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler2 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x2.value;
-      c.startY = y2.value;
-      runOnJS(timeR2)();
-    },
-    onActive: (e, c) => {
-      if (drgE2.value && prior.value == 2) {
-        let maxDragX = mainBoxSize / 3;
-        let minDragX = -mainBoxSize / 3;
-        let maxDragY = mainBoxSize / 1.5;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > 0 &&
-          e.translationY < maxDragY
-        ) {
-          x2.value = c.startX + e.translationX;
-          y2.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 1
-      if (x2.value < -mainBoxSize / 6 + 4 && y2.value <= mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(1, 0);
-      }
-
-      // 5
-      if (
-        y2.value > mainBoxSize / 6 + 4 &&
-        y2.value <= mainBoxSize / 2 + 8 &&
-        x2.value >= -mainBoxSize / 6 + 4 &&
-        x2.value <= mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(1, 4);
-      }
-
-      // 3
-      if (x2.value > mainBoxSize / 6 + 4 && y2.value <= mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(1, 2);
-      }
-
-      // 4
-      if (
-        x2.value < -mainBoxSize / 6 + 4 &&
-        y2.value > mainBoxSize / 6 + 4 &&
-        y2.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(1, 3);
-      }
-
-      // 6
-      if (
-        x2.value > mainBoxSize / 6 + 4 &&
-        y2.value > mainBoxSize / 6 + 4 &&
-        y2.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(1, 5);
-      }
-
-      // 7
-      if (x2.value < -mainBoxSize / 6 + 4 && y2.value > mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(1, 6);
-      }
-
-      // 8
-      if (
-        x2.value >= -mainBoxSize / 6 + 4 &&
-        x2.value <= mainBoxSize / 6 + 4 &&
-        y2.value > mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(1, 7);
-      }
-
-      // 9
-      if (x2.value > mainBoxSize / 6 + 4 && y2.value > mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(1, 8);
-      }
-
-      x2.value = withTiming(0, { duration: 300 });
-      y2.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler3 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x3.value;
-      c.startY = y3.value;
-      runOnJS(timeR3)();
-    },
-    onActive: (e, c) => {
-      if (drgE3.value && prior.value == 3) {
-        let maxDragX = 0;
-        let minDragX = -mainBoxSize / 1.5;
-        let minDragY = 0;
-        let maxDragY = mainBoxSize / 1.5;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > minDragY &&
-          e.translationY < maxDragY
-        ) {
-          x3.value = c.startX + e.translationX;
-          y3.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x3.value < -mainBoxSize / 6 + 4 &&
-        x3.value >= -mainBoxSize / 2 + 8 &&
-        y3.value <= mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(2, 1);
-      }
-
-      // 1
-      if (x3.value < -mainBoxSize / 2 + 8 && y3.value <= mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(2, 0);
-      }
-
-      // 5
-      if (
-        y3.value > mainBoxSize / 6 + 4 &&
-        y3.value <= mainBoxSize / 2 + 8 &&
-        x3.value < -mainBoxSize / 6 + 4 &&
-        x3.value >= -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(2, 4);
-      }
-
-      //   // 3
-      //   if (x2.value > mainBoxSize / 6 + 4 && y2.value <= mainBoxSize / 6 + 4) {
-      //     runOnJS(changePos)(1, 2);
-      //   }
-
-      // 4
-      if (
-        x3.value < -mainBoxSize / 2 + 8 &&
-        y3.value > mainBoxSize / 6 + 4 &&
-        y3.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(2, 3);
-      }
-
-      // 6
-      if (
-        x3.value > -mainBoxSize / 6 + 4 &&
-        y3.value > mainBoxSize / 6 + 4 &&
-        y3.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(2, 5);
-      }
-
-      // 7
-      if (x3.value < -mainBoxSize / 2 + 8 && y3.value > mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(2, 6);
-      }
-
-      // 8
-      if (
-        x3.value >= -mainBoxSize / 2 + 8 &&
-        x3.value <= -mainBoxSize / 6 + 4 &&
-        y3.value > mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(2, 7);
-      }
-
-      // 9
-      if (x3.value > -mainBoxSize / 6 + 4 && y3.value > mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(2, 8);
-      }
-
-      x3.value = withTiming(0, { duration: 300 });
-      y3.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler4 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x4.value;
-      c.startY = y4.value;
-      runOnJS(timeR4)();
-    },
-    onActive: (e, c) => {
-      if (drgE4.value && prior.value == 4) {
-        let maxDragX = mainBoxSize / 1.5;
-        let minDragX = 0;
-        let minDragY = -mainBoxSize / 3;
-        let maxDragY = mainBoxSize / 3;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > minDragY &&
-          e.translationY < maxDragY
-        ) {
-          x4.value = c.startX + e.translationX;
-          y4.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x4.value > mainBoxSize / 6 + 4 &&
-        x4.value <= mainBoxSize / 2 + 8 &&
-        y4.value < -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(3, 1);
-      }
-
-      // 1
-      if (x4.value <= mainBoxSize / 6 + 4 && y4.value < -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(3, 0);
-      }
-
-      // 5
-      if (
-        y4.value >= -mainBoxSize / 6 + 4 &&
-        y4.value <= mainBoxSize / 6 + 4 &&
-        x4.value > mainBoxSize / 6 + 4 &&
-        x4.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(3, 4);
-      }
-
-      // 3
-      if (x4.value > mainBoxSize / 2 + 8 && y4.value < -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(3, 2);
-      }
-
-      //   // 4
-      // if (
-      //     x3.value < -mainBoxSize / 2 + 8
-      //     &&
-      //     y3.value > mainBoxSize / 6 + 4
-      //     &&
-      //     y3.value <= mainBoxSize / 2 + 8
-      //   ) {
-      //     runOnJS(changePos)(2, 3);
-      //   }
-
-      // 6
-      if (
-        x4.value > mainBoxSize / 2 + 8 &&
-        y4.value >= -mainBoxSize / 6 + 4 &&
-        y4.value <= mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(3, 5);
-      }
-
-      // 7
-      if (x4.value < mainBoxSize / 6 + 4 && y4.value > mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(3, 6);
-      }
-
-      // 8
-      if (
-        x4.value <= mainBoxSize / 2 + 8 &&
-        x4.value > mainBoxSize / 6 + 4 &&
-        y4.value > mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(3, 7);
-      }
-
-      // 9
-      if (x4.value > mainBoxSize / 2 + 8 && y4.value > mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(3, 8);
-      }
-
-      x4.value = withTiming(0, { duration: 300 });
-      y4.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler5 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x5.value;
-      c.startY = y5.value;
-      runOnJS(timeR5)();
-    },
-    onActive: (e, c) => {
-      if (drgE5.value && prior.value == 5) {
-        let maxDragX = mainBoxSize / 3;
-        let minDragX = -mainBoxSize / 3;
-        let minDragY = -mainBoxSize / 3;
-        let maxDragY = mainBoxSize / 3;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > minDragY &&
-          e.translationY < maxDragY
-        ) {
-          x5.value = c.startX + e.translationX;
-          y5.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x5.value >= -mainBoxSize / 6 + 4 &&
-        x5.value <= mainBoxSize / 6 + 4 &&
-        y5.value < -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(4, 1);
-      }
-
-      // 1
-      if (x5.value < -mainBoxSize / 6 + 4 && y5.value < -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(4, 0);
-      }
-
-      //   // 5
-      // if (
-      //     y4.value >= -mainBoxSize / 6 + 4
-      //     &&
-      //     y4.value <= mainBoxSize / 6 + 4
-      //     &&
-      //     x4.value > mainBoxSize / 6 + 4
-      //     &&
-      //     x4.value <=  mainBoxSize / 2 + 8
-      //   ) {
-      //     runOnJS(changePos)(3, 4);
-      //   }
-
-      // 3
-      if (x5.value > mainBoxSize / 6 + 4 && y5.value < -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(4, 2);
-      }
-
-      // 4
-      if (
-        x5.value < -mainBoxSize / 6 + 4 &&
-        y5.value >= -mainBoxSize / 6 + 4 &&
-        y5.value <= mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(4, 3);
-      }
-
-      // 6
-      if (
-        x5.value > mainBoxSize / 6 + 4 &&
-        y5.value >= -mainBoxSize / 6 + 4 &&
-        y5.value <= mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(4, 5);
-      }
-
-      // 7
-      if (x5.value < -mainBoxSize / 6 + 4 && y5.value > mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(4, 6);
-      }
-
-      // 8
-      if (
-        x5.value >= -mainBoxSize / 6 + 4 &&
-        x5.value <= mainBoxSize / 6 + 4 &&
-        y5.value > mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(4, 7);
-      }
-
-      // 9
-      if (x5.value > mainBoxSize / 6 + 4 && y5.value > mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(4, 8);
-      }
-
-      x5.value = withTiming(0, { duration: 300 });
-      y5.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler6 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x6.value;
-      c.startY = y6.value;
-      runOnJS(timeR6)();
-    },
-    onActive: (e, c) => {
-      if (drgE6.value && prior.value == 6) {
-        let maxDragX = 0;
-        let minDragX = -mainBoxSize / 1.5;
-        let minDragY = -mainBoxSize / 3;
-        let maxDragY = mainBoxSize / 3;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > minDragY &&
-          e.translationY < maxDragY
-        ) {
-          x6.value = c.startX + e.translationX;
-          y6.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x6.value < -mainBoxSize / 6 + 4 &&
-        x6.value >= -mainBoxSize / 2 + 8 &&
-        y6.value < -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(5, 1);
-      }
-
-      // 1
-      if (x6.value < -mainBoxSize / 2 + 8 && y6.value < -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(5, 0);
-      }
-
-      // 5
-      if (
-        y6.value >= -mainBoxSize / 6 + 4 &&
-        y6.value <= mainBoxSize / 6 + 4 &&
-        x6.value < -mainBoxSize / 6 + 4 &&
-        x6.value >= -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(5, 4);
-      }
-
-      // 3
-      if (x6.value >= -mainBoxSize / 6 + 4 && y6.value < -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(5, 2);
-      }
-
-      // 4
-      if (
-        x6.value < -mainBoxSize / 2 + 8 &&
-        y6.value <= mainBoxSize / 6 + 4 &&
-        y6.value >= -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(5, 3);
-      }
-
-      //   // 6
-      //   if (
-      //     x4.value >  mainBoxSize / 2 + 8
-      // &&
-      //     y4.value >= -mainBoxSize / 6 + 4
-      //     &&
-      // y4.value <=  mainBoxSize / 6 + 4
-      //   ) {
-      //     runOnJS(changePos)(3, 5);
-      //   }
-
-      // 7
-      if (x6.value < -mainBoxSize / 2 + 8 && y6.value > mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(5, 6);
-      }
-
-      // 8
-      if (
-        x6.value <= -mainBoxSize / 6 + 4 &&
-        x6.value >= -mainBoxSize / 2 + 8 &&
-        y6.value > mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(5, 7);
-      }
-
-      // 9
-      if (x6.value >= -mainBoxSize / 6 + 4 && y6.value > mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(5, 8);
-      }
-
-      x6.value = withTiming(0, { duration: 300 });
-      y6.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler7 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x7.value;
-      c.startY = y7.value;
-      runOnJS(timeR7)();
-    },
-    onActive: (e, c) => {
-      if (drgE7.value && prior.value == 7) {
-        let maxDragX = mainBoxSize / 1.5;
-        let minDragX = 0;
-        let minDragY = -mainBoxSize / 1.5;
-        let maxDragY = 0;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > minDragY &&
-          e.translationY < maxDragY
-        ) {
-          x7.value = c.startX + e.translationX;
-          y7.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x7.value <= mainBoxSize / 2 + 8 &&
-        x7.value >= mainBoxSize / 6 + 4 &&
-        y7.value < -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(6, 1);
-      }
-
-      // 1
-      if (x7.value < mainBoxSize / 6 + 4 && y7.value < -mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(6, 0);
-      }
-
-      // 5
-      if (
-        y7.value >= -mainBoxSize / 2 + 8 &&
-        y7.value < -mainBoxSize / 6 + 4 &&
-        x7.value >= mainBoxSize / 6 + 4 &&
-        x7.value <= mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(6, 4);
-      }
-
-      // 3
-      if (x7.value > mainBoxSize / 2 + 8 && y7.value < -mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(6, 2);
-      }
-
-      // 4
-      if (
-        x7.value <= mainBoxSize / 6 + 4 &&
-        y7.value >= -mainBoxSize / 2 + 8 &&
-        y7.value < -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(6, 3);
-      }
-
-      // 6
-      if (
-        x7.value > mainBoxSize / 2 + 8 &&
-        y7.value <= -mainBoxSize / 6 + 4 &&
-        y7.value >= -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(6, 5);
-      }
-
-      //   // 7
-      //   if (
-      // x6.value < -mainBoxSize / 2 + 8
-      //   &&
-      //   y6.value > mainBoxSize / 6 + 4
-      //   ) {
-      //     runOnJS(changePos)(5, 6);
-      //   }
-
-      // 8
-      if (
-        x7.value > mainBoxSize / 6 + 4 &&
-        x7.value <= mainBoxSize / 2 + 8 &&
-        y7.value > -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(6, 7);
-      }
-
-      // 9
-      if (x7.value > mainBoxSize / 2 + 8 && y7.value > -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(6, 8);
-      }
-
-      x7.value = withTiming(0, { duration: 300 });
-      y7.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler8 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x8.value;
-      c.startY = y8.value;
-      runOnJS(timeR8)();
-    },
-    onActive: (e, c) => {
-      if (drgE8.value && prior.value == 8) {
-        let maxDragX = mainBoxSize / 3;
-        let minDragX = -mainBoxSize / 3;
-        let minDragY = -mainBoxSize / 1.5;
-        let maxDragY = 0;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > minDragY &&
-          e.translationY < maxDragY
-        ) {
-          x8.value = c.startX + e.translationX;
-          y8.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x8.value <= mainBoxSize / 6 + 4 &&
-        x8.value >= -mainBoxSize / 6 + 4 &&
-        y8.value < -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(7, 1);
-      }
-
-      // 1
-      if (x8.value < -mainBoxSize / 6 + 4 && y8.value < -mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(7, 0);
-      }
-
-      // 5
-      if (
-        y8.value >= -mainBoxSize / 2 + 8 &&
-        y8.value < -mainBoxSize / 6 + 4 &&
-        x8.value >= -mainBoxSize / 6 + 4 &&
-        x8.value <= mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(7, 4);
-      }
-
-      // 3
-      if (x8.value > mainBoxSize / 6 + 4 && y8.value < -mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(7, 2);
-      }
-
-      // 4
-      if (
-        x8.value < -mainBoxSize / 6 + 4 &&
-        y8.value >= -mainBoxSize / 2 + 8 &&
-        y8.value <= -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(7, 3);
-      }
-
-      // 6
-      if (
-        x8.value > mainBoxSize / 6 + 4 &&
-        y8.value <= -mainBoxSize / 6 + 4 &&
-        y8.value >= -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(7, 5);
-      }
-
-      // 7
-      if (x8.value < -mainBoxSize / 6 + 4 && y8.value > -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(7, 6);
-      }
-
-      // // 8
-      // if (
-      //   x8.value >  mainBoxSize / 6 + 4
-      //   &&
-      //   x8.value <=  mainBoxSize /  2 + 8
-      //   &&
-      //   y8.value > - mainBoxSize / 6 + 4
-      // ) {
-      //   runOnJS(changePos)(7, 7);
-      // }
-
-      // 9
-      if (x8.value > mainBoxSize / 6 + 4 && y8.value > -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(7, 8);
-      }
-
-      x8.value = withTiming(0, { duration: 300 });
-      y8.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const gestureHandler9 = useAnimatedGestureHandler({
-    onStart: (e, c) => {
-      c.startX = x9.value;
-      c.startY = y9.value;
-      runOnJS(timeR9)();
-    },
-    onActive: (e, c) => {
-      if (drgE9.value && prior.value == 9) {
-        let maxDragX = 0;
-        let minDragX = -mainBoxSize / 1.5;
-        let minDragY = -mainBoxSize / 1.5;
-        let maxDragY = 0;
-
-        if (
-          e.translationX > minDragX &&
-          e.translationX < maxDragX &&
-          e.translationY > minDragY &&
-          e.translationY < maxDragY
-        ) {
-          x9.value = c.startX + e.translationX;
-          y9.value = c.startY + e.translationY;
-        }
-      }
-    },
-    onEnd: (e, c) => {
-      // 2
-      if (
-        x9.value <= -mainBoxSize / 6 + 4 &&
-        x9.value >= -mainBoxSize / 2 + 8 &&
-        y9.value < -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(8, 1);
-      }
-
-      // 1
-      if (x9.value < -mainBoxSize / 2 + 8 && y9.value < -mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(8, 0);
-      }
-
-      // 5
-      if (
-        y9.value >= -mainBoxSize / 2 + 8 &&
-        y9.value < -mainBoxSize / 6 + 4 &&
-        x9.value >= -mainBoxSize / 2 + 8 &&
-        x9.value <= -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(8, 4);
-      }
-
-      // 3
-      if (x9.value > -mainBoxSize / 6 + 4 && y9.value < -mainBoxSize / 2 + 8) {
-        runOnJS(changePos)(8, 2);
-      }
-
-      // 4
-      if (
-        x9.value < -mainBoxSize / 2 + 8 &&
-        y9.value <= -mainBoxSize / 6 + 4 &&
-        y9.value >= -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(8, 3);
-      }
-
-      // 6
-      if (
-        x9.value > -mainBoxSize / 6 + 4 &&
-        y9.value <= -mainBoxSize / 6 + 4 &&
-        y9.value >= -mainBoxSize / 2 + 8
-      ) {
-        runOnJS(changePos)(8, 5);
-      }
-
-      // 7
-      if (x9.value < -mainBoxSize / 2 + 8 && y9.value > -mainBoxSize / 6 + 4) {
-        runOnJS(changePos)(8, 6);
-      }
-
-      // 8
-      if (
-        x9.value <= -mainBoxSize / 6 + 4 &&
-        x9.value >= -mainBoxSize / 2 + 8 &&
-        y9.value > -mainBoxSize / 6 + 4
-      ) {
-        runOnJS(changePos)(8, 7);
-      }
-
-      // // 9
-      // if (
-      //   x8.value > mainBoxSize / 6 + 4
-      // &&
-      //  y8.value > - mainBoxSize / 6 + 4
-      //  ) {
-      //   runOnJS(changePos)(8, 8);
-      // }
-
-      x9.value = withTiming(0, { duration: 300 });
-      y9.value = withTiming(0, { duration: 300 }, () => {
-        prior.value = 0;
-      });
-    },
-  });
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 1 ? 2 : 1,
-      transform: [{ translateX: x.value }, { translateY: y.value }],
-    };
-  });
-
-  const animatedStyle2 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 2 ? 2 : 1,
-      transform: [{ translateX: x2.value }, { translateY: y2.value }],
-    };
-  });
-
-  const animatedStyle3 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 3 ? 2 : 1,
-      transform: [{ translateX: x3.value }, { translateY: y3.value }],
-    };
-  });
-
-  const animatedStyle4 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 4 ? 2 : 1,
-      transform: [{ translateX: x4.value }, { translateY: y4.value }],
-    };
-  });
-
-  const animatedStyle5 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 5 ? 2 : 1,
-
-      transform: [{ translateX: x5.value }, { translateY: y5.value }],
-    };
-  });
-
-  const animatedStyle6 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 6 ? 2 : 1,
-
-      transform: [{ translateX: x6.value }, { translateY: y6.value }],
-    };
-  });
-
-  const animatedStyle7 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 7 ? 2 : 1,
-      transform: [{ translateX: x7.value }, { translateY: y7.value }],
-    };
-  });
-
-  const animatedStyle8 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 8 ? 2 : 1,
-      transform: [{ translateX: x8.value }, { translateY: y8.value }],
-    };
-  });
-
-  const animatedStyle9 = useAnimatedStyle(() => {
-    return {
-      zIndex: prior.value == 9 ? 2 : 1,
-      transform: [{ translateX: x9.value }, { translateY: y9.value }],
-    };
-  });
 
   // Pic Upload
   const [modalVisible, setmodalVisible] = useState(false);
@@ -1381,79 +312,112 @@ const EditProfile = ({ navigation }) => {
   const prp_q2_ref = useRef(null);
   const prp_a2_ref = useRef(null);
 
+  // const ifFail = async (del_indx, tmp_a = []) => {
+  //   if (tmp_a.length > 0) {
+  //     if (del_indx == 0) {
+  //       setpic1(tmp_a);
+  //     } else if (del_indx == 1) {
+  //       setpic2(tmp_a);
+  //     } else if (del_indx == 2) {
+  //       setpic3(tmp_a);
+  //     } else if (del_indx == 3) {
+  //       setpic4(tmp_a);
+  //     } else if (del_indx == 4) {
+  //       setpic5(tmp_a);
+  //     } else if (del_indx == 5) {
+  //       setpic6(tmp_a);
+  //     } else if (del_indx == 6) {
+  //       setpic7(tmp_a);
+  //     } else if (del_indx == 7) {
+  //       setpic8(tmp_a);
+  //     } else if (del_indx == 8) {
+  //       setpic9(tmp_a);
+  //     }
+  //   } else {
+  //     if (del_indx == 0) {
+  //       setpic1(["", "", true, "1", ""]);
+  //     } else if (del_indx == 1) {
+  //       setpic2(["", "", true, "2", ""]);
+  //     } else if (del_indx == 2) {
+  //       setpic3(["", "", true, "3", ""]);
+  //     } else if (del_indx == 3) {
+  //       setpic4(["", "", true, "4", ""]);
+  //     } else if (del_indx == 4) {
+  //       setpic5(["", "", true, "5", ""]);
+  //     } else if (del_indx == 5) {
+  //       setpic6(["", "", true, "6", ""]);
+  //     } else if (del_indx == 6) {
+  //       setpic7(["", "", true, "7", ""]);
+  //     } else if (del_indx == 7) {
+  //       setpic8(["", "", true, "8", ""]);
+  //     } else if (del_indx == 8) {
+  //       setpic9(["", "", true, "9", ""]);
+  //     }
+  //   }
+
+  //   return true;
+  // };
+
+  // const atLast = async (tmp_lis) => {
+  //   setpic1(tmp_lis[0]);
+  //   setpic2(tmp_lis[1]);
+  //   setpic3(tmp_lis[2]);
+  //   setpic4(tmp_lis[3]);
+  //   setpic5(tmp_lis[4]);
+  //   setpic6(tmp_lis[5]);
+  //   setpic7(tmp_lis[6]);
+  //   setpic8(tmp_lis[7]);
+  //   setpic9(tmp_lis[8]);
+  //   setrefresh(!refresh);
+  // };
+
   const ifFail = async (del_indx, tmp_a = []) => {
+    let tmp_ls = [...pic_list];
     if (tmp_a.length > 0) {
-      if (del_indx == 0) {
-        setpic1(tmp_a);
-      } else if (del_indx == 1) {
-        setpic2(tmp_a);
-      } else if (del_indx == 2) {
-        setpic3(tmp_a);
-      } else if (del_indx == 3) {
-        setpic4(tmp_a);
-      } else if (del_indx == 4) {
-        setpic5(tmp_a);
-      } else if (del_indx == 5) {
-        setpic6(tmp_a);
-      } else if (del_indx == 6) {
-        setpic7(tmp_a);
-      } else if (del_indx == 7) {
-        setpic8(tmp_a);
-      } else if (del_indx == 8) {
-        setpic9(tmp_a);
-      }
+      tmp_ls[del_indx] = tmp_a;
     } else {
-      if (del_indx == 0) {
-        setpic1(["", "", true, "1", ""]);
-      } else if (del_indx == 1) {
-        setpic2(["", "", true, "2", ""]);
-      } else if (del_indx == 2) {
-        setpic3(["", "", true, "3", ""]);
-      } else if (del_indx == 3) {
-        setpic4(["", "", true, "4", ""]);
-      } else if (del_indx == 4) {
-        setpic5(["", "", true, "5", ""]);
-      } else if (del_indx == 5) {
-        setpic6(["", "", true, "6", ""]);
-      } else if (del_indx == 6) {
-        setpic7(["", "", true, "7", ""]);
-      } else if (del_indx == 7) {
-        setpic8(["", "", true, "8", ""]);
-      } else if (del_indx == 8) {
-        setpic9(["", "", true, "9", ""]);
-      }
+      tmp_ls[del_indx] = ["", "", true, String(activeIndx + 1), ""];
     }
+
+    setpic_list(tmp_ls);
 
     return true;
   };
 
   const atLast = async (tmp_lis) => {
-    setpic1(tmp_lis[0]);
-    setpic2(tmp_lis[1]);
-    setpic3(tmp_lis[2]);
-    setpic4(tmp_lis[3]);
-    setpic5(tmp_lis[4]);
-    setpic6(tmp_lis[5]);
-    setpic7(tmp_lis[6]);
-    setpic8(tmp_lis[7]);
-    setpic9(tmp_lis[8]);
+    console.log("tmp_lis", tmp_lis.length);
+    setpic_list(tmp_lis);
+
     setrefresh(!refresh);
   };
 
-  const onNextPress = () => {
-    saveProfileData();
+  const onNextPress = async () => {
+    if (pos_change) {
+      await changeImgPosition();
+    }
+    await saveProfileData();
     // updatePrompts()
   };
 
   const reArrangeList = async (indx) => {
-    let tmp_lis = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9];
+    console.log("reArrangeList");
+    let tmp_lis = _.cloneDeep(pic_list);
 
     tmp_lis.splice(indx, 1);
+
     tmp_lis.push(["", "", true, "2", ""]);
+
+    console.log("tmp_lis.length", tmp_lis.length);
+
+    console.log("positions.value", indx, positions.value);
+
+    let positions_list = Object.entries(positions.value);
+
+    console.log("positions_list", positions_list);
+    // let del_pos = positions_list.find(v => v[0] == indx)
 
     for (let j = 0; j < tmp_lis.length; j++) {
       const ele = tmp_lis[j];
-      ele[3] = j + 1;
 
       if (j > 0 && tmp_lis[j - 1][0] != "") {
         ele[2] = true;
@@ -1462,91 +426,28 @@ const EditProfile = ({ navigation }) => {
       } else {
         ele[2] = false;
       }
+      ele[3] = j + 1;
     }
+
+    let up_pos = {};
+    for (let m = 0; m < positions_list.length; m++) {
+      up_pos[m] = m;
+    }
+    console.log("up_pos", up_pos);
+
+    positions.value = up_pos;
 
     dispatch(setProfileImgs(tmp_lis));
     await atLast(tmp_lis);
   };
 
-  const deleteProfileImage = async (indx) => {
-    setloading(true);
-    let image_id = 0;
-    if (indx == 0) {
-      image_id = pic1[4];
-    } else if (indx == 1) {
-      image_id = pic2[4];
-    } else if (indx == 2) {
-      image_id = pic3[4];
-    } else if (indx == 3) {
-      image_id = pic4[4];
-    } else if (indx == 4) {
-      image_id = pic5[4];
-    } else if (indx == 5) {
-      image_id = pic6[4];
-    } else if (indx == 6) {
-      image_id = pic7[4];
-    } else if (indx == 7) {
-      image_id = pic8[4];
-    } else if (indx == 8) {
-      image_id = pic9[4];
-    }
-
-    const url = apiUrl + `userimage/${image_id}`;
-
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-      "Content-Type": "multipart/form-data",
-    };
-
-    try {
-      const resp = await axios.delete(url, {
-        headers,
-      });
-
-      let code = resp.data.code;
-      let data = resp.data.data;
-
-      if (code == 200) {
-        reArrangeList(indx);
-        setloading(false);
-      } else if (code == 401) {
-        dispatch(setSessionExpired(true));
-      } else {
-        setloading(false);
-
-        Alert.alert("Error", "While Deleting Image" + data);
-      }
-    } catch (error) {
-      setloading(false);
-      console.log("went  while del img", error);
-      dispatch(setSessionExpired(true));
-      Alert.alert("Error", "Something Went Wrong while del image");
-    }
-  };
-
   const saveProfileImage = async (mnImage, crpImage) => {
+    console.log("saveProfileImage");
     setloading_img(true);
 
     let active_itm = [];
-    if (activeIndx == 0) {
-      active_itm = pic1;
-    } else if (activeIndx == 1) {
-      active_itm = pic2;
-    } else if (activeIndx == 2) {
-      active_itm = pic3;
-    } else if (activeIndx == 3) {
-      active_itm = pic4;
-    } else if (activeIndx == 4) {
-      active_itm = pic5;
-    } else if (activeIndx == 5) {
-      active_itm = pic6;
-    } else if (activeIndx == 6) {
-      active_itm = pic7;
-    } else if (activeIndx == 7) {
-      active_itm = pic8;
-    } else if (activeIndx == 8) {
-      active_itm = pic9;
-    }
+
+    active_itm = pic_list[activeIndx];
 
     const url = apiUrl + "userimage/";
 
@@ -1585,62 +486,17 @@ const EditProfile = ({ navigation }) => {
         let pid = data.id;
         let crp_imgd = data.cropedimage;
 
-        let tmp_lis = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9];
-        tmp_lis[activeIndx] = [n_img, crp_imgd, true, activeIndx + 1, pid];
-        if (activeIndx == 0) {
-          setpic1([n_img, crp_imgd, true, "1", pid]);
+        let tmp_lst = [...pic_list];
+        tmp_lst[activeIndx] = [n_img, crp_imgd, true, activeIndx + 1, pid];
 
-          if (!pic2[2]) {
-            setpic2(["", "", true, "2", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "2", ""];
-          }
-        } else if (activeIndx == 1) {
-          setpic2([n_img, crp_imgd, true, "2", pid]);
-          if (!pic3[2]) {
-            setpic3(["", "", true, "3", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "3", ""];
-          }
-        } else if (activeIndx == 2) {
-          setpic3([n_img, crp_imgd, true, "3", pid]);
-          if (!pic4[2]) {
-            setpic4(["", "", true, "4", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "4", ""];
-          }
-        } else if (activeIndx == 3) {
-          setpic4([n_img, crp_imgd, true, "4", pid]);
-          if (!pic5[2]) {
-            setpic5(["", "", true, "5", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "5", ""];
-          }
-        } else if (activeIndx == 4) {
-          setpic5([n_img, crp_imgd, true, "5", pid]);
-          if (!pic6[2]) {
-            setpic6(["", "", true, "6", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "6", ""];
-          }
-        } else if (activeIndx == 5) {
-          setpic6([n_img, crp_imgd, true, "6", pid]);
-          if (!pic7[2]) {
-            setpic7(["", "", true, "7", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "7", ""];
-          }
-        } else if (activeIndx == 6) {
-          setpic7([n_img, crp_imgd, true, "7", pid]);
-          if (!pic8[2]) {
-            setpic8(["", "", true, "8", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "8", ""];
-          }
-        } else if (activeIndx == 7) {
-          setpic8([n_img, crp_imgd, true, "8", pid]);
-          if (!pic9[2]) {
-            setpic9(["", "", true, "9", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "9", ""];
-          }
-        } else if (activeIndx == 8) {
-          setpic9([n_img, crp_imgd, true, "9", pid]);
+        // let compl_list = tmp_lst.filter(v => v[1] !="")
+
+        if (activeIndx < 8 && !tmp_lst[activeIndx + 1][2]) {
+          tmp_lst[activeIndx + 1] = ["", "", true, String(activeIndx + 2), ""];
         }
 
-        dispatch(setProfileImgs(tmp_lis));
+        setpic_list(tmp_lst);
+        dispatch(setProfileImgs(tmp_lst));
         setrefresh(!refresh);
 
         setloading_img(false);
@@ -1648,16 +504,19 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading_img(false);
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        Alert.alert(
+          "saveProfileImage Error",
+          "Some Error Occur" + resp.data.data
+        );
         ifFail(activeIndx);
       }
     } catch (error) {
+      dispatch(setSessionExpired(true));
       setloading_img(false);
       ifFail(activeIndx);
-      dispatch(setSessionExpired(true));
-      console.log("went wrong error", error);
 
-      Alert.alert("Error", "Something Went Wrong");
+      console.log("saveProfileImage went wrong error", error);
+      Alert.alert("saveProfileImage Error", "Something Went Wrong");
     }
   };
 
@@ -1665,25 +524,7 @@ const EditProfile = ({ navigation }) => {
     setloading_img(true);
 
     let active_itm = [];
-    if (activeIndx == 0) {
-      active_itm = pic1;
-    } else if (activeIndx == 1) {
-      active_itm = pic2;
-    } else if (activeIndx == 2) {
-      active_itm = pic3;
-    } else if (activeIndx == 3) {
-      active_itm = pic4;
-    } else if (activeIndx == 4) {
-      active_itm = pic5;
-    } else if (activeIndx == 5) {
-      active_itm = pic6;
-    } else if (activeIndx == 6) {
-      active_itm = pic7;
-    } else if (activeIndx == 7) {
-      active_itm = pic8;
-    } else if (activeIndx == 8) {
-      active_itm = pic9;
-    }
+    active_itm = pic_list[activeIndx];
 
     const url = apiUrl + `userimage/`;
 
@@ -1721,60 +562,14 @@ const EditProfile = ({ navigation }) => {
         let n_img = data.image;
         let pid = data.id;
         let crp_imgd = data.cropedimage;
-        let tmp_lis = [pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9];
+        let tmp_lis = [...pic_list];
         tmp_lis[activeIndx] = [n_img, crp_imgd, true, activeIndx + 1, pid];
-        if (activeIndx == 0) {
-          setpic1([n_img, crp_imgd, true, "1", pid]);
 
-          if (!pic2[2]) {
-            setpic2(["", "", true, "2", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "2", ""];
-          }
-        } else if (activeIndx == 1) {
-          setpic2([n_img, crp_imgd, true, "2", pid]);
-          if (!pic3[2]) {
-            setpic3(["", "", true, "3", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "3", ""];
-          }
-        } else if (activeIndx == 2) {
-          setpic3([n_img, crp_imgd, true, "3", pid]);
-          if (!pic4[2]) {
-            setpic4(["", "", true, "4", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "4", ""];
-          }
-        } else if (activeIndx == 3) {
-          setpic4([n_img, crp_imgd, true, "4", pid]);
-          if (!pic5[2]) {
-            setpic5(["", "", true, "5", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "5", ""];
-          }
-        } else if (activeIndx == 4) {
-          setpic5([n_img, crp_imgd, true, "5", pid]);
-          if (!pic6[2]) {
-            setpic6(["", "", true, "6", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "6", ""];
-          }
-        } else if (activeIndx == 5) {
-          setpic6([n_img, crp_imgd, true, "6", pid]);
-          if (!pic7[2]) {
-            setpic7(["", "", true, "7", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "7", ""];
-          }
-        } else if (activeIndx == 6) {
-          setpic7([n_img, crp_imgd, true, "7", pid]);
-          if (!pic8[2]) {
-            setpic8(["", "", true, "8", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "8", ""];
-          }
-        } else if (activeIndx == 7) {
-          setpic8([n_img, crp_imgd, true, "8", pid]);
-          if (!pic9[2]) {
-            setpic9(["", "", true, "9", ""]);
-            tmp_lis[activeIndx + 1] = ["", "", true, "9", ""];
-          }
-        } else if (activeIndx == 8) {
-          setpic9([n_img, crp_imgd, true, "9", pid]);
+        if (activeIndx < 8 && !tmp_lis[activeIndx + 1][2]) {
+          tmp_lis[activeIndx + 1] = ["", "", true, String(activeIndx + 2), ""];
         }
+
+        setpic_list(tmp_lis);
 
         dispatch(setProfileImgs(tmp_lis));
         setrefresh(!refresh);
@@ -1783,7 +578,10 @@ const EditProfile = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        Alert.alert(
+          "Error updateProfileImage",
+          "Some Error Occur" + resp.data.data
+        );
         setloading_img(false);
         ifFail(activeIndx, tmp_a);
       }
@@ -1792,9 +590,49 @@ const EditProfile = ({ navigation }) => {
       dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
 
-      console.log("went wrong error", error);
+      console.log("updateProfileImage went wrong error", error);
 
-      Alert.alert("Error", "Something Went Wrong");
+      Alert.alert("updateProfileImage Error", "Something Went Wrong");
+    }
+  };
+
+  const deleteProfileImage = async (indx) => {
+    setloading(true);
+
+    let image_id = pic_list[indx][4];
+
+    console.log("image_id", image_id);
+
+    const url = apiUrl + `userimage/${image_id}`;
+
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "multipart/form-data",
+    };
+
+    try {
+      const resp = await axios.delete(url, {
+        headers,
+      });
+
+      let code = resp.data.code;
+      let data = resp.data.data;
+
+      if (code == 200) {
+        reArrangeList(indx);
+        setloading(false);
+      } else if (code == 401) {
+        dispatch(setSessionExpired(true));
+      } else {
+        setloading(false);
+
+        Alert.alert("Error", "While Deleting Image" + data);
+      }
+    } catch (error) {
+      setloading(false);
+      dispatch(setSessionExpired(true));
+      console.log("went  while del img", error);
+      Alert.alert("Error", "Something Went Wrong while del image");
     }
   };
 
@@ -1821,78 +659,25 @@ const EditProfile = ({ navigation }) => {
     // let af_nsize = await getSize(n_img)
     // let af_csize = await getSize(comp_crp_img)
 
-    if (activeIndx == 0) {
-      let tmp_a = pic1;
-      setpic1([n_img, comp_crp_img, false, "1", ""]);
-      if (pic1[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 1) {
-      let tmp_a = pic2;
-      setpic2([n_img, comp_crp_img, false, "2", ""]);
-      if (pic2[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 2) {
-      let tmp_a = pic3;
-      setpic3([n_img, comp_crp_img, false, "3", ""]);
-      if (pic3[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 3) {
-      let tmp_a = pic4;
-      setpic4([n_img, comp_crp_img, false, "4", ""]);
-      if (pic4[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 4) {
-      let tmp_a = pic5;
-      setpic5([n_img, comp_crp_img, false, "5", ""]);
-      if (pic5[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 5) {
-      let tmp_a = pic6;
-      setpic6([n_img, comp_crp_img, false, "6", ""]);
-      if (pic6[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 6) {
-      let tmp_a = pic7;
-      setpic7([n_img, comp_crp_img, false, "7", ""]);
-      if (pic7[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 7) {
-      let tmp_a = pic8;
-      setpic8([n_img, comp_crp_img, false, "8", ""]);
-      if (pic8[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
-    } else if (activeIndx == 8) {
-      let tmp_a = pic9;
-      setpic9([n_img, comp_crp_img, false, "9", ""]);
-      if (pic9[0] == "") {
-        saveProfileImage(n_img, comp_crp_img);
-      } else {
-        updateProfileImage(n_img, comp_crp_img, tmp_a);
-      }
+    console.log("activeIndx", activeIndx);
+
+    let tmp_list = [...pic_list];
+
+    tmp_list[activeIndx] = [
+      n_img,
+      comp_crp_img,
+      false,
+      String(activeIndx + 1),
+      "",
+    ];
+
+    setpic_list(tmp_list);
+    let tmp_a = pic_list[activeIndx];
+
+    if (tmp_a[0] == "") {
+      saveProfileImage(n_img, comp_crp_img);
+    } else {
+      updateProfileImage(n_img, comp_crp_img, tmp_a);
     }
 
     setmodalVisible(false);
@@ -1909,93 +694,6 @@ const EditProfile = ({ navigation }) => {
     });
   };
 
-  // const cropImg = img => {
-  //   ImageCropPicker.openCropper({
-  //     path: img,
-  //     width: 300,
-  //     height: 300,
-  //   }).then(image => {
-  //     let crp_img = image.path;
-
-  //     if (activeIndx == 0) {
-  //       let tmp_a = pic1;
-  //       setpic1([img, crp_img, false, '1', '']);
-  //       if (pic1[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 1) {
-  //       let tmp_a = pic2;
-  //       setpic2([img, crp_img, false, '2', '']);
-  //       if (pic2[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 2) {
-  //       let tmp_a = pic3;
-  //       setpic3([img, crp_img, false, '3', '']);
-  //       if (pic3[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 3) {
-  //       let tmp_a = pic4;
-  //       setpic4([img, crp_img, false, '4', '']);
-  //       if (pic4[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 4) {
-  //       let tmp_a = pic5;
-  //       setpic5([img, crp_img, false, '5', '']);
-  //       if (pic5[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 5) {
-  //       let tmp_a = pic6;
-  //       setpic6([img, crp_img, false, '6', '']);
-  //       if (pic6[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 6) {
-  //       let tmp_a = pic7;
-  //       setpic7([img, crp_img, false, '7', '']);
-  //       if (pic7[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 7) {
-  //       let tmp_a = pic8;
-  //       setpic8([img, crp_img, false, '8', '']);
-  //       if (pic8[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     } else if (activeIndx == 8) {
-  //       let tmp_a = pic9;
-  //       setpic9([img, crp_img, false, '9', '']);
-  //       if (pic9[0] == '') {
-  //         saveProfileImage(img, crp_img);
-  //       } else {
-  //         updateProfileImage(img, crp_img, tmp_a);
-  //       }
-  //     }
-
-  //     setmodalVisible(false);
-  //   });
-  // };
-
-  // To Open Camera
   const cameraLaunch = () => {
     ImageCropPicker.openCamera({
       width: 300,
@@ -2035,29 +733,6 @@ const EditProfile = ({ navigation }) => {
       });
   };
 
-  // Request Camera and Gallery Permission
-  const requestCameraPermission = async (fcn) => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: "App Camera Permission",
-          message: "App needs access to your camera ",
-          buttonNeutral: "Ask Me Later",
-          buttonNegative: "Cancel",
-          buttonPositive: "OK",
-        }
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        fcn();
-      } else {
-        setgaller_per(false);
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
   const getLocation = async (page, onpage = false) => {
     setcity_refresh(true);
 
@@ -2072,7 +747,7 @@ const EditProfile = ({ navigation }) => {
     };
 
     await axios
-      .post(apiUrl + `GetLocation/?page=${page}`, data,{headers})
+      .post(apiUrl + `GetLocation/?page=${page}`, data, { headers })
       .then((resp) => {
         if (resp.data.code == 200) {
           setcity_refresh(false);
@@ -2492,6 +1167,12 @@ const EditProfile = ({ navigation }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (pos_change) {
+      setchanges_made(true);
+    }
+  }, [pos_change]);
+
   useLayoutEffect(() => {
     // getLocation(city_page);
 
@@ -2506,7 +1187,8 @@ const EditProfile = ({ navigation }) => {
     setheight_cm(usr_profile.height.toString());
     setoccupation(usr_profile.occupation);
 
-    atLast(profile_imgs);
+    // atLast(profile_imgs);
+    atLast(profile_imgs.slice(0, 9));
 
     if (prompts_list_all.length > 0) {
       setPrompts();
@@ -2663,1055 +1345,33 @@ const EditProfile = ({ navigation }) => {
               >
                 {/* Inputs Container*/}
                 <View style={{ ...styles.inputCont }}>
-                  <GestureHandlerRootView
-                    style={{
-                      // backgroundColor: 'green',
-                      flexDirection: "row",
-                      position: "relative",
-                      flexWrap: "wrap",
-                      // borderWidth: 1,
-                      // borderColor: '#000',
-                      width: mainBoxSize,
-                      height: mainBoxSize,
-                    }}
-                  >
-                    <PanGestureHandler onGestureEvent={gestureHandler1}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: 0,
-                            left: 0,
-                            opacity: pic1[0] != "" || pic1[2] ? 1 : 0.5,
-                          },
-                          animatedStyle,
-                        ]}
+                  {pic_list.map((item, index) => {
+                    return (
+                      <Draggable
+                        key={index}
+                        positions={positions}
+                        id={index}
+                        activeIndx={activeIndx}
+                        item={item}
+                        pic_list={pic_list}
+                        refresh={refresh}
+                        setrefresh={setrefresh}
+                        setpos_change={setpos_change}
                       >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic1[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(0);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic1[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 0 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                // source={{uri: `data:image/gif;base64,${itm[0]}`}}
-                                source={{ uri: `${pic1[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(0);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  1
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic1[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-
-                    <PanGestureHandler onGestureEvent={gestureHandler2}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: 0,
-                            left: mainBoxSize / 3,
-                            opacity: pic2[0] != "" || pic2[2] ? 1 : 0.5,
-                          },
-                          animatedStyle2,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic2[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(1);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic2[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 1 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                // source={{uri: `data:image/gif;base64,${itm[0]}`}}
-                                source={{ uri: `${pic2[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(1);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  2
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic2[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-
-                    <PanGestureHandler onGestureEvent={gestureHandler3}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: 0,
-                            left: mainBoxSize / 1.5,
-                            opacity: pic3[0] != "" || pic3[2] ? 1 : 0.5,
-                          },
-                          animatedStyle3,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic3[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(2);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic3[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 2 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                // source={{uri: `data:image/gif;base64,${itm[0]}`}}
-                                source={{ uri: `${pic3[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(2);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  3
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic3[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-
-                    <PanGestureHandler onGestureEvent={gestureHandler4}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: mainBoxSize / 3,
-                            left: 0,
-                            opacity: pic4[0] != "" || pic4[2] ? 1 : 0.5,
-                          },
-                          animatedStyle4,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic4[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(3);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic4[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 3 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                source={{ uri: `${pic4[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(3);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  4
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic4[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-                    <PanGestureHandler onGestureEvent={gestureHandler5}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: mainBoxSize / 3,
-                            left: mainBoxSize / 3,
-                            opacity: pic5[0] != "" || pic5[2] ? 1 : 0.5,
-                          },
-                          animatedStyle5,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic5[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(4);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic5[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 4 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                // source={{uri: `data:image/gif;base64,${itm[0]}`}}
-                                source={{ uri: `${pic5[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(4);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  5
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic5[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-                    <PanGestureHandler onGestureEvent={gestureHandler6}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: mainBoxSize / 3,
-                            left: mainBoxSize / 1.5,
-                            opacity: pic6[0] != "" || pic6[2] ? 1 : 0.5,
-                          },
-                          animatedStyle6,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic6[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(5);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic6[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 5 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                source={{ uri: `${pic6[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(5);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  6
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic6[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-                    <PanGestureHandler onGestureEvent={gestureHandler7}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: mainBoxSize / 1.5,
-                            left: 0,
-                            opacity: pic7[0] != "" || pic7[2] ? 1 : 0.5,
-                          },
-                          animatedStyle7,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic7[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(6);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic7[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 6 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                // source={{uri: `data:image/gif;base64,${itm[0]}`}}
-                                source={{ uri: `${pic7[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(6);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  7
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic7[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-                    <PanGestureHandler onGestureEvent={gestureHandler8}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: mainBoxSize / 1.5,
-                            left: mainBoxSize / 3,
-                            opacity: pic8[0] != "" || pic8[2] ? 1 : 0.5,
-                          },
-                          animatedStyle8,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic8[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(7);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic8[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 7 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.blue}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                // source={{uri: `data:image/gif;base64,${itm[0]}`}}
-                                source={{ uri: `${pic8[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(7);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  8
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic8[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-                    <PanGestureHandler o9GestureEvent={gestureHandler9}>
-                      <Animated.View
-                        style={[
-                          {
-                            position: "absolute",
-                            zIndex: 0,
-                            top: mainBoxSize / 1.5,
-                            left: mainBoxSize / 1.5,
-                            opacity: pic9[0] != "" || pic9[2] ? 1 : 0.5,
-                          },
-                          animatedStyle9,
-                        ]}
-                      >
-                        <TouchableOpacity
-                          onPress={() => {
-                            if (pic9[2]) {
-                              setmodalVisible(true);
-                              setactiveIndx(8);
-                            }
-                          }}
-                          style={styles.uploadSec}
-                        >
-                          {pic9[0] != "" ? (
-                            <View style={{ position: "relative" }}>
-                              {loading_img && activeIndx == 8 && (
-                                <View
-                                  style={{
-                                    width: rspW(23),
-                                    height: rspW(23),
-                                    position: "absolute",
-
-                                    alignSelf: "center",
-
-                                    borderRadius: rspW(2.5),
-
-                                    backgroundColor: "#0000003c",
-                                    // backgroundColor:'red',
-
-                                    zIndex: 100,
-
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  <ActivityIndicator
-                                    size="large"
-                                    color={colors.bl9e}
-                                    style={{ alignSelf: "center" }}
-                                  />
-                                </View>
-                              )}
-
-                              <Image
-                                // source={{uri: `data:image/gif;base64,${itm[0]}`}}
-                                source={{ uri: `${pic9[1]}` }}
-                                resizeMode="cover"
-                                style={{
-                                  width: rspW(23),
-                                  height: rspW(23),
-                                  borderRadius: rspW(2.5),
-                                }}
-                              />
-                              {[
-                                pic1,
-                                pic2,
-                                pic3,
-                                pic4,
-                                pic5,
-                                pic6,
-                                pic7,
-                                pic8,
-                                pic9,
-                              ].filter((v) => v[0] != "").length > 3 && (
-                                <TouchableOpacity
-                                  onPress={() => {
-                                    deleteProfileImage(8);
-                                  }}
-                                  style={{
-                                    position: "absolute",
-                                    right: rspW(-2.5),
-                                    top: rspW(-2.5),
-                                    backgroundColor: "#fff",
-                                    borderRadius: rspW(6),
-                                  }}
-                                >
-                                  <ADIcon
-                                    name="minuscircle"
-                                    size={20}
-                                    color={colors.error}
-                                  />
-                                </TouchableOpacity>
-                              )}
-                              <View
-                                style={{
-                                  ...styles.positionCont,
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    ...styles.positionTxt,
-                                  }}
-                                >
-                                  9
-                                </Text>
-                              </View>
-                            </View>
-                          ) : (
-                            <Ionicon
-                              name="md-add-circle-sharp"
-                              size={30}
-                              color={pic9[2] ? colors.blue : "#cccccc"}
-                            />
-                          )}
-                        </TouchableOpacity>
-                      </Animated.View>
-                    </PanGestureHandler>
-                  </GestureHandlerRootView>
+                        <Box
+                          positions={positions}
+                          index={index}
+                          loading={loading_img}
+                          item={item}
+                          activeIndx={activeIndx}
+                          setactiveIndx={setactiveIndx}
+                          modalVisible={modalVisible}
+                          setmodalVisible={setmodalVisible}
+                          deleteProfileImage={deleteProfileImage}
+                        />
+                      </Draggable>
+                    );
+                  })}
                 </View>
 
                 <View
@@ -4079,20 +1739,6 @@ const EditProfile = ({ navigation }) => {
                             </View>
 
                             <View ref={pup_a1_ref}>
-                              {/* <FormInput
-                                value={public_prompt1_a}
-                                setvalue={setpublic_prompt1_a}
-                                width={'100%'}
-                                placeholder={'Type your answer'}
-                                error_cond={public_prompt1_a.length < 3}
-                                keyboardType="default"
-                                value_blr={public_prompt1_blr}
-                                setvalue_blr={setpublic_prompt1_blr}
-                                multiline={true}
-                                // setchanges_made={setchanges_made}
-                                disabled={public_prompt1_q == ''}
-                              /> */}
-
                               <AutoGrowingTextInput
                                 maxLength={250}
                                 placeholder="Type your answer"
@@ -4155,20 +1801,6 @@ const EditProfile = ({ navigation }) => {
                               />
                             </View>
                             <View ref={pup_a2_ref}>
-                              {/* <FormInput
-                                value={public_prompt2_a}
-                                setvalue={setpublic_prompt2_a}
-                                width={'100%'}
-                                placeholder={'Type your answer'}
-                                error_cond={public_prompt2_a.length < 3}
-                                keyboardType="default"
-                                value_blr={public_prompt2_blr}
-                                setvalue_blr={setpublic_prompt2_blr}
-                                multiline={true}
-                                // setchanges_made={setchanges_made}
-                                disabled={public_prompt2_q == ''}
-                              /> */}
-
                               <AutoGrowingTextInput
                                 maxLength={250}
                                 placeholder="Type your answer"
@@ -4260,20 +1892,6 @@ const EditProfile = ({ navigation }) => {
                               />
                             </View>
                             <View ref={prp_a1_ref}>
-                              {/* <FormInput
-                                value={private_prompt1_a}
-                                setvalue={setprivate_prompt1_a}
-                                width={'100%'}
-                                placeholder={'Type your answer'}
-                                error_cond={private_prompt1_a.length < 3}
-                                keyboardType="default"
-                                value_blr={private_prompt1_blr}
-                                setvalue_blr={setprivate_prompt1_blr}
-                                multiline={true}
-                                // setchanges_made={setchanges_made}
-                                disabled={private_prompt1_q == ''}
-                              /> */}
-
                               <AutoGrowingTextInput
                                 maxLength={250}
                                 placeholder="Type your answer"
@@ -4333,20 +1951,6 @@ const EditProfile = ({ navigation }) => {
                               />
                             </View>
                             <View ref={prp_a2_ref}>
-                              {/* <FormInput
-                                value={private_prompt2_a}
-                                setvalue={setprivate_prompt2_a}
-                                width={'100%'}
-                                placeholder={'Type your answer'}
-                                error_cond={private_prompt2_a.length < 3}
-                                keyboardType="default"
-                                value_blr={private_prompt2_blr}
-                                setvalue_blr={setprivate_prompt2_blr}
-                                multiline={true}
-                                // setchanges_made={setchanges_made}
-                                disabled={private_prompt2_q == ''}
-                              /> */}
-
                               <AutoGrowingTextInput
                                 maxLength={250}
                                 placeholder="Type your answer"
@@ -4625,40 +2229,6 @@ const EditProfile = ({ navigation }) => {
               paddingBottom: Platform.OS == "android" ? 0 : rspH(3.6),
             }}
           >
-            {/* <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                // backgroundColor:'red',
-                height: rspH(8),
-                width: scrn_width,
-                borderBottomWidth: 1,
-                borderBottomColor: colors.blue,
-              }}
-              onPress={() => {
-                Platform.OS == 'ios'
-                  ? imageGalleryLaunch()
-                  : requestCameraPermission(imageGalleryLaunch);
-              }}>
-              <Text style={styles.imageUpTxt}>Browse Photos</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-
-                height: rspH(8),
-
-                width: scrn_width,
-              }}
-              onPress={() => {
-                Platform.OS == 'ios'
-                  ? cameraLaunch()
-                  : requestCameraPermission(cameraLaunch);
-              }}>
-              <Text style={styles.imageUpTxt}>Open Camera</Text>
-            </TouchableOpacity> */}
-
             <TouchableOpacity
               style={{
                 justifyContent: "center",
@@ -4673,9 +2243,6 @@ const EditProfile = ({ navigation }) => {
               }}
               onPress={() => {
                 imageGalleryLaunch();
-                // Platform.OS == 'ios'
-                //   ? imageGalleryLaunch()
-                //   : requestCameraPermission(imageGalleryLaunch);
               }}
             >
               <Text style={styles.imageUpTxt}>Browse Photos</Text>
@@ -4691,9 +2258,6 @@ const EditProfile = ({ navigation }) => {
               }}
               onPress={() => {
                 cameraLaunch();
-                // Platform.OS == 'ios'
-                //   ? cameraLaunch()
-                //   : requestCameraPermission(cameraLaunch);
               }}
             >
               <Text style={styles.imageUpTxt}>Open Camera</Text>
@@ -4740,12 +2304,7 @@ export default EditProfile;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-
-    // justifyContent:'center',
     alignItems: "center",
-    // backgroundColor:'#ef854895',
-    // marginHorizontal: 36,
   },
 
   profileDetailCont: {
@@ -4777,17 +2336,16 @@ const styles = StyleSheet.create({
   },
 
   inputCont: {
-    // alignItems: 'center',
-    alignSelf: "center",
-    marginHorizontal: rspW(-3),
-    // backgroundColor:'yellow',
-    width: rspW(84),
-    height: rspW(84),
+    marginHorizontal: rspW(-2),
+    width: rspW(85),
+    height: rspW(85),
+    // padding: 16,
     marginTop: rspH(1),
     // marginBottom: rspH(4),
     flexDirection: "row",
-    justifyContent: "center",
+    // justifyContent: "center",
     flexWrap: "wrap",
+    // backgroundColor:'red',
   },
   imageUpCont: {
     alignItems: "center",
