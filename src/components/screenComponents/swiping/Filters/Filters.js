@@ -215,7 +215,6 @@ const Filters = ({
     } catch (error) {
       dispatch(setSessionExpired(true));
       console.log("updateFilterData", error);
-      Alert.alert("Error", `Something Went Wrong updateFilterData `);
     }
   };
 

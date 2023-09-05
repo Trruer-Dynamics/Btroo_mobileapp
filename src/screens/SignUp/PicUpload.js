@@ -41,7 +41,6 @@ import Loader from "../../components/loader/Loader";
 import { apiUrl } from "../../constants";
 import {
   setProfileImgs,
-  setProfileImgsPos,
   setProfiledata,
   setSessionExpired,
 } from "../../store/reducers/authentication/authentication";
@@ -172,13 +171,10 @@ const PicUpload = ({ navigation, route }) => {
 
     tmp_lis.push(["", "", true, "2", ""]);
 
-    console.log("tmp_lis.length", tmp_lis.length);
-
-    console.log("positions.value", indx, positions.value);
 
     let positions_list = Object.entries(positions.value);
 
-    console.log("positions_list", positions_list);
+
     let del_pos = positions_list.find((v) => v[0] == indx);
 
     for (let j = 0; j < tmp_lis.length; j++) {
@@ -198,7 +194,6 @@ const PicUpload = ({ navigation, route }) => {
     for (let m = 0; m < positions_list.length; m++) {
       up_pos[m] = m;
     }
-    console.log("up_pos", up_pos);
 
     positions.value = up_pos;
 
@@ -210,8 +205,6 @@ const PicUpload = ({ navigation, route }) => {
     setmainloading(true);
 
     let image_id = pic_list[indx][4];
-
-    console.log("image_id", image_id);
 
     const url = apiUrl + `userimage/${image_id}`;
 
@@ -235,14 +228,14 @@ const PicUpload = ({ navigation, route }) => {
         dispatch(setSessionExpired(true));
       } else {
         setmainloading(false);
-
-        Alert.alert("Error", "While Deleting Image" + data);
+        console.log("Error", "While Deleting Image" + data)
+        
       }
     } catch (error) {
       setmainloading(false);
       dispatch(setSessionExpired(true));
       console.log("went  while del img", error);
-      Alert.alert("Error", "Something Went Wrong while del image");
+
     }
   };
 
@@ -287,20 +280,14 @@ const PicUpload = ({ navigation, route }) => {
       position_9: pic_list[8][4] != "" ? positions.value[8] : null,
     };
 
-    console.log("pic_list", pic_list);
 
     let up_pos_lis = _.cloneDeep(pic_list);
     for (let t = 0; t < up_pos_lis.length; t++) {
       const ele = up_pos_lis[t];
       ele[3] = positions.value[t];
-      console.log("\n ele", ele);
     }
 
     up_pos_lis = up_pos_lis.sort((a, b) => a[3] - b[3]);
-
-    // console.log("up_pos_lis",up_pos_lis)
-
-    // console.log("data",data)
 
     try {
       const resp = await axios.post(url, data, { headers });
@@ -308,28 +295,25 @@ const PicUpload = ({ navigation, route }) => {
 
       let code = resp.data.code;
       let user_data = resp.data.data;
-      console.log("user_data", user_data);
+  
       if (code == 200) {
-        //
-        // dispatch(setProfileImgsPos(positions.value))
+      
         await dispatch(setProfileImgs(up_pos_lis));
         confirmImageUploads();
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "pos Some Error Occur" + resp.data.data);
+        console.log("Error", "pos Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setmainloading(false);
       dispatch(setSessionExpired(true));
       console.log("error", error);
-
-      Alert.alert("Error", "Something Went Wrong");
     }
   };
 
   const saveProfileImage = async (mnImage, crpImage) => {
-    console.log("saveProfileImage");
+   
     setloading(true);
 
     let active_itm = [];
@@ -391,10 +375,9 @@ const PicUpload = ({ navigation, route }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-        Alert.alert(
-          "saveProfileImage Error",
-          "Some Error Occur" + resp.data.data
-        );
+        console.log("saveProfileImage Error",
+        "Some Error Occur" + resp.data.data)
+        
         ifFail(activeIndx);
       }
     } catch (error) {
@@ -403,7 +386,7 @@ const PicUpload = ({ navigation, route }) => {
       ifFail(activeIndx);
 
       console.log("saveProfileImage went wrong error", error);
-      Alert.alert("saveProfileImage Error", "Something Went Wrong");
+
     }
   };
 
@@ -465,10 +448,9 @@ const PicUpload = ({ navigation, route }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert(
-          "Error updateProfileImage",
-          "Some Error Occur" + resp.data.data
-        );
+        console.log("Error updateProfileImage",
+        "Some Error Occur" + resp.data.data)
+        
         setloading(false);
         ifFail(activeIndx, tmp_a);
       }
@@ -476,10 +458,8 @@ const PicUpload = ({ navigation, route }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
-
       console.log("updateProfileImage went wrong error", error);
 
-      Alert.alert("updateProfileImage Error", "Something Went Wrong");
     }
   };
 
@@ -506,7 +486,6 @@ const PicUpload = ({ navigation, route }) => {
     // let af_nsize = await getSize(n_img)
     // let af_csize = await getSize(comp_crp_img)
 
-    console.log("activeIndx", activeIndx);
 
     let tmp_list = [...pic_list];
 
@@ -584,8 +563,6 @@ const PicUpload = ({ navigation, route }) => {
       active_user_location_details.action != "signup" &&
       profile_imgs[0][0] != ""
     ) {
-      console.log("profile_imgs", profile_imgs.length);
-      // dispatch(setProfileImgs(profile_imgs.slice(0,9)))
       atLast(profile_imgs.slice(0, 9));
     } else {
       let tmp_lis = [

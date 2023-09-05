@@ -70,12 +70,8 @@ export const authenticationSlice = createSlice({
     setProfiledata: (state, action) => {
       state.profile_data = action.payload;
     },
-
     setProfileImgs: (state, action) => {
       state.profile_imgs = action.payload;
-    },
-    setProfileImgsPos: (state, action) => {
-      state.profile_imgs_pos = action.payload;
     },
     setActiveUserLocationDetails: (state, action) => {
       state.active_user_location_details = action.payload;
@@ -120,7 +116,6 @@ export const {
   setAccessToken,
   setStatusBarArgs,
   setProfileImgs,
-  setProfileImgsPos,
   setUserLoggined,
   setPromptFillingStart,
   setPromptFillingComplete,

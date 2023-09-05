@@ -142,7 +142,6 @@ const ReferralCode = ({
 
       console.log("error", error);
 
-      Alert.alert("Error", "Something Went Wrong");
     }
   };
 

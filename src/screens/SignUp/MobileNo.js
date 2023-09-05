@@ -172,8 +172,7 @@ const MobileNo = ({ navigation, route }) => {
       setloading(false);
     } catch (error) {
       console.log("SignIn", error.message, typeof error.message);
-      Alert.alert("SignIn Error", error.message);
-
+      
       setloading(false);
     }
   };
@@ -181,8 +180,7 @@ const MobileNo = ({ navigation, route }) => {
   // To otp status of phone number
   const onAuthStateChanged = (user) => {
     console.log("\nonAuthStateChanged", user, "\n");
-    // console.warn("\nonAuthStateChanged",user,'\n')
-    // Alert.alert("FN",JSON.stringify(user))
+
   };
 
   useEffect(() => {

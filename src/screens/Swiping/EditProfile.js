@@ -162,10 +162,7 @@ const EditProfile = ({ navigation }) => {
       let user_data = resp.data.data;
       console.log("user_data", user_data);
       if (code == 200) {
-        //
-        // dispatch(setProfileImgsPos(positions.value))
         await dispatch(setProfileImgs(up_pos_lis));
-        // confirmImageUploads()
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {

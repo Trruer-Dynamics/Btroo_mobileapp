@@ -130,7 +130,6 @@ const NotificationController = (props) => {
 
   useLayoutEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      //   Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
 
       console.log("\n remoteMessage", Platform.OS, remoteMessage, "\n");
 

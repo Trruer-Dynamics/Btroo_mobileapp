@@ -154,7 +154,6 @@ const OtpVerify = ({
 
       if (user_code == 400) {
         await setModalVisible(false);
-        // Alert.alert("", "User Already Exist!\nPlease Login.");
         Alert.alert(
           "",
           "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
@@ -205,14 +204,15 @@ const OtpVerify = ({
         navigation.navigate("UserIntro");
         setModalVisible(false);
       } else {
-        alert("Some Error Occur ");
+        console.log("Some Error Occur while account")
+      
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("account error", error);
 
-      Alert.alert("Error", "Something Went Wrong");
+   
     }
   };
 
@@ -240,7 +240,7 @@ const OtpVerify = ({
       dispatch(setSessionExpired(true));
       setloading(false);
       console.log("\nsendDeviceToken error", error);
-      Alert.alert("Error", "Something Went Wrong");
+
     }
   };
 
@@ -407,13 +407,14 @@ const OtpVerify = ({
           navigation.navigate(nav_to);
         }
       } else {
-        Alert.alert("Error", "Some Error Occur" + response.status);
+        console.log("Error", "Some Error Occur" + response.status)
+       
       }
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading(false);
       console.log("login error", error);
-      Alert.alert("Error", "Something Went Wrong");
+
     }
   };
 

@@ -181,8 +181,6 @@ const Info = ({ navigation, route }) => {
           });
 
           setarr(tmp_arr);
-        } else {
-          Alert.alert("Something went wrong");
         }
       })
       .catch((err) => {

@@ -949,9 +949,10 @@ const SettingsScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Info", {
-                    heading: "FAQ",
-                  });
+                  // navigation.navigate("Info", {
+                  //   heading: "FAQ",
+                  // });
+                  Linking.openURL("https://btroo.midnightpoha.com/index.php/faqs/")
                 }}
                 style={{
                   flexDirection: "row",

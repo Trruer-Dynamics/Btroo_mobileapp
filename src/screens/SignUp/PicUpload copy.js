@@ -1370,14 +1370,14 @@ const PicUpload = ({ navigation, route }) => {
         dispatch(setSessionExpired(true));
       } else {
         setmainloading(false);
-
-        Alert.alert("Error", "While Deleting Image" + data);
+        console.log("Error", "While Deleting Image" + data)
+       
       }
     } catch (error) {
       setmainloading(false);
       dispatch(setSessionExpired(true));
       console.log("went  while del img", error);
-      Alert.alert("Error", "Something Went Wrong while del image");
+      
     }
   };
 
@@ -1412,14 +1412,12 @@ const PicUpload = ({ navigation, route }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "pos Some Error Occur" + resp.data.data);
+        console.log("Error", "pos Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("error", error);
-
-      Alert.alert("Error", "Something Went Wrong");
     }
   };
 
@@ -1547,10 +1545,9 @@ const PicUpload = ({ navigation, route }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-        Alert.alert(
-          "saveProfileImage Error",
-          "Some Error Occur" + resp.data.data
-        );
+        console.log( "saveProfileImage Error",
+        "Some Error Occur" + resp.data.data)
+        
         ifFail(activeIndx);
       }
     } catch (error) {
@@ -1559,7 +1556,7 @@ const PicUpload = ({ navigation, route }) => {
       ifFail(activeIndx);
 
       console.log("saveProfileImage went wrong error", error);
-      Alert.alert("saveProfileImage Error", "Something Went Wrong");
+
     }
   };
 

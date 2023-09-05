@@ -107,7 +107,7 @@ const UserProvider = ({ children, navigationRef }) => {
       // setloading(false);
 
       console.log("removeToken error", error);
-      // Alert.alert(" removeToken Error", "Something Went Wrong");
+
     }
   };
 

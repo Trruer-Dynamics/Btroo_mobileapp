@@ -327,7 +327,6 @@ const SwipeCard = ({
       // setloading(false);
       dispatch(setSessionExpired(true));
       console.log("reportProfile error", error);
-      Alert.alert("Error", `add location Something Went Wrong`);
       return false;
     }
   };
@@ -362,7 +361,6 @@ const SwipeCard = ({
       // setloading(false);
       dispatch(setSessionExpired(true));
       console.log("swipeProfile catch err", error);
-      Alert.alert("Error", `swipeProfile Something Went Wrong`);
       return false;
     }
   };

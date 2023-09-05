@@ -110,14 +110,13 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("verifyPhoto Error", "Some Error Occur" + resp.data.data);
+        console.log("verifyPhoto Error", "Some Error Occur" + resp.data.data)
+        
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("verifyPhoto went wrong error", error);
-
-      Alert.alert("verifyPhoto Error", "Something Went Wrong");
     }
   };
 
