@@ -59,7 +59,7 @@ const UserProvider = ({ children, navigationRef }) => {
 
   const notificationListener = () => {
     console.log("notificationListener", Platform.OS);
-    // alert("notificationListener")
+
     messaging().onNotificationOpenedApp((remoteMessage) => {
       console.log(
         "Notification caused app to open from background state:",
@@ -139,7 +139,7 @@ const UserProvider = ({ children, navigationRef }) => {
   useEffect(() => {
     console.log("is_session_expired", is_session_expired);
     if (is_session_expired == true && DeviceToken != "") {
-      // alert("Session Expired")
+
       removeToken();
       dispatch(setUserLoggined(false));
       dispatch(setAccessToken(""));

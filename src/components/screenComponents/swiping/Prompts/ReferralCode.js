@@ -134,13 +134,13 @@ const ReferralCode = ({
       } else if (status == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur savePrompts" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
 
-      console.log("error", error);
+      console.log("savePrompts error", error);
 
     }
   };

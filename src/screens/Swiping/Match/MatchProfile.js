@@ -176,7 +176,6 @@ const MatchProfile = ({ route }) => {
       // setloading(false);
       console.log("unmatchProfile error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", `unmatchProfile Something Went Wrong`);
       return false;
     }
   };
@@ -212,7 +211,6 @@ const MatchProfile = ({ route }) => {
       // setloading(false);
       console.log("reportProfile error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", `reportProfile Something Went Wrong`);
       return false;
     }
   };

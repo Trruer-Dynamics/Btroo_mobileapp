@@ -73,13 +73,12 @@ const PhotoVerifyCamera = ({}) => {
         }
       } else {
         setloading(false);
-
-        alert("Not Work");
+        console.log("Not Work")
       }
     } catch (error) {
       setloading(false);
-
-      alert(error);
+      console.log("photoverucamera error")
+     
     }
   };
 

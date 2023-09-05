@@ -210,7 +210,8 @@ const Filters = ({
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur updateFilterData" + resp.data.data)
+
       }
     } catch (error) {
       dispatch(setSessionExpired(true));

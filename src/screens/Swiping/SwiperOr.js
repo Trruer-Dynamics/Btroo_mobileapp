@@ -332,7 +332,6 @@ const SwiperOr = ({}) => {
         // updateLocation(currentLatitude, currentLongitude);
       },
       (err) => {
-        // alert(err.message);
         setpermission_denied(true);
         console.log("lcation per denide", err.message);
         setwarn_step(4);
@@ -375,14 +374,14 @@ const SwiperOr = ({}) => {
 
         return true;
       } else {
-        alert("add location Some Error Occur ");
+        console.log("add location Some Error Occur ")
+        
         return false;
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("add location error", error);
-      Alert.alert("Error", `add location Something Went Wrong`);
       return false;
     }
   };
@@ -394,7 +393,7 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
 
-    // alert(profile_data.user.id)
+    
     await axios
       .get(apiUrl + `FilterUpdateGet/${profile_data.user.id}`, { headers })
       .then((resp) => {
@@ -598,7 +597,7 @@ const SwiperOr = ({}) => {
         headers,
       })
       .then((resp) => {
-        // alert(`response ${Platform.OS}`)
+        
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
         // console.log( Platform.OS,"resp_data",resp_data[0])
@@ -633,7 +632,7 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
 
-    // alert('Profile Call', profile_call)
+
     await axios
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
@@ -711,14 +710,13 @@ const SwiperOr = ({}) => {
         dispatch(setPromptFillingStart(true));
         // getPrompts();
       } else {
-        alert("promptsfillingstarted Some Error Occur ");
+        console.log("promptsfillingstarted Some Error Occur ")
         return false;
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("promptsfillingstarted error", error);
-      Alert.alert("Error", `promptsfillingstarted Something Went Wrong`);
       return false;
     }
   };
@@ -836,7 +834,6 @@ const SwiperOr = ({}) => {
       current_address
     ) {
       console.log("All Get");
-      // alert('All Get')
       addLocation();
     }
   }, [

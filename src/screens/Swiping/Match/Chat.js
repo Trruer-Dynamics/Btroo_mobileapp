@@ -453,7 +453,7 @@ const Chat = ({ profile }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("chatRvlTutDone error", error);
-      Alert.alert("Error", `chatRvlTutDone Something Went Wrong`);
+    
       return false;
     }
   };
@@ -487,7 +487,6 @@ const Chat = ({ profile }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("revealProfile error", error);
-      Alert.alert("Error", `revealProfile Something Went Wrong`);
       return false;
     }
   };

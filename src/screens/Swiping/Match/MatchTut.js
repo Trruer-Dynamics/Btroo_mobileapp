@@ -106,12 +106,13 @@ const MatchTut = () => {
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur" + resp.data.data)
+        
       }
     } catch (error) {
       console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", "Something Went Wrong");
+   
     }
   };
 
@@ -144,9 +145,8 @@ const MatchTut = () => {
       }
     } catch (error) {
       setloading(false);
-      console.log("error", error);
+      console.log("matchTutDone error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", `matchTutDone Something Went Wrong`);
       return false;
     }
   };

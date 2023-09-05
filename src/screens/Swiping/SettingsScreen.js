@@ -158,16 +158,14 @@ const SettingsScreen = ({ navigation }) => {
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert(
-          "Error",
-          "updateShowProfile Some Error Occur" + resp.data.data
-        );
+        console.log( "Error",
+        "updateShowProfile Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("went wrong error", error);
-      Alert.alert("Error", "Something Went Wrong");
+      
     }
   };
 
@@ -210,13 +208,13 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur Keep Matching" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("went wrong error", error);
-      Alert.alert("Error", "Something Went Wrong");
+
     }
   };
 
@@ -259,13 +257,14 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur updateNewMessage" + resp.data.data)
+        
       }
     } catch (error) {
       setloading(false);
       console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", "Something Went Wrong");
+    
     }
   };
 
@@ -308,14 +307,15 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur update New Match" + resp.data.data)
+     
       }
     } catch (error) {
       setloading(false);
 
       console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", "updateNewMatch Something Went Wrong");
+     
     }
   };
 
@@ -357,14 +357,13 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
-
       console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", "updateProfileReveal Something Went Wrong");
+
     }
   };
 
@@ -406,14 +405,13 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
-
       console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", "updateOthers Something Went Wrong");
+
     }
   };
 
@@ -430,8 +428,7 @@ const SettingsScreen = ({ navigation }) => {
           dispatch(setSessionExpired(true));
         } else {
           // setloading(false)
-
-          Alert.alert("getContact Something went wrong");
+          console.log("getContact Something went wrong")
         }
       })
       .catch((err) => {
@@ -472,9 +469,8 @@ const SettingsScreen = ({ navigation }) => {
       }
     } catch (error) {
       setloading(false);
-
       console.log("removeToken error", error);
-      Alert.alert("Error", "Something Went Wrong");
+
     }
   };
 
@@ -503,8 +499,7 @@ const SettingsScreen = ({ navigation }) => {
           navigation.dispatch(resetAction);
         } else {
           // setloading(false)
-
-          Alert.alert("deleteAccount Something went wrong");
+          console.log("deleteAccount Something went wrong")
         }
       })
       .catch((err) => {

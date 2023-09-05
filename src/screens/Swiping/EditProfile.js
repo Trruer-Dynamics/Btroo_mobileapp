@@ -166,14 +166,13 @@ const EditProfile = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "pos Some Error Occur" + resp.data.data);
+        console.log("Error", "pos Some Error Occur" + resp.data.data)
+     
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("error", error);
-
-      Alert.alert("Error", "Something Went Wrong");
     }
   };
 
@@ -501,19 +500,17 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading_img(false);
-        Alert.alert(
-          "saveProfileImage Error",
-          "Some Error Occur" + resp.data.data
-        );
+        console.log("saveProfileImage Error",
+        "Some Error Occur" + resp.data.data)
+        
         ifFail(activeIndx);
       }
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading_img(false);
       ifFail(activeIndx);
-
       console.log("saveProfileImage went wrong error", error);
-      Alert.alert("saveProfileImage Error", "Something Went Wrong");
+
     }
   };
 
@@ -575,10 +572,9 @@ const EditProfile = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert(
-          "Error updateProfileImage",
-          "Some Error Occur" + resp.data.data
-        );
+        console.log("Error updateProfileImage",
+        "Some Error Occur" + resp.data.data)
+        
         setloading_img(false);
         ifFail(activeIndx, tmp_a);
       }
@@ -586,10 +582,8 @@ const EditProfile = ({ navigation }) => {
       setloading_img(false);
       dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
-
       console.log("updateProfileImage went wrong error", error);
 
-      Alert.alert("updateProfileImage Error", "Something Went Wrong");
     }
   };
 
@@ -622,14 +616,13 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-
-        Alert.alert("Error", "While Deleting Image" + data);
+        console.log("Error", "While Deleting Image" + data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("went  while del img", error);
-      Alert.alert("Error", "Something Went Wrong while del image");
+     
     }
   };
 
@@ -1073,15 +1066,12 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur saveProfileData" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("saveProfileData error", error);
-
-      Alert.alert("saveProfileData Error", "Something Went Wrong");
     }
   };
 
@@ -1144,17 +1134,13 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
         setloading(false);
       } else {
-        Alert.alert("updatePrompts Error", "Some Error Occur" + resp.data.data);
+        console.log("updatePrompts Error", "Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       // setchanges_made(false)
-
       setloading(false);
       dispatch(setSessionExpired(true));
-
       console.log("updatePrompts error", error);
-
-      Alert.alert("updatePrompts Error", "Something Went Wrong");
     }
   };
 

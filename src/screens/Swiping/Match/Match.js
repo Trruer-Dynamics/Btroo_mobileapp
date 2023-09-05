@@ -133,15 +133,13 @@ const Match = () => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-        Alert.alert(
-          "Error",
-          "updateKeepMatching Some Error Occur" + resp.data.data
-        );
+        console.log("Error",
+        "updateKeepMatching Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", "Something Went Wrong");
+      
     }
   };
 
@@ -222,14 +220,12 @@ const Match = () => {
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        Alert.alert("Error", "Some Error Occur" + resp.data.data);
+        console.log("Error", "Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("went wrong error", error);
-
-      Alert.alert("Error", "Something Went Wrong");
     }
   };
 

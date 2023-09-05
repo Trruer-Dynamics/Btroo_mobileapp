@@ -77,8 +77,8 @@ const MobileNo = ({ navigation, route }) => {
       }
     } catch (error) {
       setloading(false);
-      console.log("error", error);
-      Alert.alert("Error", "Something Went Wrong");
+      console.log("logincheck error", error);
+    
     }
   };
 

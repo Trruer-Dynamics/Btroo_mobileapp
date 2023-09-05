@@ -255,7 +255,6 @@ const SwiperTut = ({ navigation }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("error", error);
-      Alert.alert("Error", `swipeTutDone Something Went Wrong`);
       return false;
     }
   };

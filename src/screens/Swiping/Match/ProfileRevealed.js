@@ -77,7 +77,6 @@ const ProfileRevealed = ({ route }) => {
       // setloading(false);
       console.log("getRvlProfData error", error);
       dispatch(setSessionExpired(true));
-      Alert.alert("Error", `getRvlProfData Something Went Wrong`);
       return false;
     }
   };

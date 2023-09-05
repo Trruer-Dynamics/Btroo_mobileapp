@@ -177,7 +177,6 @@ const ChatTut = ({ profile }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("chatTutDone error", error);
-      Alert.alert("Error", `chatTutDone Something Went Wrong`);
       return false;
     }
   };
