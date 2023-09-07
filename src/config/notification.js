@@ -48,7 +48,7 @@ const NotificationController = (props) => {
       mth.user_id = dt.image.user;
       mth.prof_img = dt.image.cropedimage;
       mth.prof_rvl = true;
-
+      mth.all_images = [];
       navigation.navigate("ProfileRevealed", {
         profile: mth,
       });

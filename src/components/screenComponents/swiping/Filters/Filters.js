@@ -141,10 +141,11 @@ const Filters = ({
 
   const onNextPress = () => {
     if (
-      changes_made &&
-      selected_preferences_list.length > 0 &&
-      selected_languages_list.length > 0 &&
-      selected_interest_list.length > 0
+      changes_made 
+      // &&
+      // selected_preferences_list.length > 0 &&
+      // selected_languages_list.length > 0 &&
+      // selected_interest_list.length > 0
     ) {
       updateFilterData();
     }
@@ -168,10 +169,15 @@ const Filters = ({
       distance: distance,
       language: selected_languages_list,
       interests: selected_interest_list,
+      // habit: {
+      //   smoking: habits_list[0][1] ? 1 : 0,
+      //   drinking: habits_list[1][1] ? 1 : 0,
+      //   marijuana: habits_list[2][1] ? 1 : 0,
+      // },
       habit: {
-        smoking: habits_list[0][1] ? 1 : 0,
-        drinking: habits_list[1][1] ? 1 : 0,
-        marijuana: habits_list[2][1] ? 1 : 0,
+        smoking: [habits_list[0][1],habits_list[0][2]],
+        drinking: [habits_list[1][1],habits_list[1][2]],
+        marijuana: [habits_list[2][1],habits_list[2][2]],
       },
       age_min: minage,
       age_max: maxage,
@@ -179,13 +185,16 @@ const Filters = ({
       height_max: maxheight,
     };
 
+console.log("selected_interest_list",selected_interest_list)
     try {
       const resp = await axios.put(url, body, {
         headers,
       });
-      let status = resp.data.status;
+
 
       if (resp.data.code == 200) {
+
+        console.log("Here resp200")
         setModalVisible(false);
         if (setfilterRefresh != null) {
           setfilterRefresh(!filterRefresh);
@@ -228,11 +237,26 @@ const Filters = ({
       setselected_languages_list(selected_languages);
       setselected_interest_list(selected_interests);
 
+      // sethabits_list([
+      //   ["Smoking", selected_habits[0], !selected_habits[0]],
+      //   ["Drinking", selected_habits[1], !selected_habits[1]],
+      //   ["Marijuana", selected_habits[2], !selected_habits[2]],
+      // ]);
+
+
+
+      // sethabits_list([
+      //   ["Smoking", selected_habits[0],selected_habits[0] != null? !selected_habits[0] : null],
+      //   ["Drinking", selected_habits[1], selected_habits[1] != null? !selected_habits[1] : null],
+      //   ["Marijuana", selected_habits[2], selected_habits[2] != null? !selected_habits[2] : null],
+      // ]);
+
       sethabits_list([
-        ["Smoking", selected_habits[0], !selected_habits[2]],
-        ["Drinking", selected_habits[1], !selected_habits[1]],
-        ["Marijuana", selected_habits[2], !selected_habits[2]],
+        ["Smoking", selected_habits[0][0],selected_habits[0][1]],
+        ["Drinking", selected_habits[1][0],selected_habits[1][1]],
+        ["Marijuana",selected_habits[2][0],selected_habits[2][1]],
       ]);
+
     }
   }, [preferences_list, interest_list, languages_list]);
 
@@ -245,6 +269,8 @@ const Filters = ({
       setchanges_made(true);
     }
   }, [distance, minage, maxage, minheight, maxheight]);
+
+  
 
   return (
     <>
@@ -410,10 +436,13 @@ const Filters = ({
               <FooterBtn
                 title={"Save"}
                 disabled={
-                  !changes_made ||
-                  selected_preferences_list.length == 0 ||
-                  selected_languages_list.length == 0 ||
-                  selected_interest_list.length == 0
+                  !
+                 (changes_made 
+                  // ||
+                  // selected_preferences_list.length == 0 ||
+                  // selected_languages_list.length == 0 ||
+                  // selected_interest_list.length == 0
+                 )
                 }
                 onPress={onNextPress}
               />

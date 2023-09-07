@@ -102,11 +102,11 @@ const Intro = () => {
                   ]}
                   onPress={() => {
                     navigation.navigate("Info", {
-                      heading: "Terms and Services",
+                      heading: "Terms of Service",
                     });
                   }}
                 >
-                  Terms and service.
+                  Terms of service.
                 </Text>{" "}
                 Learn how we {"\n"}process your data in our{" "}
                 <Text

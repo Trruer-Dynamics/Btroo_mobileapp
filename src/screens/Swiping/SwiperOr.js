@@ -101,6 +101,20 @@ const SwiperOr = ({}) => {
   const active_user_loc_det = useSelector(
     (state) => state.authentication.active_user_location_details
   );
+  const selected_interests = useSelector(
+    (state) => state.filter.selected_interests
+  );
+
+  const selected_habits = useSelector((state) => state.filter.selected_habits);
+
+
+
+  useEffect(() => {
+    console.log("\nselected_interests updat",selected_interests)
+
+  }, [selected_interests, selected_habits])
+  
+
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
@@ -292,7 +306,8 @@ const SwiperOr = ({}) => {
   const [filterRefresh, setfilterRefresh] = useState(false);
 
   // To get Location Permission
-  const getLocation = () => {
+  const getLocation = async () => {
+    console.log("getLocation")
     getOneTimeLocation();
 
     return () => {
@@ -315,10 +330,13 @@ const SwiperOr = ({}) => {
     }
   };
 
-  const getOneTimeLocation = () => {
-    Geolocation.getCurrentPosition(
+  const getOneTimeLocation = async () => {
+    console.log("getOneTimeLocation")
+     Geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
+      console.log("Here")
+
         //getting the Longitude from the location json
         const currentLongitude = JSON.stringify(position.coords.longitude);
 
@@ -333,7 +351,7 @@ const SwiperOr = ({}) => {
       },
       (err) => {
         setpermission_denied(true);
-        console.log("lcation per denide", err.message);
+        console.log("location per denined", err.message);
         setwarn_step(4);
       },
 
@@ -387,6 +405,8 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterData = async () => {
+
+    console.log("getFilterData")
     setloading(true);
 
     const headers = {
@@ -401,6 +421,8 @@ const SwiperOr = ({}) => {
 
         let filter_data = resp.data.data;
 
+        // console.log("filter_data",filter_data)
+
         if (resp.data.code == 200) {
           let report_count = filter_data.userreportcount;
           let profile_appr = filter_data.is_profile_approved;
@@ -409,7 +431,7 @@ const SwiperOr = ({}) => {
           setprofile_approved(profile_appr);
 
           let distance = filter_data.distance;
-          let languages = filter_data.language.map((v) => v.id);
+          let languages = filter_data.language?.length > 0 || filter_data.language != null ? filter_data.language.map((v) => v.id): []
           let minage = filter_data.age_min;
           let maxage = filter_data.age_max;
           let age_range = [minage, maxage];
@@ -417,19 +439,23 @@ const SwiperOr = ({}) => {
           let maxheight = filter_data.height_max;
           let height_range = [minheight, maxheight];
 
-          let sorted_tmp = filter_data.interests.sort(function (a, b) {
+          let sorted_tmp = filter_data.interests?.length > 0 || filter_data.interests != null ? filter_data.interests.sort(function (a, b) {
             return a["position"] - b["position"];
-          });
-          let interests = sorted_tmp.map((v) => v.id);
+          }):[]
+          
+          let interests = filter_data.interests?.length || filter_data.interests != null ? sorted_tmp.map((v) => v.id): [];
 
           let habits_data = filter_data.habit;
 
-          let habits = [
-            habits_data.smoking == 1 ? true : false,
-            habits_data.drinking == 1 ? true : false,
-            habits_data.marijuana == 1 ? true : false,
-          ];
+        
 
+
+          let smoking_t = habits_data.smoking
+          let drinking_t = habits_data.drinking
+          let marijuana_t = habits_data.marijuana
+          
+          let habits = [smoking_t,drinking_t,marijuana_t]
+          
           dispatch(setSelectedDistance(distance));
           dispatch(setSelectedLanguages(languages));
           dispatch(setSelectedAgeRange(age_range));
@@ -453,7 +479,8 @@ const SwiperOr = ({}) => {
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
         } else {
-          console.warn("Error occur while FilterUpdateGet");
+          console.warn("Error occur while FilterUpdateGet", resp.data.data);
+          Alert.alert("Error", JSON.stringify(resp.data.data))
         }
       })
       .catch((err) => {
@@ -587,7 +614,7 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterProfiles = async () => {
-    console.log("\ngetFilterProfiles");
+
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -608,13 +635,14 @@ const SwiperOr = ({}) => {
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
           console.log("active_profiles len", active_profiles.length);
+ 
           setprofiles(active_profiles);
           setloading2(false);
           setempty_profile_call(false);
         } else if (resp_code == 401) {
           dispatch(setSessionExpired(true));
         } else {
-          console.warn("Error occur while getFilterProfiles");
+          console.warn("Error occur while getFilterProfiles",  resp.data.data);
           setloading2(true);
           setempty_profile_call(false);
           // setwarn_step(3)
@@ -637,7 +665,7 @@ const SwiperOr = ({}) => {
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
         let resp_data = resp.data;
-
+console.log(" getRejectedProfiles resp_data",resp_data)
         if (resp_data.length == 0) {
           setwarn_step(2);
           setloading2(true);
@@ -805,10 +833,15 @@ const SwiperOr = ({}) => {
 
     console.log(
       "All DAta",
+      "filter_data_get",
       filter_data_get,
+      "mob_ip",
       mob_ip,
+      "current_lat",
       current_lat,
+      "current_long",
       current_long,
+      "current_address",
       current_address
     );
 
@@ -908,7 +941,7 @@ const SwiperOr = ({}) => {
               keyExtractor={(itm) => itm.created_on}
               renderItem={({ item, index }) => {
                 const isFirst = index == profiles.length - 1;
-                console.log(Platform.OS, "isFirst", isFirst, index);
+    
                 return (
                   <SwipeCard
                     card_itm={item}

@@ -2,7 +2,7 @@ com.btroo.app-jetified-annotation-experimental-1.1.0-0 /Users/rahul/.gradle/cach
 com.btroo.app-jetified-camera-camera2-1.1.0-beta02-1 /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/res
 com.btroo.app-jetified-camera-lifecycle-1.1.0-beta02-2 /Users/rahul/.gradle/caches/transforms-3/16357cfc1145b7de7d7122f24ce82da9/transformed/jetified-camera-lifecycle-1.1.0-beta02/res
 com.btroo.app-jetified-camera-core-1.1.0-beta02-3 /Users/rahul/.gradle/caches/transforms-3/176816ed1c182088bef7fdac0253ea95/transformed/jetified-camera-core-1.1.0-beta02/res
-com.btroo.app-jetified-play-services-auth-20.6.0-4 /Users/rahul/.gradle/caches/transforms-3/184079df061a00eb627142eee745d94a/transformed/jetified-play-services-auth-20.6.0/res
+com.btroo.app-jetified-play-services-auth-20.7.0-4 /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/res
 com.btroo.app-jetified-camera-view-1.1.0-beta02-5 /Users/rahul/.gradle/caches/transforms-3/18b904ed076b80d3ad9cdcf964ae986a/transformed/jetified-camera-view-1.1.0-beta02/res
 com.btroo.app-appcompat-1.4.1-6 /Users/rahul/.gradle/caches/transforms-3/1b4d19d8ac0ad66f9610e5e795a45a62/transformed/appcompat-1.4.1/res
 com.btroo.app-transition-1.2.0-7 /Users/rahul/.gradle/caches/transforms-3/1c11c050a860dfb8c84cd91b9db9a3f5/transformed/transition-1.2.0/res

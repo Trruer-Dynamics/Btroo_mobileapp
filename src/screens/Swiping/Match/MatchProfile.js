@@ -352,7 +352,10 @@ const MatchProfile = ({ route }) => {
                   {profile.prof_rvl ? (
                     <TouchableOpacity
                       onPress={() => {
-                        setmodalVisible(true);
+                        if (profile?.all_images.length > 0) {
+                          setmodalVisible(true);
+                        }
+                        
                       }}
                     >
                       <Image

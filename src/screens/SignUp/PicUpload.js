@@ -87,9 +87,19 @@ const PicUpload = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   // draggable positions
-  const [pic_list, setpic_list] = useState([]);
+  const [pic_list, setpic_list] = useState([
+    ["", "", true, "1", ""],
+    ["", "", false, "2", ""],
+    ["", "", false, "3", ""],
+    ["", "", false, "4", ""],
+    ["", "", false, "5", ""],
+    ["", "", false, "6", ""],
+    ["", "", false, "7", ""],
+    ["", "", false, "8", ""],
+    ["", "", false, "9", ""],
+  ]);
   const positions = useSharedValue(
-    Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx })))
+    Object.assign({}, ...pic_list.map((item, indx) => ({ [indx]: indx })))
   );
 
   const changePos = async (no1, no2) => {
@@ -564,20 +574,21 @@ const PicUpload = ({ navigation, route }) => {
       profile_imgs[0][0] != ""
     ) {
       atLast(profile_imgs.slice(0, 9));
-    } else {
-      let tmp_lis = [
-        ["", "", true, "1", ""],
-        ["", "", false, "2", ""],
-        ["", "", false, "3", ""],
-        ["", "", false, "4", ""],
-        ["", "", false, "5", ""],
-        ["", "", false, "6", ""],
-        ["", "", false, "7", ""],
-        ["", "", false, "8", ""],
-        ["", "", false, "9", ""],
-      ];
-      atLast(tmp_lis);
-    }
+    } 
+    // else {
+    //   let tmp_lis = [
+    //     ["", "", true, "1", ""],
+    //     ["", "", false, "2", ""],
+    //     ["", "", false, "3", ""],
+    //     ["", "", false, "4", ""],
+    //     ["", "", false, "5", ""],
+    //     ["", "", false, "6", ""],
+    //     ["", "", false, "7", ""],
+    //     ["", "", false, "8", ""],
+    //     ["", "", false, "9", ""],
+    //   ];
+    //   atLast(tmp_lis);
+    // }
   }, []);
 
   useEffect(() => {

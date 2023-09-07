@@ -481,8 +481,8 @@ const SwipeCard = ({
   const [super_liked_profile, setsuper_liked_profile] = useState(false);
 
   useLayoutEffect(() => {
-    console.log("\ncard_itm", isFirst);
-    console.log("profilestatus", card_itm.profilestatus.profilestatus);
+
+    // console.log("profilestatus", card_itm.profilestatus.profilestatus);
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
     }

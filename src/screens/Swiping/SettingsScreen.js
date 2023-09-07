@@ -1016,7 +1016,7 @@ const SettingsScreen = ({ navigation }) => {
                 // onPress={()=> setcmodal(true)}
                 onPress={() => {
                   navigation.navigate("Info", {
-                    heading: "Terms of Services",
+                    heading: "Terms of Service",
                   });
                 }}
                 style={{
@@ -1026,7 +1026,7 @@ const SettingsScreen = ({ navigation }) => {
                 }}
               >
                 <Text style={{ ...styles.titleS, color: colors.black }}>
-                  Terms of Services
+                  Terms of Service
                 </Text>
               </TouchableOpacity>
 

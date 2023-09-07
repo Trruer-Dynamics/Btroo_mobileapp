@@ -234,11 +234,23 @@ const FormSelectorFilter = ({
               {/* Next Btn To Navigate to Next Form Components */}
               <FooterBtn
                 title={"Confirm"}
-                disabled={selected_lis2.length == 0}
+                disabled={ selected_lis2.every(v => selected_list.includes(v)) && selected_list.every(v => selected_lis2.includes(v))}
                 onPress={() => {
-                  setcode_press(false);
-                  setselected_list(selected_lis2);
-                  setselected_lis2([]);
+
+                  let checker = (arr, target) => target.every(v => arr.includes(v))
+                  let check1 = checker(selected_lis2,selected_list)
+                  let check2 = checker(selected_list,selected_lis2)
+                  
+                  // console.log("selected_list",selected_list)
+                  // console.log("selected_lis2",selected_lis2)
+                  // console.log("check1",check1 && check2)
+              
+                  if (!(check1 && check2)) {
+                      setcode_press(false);
+                    setselected_list(selected_lis2);
+                    setselected_lis2([]);
+                  }
+                
                 }}
               />
             </FormWrapperFooter>

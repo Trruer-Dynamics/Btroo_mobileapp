@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect, useLayoutEffect, useRef, memo } from "react";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import { rspH, rspW, rspF } from "../../styles/responsiveSize";
@@ -196,7 +196,7 @@ const FormInputPhoneNumber = ({
   );
 };
 
-export default FormInputPhoneNumber;
+export default memo(FormInputPhoneNumber);
 
 const styles = StyleSheet.create({
   input_cont: {

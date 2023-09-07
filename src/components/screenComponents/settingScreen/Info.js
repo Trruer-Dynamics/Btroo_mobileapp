@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { memo, useLayoutEffect, useState } from "react";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import {
   rspH,
@@ -34,18 +34,28 @@ const Info = ({ navigation, route }) => {
   const tagsStyles = {
     p: {
       color: "white",
+      fontFamily:'arial',
     },
     ol: {
       color: "white",
+      fontFamily:'arial',
     },
     ul: {
       color: "white",
+      fontFamily:'arial',
+      fontFamily:'arial',
+
+
     },
     li: {
       color: "white",
+      fontFamily:'arial',
+
     },
     h2: {
       color: "white",
+      fontFamily:'arial',
+
     },
     strong: {
       color: "white",
@@ -66,9 +76,7 @@ const Info = ({ navigation, route }) => {
     await axios
       .get(apiUrl + `get_terms_of_services/`)
       .then((resp) => {
-        console.log("\n");
-        console.log("Terms and Services", resp);
-        console.log("\n");
+       
         setloading(false);
         if (resp.status == 200) {
           setpara(resp.data.data.text);
@@ -216,7 +224,7 @@ const Info = ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     // To Set Title according to link press
-    if (heading == "Terms of Services") {
+    if (heading == "Terms of Service") {
       getTAS();
     } else if (heading == "Privacy Policy") {
       getPrivacyPolicy();
@@ -304,7 +312,7 @@ const Info = ({ navigation, route }) => {
   );
 };
 
-export default Info;
+export default memo(Info);
 
 const styles = StyleSheet.create({
   container: {

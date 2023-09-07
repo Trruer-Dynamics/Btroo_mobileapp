@@ -36,6 +36,7 @@ import axios from "axios";
 import { apiUrl } from "../../../constants";
 import Loader from "../../../components/loader/Loader";
 import { setSessionExpired } from "../../../store/reducers/authentication/authentication";
+import truncateStr from "../../../components/functions/truncateStr";
 
 const ChatItem = (item) => {
   return (
@@ -226,7 +227,10 @@ const ChatTut = ({ profile }) => {
         >
           <View style={{ paddingHorizontal: rspW(5), paddingTop: rspH(2) }}>
             <FormHeader
-              title="Jessica"
+              title={truncateStr(
+                profile?.userprofile?.name.split(" ")[0],
+                10
+              )}
               left_icon={true}
               onPress={() => {
                 navigation.goBack();
@@ -389,7 +393,11 @@ const ChatTut = ({ profile }) => {
                   color: colors.black,
                 }}
               >
-                Jessica
+                {
+                truncateStr(
+                profile?.userprofile?.name.split(" ")[0],
+                10)
+              }
               </Text>
             </View>
           )}

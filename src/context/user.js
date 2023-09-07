@@ -112,8 +112,8 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   useLayoutEffect(() => {
-    // RNScreenshotPrevent.enabled(false);
-    // RNScreenshotPrevent.enableSecureView()
+    RNScreenshotPrevent.enabled(false);
+    RNScreenshotPrevent.enableSecureView()
   }, []);
 
   useEffect(() => {
@@ -137,7 +137,9 @@ const UserProvider = ({ children, navigationRef }) => {
   }, []);
 
   useEffect(() => {
+    
     console.log("is_session_expired", is_session_expired);
+
     if (is_session_expired == true && DeviceToken != "") {
 
       removeToken();
@@ -154,9 +156,7 @@ const UserProvider = ({ children, navigationRef }) => {
       });
 
       navigation.dispatch(resetAction);
-      // if (user_loggined) {
-
-      // }
+      
     }
   }, [is_session_expired]);
 
