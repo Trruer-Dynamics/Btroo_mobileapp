@@ -162,7 +162,7 @@ const OtpVerify = ({
         await dispatch(setSessionExpired(false));
         if (DeviceToken != "") {
           // save mobile device token in backend to send notification to specific device
-          sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
+          await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
         } else {
           alert("Device Token Empty");
         }
@@ -217,6 +217,7 @@ const OtpVerify = ({
   };
 
   const sendDeviceToken = async (prof_id, access_token) => {
+    console.log("sendDeviceToken call")
     setloading(true);
     const data = {
       userprofile_id: prof_id,
@@ -353,8 +354,9 @@ const OtpVerify = ({
           userprivateprompts: act_promptsm2,
         };
 
+        console.log("\nDeviceToken", DeviceToken)
         if (DeviceToken != "") {
-          sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
+          await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
         } else {
           alert("Device Token Empty");
         }

@@ -308,65 +308,6 @@ const EditProfile = ({ navigation }) => {
   const prp_q2_ref = useRef(null);
   const prp_a2_ref = useRef(null);
 
-  // const ifFail = async (del_indx, tmp_a = []) => {
-  //   if (tmp_a.length > 0) {
-  //     if (del_indx == 0) {
-  //       setpic1(tmp_a);
-  //     } else if (del_indx == 1) {
-  //       setpic2(tmp_a);
-  //     } else if (del_indx == 2) {
-  //       setpic3(tmp_a);
-  //     } else if (del_indx == 3) {
-  //       setpic4(tmp_a);
-  //     } else if (del_indx == 4) {
-  //       setpic5(tmp_a);
-  //     } else if (del_indx == 5) {
-  //       setpic6(tmp_a);
-  //     } else if (del_indx == 6) {
-  //       setpic7(tmp_a);
-  //     } else if (del_indx == 7) {
-  //       setpic8(tmp_a);
-  //     } else if (del_indx == 8) {
-  //       setpic9(tmp_a);
-  //     }
-  //   } else {
-  //     if (del_indx == 0) {
-  //       setpic1(["", "", true, "1", ""]);
-  //     } else if (del_indx == 1) {
-  //       setpic2(["", "", true, "2", ""]);
-  //     } else if (del_indx == 2) {
-  //       setpic3(["", "", true, "3", ""]);
-  //     } else if (del_indx == 3) {
-  //       setpic4(["", "", true, "4", ""]);
-  //     } else if (del_indx == 4) {
-  //       setpic5(["", "", true, "5", ""]);
-  //     } else if (del_indx == 5) {
-  //       setpic6(["", "", true, "6", ""]);
-  //     } else if (del_indx == 6) {
-  //       setpic7(["", "", true, "7", ""]);
-  //     } else if (del_indx == 7) {
-  //       setpic8(["", "", true, "8", ""]);
-  //     } else if (del_indx == 8) {
-  //       setpic9(["", "", true, "9", ""]);
-  //     }
-  //   }
-
-  //   return true;
-  // };
-
-  // const atLast = async (tmp_lis) => {
-  //   setpic1(tmp_lis[0]);
-  //   setpic2(tmp_lis[1]);
-  //   setpic3(tmp_lis[2]);
-  //   setpic4(tmp_lis[3]);
-  //   setpic5(tmp_lis[4]);
-  //   setpic6(tmp_lis[5]);
-  //   setpic7(tmp_lis[6]);
-  //   setpic8(tmp_lis[7]);
-  //   setpic9(tmp_lis[8]);
-  //   setrefresh(!refresh);
-  // };
-
   const ifFail = async (del_indx, tmp_a = []) => {
     let tmp_ls = [...pic_list];
     if (tmp_a.length > 0) {
@@ -382,7 +323,7 @@ const EditProfile = ({ navigation }) => {
 
   const atLast = async (tmp_lis) => {
     console.log("tmp_lis", tmp_lis.length);
-    setpic_list(tmp_lis);
+    await setpic_list(tmp_lis);
 
     setrefresh(!refresh);
   };
@@ -640,6 +581,7 @@ const EditProfile = ({ navigation }) => {
   };
 
   const finalLoad = async (img, crp_img) => {
+    
     // let bf_nsize = await getSize(img)
     // let bf_csize = await getSize(crp_img)
 
@@ -825,6 +767,10 @@ const EditProfile = ({ navigation }) => {
       },
     ]);
   };
+
+  //Debounce the showAlert function with a delay of 300 milliseconds
+  const debounceShowConfirmDialog = _.debounce(showConfirmDialog, 200, {leading: true, trailing: false})
+
 
   const getGenders = async () => {
     await axios
@@ -1156,26 +1102,31 @@ const EditProfile = ({ navigation }) => {
     }
   }, [pos_change]);
 
-  useLayoutEffect(() => {
-    // getLocation(city_page);
-
-    getGenders();
-    getEducation();
-    getInterests();
-    getLanguages();
-    getPets();
-    getPoliticalInclinations();
-
+  const loadData = async () =>{
+    // setloading(false)
     let usr_profile = profile_data.userprofile;
     setheight_cm(usr_profile.height.toString());
     setoccupation(usr_profile.occupation);
-
-    // atLast(profile_imgs);
-    atLast(profile_imgs.slice(0, 9));
+    await atLast(profile_imgs.slice(0, 9));
+    await getGenders();
+    await getEducation();
+    await getInterests();
+    await getLanguages();
+    await getPets();
+    await getPoliticalInclinations();
+   
 
     if (prompts_list_all.length > 0) {
-      setPrompts();
+     await setPrompts();
     }
+
+  }
+
+  useLayoutEffect(() => {
+
+    // getLocation(city_page);
+
+    loadData()
   }, []);
 
   let usr_profile = profile_data.userprofile;
@@ -1290,7 +1241,7 @@ const EditProfile = ({ navigation }) => {
               left_icon={true}
               onPress={() => {
                 if (changes_made == true) {
-                  showConfirmDialog();
+                  debounceShowConfirmDialog();
                   return;
                 }
 

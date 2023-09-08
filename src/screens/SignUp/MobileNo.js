@@ -8,7 +8,7 @@ import {
   Platform,
   Keyboard,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import countries_with_ph_no from "../../data/countries_with_ph_no";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
 import colors from "../../styles/colors";
@@ -35,6 +35,7 @@ const MobileNo = ({ navigation, route }) => {
   const [selected_ph_code_id, setselected_ph_code_id] = useState("");
   const [selected_ph_code_id_blr, setselected_ph_code_id_blr] = useState(false);
   const [ph_no, setph_no] = useState("");
+
   const [ph_no_blr, setph_no_blr] = useState(false);
 
   const [min_ph_no, setmin_ph_no] = useState(0);
@@ -84,6 +85,7 @@ const MobileNo = ({ navigation, route }) => {
 
   useEffect(() => {
     // Phone Number Validations
+    console.log("selected_ph_code_id",selected_ph_code_id)
     if (selected_ph_code_id != "") {
       let selected_country = countries_with_ph_no.find(
         (v) => v.code == selected_ph_code_id
@@ -253,6 +255,7 @@ const MobileNo = ({ navigation, route }) => {
                   placeholder={"Phone Number"}
                   placeholderTextColor={colors.blue}
                   disabled={selected_ph_code_id == ""}
+                  
                   maxLength={12}
                   error_cond={
                     clickBtn &&
@@ -270,6 +273,9 @@ const MobileNo = ({ navigation, route }) => {
                   setvalue_blr={setph_no_blr}
                   s_allow={false}
                   a_allow={false}
+                  onFocus={()=>{
+                    console.log("Input Focus")
+                  }}
                 />
               </View>
             </View>

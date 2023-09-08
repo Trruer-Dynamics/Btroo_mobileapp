@@ -40,7 +40,7 @@ const FormInputPhoneNumber = ({
   inputwidth = "100%",
   setchanges_made = null,
 }) => {
-  const inpt_ref = useRef();
+
   const [invalid, setinvalid] = useState(false);
 
   useEffect(() => {
@@ -60,9 +60,7 @@ const FormInputPhoneNumber = ({
   return (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => {
-        inpt_ref.current?.focus();
-      }}
+      
       style={{
         ...styles.input_cont,
         height: multiline ? rspH(11.6) : rspH(5.8),
@@ -102,7 +100,7 @@ const FormInputPhoneNumber = ({
         }}
       >
         <TextInput
-          ref={inpt_ref}
+         
           onFocus={onFocus}
           // textAlignVertical='top'
           style={{
