@@ -33,6 +33,7 @@ import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "./ErrorContainer";
 import FooterBtn from "../Buttons/FooterBtn";
 import { useSelector } from "react-redux";
+import truncateStr from "../functions/truncateStr";
 
 const FormSelectorRadio = ({
   headtitle = "",
@@ -63,27 +64,39 @@ const FormSelectorRadio = ({
           </View>
 
           <View>
-            <Text style={styles.selectedOpt}>
+            <Text style={styles.selectedOpt}
+            numberOfLines={1}
+            >
               
               {
-                list.filter(g => !(!g[1] && !g[2])).map((v, idx) => {
+               truncateStr(
+               (list.filter(g => !(!g[1] && !g[2])).map((v, idx) => {
                   
-                  console.log(v, idx)
-                  let all_false = !v[1] && !v[2]
-                  let dec2 = all_false ? "" : v[1] ? v[0] : "Not " + v[0]
+                  let v_t =  String(v[1] ? v[0] : '') 
+                  let v_f =  String(v[2] ? 'Not' + v[0] : '')
+                  let dec2 =
+                  // String(idx != 0 ? ", " : "")
+                  // +
+                   v_t
+                   + 
+                   String(v_t != "" && v_f !=""? ", " : '')
+                   +
+                   v_f
+      
+                   console.log("dec2",dec2)
 
-                  console.log("dec2",dec2)
+                   return dec2
                   
-                  
-                  if (idx == 0) {
-
-                    return dec2
-                  } 
-                  else {
-                    return ", " + dec2
+                  // if (idx == 0) {
+                  //   return dec2
+                  // } 
+                  // else {
+                  //   return  dec2
    
-                  }
-                })}
+                  // }
+                })).join(", ")
+                , 34)
+                }
             </Text>
           </View>
         </View>
@@ -167,12 +180,6 @@ const FormSelectorRadio = ({
                           <TouchableOpacity
                             
                             onPress={() => {
-                              // setchanges_made(true)
-                              // if (setchanges_made != null) {
-                              //   setchanges_made(true);
-                              // }
-                              // sethabits_blr(true);
-
                               
                               list[idx][1] =
                                 list[idx][1] != null
@@ -181,9 +188,9 @@ const FormSelectorRadio = ({
                                     : true
                                   : true;
 
-                              if (list[idx][1]) {
-                                list[idx][2] = false;
-                              }
+                              // if (list[idx][1]) {
+                              //   list[idx][2] = false;
+                              // }
 
                               setrefresh(!refresh);
                             }}
@@ -200,9 +207,6 @@ const FormSelectorRadio = ({
                           <TouchableOpacity
                                                         onPress={() => {
                              
-                              // if (setchanges_made != null) {
-                              //   setchanges_made(true);
-                              // }
 
                               list[idx][2] =
                                 list[idx][2] != null
@@ -211,9 +215,9 @@ const FormSelectorRadio = ({
                                     : true
                                   : true;
 
-                              if (list[idx][2]) {
-                                list[idx][1] =  false;
-                              }
+                              // if (list[idx][2]) {
+                              //   list[idx][1] =  false;
+                              // }
                               setrefresh(!refresh);
                             }}
                             style={{
@@ -251,23 +255,16 @@ const FormSelectorRadio = ({
                     String(list[2].slice(1,3)) != String(selected_habits[2]))
                   }
 
-                  // disabled={
-                  //   // false
-                  //   !(
-                  //     (list[0][1] || list[0][2])||
-                  //   (list[1][1] || list[1][2]) ||
-                  //   (list[2][1] || list[2][2]) )
-
-                  //   // ((!list[0][1] || !list[0][2]) ||
-                  //   // (!list[1][1] || !list[1][2]) ||
-                  //   // (!list[2][1] || !list[2][2]))
-                  // }
+            
                   onPress={() => {
                     let smok_c = String(list[0].slice(1,3)) != String(selected_habits[0])
                     let drik_c = String(list[1].slice(1,3)) != String(selected_habits[1])
-                    let marij_c= String(list[2].slice(1,3)) != String(selected_habits[2])
+                    let marij_c= String(list[2].slice(1,3)) != String(selected_habits[2])       
 
-                   
+                    console.log("list[0]",list[0])
+                    console.log("list[1]",list[1])
+                    console.log("list[2]",list[2])
+
                     
                     if (smok_c || drik_c || marij_c ) {
                       setchanges_made(true)

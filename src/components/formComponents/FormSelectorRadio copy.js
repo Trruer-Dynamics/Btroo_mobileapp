@@ -64,13 +64,24 @@ const FormSelectorRadio = ({
 
           <View>
             <Text style={styles.selectedOpt}>
-              {/* {list} */}
-              {list.length > 0 &&
-                list.map((v, idx) => {
+              
+              {
+                list.filter(g => !(!g[1] && !g[2])).map((v, idx) => {
+                  
+                  console.log(v, idx)
+                  let all_false = !v[1] && !v[2]
+                  let dec2 = all_false ? "" : v[1] ? v[0] : "Not " + v[0]
+
+                  console.log("dec2",dec2)
+                  
+                  
                   if (idx == 0) {
-                    return v[1] ? v[0] : "Not " + v[0];
-                  } else {
-                    return v[1] ? ", " + v[0] : ", " + "Not " + v[0];
+
+                    return dec2
+                  } 
+                  else {
+                    return ", " + dec2
+   
                   }
                 })}
             </Text>
@@ -95,11 +106,14 @@ const FormSelectorRadio = ({
                 visible={code_press}
                 setvisible={() => {
                   setcode_press(!code_press);
+                  
+
                   setlist([
-                    ["Smoking", selected_habits[0], !selected_habits[2]],
-                    ["Drinking", selected_habits[1], !selected_habits[1]],
-                    ["Marijuana", selected_habits[2], !selected_habits[2]],
+                    ["Smoking", selected_habits[0][0],selected_habits[0][1]],
+                    ["Drinking", selected_habits[1][0],selected_habits[1][1]],
+                    ["Marijuana",selected_habits[2][0],selected_habits[2][1]],
                   ]);
+
                 }}
                 marginBottom={0}
               />
@@ -151,20 +165,15 @@ const FormSelectorRadio = ({
                         {/* Chioce */}
                         <View style={styles.radioBtnCont}>
                           <TouchableOpacity
-                            // onPress={() => {
-                            //   list[idx][1] = true;
-                            //   setrefresh(!refresh);
-                            //   if (setchanges_made != null) {
-                            //     setchanges_made(true);
-                            //   }
-                            // }}
-
+                            
                             onPress={() => {
                               // setchanges_made(true)
-                              if (setchanges_made != null) {
-                                setchanges_made(true);
-                              }
+                              // if (setchanges_made != null) {
+                              //   setchanges_made(true);
+                              // }
                               // sethabits_blr(true);
+
+                              
                               list[idx][1] =
                                 list[idx][1] != null
                                   ? list[idx][1]
@@ -189,27 +198,11 @@ const FormSelectorRadio = ({
                             }}
                           ></TouchableOpacity>
                           <TouchableOpacity
-                            // onPress={() => {
-                            //   list[idx][1] = false;
-                            //   setrefresh(!refresh);
-                            //   if (setchanges_made != null) {
-                            //     setchanges_made(true);
-                            //   }
-                            // }}
-                            // style={{
-                            //   backgroundColor: !list[idx][1]
-                            //     ? colors.blue
-                            //     : colors.grey,
-                            //   ...styles.radioBtn,
-                            // }}
-
-                            onPress={() => {
-                              // sethabits_blr(true);
-                              // setchanges_made(true)
-
-                              if (setchanges_made != null) {
-                                setchanges_made(true);
-                              }
+                                                        onPress={() => {
+                             
+                              // if (setchanges_made != null) {
+                              //   setchanges_made(true);
+                              // }
 
                               list[idx][2] =
                                 list[idx][2] != null
@@ -219,7 +212,7 @@ const FormSelectorRadio = ({
                                   : true;
 
                               if (list[idx][2]) {
-                                list[idx][1] = false;
+                                list[idx][1] =  false;
                               }
                               setrefresh(!refresh);
                             }}
@@ -249,17 +242,35 @@ const FormSelectorRadio = ({
                 {/* Next Btn To Navigate to Next Form Components */}
                 <FooterBtn
                   title={"Confirm"}
-                  disabled={
-                    (!list[0][1] && !list[0][2]) ||
-                    (!list[1][1] && !list[1][2]) ||
-                    (!list[2][1] && !list[2][2])
-                  }
-                  onPress={() => {
-                    let smok = list[0][1] ? true : list[0][2] ? false : null;
-                    let drik = list[1][1] ? true : list[1][2] ? false : null;
-                    let marij = list[2][1] ? true : list[2][2] ? false : null;
 
-                    if (smok != null && drik != null && marij != null) {
+                  disabled={
+                  !(String(list[0].slice(1,3)) != String(selected_habits[0])
+                    ||
+                    String(list[1].slice(1,3)) != String(selected_habits[1])
+                    ||
+                    String(list[2].slice(1,3)) != String(selected_habits[2]))
+                  }
+
+                  // disabled={
+                  //   // false
+                  //   !(
+                  //     (list[0][1] || list[0][2])||
+                  //   (list[1][1] || list[1][2]) ||
+                  //   (list[2][1] || list[2][2]) )
+
+                  //   // ((!list[0][1] || !list[0][2]) ||
+                  //   // (!list[1][1] || !list[1][2]) ||
+                  //   // (!list[2][1] || !list[2][2]))
+                  // }
+                  onPress={() => {
+                    let smok_c = String(list[0].slice(1,3)) != String(selected_habits[0])
+                    let drik_c = String(list[1].slice(1,3)) != String(selected_habits[1])
+                    let marij_c= String(list[2].slice(1,3)) != String(selected_habits[2])
+
+                   
+                    
+                    if (smok_c || drik_c || marij_c ) {
+                      setchanges_made(true)
                       setcode_press(false);
                     }
                   }}

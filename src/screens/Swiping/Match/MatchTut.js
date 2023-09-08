@@ -43,7 +43,7 @@ const insets = initialWindowMetrics.insets;
 const DATA = [
   {
     id: "1",
-    userprofile: { name: "Jessica", age: "44", occupation: "Teacher" },
+    userprofile: { name: "bTroo", age: "44", occupation: "Teacher" },
     profession: "Teacher",
     age: 23,
     lastMessage: "Hello! How are you man?",

@@ -162,7 +162,7 @@ const Match = () => {
       let code = resp.data.code;
       let resp_data = resp.data.data;
 
-      console.log("resp_data.length", resp_data.length);
+     
 
       if (code == 200) {
         let match_tmp = [];

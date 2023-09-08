@@ -389,6 +389,7 @@ const Chat = ({ profile }) => {
   const [chatPage, setchatPage] = useState(1);
 
   const [rvl_activate, setrvl_activate] = useState(false);
+  const [rvl_time, setrvl_time] = useState(false);
   const [rvl_click, setrvl_click] = useState(false);
   const [msg, setmsg] = useState("");
 
@@ -487,6 +488,43 @@ const Chat = ({ profile }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("revealProfile error", error);
+      return false;
+    }
+  };
+
+
+  const revealProfileTime = async () => {
+    setloading(true);
+
+    const api = apiUrl + 'sendnotificationforprofilereveal/'
+
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
+
+    const data = {
+      
+        profileid1 : profile_data.userprofile.id,
+        profileid2 : profile.userprofile.id,        
+    };
+
+    console.log("data",data)
+
+    try {
+      const response = await axios.post(api, data, {
+        headers,
+      });
+      setloading(false);
+
+      let resp_data = response.data;
+
+      console.log("revealProfileTime resp", response)
+
+      
+    } catch (error) {
+      setloading(false);
+      // dispatch(setSessionExpired(true));
+      console.log("revealProfileTime error", error);
       return false;
     }
   };
@@ -691,6 +729,7 @@ const Chat = ({ profile }) => {
   };
 
   useEffect(() => {
+    
     if (connectSocketS) {
       connectSocket();
     }
@@ -748,7 +787,10 @@ const Chat = ({ profile }) => {
   useEffect(() => {
     console.log("\nchatlist.length", Platform.OS, chatlist.length);
 
-    if (chatlist.length >= 25 && !profile.prof_rvl) {
+    if (chatlist.length >= 25 && !profile.prof_rvl
+       && 
+       !rvl_activate
+       ) {
       let mymsgs = chatlist.filter((v) => v[1] == 1);
       let othmsgs = chatlist.filter((v) => v[1] == 0);
       let mycount = mymsgs
@@ -797,14 +839,31 @@ const Chat = ({ profile }) => {
 
         if (avg_time <= 5) {
           setrvl_activate(true);
+          console.log("\nrvl_activate..\n")
+        
           if (chat_reveal_tut == true) {
             Keyboard.dismiss();
             setshow_rvl_tut(true);
+            
           }
         }
       }
     }
   }, [chatlist]);
+
+
+  useEffect(() => {
+    
+    if (rvl_activate) {
+      setrvl_time(true) 
+      // revealProfileTime()
+    }
+
+    
+  }, [rvl_activate])
+  
+
+  
 
   useLayoutEffect(() => {
     if (profile.matchType == "New Match") {
