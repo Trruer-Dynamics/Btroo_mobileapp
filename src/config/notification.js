@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { setProfileRevealed } from "../store/reducers/authentication/authentication";
 
 const NotificationController = (props) => {
-  const { sckop } = useContext(UserContext);
+  const { sckop, newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);
   const user_loggined = useSelector(
     (state) => state.authentication.user_loggined
   );
@@ -31,6 +31,10 @@ const NotificationController = (props) => {
     console.log("not_data?.type", not_data?.type);
     console.log("user_loggined", user_loggined);
     console.log("\n");
+
+    if (not_data?.type == "Chat" || not_data?.type == "Hidden") {    
+      setnewMsgRefresh(!newMsgRefresh)
+    }
 
     if (not_data?.type == "Reveal" && user_loggined) {
       setuser_interact(false);
@@ -61,6 +65,9 @@ const NotificationController = (props) => {
         navigation.navigate("Match");
       } else {
       }
+
+   
+      
     }
   }, [refresh, user_interact, not_data]);
 
@@ -160,7 +167,7 @@ const NotificationController = (props) => {
 
       console.log(Platform.OS, "  sckop.current", sckop.current);
 
-      if (user_loggined && !sckop.current) {
+      if (user_loggined && !sckop.current &&  data?.type != "Hidden")  {
         PushNotification.localNotification(notifObj);
       }
     });

@@ -8,7 +8,7 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect, useContext } from "react";
 import FormWrapper from "../../../components/wrappers/formWrappers/FormWrapper";
 
 import MatchItem from "../../../components/screenComponents/matching/MatchItem";
@@ -37,6 +37,7 @@ import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
 import Loader from "../../../components/loader/Loader";
 
 import { initialWindowMetrics } from "react-native-safe-area-context";
+import { UserContext } from "../../../context/user";
 const insets = initialWindowMetrics.insets;
 
 const DATA = [
@@ -74,6 +75,9 @@ const DATA = [
 
 const Match = () => {
   const dispatch = useDispatch();
+
+  const {  newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);
+
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -144,7 +148,7 @@ const Match = () => {
   };
 
   const getMatches = async () => {
-    setloading(true);
+    // setloading(true);
     const url = apiUrl + `activechatroomlist/`;
 
     const headers = {
@@ -192,8 +196,8 @@ const Match = () => {
                 ? resp_data[p].last_message.seen_by
                 : [];
             let lg_id = profile_data.user.id;
-
-            let ym = resp_data[p].current_turn !== lg_id ? false : true;
+console.log("resp_data[p].current_turn",resp_data[p].current_turn, lg_id)
+            let ym = resp_data[p].current_turn === lg_id ? false : true;
 
             mth.id = id;
             mth.lastMessage = lastMessage;
@@ -223,7 +227,7 @@ const Match = () => {
         console.log("Error", "Some Error Occur" + resp.data.data)
       }
     } catch (error) {
-      setloading(false);
+      // setloading(false);
       dispatch(setSessionExpired(true));
       console.log("went wrong error", error);
     }
@@ -285,10 +289,15 @@ const Match = () => {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
+      
       getMatches();
-    }, [])
+    }, [newMsgRefresh])
   );
 
+
+
+
+  
   return (
     <>
       {loading && <Loader />}

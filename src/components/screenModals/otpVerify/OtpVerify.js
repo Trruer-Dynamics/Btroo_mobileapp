@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Platform,
 } from "react-native";
+import _ from "lodash";
 import React, {
   useRef,
   useState,
@@ -114,6 +115,18 @@ const OtpVerify = ({
   const [btnClick, setbtnClick] = useState(false);
   const [keyboard_hgt, setkeyboard_hgt] = useState(0);
 
+ const showAlrdyAlert =  async()=>{
+
+  Alert.alert(
+    "",
+    "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
+  );
+
+ }
+
+   //Debounce the showAlert function with a delay of 300 milliseconds
+   const debounceShowConfirmDialog = _.debounce(showAlrdyAlert, 200, {leading: true, trailing: false})
+
   // To register mobile number
   const sendActiveUserDetails = async () => {
     setloading(true);
@@ -151,21 +164,20 @@ const OtpVerify = ({
       let user_code = response.data.code;
 
       setloading(false);
-
+      
       if (user_code == 400) {
-        await setModalVisible(false);
-        Alert.alert(
-          "",
-          "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
-        );
-      } else if (user_code == 200) {
+        setModalVisible(false);
+        await debounceShowConfirmDialog()
+
+      }
+       else if (user_code == 200) {
         await dispatch(setSessionExpired(false));
-        if (DeviceToken != "") {
+        // if (DeviceToken != "") {
           // save mobile device token in backend to send notification to specific device
           await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
-        } else {
-          alert("Device Token Empty");
-        }
+        // } else {
+          // alert("Device Token Empty");
+        // }
 
         let usr_imgs = user_data.userimage.map((v) => [
           v.image,
@@ -202,12 +214,14 @@ const OtpVerify = ({
         dispatch(setProfiledata(user_prof_data));
 
         navigation.navigate("UserIntro");
+        // setModalVisible(false);
         setModalVisible(false);
       } else {
         console.log("Some Error Occur while account")
-      
+        setModalVisible(false);
       }
     } catch (error) {
+      setModalVisible(false);
       setloading(false);
       dispatch(setSessionExpired(true));
       console.log("account error", error);
@@ -216,12 +230,33 @@ const OtpVerify = ({
     }
   };
 
+
+  const getDeviceToken = async () => {
+   
+    const registered = await messaging().registerDeviceForRemoteMessages();
+
+    if (Platform.OS == "ios") {
+      const apn_tok = await messaging().getAPNSToken();
+      console.log("apn_tok", apn_tok);
+      // Alert.alert("apn_tok",apn_tok)
+    }
+
+    const token = await messaging().getToken();
+    setDeviceToken(token);
+    console.log(Platform.OS, "token", token);
+    // Alert.alert("token",token)
+    return token
+
+  };
+
   const sendDeviceToken = async (prof_id, access_token) => {
     console.log("sendDeviceToken call")
     setloading(true);
+    let dvToken = await getDeviceToken()
+    console.log("dvToken",dvToken)
     const data = {
       userprofile_id: prof_id,
-      device_token: DeviceToken,
+      device_token: dvToken,
     };
 
     const headers = {
@@ -355,11 +390,11 @@ const OtpVerify = ({
         };
 
         console.log("\nDeviceToken", DeviceToken)
-        if (DeviceToken != "") {
+        // if (DeviceToken != "") {
           await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
-        } else {
-          alert("Device Token Empty");
-        }
+        // } else {
+          // alert("Device Token Empty");
+        // }
 
         // Sets Prompts Filling status locally
         dispatch(
@@ -422,51 +457,52 @@ const OtpVerify = ({
 
   // To verify sent otp
   const verifyOtp = async () => {
-    if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
-      setotperr(false);
-
-      dispatch(
-        setActiveUserLocationDetails({
-          ...active_user_location_details,
-          mobile: "+" + ph_code + "" + ph_no,
-        })
-      );
-
-      if (action == "login") {
-        userLogin(); // if action is login call login api
-      } else {
-        sendActiveUserDetails(); // if action is signup call signup api
-      }
-    } else {
-      setotperr(true); // if otp is invalid
-    }
-
-    // try {
-    //   setloading(true)
-    //   await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
-
-    //   console.log("\n Otp Verify Successfully")
-
+    // if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
     //   setotperr(false);
 
     //   dispatch(
     //     setActiveUserLocationDetails({
     //       ...active_user_location_details,
-    //       mobile: '+' + ph_code + '' + ph_no,
-    //     }),
+    //       mobile: "+" + ph_code + "" + ph_no,
+    //     })
     //   );
 
-    //   if (action == 'login') {
-    //     userLogin();
+    //   if (action == "login") {
+    //     userLogin(); // if action is login call login api
     //   } else {
-    //     sendActiveUserDetails();
+    //     sendActiveUserDetails(); // if action is signup call signup api
     //   }
-
-    // } catch (error) {
-    //   setloading(false)
-    //   console.log("otp verification failed", error)
-    //   setotperr(true)
+    // } else 
+    // {
+    //   setotperr(true); // if otp is invalid
     // }
+
+    try {
+      setloading(true)
+      await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
+
+      console.log("\n Otp Verify Successfully")
+
+      setotperr(false);
+
+      dispatch(
+        setActiveUserLocationDetails({
+          ...active_user_location_details,
+          mobile: '+' + ph_code + '' + ph_no,
+        }),
+      );
+
+      if (action == 'login') {
+        userLogin();
+      } else {
+        sendActiveUserDetails();
+      }
+
+    } catch (error) {
+      setloading(false)
+      console.log("otp verification failed", error)
+      setotperr(true)
+    }
   };
 
   // To resend OTP after 30 seconds

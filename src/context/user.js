@@ -25,6 +25,7 @@ const UserProvider = ({ children, navigationRef }) => {
   const navigation = useNavigation();
 
   const [DeviceToken, setDeviceToken] = useState("");
+  const [newMsgRefresh, setnewMsgRefresh] = useState(false)
   const [ToNavigate, setToNavigate] = useState(null);
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
@@ -45,16 +46,20 @@ const UserProvider = ({ children, navigationRef }) => {
   );
 
   const getDeviceToken = async () => {
-    // const registered = await messaging().registerDeviceForRemoteMessages();
+   
+    const registered = await messaging().registerDeviceForRemoteMessages();
 
     if (Platform.OS == "ios") {
       const apn_tok = await messaging().getAPNSToken();
       console.log("apn_tok", apn_tok);
+      Alert.alert("apn_tok",apn_tok)
     }
 
     const token = await messaging().getToken();
     setDeviceToken(token);
     console.log(Platform.OS, "token", token);
+    Alert.alert("token",token)
+
   };
 
   const notificationListener = () => {
@@ -161,7 +166,7 @@ const UserProvider = ({ children, navigationRef }) => {
   }, [is_session_expired]);
 
   useLayoutEffect(() => {
-    getDeviceToken();
+    // getDeviceToken();
     notificationListener();
   }, [user_loggined]);
 
@@ -170,6 +175,8 @@ const UserProvider = ({ children, navigationRef }) => {
       value={{
         DeviceToken,
         setDeviceToken,
+        newMsgRefresh,
+        setnewMsgRefresh,
         ToNavigate,
         setToNavigate,
         appStateVisible,

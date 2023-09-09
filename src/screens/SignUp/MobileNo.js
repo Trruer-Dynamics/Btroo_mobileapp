@@ -52,6 +52,8 @@ const MobileNo = ({ navigation, route }) => {
   const [loading, setloading] = useState(false);
 
   const checkUserAvailable = async () => {
+
+    console.log("checkUserAvailable call")
     setloading(true);
     // Validation for Israel mobile number validation
     let up_ph =
@@ -72,7 +74,7 @@ const MobileNo = ({ navigation, route }) => {
       setloading(false);
 
       if (response.data.data == true) {
-        showConfirmDialog();
+        await showConfirmDialog();
       } else {
         setshow_alert(true);
       }
@@ -110,7 +112,7 @@ const MobileNo = ({ navigation, route }) => {
   }, [selected_ph_code_id]);
 
   // To confirm to verify phone number
-  const showConfirmDialog = () => {
+  const showConfirmDialog = async () => {
     return Alert.alert(
       "Verify Phone Number?",
       `+${selected_ph_code?.phone}  ${
@@ -133,7 +135,7 @@ const MobileNo = ({ navigation, route }) => {
   };
 
   // On Next Button Press
-  const onNextPress = () => {
+  const onNextPress = async () => {
     Keyboard.dismiss();
     if (ph_no.length > 0) {
       setclickBtn(true);
@@ -146,10 +148,11 @@ const MobileNo = ({ navigation, route }) => {
           : // ph_no.length > 0 &&
             ph_no.length <= max_ph_no && ph_no.length >= min_ph_no
       ) {
+        console.log("route.params.action",route.params.action)
         if (route.params.action != "signup") {
-          checkUserAvailable();
+        await checkUserAvailable();
         } else {
-          showConfirmDialog();
+        await showConfirmDialog();
         }
       }
     }
@@ -161,12 +164,11 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-
-      // setconfirm(confirmation);
-      // console.log('\n')
-      // console.log("confirmation",JSON.stringify(confirmation))
-      // console.log('\n')
+      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      setconfirm(confirmation);
+      console.log('\n')
+      console.log("confirmation",JSON.stringify(confirmation))
+      console.log('\n')
 
       setOtpShowBox(true);
 
@@ -181,7 +183,7 @@ const MobileNo = ({ navigation, route }) => {
 
   // To otp status of phone number
   const onAuthStateChanged = (user) => {
-    console.log("\nonAuthStateChanged", user, "\n");
+    // console.log("\nonAuthStateChanged", user, "\n");
 
   };
 
@@ -386,7 +388,7 @@ const MobileNo = ({ navigation, route }) => {
                 title={"OK"}
                 disabled={false}
                 onPress={async () => {
-                  await setshow_alert(false);
+                   setshow_alert(false);
                   navigation.navigate("Intro");
                 }}
               />

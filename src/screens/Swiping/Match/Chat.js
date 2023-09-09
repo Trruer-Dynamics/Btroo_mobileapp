@@ -787,68 +787,78 @@ const Chat = ({ profile }) => {
   useEffect(() => {
     console.log("\nchatlist.length", Platform.OS, chatlist.length);
 
-    if (chatlist.length >= 25 && !profile.prof_rvl
-       && 
-       !rvl_activate
-       ) {
-      let mymsgs = chatlist.filter((v) => v[1] == 1);
-      let othmsgs = chatlist.filter((v) => v[1] == 0);
-      let mycount = mymsgs
-        .map((v) => v[0])
-        .flat()
-        .join().length;
-      let othcount = othmsgs
-        .map((v) => v[0])
-        .flat()
-        .join().length;
+    // try {
+      if (chatlist.length >= 25 && !profile.prof_rvl
+        && 
+        !rvl_activate
+        ) {
+       let mymsgs = chatlist.filter((v) => v[1] == 1);
+       let othmsgs = chatlist.filter((v) => v[1] == 0);
+       let mycount = mymsgs
+         .map((v) => v[0])
+         .flat()
+         .join().length;
+       let othcount = othmsgs
+         .map((v) => v[0])
+         .flat()
+         .join().length;
+ 
+       if (mycount >= 120 && othcount >= 120) {
+         let tmpl = [];
+         let turn = 0;
+         for (let j = 0; j < chatlist.length; j++) {
+           const ele = chatlist[j];
+ 
+           if (ele[1] == turn) {
+             tmpl.push(ele);
+             turn = turn == 0 ? 1 : 0;
+           } else {
+             continue;
+           }
+         }
+ 
+         let tmpl2 = tmpl[tmpl.length - 1][1] == 0 ? tmpl.slice(0, -1) : tmpl;
+         tmp_11 = tmpl2.map((v) => v[2]);
+ 
+         let tmpl3 = [];
+ 
+         l = 0;
+         for (const iter of tmp_11) {
+           if ((l + 1) % 2 !== 0) {
+             let t1 = new Date(tmp_11[l]);
+             let t2 = new Date(tmp_11[l + 1]);
+             let diff = Math.abs(t2 - t1);
+ 
+             tmpl3.push(diff);
+           }
+ 
+           l = l + 1;
+         }
+ 
+         console.log("tmpl3",tmpl3)
 
-      if (mycount >= 120 && othcount >= 120) {
-        let tmpl = [];
-        let turn = 0;
-        for (let j = 0; j < chatlist.length; j++) {
-          const ele = chatlist[j];
-
-          if (ele[1] == turn) {
-            tmpl.push(ele);
-            turn = turn == 0 ? 1 : 0;
-          } else {
-            continue;
-          }
-        }
-
-        let tmpl2 = tmpl[tmpl.length - 1][1] == 0 ? tmpl.slice(0, -1) : tmpl;
-        tmp_11 = tmpl2.map((v) => v[2]);
-
-        let tmpl3 = [];
-
-        l = 0;
-        for (const iter of tmp_11) {
-          if ((l + 1) % 2 !== 0) {
-            let t1 = new Date(tmp_11[l]);
-            let t2 = new Date(tmp_11[l + 1]);
-            let diff = Math.abs(t2 - t1);
-
-            tmpl3.push(diff);
-          }
-
-          l = l + 1;
-        }
-
-        let total_time = new Date(tmpl3.reduce((a, b) => a + b)).getMinutes();
-        let avg_time = total_time / chatlist.length;
-
-        if (avg_time <= 5) {
-          setrvl_activate(true);
-          console.log("\nrvl_activate..\n")
-        
-          if (chat_reveal_tut == true) {
-            Keyboard.dismiss();
-            setshow_rvl_tut(true);
-            
-          }
-        }
-      }
-    }
+         if (tmpl3.length > 0) {
+          let total_time = new Date(tmpl3.reduce((a, b) => a + b)).getMinutes();
+          let avg_time = total_time / chatlist.length;
+  
+          if (avg_time <= 5) {
+            setrvl_activate(true);
+            console.log("\nrvl_activate..\n")
+          
+            if (chat_reveal_tut == true) {
+              Keyboard.dismiss();
+              setshow_rvl_tut(true);
+              
+            }
+          } 
+         }
+         
+       }
+     }
+    // } catch (error) {
+    //   console.log(" tim error", error)
+    // }
+    
   }, [chatlist]);
 
 

@@ -73,7 +73,7 @@ const FormSelectorRadio = ({
                (list.filter(g => !(!g[1] && !g[2])).map((v, idx) => {
                   
                   let v_t =  String(v[1] ? v[0] : '') 
-                  let v_f =  String(v[2] ? 'Not' + v[0] : '')
+                  let v_f =  String(v[2] ? 'Not ' + v[0] : '')
                   let dec2 =
                   // String(idx != 0 ? ", " : "")
                   // +
