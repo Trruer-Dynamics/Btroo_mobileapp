@@ -486,7 +486,6 @@ const SwiperOr = ({}) => {
       .catch((err) => {
         dispatch(setSessionExpired(true));
         setloading(false);
-
         console.log("FilterUpdateGet err", err);
       });
   };

@@ -69,7 +69,6 @@ import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
-  withDelay,
   withTiming,
 } from "react-native-reanimated";
 import { FlashList } from "@shopify/flash-list";
@@ -157,30 +156,12 @@ const ChatItem = ({
     };
   });
 
-
-  const animation2 = useSharedValue(1)
-  const fadeIn = async () =>{
-    console.log("fadeIn")
-   
-   animation2.value = withDelay(500, withTiming(100,{
-    duration: 2000,
-   }))
-
-  }
-
-  const animatedBox = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(animation2.value, [0, 100], [1, 0]),
-    };
-  })
-
   
-  
-console.log(index, rply_item_indx,index === rply_item_indx)
+
   return (
     <View style={{ flex: 1, position: "relative", marginBottom: rspH(2.35) ,
-
-    
+    paddingVertical: rspH(0.2),
+    backgroundColor: index == rply_item_indx ? '#2364aa4e' : '#fff',
     }}>
       <Animated.View
         style={[
@@ -232,15 +213,20 @@ console.log(index, rply_item_indx,index === rply_item_indx)
           {item[5] != null && (
             <TouchableOpacity
             onPress={()=>{
-  
+
+              
               let rply_itm =chatlist.find((v) => v[4] == item[5])
              
               let rply_itm_indx = chatlist.indexOf(rply_itm)
               setrply_item_indx(rply_itm_indx)
               let tmp_lis = [...chatlist];
+  
               setchatlist(tmp_lis)
+
+
+              
               scrollViewRef.current.scrollToIndex({ index : rply_itm_indx, animated: true})
-         
+           
             }}
               style={{
                 backgroundColor: item[1] == 0 ? "#e6e8eb" : "#4986CA",
@@ -385,37 +371,6 @@ console.log(index, rply_item_indx,index === rply_item_indx)
           )}
         </Animated.View>
       </PanGestureHandler>
-
-     {
-     index === rply_item_indx &&
-     <Animated.View
-     onLayout={()=>{
-      fadeIn().then(
-        ()=>{
-          
-          console.log("New", rply_item_indx)
-          
-          setTimeout(() => {
-            animation2.value = 0
-            setrply_item_indx(null)
-            let tmp_lis = [...chatlist];
-              setchatlist(tmp_lis)
-            
-          }, 1800);
-        }
-      )
-     }}
-      style={[
-        {
-          paddingVertical: rspH(0.4),
-          position:'absolute',
-          width: '100%',
-          height: '100%',
-          backgroundColor:  '#2364aa4e',
-        },
-        animatedBox
-      ]}
-      />}
     </View>
   );
 };
@@ -948,16 +903,18 @@ const Chat = ({ profile }) => {
     
   }, [rvl_activate])
   
-  // useEffect(() => {
-  //   console.log("rply_item_indx",rply_item_indx)
-  //   if (rply_item_indx) {
-  //     setTimeout(() => {
-  //       setrply_item_indx(null)
-  //       // let tmp_lis = [...chatlist]
-  //       // setchatlist(tmp_lis)
-  //     }, 2500);
-  //   }
-  // }, [rply_item_indx])  
+useEffect(() => {
+  console.log("rply_item_indx",rply_item_indx)
+  if (rply_item_indx) {
+    setTimeout(() => {
+      setrply_item_indx(null)
+      let tmp_lis = [...chatlist]
+      setchatlist(tmp_lis)
+    }, 2000);
+  }
+}, [rply_item_indx])
+
+  
 
   useLayoutEffect(() => {
     if (profile.matchType == "New Match") {
