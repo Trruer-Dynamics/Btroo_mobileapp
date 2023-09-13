@@ -87,7 +87,6 @@ const Info = ({ navigation, route }) => {
       .catch((err) => {
         setloading(false);
 
-        console.log("getTAS err", err);
       });
   };
 
@@ -107,8 +106,6 @@ const Info = ({ navigation, route }) => {
       })
       .catch((err) => {
         setloading(false);
-
-        console.log("get_privacy_policy_master err", err);
       });
   };
 
@@ -128,72 +125,6 @@ const Info = ({ navigation, route }) => {
       })
       .catch((err) => {
         setloading(false);
-
-        console.log("get_privacy_preference_master err", err);
-      });
-  };
-
-  const getCommunityGuidelines = async () => {
-    setloading(true);
-
-    await axios
-      .get(apiUrl + `get_community_guidelines_master/`)
-      .then((resp) => {
-        setloading(false);
-
-        if (resp.status == 200) {
-          setpara(resp.data.data.text);
-        } else {
-          console.warn("Error occur while get_community_guidelines_master");
-        }
-      })
-      .catch((err) => {
-        setloading(false);
-
-        console.log("get_community_guidelines_master err", err);
-      });
-  };
-
-  const getPhotoGuidelines = async () => {
-    setloading(true);
-
-    await axios
-      .get(apiUrl + `get_photo_guidelines_master/`)
-      .then((resp) => {
-        setloading(false);
-
-        if (resp.status == 200) {
-          setpara(resp.data.data.text);
-        } else {
-          console.warn("Error occur while get_photo_guidelines_master");
-        }
-      })
-      .catch((err) => {
-        setloading(false);
-
-        console.log("get_community_guidelines_master err", err);
-      });
-  };
-
-  const getFAQ = async () => {
-    setloading(true);
-    await axios
-      .get(apiUrl + `get_FAQ_master/`)
-      .then((resp) => {
-        setloading(false);
-
-        let faq_data = resp.data.data;
-        if (resp.data.code == 200) {
-          let tmp_arr = faq_data.map((c) => {
-            return { id: c.id, question: c.question, answer: c.answer };
-          });
-
-          setarr(tmp_arr);
-        }
-      })
-      .catch((err) => {
-        setloading(false);
-        console.log("getFAQ err", err);
       });
   };
 
@@ -213,8 +144,6 @@ const Info = ({ navigation, route }) => {
       })
       .catch((err) => {
         setloading(false);
-
-        console.log("get_cookies_policy_master err", err);
       });
   };
 
@@ -230,13 +159,10 @@ const Info = ({ navigation, route }) => {
       getPrivacyPolicy();
     } else if (heading == "Privacy Preference") {
       getPrivacyPreferance();
-    } else if (heading == "Community Guidelines") {
-      getCommunityGuidelines();
-    } else if (heading == "Photo Guidelines") {
-      getPhotoGuidelines();
-    } else if (heading == "FAQ") {
-      getFAQ();
-    } else if (heading == "Cookies Policy") {
+    }
+    
+     
+    else if (heading == "Cookies Policy") {
       getCookiesPolicy();
     }
   }, []);

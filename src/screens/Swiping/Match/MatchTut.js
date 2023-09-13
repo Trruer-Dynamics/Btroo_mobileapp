@@ -3,15 +3,12 @@ import {
   Text,
   View,
   FlatList,
-  Image,
   SafeAreaView,
   Platform,
   TouchableOpacity,
-  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import FormWrapper from "../../../components/wrappers/formWrappers/FormWrapper";
-
 import MatchItem from "../../../components/screenComponents/matching/MatchItem";
 import colors from "../../../styles/colors";
 import {
@@ -26,7 +23,6 @@ import fontFamily from "../../../styles/fontFamily";
 import { Switch } from "react-native-switch";
 import CentralModal from "../../../components/modals/CentralModal";
 import ExtendTime from "../../../components/screenComponents/matching/ExtendTime";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { setMatchTut } from "../../../store/reducers/tutorial/tutorial";
 import { apiUrl } from "../../../constants";
@@ -105,14 +101,9 @@ const MatchTut = () => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur" + resp.data.data)
-        
-      }
+      } 
     } catch (error) {
-      console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
-   
     }
   };
 
@@ -145,7 +136,6 @@ const MatchTut = () => {
       }
     } catch (error) {
       setloading(false);
-      console.log("matchTutDone error", error);
       dispatch(setSessionExpired(true));
       return false;
     }
@@ -200,7 +190,6 @@ const MatchTut = () => {
 
             <Switch
               value={keep_matching}
-              // onValueChange={() => setkeep_matching(!keep_matching)}
               onValueChange={() => {
                 updateKeepMatching();
               }}
@@ -290,8 +279,6 @@ export default MatchTut;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // width: '100%',
-    // height: scrn_height/2,
     justifyContent: "space-between",
     alignItems: "center",
   },
@@ -300,8 +287,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // bottom: rspH(12),
-    // backgroundColor:'red',
   },
   bottomContTxt: {
     color: colors.black,
@@ -317,8 +302,6 @@ const styles = StyleSheet.create({
     top: 0,
     height: scrn_height,
     width: scrn_width,
-    // flex:1,
-    // alignSelf:'center',
   },
 
   centralModalTextCont: {
@@ -371,11 +354,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   timeHighCont: {
-    // top: rspH(19.4),
-    // top: Platform.OS == 'android' ?srn_height/6.92: srn_height/5.1,
-    // top: Platform.OS == 'android' ?rspH(10.76) + insets.top: srn_height/5.1,
     top: Platform.OS == "android" ? rspH(10.2) + insets.top : srn_height / 5.1,
-
     right: rspW(12),
     width: rspW(22.2),
     height: rspH(2.75),

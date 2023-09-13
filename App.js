@@ -47,67 +47,73 @@ import Test from "./Test";
 import axios from "axios";
 import { apiUrl } from "./src/constants";
 import { getHash, startOtpListener } from "react-native-otp-verify";
+import NetInfo from "@react-native-community/netinfo";
+import _ from "lodash";
+import { setNetworkConnect } from "./src/store/reducers/authentication/authentication";
+
 
 AntDesign.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 Ionicons.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 Feather.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 Entypo.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 EvilIcons.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 // FontAwesome5.loadFont().then();
 FontAwesome.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 // FontAwesome5Pro.loadFont().then();
 Fontisto.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 Foundation.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 MaterialCommunityIcons.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 MaterialIcons.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 Octicons.loadFont()
   .then()
   .catch((error) => {
-    console.info(error);
+    // console.info(error);
   });
 
 const App = () => {
   // const { ScreenshotOverlay } = NativeModules;
+
+  const dispatch = useDispatch()
 
   const status_bg = useSelector(
     (state) => state.authentication.statusBarArg.backgroundColor
@@ -181,6 +187,51 @@ const App = () => {
       backHandler.remove();
     };
   }, []);
+
+
+
+
+  const handleNetworkChange = (state => {
+  
+    if (state.isConnected) {
+      console.log("\n",Platform.OS,"Network Connected")
+    dispatch(setNetworkConnect(true))
+      // alert('Network Connected')
+    }
+    else{
+      console.log("\n",Platform.OS,"Network Disconnected")
+      dispatch(setNetworkConnect(false))
+      // alert('Network Disconnected')
+
+    }
+  });
+
+
+
+  // useEffect(() => {
+  //   console.log("count 3",count)
+  //   unsubscribe()
+  //   const timer =
+  //     setTimeout(() => {
+  //       setcount(count + 1)
+  //     }, 10000);
+  //   return () => clearTimeout(timer)
+      
+  // }, [count]);
+
+  // const netinfoSub = NetInfo.addEventListener(handleNetworkChange)
+
+  const debounceHandleNet = _.debounce(handleNetworkChange, 500, {leading: false, trailing: true})
+
+
+  useEffect(() => {
+    
+    const netinfoSub = NetInfo.addEventListener(debounceHandleNet)  
+    return () => {
+      netinfoSub && netinfoSub()
+    }
+  }, [])
+  
 
   return (
     <View style={[styles.container]}>

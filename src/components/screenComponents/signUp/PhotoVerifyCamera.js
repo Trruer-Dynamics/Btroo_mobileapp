@@ -73,11 +73,9 @@ const PhotoVerifyCamera = ({}) => {
         }
       } else {
         setloading(false);
-        console.log("Not Work")
       }
     } catch (error) {
       setloading(false);
-      console.log("photoverucamera error")
      
     }
   };

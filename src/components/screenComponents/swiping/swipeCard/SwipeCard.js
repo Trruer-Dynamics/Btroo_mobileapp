@@ -7,11 +7,8 @@ import {
   TouchableOpacity,
   Animated,
   Image,
-  // ScrollView,
-  Alert,
   StatusBar,
   TouchableWithoutFeedback,
-  Pressable,
 } from "react-native";
 
 import {
@@ -86,7 +83,6 @@ const Item = ({
       <TouchableOpacityG
         activeOpacity={1}
         onPress={() => {
-          // console.log("Modal Visibel")
           setmodalVisible(true);
         }}
       >
@@ -314,19 +310,14 @@ const SwipeCard = ({
       });
       let resp_data = response.data;
 
-      // setloading(false);
       if (resp_data.code == 200) {
         handleChoiceButtons(-1);
         swipeProfile(false, false);
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("err reportProfile", resp_data);
       }
     } catch (error) {
-      // setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("reportProfile error", error);
       return false;
     }
   };
@@ -348,19 +339,15 @@ const SwipeCard = ({
         headers,
       });
       let resp_data = response.data;
-      console.log("swipeProfile resp_data.code", resp_data.code);
       // setloading(false);
       if (resp_data.code == 200) {
         setswippingcount(resp_data.data.swappingcountvalue);
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("err swipeProfile", resp_data);
       }
     } catch (error) {
       // setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("swipeProfile catch err", error);
       return false;
     }
   };
@@ -482,7 +469,6 @@ const SwipeCard = ({
 
   useLayoutEffect(() => {
 
-    // console.log("profilestatus", card_itm.profilestatus.profilestatus);
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
     }
@@ -498,9 +484,7 @@ const SwipeCard = ({
           height: "100%",
           left: 0,
           top: 0,
-          // zIndex: Platform.OS == 'ios'?  mainIndex : 100 - mainIndex,
           zIndex: 100 - mainIndex,
-          // zIndex:  mainIndex,
 
           transform: [
             {
@@ -559,7 +543,6 @@ const SwipeCard = ({
                     alignItems: "center",
 
                     height: rspW(7.6),
-                    // width: rspW(7.6),
                     borderRadius: rspW(3.8),
                   }}
                   onPress={() => {
@@ -576,9 +559,7 @@ const SwipeCard = ({
                     width: rspW(6.05),
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    // alignItems: 'center',
-                    // alignSelf: 'flex-end',
-                    // marginRight: rspW(5.5),
+                   
                   }}
                 >
                   <View style={styles.dots} />
@@ -616,35 +597,12 @@ const SwipeCard = ({
                 <TouchableOpacity
                   style={{
                     ...styles.filterCont,
-
-                    // shadowColor: colors.black,
-                    //   shadowOffset: {
-                    //     width: 0,
-                    //     height: 2,
-                    //   },
-                    //   shadowOpacity: 0.4,
-                    //   shadowRadius: 2.5,
-                    // elevation: 4,
                   }}
                   onPress={() => {
                     setshowFilter(!showFilter);
                   }}
                 >
-                  {/* <FAIcon 
-                style={{
-                  // shadowColor: '#000',
-                
-                  shadowOffset: {
-                    width: 0,
-                    height: 2,
-                  },
-                  shadowOpacity: 0.4,
-                  shadowRadius: 2.5,
-                  elevation: 5,
-            
-                }}
-                size={30} name="filter" color={'#ffffff'} /> */}
-
+                  
                   <Image
                     source={require("../../../../assets/images/Swiping/Filter3.png")}
                     style={{ width: 26, height: 26 }}
@@ -832,11 +790,7 @@ const SwipeCard = ({
 
             <ScrollView
               style={styles.profileDetailsCont}
-              // contentContainerStyle={{
-              //   flexGrow:1,
-              //   borderWidth:1,
-              //   borderColor:'red',
-              // }}
+              
               bounces={false}
               showsVerticalScrollIndicator={false}
               scrollEventThrottle={300}
@@ -865,7 +819,6 @@ const SwipeCard = ({
                       style={{
                         ...styles.profileDetailCont,
                         ...styles.boxShadowCont,
-                        // alignItems:'center',
                         paddingHorizontal: rspW(3.2),
                         justifyContent: "center",
                       }}
@@ -907,7 +860,6 @@ const SwipeCard = ({
                             marginRight: rspW(2),
                           }}
                         />
-                        {/* <Text style={styles.profileDetailContNText}>Graduate</Text> */}
 
                         <Text
                           numberOfLines={1}
@@ -985,6 +937,7 @@ const SwipeCard = ({
                     </Text>
                     <TouchableWithoutFeedback>
                       <ScrollView
+                      bounces={false}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -1030,6 +983,7 @@ const SwipeCard = ({
                     >
                       <Text style={styles.profileDetailContHeading}>Pets</Text>
                       <ScrollView
+                      bounces={false}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
                         scrollEventThrottle={1}
@@ -1104,8 +1058,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: rspW(5.1),
     flex: 1,
     backgroundColor: colors.white,
-
-    // alignItems: 'center',
   },
 
   // Main Screen
@@ -1134,8 +1086,6 @@ const styles = StyleSheet.create({
 
   item: {
     borderRadius: rspW(5.1),
-    // backgroundColor:'red',
-    // width: rspW(89),
     width: rspW(88),
     marginRight: rspW(1),
   },
@@ -1162,17 +1112,14 @@ const styles = StyleSheet.create({
 
   actionsCont: {
     width: rspW(89),
-
     paddingHorizontal: rspW(13.8),
     flexDirection: "row",
-    // justifyContent: 'space-around',
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: rspH(1.1),
   },
 
   actionCont: {
-    // width: rspW(13),
     width: rspW(13),
     height: rspW(13),
     borderRadius: rspW(7),
@@ -1182,7 +1129,6 @@ const styles = StyleSheet.create({
   },
 
   actionSetCont: {
-    // width: rspW(13),
     width: rspW(26),
     height: rspW(26),
     borderRadius: rspW(4),
@@ -1206,24 +1152,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
   },
 
-  // Profile Details
   profileDetailsCont: {
     alignSelf: "center",
-    // paddingHorizontal: rspW(2),
     width: rspW(86),
     height: scrn_height,
-    // height: rspH(70),
-    // paddingBottom: rspH(30),
     marginTop: rspH(3.4),
-    // backgroundColor:'red',
-    // marginBottom: rspH(Platform.OS == 'ios' ? 3.4 : 5.6),
+
   },
   profileDetailsSubCont: {
     width: rspW(82),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // backgroundColor:'red',
     marginBottom: rspH(3),
   },
   profileDetailsSubCont2: {
@@ -1232,13 +1172,8 @@ const styles = StyleSheet.create({
     borderRadius: rspW(1.6),
     height: rspH(9.6),
     paddingHorizontal: rspW(3.2),
-    // paddingTop: rspH(1.17),
     paddingTop: rspH(1.17),
-    // marginBottom: 20,
-    // paddingBottom: rspH(1.67),
-    // paddingBottom: rspW(0),
-
-    // backgroundColor: 'red',
+    
   },
   profileDetailCont: {
     height: rspH(9.6),
@@ -1279,15 +1214,9 @@ const styles = StyleSheet.create({
 
   // Prompt
   promptContainer: {
-    // backgroundColor:'purple',
     width: rspW(82),
-    // height: rspH(12.9),
-    // marginTop: rspH(2.35),
     marginBottom: rspH(3),
-
-    // marginBottom: rspH(1),
     paddingHorizontal: rspW(2.5),
-    // paddingVertical: rspH(0.6),
   },
   promptQuestionContainer: {
     marginBottom: rspH(0.6),

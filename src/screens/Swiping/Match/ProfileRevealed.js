@@ -4,7 +4,6 @@ import {
   View,
   Image,
   SafeAreaView,
-  Alert,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import {
@@ -12,7 +11,6 @@ import {
   rspH,
   rspW,
   scrn_height,
-  scrn_width,
 } from "../../../styles/responsiveSize";
 import colors from "../../../styles/colors";
 import { useNavigation } from "@react-navigation/native";
@@ -69,13 +67,9 @@ const ProfileRevealed = ({ route }) => {
         setupdated_prof(prf_usr);
       } else if (response.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("err getRvlProfData", resp_data);
-      }
+      } 
     } catch (error) {
       setreport("");
-      // setloading(false);
-      console.log("getRvlProfData error", error);
       dispatch(setSessionExpired(true));
       return false;
     }
@@ -93,7 +87,6 @@ const ProfileRevealed = ({ route }) => {
             title="Profile Revealed"
             left_icon={true}
             onPress={() => {
-              // navigation.goBack();
               navigation.navigate("Chat", {
                 profile: updated_prof,
               });
@@ -109,7 +102,6 @@ const ProfileRevealed = ({ route }) => {
             <View
               style={{
                 alignItems: "center",
-                // backgroundColor:'red',
                 width: rspW(76),
               }}
             >
@@ -155,14 +147,12 @@ export default ProfileRevealed;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    // height: scrn_height,
     paddingTop: rspH(3.25),
     paddingBottom: rspW(10.24),
     backgroundColor: colors.white,
   },
   container: {
     flex: 1,
-    // backgroundColor:'#ef854895',
     marginHorizontal: rspW(9.6),
     alignItems: "center",
   },

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -16,17 +16,14 @@ import {
   rspF,
   rspH,
   rspW,
-  scrn_height,
   scrn_width,
 } from "../../styles/responsiveSize";
 import FormComponentsWrapper from "../wrappers/formComponentsWrappers/FormComponentsWrapper";
 import FormComponentsWrapperHeader from "../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
-import FormInput from "./FormInput";
 import SearchInput from "./SearchInput";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import FAIcon from "react-native-vector-icons/FontAwesome";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
-import ErrorContainer from "./ErrorContainer";
 import FooterBtn from "../Buttons/FooterBtn";
 
 const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => {
@@ -123,7 +120,7 @@ const FormSelectorFilter = ({
             tmp.splice(indx, 1);
             setselected_lis2(tmp);
           }
-          // if (selected_lis2.length < 10)
+
           else {
             setselected_lis2([...selected_lis2, item[0]]);
           }
@@ -155,13 +152,7 @@ const FormSelectorFilter = ({
           <View style={{ width: scrn_width / 1.5 }}>
             <Text style={styles.selectedOpt} numberOfLines={1}>
               {selected_list.length > 0
-                ? // selected_list.map((v, idx) => {
-                  //     let name = list.filter(g => g[0] == v)[0];
-                  //     let val = name?  (idx == 0 ? name[1] : ', ' + name[1]) : '';
-
-                  //     return val;
-                  //     // return 'val';
-                  //   })
+                ? 
                   names
                 : ""}
 
@@ -172,9 +163,7 @@ const FormSelectorFilter = ({
 
         <View
           style={{ alignItems: "center", justifyContent: "center" }}
-          onPress={() => {
-            // setvisible(false);
-          }}
+          
         >
           <ADIcon size={20} name="right" color={colors.blue} />
         </View>
@@ -211,25 +200,11 @@ const FormSelectorFilter = ({
                 data={search_value ? filterdatalist : list}
                 renderItem={renderItem}
                 keyExtractor={(item) => item[0]}
-                // extraData={selectedId}
-                // style={{height: scrn_height / 1.77}}
               />
             </View>
             {/* Confirm Btn */}
 
             <FormWrapperFooter>
-              {/* Error Show Here */}
-
-              {/* <View style={{marginVertical: rspH(1),
-              alignSelf:'center',
-              }}>
-              <Text style={{
-                fontSize: rspF(1.3),
-                fontFamily: fontFamily.regular,
-                color: '#000',
-                textAlign:'center',
-              }}>{`Please select up to 10 ${mainTitle.toLowerCase()} from the list above`}</Text>
-              </View> */}
 
               {/* Next Btn To Navigate to Next Form Components */}
               <FooterBtn
@@ -240,10 +215,6 @@ const FormSelectorFilter = ({
                   let checker = (arr, target) => target.every(v => arr.includes(v))
                   let check1 = checker(selected_lis2,selected_list)
                   let check2 = checker(selected_list,selected_lis2)
-                  
-                  // console.log("selected_list",selected_list)
-                  // console.log("selected_lis2",selected_lis2)
-                  // console.log("check1",check1 && check2)
               
                   if (!(check1 && check2)) {
                       setcode_press(false);
@@ -267,7 +238,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     borderWidth: 1,
     backgroundColor: "#DCDCDC33", // 0.2 opacity added,
-
     paddingHorizontal: rspW(4),
     borderRadius: rspW(1.3),
   },
@@ -319,15 +289,11 @@ const styles = StyleSheet.create({
   selectedOpt: {
     fontSize: rspF(1.66),
     lineHeight: rspF(1.8),
-
     fontFamily: fontFamily.bold,
     color: `#999999`,
-    // letterSpacing:1,
   },
   listCont: {
-    // height: scrn_height / 1.65,
     marginBottom: rspH(1.2),
-    // alignSelf:'center',
   },
 
   emptysearchContainer: {
@@ -335,9 +301,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // borderWidth: 1,
-    // backgroundColor: '#DCDCDC33', // 0.2 opacity added,
-    // borderColor: '#DCDCDC',
     paddingHorizontal: rspW(4),
     borderRadius: rspW(2.5),
     marginBottom: rspH(3.9),

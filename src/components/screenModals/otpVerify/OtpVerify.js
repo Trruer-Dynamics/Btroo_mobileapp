@@ -74,17 +74,6 @@ const OtpVerify = ({
     (state) => state.authentication.active_user_location_details
   );
 
-  const user_loggined = useSelector(
-    (state) => state.authentication.user_loggined
-  );
-
-  const access_token = useSelector(
-    (state) => state.authentication.access_token
-  );
-  const profile_data = useSelector(
-    (state) => state.authentication.profile_data
-  );
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -172,12 +161,8 @@ const OtpVerify = ({
       }
        else if (user_code == 200) {
         await dispatch(setSessionExpired(false));
-        // if (DeviceToken != "") {
-          // save mobile device token in backend to send notification to specific device
+       
           await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
-        // } else {
-          // alert("Device Token Empty");
-        // }
 
         let usr_imgs = user_data.userimage.map((v) => [
           v.image,
@@ -214,19 +199,15 @@ const OtpVerify = ({
         dispatch(setProfiledata(user_prof_data));
 
         navigation.navigate("UserIntro");
-        // setModalVisible(false);
         setModalVisible(false);
       } else {
-        console.log("Some Error Occur while account")
         setModalVisible(false);
       }
     } catch (error) {
       setModalVisible(false);
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("account error", error);
-
-   
+  
     }
   };
 
@@ -237,23 +218,17 @@ const OtpVerify = ({
 
     if (Platform.OS == "ios") {
       const apn_tok = await messaging().getAPNSToken();
-      console.log("apn_tok", apn_tok);
-      // Alert.alert("apn_tok",apn_tok)
     }
 
     const token = await messaging().getToken();
     setDeviceToken(token);
-    console.log(Platform.OS, "token", token);
-    // Alert.alert("token",token)
     return token
 
   };
 
   const sendDeviceToken = async (prof_id, access_token) => {
-    console.log("sendDeviceToken call")
     setloading(true);
     let dvToken = await getDeviceToken()
-    console.log("dvToken",dvToken)
     const data = {
       userprofile_id: prof_id,
       device_token: dvToken,
@@ -268,14 +243,11 @@ const OtpVerify = ({
         headers,
       });
       let user_data = response.data.data;
-      let status_code = response.data.code;
 
-      console.log("\nsend device token", user_data);
       setloading(false);
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading(false);
-      console.log("\nsendDeviceToken error", error);
 
     }
   };
@@ -323,8 +295,6 @@ const OtpVerify = ({
       } else if (status_code == 200) {
         dispatch(setSessionExpired(false));
 
-        let ref_code = user_data.userprofile.referral_code;
-
         let u_pref = user_data.userprefrances.map((v) => v.gendermaster.id);
 
         // filter active prompts
@@ -352,7 +322,6 @@ const OtpVerify = ({
           return 0;
         });
 
-        console.log("resp_imgs", resp_imgs);
 
         // // create a empty data list format for 9 images
         let tmp1 = [
@@ -389,12 +358,7 @@ const OtpVerify = ({
           userprivateprompts: act_promptsm2,
         };
 
-        console.log("\nDeviceToken", DeviceToken)
-        // if (DeviceToken != "") {
           await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
-        // } else {
-          // alert("Device Token Empty");
-        // }
 
         // Sets Prompts Filling status locally
         dispatch(
@@ -443,15 +407,10 @@ const OtpVerify = ({
         if (nav_to != "") {
           navigation.navigate(nav_to);
         }
-      } else {
-        console.log("Error", "Some Error Occur" + response.status)
-       
-      }
+      } 
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading(false);
-      console.log("login error", error);
-
     }
   };
 
@@ -481,8 +440,6 @@ const OtpVerify = ({
     //   setloading(true)
     //   await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
 
-    //   console.log("\n Otp Verify Successfully")
-
     //   setotperr(false);
 
     //   dispatch(
@@ -500,7 +457,6 @@ const OtpVerify = ({
 
     // } catch (error) {
     //   setloading(false)
-    //   console.log("otp verification failed", error)
     //   setotperr(true)
     // }
   };

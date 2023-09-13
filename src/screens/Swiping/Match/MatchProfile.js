@@ -6,7 +6,6 @@ import {
   Image,
   ScrollView,
   SafeAreaView,
-  Alert,
   Platform,
   Animated,
   FlatList,
@@ -53,7 +52,6 @@ const Item2 = ({ item }) => {
   return (
     <View style={styles.item2}>
       <Image
-        // source={{uri: imageUri}}
         source={{ uri: imageUri }}
         style={{ width: "100%", height: "98%" }}
         resizeMode="contain"
@@ -90,9 +88,6 @@ const MatchProfile = ({ route }) => {
   );
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
-  );
-  const profile_imgs = useSelector(
-    (state) => state.authentication.profile_imgs
   );
 
   const [modalVisible, setmodalVisible] = useState(false);
@@ -146,12 +141,10 @@ const MatchProfile = ({ route }) => {
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-        console.log("extendTime err", err);
       });
   };
 
   const unmatchProfile = async () => {
-    // setloading(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -164,7 +157,6 @@ const MatchProfile = ({ route }) => {
       const response = await axios.post(apiUrl + "unmatch_chatroom/", data, {
         headers,
       });
-      // setloading(false);
 
       let resp_data = response.data;
       if (resp_data.code == 200) {
@@ -173,15 +165,12 @@ const MatchProfile = ({ route }) => {
         dispatch(setSessionExpired(true));
       }
     } catch (error) {
-      // setloading(false);
-      console.log("unmatchProfile error", error);
       dispatch(setSessionExpired(true));
       return false;
     }
   };
 
   const reportProfile = async () => {
-    // setloading(true)
     const data = {
       user_id: profile_data.user.id,
       user_profile_id: profile.userprofile.id,
@@ -198,18 +187,13 @@ const MatchProfile = ({ route }) => {
       });
       let resp_data = response.data;
       setreport("");
-      // setloading(false);
       if (resp_data.code == 200) {
         setreportConfirm(true);
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("err reportProfile", resp_data);
-      }
+      } 
     } catch (error) {
       setreport("");
-      // setloading(false);
-      console.log("reportProfile error", error);
       dispatch(setSessionExpired(true));
       return false;
     }
@@ -217,8 +201,7 @@ const MatchProfile = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("profile images", profile.all_images);
-
+  
       let lang_tmp = profile?.userprofile?.language.map(
         (v) => v?.languagemaster?.language
       );
@@ -343,11 +326,7 @@ const MatchProfile = ({ route }) => {
                 alignSelf: "center",
               }}
             >
-              <View
-                onPress={() => {
-                  // navigation.navigate('ProfileRevealed', {profile});
-                }}
-              >
+              <View>
                 <View style={{ alignSelf: "center" }}>
                   {profile.prof_rvl ? (
                     <TouchableOpacity
@@ -600,6 +579,7 @@ const MatchProfile = ({ route }) => {
                     >
                       <Text style={styles.profileDetailContHeading}>Pets</Text>
                       <ScrollView
+                      bounces={false}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -639,6 +619,7 @@ const MatchProfile = ({ route }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Interests</Text>
                   <ScrollView
+                    bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -740,6 +721,7 @@ const MatchProfile = ({ route }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Languages</Text>
                   <ScrollView
+                  bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -859,12 +841,8 @@ const MatchProfile = ({ route }) => {
             style={{
               position: "absolute",
               zIndex: 2,
-              // top: rspH(2.35),
               top: rspH(3),
-
               left: rspW(8),
-              // backgroundColor: 'red',
-
               alignSelf: "center",
               justifyContent: "center",
               alignItems: "center",
@@ -920,45 +898,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   leftTime: {
-    // color: '#000',
     fontSize: rspF(1.4),
     fontFamily: fontFamily.light,
   },
   profileImage: {
-    // width: rspW(21.64),
     width: rspW(21.64),
-
     height: rspW(21.64),
-    // alignSelf:'center',
     marginBottom: rspH(1.4),
-    // marginBottom: rspH(1.32),
-    // borderRadius: rspW(43.3),
     borderRadius: rspW(43.3),
   },
 
   profileDetailsSubCont: {
-    // paddingHorizontal: 5,
-
-    // width: '100%',
     flexDirection: "row",
-    // alignSelf:'center',
     justifyContent: "space-around",
     alignItems: "center",
   },
   profileDetailsSubCont2: {
     alignSelf: "center",
-
     width: rspW(82),
-    // width: '100%',
     marginTop: rspH(3),
-    // marginBottom: rspH(3),
     borderRadius: rspW(1.6),
     height: rspH(9.6),
     paddingHorizontal: rspW(3.2),
-    // backgroundColor: colors.error,
     paddingTop: rspH(1.17),
-    // paddingBottom: rspH(1.67),
-    // paddingBottom: rspH(1.67),
+
   },
   profileDetailCont: {
     height: rspH(9.6),
@@ -981,12 +944,9 @@ const styles = StyleSheet.create({
     color: colors.black,
     letterSpacing: 1,
     fontSize: rspF(2.02),
-    // lineHeight: 16,
   },
   interestImage: {
-    // backgroundColor:'red',
     height: rspH(3.75),
-
     width: rspW(7.64),
     marginRight: rspW(4.52),
   },

@@ -3,30 +3,24 @@ import {
   Text,
   View,
   FlatList,
-  Image,
   SafeAreaView,
   Platform,
-  Alert,
 } from "react-native";
-import React, { useState, useLayoutEffect, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import FormWrapper from "../../../components/wrappers/formWrappers/FormWrapper";
-
 import MatchItem from "../../../components/screenComponents/matching/MatchItem";
 import colors from "../../../styles/colors";
 import {
   rspH,
   rspW,
   rspF,
-  scrn_height,
-  scrn_width,
 } from "../../../styles/responsiveSize";
 import fontFamily from "../../../styles/fontFamily";
 import { Switch } from "react-native-switch";
 import CentralModal from "../../../components/modals/CentralModal";
 import ExtendTime from "../../../components/screenComponents/matching/ExtendTime";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import { setMatchTut } from "../../../store/reducers/tutorial/tutorial";
 import { apiUrl } from "../../../constants";
 import axios from "axios";
 import {
@@ -40,44 +34,10 @@ import { initialWindowMetrics } from "react-native-safe-area-context";
 import { UserContext } from "../../../context/user";
 const insets = initialWindowMetrics.insets;
 
-const DATA = [
-  {
-    id: "1",
-    name: "Abhiroop",
-    profession: "Teacher",
-    age: 23,
-    lastMessage: "Hello! How are you man?",
-    matchType: "New Match",
-    time: new Date("2023-4-14T10:24:00"),
-    seen: false,
-  },
-  {
-    id: "2",
-    name: "David",
-    profession: "Guardian",
-    age: 25,
-    lastMessage: "Hello! Do you know how to play guitar?",
-    matchType: "Your Move",
-    time: new Date("2023-4-13T16:14:00"),
-    seen: true,
-  },
-  {
-    id: "3",
-    name: "Ronald",
-    profession: "Footballer",
-    age: 22,
-    lastMessage: "Hello!",
-    matchType: "Your Move",
-    time: new Date("2023-4-13T12:52:00"),
-    seen: false,
-  },
-];
-
 const Match = () => {
   const dispatch = useDispatch();
 
   const {  newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);
-
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -88,9 +48,7 @@ const Match = () => {
 
   const [match_list, setmatch_list] = useState([]);
 
-  const [loading, setloading] = useState(true);
-
-  const [matching, setmatching] = useState([]);
+  const [loading, setloading] = useState(false);
 
   const kp_mtch = profile_data?.userprofile?.keepmatchingnotification;
   const [keep_matching, setkeep_matching] = useState(kp_mtch);
@@ -100,7 +58,7 @@ const Match = () => {
   const [extendTimeUser_ID, setextendTimeMatchID] = useState(0);
 
   const updateKeepMatching = async () => {
-    setloading(true);
+    // setloading(true);
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
 
@@ -119,7 +77,7 @@ const Match = () => {
         }
       );
 
-      setloading(false);
+      // setloading(false);
 
       if (resp.data.code == 200) {
         setkeep_matching(!keep_matching);
@@ -135,20 +93,16 @@ const Match = () => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        setloading(false);
-        console.log("Error",
-        "updateKeepMatching Some Error Occur" + resp.data.data)
-      }
+      } 
+      
     } catch (error) {
-      console.log("went wrong error", error);
       dispatch(setSessionExpired(true));
       
     }
   };
 
   const getMatches = async () => {
-    // setloading(true);
+
     const url = apiUrl + `activechatroomlist/`;
 
     const headers = {
@@ -161,12 +115,12 @@ const Match = () => {
 
     try {
       const resp = await axios.post(url, data, { headers });
-      setloading(false);
+      // setloading(false);
 
       let code = resp.data.code;
       let resp_data = resp.data.data;
 
-     
+
 
       if (code == 200) {
         let match_tmp = [];
@@ -174,7 +128,6 @@ const Match = () => {
         if (resp_data.length > 0) {
           for (let p = 0; p < resp_data.length; p++) {
             let mth = {};
-
             let id = resp_data[p].id;
             let lastMessage = resp_data[p].last_message?.content
               ? resp_data[p].last_message.content
@@ -196,7 +149,6 @@ const Match = () => {
                 ? resp_data[p].last_message.seen_by
                 : [];
             let lg_id = profile_data.user.id;
-console.log("resp_data[p].current_turn",resp_data[p].current_turn, lg_id)
             let ym = resp_data[p].current_turn === lg_id ? false : true;
 
             mth.id = id;
@@ -223,13 +175,9 @@ console.log("resp_data[p].current_turn",resp_data[p].current_turn, lg_id)
         setmatch_list(match_tmp);
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur" + resp.data.data)
-      }
+      } 
     } catch (error) {
-      // setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("went wrong error", error);
     }
   };
 
@@ -245,14 +193,11 @@ console.log("resp_data[p].current_turn",resp_data[p].current_turn, lg_id)
   };
 
   const extendTime = async () => {
-    // let tmstmp =  new Date().toLocaleString().slice(0,-2).trim().split(',')
-    let tmstmp = new Date().toISOString().slice(0, -5).split("T");
 
+    let tmstmp = new Date().toISOString().slice(0, -5).split("T");
     let date = tmstmp[0];
     let time = tmstmp[1];
-
     let fn_date = date + " " + time;
-
     let url =
       apiUrl +
       "chatroomextendapi/" +
@@ -278,7 +223,6 @@ console.log("resp_data[p].current_turn",resp_data[p].current_turn, lg_id)
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-        console.log("extendTime err", err);
       });
   };
 
@@ -289,15 +233,11 @@ console.log("resp_data[p].current_turn",resp_data[p].current_turn, lg_id)
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      
       getMatches();
     }, [newMsgRefresh])
   );
 
 
-
-
-  
   return (
     <>
       {loading && <Loader />}
@@ -333,7 +273,6 @@ console.log("resp_data[p].current_turn",resp_data[p].current_turn, lg_id)
 
               <Switch
                 value={keep_matching}
-                // onValueChange={() => setkeep_matching(!keep_matching)}
                 onValueChange={() => {
                   updateKeepMatching();
                 }}
@@ -381,8 +320,6 @@ export default Match;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // width: '100%',
-    // height: scrn_height/2,
     justifyContent: "space-between",
     alignItems: "center",
   },
@@ -391,9 +328,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor:'red',
-
-    // marginBottom: rspH(Platform.OS == 'ios' ? 7 : 11),
   },
   bottomContTxt: {
     color: colors.black,

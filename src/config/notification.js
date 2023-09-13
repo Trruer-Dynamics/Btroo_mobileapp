@@ -27,10 +27,6 @@ const NotificationController = (props) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    console.log("\nuser_interact", user_interact);
-    console.log("not_data?.type", not_data?.type);
-    console.log("user_loggined", user_loggined);
-    console.log("\n");
 
     if (not_data?.type == "Chat" || not_data?.type == "Hidden") {    
       setnewMsgRefresh(!newMsgRefresh)
@@ -83,7 +79,7 @@ const NotificationController = (props) => {
         importance: 4, // (optional) default: Importance.HIGH. Int value of the Android notification importance
         vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
       },
-      (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
+      (created) => {} // (optional) callback returns whether the channel was created, false means it already existed.
     );
 
     PushNotification.configure({
@@ -91,19 +87,10 @@ const NotificationController = (props) => {
       onRegister: function (token) {},
 
       onNotification: function (notification) {
-        console.log(
-          "\nNOTIFICATION:",
-          notification.data.type,
-          notification.foreground
-        );
-
-        console.log("\nuserInteraction", notification.userInteraction, "\n");
 
         setuser_interact(notification.userInteraction);
         if (notification.userInteraction) {
-          let type = "";
-          let data = {};
-
+         
           if (!notification.foreground) {
             setnot_data(notification.data);
             setrefresh(!refresh);
@@ -138,8 +125,6 @@ const NotificationController = (props) => {
   useLayoutEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
 
-      console.log("\n remoteMessage", Platform.OS, remoteMessage, "\n");
-
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
 
@@ -164,8 +149,6 @@ const NotificationController = (props) => {
           color: "#1c2143",
         };
       }
-
-      console.log(Platform.OS, "  sckop.current", sckop.current);
 
       if (user_loggined && !sckop.current &&  data?.type != "Hidden")  {
         PushNotification.localNotification(notifObj);

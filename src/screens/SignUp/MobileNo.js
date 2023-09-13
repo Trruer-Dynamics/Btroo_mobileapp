@@ -53,7 +53,6 @@ const MobileNo = ({ navigation, route }) => {
 
   const checkUserAvailable = async () => {
 
-    console.log("checkUserAvailable call")
     setloading(true);
     // Validation for Israel mobile number validation
     let up_ph =
@@ -68,9 +67,6 @@ const MobileNo = ({ navigation, route }) => {
     // to check user already available
     try {
       const response = await axios.post(apiUrl + "logincheck/", data);
-
-      console.log("response", response.data);
-
       setloading(false);
 
       if (response.data.data == true) {
@@ -80,14 +76,11 @@ const MobileNo = ({ navigation, route }) => {
       }
     } catch (error) {
       setloading(false);
-      console.log("logincheck error", error);
-    
     }
   };
 
   useEffect(() => {
     // Phone Number Validations
-    console.log("selected_ph_code_id",selected_ph_code_id)
     if (selected_ph_code_id != "") {
       let selected_country = countries_with_ph_no.find(
         (v) => v.code == selected_ph_code_id
@@ -148,7 +141,6 @@ const MobileNo = ({ navigation, route }) => {
           : // ph_no.length > 0 &&
             ph_no.length <= max_ph_no && ph_no.length >= min_ph_no
       ) {
-        console.log("route.params.action",route.params.action)
         if (route.params.action != "signup") {
         await checkUserAvailable();
         } else {
@@ -275,9 +267,7 @@ const MobileNo = ({ navigation, route }) => {
                   setvalue_blr={setph_no_blr}
                   s_allow={false}
                   a_allow={false}
-                  onFocus={()=>{
-                    console.log("Input Focus")
-                  }}
+                  
                 />
               </View>
             </View>

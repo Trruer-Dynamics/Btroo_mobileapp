@@ -3,13 +3,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
-  ScrollView,
-  PermissionsAndroid,
   SafeAreaView,
   Platform,
   Alert,
-  ActivityIndicator,
   Linking,
 } from "react-native";
 import React, {
@@ -28,10 +24,6 @@ import {
 } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-
-import ADIcon from "react-native-vector-icons/AntDesign";
-import { launchCamera, launchImageLibrary } from "react-native-image-picker";
-import Ionicon from "react-native-vector-icons/Ionicons";
 import BottomModal from "../../components/modals/BottomModal";
 import FormInputContainer from "../../components/formComponents/FormInputContainer";
 import FormSelector from "../../components/formComponents/FormSelector";
@@ -51,23 +43,15 @@ import {
 } from "../../store/reducers/authentication/authentication";
 import Loader from "../../components/loader/Loader";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
-import {
-  GestureHandlerRootView,
-  PanGestureHandler,
-} from "react-native-gesture-handler";
-import Animated, {
-  runOnJS,
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
+
+import  {
   useSharedValue,
-  withTiming,
 } from "react-native-reanimated";
 import ImageCropPicker from "react-native-image-crop-picker";
 import CentralModal from "../../components/modals/CentralModal";
 import { UserContext } from "../../context/user";
 import AutoGrowingTextInput from "react-native-autogrow-textinput-ts";
 import { Image as CompImage } from "react-native-compressor";
-import { stat } from "react-native-fs";
 import Draggable from "../../components/screenComponents/picUpload/draggable";
 import Box from "../../components/screenComponents/picUpload/box";
 import _ from "lodash";
@@ -145,14 +129,9 @@ const EditProfile = ({ navigation }) => {
     for (let t = 0; t < up_pos_lis.length; t++) {
       const ele = up_pos_lis[t];
       ele[3] = positions.value[t];
-      console.log("\n ele", ele);
     }
 
     up_pos_lis = up_pos_lis.sort((a, b) => a[3] - b[3]);
-
-    // console.log("up_pos_lis",up_pos_lis)
-
-    // console.log("data",data)
 
     try {
       const resp = await axios.post(url, data, { headers });
@@ -160,19 +139,15 @@ const EditProfile = ({ navigation }) => {
 
       let code = resp.data.code;
       let user_data = resp.data.data;
-      console.log("user_data", user_data);
+
       if (code == 200) {
         await dispatch(setProfileImgs(up_pos_lis));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "pos Some Error Occur" + resp.data.data)
-     
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("error", error);
     }
   };
 
@@ -210,8 +185,6 @@ const EditProfile = ({ navigation }) => {
   const [gender_blr, setgender_blr] = useState(false);
 
   // Step 2
-  const [preference, setpreference] = useState("");
-  const [preference_id, setpreference_id] = useState(0);
   const [preference_list, setpreference_list] = useState([]);
   const [selected_preference_list, setselected_preference_list] = useState([]);
   const [preference_blr, setpreference_blr] = useState(false);
@@ -222,8 +195,6 @@ const EditProfile = ({ navigation }) => {
   const [education_blr, seteducation_blr] = useState(false);
 
   const [occupation, setoccupation] = useState("");
-  const [occupation_id, setoccupation_id] = useState(0);
-  const [occupation_list, setoccupation_list] = useState([]);
   const [occupation_blr, setoccupation_blr] = useState(true);
 
   const [habits_list, sethabits_list] = useState([
@@ -243,7 +214,6 @@ const EditProfile = ({ navigation }) => {
       !profile_data.userprofile.marijuana,
     ],
   ]);
-  const [habits_blr, sethabits_blr] = useState(false);
 
   // Step 3
   const [interests, setinterests] = useState("");
@@ -322,9 +292,7 @@ const EditProfile = ({ navigation }) => {
   };
 
   const atLast = async (tmp_lis) => {
-    console.log("tmp_lis", tmp_lis.length);
     await setpic_list(tmp_lis);
-
     setrefresh(!refresh);
   };
 
@@ -333,25 +301,14 @@ const EditProfile = ({ navigation }) => {
       await changeImgPosition();
     }
     await saveProfileData();
-    // updatePrompts()
   };
 
   const reArrangeList = async (indx) => {
-    console.log("reArrangeList");
     let tmp_lis = _.cloneDeep(pic_list);
-
     tmp_lis.splice(indx, 1);
-
     tmp_lis.push(["", "", true, "2", ""]);
 
-    console.log("tmp_lis.length", tmp_lis.length);
-
-    console.log("positions.value", indx, positions.value);
-
     let positions_list = Object.entries(positions.value);
-
-    console.log("positions_list", positions_list);
-    // let del_pos = positions_list.find(v => v[0] == indx)
 
     for (let j = 0; j < tmp_lis.length; j++) {
       const ele = tmp_lis[j];
@@ -370,8 +327,7 @@ const EditProfile = ({ navigation }) => {
     for (let m = 0; m < positions_list.length; m++) {
       up_pos[m] = m;
     }
-    console.log("up_pos", up_pos);
-
+    
     positions.value = up_pos;
 
     dispatch(setProfileImgs(tmp_lis));
@@ -379,15 +335,10 @@ const EditProfile = ({ navigation }) => {
   };
 
   const saveProfileImage = async (mnImage, crpImage) => {
-    console.log("saveProfileImage");
     setloading_img(true);
-
     let active_itm = [];
-
     active_itm = pic_list[activeIndx];
-
     const url = apiUrl + "userimage/";
-
     const headers = {
       Authorization: `Bearer ${access_token}`,
       "Content-Type": "multipart/form-data",
@@ -426,8 +377,6 @@ const EditProfile = ({ navigation }) => {
         let tmp_lst = [...pic_list];
         tmp_lst[activeIndx] = [n_img, crp_imgd, true, activeIndx + 1, pid];
 
-        // let compl_list = tmp_lst.filter(v => v[1] !="")
-
         if (activeIndx < 8 && !tmp_lst[activeIndx + 1][2]) {
           tmp_lst[activeIndx + 1] = ["", "", true, String(activeIndx + 2), ""];
         }
@@ -441,17 +390,12 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading_img(false);
-        console.log("saveProfileImage Error",
-        "Some Error Occur" + resp.data.data)
-        
         ifFail(activeIndx);
       }
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading_img(false);
       ifFail(activeIndx);
-      console.log("saveProfileImage went wrong error", error);
-
     }
   };
 
@@ -513,9 +457,6 @@ const EditProfile = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        console.log("Error updateProfileImage",
-        "Some Error Occur" + resp.data.data)
-        
         setloading_img(false);
         ifFail(activeIndx, tmp_a);
       }
@@ -523,8 +464,6 @@ const EditProfile = ({ navigation }) => {
       setloading_img(false);
       dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
-      console.log("updateProfileImage went wrong error", error);
-
     }
   };
 
@@ -532,11 +471,7 @@ const EditProfile = ({ navigation }) => {
     setloading(true);
 
     let image_id = pic_list[indx][4];
-
-    console.log("image_id", image_id);
-
     const url = apiUrl + `userimage/${image_id}`;
-
     const headers = {
       Authorization: `Bearer ${access_token}`,
       "Content-Type": "multipart/form-data",
@@ -557,13 +492,10 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-        console.log("Error", "While Deleting Image" + data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("went  while del img", error);
-     
     }
   };
 
@@ -575,23 +507,10 @@ const EditProfile = ({ navigation }) => {
     return compr_img;
   };
 
-  const getSize = async (img) => {
-    const statResult = await stat(img);
-    return statResult.size / 1024 / 1024;
-  };
-
   const finalLoad = async (img, crp_img) => {
-    
-    // let bf_nsize = await getSize(img)
-    // let bf_csize = await getSize(crp_img)
 
     let n_img = await compressImg(img);
     let comp_crp_img = await compressImg(crp_img);
-
-    // let af_nsize = await getSize(n_img)
-    // let af_csize = await getSize(comp_crp_img)
-
-    console.log("activeIndx", activeIndx);
 
     let tmp_list = [...pic_list];
 
@@ -644,12 +563,9 @@ const EditProfile = ({ navigation }) => {
   // To Open Gallery
   const imageGalleryLaunch = () => {
     ImageCropPicker.openPicker({
-      // cropping: true,
       width: 300,
       height: 400,
       avoidEmptySpaceAroundImage: false,
-      // cropperCircleOverlay: true,
-      // freeStyleCropEnabled: true,
       mediaType: "photo",
     })
       .then((image) => {
@@ -706,14 +622,11 @@ const EditProfile = ({ navigation }) => {
           setcity_list(f_list);
         } else {
           setcity_refresh(false);
-
-          console.warn("Error occur while getting Location");
         }
       })
       .catch((err) => {
         setcity_refresh(false);
         dispatch(setSessionExpired(true));
-        console.log("getLocation err", err);
       });
   };
 
@@ -784,18 +697,12 @@ const EditProfile = ({ navigation }) => {
           });
 
           let tmp_lis = sorted_tmp.map((v) => [v.id, v.gender]);
-
           setgender_list(tmp_lis);
-
           setpreference_list(tmp_lis);
-        } else {
-          console.warn("Error occur while getting Genders");
         }
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-
-        console.log("getGenders err", err);
       });
   };
 
@@ -813,14 +720,10 @@ const EditProfile = ({ navigation }) => {
           let tmp_lis = sorted_tmp.map((v) => [v.id, v.education]);
 
           seteducation_list(tmp_lis);
-        } else {
-          console.warn("Error occur while getting Education");
         }
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-
-        console.log("getEducations err", err);
       });
   };
 
@@ -849,8 +752,6 @@ const EditProfile = ({ navigation }) => {
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-
-        console.log("getInterests err", err);
       });
   };
 
@@ -874,8 +775,6 @@ const EditProfile = ({ navigation }) => {
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-
-        console.log("getLanguages err", err);
       });
   };
 
@@ -904,8 +803,6 @@ const EditProfile = ({ navigation }) => {
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-
-        console.log("getPets err", err);
       });
   };
 
@@ -929,8 +826,6 @@ const EditProfile = ({ navigation }) => {
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-
-        console.log("getPoliticalInclination err", err);
       });
   };
 
@@ -1012,12 +907,10 @@ const EditProfile = ({ navigation }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-        console.log("Error", "Some Error Occur saveProfileData" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("saveProfileData error", error);
     }
   };
 
@@ -1079,14 +972,10 @@ const EditProfile = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
         setloading(false);
-      } else {
-        console.log("updatePrompts Error", "Some Error Occur" + resp.data.data)
       }
     } catch (error) {
-      // setchanges_made(false)
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("updatePrompts error", error);
     }
   };
 
@@ -1103,7 +992,6 @@ const EditProfile = ({ navigation }) => {
   }, [pos_change]);
 
   const loadData = async () =>{
-    // setloading(false)
     let usr_profile = profile_data.userprofile;
     setheight_cm(usr_profile.height.toString());
     setoccupation(usr_profile.occupation);
@@ -1123,15 +1011,11 @@ const EditProfile = ({ navigation }) => {
   }
 
   useLayoutEffect(() => {
-
-    // getLocation(city_page);
-
     loadData()
   }, []);
 
   let usr_profile = profile_data.userprofile;
   let usr_preference = profile_data.userpreferances;
-
   let usr_interest = profile_data.userinterest.map((v) => v.interestmaster.id);
   let usr_languages = profile_data.userlanguages.map(
     (v) => v.languagemaster.id
@@ -1265,16 +1149,24 @@ const EditProfile = ({ navigation }) => {
 
                 setcurrent_pos(y);
               }}
+              
               enableOnAndroid={true}
               extraScrollHeight={Platform.OS == "ios" ? 0 : scrn_height / 6}
               extraHeight={Platform.OS == "ios" ? scrn_height / 6 : 0}
-              style={{ flex: 1, backgroundColor: "#fff" }}
+              style={{ flex: 1,
+                 backgroundColor: "#fff",
+                //  backgroundColor: "red",
+                  width: scrn_width,
+                }}
               bounces={false}
               showsVerticalScrollIndicator={false}
+              horizontal={false}
             >
               <View
                 style={{
                   paddingHorizontal: rspW(10),
+                  // width: '100%',
+                  // backgroundColor:'green'
                 }}
               >
                 {/* Inputs Container*/}
@@ -1310,11 +1202,7 @@ const EditProfile = ({ navigation }) => {
 
                 <View
                   style={{
-                    // width: scrn_width,
-                    // paddingHorizontal: rspW(10),
-
                     marginTop: rspH(1.2),
-                    //  backgroundColor:'red'
                   }}
                 >
                   <FormInputContainer label="City">
@@ -1362,7 +1250,6 @@ const EditProfile = ({ navigation }) => {
                         width={scrn_width / 2.65}
                         height={rspH(5.9)}
                         placeholder={"cms"}
-                        // error_cond={height_cm > }
                         error_cond={height_cm < 60 || height_cm > 270}
                         keyboardType="number-pad"
                         value_blr={height_blr}
@@ -1483,7 +1370,6 @@ const EditProfile = ({ navigation }) => {
                               <TouchableOpacity
                                 onPress={() => {
                                   setchanges_made(true);
-                                  sethabits_blr(true);
                                   habits_list[idx][1] =
                                     habits_list[idx][1] != null
                                       ? habits_list[idx][1]
@@ -1510,7 +1396,6 @@ const EditProfile = ({ navigation }) => {
 
                               <TouchableOpacity
                                 onPress={() => {
-                                  sethabits_blr(true);
                                   setchanges_made(true);
 
                                   habits_list[idx][2] =
@@ -1934,7 +1819,6 @@ const EditProfile = ({ navigation }) => {
 
                   marginBottom: rspH(-2.32),
 
-                  // backgroundColor:'red',
                 }}
               >
                 <ErrorContainer error_msg="" />
@@ -1949,7 +1833,6 @@ const EditProfile = ({ navigation }) => {
                     (!habits_list[0][1] && !habits_list[0][2]) ||
                     (!habits_list[1][1] && !habits_list[1][2]) ||
                     (!habits_list[2][1] && !habits_list[2][2]) ||
-                    // pic_list.filter(v => v[0] != '').length < 3 ||
                     (profile_data?.userprivateprompts.length > 0 &&
                       (public_prompt1_q_id == 0 ||
                         public_prompt1_a == "" ||
@@ -1979,7 +1862,6 @@ const EditProfile = ({ navigation }) => {
 
                     if (
                       changes_made &&
-                      // pic_list.filter(v => v[0] != '').length >= 3 &&
                       height_cm >= 60 &&
                       height_cm <= 270 &&
                       occupation != "" &&
@@ -1993,7 +1875,6 @@ const EditProfile = ({ navigation }) => {
                       if (
                         profile_data?.userprivateprompts.length > 0 &&
                         changes_made &&
-                        // pic_list.filter(v => v[0] != '').length >= 3 &&
                         height_cm >= 50 &&
                         height_cm <= 270 &&
                         occupation != "" &&
@@ -2146,12 +2027,6 @@ const EditProfile = ({ navigation }) => {
         <BottomModal
           bottom={Platform.OS == "android" ? 0 : 3}
           padding={0}
-          extContainerStyle={
-            {
-              // borderBottomWidth:1,
-              // borderBottomColor: colors.blue,
-            }
-          }
           height={rspH(16)}
           modalVisible={modalVisible}
           setModalVisible={setmodalVisible}
@@ -2167,13 +2042,10 @@ const EditProfile = ({ navigation }) => {
               style={{
                 justifyContent: "center",
                 alignItems: "center",
-                // backgroundColor:'#fff',
                 height: rspH(8),
                 width: scrn_width,
                 borderBottomWidth: 1,
                 borderBottomColor: colors.blue,
-                // borderTopLeftRadius: rspW(5),
-                // borderTopRightRadius: rspW(5),
               }}
               onPress={() => {
                 imageGalleryLaunch();
@@ -2216,13 +2088,11 @@ const EditProfile = ({ navigation }) => {
             <TouchableOpacity
               style={styles.loadingBtn}
               onPress={() => {
-                // setredirect_to_settings(true)
                 if (Platform.OS == "ios") {
                   Linking.openURL("app-settings:");
                 } else {
                   Linking.openSettings();
                 }
-                // setper_modal(false)
               }}
             >
               <Text style={styles.loadingBtnTxt}>Got to Settings</Text>
@@ -2262,9 +2132,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.bold,
     fontSize: rspF(2.62),
     color: colors.black,
-    // lineHeight: rspF(2.65),
     lineHeight: rspF(2.65),
-    // backgroundColor:'red',
     marginBottom: rspH(2.35),
     letterSpacing: 1,
   },
@@ -2273,13 +2141,9 @@ const styles = StyleSheet.create({
     marginHorizontal: rspW(-2),
     width: rspW(85),
     height: rspW(85),
-    // padding: 16,
     marginTop: rspH(1),
-    // marginBottom: rspH(4),
     flexDirection: "row",
-    // justifyContent: "center",
     flexWrap: "wrap",
-    // backgroundColor:'red',
   },
   imageUpCont: {
     alignItems: "center",
@@ -2287,9 +2151,7 @@ const styles = StyleSheet.create({
 
   imageUpTxt: {
     fontFamily: fontFamily.regular,
-    // fontSize: rspF(2.02),
     fontSize: rspF(2.02),
-
     lineHeight: rspF(2.1),
     color: colors.blue,
   },
@@ -2314,18 +2176,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // paddingHorizontal: rspW(5.1),
     paddingHorizontal: rspW(3.2),
-    // backgroundColor:'green',
     marginBottom: rspH(0.6),
   },
   radioTxt: {
     lineHeight: rspF(2.05),
-
     fontFamily: fontFamily.medium,
     color: colors.black,
     fontSize: rspF(2.02),
-    // letterSpacing:1,
   },
   radioBtnCont: {
     flexDirection: "row",
@@ -2335,10 +2193,7 @@ const styles = StyleSheet.create({
   },
   radioBtn: {
     width: rspW(6.34),
-    // width: rspW(6.34),
-
     height: rspW(6.34),
-    // borderRadius: rspW(1.3),
     borderRadius: rspW(1.3),
   },
   radioBtnLabel: {
@@ -2369,7 +2224,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: rspW(1),
     top: rspH(8),
-    // backgroundColor: 'red',
     backgroundColor: "#00000089",
     paddingTop: rspH(0.5),
     borderRadius: rspW(6),

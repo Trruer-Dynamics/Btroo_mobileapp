@@ -115,13 +115,17 @@ const SettingsScreen = ({ navigation }) => {
   const [cmodal, setcmodal] = useState(false);
 
   const [confirmDelete, setconfirmDelete] = useState(false);
+  const [lgModal, setlgModal] = useState(false);
+
+
+
 
   const [contact, setcontact] = useState("");
 
   const { DeviceToken } = useContext(UserContext);
 
   const updateShowProfile = async () => {
-    setloading(true);
+    // setloading(true);
     const url =
       apiUrl + `show_profile_notification_update/${profile_data.user.id}`;
 
@@ -141,7 +145,7 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let status = resp.data.status;
-      setloading(false);
+      // setloading(false);
 
       if (resp.data.code == 200) {
         setshow_my_profile(!show_my_profile);
@@ -157,20 +161,15 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log( "Error",
-        "updateShowProfile Some Error Occur" + resp.data.data)
-      }
+      } 
     } catch (error) {
-      setloading(false);
-      dispatch(setSessionExpired(true));
-      console.log("went wrong error", error);
-      
+      // setloading(false);
+      dispatch(setSessionExpired(true));      
     }
   };
 
   const updateKeepMatching = async () => {
-    setloading(true);
+    // setloading(true);
 
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
@@ -191,7 +190,7 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      setloading(false);
+      // setloading(false);
 
       if (code == 200) {
         setkeep_matching(!keep_matching);
@@ -207,19 +206,15 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur Keep Matching" + resp.data.data)
       }
     } catch (error) {
-      setloading(false);
+      // setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("went wrong error", error);
-
     }
   };
 
   const updateNewMessage = async () => {
-    setloading(true);
+    // setloading(true);
 
     const url =
       apiUrl + `new_message_notification_update/${profile_data.user.id}`;
@@ -238,7 +233,7 @@ const SettingsScreen = ({ navigation }) => {
           headers,
         }
       );
-      setloading(false);
+      // setloading(false);
 
       let code = resp.data.code;
 
@@ -256,20 +251,16 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur updateNewMessage" + resp.data.data)
-        
       }
     } catch (error) {
-      setloading(false);
-      console.log("went wrong error", error);
+      // setloading(false);
       dispatch(setSessionExpired(true));
     
     }
   };
 
   const updateNewMatch = async () => {
-    setloading(true);
+    // setloading(true);
 
     const url =
       apiUrl + `new_match_notification_update/${profile_data.user.id}`;
@@ -290,7 +281,7 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      setloading(false);
+      // setloading(false);
 
       if (code == 200) {
         setnew_match(!new_match);
@@ -306,21 +297,16 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur update New Match" + resp.data.data)
-     
       }
     } catch (error) {
-      setloading(false);
-
-      console.log("went wrong error", error);
+      // setloading(false);
       dispatch(setSessionExpired(true));
      
     }
   };
 
   const updateProfileReveal = async () => {
-    setloading(true);
+    // setloading(true);
 
     const url =
       apiUrl + `profile_reveal_notification_update/${profile_data.user.id}`;
@@ -341,7 +327,7 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      setloading(false);
+      // setloading(false);
 
       if (code == 200) {
         setprofile_reveal(!profile_reveal);
@@ -356,19 +342,16 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur" + resp.data.data)
-      }
+      } 
     } catch (error) {
-      setloading(false);
-      console.log("went wrong error", error);
+      // setloading(false);
       dispatch(setSessionExpired(true));
 
     }
   };
 
   const updateOthers = async () => {
-    setloading(true);
+    // setloading(true);
 
     const url = apiUrl + `other_notification_update/${profile_data.user.id}`;
 
@@ -388,7 +371,7 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      setloading(false);
+      // setloading(false);
 
       if (code == 200) {
         setothers(!others);
@@ -404,78 +387,36 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur" + resp.data.data)
-      }
+      } 
     } catch (error) {
-      setloading(false);
-      console.log("went wrong error", error);
+      // setloading(false);
       dispatch(setSessionExpired(true));
 
     }
   };
 
   const getContact = async () => {
-    setloading(true);
+    // setloading(true);
     await axios
       .get(apiUrl + `get_user_contact/`)
       .then((resp) => {
         let contact_data = resp.data.data;
-        setloading(false);
+        // setloading(false);
         if (resp.data.code == 200) {
           setcontact(contact_data.usercontact);
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
-        } else {
-          // setloading(false)
-          console.log("getContact Something went wrong")
         }
       })
       .catch((err) => {
-        setloading(false);
+        // setloading(false);
         dispatch(setSessionExpired(true));
-        console.log("getContact err", err);
       });
   };
 
-  const removeToken = async (action = "") => {
-    // Set the API endpoint URL
-    setloading(true);
-
-    const url = apiUrl + "token_remove/";
-    // Set the headers and token
-
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      profile_id: profile_data.userprofile.id,
-      token: DeviceToken,
-    };
-
-    try {
-      const resp = await axios.post(url, data, { headers });
-      setloading(false);
-
-      let code = resp.data.code;
-      let user_data = resp.data.data;
-
-      if (code == 200) {
-        if (action == "delete") {
-          deleteAccount();
-        }
-      }
-    } catch (error) {
-      setloading(false);
-      console.log("removeToken error", error);
-
-    }
-  };
+  
 
   const deleteAccount = async () => {
-    // setloading(true)
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -486,25 +427,13 @@ const SettingsScreen = ({ navigation }) => {
         headers,
       })
       .then((resp) => {
-        // setloading(false)
+
         if (resp.data.code == 200) {
-          dispatch(setUserLoggined(false));
-
-          navigation.navigate("Intro");
-
-          const resetAction = CommonActions.reset({
-            index: 1,
-            routes: [{ name: "Intro" }],
-          });
-          navigation.dispatch(resetAction);
-        } else {
-          // setloading(false)
-          console.log("deleteAccount Something went wrong")
+          dispatch(setSessionExpired(true))
         }
       })
       .catch((err) => {
-        // setloading(false)
-        console.log("deleteAccount err", err);
+
       });
   };
 
@@ -531,8 +460,7 @@ const SettingsScreen = ({ navigation }) => {
       <SafeAreaView
         style={{
           height: scrn_height,
-          backgroundColor: "#fff",
-
+          backgroundColor: colors.white,
           zIndex: 5,
         }}
       >
@@ -547,7 +475,8 @@ const SettingsScreen = ({ navigation }) => {
 
           <View
             style={{
-              height: rspH(Platform.OS == "ios" ? 71 : 75) + insets.top,
+              height: rspH(Platform.OS == "ios" ? 72 : 76) + insets.top,
+              // height: scrn_height,
               paddingHorizontal: rspW(10),
               alignItems: "center",
               backgroundColor: colors.white,
@@ -558,6 +487,9 @@ const SettingsScreen = ({ navigation }) => {
               showsVerticalScrollIndicator={false}
               style={{
                 width: "100%",
+                // height: '100%',
+                paddingBottom: rspH(Platform.OS == 'ios' ? 10 : 15),
+               
               }}
               bounces={false}
             >
@@ -670,6 +602,7 @@ const SettingsScreen = ({ navigation }) => {
                       style={{
                         flexDirection: "row",
                         justifyContent: "space-between",
+                        alignItems:'center',
                       }}
                     >
                       <Text style={styles.titleS}>Show My Profile</Text>
@@ -713,6 +646,7 @@ const SettingsScreen = ({ navigation }) => {
                       style={{
                         flexDirection: "row",
                         justifyContent: "space-between",
+                        alignItems:'center',
                       }}
                     >
                       <Text style={styles.titleS}>Keep Matching</Text>
@@ -784,7 +718,8 @@ const SettingsScreen = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      marginBottom: rspH(1.4),
+                      alignItems:'center',
+                      marginBottom: rspH(1.8),
                     }}
                   >
                     <Text style={styles.titleS}>New Messages</Text>
@@ -821,7 +756,9 @@ const SettingsScreen = ({ navigation }) => {
                       flexDirection: "row",
                       justifyContent: "space-between",
                       // marginBottom: rspH(2.05),
-                      marginBottom: rspH(1.4),
+                      marginBottom: rspH(1.8),
+                      alignItems:'center',
+
                     }}
                   >
                     <Text style={styles.titleS}>New Match</Text>
@@ -857,8 +794,9 @@ const SettingsScreen = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
+                      alignItems:'center',
                       // marginBottom: rspH(2.05),
-                      marginBottom: rspH(1.4),
+                      marginBottom: rspH(1.8),
                     }}
                   >
                     <Text style={styles.titleS}>Profile Reveal</Text>
@@ -895,7 +833,9 @@ const SettingsScreen = ({ navigation }) => {
                       flexDirection: "row",
                       justifyContent: "space-between",
                       // marginBottom: rspH(2.05),
-                      marginBottom: rspH(1.4),
+                      marginBottom: rspH(1.8),
+                      alignItems:'center',
+
                     }}
                   >
                     <Text style={styles.titleS}>Others</Text>
@@ -1120,15 +1060,7 @@ const SettingsScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  dispatch(setUserLoggined(false));
-                  dispatch(setSessionExpired(true));
-                  navigation.navigate("Intro");
-
-                  const resetAction = CommonActions.reset({
-                    index: 1,
-                    routes: [{ name: "Intro" }],
-                  });
-                  navigation.dispatch(resetAction);
+                  setlgModal(true)
                 }}
                 style={{
                   flexDirection: "row",
@@ -1254,12 +1186,84 @@ const SettingsScreen = ({ navigation }) => {
                         onPress={() => {
                           setcmodal(false);
                           setconfirmDelete(false);
-                          removeToken("delete");
+                          deleteAccount()
                         }}
                       />
                     </View>
                   </>
                 )}
+              </View>
+            </CentralModal>
+
+            <CentralModal modalVisible={lgModal} setModalVisible={setlgModal}>
+              <View
+                style={{
+                  paddingHorizontal: rspW(4),
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#fff",
+                  height: rspH(Platform.OS == "ios" ? 37 : 38),
+                  // height: rspH(54.38),
+                  borderRadius: rspW(5.1),
+                  // width: rspW(76.5), 76.5
+                  width: rspW(80),
+                }}
+              >
+                
+               
+                    <View
+                      style={{
+                        marginBottom: rspH(4.1),
+                      }}
+                    >
+                      <Text style={styles.title}>Are you sure?</Text>
+                    </View>
+                    <View
+                      style={{
+                        marginBottom: rspH(5.9),
+                      }}
+                    >
+                      <Text style={styles.modalPara}>
+                        You want to Log Out.
+                      </Text>
+                    </View>
+
+                    <FooterBtn
+                      title="Take me back!"
+                      onPress={() => {
+                        setlgModal(false);
+                      }}
+                    />
+
+                    <TouchableOpacity
+                      style={{ marginTop: rspH(3.7) }}
+                      onPress={() => {
+                        dispatch(setUserLoggined(false));
+                        dispatch(setSessionExpired(true));
+                        
+      
+                        const resetAction = CommonActions.reset({
+                          index: 1,
+                          routes: [{ name: "Intro" }],
+                        });
+                        navigation.dispatch(resetAction);
+                        setlgModal(false)
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: colors.blue,
+
+                          fontSize: rspF(1.5),
+                          fontFamily: fontFamily.bold,
+                          lineHeight: rspF(1.51),
+                        }}
+                      >
+                        Yes Log Out 
+                      </Text>
+                    </TouchableOpacity>
+                  
+                
               </View>
             </CentralModal>
 
@@ -1330,9 +1334,9 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   para: {
-    fontSize: rspF(1.302),
+    fontSize: rspF(Platform.OS == 'android'? 1.302 : 1.32),
     // fontSize: rspF(1.302),
-    lineHeight: rspF(1.31),
+    lineHeight: rspF(1.322),
     // lineHeight: rspF(1.31),
     fontFamily: fontFamily.light,
     color: colors.black,

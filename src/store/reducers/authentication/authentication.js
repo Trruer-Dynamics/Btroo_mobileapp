@@ -13,6 +13,7 @@ const initialState = {
   is_session_expired: false,
   is_profile_revealed: false,
   is_socket_closed: true,
+  is_network_connected : false,
   active_user_location_details: {
     mobile: "",
 
@@ -101,6 +102,10 @@ export const authenticationSlice = createSlice({
     setSessionExpired: (state, action) => {
       state.is_session_expired = action.payload;
     },
+
+    setNetworkConnect: (state, action) => {
+      state.is_network_connected = action.payload;
+    },
   },
 });
 
@@ -119,6 +124,7 @@ export const {
   setUserLoggined,
   setPromptFillingStart,
   setPromptFillingComplete,
+  setNetworkConnect,
 } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

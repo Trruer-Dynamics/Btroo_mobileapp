@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect, memo } from "react";
+import React, {  useState, useEffect, memo } from "react";
 import {
   FlatList,
   SafeAreaView,
@@ -16,12 +16,9 @@ import {
   rspH,
   rspW,
   rspF,
-  scrn_height,
-  scrn_width,
 } from "../../styles/responsiveSize";
 import FormComponentsWrapper from "../wrappers/formComponentsWrappers/FormComponentsWrapper";
 import FormComponentsWrapperHeader from "../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
-import FormInput from "./FormInput";
 import SearchInput from "./SearchInput";
 import SearchInputBackend from "./SearchInputBackend";
 
@@ -30,9 +27,7 @@ const Item = ({ item, onPress, selectedValue, multiline }) => (
     onPress={onPress}
     style={[
       styles.item,
-
       {
-        // height: rspH(5.6),
         paddingVertical: rspH(2),
         backgroundColor:
           item[1] == selectedValue
@@ -103,9 +98,7 @@ const FormSelector = ({
             if (setchanges_made != null) {
               setchanges_made(true);
             }
-
             setSelectedId(item[0]);
-
             setcode_press(!code_press);
           }}
         />
@@ -125,11 +118,7 @@ const FormSelector = ({
                 rmv_list.splice(rmv_list.indexOf(selectedId), 1);
               }
               setSelectedId(item[0]);
-
-              // else{
               setrmv_list([...rmv_list, item[0]]);
-
-              // }
               setcode_press(!code_press);
             }}
           />
@@ -144,7 +133,6 @@ const FormSelector = ({
         onBackendSearch(backend_search_txt);
       }
     }, 500);
-
     return () => clearTimeout(delay);
   }, [backend_search_txt]);
 
@@ -154,9 +142,7 @@ const FormSelector = ({
         style={[
           styles.searchContainer,
           {
-            // height: rspH(5.6),
             height: rspH(5.8),
-
             width: width,
             borderColor:
               blr_value && selectedValue == undefined
@@ -210,7 +196,6 @@ const FormSelector = ({
               )}
               <View
                 style={{
-                  // height: rspH(58.7),
                   height: rspH(Platform.OS == "ios" ? 59.6 : 64),
                 }}
               >
@@ -226,16 +211,11 @@ const FormSelector = ({
                         setend_reach(true);
                         setpage(page + 1);
                       }
-                      // setbackend_search_txt(backend_search_txt)
-
-                      // onRefresh(page + 1)
-                      // onBackendSearch()
+                      
                     }
                   }}
                   onMomentumScrollBegin={() => setend_reach(false)}
-                  // Call handleLoadMore when reaching the end of the list
-                  // onEndReachedThreshold={0.5}
-                  // Adjust the threshold as needed
+                  
                   ListFooterComponent={
                     pull_refresh &&
                     refreshing && (

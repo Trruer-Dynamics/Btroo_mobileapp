@@ -41,7 +41,6 @@ const Draggable = ({
   );
 
   const setDraggable = () => {
-    console.log("activeIndx", item[1] != "");
 
     if (item[1] != "") {
       isDraggable.value = true;
@@ -82,17 +81,14 @@ const Draggable = ({
           const idToSwap = Object.keys(positions.value).find(
             (key) => positions.value[key] === newOrder
           );
-          console.log("idToSwap", idToSwap);
 
           if (idToSwap) {
             let actV = pic_list[idToSwap][1] != "";
             if (actV) {
-              console.log("oldOrder", oldOrder);
-              console.log("newOrder", newOrder);
+         
               const newPostions = JSON.parse(JSON.stringify(positions.value));
 
               let exact_pos = newPostions[id];
-              console.log("exact ", exact_pos);
 
               let new_pos_list = Object.entries(newPostions);
               let sort_lis0 = new_pos_list.sort((a, b) => a[1] - b[1]);
@@ -100,8 +96,7 @@ const Draggable = ({
               let swipe_pos = sort_lis.find((v) => v[0] == exact_pos);
 
               if (newOrder > oldOrder) {
-                console.log("ascending order");
-
+                
                 let rem_poses = sort_lis.slice(swipe_pos[0] + 1, newOrder + 1);
 
                 let lst = [];
@@ -135,8 +130,6 @@ const Draggable = ({
                 let rem_poses = sort_lis.slice(newOrder, exact_pos);
 
                 let lst = [];
-
-                console.log("descending order");
 
                 for (let j = 0; j < rem_poses.length; j++) {
                   let ele = rem_poses[j];

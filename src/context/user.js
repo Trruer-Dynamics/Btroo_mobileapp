@@ -1,8 +1,7 @@
-import { Alert, AppState, StyleSheet, Text, View } from "react-native";
+import {  AppState, StyleSheet } from "react-native";
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
-import { apiUrl, webSocketUrl } from "../constants";
+import { apiUrl } from "../constants";
 import messaging from "@react-native-firebase/messaging";
-import { Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { CommonActions, useNavigation } from "@react-navigation/native";
@@ -45,31 +44,11 @@ const UserProvider = ({ children, navigationRef }) => {
     (state) => state.authentication.user_loggined
   );
 
-  const getDeviceToken = async () => {
-   
-    const registered = await messaging().registerDeviceForRemoteMessages();
+  
 
-    if (Platform.OS == "ios") {
-      const apn_tok = await messaging().getAPNSToken();
-      console.log("apn_tok", apn_tok);
-      Alert.alert("apn_tok",apn_tok)
-    }
-
-    const token = await messaging().getToken();
-    setDeviceToken(token);
-    console.log(Platform.OS, "token", token);
-    Alert.alert("token",token)
-
-  };
-
+  
   const notificationListener = () => {
-    console.log("notificationListener", Platform.OS);
-
     messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
     });
 
     // Check whether an initial notification is available
@@ -77,13 +56,10 @@ const UserProvider = ({ children, navigationRef }) => {
       .getInitialNotification()
       .then((remoteMessage) => {
         if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
+          
           // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
         }
-        //   setLoading(false);
+     
       });
   };
 
@@ -102,16 +78,9 @@ const UserProvider = ({ children, navigationRef }) => {
 
     try {
       const resp = await axios.post(url, data, { headers });
-      // setloading(false);
-
-      let code = resp.data.code;
       let user_data = resp.data.data;
 
-      console.log("removeToken resp.data", user_data);
     } catch (error) {
-      // setloading(false);
-
-      console.log("removeToken error", error);
 
     }
   };
@@ -123,17 +92,8 @@ const UserProvider = ({ children, navigationRef }) => {
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
-      if (
-        appState.current.match(/inactive|background/) &&
-        nextAppState === "active"
-      ) {
-        console.log("App has come to the foreground!");
-      }
-
       appState.current = nextAppState;
-
       setAppStateVisible(appState.current);
-      console.log("/nAppState", appState.current);
     });
 
     return () => {
@@ -144,7 +104,8 @@ const UserProvider = ({ children, navigationRef }) => {
 
   useEffect(() => {
     
-    console.log("is_session_expired", is_session_expired);
+    console.log("is_session_expired",is_session_expired)
+    console.log("DeviceToken",DeviceToken)
 
     if (is_session_expired == true && DeviceToken != "") {
 
@@ -154,7 +115,6 @@ const UserProvider = ({ children, navigationRef }) => {
       dispatch(setProfiledata({}));
       dispatch(setProfileImgs([]));
       dispatch(setSessionExpired(false));
-      // navigation.navigate("Intro");
 
       const resetAction = CommonActions.reset({
         index: 1,
@@ -167,7 +127,6 @@ const UserProvider = ({ children, navigationRef }) => {
   }, [is_session_expired]);
 
   useLayoutEffect(() => {
-    // getDeviceToken();
     notificationListener();
   }, [user_loggined]);
 

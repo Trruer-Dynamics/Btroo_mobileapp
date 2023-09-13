@@ -3,17 +3,12 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
   Image,
   SafeAreaView,
-  Alert,
   Platform,
 } from "react-native";
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState } from "react";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
-import { initialWindowMetrics } from "react-native-safe-area-context";
-const insets = initialWindowMetrics.insets;
-
 import colors from "../../styles/colors";
 import {
   rspF,
@@ -25,9 +20,6 @@ import {
 } from "../../styles/responsiveSize";
 import FooterBtn from "../../components/Buttons/FooterBtn";
 import fontFamily from "../../styles/fontFamily";
-import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
-import ErrorContainer from "../../components/formComponents/ErrorContainer";
-
 import FullModal from "../../components/modals/FullModal";
 import PhotoVerifyCamera from "../../components/screenComponents/signUp/PhotoVerifyCamera";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,6 +32,9 @@ import {
   setSessionExpired,
   setUserLoggined,
 } from "../../store/reducers/authentication/authentication";
+import { initialWindowMetrics } from "react-native-safe-area-context";
+const insets = initialWindowMetrics.insets;
+
 
 const PhotoVerificationFinal = ({ navigation, route }) => {
   const access_token = useSelector(
@@ -84,8 +79,6 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
 
     prof_data.append("image", {
       uri: "file://" + imgUri,
-      // uri: imgUri,
-
       name: `${profile_data.user.id}_verification_image.jpg`,
       type: `image/jpg`,
     });
@@ -109,14 +102,10 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
         }
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("verifyPhoto Error", "Some Error Occur" + resp.data.data)
-        
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("verifyPhoto went wrong error", error);
     }
   };
 
@@ -126,7 +115,6 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
       {loading && <Loader />}
       <FormWrapper
         containerStyle={{
-          // paddingTop: rspH(3.7),
           paddingTop: rspH(3.7),
         }}
       >
@@ -144,7 +132,6 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
               }}
             >
               <Image
-                // source={require('../../assets/images/FormImages/PhotoPoseBL.png')}
                 source={require("../../assets/images/PicVerifyBL.png")}
                 style={styles.poseImage}
                 resizeMode="stretch"
@@ -154,23 +141,18 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
             <View
               style={{
                 ...styles.poseImageCont,
-                // backgroundColor: colors.lightBlue,
               }}
             >
               <Image
-                // source={require('../../assets/images/FormImages/PhotoPoseBL.png')}
-                // source={{uri: 'file://' + imgUri}}
                 source={{ uri: imgUri }}
                 style={{ ...styles.poseImageCont }}
                 resizeMode="cover"
-                // resizeMode='contain'
               />
             </View>
           </View>
 
           <View style={styles.middleTitle}>
             <View
-            // style={{marginBottom: rspH(1)}}
             >
               <Text style={styles.headerTitle}>Satisfied with your photo?</Text>
             </View>
@@ -183,7 +165,6 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
           <View
             style={{
               height: rspH(13.5),
-              // backgroundColor:'yellow',
               justifyContent: "space-between",
               marginTop: rspH(7),
             }}
@@ -225,7 +206,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    // backgroundColor:'red',
     alignSelf: "center",
   },
   multiInputContainer: {
@@ -236,8 +216,6 @@ const styles = StyleSheet.create({
 
   poseImageCont: {
     width: rspW(38),
-    // height: rspH(20),
-    // height: rspH(Platform.OS == 'ios' ? 21.5 : 22.5),
     height:
       Platform.OS == "ios" ? srn_height / 4.6 : scrn_height / 5.2 + insets.top,
 
@@ -248,12 +226,8 @@ const styles = StyleSheet.create({
   },
   poseImage: {
     width: rspW(40),
-    // height: rspH(Platform.OS == 'ios' ? 21.5 : 22.5),
     height:
       Platform.OS == "ios" ? srn_height / 4.6 : scrn_height / 5.2 + insets.top,
-
-    // justifyContent:'flex-end',
-    // alignSelf:'flex-end',
   },
   middleTitle: {
     marginTop: rspH(9.9),
@@ -262,14 +236,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: fontFamily.bold,
     fontSize: rspF(2.6),
-
     color: colors.black,
     lineHeight: rspF(2.65),
     marginBottom: rspH(4.8),
     letterSpacing: 1,
   },
   infoPara: {
-    // backgroundColor:'red',
     fontFamily: fontFamily.regular,
     fontSize: rspF(2.02),
     color: colors.blue,
@@ -281,11 +253,9 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     width: scrn_width / 1.4,
     height: rspH(5.8),
-    // height: rspH(5.6),
     alignItems: "center",
     justifyContent: "center",
     borderRadius: rspW(8),
-    // borderRadius: rspW(10),
     borderWidth: 1,
     borderColor: colors.blue,
   },

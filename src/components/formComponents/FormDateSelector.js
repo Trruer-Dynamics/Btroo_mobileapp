@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import { rspF, rspH, rspW } from "../../styles/responsiveSize";
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     backgroundColor: "#DCDCDC33", // 0.2 opacity added,
-
     borderColor: "#DCDCDC",
     borderRadius: rspW(1.3),
   },
@@ -58,8 +57,6 @@ const styles = StyleSheet.create({
     fontSize: rspF(2.02),
     lineHeight: rspF(2.1),
     textAlign: "left",
-    // paddingHorizontal:0,
-    // backgroundColor:'green',
     fontFamily: fontFamily.regular,
   },
 

@@ -69,12 +69,10 @@ const FormCountrySelector = ({
         style={[
           styles.searchContainer,
           {
-            // justifyContent: 'center',
             justifyContent: selectedValue ? "space-between" : "center",
             height: rspH(5.8),
             width: width,
             backgroundColor: selectedId != "" ? "#fff" : "#DCDCDC33",
-            // backgroundColor: colors.error,
             position: "relative",
             borderColor: selectedId == "" ? colors.grey : colors.blue,
           },
@@ -93,7 +91,6 @@ const FormCountrySelector = ({
             zIndex: 1,
             height: "100%",
             paddingTop: rspH(selectedValue ? 1.4 : 0),
-            // backgroundColor:'red',
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -116,7 +113,6 @@ const FormCountrySelector = ({
             barStyle="light-content"
             containerStyle={{
               paddingTop: rspH(3.7),
-              // paddingBottom: rspH(7.04),
             }}
           >
             <FormComponentsWrapperHeader
@@ -137,7 +133,6 @@ const FormCountrySelector = ({
               />
               <View
                 style={{
-                  // height: rspH(58.7),
                   height: rspH(Platform.OS == "ios" ? 59.6 : 64),
                 }}
               >
@@ -172,7 +167,6 @@ const styles = StyleSheet.create({
   txt: {
     color: colors.black,
     fontSize: rspF(2.02),
-
     textAlign: "center",
     fontFamily: fontFamily.regular,
   },
@@ -192,7 +186,6 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.medium,
     lineHeight: rspF(1.93),
     color: colors.black,
-    // backgroundColor: colors.error,
   },
 
   inp_title: {

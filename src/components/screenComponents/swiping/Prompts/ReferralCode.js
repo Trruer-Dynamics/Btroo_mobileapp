@@ -1,20 +1,14 @@
 import {
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
-  ScrollView,
   SafeAreaView,
-  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import {
   scrn_height,
-  rspF,
   rspH,
   rspW,
 } from "../../../../styles/responsiveSize";
-import colors from "../../../../styles/colors";
 import FormWrapper from "../../../wrappers/formWrappers/FormWrapper";
 import FormWrapperFooter from "../../../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../../formComponents/ErrorContainer";
@@ -35,23 +29,14 @@ import axios from "axios";
 
 const ReferralCode = ({
   setModalVisible,
-
   public_prompt1_q,
-  setpublic_prompt1_q,
   public_prompt1_a,
-  setpublic_prompt1_a,
   public_prompt2_q,
-  setpublic_prompt2_q,
   public_prompt2_a,
-  setpublic_prompt2_a,
   private_prompt1_q,
-  setprivate_prompt1_q,
   private_prompt1_a,
-  setprivate_prompt1_a,
   private_prompt2_q,
-  setprivate_prompt2_q,
   private_prompt2_a,
-  setprivate_prompt2_a,
 }) => {
   const [referral_code, setreferral_code] = useState("");
   const [referral_code_blr, setreferral_code_blr] = useState(false);
@@ -129,28 +114,17 @@ const ReferralCode = ({
         dispatch(setProfiledata(user_prof_datap));
         dispatch(setProfileRefresh(!profile_refresh));
         setModalVisible(false);
-        // setpromptStep(1)
-        // navigation.navigate('ProfileMain');
       } else if (status == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur savePrompts" + resp.data.data)
-      }
+      } 
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-
-      console.log("savePrompts error", error);
-
     }
   };
 
   const onNextPress = () => {
     savePrompts();
-    // setshowPrompts(true);
-    // setModalVisible(false);
-    // setpromptStep(2)
-    // checkValidation()
   };
 
   return (
@@ -188,7 +162,6 @@ const ReferralCode = ({
                   keyboardType="default"
                   value_blr={referral_code_blr}
                   setvalue_blr={setreferral_code_blr}
-                  // multiline={true}
                 />
               </View>
             </View>
@@ -217,8 +190,6 @@ export default ReferralCode;
 const styles = StyleSheet.create({
   inputCont: {
     marginTop: rspH(20),
-
-    // backgroundColor:'red',
     height: scrn_height / 3,
     alignItems: "center",
     justifyContent: "center",

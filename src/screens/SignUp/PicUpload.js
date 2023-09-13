@@ -2,23 +2,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  Image,
   Text,
-  PermissionsAndroid,
   SafeAreaView,
   Platform,
-  Alert,
-  ActivityIndicator,
   Linking,
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect, useContext } from "react";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
-import Animated, {
-  runOnJS,
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
+import  {
   useSharedValue,
-  withTiming,
 } from "react-native-reanimated";
 import colors from "../../styles/colors";
 import {
@@ -32,8 +24,6 @@ import FooterBtn from "../../components/Buttons/FooterBtn";
 import BottomModal from "../../components/modals/BottomModal";
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
-import Ionicon from "react-native-vector-icons/Ionicons";
-import ADIcon from "react-native-vector-icons/AntDesign";
 import fontFamily from "../../styles/fontFamily";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -41,23 +31,13 @@ import Loader from "../../components/loader/Loader";
 import { apiUrl } from "../../constants";
 import {
   setProfileImgs,
-  setProfiledata,
   setSessionExpired,
 } from "../../store/reducers/authentication/authentication";
-import ImageCropPicker, {
-  openPicker,
-  openCamera,
-  openCropper,
-} from "react-native-image-crop-picker";
+import ImageCropPicker from "react-native-image-crop-picker";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
-import {
-  GestureHandlerRootView,
-  PanGestureHandler,
-} from "react-native-gesture-handler";
 import CentralModal from "../../components/modals/CentralModal";
 import { UserContext } from "../../context/user";
 import { Image as CompImage } from "react-native-compressor";
-import { stat } from "react-native-fs";
 import Draggable from "../../components/screenComponents/picUpload/draggable";
 import Box from "../../components/screenComponents/picUpload/box";
 import _ from "lodash";
@@ -102,15 +82,8 @@ const PicUpload = ({ navigation, route }) => {
     Object.assign({}, ...pic_list.map((item, indx) => ({ [indx]: indx })))
   );
 
-  const changePos = async (no1, no2) => {
-    let tmp_l = [...pic_list];
-    // changeImgPosition(img_id_1, pos_1, img_id_2, pos_2);
-  };
-
   const [modalVisible, setmodalVisible] = useState(false);
-  const [modalVisible2, setmodalVisible2] = useState(false);
   const [activeIndx, setactiveIndx] = useState(0);
-  const [cImage, setcImage] = useState("");
 
   const [loading, setloading] = useState(false);
   const [mainloading, setmainloading] = useState(false);
@@ -133,7 +106,6 @@ const PicUpload = ({ navigation, route }) => {
   };
 
   const atLast = async (tmp_lis) => {
-    console.log("tmp_lis", tmp_lis.length);
     setpic_list(tmp_lis);
 
     setrefresh(!refresh);
@@ -161,7 +133,6 @@ const PicUpload = ({ navigation, route }) => {
       })
       .catch((err) => {
         setmainloading(false);
-        console.log("confirmImageUploads err", err);
       });
   };
 
@@ -174,22 +145,13 @@ const PicUpload = ({ navigation, route }) => {
   };
 
   const reArrangeList = async (indx) => {
-    console.log("reArrangeList");
     let tmp_lis = _.cloneDeep(pic_list);
-
     tmp_lis.splice(indx, 1);
-
     tmp_lis.push(["", "", true, "2", ""]);
-
-
     let positions_list = Object.entries(positions.value);
-
-
-    let del_pos = positions_list.find((v) => v[0] == indx);
-
+   
     for (let j = 0; j < tmp_lis.length; j++) {
       const ele = tmp_lis[j];
-
       if (j > 0 && tmp_lis[j - 1][0] != "") {
         ele[2] = true;
       } else if (j == 0) {
@@ -238,14 +200,10 @@ const PicUpload = ({ navigation, route }) => {
         dispatch(setSessionExpired(true));
       } else {
         setmainloading(false);
-        console.log("Error", "While Deleting Image" + data)
-        
       }
     } catch (error) {
       setmainloading(false);
       dispatch(setSessionExpired(true));
-      console.log("went  while del img", error);
-
     }
   };
 
@@ -312,13 +270,10 @@ const PicUpload = ({ navigation, route }) => {
         confirmImageUploads();
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "pos Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setmainloading(false);
       dispatch(setSessionExpired(true));
-      console.log("error", error);
     }
   };
 
@@ -370,8 +325,6 @@ const PicUpload = ({ navigation, route }) => {
         let tmp_lst = [...pic_list];
         tmp_lst[activeIndx] = [n_img, crp_imgd, true, activeIndx + 1, pid];
 
-        // let compl_list = tmp_lst.filter(v => v[1] !="")
-
         if (activeIndx < 8 && !tmp_lst[activeIndx + 1][2]) {
           tmp_lst[activeIndx + 1] = ["", "", true, String(activeIndx + 2), ""];
         }
@@ -385,18 +338,12 @@ const PicUpload = ({ navigation, route }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
-        console.log("saveProfileImage Error",
-        "Some Error Occur" + resp.data.data)
-        
         ifFail(activeIndx);
       }
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading(false);
       ifFail(activeIndx);
-
-      console.log("saveProfileImage went wrong error", error);
-
     }
   };
 
@@ -458,9 +405,7 @@ const PicUpload = ({ navigation, route }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-        console.log("Error updateProfileImage",
-        "Some Error Occur" + resp.data.data)
-        
+       
         setloading(false);
         ifFail(activeIndx, tmp_a);
       }
@@ -468,7 +413,6 @@ const PicUpload = ({ navigation, route }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
-      console.log("updateProfileImage went wrong error", error);
 
     }
   };
@@ -481,21 +425,10 @@ const PicUpload = ({ navigation, route }) => {
     return compr_img;
   };
 
-  const getSize = async (img) => {
-    const statResult = await stat(img);
-    return statResult.size / 1024 / 1024;
-  };
-
   const finalLoad = async (img, crp_img) => {
-    // let bf_nsize = await getSize(img)
-    // let bf_csize = await getSize(crp_img)
 
     let n_img = await compressImg(img);
     let comp_crp_img = await compressImg(crp_img);
-
-    // let af_nsize = await getSize(n_img)
-    // let af_csize = await getSize(comp_crp_img)
-
 
     let tmp_list = [...pic_list];
 
@@ -533,8 +466,6 @@ const PicUpload = ({ navigation, route }) => {
   // To Open Camera
   const cameraLaunch = async () => {
     ImageCropPicker.openCamera({
-      // width: 300,
-      // height: 400,
       mediaType: "photo",
     })
       .then((image) => {
@@ -550,12 +481,7 @@ const PicUpload = ({ navigation, route }) => {
   // To Open Gallery
   const imageGalleryLaunch = () => {
     ImageCropPicker.openPicker({
-      // cropping: true,
-      // width: 300,
-      // height: 400,
       avoidEmptySpaceAroundImage: false,
-      // cropperCircleOverlay: true,
-      // freeStyleCropEnabled: true,
       mediaType: "photo",
     })
       .then((image) => {
@@ -575,20 +501,7 @@ const PicUpload = ({ navigation, route }) => {
     ) {
       atLast(profile_imgs.slice(0, 9));
     } 
-    // else {
-    //   let tmp_lis = [
-    //     ["", "", true, "1", ""],
-    //     ["", "", false, "2", ""],
-    //     ["", "", false, "3", ""],
-    //     ["", "", false, "4", ""],
-    //     ["", "", false, "5", ""],
-    //     ["", "", false, "6", ""],
-    //     ["", "", false, "7", ""],
-    //     ["", "", false, "8", ""],
-    //     ["", "", false, "9", ""],
-    //   ];
-    //   atLast(tmp_lis);
-    // }
+   
   }, []);
 
   useEffect(() => {
@@ -672,9 +585,7 @@ const PicUpload = ({ navigation, route }) => {
               <Text
                 style={{ textDecorationLine: "underline" }}
                 onPress={() => {
-                  // navigation.navigate('Info', {
-                  //   heading: 'Photo Guidelines',
-                  // });
+                  
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
                   );
@@ -735,13 +646,10 @@ const PicUpload = ({ navigation, route }) => {
               style={{
                 justifyContent: "center",
                 alignItems: "center",
-                // backgroundColor:'#fff',
                 height: rspH(8),
                 width: scrn_width,
                 borderBottomWidth: 1,
                 borderBottomColor: colors.blue,
-                // borderTopLeftRadius: rspW(5),
-                // borderTopRightRadius: rspW(5),
               }}
               onPress={() => {
                 imageGalleryLaunch();
@@ -784,13 +692,11 @@ const PicUpload = ({ navigation, route }) => {
             <TouchableOpacity
               style={styles.loadingBtn}
               onPress={() => {
-                // setredirect_to_settings(true)
                 if (Platform.OS == "ios") {
                   Linking.openURL("app-settings:");
                 } else {
                   Linking.openSettings();
                 }
-                // setper_modal(false)
               }}
             >
               <Text style={styles.loadingBtnTxt}>Got to Settings</Text>
@@ -806,29 +712,16 @@ export default PicUpload;
 
 const styles = StyleSheet.create({
   inputCont: {
-    // alignSelf: "center",
-    // alignItems: "center",
     marginHorizontal: rspW(-2),
-    // marginHorizontal: rspW(-4),
-
     width: rspW(85),
     height: rspW(85),
-    // padding: 16,
     marginTop: rspH(7),
     marginBottom: rspH(4),
     flexDirection: "row",
-    // justifyContent: "center",
     flexWrap: "wrap",
-    // backgroundColor:'red',
   },
   imageUpCont: {
-    // height: scrn_height / 8,
-    // justifyContent: 'space-between',
     alignItems: "center",
-    // backgroundColor:'red',
-    // backgroundColor:'green',
-    // marginTop: rspH(-1.7),
-    // borderRadius: rspW(5.1),
   },
   imageUpTxt: {
     fontFamily: fontFamily.regular,
@@ -858,7 +751,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: rspW(1),
     top: rspH(8),
-    // backgroundColor: 'red',
     backgroundColor: "#00000089",
     paddingTop: rspH(0.5),
     borderRadius: rspW(6),
@@ -902,14 +794,10 @@ const styles = StyleSheet.create({
 
   loadingBtn: {
     width: rspW(69),
-
     height: rspH(5.62),
-
     borderWidth: 1,
     borderColor: colors.blue,
-
     borderRadius: rspW(8),
-
     justifyContent: "center",
     marginTop: rspH(3),
   },

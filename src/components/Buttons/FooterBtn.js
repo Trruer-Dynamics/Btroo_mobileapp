@@ -1,21 +1,17 @@
 import {
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from "react-native";
 import React from "react";
 import colors from "../../styles/colors";
-import { rspF, rspH, rspW, scrn_width } from "../../styles/responsiveSize";
+import { rspF, rspH, rspW } from "../../styles/responsiveSize";
 import fontFamily from "../../styles/fontFamily";
 
 const FooterBtn = ({
   title = "",
   disabled,
   onPress,
-  // width = scrn_width / 1.4,
-  // width = rspW(69),
   width = 70,
 }) => {
   return (
@@ -42,15 +38,12 @@ const styles = StyleSheet.create({
   btn: {
     alignSelf: "center",
     backgroundColor: colors.blue,
-
     height: rspH(5.8),
     alignItems: "center",
     justifyContent: "center",
-    // borderRadius: rspW(8),
     borderRadius: rspW(10),
     shadowOffset: {
       width: 0,
-
       height: rspH(1),
     },
 

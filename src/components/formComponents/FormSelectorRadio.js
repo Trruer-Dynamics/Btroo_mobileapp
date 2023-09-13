@@ -39,7 +39,6 @@ const FormSelectorRadio = ({
   headtitle = "",
   list,
   setlist = null,
-  marginTop = 0,
   refresh,
   setrefresh,
   setchanges_made = null,
@@ -75,25 +74,15 @@ const FormSelectorRadio = ({
                   let v_t =  String(v[1] ? v[0] : '') 
                   let v_f =  String(v[2] ? 'Not ' + v[0] : '')
                   let dec2 =
-                  // String(idx != 0 ? ", " : "")
-                  // +
+                  
                    v_t
                    + 
                    String(v_t != "" && v_f !=""? ", " : '')
                    +
                    v_f
-      
-                   console.log("dec2",dec2)
 
                    return dec2
                   
-                  // if (idx == 0) {
-                  //   return dec2
-                  // } 
-                  // else {
-                  //   return  dec2
-   
-                  // }
                 })).join(", ")
                 , 34)
                 }
@@ -146,8 +135,6 @@ const FormSelectorRadio = ({
                         <Text
                           style={{
                             ...styles.radioBtnLabel,
-                            // backgroundColor:'red',
-                            // marginLeft: rspW(0.5)
                           }}
                         >
                           {" "}
@@ -158,7 +145,6 @@ const FormSelectorRadio = ({
                         <Text
                           style={{
                             ...styles.radioBtnLabel,
-                            //  backgroundColor:'red',
                             marginRight: rspW(1),
                           }}
                         >
@@ -188,10 +174,6 @@ const FormSelectorRadio = ({
                                     : true
                                   : true;
 
-                              // if (list[idx][1]) {
-                              //   list[idx][2] = false;
-                              // }
-
                               setrefresh(!refresh);
                             }}
                             style={{
@@ -205,7 +187,7 @@ const FormSelectorRadio = ({
                             }}
                           ></TouchableOpacity>
                           <TouchableOpacity
-                                                        onPress={() => {
+                           onPress={() => {
                              
 
                               list[idx][2] =
@@ -215,9 +197,6 @@ const FormSelectorRadio = ({
                                     : true
                                   : true;
 
-                              // if (list[idx][2]) {
-                              //   list[idx][1] =  false;
-                              // }
                               setrefresh(!refresh);
                             }}
                             style={{
@@ -261,11 +240,6 @@ const FormSelectorRadio = ({
                     let drik_c = String(list[1].slice(1,3)) != String(selected_habits[1])
                     let marij_c= String(list[2].slice(1,3)) != String(selected_habits[2])       
 
-                    console.log("list[0]",list[0])
-                    console.log("list[1]",list[1])
-                    console.log("list[2]",list[2])
-
-                    
                     if (smok_c || drik_c || marij_c ) {
                       setchanges_made(true)
                       setcode_press(false);
@@ -321,14 +295,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: rspH(3),
     height: rspH(Platform.OS == "ios" ? 70 : 76),
-    // backgroundColor:'red',
   },
 
   selectorCont: {
-    // backgroundColor:'red',
     flexDirection: "row",
     justifyContent: "space-between",
-    // marginBottom: rspH(2),
     marginBottom: rspH(2),
   },
   headTitleCont: {
@@ -358,7 +329,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: rspW(5.1),
-    // backgroundColor:'green',
     marginBottom: rspH(0.6),
   },
   radioTxt: {
@@ -366,7 +336,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontSize: rspF(2.02),
     lineHeight: rspF(2.1),
-    // letterSpacing:1,
   },
   radioBtnCont: {
     flexDirection: "row",
@@ -393,7 +362,6 @@ const styles = StyleSheet.create({
     fontSize: rspF(3.2),
     color: colors.black,
     lineHeight: rspF(3.21),
-    // marginBottom: rspH(1.2),
     letterSpacing: 1,
   },
 });

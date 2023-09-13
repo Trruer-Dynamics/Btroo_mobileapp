@@ -3,19 +3,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
   Image,
   SafeAreaView,
   Platform,
-  TextInput,
   Keyboard,
   KeyboardAvoidingView,
   BackHandler,
   AppState,
-  Alert,
-  RefreshControl,
-  ActivityIndicator,
-  Vibration,
 } from "react-native";
 import React, {
   useState,
@@ -44,11 +38,9 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { apiUrl, webSocketUrl } from "../../../constants";
 
-import { useStateWithCallbackLazy } from "use-state-with-callback";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
-  ScrollView,
 } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { setChatRevealTut } from "../../../store/reducers/tutorial/tutorial";
@@ -74,6 +66,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { FlashList } from "@shopify/flash-list";
 import _ from "lodash";
+import { setDraftMsgs } from "../../../store/reducers/chats/chats";
 
 const ChatItem = ({
   item,
@@ -147,12 +140,8 @@ const ChatItem = ({
   const animatedIconLeft = useAnimatedStyle(() => {
     return {
       opacity: interpolate(animation.value, [0, 50], [0, 1]),
-
-      // animation.value > 0 ? withTiming(1) : withTiming(0),
       transform: [
-        // {scale: animation.value > 0 ? withTiming(2) : withTiming(1)},
         { translateX: animation.value },
-        // { translateX: animation.value  },
       ],
     };
   });
@@ -160,8 +149,6 @@ const ChatItem = ({
 
   const animation2 = useSharedValue(1)
   const fadeIn = async () =>{
-    console.log("fadeIn")
-   
    animation2.value = withDelay(500, withTiming(100,{
     duration: 2000,
    }))
@@ -172,15 +159,16 @@ const ChatItem = ({
     return {
       opacity: interpolate(animation2.value, [0, 100], [1, 0]),
     };
+    
   })
 
-  
-  
-console.log(index, rply_item_indx,index === rply_item_indx)
-  return (
-    <View style={{ flex: 1, position: "relative", marginBottom: rspH(2.35) ,
 
-    
+  return (
+    <View style={{ flex: 1, position: "relative", 
+
+    // marginBottom: rspH(2.35) ,
+    marginBottom: rspH(1.6) ,
+
     }}>
       <Animated.View
         style={[
@@ -246,13 +234,12 @@ console.log(index, rply_item_indx,index === rply_item_indx)
                 backgroundColor: item[1] == 0 ? "#e6e8eb" : "#4986CA",
 
                 borderLeftColor: "#000",
-                // paddingVertical: 10,
                 paddingVertical: rspH(1.2),
-                // paddingHorizontal: 10,
-                paddingHorizontal: rspW(5.8),
+                // paddingHorizontal: rspW(5.8),
+                paddingHorizontal: rspW(3.8),
+
                 marginBottom: rspH(1.2),
                 maxWidth: rspW(52),
-                // borderRadius: 5,
                 borderRadius: rspW(3),
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -289,7 +276,8 @@ console.log(index, rply_item_indx,index === rply_item_indx)
 
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: "column",
+              // flexDirection: "row",
               zIndex: 2,
             }}
           >
@@ -301,7 +289,7 @@ console.log(index, rply_item_indx,index === rply_item_indx)
             >
               {item[0]}
             </Text>
-            {item[5] == null && (
+            {/* {item[5] == null && (
               <View
                 style={{
                   marginRight: rspW(-3),
@@ -321,7 +309,7 @@ console.log(index, rply_item_indx,index === rply_item_indx)
                   {c_time}
                 </Text>
               </View>
-            )}
+            )} */}
           </View>
           {item[1] == 0 ? (
             <View
@@ -362,16 +350,23 @@ console.log(index, rply_item_indx,index === rply_item_indx)
             </View>
           )}
 
-          {item[5] && (
+          {/* {item[5] && ( */}
             <View
               style={{
-                marginRight: rspW(-3),
-                marginBottom: rspH(-1.5),
+                // backgroundColor:'red',
+                paddingTop: rspH(1),
+                marginRight: rspW(-2.7),
+                // marginBottom: rspH(-1.5),
                 paddingLeft: rspW(2),
-                justifyContent: "flex-end",
+                // justifyContent: "flex-end",
                 zIndex: 2,
               }}
             >
+              <View
+              style={{
+                marginBottom: rspH(-1.3),
+              }}
+              >
               <Text
                 style={{
                   ...styles.chatTimeTxt,
@@ -381,8 +376,9 @@ console.log(index, rply_item_indx,index === rply_item_indx)
               >
                 {c_time}
               </Text>
+              </View>
             </View>
-          )}
+          {/* )} */}
         </Animated.View>
       </PanGestureHandler>
 
@@ -392,9 +388,7 @@ console.log(index, rply_item_indx,index === rply_item_indx)
      onLayout={()=>{
       fadeIn().then(
         ()=>{
-          
-          console.log("New", rply_item_indx)
-          
+           
           setTimeout(() => {
             animation2.value = 0
             setrply_item_indx(null)
@@ -421,6 +415,7 @@ console.log(index, rply_item_indx,index === rply_item_indx)
 };
 
 const Chat = ({ profile }) => {
+
   const chat_reveal_tut = useSelector(
     (state) => state.tutorial.chat_reveal_tut
   );
@@ -434,7 +429,20 @@ const Chat = ({ profile }) => {
     (state) => state.authentication.profile_data
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
+  const chats_msgs = useSelector(
+    (state) => state.chats.chats_msgs
+  );
+
+  const drafts_msgs = useSelector(
+    (state) => state.chats.drafts_msgs
+  );
+
   const [connectSocketS, setconnectSocketS] = useState(false);
+
 
   const [loading, setloading] = useState(false);
   const [show_rvl_tut, setshow_rvl_tut] = useState(false);
@@ -456,8 +464,6 @@ const Chat = ({ profile }) => {
   const [chatlist_remain, setchatlist_remain] = useState([]);
   const [rply_item_indx, setrply_item_indx] = useState(null)
   
-
-  const [chat_refresh, setchat_refresh] = useState(false);
   const [chatPage, setchatPage] = useState(1);
 
   const [rvl_activate, setrvl_activate] = useState(false);
@@ -485,18 +491,14 @@ const Chat = ({ profile }) => {
             .map((v) => v.icebreaker);
 
           seticebreaker_list(active_ibs);
-        } else {
-          console.warn("Error occur while getting IceBreakers");
-        }
+        } 
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-        console.log("getIceBreaker err", err);
       });
   };
 
   const chatRvlTutDone = async () => {
-    // setloading(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -524,9 +526,7 @@ const Chat = ({ profile }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
-      console.log("chatRvlTutDone error", error);
-    
+      dispatch(setSessionExpired(true));    
       return false;
     }
   };
@@ -559,7 +559,6 @@ const Chat = ({ profile }) => {
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("revealProfile error", error);
       return false;
     }
   };
@@ -601,7 +600,10 @@ const Chat = ({ profile }) => {
     }
   };
 
+
   const getPrevChats = async (page, list = []) => {
+
+    console.log("getPrevChats call")
     setloading(true);
 
     let url = apiUrl + "chat_history/" + profile.chat_id + "/";
@@ -648,7 +650,6 @@ const Chat = ({ profile }) => {
             }
           }
 
-          let f_lis = [];
           let k = 0;
           for (const trw of [...tmp_2].reverse()) {
             tmp_lis[k][6] = trw;
@@ -659,11 +660,11 @@ const Chat = ({ profile }) => {
           chatlist_ref.current = tmp_lis;
           setconnectSocketS(true);
         }
+        
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
         setloading(false);
-        console.log("getPrevChats err", err);
       });
   };
 
@@ -706,11 +707,12 @@ const Chat = ({ profile }) => {
     };
 
     ws.current.onmessage = (e) => {
+
+
       const data = JSON.parse(e.data);
-      // console.log("\nserver on message data", data);
 
       if (data.sender != profile_data.user.id) {
-        // Vibration.vibrate(0);
+
         try {
           let day_tmp = moment(new Date(data.datetime))
             .calendar()
@@ -743,9 +745,9 @@ const Chat = ({ profile }) => {
             ...chatlist_ref.current,
           ];
         } catch (error) {
-          console.log("Error Occur onmmessage", error);
         }
       } else {
+        // console.log("sender msg", data)
         setchatlist_remain([data, ...chatlist_remain]);
       }
     };
@@ -761,18 +763,17 @@ const Chat = ({ profile }) => {
         {item[6] != "" && (
           <View
             style={{
-              minWidth: rspW(18.1),
-              paddingHorizontal: rspW(2),
+              // minWidth: rspW(18.1),
+              paddingHorizontal: rspW(2.5),
               paddingTop: rspH(1.1),
               paddingBottom: rspH(0.7),
-
-              // height: rspH(2.8),
               borderRadius: rspW(3.2),
               justifyContent: "center",
               alignSelf: "center",
-              // alignItems:'center',
               backgroundColor: "#CCCCCC",
               marginBottom: rspH(1.83),
+              // marginBottom: rspH(1.5),
+
             }}
           >
             <Text
@@ -821,10 +822,22 @@ const Chat = ({ profile }) => {
     };
   }, [connectSocketS]);
 
+
   useEffect(() => {
     if (chatlist_remain.length > 0) {
-      let frm = [];
 
+      let draft_msgs_tmp = [...drafts_msgs]
+      console.log("draft_msgs_tmp length", draft_msgs_tmp.length)
+
+      for (let p = 0; p < chatlist_remain.length; p++) {
+        const msg_itm = chatlist_remain[p];
+        console.log("msg_itm",msg_itm)
+        draft_msgs_tmp = draft_msgs_tmp.filter(v => v.unique_id != msg_itm.unique_id)
+      }
+
+      console.log("draft_msgs_tmp length", draft_msgs_tmp.length)
+
+      let frm = [];
       for (let t = 0; t < chatlist_remain.length; t++) {
         const ele = chatlist_remain[t];
         let day_tmp = moment(new Date(ele.datetime))
@@ -863,9 +876,7 @@ const Chat = ({ profile }) => {
   }, [chatlist_remain]);
 
   useEffect(() => {
-    console.log("\nchatlist.length", Platform.OS, chatlist.length);
 
-    // try {
       if (chatlist.length >= 25 && !profile.prof_rvl
         && 
         !rvl_activate
@@ -931,15 +942,13 @@ const Chat = ({ profile }) => {
          
        }
      }
-    // } catch (error) {
-    //   console.log(" tim error", error)
-    // }
+  
     
   }, [chatlist]);
 
 
   useEffect(() => {
-    console.log("rvl_activate",rvl_activate)
+    // console.log("rvl_activate",rvl_activate)
     if (rvl_activate) {
       setrvl_time(true) 
       // revealProfileTime()
@@ -947,17 +956,7 @@ const Chat = ({ profile }) => {
 
     
   }, [rvl_activate])
-  
-  // useEffect(() => {
-  //   console.log("rply_item_indx",rply_item_indx)
-  //   if (rply_item_indx) {
-  //     setTimeout(() => {
-  //       setrply_item_indx(null)
-  //       // let tmp_lis = [...chatlist]
-  //       // setchatlist(tmp_lis)
-  //     }, 2500);
-  //   }
-  // }, [rply_item_indx])  
+ 
 
   useLayoutEffect(() => {
     if (profile.matchType == "New Match") {
@@ -992,7 +991,6 @@ const Chat = ({ profile }) => {
       "hardwareBackPress",
       () => {
         AppState.currentState = "background";
-        // BackHandler.exitApp();
         Keyboard.dismiss();
         return true;
       }
@@ -1003,6 +1001,18 @@ const Chat = ({ profile }) => {
     };
   }, []);
 
+
+  useEffect(() => {
+    console.log("is_network_connected",is_network_connected)
+   
+    if (is_network_connected && drafts_msgs.length > 0) {
+      console.log("drafts_msgs.length",drafts_msgs.length)
+     let only_msg =  drafts_msgs.map(v=> v.message)
+      console.log("only_msg",only_msg)
+    }
+  }, [is_network_connected])
+  
+
   return (
     <>
       {loading && <Loader />}
@@ -1011,7 +1021,6 @@ const Chat = ({ profile }) => {
           style={{
             flex: 1,
             backgroundColor: "#fff",
-            // alignItems:'center',
             justifyContent: "flex-start",
           }}
           behavior="padding"
@@ -1099,7 +1108,6 @@ const Chat = ({ profile }) => {
 
           <FlashList
             keyboardDismissMode="interactive"
-            
             estimatedItemSize={10}
             data={chatlist}
             contentContainerStyle={{
@@ -1121,13 +1129,7 @@ const Chat = ({ profile }) => {
 
               if (login_user === sender) {
                 scrollViewRef.current.scrollToIndex({ index : 0, animated: false})
-              }
-              }
-              
-              
-
-              
-
+              }}
             }}
           
             renderItem={renderItem}
@@ -1135,19 +1137,9 @@ const Chat = ({ profile }) => {
             bounces={false}
           />
 
-          {/* <View
-style={{backgroundColor:'green', flex}}
-/> */}
           <View
             style={{
-              // height: rspH(13),
-
-              // height: rspH(13),
-
-              // flex: 1,
-
               paddingBottom: rspH(Platform.OS == "android" ? inp_btp : 1),
-
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -1169,7 +1161,6 @@ style={{backgroundColor:'green', flex}}
             </View>
             <View
               style={{
-                //  paddingVertical: rspH(Platform.OS == 'ios'? 1 : 0 ),
                 borderColor: colors.grey,
                 borderRadius: rspW(3.2),
                 borderWidth: 1,
@@ -1188,13 +1179,10 @@ style={{backgroundColor:'green', flex}}
                     borderLeftWidth: rspW(1),
                     borderLeftColor: "#000",
                     paddingVertical: rspH(1.2),
-                    // paddingHorizontal: 10,
                     paddingHorizontal: rspW(5.8),
                     marginTop: 10,
                     width: rspW(90),
-                    // borderRadius: 5,
                     borderRadius: rspW(2),
-
                     flexDirection: "row",
                     justifyContent: "space-between",
                   }}
@@ -1214,11 +1202,7 @@ style={{backgroundColor:'green', flex}}
                         : profile.userprofile.name}
                     </Text>
                     <View
-                      style={
-                        {
-                          // backgroundColor:'red',
-                        }
-                      }
+                      style={{}}
                     >
                       <Text
                         style={{
@@ -1259,13 +1243,9 @@ style={{backgroundColor:'green', flex}}
                 style={{
                   ...styles.messageInputCont,
                   paddingVertical: rspH(Platform.OS == "ios" ? 1 : 0),
-
-                  // paddingVertical: rspH(Platform.OS == 'ios'? 1 : 0 ),
-                  // borderColor: colors.grey,
                 }}
               >
                 <AutoGrowingTextInput
-                  // autoFocus={true}
                   placeholder="Enter Message Here..."
                   placeholderTextColor={"#7b7b7b"}
                   keyboardType="default"
@@ -1274,8 +1254,6 @@ style={{backgroundColor:'green', flex}}
                   onChangeText={(val) => {
                     setmsg(val);
                   }}
-                  // placeholderTextColor={'black'}
-
                   maxHeight={rspH(12.5)}
                 />
                 {msg == "" ? (
@@ -1288,6 +1266,8 @@ style={{backgroundColor:'green', flex}}
                   <TouchableOpacity
                     onPress={() => {
                       if (msg.length > 0) {
+                
+
                         seticebreaker("");
 
                         let ung_id = Math.random().toString(36).slice(2);
@@ -1314,7 +1294,7 @@ style={{backgroundColor:'green', flex}}
                         ];
 
                         tmp_lis.unshift(nitm);
-
+  
                         setchatlist(tmp_lis);
                         chatlist_ref.current = tmp_lis;
                         setreplySet(false);
@@ -1329,8 +1309,21 @@ style={{backgroundColor:'green', flex}}
                           unique_id: ung_id,
                         };
 
+                        console.log("Here4")
+
+                        // console.log("drafts_messages",drafts_msgs.map(v=> v.msg_data.message))
+                        let all_drafts_msgs = [...drafts_msgs]
+
+                       
+
+                        all_drafts_msgs.push(data)
+
+                        // console.log("all_drafts_msgs",all_drafts_msgs.map(v=> v.msg_data.message))
+
+
+                        dispatch(setDraftMsgs(all_drafts_msgs))
                         if (SocketOpen) {
-                          ws.current.send(JSON.stringify(data));
+                             ws.current.send(JSON.stringify(data));
                         }
 
                         setmsg("");
@@ -1363,7 +1356,7 @@ style={{backgroundColor:'green', flex}}
             />
           </FullModal>
         </KeyboardAvoidingView>
-        {/* </GestureHandlerRootView> */}
+
       </SafeAreaView>
 
       {show_rvl_tut && (
@@ -1428,16 +1421,17 @@ const styles = StyleSheet.create({
   chatCont: {
     paddingVertical: rspH(1.9),
     paddingHorizontal: rspW(4),
-    // marginBottom: rspH(2.35),
     borderRadius: rspW(5.1),
     borderRadius: rspW(2),
     marginHorizontal: rspW(4),
+
   },
   chatMsgTxt: {
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
     lineHeight: rspF(2.1),
-    minWidth: rspW(10),
+    // minWidth: rspW(10),
+    minWidth: rspW(12),
     maxWidth: rspW(45),
     letterSpacing: Platform.OS == "ios" ? 0 : 0.5,
   },
@@ -1461,19 +1455,14 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.31),
   },
   messageInputArea: {
-    // backgroundColor: 'lightblue',
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: rspH(1.2),
-    // paddingHorizontal: rspW(3.2),
   },
   iceBreakerCont: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-
-    // backgroundColor:'red',
-    // width: '100%',
   },
   iceBreakerImg: {
     width: rspW(6.6),
@@ -1484,19 +1473,12 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.bold,
     lineHeight: rspF(2.18),
     fontSize: rspF(Platform.OS == "ios" ? 2.02 : 1.9),
-    // fontSize: rspW(Platform.OS == 'ios'? 4.2 : 3.8),
-
-    // fontSize: Platform.OS == 'ios' ?17 :15,
-
     color: colors.blue,
     textAlign: "center",
     letterSpacing: Platform.OS == "ios" ? 0 : 1,
   },
   messageInputCont: {
     paddingHorizontal: rspW(2.4),
-    // borderWidth: 1,
-    // borderColor: colors.grey,
-    // borderRadius: rspW(3.2),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -1505,11 +1487,9 @@ const styles = StyleSheet.create({
   messageInput: {
     color: colors.black,
     width: scrn_width / 1.28,
-
     fontFamily: fontFamily.bold,
     fontSize: rspF(2.02),
     lineHeight: rspF(2.1),
-    // backgroundColor:'red',
   },
   sendBtn: {
     width: rspW(7.64),
@@ -1577,7 +1557,6 @@ const styles = StyleSheet.create({
   highCont: {
     position: "absolute",
     backgroundColor: colors.white,
-    // +33
     alignItems: "center",
     justifyContent: "center",
   },
@@ -1588,7 +1567,5 @@ const styles = StyleSheet.create({
     width: rspW(16),
     height: rspW(16),
     borderRadius: rspW(8.1),
-
-    // opacity: 0.3,
   },
 });

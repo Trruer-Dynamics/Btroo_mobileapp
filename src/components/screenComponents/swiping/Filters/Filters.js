@@ -185,7 +185,6 @@ const Filters = ({
       height_max: maxheight,
     };
 
-console.log("selected_interest_list",selected_interest_list)
     try {
       const resp = await axios.put(url, body, {
         headers,
@@ -194,7 +193,6 @@ console.log("selected_interest_list",selected_interest_list)
 
       if (resp.data.code == 200) {
 
-        console.log("Here resp200")
         setModalVisible(false);
         if (setfilterRefresh != null) {
           setfilterRefresh(!filterRefresh);
@@ -218,13 +216,9 @@ console.log("selected_interest_list",selected_interest_list)
         );
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur updateFilterData" + resp.data.data)
-
       }
     } catch (error) {
       dispatch(setSessionExpired(true));
-      console.log("updateFilterData", error);
     }
   };
 

@@ -3,19 +3,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  FlatList,
   Image,
   SafeAreaView,
   Platform,
-  TextInput,
   Keyboard,
   KeyboardAvoidingView,
   BackHandler,
   AppState,
-  Alert,
-  RefreshControl,
-  ActivityIndicator,
-  Vibration,
 } from "react-native";
 import React, {
   useState,
@@ -44,11 +38,9 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { apiUrl, webSocketUrl } from "../../../constants";
 
-import { useStateWithCallbackLazy } from "use-state-with-callback";
 import {
   GestureHandlerRootView,
   PanGestureHandler,
-  ScrollView,
 } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { setChatRevealTut } from "../../../store/reducers/tutorial/tutorial";
@@ -69,6 +61,7 @@ import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withTiming,
 } from "react-native-reanimated";
 import { FlashList } from "@shopify/flash-list";
@@ -146,22 +139,31 @@ const ChatItem = ({
   const animatedIconLeft = useAnimatedStyle(() => {
     return {
       opacity: interpolate(animation.value, [0, 50], [0, 1]),
-
-      // animation.value > 0 ? withTiming(1) : withTiming(0),
       transform: [
-        // {scale: animation.value > 0 ? withTiming(2) : withTiming(1)},
         { translateX: animation.value },
-        // { translateX: animation.value  },
       ],
     };
   });
 
-  
+
+  const animation2 = useSharedValue(1)
+  const fadeIn = async () =>{
+   animation2.value = withDelay(500, withTiming(100,{
+    duration: 2000,
+   }))
+
+  }
+
+  const animatedBox = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(animation2.value, [0, 100], [1, 0]),
+    };
+  })
 
   return (
     <View style={{ flex: 1, position: "relative", marginBottom: rspH(2.35) ,
-    paddingVertical: rspH(0.2),
-    backgroundColor: index == rply_item_indx ? '#2364aa4e' : '#fff',
+
+    
     }}>
       <Animated.View
         style={[
@@ -213,32 +215,24 @@ const ChatItem = ({
           {item[5] != null && (
             <TouchableOpacity
             onPress={()=>{
-
-              
+  
               let rply_itm =chatlist.find((v) => v[4] == item[5])
              
               let rply_itm_indx = chatlist.indexOf(rply_itm)
               setrply_item_indx(rply_itm_indx)
               let tmp_lis = [...chatlist];
-  
               setchatlist(tmp_lis)
-
-
-              
               scrollViewRef.current.scrollToIndex({ index : rply_itm_indx, animated: true})
-           
+         
             }}
               style={{
                 backgroundColor: item[1] == 0 ? "#e6e8eb" : "#4986CA",
 
                 borderLeftColor: "#000",
-                // paddingVertical: 10,
                 paddingVertical: rspH(1.2),
-                // paddingHorizontal: 10,
                 paddingHorizontal: rspW(5.8),
                 marginBottom: rspH(1.2),
                 maxWidth: rspW(52),
-                // borderRadius: 5,
                 borderRadius: rspW(3),
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -371,6 +365,35 @@ const ChatItem = ({
           )}
         </Animated.View>
       </PanGestureHandler>
+
+     {
+     index === rply_item_indx &&
+     <Animated.View
+     onLayout={()=>{
+      fadeIn().then(
+        ()=>{
+           
+          setTimeout(() => {
+            animation2.value = 0
+            setrply_item_indx(null)
+            let tmp_lis = [...chatlist];
+              setchatlist(tmp_lis)
+            
+          }, 1800);
+        }
+      )
+     }}
+      style={[
+        {
+          paddingVertical: rspH(0.4),
+          position:'absolute',
+          width: '100%',
+          height: '100%',
+          backgroundColor:  '#2364aa4e',
+        },
+        animatedBox
+      ]}
+      />}
     </View>
   );
 };
@@ -411,8 +434,6 @@ const Chat = ({ profile }) => {
   const [chatlist_remain, setchatlist_remain] = useState([]);
   const [rply_item_indx, setrply_item_indx] = useState(null)
   
-
-  const [chat_refresh, setchat_refresh] = useState(false);
   const [chatPage, setchatPage] = useState(1);
 
   const [rvl_activate, setrvl_activate] = useState(false);
@@ -440,18 +461,14 @@ const Chat = ({ profile }) => {
             .map((v) => v.icebreaker);
 
           seticebreaker_list(active_ibs);
-        } else {
-          console.warn("Error occur while getting IceBreakers");
-        }
+        } 
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-        console.log("getIceBreaker err", err);
       });
   };
 
   const chatRvlTutDone = async () => {
-    // setloading(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -479,9 +496,7 @@ const Chat = ({ profile }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
-      console.log("chatRvlTutDone error", error);
-    
+      dispatch(setSessionExpired(true));    
       return false;
     }
   };
@@ -514,7 +529,6 @@ const Chat = ({ profile }) => {
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("revealProfile error", error);
       return false;
     }
   };
@@ -603,7 +617,6 @@ const Chat = ({ profile }) => {
             }
           }
 
-          let f_lis = [];
           let k = 0;
           for (const trw of [...tmp_2].reverse()) {
             tmp_lis[k][6] = trw;
@@ -618,7 +631,6 @@ const Chat = ({ profile }) => {
       .catch((err) => {
         dispatch(setSessionExpired(true));
         setloading(false);
-        console.log("getPrevChats err", err);
       });
   };
 
@@ -662,10 +674,9 @@ const Chat = ({ profile }) => {
 
     ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      // console.log("\nserver on message data", data);
 
       if (data.sender != profile_data.user.id) {
-        // Vibration.vibrate(0);
+
         try {
           let day_tmp = moment(new Date(data.datetime))
             .calendar()
@@ -698,7 +709,6 @@ const Chat = ({ profile }) => {
             ...chatlist_ref.current,
           ];
         } catch (error) {
-          console.log("Error Occur onmmessage", error);
         }
       } else {
         setchatlist_remain([data, ...chatlist_remain]);
@@ -720,12 +730,9 @@ const Chat = ({ profile }) => {
               paddingHorizontal: rspW(2),
               paddingTop: rspH(1.1),
               paddingBottom: rspH(0.7),
-
-              // height: rspH(2.8),
               borderRadius: rspW(3.2),
               justifyContent: "center",
               alignSelf: "center",
-              // alignItems:'center',
               backgroundColor: "#CCCCCC",
               marginBottom: rspH(1.83),
             }}
@@ -818,9 +825,7 @@ const Chat = ({ profile }) => {
   }, [chatlist_remain]);
 
   useEffect(() => {
-    console.log("\nchatlist.length", Platform.OS, chatlist.length);
 
-    // try {
       if (chatlist.length >= 25 && !profile.prof_rvl
         && 
         !rvl_activate
@@ -886,9 +891,7 @@ const Chat = ({ profile }) => {
          
        }
      }
-    // } catch (error) {
-    //   console.log(" tim error", error)
-    // }
+  
     
   }, [chatlist]);
 
@@ -902,25 +905,13 @@ const Chat = ({ profile }) => {
 
     
   }, [rvl_activate])
-  
-useEffect(() => {
-  console.log("rply_item_indx",rply_item_indx)
-  if (rply_item_indx) {
-    setTimeout(() => {
-      setrply_item_indx(null)
-      let tmp_lis = [...chatlist]
-      setchatlist(tmp_lis)
-    }, 2000);
-  }
-}, [rply_item_indx])
-
-  
+ 
 
   useLayoutEffect(() => {
     if (profile.matchType == "New Match") {
       setmsg("Hi!");
     }
-    getPrevChats(chatPage, chatlist);
+    // getPrevChats(chatPage, chatlist);
   }, []);
 
   useLayoutEffect(() => {
@@ -949,7 +940,6 @@ useEffect(() => {
       "hardwareBackPress",
       () => {
         AppState.currentState = "background";
-        // BackHandler.exitApp();
         Keyboard.dismiss();
         return true;
       }
@@ -968,7 +958,6 @@ useEffect(() => {
           style={{
             flex: 1,
             backgroundColor: "#fff",
-            // alignItems:'center',
             justifyContent: "flex-start",
           }}
           behavior="padding"
@@ -1056,7 +1045,6 @@ useEffect(() => {
 
           <FlashList
             keyboardDismissMode="interactive"
-            
             estimatedItemSize={10}
             data={chatlist}
             contentContainerStyle={{
@@ -1078,13 +1066,7 @@ useEffect(() => {
 
               if (login_user === sender) {
                 scrollViewRef.current.scrollToIndex({ index : 0, animated: false})
-              }
-              }
-              
-              
-
-              
-
+              }}
             }}
           
             renderItem={renderItem}
@@ -1092,19 +1074,9 @@ useEffect(() => {
             bounces={false}
           />
 
-          {/* <View
-style={{backgroundColor:'green', flex}}
-/> */}
           <View
             style={{
-              // height: rspH(13),
-
-              // height: rspH(13),
-
-              // flex: 1,
-
               paddingBottom: rspH(Platform.OS == "android" ? inp_btp : 1),
-
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -1126,7 +1098,6 @@ style={{backgroundColor:'green', flex}}
             </View>
             <View
               style={{
-                //  paddingVertical: rspH(Platform.OS == 'ios'? 1 : 0 ),
                 borderColor: colors.grey,
                 borderRadius: rspW(3.2),
                 borderWidth: 1,
@@ -1145,13 +1116,10 @@ style={{backgroundColor:'green', flex}}
                     borderLeftWidth: rspW(1),
                     borderLeftColor: "#000",
                     paddingVertical: rspH(1.2),
-                    // paddingHorizontal: 10,
                     paddingHorizontal: rspW(5.8),
                     marginTop: 10,
                     width: rspW(90),
-                    // borderRadius: 5,
                     borderRadius: rspW(2),
-
                     flexDirection: "row",
                     justifyContent: "space-between",
                   }}
@@ -1171,11 +1139,7 @@ style={{backgroundColor:'green', flex}}
                         : profile.userprofile.name}
                     </Text>
                     <View
-                      style={
-                        {
-                          // backgroundColor:'red',
-                        }
-                      }
+                      style={{}}
                     >
                       <Text
                         style={{
@@ -1216,13 +1180,9 @@ style={{backgroundColor:'green', flex}}
                 style={{
                   ...styles.messageInputCont,
                   paddingVertical: rspH(Platform.OS == "ios" ? 1 : 0),
-
-                  // paddingVertical: rspH(Platform.OS == 'ios'? 1 : 0 ),
-                  // borderColor: colors.grey,
                 }}
               >
                 <AutoGrowingTextInput
-                  // autoFocus={true}
                   placeholder="Enter Message Here..."
                   placeholderTextColor={"#7b7b7b"}
                   keyboardType="default"
@@ -1231,8 +1191,6 @@ style={{backgroundColor:'green', flex}}
                   onChangeText={(val) => {
                     setmsg(val);
                   }}
-                  // placeholderTextColor={'black'}
-
                   maxHeight={rspH(12.5)}
                 />
                 {msg == "" ? (
@@ -1320,7 +1278,7 @@ style={{backgroundColor:'green', flex}}
             />
           </FullModal>
         </KeyboardAvoidingView>
-        {/* </GestureHandlerRootView> */}
+
       </SafeAreaView>
 
       {show_rvl_tut && (
@@ -1385,7 +1343,6 @@ const styles = StyleSheet.create({
   chatCont: {
     paddingVertical: rspH(1.9),
     paddingHorizontal: rspW(4),
-    // marginBottom: rspH(2.35),
     borderRadius: rspW(5.1),
     borderRadius: rspW(2),
     marginHorizontal: rspW(4),
@@ -1418,19 +1375,14 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.31),
   },
   messageInputArea: {
-    // backgroundColor: 'lightblue',
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: rspH(1.2),
-    // paddingHorizontal: rspW(3.2),
   },
   iceBreakerCont: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-
-    // backgroundColor:'red',
-    // width: '100%',
   },
   iceBreakerImg: {
     width: rspW(6.6),
@@ -1441,19 +1393,12 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.bold,
     lineHeight: rspF(2.18),
     fontSize: rspF(Platform.OS == "ios" ? 2.02 : 1.9),
-    // fontSize: rspW(Platform.OS == 'ios'? 4.2 : 3.8),
-
-    // fontSize: Platform.OS == 'ios' ?17 :15,
-
     color: colors.blue,
     textAlign: "center",
     letterSpacing: Platform.OS == "ios" ? 0 : 1,
   },
   messageInputCont: {
     paddingHorizontal: rspW(2.4),
-    // borderWidth: 1,
-    // borderColor: colors.grey,
-    // borderRadius: rspW(3.2),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -1462,11 +1407,9 @@ const styles = StyleSheet.create({
   messageInput: {
     color: colors.black,
     width: scrn_width / 1.28,
-
     fontFamily: fontFamily.bold,
     fontSize: rspF(2.02),
     lineHeight: rspF(2.1),
-    // backgroundColor:'red',
   },
   sendBtn: {
     width: rspW(7.64),
@@ -1534,7 +1477,6 @@ const styles = StyleSheet.create({
   highCont: {
     position: "absolute",
     backgroundColor: colors.white,
-    // +33
     alignItems: "center",
     justifyContent: "center",
   },
@@ -1545,7 +1487,5 @@ const styles = StyleSheet.create({
     width: rspW(16),
     height: rspW(16),
     borderRadius: rspW(8.1),
-
-    // opacity: 0.3,
   },
 });

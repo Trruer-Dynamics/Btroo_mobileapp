@@ -77,7 +77,6 @@ const Intro = () => {
             rate={1.0}
             ignoreSilentSwitch={"obey"}
             onError={(err) => {
-              console.log("--videos err", err);
             }}
           />
 
@@ -174,9 +173,7 @@ const Intro = () => {
                       action: "login",
                     })
                   );
-
                   navigation.navigate("MobileNo", { action: "login" });
-                  // navigation.navigate("PicUpload");
                 }}
                 style={[
                   styles.button,

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useState, useEffect, useLayoutEffect, useRef, memo } from "react";
+import React, { useState, useEffect, useLayoutEffect,  memo } from "react";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import { rspH, rspW, rspF } from "../../styles/responsiveSize";
@@ -27,15 +27,12 @@ const FormInputPhoneNumber = ({
   ref = null,
   pass_ref = null,
   multiline = false,
-
   refresh = false,
   maxLength = null,
   onFocus,
-
   a_allow = true,
   n_allow = true,
   s_allow = true,
-
   unit = "",
   inputwidth = "100%",
   setchanges_made = null,
@@ -60,12 +57,10 @@ const FormInputPhoneNumber = ({
   return (
     <TouchableOpacity
       activeOpacity={1}
-      
       style={{
         ...styles.input_cont,
         height: multiline ? rspH(11.6) : rspH(5.8),
         width: width,
-        // backgroundColor:'yellow',
         backgroundColor: value.length > 0 ? "#fff" : "#F8F8F8",
         borderColor: invalid
           ? colors.error
@@ -77,9 +72,7 @@ const FormInputPhoneNumber = ({
     >
       <View
         style={{
-          // backgroundColor:'red',
           position: "absolute",
-          // top: 0.3,
           top: rspH(0.6),
           paddingHorizontal: rspW(4),
         }}
@@ -93,24 +86,18 @@ const FormInputPhoneNumber = ({
         style={{
           flexDirection: "row",
           alignItems: "center",
-
           paddingTop:
             value.length > 0 ? rspH(Platform.OS == "ios" ? 0.6 : 0.4) : 0,
           width: "100%",
         }}
       >
         <TextInput
-         
           onFocus={onFocus}
-          // textAlignVertical='top'
           style={{
             width: inputwidth,
             textAlign: textAlign,
-
             ...styles.input,
-
             marginTop: value.length > 0 ? 10 : 0,
-
             paddingHorizontal: 0,
           }}
           maxLength={maxLength}
@@ -154,9 +141,6 @@ const FormInputPhoneNumber = ({
             if (cond_lis) {
               setvalue(text);
             }
-
-            // setvalue(text);
-
             if (setchanges_made != null) {
               setchanges_made(true);
             }
@@ -209,9 +193,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontFamily: fontFamily.regular,
     lineHeight: 13,
-
-    // marginTop: Platform.OS == 'ios' ? 0 : rspH(0.6),
-    // marginBottom: Platform.OS == 'ios' ? rspH(-0.44) : rspH(-1.54),
   },
   input: {
     color: colors.black,

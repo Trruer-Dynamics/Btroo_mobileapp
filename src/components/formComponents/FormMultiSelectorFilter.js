@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState, useEffect, memo } from "react";
+import React, {  useState, useEffect, memo } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -22,12 +22,10 @@ import {
 import FormComponentsWrapper from "../wrappers/formComponentsWrappers/FormComponentsWrapper";
 import FormComponentsWrapperHeader from "../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
 import SearchInput from "./SearchInput";
-import FAIcon from "react-native-vector-icons/FontAwesome";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import FooterBtn from "../Buttons/FooterBtn";
-import ErrorContainer from "./ErrorContainer";
-import { apiUrl } from "../../constants";
+
 
 const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
   <TouchableOpacity
@@ -68,7 +66,7 @@ const FormMultiSelectorFilter = ({
   setchanges_made = null,
   setselected_list,
 }) => {
-  // const [datalist, setdatalist] = useState([]);
+
   const [selected_lis2, setselected_lis2] = useState([]);
   const [filterdatalist, setfilterdatalist] = useState([]);
   const [search_value, setsearch_value] = useState("");
@@ -93,7 +91,6 @@ const FormMultiSelectorFilter = ({
             tmp.splice(indx, 1);
             setselected_lis2(tmp);
           }
-          //  if (selected_lis2.length < 10)
           else {
             setselected_lis2([...selected_lis2, item[0]]);
           }
@@ -146,11 +143,7 @@ const FormMultiSelectorFilter = ({
           <View style={{ width: scrn_width / 1.5 }}>
             <Text style={styles.selectedOpt} numberOfLines={1}>
               {selected_list.length > 0
-                ? // selected_list.map((v, idx) => {
-                  //     let name = list.find(g => g[0] == v)[1];
-                  //     let val = idx == 0 ? name : ', ' + name;
-                  //     return val;
-                  //   })
+                ? 
                   names
                 : ""}
             </Text>
@@ -189,7 +182,6 @@ const FormMultiSelectorFilter = ({
               )}
               <View
                 style={{
-                  // height: rspH(58.7),
                   height: rspH(Platform.OS == "ios" ? 58.6 : 63),
                 }}
               >
@@ -201,17 +193,7 @@ const FormMultiSelectorFilter = ({
               </View>
             </View>
             <FormWrapperFooter>
-              {/* <View style={{
-                marginVertical: rspH(1),
-                alignSelf:'center',
-              }}>
-              <Text style={{
-                fontSize: rspF(1.3),
-                fontFamily: fontFamily.regular,
-                color: '#000',
-                textAlign:'center',
-              }}>{`Please select up to 10 ${title.toLowerCase()} from the list above`}</Text>
-              </View> */}
+              
               <FooterBtn
                 title={"Confirm"}
                 disabled={ selected_lis2.every(v => selected_list.includes(v)) && selected_list.every(v => selected_lis2.includes(v))}
@@ -220,10 +202,6 @@ const FormMultiSelectorFilter = ({
                   let checker = (arr, target) => target.every(v => arr.includes(v))
                   let check1 = checker(selected_lis2,selected_list)
                   let check2 = checker(selected_list,selected_lis2)
-                  
-                  // console.log("selected_list",selected_list)
-                  // console.log("selected_lis2",selected_lis2)
-                  // console.log("check1",check1 && check2)
               
                   if (!(check1 && check2)) {
                       setcode_press(false);
@@ -253,10 +231,9 @@ const styles = StyleSheet.create({
   selectedOpt: {
     fontSize: rspF(1.66),
     lineHeight: rspF(1.8),
-
     fontFamily: fontFamily.bold,
     color: `#999999`,
-    // letterSpacing:1,
+
   },
   txtCont: {
     flexDirection: "column",

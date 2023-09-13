@@ -1,6 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
 import authenticationReducer from "./reducers/authentication/authentication";
+import chatsReducer from "./reducers/chats/chats";
+
 import filterReducer from "./reducers/filter/filter";
 import permissionReducer from "./reducers/permission/permission";
 import allDataReducer from "./reducers/allData/allData";
@@ -21,6 +23,7 @@ const appReducer = combineReducers({
   screen: screenReducer,
   filter: filterReducer,
   allData: allDataReducer,
+  chats : chatsReducer,
   permission: permissionReducer,
 });
 

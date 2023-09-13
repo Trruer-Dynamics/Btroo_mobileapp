@@ -2,16 +2,12 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableWithoutFeedback,
   TouchableOpacity,
   Image,
   Animated,
-  ScrollView,
   SafeAreaView,
-  StatusBar,
   PermissionsAndroid,
   Platform,
-  Alert,
   Linking,
 } from "react-native";
 import publicIP from "react-native-public-ip";
@@ -23,7 +19,6 @@ import React, {
   useEffect,
   useContext,
   memo,
-  useMemo,
 } from "react";
 import colors from "../../styles/colors";
 import {
@@ -35,15 +30,11 @@ import {
 } from "../../styles/responsiveSize";
 import { FlatList } from "react-native-gesture-handler";
 import FullModal from "../../components/modals/FullModal";
-import ADIcon from "react-native-vector-icons/AntDesign";
-import FAIcon from "react-native-vector-icons/FontAwesome";
-import Paginator from "../../components/screenComponents/swiping/Paginator";
 import fontFamily from "../../styles/fontFamily";
 import PromptIntro from "../../components/screenComponents/swiping/Prompts/PromptIntro";
 import PublicPrompts from "../../components/screenComponents/swiping/Prompts/PublicPrompts";
 import PrivatePrompts from "../../components/screenComponents/swiping/Prompts/PrivatePrompts";
 import ReferralCode from "../../components/screenComponents/swiping/Prompts/ReferralCode";
-import Report from "../../components/screenComponents/swiping/Report/Report";
 import Filters from "../../components/screenComponents/swiping/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -51,10 +42,7 @@ import {
   setProfileApproved,
   setProfileRefresh,
   setSessionExpired,
-  setStatusBarArgs,
 } from "../../store/reducers/authentication/authentication";
-
-import PushNotification from "react-native-push-notification";
 
 import Geolocation from "@react-native-community/geolocation";
 import axios from "axios";
@@ -74,18 +62,13 @@ import {
   setSelectedInterests,
   setSelectedLanguages,
 } from "../../store/reducers/filter/filter";
-import { setLocationPermission } from "../../store/reducers/permission/permission";
-// import { } from '../../assets/images/Tutorial/Tut1.png'
-import { check, PERMISSIONS, RESULTS } from "react-native-permissions";
 import SwipeCard from "../../components/screenComponents/swiping/swipeCard/SwipeCard";
 
 import {
   useFocusEffect,
-  useIsFocused,
   useNavigation,
 } from "@react-navigation/native";
-import useIsReady from "../../components/functions/isScreenReady";
-import DeviceInfo from "react-native-device-info";
+
 import messaging from "@react-native-firebase/messaging";
 import { setPromptFillingStart } from "../../store/reducers/authentication/authentication";
 import { UserContext } from "../../context/user";
@@ -93,27 +76,12 @@ import { UserContext } from "../../context/user";
 const SwiperOr = ({}) => {
   const navigation = useNavigation();
 
-  const isReady = useIsReady();
-
   const { appStateVisible } = useContext(UserContext);
 
   const dispatch = useDispatch();
   const active_user_loc_det = useSelector(
     (state) => state.authentication.active_user_location_details
   );
-  const selected_interests = useSelector(
-    (state) => state.filter.selected_interests
-  );
-
-  const selected_habits = useSelector((state) => state.filter.selected_habits);
-
-
-
-  useEffect(() => {
-    console.log("\nselected_interests updat",selected_interests)
-
-  }, [selected_interests, selected_habits])
-  
 
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
@@ -194,21 +162,13 @@ const SwiperOr = ({}) => {
   const [warn_step, setwarn_step] = useState(0);
   const [redirect_to_settings, setredirect_to_settings] = useState(false);
   const [promptStep, setpromptStep] = useState(1);
-
   const [profiles, setprofiles] = useState([]);
-
   const [empty_profile_call, setempty_profile_call] = useState(false);
-
-  // Report Control
-  const [openReport, setopenReport] = useState(false);
-  const [report, setreport] = useState("");
 
   //Filter
   const [showFilter, setshowFilter] = useState(false);
-  const [filter, setfilter] = useState(false);
 
   // Public Prompts State
-  const [showPrompts, setshowPrompts] = useState(true);
   const [promptsmodalVisible, setpromptsmodalVisible] = useState(false);
 
   const [swippingcount, setswippingcount] = useState(0);
@@ -234,34 +194,25 @@ const SwiperOr = ({}) => {
   const scaleAnimation = () => {
     Animated.timing(scaleValue, {
       fromValue: 0.9,
-
       toValue: 1,
-
       duration: 500,
-
       useNativeDriver: true,
     }).start(() => {});
   };
 
   const removeCard = useCallback(
     () => {
-      console.log("removeCard");
 
       scaleValue.setValue(0.9);
       iconRotate.setValue(0);
       iconTranslateX.setValue(0);
       iconTranslateY.setValue(0);
-
       leftX.setValue(0);
-
       rightX.setValue(0);
-
       upY.setValue(0);
-
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
-
       swipe.setValue({ x: 0, y: 0 });
-      // console.log('swippingcount', swippingcount);
+  
       if (swippingcount >= 2) {
         setpromptTime(true);
       }
@@ -296,8 +247,6 @@ const SwiperOr = ({}) => {
 
   // Location Permission State
   const [permission_denied, setpermission_denied] = useState(false);
-  // const location_perm = useSelector(state => state.permission.location_perm);
-
   const [mob_ip, setmob_ip] = useState("");
   const [current_lat, setcurrent_lat] = useState("");
   const [current_long, setcurrent_long] = useState("");
@@ -307,9 +256,7 @@ const SwiperOr = ({}) => {
 
   // To get Location Permission
   const getLocation = async () => {
-    console.log("getLocation")
     getOneTimeLocation();
-
     return () => {
       Geolocation.clearWatch(watchID);
     };
@@ -324,18 +271,15 @@ const SwiperOr = ({}) => {
       setcurrent_address(response.data.display_name);
     } catch (error) {
       dispatch(setSessionExpired(true));
-      console.error("reversr geocoding", error);
-      // setwarn_step(3)
       setloading2(true);
     }
   };
 
   const getOneTimeLocation = async () => {
-    console.log("getOneTimeLocation")
+
      Geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
-      console.log("Here")
 
         //getting the Longitude from the location json
         const currentLongitude = JSON.stringify(position.coords.longitude);
@@ -347,18 +291,14 @@ const SwiperOr = ({}) => {
         setcurrent_lat(currentLatitude);
 
         getReverseGeocodingData(currentLatitude, currentLongitude);
-        // updateLocation(currentLatitude, currentLongitude);
       },
       (err) => {
         setpermission_denied(true);
-        console.log("location per denined", err.message);
         setwarn_step(4);
       },
 
       {
         enableHighAccuracy: true,
-        // timeout: 5000,
-        // maximumAge: 10000,
       }
     );
   };
@@ -366,11 +306,8 @@ const SwiperOr = ({}) => {
   const addLocation = async () => {
     const data = {
       user_id: profile_data.user.id,
-      // longitude: '79.021490',
       longitude: current_long,
-      // latitude: '21.132141',
       latitude: current_lat,
-
       location: current_address,
       action: active_user_loc_det.action,
       ip: mob_ip,
@@ -392,21 +329,17 @@ const SwiperOr = ({}) => {
 
         return true;
       } else {
-        console.log("add location Some Error Occur ")
-        
         return false;
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("add location error", error);
       return false;
     }
   };
 
   const getFilterData = async () => {
 
-    console.log("getFilterData")
     setloading(true);
 
     const headers = {
@@ -420,8 +353,6 @@ const SwiperOr = ({}) => {
         setloading(false);
 
         let filter_data = resp.data.data;
-
-        // console.log("filter_data",filter_data)
 
         if (resp.data.code == 200) {
           let report_count = filter_data.userreportcount;
@@ -446,9 +377,6 @@ const SwiperOr = ({}) => {
           let interests = filter_data.interests?.length || filter_data.interests != null ? sorted_tmp.map((v) => v.id): [];
 
           let habits_data = filter_data.habit;
-
-        
-
 
           let smoking_t = habits_data.smoking
           let drinking_t = habits_data.drinking
@@ -478,15 +406,11 @@ const SwiperOr = ({}) => {
           }
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
-        } else {
-          console.warn("Error occur while FilterUpdateGet", resp.data.data);
-          Alert.alert("Error", JSON.stringify(resp.data.data))
         }
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
         setloading(false);
-        console.log("FilterUpdateGet err", err);
       });
   };
 
@@ -496,7 +420,6 @@ const SwiperOr = ({}) => {
     await axios
       .get(apiUrl + "getactivegender/")
       .then((resp) => {
-        // setloading(false)
 
         if (resp.status == 200) {
           let tmp = resp.data.data;
@@ -507,17 +430,12 @@ const SwiperOr = ({}) => {
 
           let tmp_lis = sorted_tmp.map((v) => [v.id, v.gender]);
           dispatch(setAllGenders(tmp_lis));
-          // setgender_list(tmp_lis);
-
-          // setpreference_list(tmp_lis);
-        } else {
-          console.warn("Error occur while getting Genders");
+         
         }
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
         setloading(false);
-        console.log("getGenders err", err);
       });
   };
 
@@ -544,17 +462,11 @@ const SwiperOr = ({}) => {
           ]);
 
           dispatch(setAllInterests(tmp_lis));
-
-          // setinterest_list(tmp_lis);
-        } else {
-          console.warn("Error occur while getInterests");
         }
-        // setloading(false)
       })
       .catch((err) => {
         setloading(false);
         dispatch(setSessionExpired(true));
-        console.log("getInterests err", err);
       });
   };
 
@@ -564,7 +476,6 @@ const SwiperOr = ({}) => {
     await axios
       .get(apiUrl + "getactivelanguage/")
       .then((resp) => {
-        // setloading(false)
 
         if (resp.status == 200) {
           let tmp = resp.data.data;
@@ -575,15 +486,11 @@ const SwiperOr = ({}) => {
 
           let tmp_lis = sorted_tmp.map((v) => [v.id, v.language]);
           dispatch(setAllLanguges(tmp_lis));
-          // setlanguages_list(tmp_lis);
-        } else {
-          console.warn("Error occur while getLanguages");
         }
       })
       .catch((err) => {
         setloading(false);
         dispatch(setSessionExpired(true));
-        console.log("getLanguages err", err);
       });
   };
 
@@ -602,13 +509,10 @@ const SwiperOr = ({}) => {
           dispatch(setAllPrompts(act_promptsm));
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
-        } else {
-          console.warn("Error occur while getPrompts");
-        }
+        } 
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-        console.log("getPrompts err", err);
       });
   };
 
@@ -626,30 +530,25 @@ const SwiperOr = ({}) => {
         
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
-        // console.log( Platform.OS,"resp_data",resp_data[0])
+
         if (resp_code == 204) {
           setwarn_step(2);
           setloading2(true);
           setempty_profile_call(true);
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
-          console.log("active_profiles len", active_profiles.length);
- 
           setprofiles(active_profiles);
           setloading2(false);
           setempty_profile_call(false);
         } else if (resp_code == 401) {
           dispatch(setSessionExpired(true));
         } else {
-          console.warn("Error occur while getFilterProfiles",  resp.data.data);
           setloading2(true);
           setempty_profile_call(false);
-          // setwarn_step(3)
         }
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
-        console.log("getFilterProfiles err", err);
       });
   };
 
@@ -664,26 +563,19 @@ const SwiperOr = ({}) => {
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
         let resp_data = resp.data;
-console.log(" getRejectedProfiles resp_data",resp_data)
         if (resp_data.length == 0) {
           setwarn_step(2);
           setloading2(true);
         } else if (resp_data.length > 0) {
           setempty_profile_call(false);
           let active_profiles = resp_data.filter((v) => v.active == true);
-          // console.log('active_profiles len', active_profiles.length);
           setprofiles(active_profiles);
 
           setloading2(false);
         }
-        // else {
-        //   console.warn('Error occur while getRejectedProfiles');
-        //   setloading2(true);
-        //   setwarn_step(3)
-        // }
+        
       })
       .catch((err) => {
-        console.log("swap_again err", err);
       });
   };
 
@@ -710,7 +602,6 @@ console.log(" getRejectedProfiles resp_data",resp_data)
   }, [profiles]);
 
   const startFillingPrompts = async () => {
-    console.log("startFillingPrompts");
     setloading(true);
     const data = {
       user_id: profile_data.user.id,
@@ -735,15 +626,12 @@ console.log(" getRejectedProfiles resp_data",resp_data)
 
       if (resp_data.code == 200) {
         dispatch(setPromptFillingStart(true));
-        // getPrompts();
       } else {
-        console.log("promptsfillingstarted Some Error Occur ")
         return false;
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("promptsfillingstarted error", error);
       return false;
     }
   };
@@ -776,34 +664,20 @@ console.log(" getRejectedProfiles resp_data",resp_data)
   }, [current_lat, current_long, current_address]);
 
   const getIp = () => {
-    // setmob_ip('198.60.1.23');
-
     // Ip Function temporary commentet because it takes too long to load
     publicIP()
       .then((ip) => {
-        console.log("mobile ip", ip);
         setmob_ip(ip);
       })
       .catch((error) => {
         dispatch(setSessionExpired(true));
-        console.log("publicIP", error);
-        // setwarn_step(3)
         setloading2(true);
-        // 'Unable to get IP address.'
       });
   };
 
   const requestNotificaionPermission = async () => {
-    // console.log("\nrequestNotificaionPermission\n")
     if (Platform.OS == "ios") {
       const authStatus = await messaging().requestPermission();
-      const enabled =
-        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-      if (enabled) {
-        console.log(Platform.OS, " Authorization status:", authStatus);
-      }
     } else if (Platform.OS == "android") {
       let ntf_per = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
@@ -813,7 +687,6 @@ console.log(" getRejectedProfiles resp_data",resp_data)
 
   const getData = useCallback(() => {
     getLocation();
-    // requestNotificaionPermission()
     getIp();
   }, []);
 
@@ -828,44 +701,16 @@ console.log(" getRejectedProfiles resp_data",resp_data)
   }, [profile_refresh]);
 
   useEffect(() => {
-    console.log("permission_denied", permission_denied);
-
-    console.log(
-      "All DAta",
-      "filter_data_get",
-      filter_data_get,
-      "mob_ip",
-      mob_ip,
-      "current_lat",
-      current_lat,
-      "current_long",
-      current_long,
-      "current_address",
-      current_address
-    );
-
-    console.log(
-      "ALl stft",
-      filter_data_get &&
-        mob_ip &&
-        current_lat &&
-        current_long &&
-        current_address
-        ? "True"
-        : "False"
-    );
-
+    
     if (permission_denied) {
       setloading2(true);
       setwarn_step(4);
     } else if (
       filter_data_get &&
-      // mob_ip &&
       current_lat &&
       current_long &&
       current_address
     ) {
-      console.log("All Get");
       addLocation();
     }
   }, [
@@ -896,7 +741,6 @@ console.log(" getRejectedProfiles resp_data",resp_data)
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      console.log(Platform.OS, "profile_approv", profile_approv);
 
       if (profile_approv == false) {
         setwarn_step(5);
@@ -921,15 +765,10 @@ console.log(" getRejectedProfiles resp_data",resp_data)
           <SafeAreaView
             style={{
               flex: 1,
-              // height:scrn_height,
-              // width: scrn_width,
-              // position:'relative'
             }}
           >
             <FlatList
               pagingEnabled
-              // horizontal
-              // inverted
               contentContainerStyle={{
                 flexGrow: 1,
                 borderWidth: 1,
@@ -961,31 +800,7 @@ console.log(" getRejectedProfiles resp_data",resp_data)
                 );
               }}
             />
-            {/* {profiles
-            .filter(v => profiles_ref.current.includes(v))
-            .map((item, idx) => {
-                // const newItem = useMemo(() => {return item}, [item])
-                const isFirst = idx === 0;
-                return (
-                  <SwipeCard
-                    card_itm={item}
-                    iconRotate={iconRotate}
-                    iconTranslateX={iconTranslateX}
-                    iconTranslateY={iconTranslateY}
-                    handleChoiceButtons={handleChoiceButtons}
-                    isFirst={isFirst}
-                    swipe={swipe}
-                    scaleValue={scaleValue}
-                    leftX={leftX}
-                    rightX={rightX}
-                    upY={upY}
-                    mainIndex={idx}
-                    setswippingcount={setswippingcount}
-                    swippingcount={swippingcount}
-                  />
-                );
-              })
-              .reverse()} */}
+            
           </SafeAreaView>
         ) : (
           // Loading Container
@@ -996,20 +811,11 @@ console.log(" getRejectedProfiles resp_data",resp_data)
                 <TouchableOpacity
                   style={{
                     ...styles.filterCont,
-                    // marginRight: 20,
-                    // marginTop: 10,
                   }}
                   onPress={() => {
                     setshowFilter(!showFilter);
                   }}
                 >
-                  {/* <FAIcon
-                    solid={false}
-                    size={30}
-                    name="filter"
-                    color={'#9d9c9c'}
-                  /> */}
-
                   <Image
                     source={require("../../assets/images/Swiping/Filter3.png")}
                     style={{ width: 26, height: 26 }}
@@ -1036,15 +842,11 @@ console.log(" getRejectedProfiles resp_data",resp_data)
                   style={styles.loadingBtn}
                   onPress={() => {
                     if (warn_step == 2) {
-                      // setProfileRefresh(!profile_refresh);
-
                       getRejectedProfiles();
                     }
-
                     if (warn_step == 5) {
                       navigation.navigate("PhotoVerification");
                     }
-
                     if (warn_step == 4) {
                       setredirect_to_settings(true);
                       if (Platform.OS == "ios") {
@@ -1146,30 +948,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: rspW(5.1),
     flex: 1,
     backgroundColor: colors.white,
-
-    // alignItems: 'center',
   },
 
   // Loading View
   loadingCont: {
     height: scrn_height - rspH(18),
     width: scrn_width,
-    // backgroundColor:'red',
     justifyContent: "center",
     alignItems: "center",
   },
   loadingTitleCont: {
-    // backgroundColor:'red',
-    // marginBottom: rspH(3.5),
     marginBottom: rspH(3.5),
   },
   loadingTitle: {
-    // backgroundColor:'red',
-    // lineHeight: rspF(3.35),
     lineHeight: rspF(3.35),
     fontFamily: fontFamily.bold,
     fontSize: rspF(3.308),
-    // fontSize: rspF(3.308),
     color: colors.blue,
     textAlign: "center",
     letterSpacing: 1,
@@ -1177,28 +971,19 @@ const styles = StyleSheet.create({
 
   loadingPara: {
     lineHeight: rspH(3.35),
-    // fontSize: rspF(2.38),
     fontSize: rspF(2.38),
-
     color: colors.black,
     fontFamily: fontFamily.regular,
     textAlign: "center",
   },
   loadingBtn: {
     position: "absolute",
-    // bottom: rspH(16.4),
     bottom: rspH(5),
     width: rspW(69),
-    // width: rspW(69),
-
-    // height: rspH(5.62),
     height: rspH(5.62),
-
     borderWidth: 1,
     borderColor: colors.blue,
-    // borderRadius: rspW(8),
     borderRadius: rspW(8),
-
     justifyContent: "center",
   },
 
@@ -1249,14 +1034,10 @@ const styles = StyleSheet.create({
   filterCont: {
     top: rspH(1.2),
     right: rspW(2.5),
-    // width: rspW(12.76),
     width: rspW(12.76),
-
     aspectRatio: 1,
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor:'red',
-    // borderRadius : rspW(7),
     borderRadius: rspW(7),
     position: "absolute",
     alignSelf: "flex-end",

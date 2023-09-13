@@ -54,7 +54,9 @@ const IceBreaker = ({
         onPress={() => {
           seticebreaker(item);
           setModalVisible(!modalVisible);
-          setmsg((messg) => messg + item);
+          // setmsg((messg) => messg + item);
+          setmsg(item);
+
         }}
       />
     );
@@ -109,7 +111,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: rspF(1.9),
     fontFamily: fontFamily.medium,
-    lineHeight: rspF(1.93),
+    // lineHeight: rspF(1.93),
+    lineHeight: rspF(2.3),
     color: colors.black,
   },
   emptysearchContainer: {

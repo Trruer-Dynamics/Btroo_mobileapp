@@ -2,19 +2,15 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableWithoutFeedback,
   TouchableOpacity,
   Image,
   Animated,
   ScrollView,
   SafeAreaView,
-  StatusBar,
-  PermissionsAndroid,
   Platform,
-  Alert,
 } from "react-native";
 
-import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
+import React, {  useRef, useState } from "react";
 import colors from "../../styles/colors";
 import {
   rspF,
@@ -49,7 +45,6 @@ const DATA = [
     id: 2,
     title: "Second Item",
     image:
-      // '../../assets/images/Tutorial/Tut1.png',
       require("../../assets/images/Tutorial/Tut1.png"),
     image2: require("../../assets/images/Tutorial/Tut2.png"),
   },
@@ -106,8 +101,7 @@ const Item = ({ item, setmodalVisible, masked }) => {
                   top: 0,
                   left: 0,
                   zIndex: 1,
-                  //  borderRadius
-                  //  borderTopRightRadius: 30,
+                
                 }}
                 resizeMode="stretch"
               />
@@ -184,7 +178,7 @@ const SwiperTut = ({ navigation }) => {
     "Let people know you fancy \nthem by sending them a \nsoft spot.",
     "Pass on someone that you \nfeel you will not connect \nwith.",
     "Swipe to check out \nmultiple photos. You can \nalso enlarge it by clicking \non it.",
-    "Scroll to see the bio of the \nsoul. You can also enlarge \nthe bio by clicking on it.",
+    "Scroll to see the bio of the \nsoul. You can also enlarge \nthe bio by long pressing it.",
   ]);
 
   const access_token = useSelector(
@@ -254,7 +248,6 @@ const SwiperTut = ({ navigation }) => {
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("error", error);
       return false;
     }
   };
@@ -264,7 +257,6 @@ const SwiperTut = ({ navigation }) => {
     <Item item={item} masked={masked} setmodalVisible={setmodalVisible} />
   );
 
-  // Full Screen Carosel Item Render Function
   const renderItem2 = ({ item }) => (
     <Item2 item={item} setmodalVisible={setmodalVisible} />
   );
@@ -280,7 +272,6 @@ const SwiperTut = ({ navigation }) => {
           width: scrn_width,
         }}
       >
-        {/* <View style={{...styles.container}}> */}
 
         <View
           style={{
@@ -341,7 +332,6 @@ const SwiperTut = ({ navigation }) => {
                     source={require("../../assets/images/Swiping/Actions/Pass.png")}
                     style={{
                       width: rspW(8.695),
-                      // height: rspH(4),
                       height: rspH(4),
                     }}
                   />
@@ -468,11 +458,8 @@ const SwiperTut = ({ navigation }) => {
                     <Image
                       source={require("../../assets/images/Swiping/BioIcons/City.png")}
                       style={{
-                        // width: rspW(6.75),
                         width: rspW(6.75),
-                        // height: rspH(3),
                         height: rspH(3),
-                        // marginRight: rspW(2),
                         marginRight: rspW(2),
                       }}
                     />
@@ -693,8 +680,6 @@ const SwiperTut = ({ navigation }) => {
           </ScrollView>
         </View>
 
-        {/* </View> */}
-
         <>
           {swipe_tut_l && (
             <SafeAreaView style={styles.mainTutCont}>
@@ -702,15 +687,12 @@ const SwiperTut = ({ navigation }) => {
               <View
                 style={{
                   position: "relative",
-
-                  // backgroundColor:'red',
                 }}
               >
                 {step == 0 && (
                   <View
                     style={{
                       position: "absolute",
-                      // top: rspH(41),
                       top: rspH(41),
                       left: rspW(66.3),
                     }}
@@ -720,9 +702,6 @@ const SwiperTut = ({ navigation }) => {
                         <Image
                           source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                           style={{
-                            // backgroundColor:'red',
-                            // width: rspW(8.46),
-                            // height: rspH(4.3),
                             width: rspW(8.9),
                             height: rspH(4.4),
                           }}
@@ -745,8 +724,6 @@ const SwiperTut = ({ navigation }) => {
                         <Image
                           source={require("../../assets/images/Swiping/Actions/Softspot.png")}
                           style={{
-                            // width: rspW(8.46),
-                            // height: rspH(4.3),
                             width: rspW(8.9),
                             height: rspH(4.4),
                           }}
@@ -929,7 +906,6 @@ const SwiperTut = ({ navigation }) => {
                         style={{
                           borderBottomColor: colors.grey,
                           borderBottomWidth: rspH(0.24),
-                          // borderBottomWidth: rspH(0.24),
                         }}
                       />
 
@@ -1239,31 +1215,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "flex-end",
-    // marginRight: rspW(5.5),
     marginRight: rspW(5.5),
-    // backgroundColor:'red',
   },
   dots: {
     backgroundColor: colors.blue,
-    // width: rspW(1),
     width: rspW(1),
     borderRadius: rspW(0.51),
     aspectRatio: 1,
-    // marginVertical: rspH(1.1),
     marginVertical: rspH(1.1),
   },
 
   imageCont: {
     width: rspW(89),
-    // width: rspW(81),
     height: rspH(42),
     height: rspH(Platform.OS == "ios" ? 42 : 48.3),
-
     borderRadius: rspW(5.3),
-    // borderRadius: rspW(200),
-
-    // position: 'relative',
-    // backgroundColor:'red',
   },
 
   item: {
@@ -1317,14 +1283,9 @@ const styles = StyleSheet.create({
     paddingBottom: rspH(1.67),
   },
   profileDetailCont: {
-    // height: rspH(9.6),
     height: rspH(9.6),
-    // width: rspW(39.5),
     width: rspW(39.5),
-    // borderRadius: rspW(1.6),
     borderRadius: rspW(1.6),
-
-    // backgroundColor: 'blue',
   },
   boxShadowCont: {
     backgroundColor: colors.white,
@@ -1340,7 +1301,6 @@ const styles = StyleSheet.create({
 
   profileDetailContHeading: {
     fontSize: rspF(2.02),
-    // fontSize: rspF(2.02),
     fontFamily: fontFamily.bold,
     lineHeight: rspF(2.1),
     color: colors.black,
@@ -1348,19 +1308,13 @@ const styles = StyleSheet.create({
   },
   interestImage: {
     height: rspH(3.75),
-    // height: rspH(3.75),
-    // width: rspW(7.64),
     width: rspW(7.64),
-    // marginRight: rspW(4.52),
     marginRight: rspW(4.52),
   },
   profileDetailContNText: {
     color: colors.blue,
     fontFamily: fontFamily.semi_bold,
-    // fontSize: rspF(2.138),
     fontSize: rspF(2.14),
-
-    // lineHeight: rspF(2.18),
     lineHeight: rspF(2.18),
   },
 
@@ -1371,7 +1325,6 @@ const styles = StyleSheet.create({
     marginTop: rspH(2.35),
     marginBottom: rspH(-1.7),
     paddingHorizontal: rspW(2.5),
-
     paddingVertical: rspH(0.6),
   },
   promptQuestionContainer: {
@@ -1380,25 +1333,18 @@ const styles = StyleSheet.create({
   promptQuestion: {
     fontFamily: fontFamily.bold,
     fontSize: rspF(1.9),
-    // fontSize: rspF(1.9),
     color: colors.black,
-
     lineHeight: rspF(1.96),
-
     letterSpacing: 1,
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
     fontSize: rspF(1.66),
-    // fontSize: rspF(1.66),
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
   },
-  // });
 
-  // const styles = StyleSheet.create({
-  // Tutorial Main Container
   mainTutCont: {
     position: "absolute",
     backgroundColor: "#0000006f",
@@ -1414,17 +1360,14 @@ const styles = StyleSheet.create({
     height: rspW(15.2),
     borderRadius: rspW(7.52),
     backgroundColor: "#ffffffa3",
-
     alignItems: "center",
     justifyContent: "center",
   },
   actionCont: {
-    // width: rspW(13),
     width: rspW(13),
     height: rspW(13),
     borderRadius: rspW(7),
     backgroundColor: colors.grey + "85",
-
     alignItems: "center",
     justifyContent: "center",
   },
@@ -1433,9 +1376,7 @@ const styles = StyleSheet.create({
   centralModalCont: {
     alignSelf: "center",
     position: "absolute",
-
     height: rspH(28.85),
-
     width: rspW(86),
     borderRadius: rspW(3),
     backgroundColor: colors.white,
@@ -1445,7 +1386,6 @@ const styles = StyleSheet.create({
   },
 
   centralModalTextCont: {
-    // marginTop: rspH(2.8),
     marginTop: rspH(2.8),
   },
   centralModalText: {
@@ -1475,7 +1415,6 @@ const styles = StyleSheet.create({
 
   //Tutorial Scroll Modal
   scrollModalCont: {
-    // position: 'absolute',
     height: rspH(38.74),
     width: rspW(91.8),
     borderRadius: rspW(4),
@@ -1483,16 +1422,13 @@ const styles = StyleSheet.create({
   },
 
   carouselHighlightCont: {
-    // width: rspW(92.4),
     width: rspW(92.4),
-    // height: rspH(43.6),
     height: rspH(Platform.OS == "ios" ? 43.6 : 50),
     borderRadius: rspW(6.4),
     position: "relative",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor:'#d72e2e39',
   },
 
   item: {

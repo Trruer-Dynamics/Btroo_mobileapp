@@ -33,15 +33,12 @@ const FormInput = ({
   ref = null,
   pass_ref = null,
   multiline = false,
-
   refresh = false,
   maxLength = null,
   onFocus,
-
   a_allow = true,
   n_allow = true,
   s_allow = true,
-
   unit = "",
   inputwidth = "100%",
   setchanges_made = null,
@@ -85,9 +82,7 @@ const FormInput = ({
         <View
           style={{
             flexDirection: "row",
-
             alignItems: "center",
-
             paddingVertical: 0,
             width: "100%",
           }}
@@ -95,7 +90,6 @@ const FormInput = ({
           <TextInput
             ref={inpt_ref}
             onFocus={onFocus}
-            // textAlignVertical='top'
             style={{
               width: inputwidth,
               textAlign: textAlign,

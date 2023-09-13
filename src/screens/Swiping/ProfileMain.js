@@ -6,12 +6,11 @@ import {
   Image,
   ScrollView,
   SafeAreaView,
-  Alert,
   Platform,
   FlatList,
   Animated,
 } from "react-native";
-import React, { useState, useLayoutEffect, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import {
   rspF,
@@ -22,9 +21,7 @@ import {
 } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-
-import { useDispatch, useSelector } from "react-redux";
-import { apiUrl } from "../../constants";
+import {  useSelector } from "react-redux";
 import {
   DrinkingNo,
   DrinkingYes,
@@ -45,7 +42,6 @@ const Item2 = ({ item }) => {
   return (
     <View style={styles.item2}>
       <Image
-        // source={{uri: imageUri}}
         source={{ uri: imageUri }}
         style={{ width: "100%", height: "98%" }}
         resizeMode="contain"
@@ -66,9 +62,7 @@ const ProfileMain = ({ navigation }) => {
     "Urdu",
   ]);
 
-  const access_token = useSelector(
-    (state) => state.authentication.access_token
-  );
+  
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
@@ -84,7 +78,6 @@ const ProfileMain = ({ navigation }) => {
   const slidesRef3 = useRef(null);
 
   const viewableItemsChanged3 = useRef(({ viewableItems }) => {
-    console.log(viewableItems[0]?.index);
     setcurrentIndex3(viewableItems[0]?.index);
   }).current;
 
@@ -130,11 +123,8 @@ const ProfileMain = ({ navigation }) => {
 
       setinterest_list(usr_interest);
 
-      console.log("userprofile id", profile_data.userprofile.id);
-      console.log(
-        "profile_imgs",
-        profile_imgs.filter((v) => v[0] != "").length
-      );
+      console.log("profile_imgs",profile_imgs[0])
+
       let actv = profile_imgs.filter((v) => v[0] != "");
       setactive_prf_imgs(actv);
 
@@ -148,17 +138,6 @@ const ProfileMain = ({ navigation }) => {
   const renderItem2 = ({ item, index }) => {
     return <Item2 item={item} />;
   };
-
-  const [page_len, setpage_len] = useState([]);
-
-  // const page_len = profile_imgs.map((v,indx)=> indx)
-
-  useEffect(() => {
-    let rmp = profile_imgs.map((v, indx) => indx);
-    setpage_len(rmp);
-  }, []);
-
-  // console.log("page_len",page_len)
 
   return (
     <View style={{ height: scrn_height, backgroundColor: "#fff" }}>
@@ -176,7 +155,6 @@ const ProfileMain = ({ navigation }) => {
                     profile_data?.userprofile?.name.split(" ")[0],
                     7
                   )) +
-              //  profile_data?.userprofile?.name.split(' ')[0].substring(0,6) + '...'
               ", " +
               age
             }
@@ -186,22 +164,17 @@ const ProfileMain = ({ navigation }) => {
         <View
           style={{
             flex: 1,
-
             alignItems: "center",
             backgroundColor: colors.white,
           }}
         >
           <View
             style={{
-              // backgroundColor: colors.blue,
               alignItems: "center",
               alignSelf: "center",
             }}
           >
             <TouchableOpacity
-              // onPress={()=> navigation.navigate('ProfileRevealed',{
-              //     'profile': profile
-              // })}
               onPress={() => {
                 setmodalVisible(true);
               }}
@@ -218,7 +191,7 @@ const ProfileMain = ({ navigation }) => {
               }}
               style={styles.editBtn}
             >
-              <Text style={styles.editBtnTxt}>Edit</Text>
+              <Text style={styles.editBtnTxt}>Edit My Profile</Text>
             </TouchableOpacity>
           </View>
 
@@ -226,29 +199,20 @@ const ProfileMain = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             bounces={false}
             style={{
-              // marginVertical: rspH(2.16),
               marginVertical: rspH(2.16),
-
-              // width: '100%',
-              //  backgroundColor: 'lime',
             }}
           >
             <View
               style={{
-                //  backgroundColor: 'lime',
-
                 paddingTop: rspH(1.2),
-                // paddingBottom: rspH(9.64),
                 paddingBottom: rspH(9.64),
 
                 width: scrn_width / 1.2,
               }}
             >
               <View
-                //  style={styles.profileDetailsSubCont}
                 style={{
                   flexDirection: "row",
-                  //  backgroundColor:'red',
                   justifyContent: "space-between",
                   paddingHorizontal: 1,
                 }}
@@ -287,7 +251,6 @@ const ProfileMain = ({ navigation }) => {
                       flexDirection: "row",
                       alignItems: "center",
                       width: "100%",
-                      // alignItems:'center',
                     }}
                   >
                     <Image
@@ -387,14 +350,12 @@ const ProfileMain = ({ navigation }) => {
                     paddingHorizontal: rspW(3.2),
                     justifyContent: "center",
                     marginTop: rspH(2.9),
-                    // marginTop: rspH(2.9),
                   }}
                 >
                   <View
                     style={{
                       flexDirection: "row",
                       alignItems: "center",
-                      // backgroundColor:'red',
                       paddingBottom: rspH(0.4),
                     }}
                   >
@@ -450,6 +411,7 @@ const ProfileMain = ({ navigation }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Pets</Text>
                   <ScrollView
+                  bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -488,6 +450,7 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Interests</Text>
                 <ScrollView
+                bounces={false}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
@@ -526,6 +489,7 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Languages</Text>
                 <ScrollView
+                bounces={false}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
@@ -585,16 +549,11 @@ const ProfileMain = ({ navigation }) => {
             style={{
               position: "absolute",
               zIndex: 2,
-              // top: rspH(2.35),
               top: rspH(3),
-
               left: rspW(8),
-              // backgroundColor: 'red',
-
               alignSelf: "center",
               justifyContent: "center",
               alignItems: "center",
-
               height: rspW(7.6),
               width: rspW(7.6),
               borderRadius: rspW(3.8),
@@ -641,23 +600,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   profileImage: {
-    // width: rspW(21.64),
     width: rspW(21.64),
-
     height: rspW(21.64),
-    // alignSelf:'center',
     marginBottom: rspH(1.4),
-    // marginBottom: rspH(1.32),
-    // borderRadius: rspW(43.3),
     borderRadius: rspW(43.3),
   },
 
   editBtn: {
     justifyContent: "center",
     backgroundColor: colors.white,
-    width: rspW(23.6),
     // width: rspW(23.6),
-    // height: rspH(3),
+    paddingHorizontal: rspW(5),
     height: rspH(3),
     shadowOffset: {
       width: 0,
@@ -675,38 +628,24 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: fontFamily.bold,
     color: colors.black,
-    // fontSize: rspF(1.76),
     fontSize: rspF(1.76),
-    // lineHeight: rspF(1.78),
     lineHeight: rspF(1.78),
-
     letterSpacing: 1,
-    // backgroundColor:'red',
   },
 
   profileDetailsSubCont: {
-    // paddingHorizontal: 5,
-
-    // width: '100%',
     flexDirection: "row",
-    // alignSelf:'center',
     justifyContent: "space-around",
     alignItems: "center",
   },
   profileDetailsSubCont2: {
     alignSelf: "center",
-
     width: rspW(82),
-    // width: '100%',
     marginTop: rspH(3),
-    // marginBottom: rspH(3),
     borderRadius: rspW(1.6),
     height: rspH(9.6),
     paddingHorizontal: rspW(3.2),
-    // backgroundColor: colors.error,
     paddingTop: rspH(1.17),
-    // paddingBottom: rspH(1.67),
-    // paddingBottom: rspH(1.67),
   },
   profileDetailCont: {
     height: rspH(9.6),
@@ -729,19 +668,15 @@ const styles = StyleSheet.create({
     color: colors.black,
     letterSpacing: 1,
     fontSize: rspF(2.02),
-    // lineHeight: 16,
   },
   interestImage: {
-    // backgroundColor:'red',
     height: rspH(3.75),
-
     width: rspW(7.64),
     marginRight: rspW(4.52),
   },
   profileDetailContNText: {
     color: colors.blue,
     fontFamily: fontFamily.semi_bold,
-    // fontSize: rspF(2.138),
     fontSize: rspF(Platform.OS == "ios" ? 2 : 1.8),
     lineHeight: rspH(3.35),
   },
@@ -749,7 +684,6 @@ const styles = StyleSheet.create({
   // Prompt
   promptContainer: {
     width: rspW(82),
-    // height: rspH(12.9),
     marginTop: rspH(2.35),
     marginBottom: rspH(-1.7),
     paddingHorizontal: rspW(2.5),

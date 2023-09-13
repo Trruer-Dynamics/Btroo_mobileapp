@@ -19,7 +19,7 @@ import SearchInput from "./SearchInput";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import FooterBtn from "../Buttons/FooterBtn";
 
-const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
+const Item = ({ item, onPress, selected_lis2, multi }) => (
   <TouchableOpacity
     onPress={onPress}
     style={{

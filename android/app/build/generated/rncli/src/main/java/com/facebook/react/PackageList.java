@@ -19,8 +19,8 @@ import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.clipboard.ClipboardPackage;
 // @react-native-community/geolocation
 import com.reactnativecommunity.geolocation.GeolocationPackage;
-// @react-native-community/image-editor
-import com.reactnativecommunity.imageeditor.ImageEditorPackage;
+// @react-native-community/netinfo
+import com.reactnativecommunity.netinfo.NetInfoPackage;
 // @react-native-firebase/analytics
 import io.invertase.firebase.analytics.ReactNativeFirebaseAnalyticsPackage;
 // @react-native-firebase/app
@@ -39,8 +39,6 @@ import com.wix.autogrowtextinput.AutoGrowTextInputPackage;
 import com.reactnativecompressor.CompressorPackage;
 // react-native-date-picker
 import com.henninghall.date_picker.DatePickerPackage;
-// react-native-device-info
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-email-link
 import agency.flexible.react.modules.email.EmailPackage;
 // react-native-fs
@@ -49,8 +47,6 @@ import com.rnfs.RNFSPackage;
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-image-crop-picker
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-// react-native-image-picker
-import com.imagepicker.ImagePickerPackage;
 // react-native-linear-gradient
 import com.BV.LinearGradient.LinearGradientPackage;
 // react-native-otp-verify
@@ -67,8 +63,6 @@ import com.swmansion.rnscreens.RNScreensPackage;
 import com.killserver.screenshotprev.RNScreenshotPreventPackage;
 // react-native-share
 import cl.json.RNSharePackage;
-// react-native-sms
-import com.tkporter.sendsms.SendSMSPackage;
 // react-native-sound
 import com.zmxv.RNSound.RNSoundPackage;
 // react-native-splash-screen
@@ -126,7 +120,7 @@ public class PackageList {
       new AsyncStoragePackage(),
       new ClipboardPackage(),
       new GeolocationPackage(),
-      new ImageEditorPackage(),
+      new NetInfoPackage(),
       new ReactNativeFirebaseAnalyticsPackage(),
       new ReactNativeFirebaseAppPackage(),
       new ReactNativeFirebaseAuthPackage(),
@@ -136,12 +130,10 @@ public class PackageList {
       new AutoGrowTextInputPackage(),
       new CompressorPackage(),
       new DatePickerPackage(),
-      new RNDeviceInfo(),
       new EmailPackage(),
       new RNFSPackage(),
       new RNGestureHandlerPackage(),
       new PickerPackage(),
-      new ImagePickerPackage(),
       new LinearGradientPackage(),
       new OtpVerifyPackage(),
       new ReactNativePushNotificationPackage(),
@@ -150,7 +142,6 @@ public class PackageList {
       new RNScreensPackage(),
       new RNScreenshotPreventPackage(),
       new RNSharePackage(),
-      new SendSMSPackage(),
       new RNSoundPackage(),
       new SplashScreenReactPackage(),
       new VectorIconsPackage(),

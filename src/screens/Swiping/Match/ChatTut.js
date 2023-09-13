@@ -8,10 +8,8 @@ import {
   SafeAreaView,
   Platform,
   TextInput,
-  Alert,
 } from "react-native";
 import React, { useState } from "react";
-
 import {
   rspH,
   rspW,
@@ -23,14 +21,11 @@ import colors from "../../../styles/colors";
 import fontFamily from "../../../styles/fontFamily";
 import IceBreaker from "../../../components/screenComponents/matching/IceBreaker";
 import FullModal from "../../../components/modals/FullModal";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   setChatTut,
-  setMatchTut,
 } from "../../../store/reducers/tutorial/tutorial";
 import axios from "axios";
 import { apiUrl } from "../../../constants";
@@ -106,9 +101,8 @@ const ChatItem = (item) => {
             style={{
               width: rspW(10.3),
               height: rspH(3.6),
-
               zIndex: 1,
-              // tintColor: 'red',
+
             }}
           />
         </View>
@@ -177,7 +171,6 @@ const ChatTut = ({ profile }) => {
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("chatTutDone error", error);
       return false;
     }
   };
@@ -222,7 +215,6 @@ const ChatTut = ({ profile }) => {
         <SafeAreaView
           style={{
             height: Platform.OS == "ios" ? scrn_height - rspH(10) : scrn_height,
-            // paddingVertical: rspW(2.5),
           }}
         >
           <View style={{ paddingHorizontal: rspW(5), paddingTop: rspH(2) }}>
@@ -275,11 +267,7 @@ const ChatTut = ({ profile }) => {
           <View
             style={{
               height: rspH(13),
-
-              // flex: 1,
-
               paddingBottom: rspH(1),
-
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -370,7 +358,6 @@ const ChatTut = ({ profile }) => {
                   }}
                   style={{
                     ...styles.centralModalTextNextCont,
-                    // marginVertical: chat_step == 3 ? 0 : 12,
                   }}
                 >
                   <Text style={styles.centralModalTextNext}>
@@ -466,26 +453,19 @@ export default ChatTut;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // height: scrn_height,
   },
   chatMsgArea: {
     paddingHorizontal: rspW(6.2),
-    // flex: 1,
-    // width: rspW(100),
     height: rspH(Platform.OS == "ios" ? 70 : 75),
     backgroundColor: "#fff",
   },
   chatCont: {
     width: scrn_width / 1.8,
-    // width: scrn_width ,
-    // backgroundColor:'green',
     paddingVertical: rspH(1.9),
     paddingHorizontal: rspW(2.4),
     marginBottom: rspH(2.35),
     borderRadius: rspW(5.1),
-    // marginHorizontal: rspW(6.2),
     marginHorizontal: rspW(4),
-
     position: "relative",
   },
   chatMsgTxt: {
@@ -499,18 +479,14 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.31),
   },
   messageInputArea: {
-    // backgroundColor: 'lightblue',
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: rspH(1.2),
-    // paddingHorizontal: rspW(3.2),
   },
   iceBreakerCont: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor:'red',
-    // width: scrn_width - rspW(10),
   },
   iceBreakerImg: {
     width: rspW(6.6),
@@ -520,7 +496,6 @@ const styles = StyleSheet.create({
   iceBreakerTxt: {
     fontFamily: fontFamily.bold,
     lineHeight: rspF(2.18),
-    // fontSize: rspF(2.02),
     fontSize: rspF(Platform.OS == "ios" ? 2.02 : 1.9),
     color: colors.blue,
     textAlign: "center",
@@ -528,7 +503,6 @@ const styles = StyleSheet.create({
 
   messageInputCont: {
     height: rspH(6),
-
     paddingHorizontal: rspW(2.4),
     borderWidth: 1,
     borderColor: colors.grey,
@@ -539,20 +513,11 @@ const styles = StyleSheet.create({
   },
 
   messageInput: {
-    // color: colors.black,
-    // width: scrn_width / 1.24,
-
-    // fontFamily: fontFamily.bold,
-    // lineHeight: 16.84,
-    // fontSize: rspF(2.02),
-
     color: colors.black,
     width: scrn_width / 1.28,
-
     fontFamily: fontFamily.bold,
     fontSize: rspF(2.02),
     lineHeight: rspF(2.1),
-    // backgroundColor:'red',
   },
   sendBtn: {
     width: rspW(7.64),
@@ -619,7 +584,6 @@ const styles = StyleSheet.create({
   highCont: {
     position: "absolute",
     backgroundColor: colors.white,
-    // +33
     alignItems: "center",
     justifyContent: "center",
   },
@@ -640,7 +604,6 @@ const styles = StyleSheet.create({
     left: rspW(32),
     width: rspW(36),
     height: rspH(3.8),
-    // opacity:0.32,
     alignItems: "center",
     borderRadius: rspW(4),
   },
@@ -652,13 +615,8 @@ const styles = StyleSheet.create({
   },
 
   iceBreakerHighCont: {
-    // bottom: rspH(Platform.OS == 'ios' ? 13 : 9.5),
     top: rspH(87),
-
     alignSelf: "center",
-    // opacity: 0.3,
-    // left: rspW(2.5),
-
     width: rspW(94),
     height: rspH(3.6),
     borderRadius: rspW(7),
@@ -670,7 +628,5 @@ const styles = StyleSheet.create({
     width: rspW(16),
     height: rspW(16),
     borderRadius: rspW(8.1),
-
-    // opacity: 0.3,
   },
 });

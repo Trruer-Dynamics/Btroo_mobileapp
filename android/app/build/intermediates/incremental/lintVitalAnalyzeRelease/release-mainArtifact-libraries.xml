@@ -1,18 +1,5 @@
 <libraries>
   <library
-      name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-community_image-editor::release"
-      jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-community/image-editor/android/build/.transforms/39e35190a6f6561f78083bacac309551/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-community/image-editor/android/build/.transforms/39e35190a6f6561f78083bacac309551/transformed/out/jars/libs/R.jar"
-      resolved="btroo:react-native-community_image-editor:unspecified"
-      folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-community/image-editor/android/build/.transforms/39e35190a6f6561f78083bacac309551/transformed/out"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
       name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-firebase_analytics::release"
       jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/.transforms/51cd05c0e614333a37f6524a6014cd47/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/analytics/android/build/.transforms/51cd05c0e614333a37f6524a6014cd47/transformed/out/jars/libs/R.jar"
       resolved="btroo:react-native-firebase_analytics:unspecified"
@@ -208,6 +195,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-community_netinfo::release"
+      jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-community/netinfo/android/build/.transforms/affd230b615157f8dbfae0a9ceb02777/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-community/netinfo/android/build/.transforms/affd230b615157f8dbfae0a9ceb02777/transformed/out/jars/libs/R.jar"
+      resolved="btroo:react-native-community_netinfo:unspecified"
+      folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-community/netinfo/android/build/.transforms/affd230b615157f8dbfae0a9ceb02777/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-masked-view_masked-view::release"
       jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-masked-view/masked-view/android/build/.transforms/bed0a5e7098572e75b18e82ced5b0327/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-masked-view/masked-view/android/build/.transforms/bed0a5e7098572e75b18e82ced5b0327/transformed/out/jars/libs/R.jar"
       resolved="btroo:react-native-masked-view_masked-view:unspecified"
@@ -273,19 +273,6 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-device-info::release"
-      jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-device-info/android/build/.transforms/9a49947410f822643079d5fc5ba75aee/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-device-info/android/build/.transforms/9a49947410f822643079d5fc5ba75aee/transformed/out/jars/libs/R.jar"
-      resolved="btroo:react-native-device-info:unspecified"
-      folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-device-info/android/build/.transforms/9a49947410f822643079d5fc5ba75aee/transformed/out"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
       name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-email-link::release"
       jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/.transforms/57a23f9e99b1c731b0ead8e649ba7214/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/.transforms/57a23f9e99b1c731b0ead8e649ba7214/transformed/out/jars/libs/R.jar"
       resolved="btroo:react-native-email-link:unspecified"
@@ -329,19 +316,6 @@
       jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/.transforms/9b45ccc0c01cc689434d198e9aa7bb36/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/.transforms/9b45ccc0c01cc689434d198e9aa7bb36/transformed/out/jars/libs/R.jar"
       resolved="btroo:react-native-image-crop-picker:unspecified"
       folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/.transforms/9b45ccc0c01cc689434d198e9aa7bb36/transformed/out"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-image-picker::release"
-      jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/.transforms/5f922db5978ae4bfb2fce8428ad01402/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/.transforms/5f922db5978ae4bfb2fce8428ad01402/transformed/out/jars/libs/R.jar"
-      resolved="btroo:react-native-image-picker:unspecified"
-      folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-picker/android/build/.transforms/5f922db5978ae4bfb2fce8428ad01402/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -433,19 +407,6 @@
       jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/.transforms/b8ac9e9a57405a958c5b5b507af2a78e/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/.transforms/b8ac9e9a57405a958c5b5b507af2a78e/transformed/out/jars/libs/R.jar"
       resolved="btroo:react-native-share:unspecified"
       folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-share/android/build/.transforms/b8ac9e9a57405a958c5b5b507af2a78e/transformed/out"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-sms::release"
-      jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-sms/android/build/.transforms/1107d0b3f237bdec5896e5f40885afce/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-sms/android/build/.transforms/1107d0b3f237bdec5896e5f40885afce/transformed/out/jars/libs/R.jar"
-      resolved="btroo:react-native-sms:unspecified"
-      folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-sms/android/build/.transforms/1107d0b3f237bdec5896e5f40885afce/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -1620,19 +1581,6 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="com.google.android.gms:play-services-iid:17.0.0@aar"
-      jars="/Users/rahul/.gradle/caches/transforms-3/481dc29721caed0573831bcfdd8ccf63/transformed/jetified-play-services-iid-17.0.0/jars/classes.jar"
-      resolved="com.google.android.gms:play-services-iid:17.0.0"
-      folder="/Users/rahul/.gradle/caches/transforms-3/481dc29721caed0573831bcfdd8ccf63/transformed/jetified-play-services-iid-17.0.0"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
       name="com.google.android.gms:play-services-auth-base:18.0.4@aar"
       jars="/Users/rahul/.gradle/caches/transforms-3/c9a62aa7ada4dc8be27255e8067e2b2b/transformed/jetified-play-services-auth-base-18.0.4/jars/classes.jar"
       resolved="com.google.android.gms:play-services-auth-base:18.0.4"
@@ -1940,6 +1888,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="androidx.coordinatorlayout:coordinatorlayout:1.1.0@aar"
+      jars="/Users/rahul/.gradle/caches/transforms-3/f2e460e79192f7e587af2d94dc9b16ef/transformed/coordinatorlayout-1.1.0/jars/classes.jar"
+      resolved="androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+      folder="/Users/rahul/.gradle/caches/transforms-3/f2e460e79192f7e587af2d94dc9b16ef/transformed/coordinatorlayout-1.1.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="androidx.camera:camera-extensions:1.1.0-beta02@aar"
       jars="/Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/jars/classes.jar"
       resolved="androidx.camera:camera-extensions:1.1.0-beta02"
@@ -2009,19 +1970,6 @@
       jars="/Users/rahul/.gradle/caches/transforms-3/37ce5c19a52aaafc85b7ce63149662b5/transformed/exifinterface-1.3.3/jars/classes.jar"
       resolved="androidx.exifinterface:exifinterface:1.3.3"
       folder="/Users/rahul/.gradle/caches/transforms-3/37ce5c19a52aaafc85b7ce63149662b5/transformed/exifinterface-1.3.3"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="androidx.coordinatorlayout:coordinatorlayout:1.1.0@aar"
-      jars="/Users/rahul/.gradle/caches/transforms-3/f2e460e79192f7e587af2d94dc9b16ef/transformed/coordinatorlayout-1.1.0/jars/classes.jar"
-      resolved="androidx.coordinatorlayout:coordinatorlayout:1.1.0"
-      folder="/Users/rahul/.gradle/caches/transforms-3/f2e460e79192f7e587af2d94dc9b16ef/transformed/coordinatorlayout-1.1.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -2134,19 +2082,6 @@
       jars="/Users/rahul/.gradle/caches/transforms-3/f3cc7ccb50e6362fb2d8829407d934c3/transformed/jetified-time4j-android-4.8-2021a/jars/classes.jar"
       resolved="net.time4j:time4j-android:4.8-2021a"
       folder="/Users/rahul/.gradle/caches/transforms-3/f3cc7ccb50e6362fb2d8829407d934c3/transformed/jetified-time4j-android-4.8-2021a"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="com.android.installreferrer:installreferrer:1.1.2@aar"
-      jars="/Users/rahul/.gradle/caches/transforms-3/44c6fcf38a2cd09990fe979d5595215e/transformed/jetified-installreferrer-1.1.2/jars/classes.jar"
-      resolved="com.android.installreferrer:installreferrer:1.1.2"
-      folder="/Users/rahul/.gradle/caches/transforms-3/44c6fcf38a2cd09990fe979d5595215e/transformed/jetified-installreferrer-1.1.2"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

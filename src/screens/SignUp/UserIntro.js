@@ -3,15 +3,11 @@ import {
   Text,
   TouchableOpacity,
   View,
-  BackHandler,
-  Alert,
-  ScrollView,
   SafeAreaView,
   Platform,
 } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
-
 import colors from "../../styles/colors";
 import FormInput from "../../components/formComponents/FormInput";
 import {
@@ -21,7 +17,6 @@ import {
   scrn_height,
   scrn_width,
 } from "../../styles/responsiveSize";
-
 import FooterBtn from "../../components/Buttons/FooterBtn";
 import fontFamily from "../../styles/fontFamily";
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
@@ -92,13 +87,8 @@ const UserIntro = ({ navigation }) => {
   const [city_blr, setcity_blr] = useState(false);
   const [city_page, setcity_page] = useState(1);
   const [city_search, setcity_search] = useState("");
-
   const [height_cm, setheight_cm] = useState("");
   const [height_blr, setheight_blr] = useState(false);
-
-  // const [gender, setgender] = useState('');
-  // const [gender_blr, setgender_blr] = useState('');
-
   const [gender, setgender] = useState("");
   const [gender_id, setgender_id] = useState(0);
   const [gender_list, setgender_list] = useState([]);
@@ -124,7 +114,6 @@ const UserIntro = ({ navigation }) => {
     ["Drinking", null, null],
     ["Marijuana", null, null],
   ]);
-  const [habits_blr, sethabits_blr] = useState(false);
 
   const [refresh, setrefresh] = useState(false);
 
@@ -234,7 +223,6 @@ const UserIntro = ({ navigation }) => {
       setpreference_blr(true);
       seteducation_blr(true);
       setoccupation_blr(true);
-      sethabits_blr(true);
     }
   }, [step2blr]);
 
@@ -342,8 +330,7 @@ const UserIntro = ({ navigation }) => {
         (habits_list[0][1] || habits_list[0][2]) &&
         (habits_list[1][1] || habits_list[1][2]) &&
         (habits_list[2][1] || habits_list[2][2])) ||
-      // habits_list[1][1] != null &&
-      // habits_list[2][1] != null)
+
       (step == 3 &&
         selected_interests_list.length > 0 &&
         selected_languages_list.length > 0)
@@ -456,13 +443,10 @@ const UserIntro = ({ navigation }) => {
         setstep(1);
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } else {
-        console.log("Error", "Some Error Occur" + resp.data.data)
       }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));
-      console.log("saveProfileData error", error);
     }
   };
 
@@ -504,15 +488,11 @@ const UserIntro = ({ navigation }) => {
           setcity_list(f_list);
         } else {
           setcity_refresh(false);
-
-          // setcity_list([])
           console.warn("Error occur while getting Location");
         }
       })
       .catch((err) => {
         setcity_refresh(false);
-
-        console.log("getLocation err", err);
       });
   };
 
@@ -537,7 +517,6 @@ const UserIntro = ({ navigation }) => {
         }
       })
       .catch((err) => {
-        console.log("getGenders err", err);
       });
   };
 
@@ -560,7 +539,6 @@ const UserIntro = ({ navigation }) => {
         }
       })
       .catch((err) => {
-        console.log("getEducations err", err);
       });
   };
 
@@ -588,7 +566,6 @@ const UserIntro = ({ navigation }) => {
         }
       })
       .catch((err) => {
-        console.log("getInterests err", err);
       });
   };
 
@@ -611,7 +588,6 @@ const UserIntro = ({ navigation }) => {
         }
       })
       .catch((err) => {
-        console.log("getLanguages err", err);
       });
   };
 
@@ -639,7 +615,6 @@ const UserIntro = ({ navigation }) => {
         }
       })
       .catch((err) => {
-        console.log("getPets err", err);
       });
   };
 
@@ -662,7 +637,6 @@ const UserIntro = ({ navigation }) => {
         }
       })
       .catch((err) => {
-        console.log("getPoliticalInclination err", err);
       });
   };
 
@@ -756,8 +730,6 @@ const UserIntro = ({ navigation }) => {
                       onCancel={() => {
                         setdate_open(false);
                       }}
-
-                      // maximumDate={maxdate ? maxdate : new Date()}
                     />
                   </FormInputContainer>
 
@@ -807,7 +779,6 @@ const UserIntro = ({ navigation }) => {
                         error_cond={
                           (height_cm < 60 || height_cm > 270) && step1blr
                         }
-                        // keyboardType="default"
                         value_blr={height_blr}
                         setvalue_blr={setheight_blr}
                         s_allow={false}
@@ -907,7 +878,6 @@ const UserIntro = ({ navigation }) => {
                           <Text
                             style={{
                               ...styles.radioBtnLabel,
-                              // backgroundColor:'red',
                               marginLeft: rspW(0.5),
                             }}
                           >
@@ -945,9 +915,6 @@ const UserIntro = ({ navigation }) => {
                           <View style={styles.radioBtnCont}>
                             <TouchableOpacity
                               onPress={() => {
-                                if (step2blr) {
-                                  sethabits_blr(true);
-                                }
 
                                 habits_list[idx][1] =
                                   habits_list[idx][1] != null
@@ -975,10 +942,7 @@ const UserIntro = ({ navigation }) => {
 
                             <TouchableOpacity
                               onPress={() => {
-                                if (step2blr) {
-                                  sethabits_blr(true);
-                                }
-
+                                
                                 habits_list[idx][2] =
                                   habits_list[idx][2] != null
                                     ? habits_list[idx][2]
@@ -1125,7 +1089,6 @@ const styles = StyleSheet.create({
   inputCont: {
     marginTop: rspH(2),
     height: rspH(56),
-    // backgroundColor:'red',
   },
 
   multiInputContainer: {
@@ -1139,19 +1102,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // paddingHorizontal: rspW(5.1),
     paddingHorizontal: rspW(3.2),
-
-    // backgroundColor:'green',
-    // marginBottom: rspH(0.6),
   },
   radioTxt: {
     fontFamily: fontFamily.medium,
     color: colors.black,
     fontSize: rspF(2.02),
-
     lineHeight: rspF(2.05),
-    // letterSpacing:1,
   },
   radioBtnCont: {
     flexDirection: "row",
@@ -1169,9 +1126,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.bold,
     lineHeight: rspF(1.31),
     color: colors.black,
-
     paddingBottom: rspH(Platform.OS == "ios" ? 1 : 0.1),
-
     textAlign: "center",
     letterSpacing: 1,
   },
