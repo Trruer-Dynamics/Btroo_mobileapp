@@ -1,14 +1,6 @@
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import React, { useState } from "react";
-import {
-  scrn_height,
-  rspH,
-  rspW,
-} from "../../../../styles/responsiveSize";
+import { scrn_height, rspH, rspW } from "../../../../styles/responsiveSize";
 import FormWrapper from "../../../wrappers/formWrappers/FormWrapper";
 import FormWrapperFooter from "../../../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../../formComponents/ErrorContainer";
@@ -116,7 +108,7 @@ const ReferralCode = ({
         setModalVisible(false);
       } else if (status == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       setloading(false);
       dispatch(setSessionExpired(true));

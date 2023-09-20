@@ -63,29 +63,21 @@ const FormSelectorRadio = ({
           </View>
 
           <View>
-            <Text style={styles.selectedOpt}
-            numberOfLines={1}
-            >
-              
-              {
-               truncateStr(
-               (list.filter(g => !(!g[1] && !g[2])).map((v, idx) => {
-                  
-                  let v_t =  String(v[1] ? v[0] : '') 
-                  let v_f =  String(v[2] ? 'Not ' + v[0] : '')
-                  let dec2 =
-                  
-                   v_t
-                   + 
-                   String(v_t != "" && v_f !=""? ", " : '')
-                   +
-                   v_f
+            <Text style={styles.selectedOpt} numberOfLines={1}>
+              {truncateStr(
+                list
+                  .filter((g) => !(!g[1] && !g[2]))
+                  .map((v, idx) => {
+                    let v_t = String(v[1] ? v[0] : "");
+                    let v_f = String(v[2] ? "Not " + v[0] : "");
+                    let dec2 =
+                      v_t + String(v_t != "" && v_f != "" ? ", " : "") + v_f;
 
-                   return dec2
-                  
-                })).join(", ")
-                , 34)
-                }
+                    return dec2;
+                  })
+                  .join(", "),
+                34
+              )}
             </Text>
           </View>
         </View>
@@ -108,14 +100,12 @@ const FormSelectorRadio = ({
                 visible={code_press}
                 setvisible={() => {
                   setcode_press(!code_press);
-                  
 
                   setlist([
-                    ["Smoking", selected_habits[0][0],selected_habits[0][1]],
-                    ["Drinking", selected_habits[1][0],selected_habits[1][1]],
-                    ["Marijuana",selected_habits[2][0],selected_habits[2][1]],
+                    ["Smoking", selected_habits[0][0], selected_habits[0][1]],
+                    ["Drinking", selected_habits[1][0], selected_habits[1][1]],
+                    ["Marijuana", selected_habits[2][0], selected_habits[2][1]],
                   ]);
-
                 }}
                 marginBottom={0}
               />
@@ -164,9 +154,7 @@ const FormSelectorRadio = ({
                         {/* Chioce */}
                         <View style={styles.radioBtnCont}>
                           <TouchableOpacity
-                            
                             onPress={() => {
-                              
                               list[idx][1] =
                                 list[idx][1] != null
                                   ? list[idx][1]
@@ -187,9 +175,7 @@ const FormSelectorRadio = ({
                             }}
                           ></TouchableOpacity>
                           <TouchableOpacity
-                           onPress={() => {
-                             
-
+                            onPress={() => {
                               list[idx][2] =
                                 list[idx][2] != null
                                   ? list[idx][2]
@@ -225,23 +211,25 @@ const FormSelectorRadio = ({
                 {/* Next Btn To Navigate to Next Form Components */}
                 <FooterBtn
                   title={"Confirm"}
-
                   disabled={
-                  !(String(list[0].slice(1,3)) != String(selected_habits[0])
-                    ||
-                    String(list[1].slice(1,3)) != String(selected_habits[1])
-                    ||
-                    String(list[2].slice(1,3)) != String(selected_habits[2]))
+                    !(
+                      String(list[0].slice(1, 3)) !=
+                        String(selected_habits[0]) ||
+                      String(list[1].slice(1, 3)) !=
+                        String(selected_habits[1]) ||
+                      String(list[2].slice(1, 3)) != String(selected_habits[2])
+                    )
                   }
-
-            
                   onPress={() => {
-                    let smok_c = String(list[0].slice(1,3)) != String(selected_habits[0])
-                    let drik_c = String(list[1].slice(1,3)) != String(selected_habits[1])
-                    let marij_c= String(list[2].slice(1,3)) != String(selected_habits[2])       
+                    let smok_c =
+                      String(list[0].slice(1, 3)) != String(selected_habits[0]);
+                    let drik_c =
+                      String(list[1].slice(1, 3)) != String(selected_habits[1]);
+                    let marij_c =
+                      String(list[2].slice(1, 3)) != String(selected_habits[2]);
 
-                    if (smok_c || drik_c || marij_c ) {
-                      setchanges_made(true)
+                    if (smok_c || drik_c || marij_c) {
+                      setchanges_made(true);
                       setcode_press(false);
                     }
                   }}

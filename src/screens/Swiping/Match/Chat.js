@@ -66,7 +66,11 @@ import Animated, {
 } from "react-native-reanimated";
 import { FlashList } from "@shopify/flash-list";
 import _ from "lodash";
-import { setDraftMsgs } from "../../../store/reducers/chats/chats";
+import {
+  setChatMsgs,
+  setDraftMsgs,
+  setIceBreakers,
+} from "../../../store/reducers/chats/chats";
 
 const ChatItem = ({
   item,
@@ -81,6 +85,7 @@ const ChatItem = ({
   setchatlist,
   scrollViewRef,
   profile,
+  dispatch,
 }) => {
   const vibtr = async () => {
     // await Vibration.vibrate(50);
@@ -140,36 +145,39 @@ const ChatItem = ({
   const animatedIconLeft = useAnimatedStyle(() => {
     return {
       opacity: interpolate(animation.value, [0, 50], [0, 1]),
-      transform: [
-        { translateX: animation.value },
-      ],
+      transform: [{ translateX: animation.value }],
     };
   });
 
-
-  const animation2 = useSharedValue(1)
-  const fadeIn = async () =>{
-   animation2.value = withDelay(500, withTiming(100,{
-    duration: 2000,
-   }))
-
-  }
+  const animation2 = useSharedValue(1);
+  const fadeIn = async () => {
+    animation2.value = withDelay(
+      500,
+      withTiming(100, {
+        duration: 2000,
+      })
+    );
+  };
 
   const animatedBox = useAnimatedStyle(() => {
     return {
       opacity: interpolate(animation2.value, [0, 100], [1, 0]),
     };
-    
-  })
+  });
 
+  let btmMarg =
+    index == 0 ? 1.6 : chatlist[index - 1][1] == chatlist[index][1] ? 0.5 : 1.6;
 
   return (
-    <View style={{ flex: 1, position: "relative", 
+    <View
+      style={{
+        flex: 1,
+        position: "relative",
 
-    // marginBottom: rspH(2.35) ,
-    marginBottom: rspH(1.6) ,
-
-    }}>
+        // marginBottom: rspH(2.35) ,
+        marginBottom: rspH(btmMarg),
+      }}
+    >
       <Animated.View
         style={[
           {
@@ -219,17 +227,19 @@ const ChatItem = ({
         >
           {item[5] != null && (
             <TouchableOpacity
-            onPress={()=>{
-  
-              let rply_itm =chatlist.find((v) => v[4] == item[5])
-             
-              let rply_itm_indx = chatlist.indexOf(rply_itm)
-              setrply_item_indx(rply_itm_indx)
-              let tmp_lis = [...chatlist];
-              setchatlist(tmp_lis)
-              scrollViewRef.current.scrollToIndex({ index : rply_itm_indx, animated: true})
-         
-            }}
+              onPress={() => {
+                let rply_itm = chatlist.find((v) => v[4] == item[5]);
+
+                let rply_itm_indx = chatlist.indexOf(rply_itm);
+                setrply_item_indx(rply_itm_indx);
+                let tmp_lis = [...chatlist];
+                setchatlist(tmp_lis);
+
+                scrollViewRef.current.scrollToIndex({
+                  index: rply_itm_indx,
+                  animated: true,
+                });
+              }}
               style={{
                 backgroundColor: item[1] == 0 ? "#e6e8eb" : "#4986CA",
 
@@ -351,22 +361,22 @@ const ChatItem = ({
           )}
 
           {/* {item[5] && ( */}
+          <View
+            style={{
+              // backgroundColor:'red',
+              paddingTop: rspH(1),
+              marginRight: rspW(-2.7),
+              // marginBottom: rspH(-1.5),
+              paddingLeft: rspW(2),
+              // justifyContent: "flex-end",
+              zIndex: 2,
+            }}
+          >
             <View
-              style={{
-                // backgroundColor:'red',
-                paddingTop: rspH(1),
-                marginRight: rspW(-2.7),
-                // marginBottom: rspH(-1.5),
-                paddingLeft: rspW(2),
-                // justifyContent: "flex-end",
-                zIndex: 2,
-              }}
-            >
-              <View
               style={{
                 marginBottom: rspH(-1.3),
               }}
-              >
+            >
               <Text
                 style={{
                   ...styles.chatTimeTxt,
@@ -376,50 +386,46 @@ const ChatItem = ({
               >
                 {c_time}
               </Text>
-              </View>
             </View>
+          </View>
           {/* )} */}
         </Animated.View>
       </PanGestureHandler>
 
-     {
-     index === rply_item_indx &&
-     <Animated.View
-     onLayout={()=>{
-      fadeIn().then(
-        ()=>{
-           
-          setTimeout(() => {
-            animation2.value = 0
-            setrply_item_indx(null)
-            let tmp_lis = [...chatlist];
-              setchatlist(tmp_lis)
-            
-          }, 1800);
-        }
-      )
-     }}
-      style={[
-        {
-          paddingVertical: rspH(0.4),
-          position:'absolute',
-          width: '100%',
-          height: '100%',
-          backgroundColor:  '#2364aa4e',
-        },
-        animatedBox
-      ]}
-      />}
+      {index === rply_item_indx && (
+        <Animated.View
+          onLayout={() => {
+            fadeIn().then(() => {
+              setTimeout(() => {
+                animation2.value = 0;
+                setrply_item_indx(null);
+                let tmp_lis = [...chatlist];
+                setchatlist(tmp_lis);
+              }, 1800);
+            });
+          }}
+          style={[
+            {
+              paddingVertical: rspH(0.4),
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              backgroundColor: "#2364aa4e",
+            },
+            animatedBox,
+          ]}
+        />
+      )}
     </View>
   );
 };
 
 const Chat = ({ profile }) => {
-
   const chat_reveal_tut = useSelector(
     (state) => state.tutorial.chat_reveal_tut
   );
   const { sckop } = useContext(UserContext);
+
   const [replySet, setreplySet] = useState(false);
   const [actreplyID, setactreplyID] = useState(null);
   const access_token = useSelector(
@@ -433,16 +439,13 @@ const Chat = ({ profile }) => {
     (state) => state.authentication.is_network_connected
   );
 
-  const chats_msgs = useSelector(
-    (state) => state.chats.chats_msgs
-  );
+  const chats_msgs = useSelector((state) => state.chats.chats_msgs);
 
-  const drafts_msgs = useSelector(
-    (state) => state.chats.drafts_msgs
-  );
+  const drafts_msgs = useSelector((state) => state.chats.drafts_msgs);
+
+  const icebreakers = useSelector((state) => state.chats.icebreakers);
 
   const [connectSocketS, setconnectSocketS] = useState(false);
-
 
   const [loading, setloading] = useState(false);
   const [show_rvl_tut, setshow_rvl_tut] = useState(false);
@@ -461,9 +464,10 @@ const Chat = ({ profile }) => {
 
   const [chatlist, setchatlist] = useState([]);
   const chatlist_ref = useRef(null);
+  const socket_con = useRef(null);
   const [chatlist_remain, setchatlist_remain] = useState([]);
-  const [rply_item_indx, setrply_item_indx] = useState(null)
-  
+  const [rply_item_indx, setrply_item_indx] = useState(null);
+
   const [chatPage, setchatPage] = useState(1);
 
   const [rvl_activate, setrvl_activate] = useState(false);
@@ -491,10 +495,11 @@ const Chat = ({ profile }) => {
             .map((v) => v.icebreaker);
 
           seticebreaker_list(active_ibs);
-        } 
+          dispatch(setIceBreakers(active_ibs));
+        }
       })
       .catch((err) => {
-        dispatch(setSessionExpired(true));
+        // dispatch(setSessionExpired(true));
       });
   };
 
@@ -522,11 +527,11 @@ const Chat = ({ profile }) => {
         setshow_rvl_tut(false);
         dispatch(setChatRevealTut(false));
       } else if (resp_data.code == 401) {
-        dispatch(setSessionExpired(true));
+        // dispatch(setSessionExpired(true));
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));    
+      // dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -554,32 +559,30 @@ const Chat = ({ profile }) => {
       if (resp_data.code == 200) {
         setrvl_click(true);
       } else if (resp_data.code == 401) {
-        dispatch(setSessionExpired(true));
+        // dispatch(setSessionExpired(true));
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
+      // dispatch(setSessionExpired(true));
       return false;
     }
   };
 
-
   const revealProfileTime = async () => {
     setloading(true);
 
-    const api = apiUrl + 'sendnotificationforprofilereveal/'
+    const api = apiUrl + "sendnotificationforprofilereveal/";
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
 
     const data = {
-      
-        profileid1 : profile_data.userprofile.id,
-        profileid2 : profile.userprofile.id,        
+      profileid1: profile_data.userprofile.id,
+      profileid2: profile.userprofile.id,
     };
 
-    console.log("data",data)
+    console.log("data", data);
 
     try {
       const response = await axios.post(api, data, {
@@ -589,9 +592,7 @@ const Chat = ({ profile }) => {
 
       let resp_data = response.data;
 
-      console.log("revealProfileTime resp", response)
-
-      
+      console.log("revealProfileTime resp", response);
     } catch (error) {
       setloading(false);
       // dispatch(setSessionExpired(true));
@@ -600,11 +601,8 @@ const Chat = ({ profile }) => {
     }
   };
 
-
-  const getPrevChats = async (page, list = []) => {
-
-    console.log("getPrevChats call")
-    setloading(true);
+  const getPrevChats = async (list = []) => {
+    // setloading(true);
 
     let url = apiUrl + "chat_history/" + profile.chat_id + "/";
     const headers = {
@@ -637,6 +635,8 @@ const Chat = ({ profile }) => {
               ele.id,
               ele.reply_msg_id != null ? ele.reply_msg_id : null,
               day_tmp,
+              "",
+              profile.chat_id,
             ];
 
             tmp_lis.push(sitm);
@@ -656,14 +656,23 @@ const Chat = ({ profile }) => {
             k += 1;
           }
 
-          setchatlist(tmp_lis);
-          chatlist_ref.current = tmp_lis;
+          console.log("chats_msgs.length", chats_msgs.length);
+          console.log("tmp_lis.length", tmp_lis.length);
+
+          if (chats_msgs.length > tmp_lis.length) {
+            let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
+            setchatlist(tmp);
+            chatlist_ref.current = tmp;
+          } else {
+            setchatlist(tmp_lis);
+            chatlist_ref.current = tmp_lis;
+          }
+
           setconnectSocketS(true);
         }
-        
       })
       .catch((err) => {
-        dispatch(setSessionExpired(true));
+        console.log("getPrevChats err", err);
         setloading(false);
       });
   };
@@ -681,22 +690,29 @@ const Chat = ({ profile }) => {
     ws.current.send(JSON.stringify(data));
   };
 
-  const connectSocket = () => {
+  const connectSocket = async () => {
+    console.log("connectSocket Call");
+
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
 
     ws.current.onopen = (e) => {
       console.log("Open");
-
+      socket_con.current = true;
       SeenMe();
+
       setSocketOpen(true);
       sckop.current = true;
       dispatch(setSocketClose(false));
+
+      if (drafts_msgs.length > 0) {
+        sentDraftMesg();
+      }
     };
 
     ws.current.onclose = (e) => {
-      console.log("Close");
+      console.log(Platform.OS, "Close");
       sckop.current = false;
-
+      socket_con.current = false;
       setSocketOpen(false);
       dispatch(setSocketClose(true));
     };
@@ -707,11 +723,10 @@ const Chat = ({ profile }) => {
     };
 
     ws.current.onmessage = (e) => {
-
-
       const data = JSON.parse(e.data);
 
       if (data.sender != profile_data.user.id) {
+        console.log(Platform.OS, "on message", data.sender);
 
         try {
           let day_tmp = moment(new Date(data.datetime))
@@ -729,9 +744,12 @@ const Chat = ({ profile }) => {
               data.id,
               data.reply_msg_id,
               day_t ? day_tmp : "",
+              "",
+              profile.chat_id,
             ],
             ...prv,
           ]);
+
           chatlist_ref.current = [
             [
               data.message,
@@ -744,18 +762,14 @@ const Chat = ({ profile }) => {
             ],
             ...chatlist_ref.current,
           ];
-        } catch (error) {
-        }
+        } catch (error) {}
       } else {
-        // console.log("sender msg", data)
+        console.log(Platform.OS, " othe on message", data.sender);
+
         setchatlist_remain([data, ...chatlist_remain]);
       }
     };
   };
-
-  let day_lis = [];
-
-  let day_ind = 0;
 
   const renderItem = ({ item, index }) => {
     return (
@@ -773,7 +787,6 @@ const Chat = ({ profile }) => {
               backgroundColor: "#CCCCCC",
               marginBottom: rspH(1.83),
               // marginBottom: rspH(1.5),
-
             }}
           >
             <Text
@@ -794,6 +807,7 @@ const Chat = ({ profile }) => {
           item={item}
           index={index}
           msg={msg}
+          dispatch={dispatch}
           rply_item_indx={rply_item_indx}
           setrply_item_indx={setrply_item_indx}
           scrollViewRef={scrollViewRef}
@@ -808,7 +822,13 @@ const Chat = ({ profile }) => {
   };
 
   useEffect(() => {
-    
+    if (chatlist.length > 0) {
+      console.log("chatlist 0", chatlist[0]);
+      dispatch(setChatMsgs(chatlist));
+    }
+  }, [chatlist]);
+
+  useEffect(() => {
     if (connectSocketS) {
       connectSocket();
     }
@@ -816,26 +836,39 @@ const Chat = ({ profile }) => {
     return () => {
       if (connectSocketS) {
         if (ws.current.readyState == 1) {
+          console.log("useEffect Close");
           ws.current.close();
         }
       }
     };
   }, [connectSocketS]);
 
+  useEffect(() => {
+    if (socket_con.current == false) {
+      connectSocket();
+    }
+  }, [socket_con.current]);
+
+  const sentDraftMesg = () => {
+    for (let l = 0; l < drafts_msgs.length; l++) {
+      const et = drafts_msgs[l];
+      ws.current.send(JSON.stringify(et));
+    }
+
+    dispatch(setDraftMsgs([]));
+  };
 
   useEffect(() => {
     if (chatlist_remain.length > 0) {
-
-      let draft_msgs_tmp = [...drafts_msgs]
-      console.log("draft_msgs_tmp length", draft_msgs_tmp.length)
+      let draft_msgs_tmp = [...drafts_msgs];
 
       for (let p = 0; p < chatlist_remain.length; p++) {
         const msg_itm = chatlist_remain[p];
-        console.log("msg_itm",msg_itm)
-        draft_msgs_tmp = draft_msgs_tmp.filter(v => v.unique_id != msg_itm.unique_id)
+        draft_msgs_tmp = draft_msgs_tmp.filter(
+          (v) => v.unique_id != msg_itm.unique_id
+        );
       }
-
-      console.log("draft_msgs_tmp length", draft_msgs_tmp.length)
+      dispatch(setDraftMsgs(draft_msgs_tmp));
 
       let frm = [];
       for (let t = 0; t < chatlist_remain.length; t++) {
@@ -871,102 +904,93 @@ const Chat = ({ profile }) => {
       let tmp3 = tmpR.reverse();
 
       setchatlist(tmp3);
+
       chatlist_ref.current = tmp;
     }
   }, [chatlist_remain]);
 
   useEffect(() => {
+    if (chatlist.length >= 25 && !profile.prof_rvl && !rvl_activate) {
+      let mymsgs = chatlist.filter((v) => v[1] == 1);
+      let othmsgs = chatlist.filter((v) => v[1] == 0);
+      let mycount = mymsgs
+        .map((v) => v[0])
+        .flat()
+        .join().length;
+      let othcount = othmsgs
+        .map((v) => v[0])
+        .flat()
+        .join().length;
 
-      if (chatlist.length >= 25 && !profile.prof_rvl
-        && 
-        !rvl_activate
-        ) {
-       let mymsgs = chatlist.filter((v) => v[1] == 1);
-       let othmsgs = chatlist.filter((v) => v[1] == 0);
-       let mycount = mymsgs
-         .map((v) => v[0])
-         .flat()
-         .join().length;
-       let othcount = othmsgs
-         .map((v) => v[0])
-         .flat()
-         .join().length;
- 
-       if (mycount >= 120 && othcount >= 120) {
-         let tmpl = [];
-         let turn = 0;
-         for (let j = 0; j < chatlist.length; j++) {
-           const ele = chatlist[j];
- 
-           if (ele[1] == turn) {
-             tmpl.push(ele);
-             turn = turn == 0 ? 1 : 0;
-           } else {
-             continue;
-           }
-         }
- 
-         let tmpl2 = tmpl[tmpl.length - 1][1] == 0 ? tmpl.slice(0, -1) : tmpl;
-         tmp_11 = tmpl2.map((v) => v[2]);
- 
-         let tmpl3 = [];
- 
-         l = 0;
-         for (const iter of tmp_11) {
-           if ((l + 1) % 2 !== 0) {
-             let t1 = new Date(tmp_11[l]);
-             let t2 = new Date(tmp_11[l + 1]);
-             let diff = Math.abs(t2 - t1);
- 
-             tmpl3.push(diff);
-           }
- 
-           l = l + 1;
-         }
- 
+      if (mycount >= 120 && othcount >= 120) {
+        let tmpl = [];
+        let turn = 0;
+        for (let j = 0; j < chatlist.length; j++) {
+          const ele = chatlist[j];
 
-         if (tmpl3.length > 0) {
+          if (ele[1] == turn) {
+            tmpl.push(ele);
+            turn = turn == 0 ? 1 : 0;
+          } else {
+            continue;
+          }
+        }
+
+        let tmpl2 = tmpl[tmpl.length - 1][1] == 0 ? tmpl.slice(0, -1) : tmpl;
+        tmp_11 = tmpl2.map((v) => v[2]);
+
+        let tmpl3 = [];
+
+        l = 0;
+        for (const iter of tmp_11) {
+          if ((l + 1) % 2 !== 0) {
+            let t1 = new Date(tmp_11[l]);
+            let t2 = new Date(tmp_11[l + 1]);
+            let diff = Math.abs(t2 - t1);
+
+            tmpl3.push(diff);
+          }
+
+          l = l + 1;
+        }
+
+        if (tmpl3.length > 0) {
           let total_time = new Date(tmpl3.reduce((a, b) => a + b)).getMinutes();
           let avg_time = total_time / chatlist.length;
-  
+
           if (avg_time <= 5) {
             setrvl_activate(true);
-         
+
             if (chat_reveal_tut == true) {
               Keyboard.dismiss();
               setshow_rvl_tut(true);
-              
             }
-          } 
-         }
-         
-       }
-     }
-  
-    
+          }
+        }
+      }
+    }
   }, [chatlist]);
-
 
   useEffect(() => {
     // console.log("rvl_activate",rvl_activate)
     if (rvl_activate) {
-      setrvl_time(true) 
+      setrvl_time(true);
       // revealProfileTime()
     }
-
-    
-  }, [rvl_activate])
- 
+  }, [rvl_activate]);
 
   useLayoutEffect(() => {
     if (profile.matchType == "New Match") {
       setmsg("Hi!");
     }
-    getPrevChats(chatPage, chatlist);
   }, []);
 
   useLayoutEffect(() => {
-    getIceBreaker();
+    if (is_network_connected) {
+      getIceBreaker();
+    } else {
+      seticebreaker_list(icebreakers);
+    }
   }, []);
 
   useLayoutEffect(() => {
@@ -1001,17 +1025,30 @@ const Chat = ({ profile }) => {
     };
   }, []);
 
-
   useEffect(() => {
-    console.log("is_network_connected",is_network_connected)
-   
-    if (is_network_connected && drafts_msgs.length > 0) {
-      console.log("drafts_msgs.length",drafts_msgs.length)
-     let only_msg =  drafts_msgs.map(v=> v.message)
-      console.log("only_msg",only_msg)
+    // dispatch(setDraftMsgs([]))
+    // dispatch(setChatMsgs([]))
+    console.log("profile", profile.chat_id);
+
+    let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
+    console.log("tmp[0]", tmp[0], tmp.length);
+
+    console.log("is_network_connected", is_network_connected);
+
+    if (!is_network_connected && tmp.length > 0) {
+      setchatlist(tmp);
     }
-  }, [is_network_connected])
-  
+
+    if (is_network_connected && drafts_msgs.length > 0) {
+      connectSocket();
+    }
+  }, [is_network_connected]);
+
+  useLayoutEffect(() => {
+    if (is_network_connected) {
+      getPrevChats(chatlist);
+    }
+  }, []);
 
   return (
     <>
@@ -1120,18 +1157,20 @@ const Chat = ({ profile }) => {
               Platform.OS == "android" ? "always" : "never"
             }
             onContentSizeChange={() => {
-            
-              let lastMsg = chatlist[0]
-              let sender = ""
+              let lastMsg = chatlist[0];
+              let sender = "";
               if (lastMsg) {
-                 sender = lastMsg[3]
-                 let login_user = profile_data.user.id
+                sender = lastMsg[3];
+                let login_user = profile_data.user.id;
 
-              if (login_user === sender) {
-                scrollViewRef.current.scrollToIndex({ index : 0, animated: false})
-              }}
+                if (login_user === sender) {
+                  scrollViewRef.current.scrollToIndex({
+                    index: 0,
+                    animated: false,
+                  });
+                }
+              }
             }}
-          
             renderItem={renderItem}
             keyExtractor={(_, index) => index}
             bounces={false}
@@ -1201,9 +1240,7 @@ const Chat = ({ profile }) => {
                         ? "You"
                         : profile.userprofile.name}
                     </Text>
-                    <View
-                      style={{}}
-                    >
+                    <View style={{}}>
                       <Text
                         style={{
                           color:
@@ -1266,8 +1303,6 @@ const Chat = ({ profile }) => {
                   <TouchableOpacity
                     onPress={() => {
                       if (msg.length > 0) {
-                
-
                         seticebreaker("");
 
                         let ung_id = Math.random().toString(36).slice(2);
@@ -1291,11 +1326,13 @@ const Chat = ({ profile }) => {
                           actreplyID != null ? actreplyID : null,
                           day_t ? day_tmp : "",
                           ung_id,
+                          profile.chat_id,
                         ];
-
+                        console.log("nitm", nitm);
                         tmp_lis.unshift(nitm);
-  
+
                         setchatlist(tmp_lis);
+
                         chatlist_ref.current = tmp_lis;
                         setreplySet(false);
 
@@ -1309,21 +1346,13 @@ const Chat = ({ profile }) => {
                           unique_id: ung_id,
                         };
 
-                        console.log("Here4")
+                        let all_drafts_msgs = [...drafts_msgs];
 
-                        // console.log("drafts_messages",drafts_msgs.map(v=> v.msg_data.message))
-                        let all_drafts_msgs = [...drafts_msgs]
+                        all_drafts_msgs.push(data);
 
-                       
-
-                        all_drafts_msgs.push(data)
-
-                        // console.log("all_drafts_msgs",all_drafts_msgs.map(v=> v.msg_data.message))
-
-
-                        dispatch(setDraftMsgs(all_drafts_msgs))
+                        dispatch(setDraftMsgs(all_drafts_msgs));
                         if (SocketOpen) {
-                             ws.current.send(JSON.stringify(data));
+                          ws.current.send(JSON.stringify(data));
                         }
 
                         setmsg("");
@@ -1356,7 +1385,6 @@ const Chat = ({ profile }) => {
             />
           </FullModal>
         </KeyboardAvoidingView>
-
       </SafeAreaView>
 
       {show_rvl_tut && (
@@ -1424,7 +1452,6 @@ const styles = StyleSheet.create({
     borderRadius: rspW(5.1),
     borderRadius: rspW(2),
     marginHorizontal: rspW(4),
-
   },
   chatMsgTxt: {
     fontSize: rspF(1.8),

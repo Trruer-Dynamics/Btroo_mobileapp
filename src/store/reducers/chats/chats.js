@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  chats_msgs : [],
-  drafts_msgs : []
+  chats_msgs: [],
+  drafts_msgs: [],
+  matches: [],
+  icebreakers: [],
 };
 
 export const chatsSlice = createSlice({
@@ -15,12 +17,16 @@ export const chatsSlice = createSlice({
     setDraftMsgs: (state, action) => {
       state.drafts_msgs = action.payload;
     },
+    setMatches: (state, action) => {
+      state.matches = action.payload;
+    },
+    setIceBreakers: (state, action) => {
+      state.icebreakers = action.payload;
+    },
   },
 });
 
-export const {
-  setChatMsgs,
-  setDraftMsgs
-} = chatsSlice.actions;
+export const { setChatMsgs, setDraftMsgs, setMatches, setIceBreakers } =
+  chatsSlice.actions;
 
 export default chatsSlice.reducer;

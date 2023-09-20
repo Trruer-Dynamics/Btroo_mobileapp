@@ -39,8 +39,6 @@ import com.wix.autogrowtextinput.AutoGrowTextInputPackage;
 import com.reactnativecompressor.CompressorPackage;
 // react-native-date-picker
 import com.henninghall.date_picker.DatePickerPackage;
-// react-native-email-link
-import agency.flexible.react.modules.email.EmailPackage;
 // react-native-fs
 import com.rnfs.RNFSPackage;
 // react-native-gesture-handler
@@ -130,7 +128,6 @@ public class PackageList {
       new AutoGrowTextInputPackage(),
       new CompressorPackage(),
       new DatePickerPackage(),
-      new EmailPackage(),
       new RNFSPackage(),
       new RNGestureHandlerPackage(),
       new PickerPackage(),

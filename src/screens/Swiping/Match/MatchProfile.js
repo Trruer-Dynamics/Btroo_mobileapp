@@ -191,7 +191,7 @@ const MatchProfile = ({ route }) => {
         setreportConfirm(true);
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       setreport("");
       dispatch(setSessionExpired(true));
@@ -201,7 +201,6 @@ const MatchProfile = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-  
       let lang_tmp = profile?.userprofile?.language.map(
         (v) => v?.languagemaster?.language
       );
@@ -334,7 +333,6 @@ const MatchProfile = ({ route }) => {
                         if (profile?.all_images.length > 0) {
                           setmodalVisible(true);
                         }
-                        
                       }}
                     >
                       <Image
@@ -579,7 +577,7 @@ const MatchProfile = ({ route }) => {
                     >
                       <Text style={styles.profileDetailContHeading}>Pets</Text>
                       <ScrollView
-                      bounces={false}
+                        bounces={false}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -721,7 +719,7 @@ const MatchProfile = ({ route }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Languages</Text>
                   <ScrollView
-                  bounces={false}
+                    bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -921,7 +919,6 @@ const styles = StyleSheet.create({
     height: rspH(9.6),
     paddingHorizontal: rspW(3.2),
     paddingTop: rspH(1.17),
-
   },
   profileDetailCont: {
     height: rspH(9.6),

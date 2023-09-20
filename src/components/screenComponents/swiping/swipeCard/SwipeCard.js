@@ -468,7 +468,6 @@ const SwipeCard = ({
   const [super_liked_profile, setsuper_liked_profile] = useState(false);
 
   useLayoutEffect(() => {
-
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
     }
@@ -559,7 +558,6 @@ const SwipeCard = ({
                     width: rspW(6.05),
                     flexDirection: "row",
                     justifyContent: "space-between",
-                   
                   }}
                 >
                   <View style={styles.dots} />
@@ -602,7 +600,6 @@ const SwipeCard = ({
                     setshowFilter(!showFilter);
                   }}
                 >
-                  
                   <Image
                     source={require("../../../../assets/images/Swiping/Filter3.png")}
                     style={{ width: 26, height: 26 }}
@@ -790,7 +787,6 @@ const SwipeCard = ({
 
             <ScrollView
               style={styles.profileDetailsCont}
-              
               bounces={false}
               showsVerticalScrollIndicator={false}
               scrollEventThrottle={300}
@@ -937,7 +933,7 @@ const SwipeCard = ({
                     </Text>
                     <TouchableWithoutFeedback>
                       <ScrollView
-                      bounces={false}
+                        bounces={false}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
                         showsHorizontalScrollIndicator={false}
@@ -983,7 +979,7 @@ const SwipeCard = ({
                     >
                       <Text style={styles.profileDetailContHeading}>Pets</Text>
                       <ScrollView
-                      bounces={false}
+                        bounces={false}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
                         scrollEventThrottle={1}
@@ -1157,7 +1153,6 @@ const styles = StyleSheet.create({
     width: rspW(86),
     height: scrn_height,
     marginTop: rspH(3.4),
-
   },
   profileDetailsSubCont: {
     width: rspW(82),
@@ -1173,7 +1168,6 @@ const styles = StyleSheet.create({
     height: rspH(9.6),
     paddingHorizontal: rspW(3.2),
     paddingTop: rspH(1.17),
-    
   },
   profileDetailCont: {
     height: rspH(9.6),

@@ -22,7 +22,6 @@ MERGED from [:react-native-masked-view_masked-view] /Users/rahul/Desktop/BtrooPr
 MERGED from [:react-native-autogrow-textinput-ts] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-autogrow-textinput-ts/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-compressor] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-compressor/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-date-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
 MERGED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-33:12
@@ -522,8 +521,6 @@ MERGED from [:react-native-compressor] /Users/rahul/Desktop/BtrooProject/Btroo_N
 MERGED from [:react-native-compressor] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-compressor/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-date-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-date-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
@@ -1014,22 +1011,6 @@ ADDED from [:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_
 		ADDED from [:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:29:13-35
 	android:name
 		ADDED from [:react-native-firebase_app] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/@react-native-firebase/app/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:26:13-88
-queries
-ADDED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:15
-MERGED from [:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-13:15
-MERGED from [:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-13:15
-MERGED from [androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:24:5-28:15
-MERGED from [androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:24:5-28:15
-intent#action:name:android.intent.action.VIEW+data:scheme:mailto
-ADDED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:18
-action#android.intent.action.VIEW
-ADDED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-65
-	android:name
-		ADDED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:11:21-62
-data
-ADDED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-45
-	android:scheme
-		ADDED from [:react-native-email-link] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-email-link/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:13:19-42
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-81
 MERGED from [:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:15:5-81
@@ -1038,6 +1019,10 @@ MERGED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.grad
 MERGED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradle/caches/transforms-3/ac268df81f11d2c191778ad4138dae4f/transformed/jetified-VideoCompressor-1a262bba37/AndroidManifest.xml:12:5-81
 	android:name
 		ADDED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-78
+queries
+ADDED from [:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-13:15
+MERGED from [androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:24:5-28:15
+MERGED from [androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:24:5-28:15
 intent#action:name:android.media.action.IMAGE_CAPTURE
 ADDED from [:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-12:18
 action#android.media.action.IMAGE_CAPTURE
@@ -1090,6 +1075,10 @@ ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/cache
 		ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:30:13-80
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:firebase.auth+data:path:/+data:scheme:genericidp
 ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:35:13-45:29
+action#android.intent.action.VIEW
+ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:36:17-69
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:36:25-66
 category#android.intent.category.DEFAULT
 ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:38:17-76
 	android:name
@@ -1098,6 +1087,14 @@ category#android.intent.category.BROWSABLE
 ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:17-78
 	android:name
 		ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:39:27-75
+data
+ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:41:17-44:51
+	android:path
+		ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:43:21-37
+	android:host
+		ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:42:21-49
+	android:scheme
+		ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:44:21-48
 activity#com.google.firebase.auth.internal.RecaptchaActivity
 ADDED from [com.google.firebase:firebase-auth:22.1.0] /Users/rahul/.gradle/caches/transforms-3/a6ea3b4dc34943083e8816cc560d7ebe/transformed/jetified-firebase-auth-22.1.0/AndroidManifest.xml:47:9-64:20
 	android:excludeFromRecents

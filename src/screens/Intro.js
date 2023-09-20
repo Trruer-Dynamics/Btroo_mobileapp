@@ -76,8 +76,7 @@ const Intro = () => {
             resizeMode={"cover"}
             rate={1.0}
             ignoreSilentSwitch={"obey"}
-            onError={(err) => {
-            }}
+            onError={(err) => {}}
           />
 
           {/* Logo Area */}

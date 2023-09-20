@@ -141,7 +141,7 @@ const Filters = ({
 
   const onNextPress = () => {
     if (
-      changes_made 
+      changes_made
       // &&
       // selected_preferences_list.length > 0 &&
       // selected_languages_list.length > 0 &&
@@ -175,9 +175,9 @@ const Filters = ({
       //   marijuana: habits_list[2][1] ? 1 : 0,
       // },
       habit: {
-        smoking: [habits_list[0][1],habits_list[0][2]],
-        drinking: [habits_list[1][1],habits_list[1][2]],
-        marijuana: [habits_list[2][1],habits_list[2][2]],
+        smoking: [habits_list[0][1], habits_list[0][2]],
+        drinking: [habits_list[1][1], habits_list[1][2]],
+        marijuana: [habits_list[2][1], habits_list[2][2]],
       },
       age_min: minage,
       age_max: maxage,
@@ -190,9 +190,7 @@ const Filters = ({
         headers,
       });
 
-
       if (resp.data.code == 200) {
-
         setModalVisible(false);
         if (setfilterRefresh != null) {
           setfilterRefresh(!filterRefresh);
@@ -237,8 +235,6 @@ const Filters = ({
       //   ["Marijuana", selected_habits[2], !selected_habits[2]],
       // ]);
 
-
-
       // sethabits_list([
       //   ["Smoking", selected_habits[0],selected_habits[0] != null? !selected_habits[0] : null],
       //   ["Drinking", selected_habits[1], selected_habits[1] != null? !selected_habits[1] : null],
@@ -246,11 +242,10 @@ const Filters = ({
       // ]);
 
       sethabits_list([
-        ["Smoking", selected_habits[0][0],selected_habits[0][1]],
-        ["Drinking", selected_habits[1][0],selected_habits[1][1]],
-        ["Marijuana",selected_habits[2][0],selected_habits[2][1]],
+        ["Smoking", selected_habits[0][0], selected_habits[0][1]],
+        ["Drinking", selected_habits[1][0], selected_habits[1][1]],
+        ["Marijuana", selected_habits[2][0], selected_habits[2][1]],
       ]);
-
     }
   }, [preferences_list, interest_list, languages_list]);
 
@@ -263,8 +258,6 @@ const Filters = ({
       setchanges_made(true);
     }
   }, [distance, minage, maxage, minheight, maxheight]);
-
-  
 
   return (
     <>
@@ -430,13 +423,13 @@ const Filters = ({
               <FooterBtn
                 title={"Save"}
                 disabled={
-                  !
-                 (changes_made 
-                  // ||
-                  // selected_preferences_list.length == 0 ||
-                  // selected_languages_list.length == 0 ||
-                  // selected_interest_list.length == 0
-                 )
+                  !(
+                    changes_made
+                    // ||
+                    // selected_preferences_list.length == 0 ||
+                    // selected_languages_list.length == 0 ||
+                    // selected_interest_list.length == 0
+                  )
                 }
                 onPress={onNextPress}
               />

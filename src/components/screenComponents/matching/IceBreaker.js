@@ -56,7 +56,6 @@ const IceBreaker = ({
           setModalVisible(!modalVisible);
           // setmsg((messg) => messg + item);
           setmsg(item);
-
         }}
       />
     );

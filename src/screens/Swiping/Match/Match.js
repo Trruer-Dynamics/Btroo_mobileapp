@@ -6,15 +6,11 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useLayoutEffect } from "react";
 import FormWrapper from "../../../components/wrappers/formWrappers/FormWrapper";
 import MatchItem from "../../../components/screenComponents/matching/MatchItem";
 import colors from "../../../styles/colors";
-import {
-  rspH,
-  rspW,
-  rspF,
-} from "../../../styles/responsiveSize";
+import { rspH, rspW, rspF } from "../../../styles/responsiveSize";
 import fontFamily from "../../../styles/fontFamily";
 import { Switch } from "react-native-switch";
 import CentralModal from "../../../components/modals/CentralModal";
@@ -32,12 +28,13 @@ import Loader from "../../../components/loader/Loader";
 
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { UserContext } from "../../../context/user";
+import { setMatches } from "../../../store/reducers/chats/chats";
 const insets = initialWindowMetrics.insets;
 
 const Match = () => {
   const dispatch = useDispatch();
 
-  const {  newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);
+  const { newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -57,7 +54,14 @@ const Match = () => {
 
   const [extendTimeUser_ID, setextendTimeMatchID] = useState(0);
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
+  const matches = useSelector((state) => state.chats.matches);
+
   const updateKeepMatching = async () => {
+    console.log("updateKeepMatching");
     // setloading(true);
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
@@ -93,15 +97,14 @@ const Match = () => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } 
-      
+      }
     } catch (error) {
       dispatch(setSessionExpired(true));
-      
     }
   };
 
   const getMatches = async () => {
+    console.log("getMatches");
 
     const url = apiUrl + `activechatroomlist/`;
 
@@ -119,8 +122,6 @@ const Match = () => {
 
       let code = resp.data.code;
       let resp_data = resp.data.data;
-
-
 
       if (code == 200) {
         let match_tmp = [];
@@ -163,19 +164,22 @@ const Match = () => {
             mth.expiry_date = new Date(expiry_date);
             mth.seen = seen_by.includes(lg_id);
             mth.user_id = mth_user.id;
+            mth.for_user_id = profile_data.userprofile.id;
             mth.prof_img = mth_user.userprofile.image[0].cropedimage;
             mth.prof_rvl = resp_data[p].user1_profile_reveal;
             mth.publicprompts = mth_user.userprofile.publicprompts;
             mth.privateprompts = mth_user.userprofile.privateprompts;
-            (mth.tut = false), match_tmp.push(mth);
+            mth.tut = false;
+            match_tmp.push(mth);
             mth.all_images = mth_user.userprofile.image;
           }
         }
 
         setmatch_list(match_tmp);
+        dispatch(setMatches(match_tmp));
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       dispatch(setSessionExpired(true));
     }
@@ -193,7 +197,6 @@ const Match = () => {
   };
 
   const extendTime = async () => {
-
     let tmstmp = new Date().toISOString().slice(0, -5).split("T");
     let date = tmstmp[0];
     let time = tmstmp[1];
@@ -233,10 +236,27 @@ const Match = () => {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      getMatches();
-    }, [newMsgRefresh])
-  );
 
+      if (is_network_connected) {
+        getMatches();
+      }
+
+      if (matches.length > 0) {
+        let c_user_matches = matches.filter(
+          (v) => v.for_user_id == profile_data.userprofile.id
+        );
+        console.log(
+          "c_user_matches len",
+          c_user_matches.length,
+          is_network_connected
+        );
+        // console.log("c_user_matches",c_user_matches)
+        if (!is_network_connected && c_user_matches.length > 0) {
+          setmatch_list(c_user_matches);
+        }
+      }
+    }, [newMsgRefresh, is_network_connected])
+  );
 
   return (
     <>

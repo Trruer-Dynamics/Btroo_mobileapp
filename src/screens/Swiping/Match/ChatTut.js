@@ -24,9 +24,7 @@ import FullModal from "../../../components/modals/FullModal";
 import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setChatTut,
-} from "../../../store/reducers/tutorial/tutorial";
+import { setChatTut } from "../../../store/reducers/tutorial/tutorial";
 import axios from "axios";
 import { apiUrl } from "../../../constants";
 import Loader from "../../../components/loader/Loader";
@@ -102,7 +100,6 @@ const ChatItem = (item) => {
               width: rspW(10.3),
               height: rspH(3.6),
               zIndex: 1,
-
             }}
           />
         </View>
@@ -219,10 +216,7 @@ const ChatTut = ({ profile }) => {
         >
           <View style={{ paddingHorizontal: rspW(5), paddingTop: rspH(2) }}>
             <FormHeader
-              title={truncateStr(
-                profile?.userprofile?.name.split(" ")[0],
-                10
-              )}
+              title={truncateStr(profile?.userprofile?.name.split(" ")[0], 10)}
               left_icon={true}
               onPress={() => {
                 navigation.goBack();
@@ -380,11 +374,7 @@ const ChatTut = ({ profile }) => {
                   color: colors.black,
                 }}
               >
-                {
-                truncateStr(
-                profile?.userprofile?.name.split(" ")[0],
-                10)
-              }
+                {truncateStr(profile?.userprofile?.name.split(" ")[0], 10)}
               </Text>
             </View>
           )}

@@ -64,10 +64,7 @@ import {
 } from "../../store/reducers/filter/filter";
 import SwipeCard from "../../components/screenComponents/swiping/swipeCard/SwipeCard";
 
-import {
-  useFocusEffect,
-  useNavigation,
-} from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import messaging from "@react-native-firebase/messaging";
 import { setPromptFillingStart } from "../../store/reducers/authentication/authentication";
@@ -202,7 +199,6 @@ const SwiperOr = ({}) => {
 
   const removeCard = useCallback(
     () => {
-
       scaleValue.setValue(0.9);
       iconRotate.setValue(0);
       iconTranslateX.setValue(0);
@@ -212,7 +208,7 @@ const SwiperOr = ({}) => {
       upY.setValue(0);
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
       swipe.setValue({ x: 0, y: 0 });
-  
+
       if (swippingcount >= 2) {
         setpromptTime(true);
       }
@@ -276,11 +272,9 @@ const SwiperOr = ({}) => {
   };
 
   const getOneTimeLocation = async () => {
-
-     Geolocation.getCurrentPosition(
+    Geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
-
         //getting the Longitude from the location json
         const currentLongitude = JSON.stringify(position.coords.longitude);
 
@@ -339,14 +333,12 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterData = async () => {
-
     setloading(true);
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
 
-    
     await axios
       .get(apiUrl + `FilterUpdateGet/${profile_data.user.id}`, { headers })
       .then((resp) => {
@@ -362,7 +354,10 @@ const SwiperOr = ({}) => {
           setprofile_approved(profile_appr);
 
           let distance = filter_data.distance;
-          let languages = filter_data.language?.length > 0 || filter_data.language != null ? filter_data.language.map((v) => v.id): []
+          let languages =
+            filter_data.language?.length > 0 || filter_data.language != null
+              ? filter_data.language.map((v) => v.id)
+              : [];
           let minage = filter_data.age_min;
           let maxage = filter_data.age_max;
           let age_range = [minage, maxage];
@@ -370,20 +365,26 @@ const SwiperOr = ({}) => {
           let maxheight = filter_data.height_max;
           let height_range = [minheight, maxheight];
 
-          let sorted_tmp = filter_data.interests?.length > 0 || filter_data.interests != null ? filter_data.interests.sort(function (a, b) {
-            return a["position"] - b["position"];
-          }):[]
-          
-          let interests = filter_data.interests?.length || filter_data.interests != null ? sorted_tmp.map((v) => v.id): [];
+          let sorted_tmp =
+            filter_data.interests?.length > 0 || filter_data.interests != null
+              ? filter_data.interests.sort(function (a, b) {
+                  return a["position"] - b["position"];
+                })
+              : [];
+
+          let interests =
+            filter_data.interests?.length || filter_data.interests != null
+              ? sorted_tmp.map((v) => v.id)
+              : [];
 
           let habits_data = filter_data.habit;
 
-          let smoking_t = habits_data.smoking
-          let drinking_t = habits_data.drinking
-          let marijuana_t = habits_data.marijuana
-          
-          let habits = [smoking_t,drinking_t,marijuana_t]
-          
+          let smoking_t = habits_data.smoking;
+          let drinking_t = habits_data.drinking;
+          let marijuana_t = habits_data.marijuana;
+
+          let habits = [smoking_t, drinking_t, marijuana_t];
+
           dispatch(setSelectedDistance(distance));
           dispatch(setSelectedLanguages(languages));
           dispatch(setSelectedAgeRange(age_range));
@@ -420,7 +421,6 @@ const SwiperOr = ({}) => {
     await axios
       .get(apiUrl + "getactivegender/")
       .then((resp) => {
-
         if (resp.status == 200) {
           let tmp = resp.data.data;
 
@@ -430,7 +430,6 @@ const SwiperOr = ({}) => {
 
           let tmp_lis = sorted_tmp.map((v) => [v.id, v.gender]);
           dispatch(setAllGenders(tmp_lis));
-         
         }
       })
       .catch((err) => {
@@ -476,7 +475,6 @@ const SwiperOr = ({}) => {
     await axios
       .get(apiUrl + "getactivelanguage/")
       .then((resp) => {
-
         if (resp.status == 200) {
           let tmp = resp.data.data;
 
@@ -509,7 +507,7 @@ const SwiperOr = ({}) => {
           dispatch(setAllPrompts(act_promptsm));
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
-        } 
+        }
       })
       .catch((err) => {
         dispatch(setSessionExpired(true));
@@ -517,7 +515,6 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterProfiles = async () => {
-
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -527,7 +524,6 @@ const SwiperOr = ({}) => {
         headers,
       })
       .then((resp) => {
-        
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
 
@@ -558,7 +554,6 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
 
-
     await axios
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
@@ -573,10 +568,8 @@ const SwiperOr = ({}) => {
 
           setloading2(false);
         }
-        
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -701,7 +694,6 @@ const SwiperOr = ({}) => {
   }, [profile_refresh]);
 
   useEffect(() => {
-    
     if (permission_denied) {
       setloading2(true);
       setwarn_step(4);
@@ -779,7 +771,7 @@ const SwiperOr = ({}) => {
               keyExtractor={(itm) => itm.created_on}
               renderItem={({ item, index }) => {
                 const isFirst = index == profiles.length - 1;
-    
+
                 return (
                   <SwipeCard
                     card_itm={item}
@@ -800,7 +792,6 @@ const SwiperOr = ({}) => {
                 );
               }}
             />
-            
           </SafeAreaView>
         ) : (
           // Loading Container

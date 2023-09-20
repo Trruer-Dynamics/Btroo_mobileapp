@@ -35,7 +35,6 @@ import {
 import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
 
-
 const PhotoVerificationFinal = ({ navigation, route }) => {
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -152,8 +151,7 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
           </View>
 
           <View style={styles.middleTitle}>
-            <View
-            >
+            <View>
               <Text style={styles.headerTitle}>Satisfied with your photo?</Text>
             </View>
             {/* Para Here */}

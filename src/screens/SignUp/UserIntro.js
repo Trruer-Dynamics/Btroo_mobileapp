@@ -330,7 +330,6 @@ const UserIntro = ({ navigation }) => {
         (habits_list[0][1] || habits_list[0][2]) &&
         (habits_list[1][1] || habits_list[1][2]) &&
         (habits_list[2][1] || habits_list[2][2])) ||
-
       (step == 3 &&
         selected_interests_list.length > 0 &&
         selected_languages_list.length > 0)
@@ -516,8 +515,7 @@ const UserIntro = ({ navigation }) => {
           console.warn("Error occur while getting Genders");
         }
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   const getEducation = async () => {
@@ -538,8 +536,7 @@ const UserIntro = ({ navigation }) => {
           console.warn("Error occur while getting Education");
         }
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   const getInterests = async () => {
@@ -565,8 +562,7 @@ const UserIntro = ({ navigation }) => {
           console.warn("Error occur while getInterests");
         }
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   const getLanguages = async () => {
@@ -587,8 +583,7 @@ const UserIntro = ({ navigation }) => {
           console.warn("Error occur while getLanguages");
         }
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   const getPets = async () => {
@@ -614,8 +609,7 @@ const UserIntro = ({ navigation }) => {
           console.warn("Error occur while getPets");
         }
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   const getPoliticalInclinations = async () => {
@@ -636,8 +630,7 @@ const UserIntro = ({ navigation }) => {
           console.warn("Error occur while getPoliticalInclination");
         }
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 
   useLayoutEffect(() => {
@@ -915,7 +908,6 @@ const UserIntro = ({ navigation }) => {
                           <View style={styles.radioBtnCont}>
                             <TouchableOpacity
                               onPress={() => {
-
                                 habits_list[idx][1] =
                                   habits_list[idx][1] != null
                                     ? habits_list[idx][1]
@@ -942,7 +934,6 @@ const UserIntro = ({ navigation }) => {
 
                             <TouchableOpacity
                               onPress={() => {
-                                
                                 habits_list[idx][2] =
                                   habits_list[idx][2] != null
                                     ? habits_list[idx][2]

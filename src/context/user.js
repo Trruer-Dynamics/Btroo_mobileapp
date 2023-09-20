@@ -1,10 +1,11 @@
-import {  AppState, StyleSheet } from "react-native";
+import { AppState, StyleSheet } from "react-native";
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { apiUrl } from "../constants";
 import messaging from "@react-native-firebase/messaging";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { CommonActions, useNavigation } from "@react-navigation/native";
+import { CommonActions,  useNavigation, StackActions,NavigationAction } from "@react-navigation/native";
+
 import {
   setAccessToken,
   setSessionExpired,
@@ -24,7 +25,7 @@ const UserProvider = ({ children, navigationRef }) => {
   const navigation = useNavigation();
 
   const [DeviceToken, setDeviceToken] = useState("");
-  const [newMsgRefresh, setnewMsgRefresh] = useState(false)
+  const [newMsgRefresh, setnewMsgRefresh] = useState(false);
   const [ToNavigate, setToNavigate] = useState(null);
   const appState = useRef(AppState.currentState);
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
@@ -44,26 +45,21 @@ const UserProvider = ({ children, navigationRef }) => {
     (state) => state.authentication.user_loggined
   );
 
-  
-
-  
   const notificationListener = () => {
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-    });
+    messaging().onNotificationOpenedApp((remoteMessage) => {});
 
     // Check whether an initial notification is available
     messaging()
       .getInitialNotification()
       .then((remoteMessage) => {
         if (remoteMessage) {
-          
           // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
         }
-     
       });
   };
 
   const removeToken = async () => {
+    console.log("removeToken");
     const url = apiUrl + "token_remove/";
 
     const headers = {
@@ -79,15 +75,14 @@ const UserProvider = ({ children, navigationRef }) => {
     try {
       const resp = await axios.post(url, data, { headers });
       let user_data = resp.data.data;
-
-    } catch (error) {
-
-    }
+      console.log("user_data", user_data);
+      dispatch(setDeviceToken(""));
+    } catch (error) {}
   };
 
   useLayoutEffect(() => {
     RNScreenshotPrevent.enabled(false);
-    RNScreenshotPrevent.enableSecureView()
+    RNScreenshotPrevent.enableSecureView();
   }, []);
 
   useEffect(() => {
@@ -101,29 +96,42 @@ const UserProvider = ({ children, navigationRef }) => {
     };
   }, []);
 
+  const resetNav =async ()=>{
+    console.log("resetNav")
+    const resetAction =  navigation.reset({
+      index: 0,
+      routes: [{ name: "Intro" }],
+    });
+    navigation.dispatch(resetAction);
+
+  }
+
+
+  const emptyAll = async ()=>{
+    console.log("emptyAll")
+    dispatch(setUserLoggined(false));
+    dispatch(setAccessToken(""));
+    dispatch(setSessionExpired(false));
+    dispatch(setProfiledata({}));
+    dispatch(setProfileImgs([]));
+
+  }
+
+  const clearData = async () => {
+
+    if (is_session_expired == true && user_loggined) {
+   
+      await resetNav()
+      await removeToken();
+      await emptyAll()
+
+    }
+  };
 
   useEffect(() => {
-    
-    console.log("is_session_expired",is_session_expired)
-    console.log("DeviceToken",DeviceToken)
-
-    if (is_session_expired == true && DeviceToken != "") {
-
-      removeToken();
-      dispatch(setUserLoggined(false));
-      dispatch(setAccessToken(""));
-      dispatch(setProfiledata({}));
-      dispatch(setProfileImgs([]));
-      dispatch(setSessionExpired(false));
-
-      const resetAction = CommonActions.reset({
-        index: 1,
-        routes: [{ name: "Intro" }],
-      });
-
-      navigation.dispatch(resetAction);
-      
-    }
+    console.log("is_session_expired", is_session_expired);
+    console.log("DeviceToken", DeviceToken);
+    clearData();
   }, [is_session_expired]);
 
   useLayoutEffect(() => {

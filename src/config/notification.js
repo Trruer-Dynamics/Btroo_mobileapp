@@ -19,6 +19,11 @@ const NotificationController = (props) => {
   const user_loggined = useSelector(
     (state) => state.authentication.user_loggined
   );
+  const matches = useSelector((state) => state.chats.matches);
+
+  const profile_data = useSelector(
+    (state) => state.authentication.profile_data
+  );
 
   const [user_interact, setuser_interact] = useState(false);
   const [type, settype] = useState("");
@@ -27,9 +32,8 @@ const NotificationController = (props) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-
-    if (not_data?.type == "Chat" || not_data?.type == "Hidden") {    
-      setnewMsgRefresh(!newMsgRefresh)
+    if (not_data?.type == "Chat" || not_data?.type == "Hidden") {
+      setnewMsgRefresh(!newMsgRefresh);
     }
 
     if (not_data?.type == "Reveal" && user_loggined) {
@@ -55,15 +59,26 @@ const NotificationController = (props) => {
     }
 
     if (not_data?.type != "" && user_interact && user_loggined) {
-      if (not_data?.type == "Match" || not_data?.type == "Chat") {
+      if (not_data?.type == "Match") {
         setuser_interact(false);
-
         navigation.navigate("Match");
-      } else {
-      }
+      } else if (not_data?.type == "Chat") {
+        setuser_interact(false);
+        let dt = JSON.parse(not_data.data);
+        let cht_id = dt.chatroom_id;
 
-   
-      
+        if (matches.length > 0) {
+          let c_user_match = matches.filter(
+            (v) =>
+              v.for_user_id == profile_data.userprofile.id && v.id == cht_id
+          )[0];
+          navigation.navigate("Chat", {
+            profile: c_user_match,
+          });
+        } else {
+          navigation.navigate("Match");
+        }
+      }
     }
   }, [refresh, user_interact, not_data]);
 
@@ -87,10 +102,8 @@ const NotificationController = (props) => {
       onRegister: function (token) {},
 
       onNotification: function (notification) {
-
         setuser_interact(notification.userInteraction);
         if (notification.userInteraction) {
-         
           if (!notification.foreground) {
             setnot_data(notification.data);
             setrefresh(!refresh);
@@ -124,7 +137,6 @@ const NotificationController = (props) => {
 
   useLayoutEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
 
@@ -150,7 +162,7 @@ const NotificationController = (props) => {
         };
       }
 
-      if (user_loggined && !sckop.current &&  data?.type != "Hidden")  {
+      if (user_loggined && !sckop.current && data?.type != "Hidden") {
         PushNotification.localNotification(notifObj);
       }
     });

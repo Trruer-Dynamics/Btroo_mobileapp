@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useState, useEffect, useLayoutEffect,  memo } from "react";
+import React, { useState, useEffect, useLayoutEffect, memo } from "react";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import { rspH, rspW, rspF } from "../../styles/responsiveSize";
@@ -37,7 +37,6 @@ const FormInputPhoneNumber = ({
   inputwidth = "100%",
   setchanges_made = null,
 }) => {
-
   const [invalid, setinvalid] = useState(false);
 
   useEffect(() => {

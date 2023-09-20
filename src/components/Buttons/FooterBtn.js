@@ -1,19 +1,10 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import colors from "../../styles/colors";
 import { rspF, rspH, rspW } from "../../styles/responsiveSize";
 import fontFamily from "../../styles/fontFamily";
 
-const FooterBtn = ({
-  title = "",
-  disabled,
-  onPress,
-  width = 70,
-}) => {
+const FooterBtn = ({ title = "", disabled, onPress, width = 70 }) => {
   return (
     <TouchableOpacity
       style={[

@@ -1,8 +1,10 @@
 const truncateStr = (str, num) => {
-  if (str.length > num) {
-    return str.slice(0, num) + "...";
-  } else {
-    return str;
+  if (str) {
+    if (str.length > num) {
+      return str.slice(0, num) + "...";
+    } else {
+      return str;
+    }
   }
 };
 

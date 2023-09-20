@@ -1,4 +1,4 @@
-import React, {  useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -25,7 +25,6 @@ import SearchInput from "./SearchInput";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import FooterBtn from "../Buttons/FooterBtn";
-
 
 const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
   <TouchableOpacity
@@ -66,7 +65,6 @@ const FormMultiSelectorFilter = ({
   setchanges_made = null,
   setselected_list,
 }) => {
-
   const [selected_lis2, setselected_lis2] = useState([]);
   const [filterdatalist, setfilterdatalist] = useState([]);
   const [search_value, setsearch_value] = useState("");
@@ -90,8 +88,7 @@ const FormMultiSelectorFilter = ({
             let tmp = [...selected_lis2];
             tmp.splice(indx, 1);
             setselected_lis2(tmp);
-          }
-          else {
+          } else {
             setselected_lis2([...selected_lis2, item[0]]);
           }
           if (setchanges_made != null) {
@@ -142,10 +139,7 @@ const FormMultiSelectorFilter = ({
 
           <View style={{ width: scrn_width / 1.5 }}>
             <Text style={styles.selectedOpt} numberOfLines={1}>
-              {selected_list.length > 0
-                ? 
-                  names
-                : ""}
+              {selected_list.length > 0 ? names : ""}
             </Text>
           </View>
         </View>
@@ -193,22 +187,23 @@ const FormMultiSelectorFilter = ({
               </View>
             </View>
             <FormWrapperFooter>
-              
               <FooterBtn
                 title={"Confirm"}
-                disabled={ selected_lis2.every(v => selected_list.includes(v)) && selected_list.every(v => selected_lis2.includes(v))}
+                disabled={
+                  selected_lis2.every((v) => selected_list.includes(v)) &&
+                  selected_list.every((v) => selected_lis2.includes(v))
+                }
                 onPress={() => {
+                  let checker = (arr, target) =>
+                    target.every((v) => arr.includes(v));
+                  let check1 = checker(selected_lis2, selected_list);
+                  let check2 = checker(selected_list, selected_lis2);
 
-                  let checker = (arr, target) => target.every(v => arr.includes(v))
-                  let check1 = checker(selected_lis2,selected_list)
-                  let check2 = checker(selected_list,selected_lis2)
-              
                   if (!(check1 && check2)) {
-                      setcode_press(false);
+                    setcode_press(false);
                     setselected_list(selected_lis2);
                     setselected_lis2([]);
                   }
-                
                 }}
               />
             </FormWrapperFooter>
@@ -233,7 +228,6 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.8),
     fontFamily: fontFamily.bold,
     color: `#999999`,
-
   },
   txtCont: {
     flexDirection: "column",

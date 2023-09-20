@@ -1,4 +1,4 @@
-import React, {  useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
 import {
   FlatList,
   SafeAreaView,
@@ -12,11 +12,7 @@ import {
 } from "react-native";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-import {
-  rspH,
-  rspW,
-  rspF,
-} from "../../styles/responsiveSize";
+import { rspH, rspW, rspF } from "../../styles/responsiveSize";
 import FormComponentsWrapper from "../wrappers/formComponentsWrappers/FormComponentsWrapper";
 import FormComponentsWrapperHeader from "../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
 import SearchInput from "./SearchInput";
@@ -211,11 +207,9 @@ const FormSelector = ({
                         setend_reach(true);
                         setpage(page + 1);
                       }
-                      
                     }
                   }}
                   onMomentumScrollBegin={() => setend_reach(false)}
-                  
                   ListFooterComponent={
                     pull_refresh &&
                     refreshing && (

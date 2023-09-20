@@ -101,7 +101,7 @@ const MatchTut = () => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       dispatch(setSessionExpired(true));
     }

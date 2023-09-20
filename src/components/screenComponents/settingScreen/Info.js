@@ -34,28 +34,24 @@ const Info = ({ navigation, route }) => {
   const tagsStyles = {
     p: {
       color: "white",
-      fontFamily:'arial',
+      fontFamily: "arial",
     },
     ol: {
       color: "white",
-      fontFamily:'arial',
+      fontFamily: "arial",
     },
     ul: {
       color: "white",
-      fontFamily:'arial',
-      fontFamily:'arial',
-
-
+      fontFamily: "arial",
+      fontFamily: "arial",
     },
     li: {
       color: "white",
-      fontFamily:'arial',
-
+      fontFamily: "arial",
     },
     h2: {
       color: "white",
-      fontFamily:'arial',
-
+      fontFamily: "arial",
     },
     strong: {
       color: "white",
@@ -76,7 +72,6 @@ const Info = ({ navigation, route }) => {
     await axios
       .get(apiUrl + `get_terms_of_services/`)
       .then((resp) => {
-       
         setloading(false);
         if (resp.status == 200) {
           setpara(resp.data.data.text);
@@ -86,7 +81,6 @@ const Info = ({ navigation, route }) => {
       })
       .catch((err) => {
         setloading(false);
-
       });
   };
 
@@ -159,10 +153,7 @@ const Info = ({ navigation, route }) => {
       getPrivacyPolicy();
     } else if (heading == "Privacy Preference") {
       getPrivacyPreferance();
-    }
-    
-     
-    else if (heading == "Cookies Policy") {
+    } else if (heading == "Cookies Policy") {
       getCookiesPolicy();
     }
   }, []);

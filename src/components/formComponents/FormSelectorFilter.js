@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -12,12 +12,7 @@ import {
 
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-import {
-  rspF,
-  rspH,
-  rspW,
-  scrn_width,
-} from "../../styles/responsiveSize";
+import { rspF, rspH, rspW, scrn_width } from "../../styles/responsiveSize";
 import FormComponentsWrapper from "../wrappers/formComponentsWrappers/FormComponentsWrapper";
 import FormComponentsWrapperHeader from "../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
 import SearchInput from "./SearchInput";
@@ -119,9 +114,7 @@ const FormSelectorFilter = ({
             let tmp = [...selected_lis2];
             tmp.splice(indx, 1);
             setselected_lis2(tmp);
-          }
-
-          else {
+          } else {
             setselected_lis2([...selected_lis2, item[0]]);
           }
           if (setchanges_made != null) {
@@ -151,20 +144,14 @@ const FormSelectorFilter = ({
 
           <View style={{ width: scrn_width / 1.5 }}>
             <Text style={styles.selectedOpt} numberOfLines={1}>
-              {selected_list.length > 0
-                ? 
-                  names
-                : ""}
+              {selected_list.length > 0 ? names : ""}
 
               {/* Check */}
             </Text>
           </View>
         </View>
 
-        <View
-          style={{ alignItems: "center", justifyContent: "center" }}
-          
-        >
+        <View style={{ alignItems: "center", justifyContent: "center" }}>
           <ADIcon size={20} name="right" color={colors.blue} />
         </View>
       </TouchableOpacity>
@@ -205,23 +192,24 @@ const FormSelectorFilter = ({
             {/* Confirm Btn */}
 
             <FormWrapperFooter>
-
               {/* Next Btn To Navigate to Next Form Components */}
               <FooterBtn
                 title={"Confirm"}
-                disabled={ selected_lis2.every(v => selected_list.includes(v)) && selected_list.every(v => selected_lis2.includes(v))}
+                disabled={
+                  selected_lis2.every((v) => selected_list.includes(v)) &&
+                  selected_list.every((v) => selected_lis2.includes(v))
+                }
                 onPress={() => {
+                  let checker = (arr, target) =>
+                    target.every((v) => arr.includes(v));
+                  let check1 = checker(selected_lis2, selected_list);
+                  let check2 = checker(selected_list, selected_lis2);
 
-                  let checker = (arr, target) => target.every(v => arr.includes(v))
-                  let check1 = checker(selected_lis2,selected_list)
-                  let check2 = checker(selected_list,selected_lis2)
-              
                   if (!(check1 && check2)) {
-                      setcode_press(false);
+                    setcode_press(false);
                     setselected_list(selected_lis2);
                     setselected_lis2([]);
                   }
-                
                 }}
               />
             </FormWrapperFooter>

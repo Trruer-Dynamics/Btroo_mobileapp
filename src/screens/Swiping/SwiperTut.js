@@ -10,7 +10,7 @@ import {
   Platform,
 } from "react-native";
 
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import colors from "../../styles/colors";
 import {
   rspF,
@@ -44,8 +44,7 @@ const DATA = [
   {
     id: 2,
     title: "Second Item",
-    image:
-      require("../../assets/images/Tutorial/Tut1.png"),
+    image: require("../../assets/images/Tutorial/Tut1.png"),
     image2: require("../../assets/images/Tutorial/Tut2.png"),
   },
   {
@@ -101,7 +100,6 @@ const Item = ({ item, setmodalVisible, masked }) => {
                   top: 0,
                   left: 0,
                   zIndex: 1,
-                
                 }}
                 resizeMode="stretch"
               />
@@ -272,7 +270,6 @@ const SwiperTut = ({ navigation }) => {
           width: scrn_width,
         }}
       >
-
         <View
           style={{
             paddingBottom: showPrompts ? rspH(6) : 0,

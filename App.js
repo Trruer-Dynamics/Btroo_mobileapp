@@ -51,7 +51,6 @@ import NetInfo from "@react-native-community/netinfo";
 import _ from "lodash";
 import { setNetworkConnect } from "./src/store/reducers/authentication/authentication";
 
-
 AntDesign.loadFont()
   .then()
   .catch((error) => {
@@ -113,7 +112,7 @@ Octicons.loadFont()
 const App = () => {
   // const { ScreenshotOverlay } = NativeModules;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const status_bg = useSelector(
     (state) => state.authentication.statusBarArg.backgroundColor
@@ -188,25 +187,17 @@ const App = () => {
     };
   }, []);
 
-
-
-
-  const handleNetworkChange = (state => {
-  
+  const handleNetworkChange = (state) => {
     if (state.isConnected) {
-      console.log("\n",Platform.OS,"Network Connected")
-    dispatch(setNetworkConnect(true))
+      console.log("\n", Platform.OS, "Network Connected");
+      dispatch(setNetworkConnect(true));
       // alert('Network Connected')
-    }
-    else{
-      console.log("\n",Platform.OS,"Network Disconnected")
-      dispatch(setNetworkConnect(false))
+    } else {
+      console.log("\n", Platform.OS, "Network Disconnected");
+      dispatch(setNetworkConnect(false));
       // alert('Network Disconnected')
-
     }
-  });
-
-
+  };
 
   // useEffect(() => {
   //   console.log("count 3",count)
@@ -216,22 +207,22 @@ const App = () => {
   //       setcount(count + 1)
   //     }, 10000);
   //   return () => clearTimeout(timer)
-      
+
   // }, [count]);
 
   // const netinfoSub = NetInfo.addEventListener(handleNetworkChange)
 
-  const debounceHandleNet = _.debounce(handleNetworkChange, 500, {leading: false, trailing: true})
-
+  const debounceHandleNet = _.debounce(handleNetworkChange, 500, {
+    leading: false,
+    trailing: true,
+  });
 
   useEffect(() => {
-    
-    const netinfoSub = NetInfo.addEventListener(debounceHandleNet)  
+    const netinfoSub = NetInfo.addEventListener(debounceHandleNet);
     return () => {
-      netinfoSub && netinfoSub()
-    }
-  }, [])
-  
+      netinfoSub && netinfoSub();
+    };
+  }, []);
 
   return (
     <View style={[styles.container]}>

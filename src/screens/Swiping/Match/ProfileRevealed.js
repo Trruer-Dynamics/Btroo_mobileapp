@@ -1,17 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
-import {
-  rspF,
-  rspH,
-  rspW,
-  scrn_height,
-} from "../../../styles/responsiveSize";
+import { rspF, rspH, rspW, scrn_height } from "../../../styles/responsiveSize";
 import colors from "../../../styles/colors";
 import { useNavigation } from "@react-navigation/native";
 import FormWrapperFooter from "../../../components/wrappers/formWrappers/FormWrapperFooter";
@@ -67,7 +56,7 @@ const ProfileRevealed = ({ route }) => {
         setupdated_prof(prf_usr);
       } else if (response.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       setreport("");
       dispatch(setSessionExpired(true));

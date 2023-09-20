@@ -104,17 +104,18 @@ const OtpVerify = ({
   const [btnClick, setbtnClick] = useState(false);
   const [keyboard_hgt, setkeyboard_hgt] = useState(0);
 
- const showAlrdyAlert =  async()=>{
+  const showAlrdyAlert = async () => {
+    Alert.alert(
+      "",
+      "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
+    );
+  };
 
-  Alert.alert(
-    "",
-    "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
-  );
-
- }
-
-   //Debounce the showAlert function with a delay of 300 milliseconds
-   const debounceShowConfirmDialog = _.debounce(showAlrdyAlert, 200, {leading: true, trailing: false})
+  //Debounce the showAlert function with a delay of 300 milliseconds
+  const debounceShowConfirmDialog = _.debounce(showAlrdyAlert, 200, {
+    leading: true,
+    trailing: false,
+  });
 
   // To register mobile number
   const sendActiveUserDetails = async () => {
@@ -153,16 +154,17 @@ const OtpVerify = ({
       let user_code = response.data.code;
 
       setloading(false);
-      
+
       if (user_code == 400) {
         setModalVisible(false);
-        await debounceShowConfirmDialog()
-
-      }
-       else if (user_code == 200) {
+        await debounceShowConfirmDialog();
+      } else if (user_code == 200) {
         await dispatch(setSessionExpired(false));
-       
-          await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
+
+        await sendDeviceToken(
+          user_data.userprofile.id,
+          user_data?.token?.access
+        );
 
         let usr_imgs = user_data.userimage.map((v) => [
           v.image,
@@ -207,13 +209,10 @@ const OtpVerify = ({
       setModalVisible(false);
       setloading(false);
       dispatch(setSessionExpired(true));
-  
     }
   };
 
-
   const getDeviceToken = async () => {
-   
     const registered = await messaging().registerDeviceForRemoteMessages();
 
     if (Platform.OS == "ios") {
@@ -222,13 +221,12 @@ const OtpVerify = ({
 
     const token = await messaging().getToken();
     setDeviceToken(token);
-    return token
-
+    return token;
   };
 
   const sendDeviceToken = async (prof_id, access_token) => {
     setloading(true);
-    let dvToken = await getDeviceToken()
+    let dvToken = await getDeviceToken();
     const data = {
       userprofile_id: prof_id,
       device_token: dvToken,
@@ -248,7 +246,6 @@ const OtpVerify = ({
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading(false);
-
     }
   };
 
@@ -322,7 +319,6 @@ const OtpVerify = ({
           return 0;
         });
 
-
         // // create a empty data list format for 9 images
         let tmp1 = [
           ["", "", false, "1", ""],
@@ -358,7 +354,10 @@ const OtpVerify = ({
           userprivateprompts: act_promptsm2,
         };
 
-          await sendDeviceToken(user_data.userprofile.id, user_data?.token?.access);
+        await sendDeviceToken(
+          user_data.userprofile.id,
+          user_data?.token?.access
+        );
 
         // Sets Prompts Filling status locally
         dispatch(
@@ -407,7 +406,7 @@ const OtpVerify = ({
         if (nav_to != "") {
           navigation.navigate(nav_to);
         }
-      } 
+      }
     } catch (error) {
       dispatch(setSessionExpired(true));
       setloading(false);
@@ -431,8 +430,7 @@ const OtpVerify = ({
       } else {
         sendActiveUserDetails(); // if action is signup call signup api
       }
-    } else 
-    {
+    } else {
       setotperr(true); // if otp is invalid
     }
 

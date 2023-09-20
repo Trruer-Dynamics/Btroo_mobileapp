@@ -23,7 +23,7 @@ const appReducer = combineReducers({
   screen: screenReducer,
   filter: filterReducer,
   allData: allDataReducer,
-  chats : chatsReducer,
+  chats: chatsReducer,
   permission: permissionReducer,
 });
 

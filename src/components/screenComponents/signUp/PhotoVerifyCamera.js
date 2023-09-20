@@ -76,7 +76,6 @@ const PhotoVerifyCamera = ({}) => {
       }
     } catch (error) {
       setloading(false);
-     
     }
   };
 

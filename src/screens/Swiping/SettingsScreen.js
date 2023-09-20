@@ -50,7 +50,6 @@ import {
 import { apiUrl } from "../../constants";
 import axios from "axios";
 import { CommonActions, useFocusEffect } from "@react-navigation/native";
-import { openComposer } from "react-native-email-link";
 import { setSwipeTut } from "../../store/reducers/tutorial/tutorial";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import { initialWindowMetrics } from "react-native-safe-area-context";
@@ -69,6 +68,10 @@ const SettingsScreen = ({ navigation }) => {
   );
   const profile_imgs = useSelector(
     (state) => state.authentication.profile_imgs
+  );
+
+  const is_session_expired = useSelector(
+    (state) => state.authentication.is_session_expired
   );
 
   const [loading, setloading] = useState(false);
@@ -115,10 +118,6 @@ const SettingsScreen = ({ navigation }) => {
   const [cmodal, setcmodal] = useState(false);
 
   const [confirmDelete, setconfirmDelete] = useState(false);
-  const [lgModal, setlgModal] = useState(false);
-
-
-
 
   const [contact, setcontact] = useState("");
 
@@ -161,10 +160,10 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       // setloading(false);
-      dispatch(setSessionExpired(true));      
+      dispatch(setSessionExpired(true));
     }
   };
 
@@ -255,7 +254,6 @@ const SettingsScreen = ({ navigation }) => {
     } catch (error) {
       // setloading(false);
       dispatch(setSessionExpired(true));
-    
     }
   };
 
@@ -301,7 +299,6 @@ const SettingsScreen = ({ navigation }) => {
     } catch (error) {
       // setloading(false);
       dispatch(setSessionExpired(true));
-     
     }
   };
 
@@ -342,11 +339,10 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       // setloading(false);
       dispatch(setSessionExpired(true));
-
     }
   };
 
@@ -387,11 +383,10 @@ const SettingsScreen = ({ navigation }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-      } 
+      }
     } catch (error) {
       // setloading(false);
       dispatch(setSessionExpired(true));
-
     }
   };
 
@@ -414,10 +409,25 @@ const SettingsScreen = ({ navigation }) => {
       });
   };
 
-  
+  const showConfirmDialog = () => {
+    console.log("session expired", is_session_expired);
+    // return Alert.alert("Are you Sure", "sdsd")
+
+    return Alert.alert("Are You Sure?", "You want to logout", [
+      {
+        text: "Yes",
+        onPress: () => {
+          dispatch(setSessionExpired(true));
+        },
+      },
+      {
+        text: "NO",
+        onPress: () => {},
+      },
+    ]);
+  };
 
   const deleteAccount = async () => {
-
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -427,14 +437,11 @@ const SettingsScreen = ({ navigation }) => {
         headers,
       })
       .then((resp) => {
-
         if (resp.data.code == 200) {
-          dispatch(setSessionExpired(true))
+          dispatch(setSessionExpired(true));
         }
       })
-      .catch((err) => {
-
-      });
+      .catch((err) => {});
   };
 
   useLayoutEffect(() => {
@@ -488,9 +495,8 @@ const SettingsScreen = ({ navigation }) => {
               style={{
                 width: "100%",
                 // height: '100%',
-                paddingBottom: rspH(Platform.OS == 'ios' ? 10 : 15),
-               
-              }}
+                paddingBottom: rspH(Platform.OS == "ios" ? 10 : 15),
+                }}
               bounces={false}
             >
               <View>
@@ -564,9 +570,9 @@ const SettingsScreen = ({ navigation }) => {
                 <View
                   style={{
                     width: "100%",
-                    // paddingTop: rspH(2.35),
-                    // paddingTop: rspH(2.4),
-                    paddingTop: rspH(7.2),
+                    
+                    paddingTop: rspH(2.8),
+                    // paddingTop: rspH(7.2),
                   }}
                 >
                   <View
@@ -602,7 +608,7 @@ const SettingsScreen = ({ navigation }) => {
                       style={{
                         flexDirection: "row",
                         justifyContent: "space-between",
-                        alignItems:'center',
+                        alignItems: "center",
                       }}
                     >
                       <Text style={styles.titleS}>Show My Profile</Text>
@@ -646,7 +652,7 @@ const SettingsScreen = ({ navigation }) => {
                       style={{
                         flexDirection: "row",
                         justifyContent: "space-between",
-                        alignItems:'center',
+                        alignItems: "center",
                       }}
                     >
                       <Text style={styles.titleS}>Keep Matching</Text>
@@ -718,7 +724,7 @@ const SettingsScreen = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      alignItems:'center',
+                      alignItems: "center",
                       marginBottom: rspH(1.8),
                     }}
                   >
@@ -757,8 +763,7 @@ const SettingsScreen = ({ navigation }) => {
                       justifyContent: "space-between",
                       // marginBottom: rspH(2.05),
                       marginBottom: rspH(1.8),
-                      alignItems:'center',
-
+                      alignItems: "center",
                     }}
                   >
                     <Text style={styles.titleS}>New Match</Text>
@@ -794,7 +799,7 @@ const SettingsScreen = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      alignItems:'center',
+                      alignItems: "center",
                       // marginBottom: rspH(2.05),
                       marginBottom: rspH(1.8),
                     }}
@@ -834,8 +839,7 @@ const SettingsScreen = ({ navigation }) => {
                       justifyContent: "space-between",
                       // marginBottom: rspH(2.05),
                       marginBottom: rspH(1.8),
-                      alignItems:'center',
-
+                      alignItems: "center",
                     }}
                   >
                     <Text style={styles.titleS}>Others</Text>
@@ -887,7 +891,9 @@ const SettingsScreen = ({ navigation }) => {
                   // navigation.navigate("Info", {
                   //   heading: "FAQ",
                   // });
-                  Linking.openURL("https://btroo.midnightpoha.com/index.php/faqs/")
+                  Linking.openURL(
+                    "https://btroo.midnightpoha.com/index.php/faqs/"
+                  );
                 }}
                 style={{
                   flexDirection: "row",
@@ -1060,7 +1066,7 @@ const SettingsScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  setlgModal(true)
+                  showConfirmDialog();
                 }}
                 style={{
                   flexDirection: "row",
@@ -1186,84 +1192,12 @@ const SettingsScreen = ({ navigation }) => {
                         onPress={() => {
                           setcmodal(false);
                           setconfirmDelete(false);
-                          deleteAccount()
+                          deleteAccount();
                         }}
                       />
                     </View>
                   </>
                 )}
-              </View>
-            </CentralModal>
-
-            <CentralModal modalVisible={lgModal} setModalVisible={setlgModal}>
-              <View
-                style={{
-                  paddingHorizontal: rspW(4),
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "#fff",
-                  height: rspH(Platform.OS == "ios" ? 37 : 38),
-                  // height: rspH(54.38),
-                  borderRadius: rspW(5.1),
-                  // width: rspW(76.5), 76.5
-                  width: rspW(80),
-                }}
-              >
-                
-               
-                    <View
-                      style={{
-                        marginBottom: rspH(4.1),
-                      }}
-                    >
-                      <Text style={styles.title}>Are you sure?</Text>
-                    </View>
-                    <View
-                      style={{
-                        marginBottom: rspH(5.9),
-                      }}
-                    >
-                      <Text style={styles.modalPara}>
-                        You want to Log Out.
-                      </Text>
-                    </View>
-
-                    <FooterBtn
-                      title="Take me back!"
-                      onPress={() => {
-                        setlgModal(false);
-                      }}
-                    />
-
-                    <TouchableOpacity
-                      style={{ marginTop: rspH(3.7) }}
-                      onPress={() => {
-                        dispatch(setUserLoggined(false));
-                        dispatch(setSessionExpired(true));
-                        
-      
-                        const resetAction = CommonActions.reset({
-                          index: 1,
-                          routes: [{ name: "Intro" }],
-                        });
-                        navigation.dispatch(resetAction);
-                        setlgModal(false)
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color: colors.blue,
-
-                          fontSize: rspF(1.5),
-                          fontFamily: fontFamily.bold,
-                          lineHeight: rspF(1.51),
-                        }}
-                      >
-                        Yes Log Out 
-                      </Text>
-                    </TouchableOpacity>
-                  
-                
               </View>
             </CentralModal>
 
@@ -1334,7 +1268,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   para: {
-    fontSize: rspF(Platform.OS == 'android'? 1.302 : 1.32),
+    fontSize: rspF(Platform.OS == "android" ? 1.302 : 1.32),
     // fontSize: rspF(1.302),
     lineHeight: rspF(1.322),
     // lineHeight: rspF(1.31),

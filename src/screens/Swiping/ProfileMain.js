@@ -21,7 +21,7 @@ import {
 } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   DrinkingNo,
   DrinkingYes,
@@ -62,7 +62,6 @@ const ProfileMain = ({ navigation }) => {
     "Urdu",
   ]);
 
-  
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
@@ -122,8 +121,6 @@ const ProfileMain = ({ navigation }) => {
       ]);
 
       setinterest_list(usr_interest);
-
-      console.log("profile_imgs",profile_imgs[0])
 
       let actv = profile_imgs.filter((v) => v[0] != "");
       setactive_prf_imgs(actv);
@@ -411,7 +408,7 @@ const ProfileMain = ({ navigation }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Pets</Text>
                   <ScrollView
-                  bounces={false}
+                    bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -450,7 +447,7 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Interests</Text>
                 <ScrollView
-                bounces={false}
+                  bounces={false}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
@@ -489,7 +486,7 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Languages</Text>
                 <ScrollView
-                bounces={false}
+                  bounces={false}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}

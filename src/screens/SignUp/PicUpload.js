@@ -9,9 +9,7 @@ import {
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect, useContext } from "react";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
-import  {
-  useSharedValue,
-} from "react-native-reanimated";
+import { useSharedValue } from "react-native-reanimated";
 import colors from "../../styles/colors";
 import {
   rspF,
@@ -149,7 +147,7 @@ const PicUpload = ({ navigation, route }) => {
     tmp_lis.splice(indx, 1);
     tmp_lis.push(["", "", true, "2", ""]);
     let positions_list = Object.entries(positions.value);
-   
+
     for (let j = 0; j < tmp_lis.length; j++) {
       const ele = tmp_lis[j];
       if (j > 0 && tmp_lis[j - 1][0] != "") {
@@ -248,7 +246,6 @@ const PicUpload = ({ navigation, route }) => {
       position_9: pic_list[8][4] != "" ? positions.value[8] : null,
     };
 
-
     let up_pos_lis = _.cloneDeep(pic_list);
     for (let t = 0; t < up_pos_lis.length; t++) {
       const ele = up_pos_lis[t];
@@ -263,9 +260,8 @@ const PicUpload = ({ navigation, route }) => {
 
       let code = resp.data.code;
       let user_data = resp.data.data;
-  
+
       if (code == 200) {
-      
         await dispatch(setProfileImgs(up_pos_lis));
         confirmImageUploads();
       } else if (code == 401) {
@@ -278,7 +274,6 @@ const PicUpload = ({ navigation, route }) => {
   };
 
   const saveProfileImage = async (mnImage, crpImage) => {
-   
     setloading(true);
 
     let active_itm = [];
@@ -405,7 +400,6 @@ const PicUpload = ({ navigation, route }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
-       
         setloading(false);
         ifFail(activeIndx, tmp_a);
       }
@@ -413,7 +407,6 @@ const PicUpload = ({ navigation, route }) => {
       setloading(false);
       dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
-
     }
   };
 
@@ -426,7 +419,6 @@ const PicUpload = ({ navigation, route }) => {
   };
 
   const finalLoad = async (img, crp_img) => {
-
     let n_img = await compressImg(img);
     let comp_crp_img = await compressImg(crp_img);
 
@@ -500,8 +492,7 @@ const PicUpload = ({ navigation, route }) => {
       profile_imgs[0][0] != ""
     ) {
       atLast(profile_imgs.slice(0, 9));
-    } 
-   
+    }
   }, []);
 
   useEffect(() => {
@@ -585,7 +576,6 @@ const PicUpload = ({ navigation, route }) => {
               <Text
                 style={{ textDecorationLine: "underline" }}
                 onPress={() => {
-                  
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
                   );

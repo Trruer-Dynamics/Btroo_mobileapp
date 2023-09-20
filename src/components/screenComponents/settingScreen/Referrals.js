@@ -22,16 +22,6 @@ import { useSelector } from "react-redux";
 import Toast from "../../toast/Toast";
 import FormHeader from "../../wrappers/formWrappers/FormHeader";
 
-const url = "";
-const title = "Referrals";
-const message = "";
-
-const options = {
-  title,
-  url,
-  message,
-};
-
 const Referrals = ({ modalVisible, setModalVisible }) => {
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
@@ -138,6 +128,20 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
           <FooterBtn
             title={"Invite Friends"}
             onPress={() => {
+              const url = "";
+              const title = "Referrals";
+              const message =
+                "Hey Guys join btroo " +
+                profile_data.userprofile.name.split(" ")[0] +
+                "_" +
+                profile_data.userprofile.referral_code;
+
+              const options = {
+                title,
+                url,
+                message,
+              };
+
               Share.open(options)
                 .then((res) => {})
                 .catch((err) => {

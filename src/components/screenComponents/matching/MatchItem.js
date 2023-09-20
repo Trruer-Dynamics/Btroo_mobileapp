@@ -53,9 +53,9 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
         <View>
           <Text style={styles.profileName}>
             {
-              item?.userprofile?.name.split(" ")[0].length < 8
+              item?.userprofile?.name.split(" ")[0].length < 9
                 ? item?.userprofile?.name.split(" ")[0]
-                : truncateStr(item?.userprofile?.name.split(" ")[0], 6)
+                : truncateStr(item?.userprofile?.name.split(" ")[0], 8)
               //  item?.userprofile?.name.split(' ')[0].substring(0,6) + '...'
             }
             {", "}
@@ -169,10 +169,14 @@ const styles = StyleSheet.create({
   },
   profileName: {
     // fontSize: rspF(2.62),
-    fontSize: rspF(2.5),
+    // fontSize: rspF(2.5),
+    fontSize: rspF(2.38),
+
     color: colors.black,
     fontFamily: fontFamily.bold,
-    lineHeight: rspF(2.6),
+    // lineHeight: rspF(2.6),
+    lineHeight: rspF(2.42),
+
     letterSpacing: Platform.OS == "ios" ? 0 : 1,
   },
   profileProfession: {
@@ -182,7 +186,9 @@ const styles = StyleSheet.create({
     lineHeight: rspF(2.1),
   },
   profileMessage: {
-    fontSize: rspF(1.302),
+    // fontSize: rspF(1.302),
+    fontSize: rspF(1.1),
+
     color: colors.black,
     fontFamily: fontFamily.regular,
     // backgroundColor:'red',

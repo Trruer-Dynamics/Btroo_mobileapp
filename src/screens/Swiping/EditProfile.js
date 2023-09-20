@@ -44,9 +44,7 @@ import {
 import Loader from "../../components/loader/Loader";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 
-import  {
-  useSharedValue,
-} from "react-native-reanimated";
+import { useSharedValue } from "react-native-reanimated";
 import ImageCropPicker from "react-native-image-crop-picker";
 import CentralModal from "../../components/modals/CentralModal";
 import { UserContext } from "../../context/user";
@@ -327,7 +325,7 @@ const EditProfile = ({ navigation }) => {
     for (let m = 0; m < positions_list.length; m++) {
       up_pos[m] = m;
     }
-    
+
     positions.value = up_pos;
 
     dispatch(setProfileImgs(tmp_lis));
@@ -508,7 +506,6 @@ const EditProfile = ({ navigation }) => {
   };
 
   const finalLoad = async (img, crp_img) => {
-
     let n_img = await compressImg(img);
     let comp_crp_img = await compressImg(crp_img);
 
@@ -682,8 +679,10 @@ const EditProfile = ({ navigation }) => {
   };
 
   //Debounce the showAlert function with a delay of 300 milliseconds
-  const debounceShowConfirmDialog = _.debounce(showConfirmDialog, 200, {leading: true, trailing: false})
-
+  const debounceShowConfirmDialog = _.debounce(showConfirmDialog, 200, {
+    leading: true,
+    trailing: false,
+  });
 
   const getGenders = async () => {
     await axios
@@ -896,13 +895,14 @@ const EditProfile = ({ navigation }) => {
       };
 
       if (code == 200) {
-        if (profile_data?.userprivateprompts.length > 0) {
+        // if (profile_data?.userprivateprompts.length > 0) {
           updatePrompts(user_prof_data);
-        } else {
-          setloading(false);
-          dispatch(setProfiledata(user_prof_data));
-          navigation.navigate("ProfileMain");
-        }
+        // } 
+        // else {
+        //   setloading(false);
+        //   dispatch(setProfiledata(user_prof_data));
+        //   navigation.navigate("ProfileMain");
+        // }
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
@@ -915,6 +915,9 @@ const EditProfile = ({ navigation }) => {
   };
 
   const updatePrompts = async (user_prof_data) => {
+
+    console.log("updatePrompts")
+
     const url = apiUrl + "createuserpormpts/";
 
     const headers = {
@@ -952,6 +955,8 @@ const EditProfile = ({ navigation }) => {
       setchanges_made(false);
 
       let code = resp.data.code;
+
+      console.log("updatePrompts code", code)
 
       if (code == 200) {
         let user_prof_datap = {
@@ -991,7 +996,7 @@ const EditProfile = ({ navigation }) => {
     }
   }, [pos_change]);
 
-  const loadData = async () =>{
+  const loadData = async () => {
     let usr_profile = profile_data.userprofile;
     setheight_cm(usr_profile.height.toString());
     setoccupation(usr_profile.occupation);
@@ -1002,16 +1007,14 @@ const EditProfile = ({ navigation }) => {
     await getLanguages();
     await getPets();
     await getPoliticalInclinations();
-   
 
     if (prompts_list_all.length > 0) {
-     await setPrompts();
+      await setPrompts();
     }
-
-  }
+  };
 
   useLayoutEffect(() => {
-    loadData()
+    loadData();
   }, []);
 
   let usr_profile = profile_data.userprofile;
@@ -1149,15 +1152,15 @@ const EditProfile = ({ navigation }) => {
 
                 setcurrent_pos(y);
               }}
-              
               enableOnAndroid={true}
               extraScrollHeight={Platform.OS == "ios" ? 0 : scrn_height / 6}
               extraHeight={Platform.OS == "ios" ? scrn_height / 6 : 0}
-              style={{ flex: 1,
-                 backgroundColor: "#fff",
+              style={{
+                flex: 1,
+                backgroundColor: "#fff",
                 //  backgroundColor: "red",
-                  width: scrn_width,
-                }}
+                width: scrn_width,
+              }}
               bounces={false}
               showsVerticalScrollIndicator={false}
               horizontal={false}
@@ -1500,314 +1503,332 @@ const EditProfile = ({ navigation }) => {
                       setchanges_made={setchanges_made}
                     />
                   </FormInputContainer>
-                  {profile_data?.userprivateprompts?.length > 0 && (
-                    <>
+                  {/* {profile_data?.userprivateprompts?.length > 0 && ( */}
+                  <>
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
                       <View
                         style={{
-                          alignItems: "center",
-                          justifyContent: "center",
+                          marginTop: rspH(1.2),
+                          marginBottom: rspH(1.4),
                         }}
                       >
-                        <View
-                          style={{
-                            marginTop: rspH(1.2),
-                            marginBottom: rspH(1.4),
-                          }}
-                        >
-                          <Text style={{ ...styles.label }}>
-                            Public Prompts
-                          </Text>
-                        </View>
+                        <Text style={{ ...styles.label }}>Public Prompts</Text>
+                      </View>
 
-                        <View style={{ marginBottom: rspH(3.7) }}>
-                          <Text style={{ ...styles.promptpara }}>
-                            Stand out! Don’t be just another fish in the sea.
-                            {"\n"}
-                            {"\n"}The prompts in this section will be visible
-                            only to the{"\n"}
-                            people who browse through your profile, and later,to
-                            {"\n"} people that you’ve decided to unmask yourself
-                            to.
-                          </Text>
-                        </View>
+                      <View style={{ marginBottom: rspH(3.7) }}>
+                        <Text style={{ ...styles.promptpara }}>
+                          Stand out! Don’t be just another fish in the sea.
+                          {"\n"}
+                          {"\n"}The prompts in this section will be visible only
+                          to the{"\n"}
+                          people who browse through your profile, and later,to
+                          {"\n"} people that you’ve decided to unmask yourself
+                          to.
+                        </Text>
+                      </View>
 
-                        {/* Inputs Container*/}
-                        <View style={{ alignSelf: "center", width: "100%" }}>
-                          <View style={{ marginBottom: rspH(2.35) }}>
-                            <View
-                              style={{ marginBottom: rspH(1.2) }}
-                              ref={pup_q1_ref}
-                            >
-                              <FormSelector
-                                setSelectedEntry={setpublic_prompt1_q}
-                                selectedId={public_prompt1_q_id}
-                                setSelectedId={setpublic_prompt1_q_id}
-                                blr_value={public_prompt1_q_blr}
-                                setblr_value={setpublic_prompt1_q_blr}
-                                title="Prompts"
-                                search={false}
-                                placeholder={"Public Prompt Question 1"}
-                                width={"100%"}
-                                list={prompts_list}
-                                selectedValue={public_prompt1_q[1]}
-                                setchanges_made={setchanges_made}
-                                removable={true}
-                                rmv_list={prompts_list_rmv}
-                                setrmv_list={setprompts_list_rmv}
-                              />
-                            </View>
-
-                            <View ref={pup_a1_ref}>
-                              <AutoGrowingTextInput
-                                maxLength={250}
-                                placeholder="Type your answer"
-                                placeholderTextColor={"#000000"}
-                                keyboardType="default"
-                                style={{
-                                  ...styles.promptsInput,
-                                  backgroundColor:
-                                    public_prompt1_a.length > 2
-                                      ? colors.white
-                                      : "#F8F8F8",
-                                  borderColor:
-                                    public_prompt1_a.length > 2
-                                      ? colors.blue
-                                      : colors.error,
-                                  textAlignVertical: "top",
-                                }}
-                                value={public_prompt1_a}
-                                onFocus={() => setpublic_prompt1_blr(true)}
-                                onChangeText={(val) => {
-                                  setpublic_prompt1_a(val);
-
-                                  if (public_prompt1_blr) {
-                                    setchanges_made(true);
-                                  }
-                                }}
-                                onBlur={() => {
-                                  setpublic_prompt1_blr(true);
-                                }}
-                                disabled={public_prompt1_q == ""}
-                                // placeholderTextColor={'black'}
-
-                                maxHeight={rspH(11.5)}
-                                minHeight={rspH(11.5)}
-                              />
-                            </View>
+                      {/* Inputs Container*/}
+                      <View style={{ alignSelf: "center", width: "100%" }}>
+                        <View style={{ marginBottom: rspH(2.35) }}>
+                          <View
+                            style={{ marginBottom: rspH(1.2) }}
+                            ref={pup_q1_ref}
+                          >
+                            <FormSelector
+                              setSelectedEntry={setpublic_prompt1_q}
+                              selectedId={public_prompt1_q_id}
+                              setSelectedId={setpublic_prompt1_q_id}
+                              blr_value={public_prompt1_q_blr}
+                              setblr_value={setpublic_prompt1_q_blr}
+                              title="Prompts"
+                              search={false}
+                              placeholder={"Public Prompt Question 1"}
+                              width={"100%"}
+                              list={prompts_list}
+                              selectedValue={public_prompt1_q[1]}
+                              setchanges_made={setchanges_made}
+                              removable={true}
+                              rmv_list={prompts_list_rmv}
+                              setrmv_list={setprompts_list_rmv}
+                            />
                           </View>
 
-                          <View style={{ marginBottom: rspH(2.35) }}>
-                            <View
-                              style={{ marginBottom: rspH(1.2) }}
-                              ref={pup_q2_ref}
-                            >
-                              <FormSelector
-                                setSelectedEntry={setpublic_prompt2_q}
-                                selectedId={public_prompt2_q_id}
-                                setSelectedId={setpublic_prompt2_q_id}
-                                blr_value={public_prompt2_q_blr}
-                                setblr_value={setpublic_prompt2_q_blr}
-                                title="Prompts"
-                                placeholder={"Public Prompt Question 2"}
-                                width={"100%"}
-                                list={prompts_list}
-                                search={false}
-                                selectedValue={public_prompt2_q[1]}
-                                setchanges_made={setchanges_made}
-                                removable={true}
-                                rmv_list={prompts_list_rmv}
-                                setrmv_list={setprompts_list_rmv}
-                              />
-                            </View>
-                            <View ref={pup_a2_ref}>
-                              <AutoGrowingTextInput
-                                maxLength={250}
-                                placeholder="Type your answer"
-                                placeholderTextColor={"#000000"}
-                                keyboardType="default"
-                                style={{
-                                  ...styles.promptsInput,
-                                  backgroundColor:
-                                    public_prompt2_a.length > 2
-                                      ? colors.white
-                                      : "#F8F8F8",
-                                  borderColor:
-                                    public_prompt2_a.length > 2
-                                      ? colors.blue
-                                      : colors.error,
-                                  textAlignVertical: "top",
-                                }}
-                                onFocus={() => setpublic_prompt2_blr(true)}
-                                value={public_prompt2_a}
-                                onChangeText={(val) => {
-                                  setpublic_prompt2_a(val);
-                                  if (public_prompt2_blr) {
-                                    setchanges_made(true);
-                                  }
-                                }}
-                                onBlur={() => {
-                                  setpublic_prompt2_blr(true);
-                                }}
-                                disabled={public_prompt2_q == ""}
-                                // placeholderTextColor={'black'}
+                          <View ref={pup_a1_ref}>
+                            <AutoGrowingTextInput
+                              maxLength={250}
+                              placeholder="Type your answer"
+                              placeholderTextColor={"#000000"}
+                              keyboardType="default"
+                              style={{
+                                ...styles.promptsInput,
+                                backgroundColor:
+                                  public_prompt1_a.length > 2
+                                    ? colors.white
+                                    : "#F8F8F8",
+                                borderColor:
+                                   public_prompt1_a.length > 2
+                                    ? colors.blue
+                                    : 
+                                    public_prompt1_blr ?
+                                    colors.error
+                                    :
+                                    colors.grey
+                                    ,
+                                textAlignVertical: "top",
+                              }}
+                              value={public_prompt1_a}
+                              onFocus={() => {
+                                console.log("onFocus")
+                                setpublic_prompt1_blr(true)}}
+                              onChangeText={(val) => {
+                                setpublic_prompt1_a(val);
 
-                                maxHeight={rspH(11.5)}
-                                minHeight={rspH(11.5)}
-                              />
-                            </View>
+                                if (public_prompt1_blr) {
+                                  setchanges_made(true);
+                                }
+                              }}
+                              onBlur={() => {
+                                setpublic_prompt1_blr(true);
+                              }}
+                              editable={public_prompt1_q != ""}
+                              // disabled={public_prompt1_q == ""}
+
+                              // placeholderTextColor={'black'}
+
+                              maxHeight={rspH(11.5)}
+                              minHeight={rspH(11.5)}
+                            />
+                          </View>
+                        </View>
+
+                        <View style={{ marginBottom: rspH(2.35) }}>
+                          <View
+                            style={{ marginBottom: rspH(1.2) }}
+                            ref={pup_q2_ref}
+                          >
+                            <FormSelector
+                              setSelectedEntry={setpublic_prompt2_q}
+                              selectedId={public_prompt2_q_id}
+                              setSelectedId={setpublic_prompt2_q_id}
+                              blr_value={public_prompt2_q_blr}
+                              setblr_value={setpublic_prompt2_q_blr}
+                              title="Prompts"
+                              placeholder={"Public Prompt Question 2"}
+                              width={"100%"}
+                              list={prompts_list}
+                              search={false}
+                              selectedValue={public_prompt2_q[1]}
+                              setchanges_made={setchanges_made}
+                              removable={true}
+                              rmv_list={prompts_list_rmv}
+                              setrmv_list={setprompts_list_rmv}
+                            />
+                          </View>
+                          <View ref={pup_a2_ref}>
+                            <AutoGrowingTextInput
+                              maxLength={250}
+                              placeholder="Type your answer"
+                              placeholderTextColor={"#000000"}
+                              keyboardType="default"
+                              style={{
+                                ...styles.promptsInput,
+                                backgroundColor:
+                                  public_prompt2_a.length > 2
+                                    ? colors.white
+                                    : "#F8F8F8",
+                                borderColor:
+                                  public_prompt2_a.length > 2
+                                    ? colors.blue
+                                    : public_prompt2_blr ?
+                                    colors.error
+                                    :
+                                    colors.grey,
+                                    
+                                textAlignVertical: "top",
+                              }}
+                              onFocus={() => setpublic_prompt2_blr(true)}
+                              value={public_prompt2_a}
+                              onChangeText={(val) => {
+                                setpublic_prompt2_a(val);
+                                if (public_prompt2_blr) {
+                                  setchanges_made(true);
+                                }
+                              }}
+                              onBlur={() => {
+                                setpublic_prompt2_blr(true);
+                              }}
+                              editable={public_prompt2_q != ""}
+                              // disabled={public_prompt2_q == ""}
+                              // placeholderTextColor={'black'}
+
+                              maxHeight={rspH(11.5)}
+                              minHeight={rspH(11.5)}
+                            />
                           </View>
                         </View>
                       </View>
+                    </View>
 
+                    <View
+                      style={{
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
                       <View
                         style={{
-                          alignItems: "center",
-                          justifyContent: "center",
+                          marginTop: rspH(1.2),
+                          marginBottom: rspH(1.4),
                         }}
                       >
-                        <View
-                          style={{
-                            marginTop: rspH(1.2),
-                            marginBottom: rspH(1.4),
-                          }}
-                        >
-                          <Text style={{ ...styles.label }}>
-                            Private Prompts
-                          </Text>
-                        </View>
+                        <Text style={{ ...styles.label }}>Private Prompts</Text>
+                      </View>
 
-                        <View style={{ marginBottom: rspH(3.7) }}>
-                          <Text style={{ ...styles.promptpara }}>
-                            Your Private Place.{"\n"}
-                            {"\n"}This is more exclusive. The prompts in this
-                            section will {"\n"}be visible only to the people who
-                            you’ve been matched {"\n"}with.
-                          </Text>
-                        </View>
+                      <View style={{ marginBottom: rspH(3.7) }}>
+                        <Text style={{ ...styles.promptpara }}>
+                          Your Private Place.{"\n"}
+                          {"\n"}This is more exclusive. The prompts in this
+                          section will {"\n"}be visible only to the people who
+                          you’ve been matched {"\n"}with.
+                        </Text>
+                      </View>
 
-                        {/* Inputs Container*/}
-                        <View style={{ alignSelf: "center", width: "100%" }}>
-                          <View style={{ marginBottom: rspH(2.35) }}>
-                            <View
-                              style={{ marginBottom: rspH(1.2) }}
-                              ref={prp_q1_ref}
-                            >
-                              <FormSelector
-                                setSelectedEntry={setprivate_prompt1_q}
-                                selectedId={private_prompt1_q_id}
-                                setSelectedId={setprivate_prompt1_q_id}
-                                blr_value={private_prompt1_q_blr}
-                                setblr_value={setprivate_prompt1_q_blr}
-                                title="Prompts"
-                                search={false}
-                                placeholder={"Private Prompt Question 1"}
-                                width={"100%"}
-                                list={prompts_list}
-                                selectedValue={private_prompt1_q[1]}
-                                setchanges_made={setchanges_made}
-                                removable={true}
-                                rmv_list={prompts_list_rmv}
-                                setrmv_list={setprompts_list_rmv}
-                              />
-                            </View>
-                            <View ref={prp_a1_ref}>
-                              <AutoGrowingTextInput
-                                maxLength={250}
-                                placeholder="Type your answer"
-                                placeholderTextColor={"#000000"}
-                                keyboardType="default"
-                                style={{
-                                  ...styles.promptsInput,
-                                  backgroundColor:
-                                    private_prompt1_a.length > 2
-                                      ? colors.white
-                                      : "#F8F8F8",
-                                  borderColor:
-                                    private_prompt1_a.length > 2
-                                      ? colors.blue
-                                      : colors.error,
-                                  textAlignVertical: "top",
-                                }}
-                                value={private_prompt1_a}
-                                onFocus={() => setprivate_prompt1_blr(true)}
-                                onChangeText={(val) => {
-                                  setprivate_prompt1_a(val);
-                                  if (private_prompt1_blr) {
-                                    setchanges_made(true);
-                                  }
-                                }}
-                                onBlur={() => {
-                                  setprivate_prompt1_blr(true);
-                                }}
-                                disabled={private_prompt1_q == ""}
-                                maxHeight={rspH(11.5)}
-                                minHeight={rspH(11.5)}
-                              />
-                            </View>
+                      {/* Inputs Container*/}
+                      <View style={{ alignSelf: "center", width: "100%" }}>
+                        <View style={{ marginBottom: rspH(2.35) }}>
+                          <View
+                            style={{ marginBottom: rspH(1.2) }}
+                            ref={prp_q1_ref}
+                          >
+                            <FormSelector
+                              setSelectedEntry={setprivate_prompt1_q}
+                              selectedId={private_prompt1_q_id}
+                              setSelectedId={setprivate_prompt1_q_id}
+                              blr_value={private_prompt1_q_blr}
+                              setblr_value={setprivate_prompt1_q_blr}
+                              title="Prompts"
+                              search={false}
+                              placeholder={"Private Prompt Question 1"}
+                              width={"100%"}
+                              list={prompts_list}
+                              selectedValue={private_prompt1_q[1]}
+                              setchanges_made={setchanges_made}
+                              removable={true}
+                              rmv_list={prompts_list_rmv}
+                              setrmv_list={setprompts_list_rmv}
+                            />
                           </View>
+                          <View ref={prp_a1_ref}>
+                            <AutoGrowingTextInput
+                              maxLength={250}
+                              placeholder="Type your answer"
+                              placeholderTextColor={"#000000"}
+                              keyboardType="default"
+                              style={{
+                                ...styles.promptsInput,
+                                backgroundColor:
+                                  private_prompt1_a.length > 2
+                                    ? colors.white
+                                    : "#F8F8F8",
+                                borderColor:
+                                  private_prompt1_a.length > 2
+                                    ? colors.blue
+                                    : private_prompt1_blr ?
+                                    colors.error
+                                    :
+                                    colors.grey,
+                                textAlignVertical: "top",
+                              }}
+                              value={private_prompt1_a}
+                              onFocus={() => setprivate_prompt1_blr(true)}
+                              onChangeText={(val) => {
+                                setprivate_prompt1_a(val);
+                                if (private_prompt1_blr) {
+                                  setchanges_made(true);
+                                }
+                              }}
+                              onBlur={() => {
+                                setprivate_prompt1_blr(true);
+                              }}
+                              editable={private_prompt1_q != ""}
+                              // disabled={private_prompt1_q == ""}
+                              maxHeight={rspH(11.5)}
+                              minHeight={rspH(11.5)}
+                            />
+                          </View>
+                        </View>
 
-                          <View style={{ marginBottom: rspH(2.35) }}>
-                            <View
-                              style={{ marginBottom: rspH(1.2) }}
-                              ref={prp_q2_ref}
-                            >
-                              <FormSelector
-                                setSelectedEntry={setprivate_prompt2_q}
-                                selectedId={private_prompt2_q_id}
-                                setSelectedId={setprivate_prompt2_q_id}
-                                blr_value={private_prompt2_q_blr}
-                                setblr_value={setprivate_prompt2_q_blr}
-                                title="Prompts"
-                                placeholder={"Private Prompt Question 2"}
-                                width={"100%"}
-                                list={prompts_list}
-                                selectedValue={private_prompt2_q[1]}
-                                search={false}
-                                setchanges_made={setchanges_made}
-                                removable={true}
-                                rmv_list={prompts_list_rmv}
-                                setrmv_list={setprompts_list_rmv}
-                              />
-                            </View>
-                            <View ref={prp_a2_ref}>
-                              <AutoGrowingTextInput
-                                maxLength={250}
-                                placeholder="Type your answer"
-                                placeholderTextColor={"#000000"}
-                                keyboardType="default"
-                                style={{
-                                  ...styles.promptsInput,
-                                  backgroundColor:
-                                    private_prompt2_a.length > 2
-                                      ? colors.white
-                                      : "#F8F8F8",
-                                  borderColor:
-                                    private_prompt2_a.length > 2
-                                      ? colors.blue
-                                      : colors.error,
-                                  textAlignVertical: "top",
-                                }}
-                                value={private_prompt2_a}
-                                onFocus={() => setprivate_prompt2_blr(true)}
-                                onChangeText={(val) => {
-                                  setprivate_prompt2_a(val);
-                                  if (private_prompt2_blr) {
-                                    setchanges_made(true);
-                                  }
-                                }}
-                                onBlur={() => {
-                                  setprivate_prompt2_blr(true);
-                                }}
-                                disabled={private_prompt2_q == ""}
-                                maxHeight={rspH(11.5)}
-                                minHeight={rspH(11.5)}
-                              />
-                            </View>
+                        <View style={{ marginBottom: rspH(2.35) }}>
+                          <View
+                            style={{ marginBottom: rspH(1.2) }}
+                            ref={prp_q2_ref}
+                          >
+                            <FormSelector
+                              setSelectedEntry={setprivate_prompt2_q}
+                              selectedId={private_prompt2_q_id}
+                              setSelectedId={setprivate_prompt2_q_id}
+                              blr_value={private_prompt2_q_blr}
+                              setblr_value={setprivate_prompt2_q_blr}
+                              title="Prompts"
+                              placeholder={"Private Prompt Question 2"}
+                              width={"100%"}
+                              list={prompts_list}
+                              selectedValue={private_prompt2_q[1]}
+                              search={false}
+                              setchanges_made={setchanges_made}
+                              removable={true}
+                              rmv_list={prompts_list_rmv}
+                              setrmv_list={setprompts_list_rmv}
+                            />
+                          </View>
+                          <View ref={prp_a2_ref}>
+                            <AutoGrowingTextInput
+                              maxLength={250}
+                              placeholder="Type your answer"
+                              placeholderTextColor={"#000000"}
+                              keyboardType="default"
+                              style={{
+                                ...styles.promptsInput,
+                                backgroundColor:
+                                  private_prompt2_a.length > 2
+                                    ? colors.white
+                                    : "#F8F8F8",
+                                borderColor:
+                                  private_prompt2_a.length > 2
+                                    ? colors.blue
+                                    : private_prompt2_blr ?
+                                    colors.error
+                                    :
+                                    colors.grey,
+                                textAlignVertical: "top",
+                              }}
+                              value={private_prompt2_a}
+                              onFocus={() => setprivate_prompt2_blr(true)}
+                              onChangeText={(val) => {
+                                setprivate_prompt2_a(val);
+                                if (private_prompt2_blr) {
+                                  setchanges_made(true);
+                                }
+                              }}
+                              onBlur={() => {
+                                setprivate_prompt2_blr(true);
+                              }}
+                              editable={private_prompt2_q != ""}
+                              // disabled={private_prompt2_q == ""}
+                              maxHeight={rspH(11.5)}
+                              minHeight={rspH(11.5)}
+                            />
                           </View>
                         </View>
                       </View>
-                    </>
-                  )}
+                    </View>
+                  </>
+                  {/* )} */}
                 </View>
               </View>
             </KeyboardAwareScrollView>
@@ -1818,7 +1839,6 @@ const EditProfile = ({ navigation }) => {
                   height: rspH(13.59),
 
                   marginBottom: rspH(-2.32),
-
                 }}
               >
                 <ErrorContainer error_msg="" />
@@ -1833,7 +1853,7 @@ const EditProfile = ({ navigation }) => {
                     (!habits_list[0][1] && !habits_list[0][2]) ||
                     (!habits_list[1][1] && !habits_list[1][2]) ||
                     (!habits_list[2][1] && !habits_list[2][2]) ||
-                    (profile_data?.userprivateprompts.length > 0 &&
+                    // (profile_data?.userprivateprompts.length > 0 &&
                       (public_prompt1_q_id == 0 ||
                         public_prompt1_a == "" ||
                         public_prompt2_q_id == 0 ||
@@ -1841,7 +1861,8 @@ const EditProfile = ({ navigation }) => {
                         private_prompt1_q_id == 0 ||
                         private_prompt1_a == "" ||
                         private_prompt2_q_id == 0 ||
-                        private_prompt2_a == ""))
+                        private_prompt2_a == "")
+                        // )
                   }
                   onPress={() => {
                     let smok = habits_list[0][1]
@@ -1860,22 +1881,33 @@ const EditProfile = ({ navigation }) => {
                       ? false
                       : null;
 
-                    if (
-                      changes_made &&
-                      height_cm >= 60 &&
-                      height_cm <= 270 &&
-                      occupation != "" &&
-                      smok != null &&
-                      drik != null &&
-                      marij != null &&
-                      profile_data?.userprivateprompts.length == 0
-                    ) {
-                      onNextPress();
-                    } else {
+                  // if (
+                  //     changes_made &&
+                  //     height_cm >= 60 &&
+                  //     height_cm <= 270 &&
+                  //     occupation != "" &&
+                  //     smok != null &&
+                  //     drik != null &&
+                  //     marij != null &&
+                  //     // profile_data?.userprivateprompts.length == 0
+                  //     public_prompt1_q_id != 0 &&
+                  //     public_prompt1_a != "" &&
+                  //     public_prompt2_q_id != 0 &&
+                  //     public_prompt2_a != "" &&
+                  //     private_prompt1_q_id != 0 &&
+                  //     private_prompt1_a != "" &&
+                  //     private_prompt2_q_id != 0 &&
+                  //     private_prompt2_a != ""
+                  //   ) {
+                  //     console.log("Here2");
+                  //     onNextPress();
+                  //   } 
+                  //   else {
+
                       if (
-                        profile_data?.userprivateprompts.length > 0 &&
+                        // profile_data?.userprivateprompts.length > 0 &&
                         changes_made &&
-                        height_cm >= 50 &&
+                        height_cm >= 60 &&
                         height_cm <= 270 &&
                         occupation != "" &&
                         smok != null &&
@@ -1890,133 +1922,136 @@ const EditProfile = ({ navigation }) => {
                         private_prompt2_q_id != 0 &&
                         private_prompt2_a != ""
                       ) {
+                        console.log("Here3");
+
                         onNextPress();
                       } else {
-                        if (profile_data?.userprivateprompts?.length > 0) {
-                          if (public_prompt1_q_id == 0) {
-                            pup_q1_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          } else if (public_prompt1_a == "") {
-                            pup_a1_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
+                        console.log("Here4");
+                        // if (profile_data?.userprivateprompts?.length > 0) {
+                        if (public_prompt1_q_id == 0) {
+                          pup_q1_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
+                        } else if (public_prompt1_a == "") {
+                          pup_a1_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
 
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          } else if (public_prompt2_q_id == 0) {
-                            pup_q2_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
+                        } else if (public_prompt2_q_id == 0) {
+                          pup_q2_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
 
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          } else if (public_prompt2_a == "") {
-                            pup_a2_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
+                        } else if (public_prompt2_a == "") {
+                          pup_a2_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
 
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          } else if (private_prompt1_q_id == 0) {
-                            prp_q1_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
+                        } else if (private_prompt1_q_id == 0) {
+                          prp_q1_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
 
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          } else if (private_prompt1_a == "") {
-                            prp_a1_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
+                        } else if (private_prompt1_a == "") {
+                          prp_a1_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
 
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          } else if (private_prompt2_q_id == 0) {
-                            prp_q2_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
+                        } else if (private_prompt2_q_id == 0) {
+                          prp_q2_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
 
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          } else if (private_prompt2_a == "") {
-                            prp_a2_ref.current.measure(
-                              (x, y, width, height, pageX, pageY) => {
-                                pageY = pageY + current_pos;
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
+                        } else if (private_prompt2_a == "") {
+                          prp_a2_ref.current.measure(
+                            (x, y, width, height, pageX, pageY) => {
+                              pageY = pageY + current_pos;
 
-                                scrollViewRef.current.scrollToPosition(
-                                  0,
-                                  pageY - rspH(16),
-                                  true
-                                );
-                              }
-                            );
-                          }
-
-                          if (public_prompt1_q_id == 0) {
-                            setpublic_prompt1_q_blr(true);
-                          }
-                          if (public_prompt1_a == "") {
-                            setpublic_prompt1_blr(true);
-                          }
-                          if (public_prompt2_q_id == 0) {
-                            setpublic_prompt2_q_blr(true);
-                          }
-                          if (public_prompt2_a == "") {
-                            setpublic_prompt2_blr(true);
-                          }
-                          if (private_prompt1_q_id == 0) {
-                            setprivate_prompt1_q_blr(true);
-                          }
-                          if (private_prompt1_a == "") {
-                            setprivate_prompt1_blr(true);
-                          }
-                          if (private_prompt2_q_id == 0) {
-                            setprivate_prompt2_q_blr(true);
-                          }
-                          if (private_prompt2_a == "") {
-                            setprivate_prompt2_blr(true);
-                          }
+                              scrollViewRef.current.scrollToPosition(
+                                0,
+                                pageY - rspH(16),
+                                true
+                              );
+                            }
+                          );
                         }
+
+                        if (public_prompt1_q_id == 0) {
+                          setpublic_prompt1_q_blr(true);
+                        }
+                        if (public_prompt1_a == "") {
+                          setpublic_prompt1_blr(true);
+                        }
+                        if (public_prompt2_q_id == 0) {
+                          setpublic_prompt2_q_blr(true);
+                        }
+                        if (public_prompt2_a == "") {
+                          setpublic_prompt2_blr(true);
+                        }
+                        if (private_prompt1_q_id == 0) {
+                          setprivate_prompt1_q_blr(true);
+                        }
+                        if (private_prompt1_a == "") {
+                          setprivate_prompt1_blr(true);
+                        }
+                        if (private_prompt2_q_id == 0) {
+                          setprivate_prompt2_q_blr(true);
+                        }
+                        if (private_prompt2_a == "") {
+                          setprivate_prompt2_blr(true);
+                        }
+                        // }
                       }
-                    }
+                    // }
                   }}
                 />
               </FormWrapperFooter>
