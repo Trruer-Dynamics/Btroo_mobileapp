@@ -55,6 +55,7 @@ import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { UserContext } from "../../context/user";
 import Loader from "../../components/loader/Loader";
+import FastImage from "react-native-fast-image";
 const insets = initialWindowMetrics.insets;
 
 const SettingsScreen = ({ navigation }) => {
@@ -522,7 +523,7 @@ const SettingsScreen = ({ navigation }) => {
                       right: 0,
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../assets/images/Setting/BannerImg.png")}
                       resizeMode="contain"
                       style={{
@@ -1152,7 +1153,7 @@ const SettingsScreen = ({ navigation }) => {
                         marginBottom: rspH(3.2),
                       }}
                     >
-                      <Image
+                      <FastImage
                         source={require("../../assets/images/Setting/goodBye.png")}
                         style={{
                           width: rspW(70.9),

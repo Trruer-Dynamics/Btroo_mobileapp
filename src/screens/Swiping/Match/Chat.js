@@ -71,6 +71,7 @@ import {
   setDraftMsgs,
   setIceBreakers,
 } from "../../../store/reducers/chats/chats";
+import FastImage from "react-native-fast-image";
 
 const ChatItem = ({
   item,
@@ -331,7 +332,7 @@ const ChatItem = ({
                 left: rspW(-4.8),
               }}
             >
-              <Image
+              <FastImage
                 source={require("../../../assets/images/Matching/Message/LeftCut2.png")}
                 style={{
                   width: rspW(10.24),
@@ -349,7 +350,7 @@ const ChatItem = ({
                 right: rspW(-4.8),
               }}
             >
-              <Image
+              <FastImage
                 source={require("../../../assets/images/Matching/Message/RightCut.png")}
                 style={{
                   width: rspW(10.3),
@@ -1131,7 +1132,7 @@ const Chat = ({ profile }) => {
                             }
                           }}
                         >
-                          <Image source={rvl_img} style={styles.profilePhoto} />
+                          <FastImage source={rvl_img} style={styles.profilePhoto} />
                         </TouchableOpacity>
                       )}
                     </>
@@ -1187,7 +1188,7 @@ const Chat = ({ profile }) => {
                 style={styles.iceBreakerCont}
                 onPress={() => setmodalVisible(true)}
               >
-                <Image
+                <FastImage
                   source={require("../../../assets/images/Matching/Message/Icebreaker.png")}
                   style={styles.iceBreakerImg}
                 />
@@ -1292,7 +1293,7 @@ const Chat = ({ profile }) => {
                   maxHeight={rspH(12.5)}
                 />
                 {msg == "" ? (
-                  <Image
+                  <FastImage
                     source={require("../../../assets/images/Matching/Message/sendMsg.png")}
                     style={styles.sendBtn}
                     resizeMode="contain"
@@ -1358,7 +1359,7 @@ const Chat = ({ profile }) => {
                       }
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../../assets/images/Matching/Message/sendMsgActive.png")}
                       style={styles.sendBtn}
                       resizeMode="contain"
@@ -1422,7 +1423,7 @@ const Chat = ({ profile }) => {
             style={{ ...styles.profilePhotoHighCont, ...styles.highCont }}
             onPress={() => setmodalVisible(true)}
           >
-            <Image
+            <FastImage
               source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")}
               style={styles.profilePhoto}
             />

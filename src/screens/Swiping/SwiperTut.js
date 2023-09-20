@@ -34,6 +34,7 @@ import axios from "axios";
 import Loader from "../../components/loader/Loader";
 import { setSessionExpired } from "../../store/reducers/authentication/authentication";
 import { useNavigation } from "@react-navigation/native";
+import FastImage from "react-native-fast-image";
 
 const DATA = [
   {
@@ -83,7 +84,7 @@ const Item = ({ item, setmodalVisible, masked }) => {
                   zIndex: 2,
                 }}
               >
-                <Image
+                <FastImage
                   source={require("../../assets/images/Swiping/Actions/Softspot.png")}
                   style={{
                     width: rspW(14.5),
@@ -92,7 +93,7 @@ const Item = ({ item, setmodalVisible, masked }) => {
                 />
               </View>
 
-              <Image
+              <FastImage
                 source={require("../../assets/images/Swiping/Masked/Exclude_2.png")}
                 style={{
                   width: rspW(89),
@@ -107,7 +108,7 @@ const Item = ({ item, setmodalVisible, masked }) => {
             </>
           )}
 
-          <Image
+          <FastImage
             source={item.image}
             style={{
               width: "100%",
@@ -125,7 +126,7 @@ const Item = ({ item, setmodalVisible, masked }) => {
 const Item2 = ({ item }) => {
   return (
     <View style={styles.item2}>
-      <Image
+      <FastImage
         source={item.image2}
         style={{ width: "100%", height: "98%" }}
         resizeMode="contain"
@@ -329,7 +330,7 @@ const SwiperTut = ({ repeat_tut }) => {
               <View style={styles.actionsCont}>
                 {/* Action */}
                 <TouchableOpacity style={styles.actionCont}>
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Actions/Pass.png")}
                     style={{
                       width: rspW(8.695),
@@ -340,7 +341,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
                 {/* Action */}
                 <TouchableOpacity style={styles.actionCont}>
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Actions/Softspot.png")}
                     style={{
                       width: rspW(9.8),
@@ -357,7 +358,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   }}
                   style={styles.actionCont}
                 >
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                     style={{
                       width: rspW(8.46),
@@ -456,7 +457,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{ flexDirection: "row", alignItems: "baseline" }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/City.png")}
                       style={{
                         width: rspW(6.75),
@@ -474,7 +475,7 @@ const SwiperTut = ({ repeat_tut }) => {
                       width: "100%",
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/Education.png")}
                       style={{
                         width: rspW(6.75),
@@ -500,19 +501,19 @@ const SwiperTut = ({ repeat_tut }) => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={DrinkingNo}
                       style={{
                         ...styles.habitsImage,
                       }}
                     />
-                    <Image
+                    <FastImage
                       source={SmokingNo}
                       style={{
                         ...styles.habitsImage,
                       }}
                     />
-                    <Image
+                    <FastImage
                       source={MarijuanaNo}
                       style={{
                         ...styles.habitsImage,
@@ -554,42 +555,42 @@ const SwiperTut = ({ repeat_tut }) => {
                   horizontal
                   showsHorizontalScrollIndicator={false}
                 >
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bowling.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Basketball.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Boating.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bicycling.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/AmericanFootball.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/AnimalCare.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Baking.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
@@ -629,48 +630,48 @@ const SwiperTut = ({ repeat_tut }) => {
                   horizontal
                   showsHorizontalScrollIndicator={false}
                 >
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Ant.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Hamster.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/GuineaPig.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Bird.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Butterfly.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Cat.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
 
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Chicken.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Ferret.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
@@ -700,7 +701,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   >
                     <View style={{ ...styles.actionHighlightCont }}>
                       <View style={styles.actionCont}>
-                        <Image
+                        <FastImage
                           source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                           style={{
                             width: rspW(8.9),
@@ -722,7 +723,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   >
                     <View style={{ ...styles.actionHighlightCont }}>
                       <View style={styles.actionCont}>
-                        <Image
+                        <FastImage
                           source={require("../../assets/images/Swiping/Actions/Softspot.png")}
                           style={{
                             width: rspW(8.9),
@@ -744,7 +745,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   >
                     <View style={{ ...styles.actionHighlightCont }}>
                       <View style={styles.actionCont}>
-                        <Image
+                        <FastImage
                           source={require("../../assets/images/Swiping/Actions/Pass.png")}
                           style={{
                             // width: rspW(8.46),
@@ -808,7 +809,7 @@ const SwiperTut = ({ repeat_tut }) => {
                           <View style={styles.actionsCont}>
                             {/* Action */}
                             <TouchableOpacity style={styles.actionCont}>
-                              <Image
+                              <FastImage
                                 source={require("../../assets/images/Swiping/Actions/Pass.png")}
                                 style={{
                                   width: rspW(8.695),
@@ -819,7 +820,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
                             {/* Action */}
                             <TouchableOpacity style={styles.actionCont}>
-                              <Image
+                              <FastImage
                                 source={require("../../assets/images/Swiping/Actions/Softspot.png")}
                                 style={{
                                   width: rspW(9.8),
@@ -830,7 +831,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
                             {/* Action */}
                             <TouchableOpacity style={styles.actionCont}>
-                              <Image
+                              <FastImage
                                 source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                                 style={{
                                   width: rspW(8.46),
@@ -974,7 +975,7 @@ const SwiperTut = ({ repeat_tut }) => {
                                 alignItems: "baseline",
                               }}
                             >
-                              <Image
+                              <FastImage
                                 source={require("../../assets/images/Swiping/BioIcons/City.png")}
                                 style={{
                                   width: rspW(6.75),
@@ -994,7 +995,7 @@ const SwiperTut = ({ repeat_tut }) => {
                                 width: "100%",
                               }}
                             >
-                              <Image
+                              <FastImage
                                 source={require("../../assets/images/Swiping/BioIcons/Education.png")}
                                 style={{
                                   width: rspW(6.75),
@@ -1022,19 +1023,19 @@ const SwiperTut = ({ repeat_tut }) => {
                                 justifyContent: "space-between",
                               }}
                             >
-                              <Image
+                              <FastImage
                                 source={DrinkingNo}
                                 style={{
                                   ...styles.habitsImage,
                                 }}
                               />
-                              <Image
+                              <FastImage
                                 source={SmokingNo}
                                 style={{
                                   ...styles.habitsImage,
                                 }}
                               />
-                              <Image
+                              <FastImage
                                 source={MarijuanaNo}
                                 style={{
                                   ...styles.habitsImage,
@@ -1074,42 +1075,42 @@ const SwiperTut = ({ repeat_tut }) => {
                             horizontal
                             showsHorizontalScrollIndicator={false}
                           >
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bowling.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/Basketball.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/Boating.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bicycling.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/AmericanFootball.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/AnimalCare.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/Baking.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
@@ -1149,48 +1150,48 @@ const SwiperTut = ({ repeat_tut }) => {
                             horizontal
                             showsHorizontalScrollIndicator={false}
                           >
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Ant.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Hamster.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/GuineaPig.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Bird.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Butterfly.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Cat.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
 
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Chicken.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            <Image
+                            <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Ferret.png")}
                               style={styles.interestImage}
                               resizeMode="cover"

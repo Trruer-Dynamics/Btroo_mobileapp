@@ -13,6 +13,7 @@ import { rspH, rspW, rspF } from "../../../styles/responsiveSize";
 import fontFamily from "../../../styles/fontFamily";
 import FAIcon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
+import FastImage from "react-native-fast-image";
 
 const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
   const navigation = useNavigation();
@@ -42,7 +43,7 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
           alignItems: "center",
         }}
       >
-        <Image
+        <FastImage
           source={
             item.prof_rvl
               ? { uri: item.prof_img }

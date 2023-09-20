@@ -25,6 +25,7 @@ import SearchInput from "./SearchInput";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import FooterBtn from "../Buttons/FooterBtn";
+import FastImage from "react-native-fast-image";
 
 const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
   <TouchableOpacity
@@ -39,7 +40,7 @@ const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
     }}
   >
     {multi && (
-      <Image
+      <FastImage
         source={{
           uri: selected_lis2.indexOf(item[0]) > -1 ? item[2] : item[3],
         }}

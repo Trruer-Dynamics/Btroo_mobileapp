@@ -9,10 +9,14 @@ const ChatStack = ({ route }) => {
 
   const chat_tut = useSelector((state) => state.tutorial.chat_tut);
 
+  const repeat_tut = route.params?.repeat_tut ? route.params?.repeat_tut : false
+
+  console.log("chat repeat_tut",repeat_tut)
+
   return (
     <View>
-      {chat_tut ? (
-        <ChatTut profile={profile} />
+      {chat_tut || repeat_tut ? (
+        <ChatTut profile={profile} repeat_tut={repeat_tut} />
       ) : (
         <Chat profile={profile} reveal={reveal} />
       )}

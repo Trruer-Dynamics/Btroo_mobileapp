@@ -14,6 +14,7 @@ const MatchStack = ({route}) => {
 
   return <View>{match_tut || repeat_tut ? <Match_Tut
     repeat_tut={repeat_tut}
+    
     /> : <Match />}</View>;
 };
 

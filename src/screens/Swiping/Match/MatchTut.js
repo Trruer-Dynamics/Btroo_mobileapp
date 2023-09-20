@@ -248,8 +248,12 @@ const MatchTut = ({repeat_tut}) => {
                 <TouchableOpacity
                   onPress={() => {
                     if (repeat_tut) {
-                      navigation.navigate('Match',{
-                        repeat_tut: false
+                      navigation.navigate('Chat',{
+                        repeat_tut: true,
+                        reveal: false,
+                        profile: {
+                          userprofile: {name : 'bTroo'}
+                        },
                       })
                     }
                     else{

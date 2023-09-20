@@ -11,12 +11,13 @@ import colors from "../../../styles/colors";
 import fontFamily from "../../../styles/fontFamily";
 import FooterBtn from "../../Buttons/FooterBtn";
 import { rspH, rspW, rspF } from "../../../styles/responsiveSize";
+import FastImage from "react-native-fast-image";
 
 const ExtendTime = ({ setModalVisible, extendTime }) => {
   return (
     <View style={styles.container}>
       <View style={styles.extendImageCont}>
-        <Image
+        <FastImage
           source={require("../../../assets/images/Matching/TimeExtend/ConversationTimer.png")}
           style={styles.extendImage}
         />

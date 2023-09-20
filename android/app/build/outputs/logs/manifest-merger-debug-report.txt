@@ -22,6 +22,7 @@ MERGED from [:react-native-masked-view_masked-view] /Users/rahul/Desktop/BtrooPr
 MERGED from [:react-native-autogrow-textinput-ts] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-autogrow-textinput-ts/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-compressor] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-compressor/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-date-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-fast-image] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fast-image/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-image-crop-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-image-crop-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-33:12
@@ -88,6 +89,8 @@ MERGED from [androidx.appcompat:appcompat:1.4.1] /Users/rahul/.gradle/caches/tra
 MERGED from [androidx.sqlite:sqlite-framework:2.1.0] /Users/rahul/.gradle/caches/transforms-3/1a35ed5105ed37ea853e05e916f991da/transformed/sqlite-framework-2.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.4.1] /Users/rahul/.gradle/caches/transforms-3/c70a285c3432c27aefea629febb2d434/transformed/jetified-appcompat-resources-1.4.1/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/rahul/.gradle/caches/transforms-3/6728a44bec59294e4fa02311258c49cd/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:2:1-16:12
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/rahul/.gradle/caches/transforms-3/7d365d876aa1806570caa4813c552412/transformed/jetified-glide-4.12.0/AndroidManifest.xml:2:1-12:12
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:17:1-40:12
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.1] /Users/rahul/.gradle/caches/transforms-3/0bd16382aec55a9c99f8449c92842946/transformed/jetified-play-services-auth-api-phone-18.0.1/AndroidManifest.xml:2:1-7:12
@@ -148,6 +151,7 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1] /Users/rah
 MERGED from [androidx.savedstate:savedstate:1.1.0] /Users/rahul/.gradle/caches/transforms-3/245a2d3f535a699f02c0eab2b81e49de/transformed/jetified-savedstate-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/rahul/.gradle/caches/transforms-3/ea527a48e81550df911544fdc2a660a9/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.datatransport:transport-api:3.0.0] /Users/rahul/.gradle/caches/transforms-3/f609e96eb882bdfb9f96314cb2ad88c8/transformed/jetified-transport-api-3.0.0/AndroidManifest.xml:15:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8997f9e2302933f39976d92b51bec80d/transformed/jetified-gifdecoder-4.12.0/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/rahul/.gradle/caches/transforms-3/f1f1b1529b61d3a1676fe16410ca5d1e/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cardview:cardview:1.0.0] /Users/rahul/.gradle/caches/transforms-3/5274952af47e814fe3b73e66372dc14a/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/rahul/.gradle/caches/transforms-3/8f276fed203ab163302dac910daece0a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
@@ -323,6 +327,10 @@ MERGED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.grad
 MERGED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradle/caches/transforms-3/ac268df81f11d2c191778ad4138dae4f/transformed/jetified-VideoCompressor-1a262bba37/AndroidManifest.xml:14:5-16:38
 MERGED from [com.google.android.material:material:1.1.0] /Users/rahul/.gradle/caches/transforms-3/dc5e3db9b39d80c5c0e8358f138d606d/transformed/material-1.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.1.0] /Users/rahul/.gradle/caches/transforms-3/dc5e3db9b39d80c5c0e8358f138d606d/transformed/material-1.1.0/AndroidManifest.xml:22:5-20
+MERGED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:10:5-14:19
+MERGED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:10:5-14:19
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/rahul/.gradle/caches/transforms-3/7d365d876aa1806570caa4813c552412/transformed/jetified-glide-4.12.0/AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/rahul/.gradle/caches/transforms-3/7d365d876aa1806570caa4813c552412/transformed/jetified-glide-4.12.0/AndroidManifest.xml:10:5-20
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:7:5-20
@@ -371,6 +379,8 @@ MERGED from [androidx.camera:camera-core:1.1.0-beta02] /Users/rahul/.gradle/cach
 MERGED from [androidx.camera:camera-core:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/176816ed1c182088bef7fdac0253ea95/transformed/jetified-camera-core-1.1.0-beta02/AndroidManifest.xml:25:5-36:19
 MERGED from [androidx.core:core:1.7.0] /Users/rahul/.gradle/caches/transforms-3/22259c929aa488117423d75d2a95510f/transformed/core-1.7.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.7.0] /Users/rahul/.gradle/caches/transforms-3/22259c929aa488117423d75d2a95510f/transformed/core-1.7.0/AndroidManifest.xml:24:5-89
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8997f9e2302933f39976d92b51bec80d/transformed/jetified-gifdecoder-4.12.0/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8997f9e2302933f39976d92b51bec80d/transformed/jetified-gifdecoder-4.12.0/AndroidManifest.xml:9:5-20
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/rahul/.gradle/caches/transforms-3/8f276fed203ab163302dac910daece0a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/rahul/.gradle/caches/transforms-3/8f276fed203ab163302dac910daece0a/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
 MERGED from [net.time4j:time4j-android:4.8-2021a] /Users/rahul/.gradle/caches/transforms-3/f3cc7ccb50e6362fb2d8829407d934c3/transformed/jetified-time4j-android-4.8-2021a/AndroidManifest.xml:11:5-20
@@ -521,6 +531,8 @@ MERGED from [:react-native-compressor] /Users/rahul/Desktop/BtrooProject/Btroo_N
 MERGED from [:react-native-compressor] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-compressor/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-date-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-date-picker] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-date-picker/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-fast-image] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fast-image/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-fast-image] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fast-image/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-fs] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fs/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] /Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-gesture-handler/android/build/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
@@ -653,6 +665,10 @@ MERGED from [androidx.appcompat:appcompat-resources:1.4.1] /Users/rahul/.gradle/
 MERGED from [androidx.appcompat:appcompat-resources:1.4.1] /Users/rahul/.gradle/caches/transforms-3/c70a285c3432c27aefea629febb2d434/transformed/jetified-appcompat-resources-1.4.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/rahul/.gradle/caches/transforms-3/6728a44bec59294e4fa02311258c49cd/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.autofill:autofill:1.1.0] /Users/rahul/.gradle/caches/transforms-3/6728a44bec59294e4fa02311258c49cd/transformed/jetified-autofill-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/rahul/.gradle/caches/transforms-3/7d365d876aa1806570caa4813c552412/transformed/jetified-glide-4.12.0/AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.12.0] /Users/rahul/.gradle/caches/transforms-3/7d365d876aa1806570caa4813c552412/transformed/jetified-glide-4.12.0/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:20.0.0] /Users/rahul/.gradle/caches/transforms-3/a9984547daf26ed1f915fd03acfec6a6/transformed/jetified-play-services-location-20.0.0/AndroidManifest.xml:5:5-44
@@ -773,6 +789,8 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/rahul/.gradle/
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.3.1] /Users/rahul/.gradle/caches/transforms-3/ea527a48e81550df911544fdc2a660a9/transformed/lifecycle-viewmodel-2.3.1/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.datatransport:transport-api:3.0.0] /Users/rahul/.gradle/caches/transforms-3/f609e96eb882bdfb9f96314cb2ad88c8/transformed/jetified-transport-api-3.0.0/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.android.datatransport:transport-api:3.0.0] /Users/rahul/.gradle/caches/transforms-3/f609e96eb882bdfb9f96314cb2ad88c8/transformed/jetified-transport-api-3.0.0/AndroidManifest.xml:18:5-20:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8997f9e2302933f39976d92b51bec80d/transformed/jetified-gifdecoder-4.12.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8997f9e2302933f39976d92b51bec80d/transformed/jetified-gifdecoder-4.12.0/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/rahul/.gradle/caches/transforms-3/f1f1b1529b61d3a1676fe16410ca5d1e/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/rahul/.gradle/caches/transforms-3/f1f1b1529b61d3a1676fe16410ca5d1e/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] /Users/rahul/.gradle/caches/transforms-3/5274952af47e814fe3b73e66372dc14a/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
@@ -1227,6 +1245,12 @@ uses-permission#android.permission.READ_EXTERNAL_STORAGE
 ADDED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradle/caches/transforms-3/ac268df81f11d2c191778ad4138dae4f/transformed/jetified-VideoCompressor-1a262bba37/AndroidManifest.xml:11:5-80
 	android:name
 		ADDED from [com.github.numandev1:VideoCompressor:1a262bba37] /Users/rahul/.gradle/caches/transforms-3/ac268df81f11d2c191778ad4138dae4f/transformed/jetified-VideoCompressor-1a262bba37/AndroidManifest.xml:11:22-77
+meta-data#com.bumptech.glide.integration.okhttp3.OkHttpGlideModule
+ADDED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:11:9-13:43
+	android:value
+		ADDED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:13:13-40
+	android:name
+		ADDED from [com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:12:13-84
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
 ADDED from [com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
 	android:excludeFromRecents

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Image, StatusBar } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { scrn_width } from "../styles/responsiveSize";
+import FastImage from "react-native-fast-image";
 
 const Splash = ({ navigation }) => {
   useLayoutEffect(() => {
@@ -12,7 +13,7 @@ const Splash = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image
+      <FastImage
         source={require("../assets/images/MainLogo/LogoDarkBlue.png")}
         style={{ height: scrn_width / 3.6, width: scrn_width / 3.6 }}
         resizeMode="contain"

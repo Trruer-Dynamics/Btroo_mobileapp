@@ -39,6 +39,8 @@ import com.wix.autogrowtextinput.AutoGrowTextInputPackage;
 import com.reactnativecompressor.CompressorPackage;
 // react-native-date-picker
 import com.henninghall.date_picker.DatePickerPackage;
+// react-native-fast-image
+import com.dylanvann.fastimage.FastImageViewPackage;
 // react-native-fs
 import com.rnfs.RNFSPackage;
 // react-native-gesture-handler
@@ -128,6 +130,7 @@ public class PackageList {
       new AutoGrowTextInputPackage(),
       new CompressorPackage(),
       new DatePickerPackage(),
+      new FastImageViewPackage(),
       new RNFSPackage(),
       new RNGestureHandlerPackage(),
       new PickerPackage(),

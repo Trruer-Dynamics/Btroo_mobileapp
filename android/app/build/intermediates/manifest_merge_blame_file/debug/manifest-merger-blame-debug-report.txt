@@ -608,120 +608,127 @@
 310            android:initOrder="100" />
 310-->[com.google.firebase:firebase-common:20.3.3] /Users/rahul/.gradle/caches/transforms-3/6e8dabeadedd85a9698a8c53fbc9715e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:30:13-36
 311
-312        <activity
-312-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
-313            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-313-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
-314            android:excludeFromRecents="true"
-314-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
-315            android:exported="false"
-315-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
-316            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-316-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
-317        <!--
-318            Service handling Google Sign-In user revocation. For apps that do not integrate with
-319            Google Sign-In, this service will never be started.
-320        -->
-321        <service
-321-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
-322            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-322-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
-323            android:exported="true"
-323-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
-324            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-324-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
-325            android:visibleToInstantApps="true" />
-325-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
-326
-327        <activity
-327-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
-328            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-328-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
-329            android:exported="false"
-329-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
-330            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-330-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
-331
-332        <receiver
-332-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:29:9-33:20
-333            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-333-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:30:13-85
-334            android:enabled="true"
-334-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:31:13-35
-335            android:exported="false" >
-335-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:32:13-37
-336        </receiver>
-337
-338        <service
-338-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:35:9-38:40
-339            android:name="com.google.android.gms.measurement.AppMeasurementService"
-339-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:36:13-84
-340            android:enabled="true"
-340-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:37:13-35
-341            android:exported="false" />
-341-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:38:13-37
+312        <meta-data
+312-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:11:9-13:43
+313            android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
+313-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:12:13-84
+314            android:value="GlideModule" />
+314-->[com.github.bumptech.glide:okhttp3-integration:4.12.0] /Users/rahul/.gradle/caches/transforms-3/8ba485cacaf5af10f15738d7959f232f/transformed/jetified-okhttp3-integration-4.12.0/AndroidManifest.xml:13:13-40
+315
+316        <activity
+316-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
+317            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+317-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
+318            android:excludeFromRecents="true"
+318-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
+319            android:exported="false"
+319-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
+320            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+320-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
+321        <!--
+322            Service handling Google Sign-In user revocation. For apps that do not integrate with
+323            Google Sign-In, this service will never be started.
+324        -->
+325        <service
+325-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
+326            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+326-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
+327            android:exported="true"
+327-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
+328            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+328-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
+329            android:visibleToInstantApps="true" />
+329-->[com.google.android.gms:play-services-auth:20.7.0] /Users/rahul/.gradle/caches/transforms-3/177efaf105cbb583f18f115579a7cba2/transformed/jetified-play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
+330
+331        <activity
+331-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+332            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+332-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+333            android:exported="false"
+333-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+334            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+334-->[com.google.android.gms:play-services-base:18.0.1] /Users/rahul/.gradle/caches/transforms-3/d0114eae77c8e923ed98c7532f25acdb/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+335
+336        <receiver
+336-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:29:9-33:20
+337            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+337-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:30:13-85
+338            android:enabled="true"
+338-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:31:13-35
+339            android:exported="false" >
+339-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:32:13-37
+340        </receiver>
+341
 342        <service
-342-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:39:9-43:72
-343            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-343-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:40:13-87
+342-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:35:9-38:40
+343            android:name="com.google.android.gms.measurement.AppMeasurementService"
+343-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:36:13-84
 344            android:enabled="true"
-344-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:41:13-35
-345            android:exported="false"
-345-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:42:13-37
-346            android:permission="android.permission.BIND_JOB_SERVICE" />
-346-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:43:13-69
-347
-348        <meta-data
-348-->[com.google.android.gms:play-services-basement:18.2.0] /Users/rahul/.gradle/caches/transforms-3/41132ab25bd297e8b51542061f941bf1/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:21:9-23:69
-349            android:name="com.google.android.gms.version"
-349-->[com.google.android.gms:play-services-basement:18.2.0] /Users/rahul/.gradle/caches/transforms-3/41132ab25bd297e8b51542061f941bf1/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:22:13-58
-350            android:value="@integer/google_play_services_version" />
-350-->[com.google.android.gms:play-services-basement:18.2.0] /Users/rahul/.gradle/caches/transforms-3/41132ab25bd297e8b51542061f941bf1/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:23:13-66
+344-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:37:13-35
+345            android:exported="false" />
+345-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:38:13-37
+346        <service
+346-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:39:9-43:72
+347            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+347-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:40:13-87
+348            android:enabled="true"
+348-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:41:13-35
+349            android:exported="false"
+349-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:42:13-37
+350            android:permission="android.permission.BIND_JOB_SERVICE" />
+350-->[com.google.android.gms:play-services-measurement:21.3.0] /Users/rahul/.gradle/caches/transforms-3/eb95a79ebcc51c35f6873b0d878e22a4/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:43:13-69
 351
-352        <provider
-352-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
-353            android:name="androidx.startup.InitializationProvider"
-353-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
-354            android:authorities="com.btroo.androidx-startup"
-354-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
-355            android:exported="false" >
-355-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
-356            <meta-data
-356-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
-357                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-357-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
-358                android:value="androidx.startup" />
-358-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
-359            <meta-data
-359-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/rahul/.gradle/caches/transforms-3/a8d825aa5c67a2e11cb49f3161e63776/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
-360                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-360-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/rahul/.gradle/caches/transforms-3/a8d825aa5c67a2e11cb49f3161e63776/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
-361                android:value="androidx.startup" />
-361-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/rahul/.gradle/caches/transforms-3/a8d825aa5c67a2e11cb49f3161e63776/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
-362        </provider>
-363
-364        <uses-library
-364-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:31:9-33:40
-365            android:name="androidx.camera.extensions.impl"
-365-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:32:13-59
-366            android:required="false" />
-366-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:33:13-37
+352        <meta-data
+352-->[com.google.android.gms:play-services-basement:18.2.0] /Users/rahul/.gradle/caches/transforms-3/41132ab25bd297e8b51542061f941bf1/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:21:9-23:69
+353            android:name="com.google.android.gms.version"
+353-->[com.google.android.gms:play-services-basement:18.2.0] /Users/rahul/.gradle/caches/transforms-3/41132ab25bd297e8b51542061f941bf1/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:22:13-58
+354            android:value="@integer/google_play_services_version" />
+354-->[com.google.android.gms:play-services-basement:18.2.0] /Users/rahul/.gradle/caches/transforms-3/41132ab25bd297e8b51542061f941bf1/transformed/jetified-play-services-basement-18.2.0/AndroidManifest.xml:23:13-66
+355
+356        <provider
+356-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
+357            android:name="androidx.startup.InitializationProvider"
+357-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
+358            android:authorities="com.btroo.androidx-startup"
+358-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
+359            android:exported="false" >
+359-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
+360            <meta-data
+360-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+361                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+361-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
+362                android:value="androidx.startup" />
+362-->[androidx.emoji2:emoji2:1.0.0] /Users/rahul/.gradle/caches/transforms-3/398da0935e55812eeaf3e3466d76c932/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
+363            <meta-data
+363-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/rahul/.gradle/caches/transforms-3/a8d825aa5c67a2e11cb49f3161e63776/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+364                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+364-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/rahul/.gradle/caches/transforms-3/a8d825aa5c67a2e11cb49f3161e63776/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
+365                android:value="androidx.startup" />
+365-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/rahul/.gradle/caches/transforms-3/a8d825aa5c67a2e11cb49f3161e63776/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+366        </provider>
 367
-368        <service
-368-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:26:9-35:19
-369            android:name="androidx.camera.core.impl.MetadataHolderService"
-369-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:27:13-75
-370            android:enabled="false"
-370-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:28:13-36
-371            android:exported="false" >
-371-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:29:13-37
-372            <meta-data
-372-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:32:13-34:89
-373                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
-373-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:33:17-103
-374                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
-374-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:34:17-86
-375        </service>
-376    </application>
-377
-378</manifest>
+368        <uses-library
+368-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:31:9-33:40
+369            android:name="androidx.camera.extensions.impl"
+369-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:32:13-59
+370            android:required="false" />
+370-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/727926d75e71f8736a63ff749b538617/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:33:13-37
+371
+372        <service
+372-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:26:9-35:19
+373            android:name="androidx.camera.core.impl.MetadataHolderService"
+373-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:27:13-75
+374            android:enabled="false"
+374-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:28:13-36
+375            android:exported="false" >
+375-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:29:13-37
+376            <meta-data
+376-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:32:13-34:89
+377                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+377-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:33:17-103
+378                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+378-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/rahul/.gradle/caches/transforms-3/0450362c05417ddcc614ba82ce5bdc4f/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:34:17-86
+379        </service>
+380    </application>
+381
+382</manifest>

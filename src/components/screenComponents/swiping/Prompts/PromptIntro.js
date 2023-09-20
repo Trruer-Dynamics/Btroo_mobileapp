@@ -18,6 +18,7 @@ import ErrorContainer from "../../../formComponents/ErrorContainer";
 import FooterBtn from "../../../Buttons/FooterBtn";
 import fontFamily from "../../../../styles/fontFamily";
 import FormWrapper from "../../../wrappers/formWrappers/FormWrapper";
+import FastImage from "react-native-fast-image";
 
 const PromptIntro = ({ setpromptStep }) => {
   const onNextPress = () => {
@@ -46,7 +47,7 @@ const PromptIntro = ({ setpromptStep }) => {
             </Text>
           </View>
 
-          <Image
+          <FastImage
             source={require("../../../../assets/images/Swiping/Prompts/onlineDatinglllutration.png")}
             style={styles.image}
             resizeMode="contain"

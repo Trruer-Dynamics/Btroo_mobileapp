@@ -33,6 +33,7 @@ import {
   setUserLoggined,
 } from "../../store/reducers/authentication/authentication";
 import { initialWindowMetrics } from "react-native-safe-area-context";
+import FastImage from "react-native-fast-image";
 const insets = initialWindowMetrics.insets;
 
 const PhotoVerificationFinal = ({ navigation, route }) => {
@@ -130,7 +131,7 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
                 ...styles.poseImageCont,
               }}
             >
-              <Image
+              <FastImage
                 source={require("../../assets/images/PicVerifyBL.png")}
                 style={styles.poseImage}
                 resizeMode="stretch"
@@ -142,7 +143,7 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
                 ...styles.poseImageCont,
               }}
             >
-              <Image
+              <FastImage
                 source={{ uri: imgUri }}
                 style={{ ...styles.poseImageCont }}
                 resizeMode="cover"

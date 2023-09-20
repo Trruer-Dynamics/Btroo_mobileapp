@@ -25,6 +25,7 @@ import { useDispatch } from "react-redux";
 import { setStatusBarArgs } from "../../../store/reducers/authentication/authentication";
 import Loader from "../../loader/Loader";
 import { Image as CompImage } from "react-native-compressor";
+import FastImage from "react-native-fast-image";
 
 const PhotoVerifyCamera = ({}) => {
   const navigation = useNavigation();
@@ -167,7 +168,7 @@ const PhotoVerifyCamera = ({}) => {
               {/* Demo Pose Pic */}
               <View style={styles.posePicCont}>
                 <View style={styles.poseSubPicCont}>
-                  <Image
+                  <FastImage
                     style={styles.posePic}
                     source={require("../../../assets/images/PicVerifyBL.png")}
                     resizeMode="stretch"
@@ -214,7 +215,7 @@ const PhotoVerifyCamera = ({}) => {
               }
             }}
           >
-            <Image
+            <FastImage
               source={require("../../../assets/images/FormImages/switch_camera.png")}
               style={styles.switchCamera}
             />

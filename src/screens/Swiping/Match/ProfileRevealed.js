@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { apiUrl } from "../../../constants";
 import axios from "axios";
 import { setSessionExpired } from "../../../store/reducers/authentication/authentication";
+import FastImage from "react-native-fast-image";
 
 const ProfileRevealed = ({ route }) => {
   const navigation = useNavigation();
@@ -83,7 +84,7 @@ const ProfileRevealed = ({ route }) => {
           />
 
           <View style={styles.container}>
-            <Image
+            <FastImage
               source={{ uri: profile?.prof_img }}
               style={styles.profileImage}
             />

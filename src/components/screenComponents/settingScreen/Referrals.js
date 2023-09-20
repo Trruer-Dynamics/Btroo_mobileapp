@@ -21,6 +21,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useSelector } from "react-redux";
 import Toast from "../../toast/Toast";
 import FormHeader from "../../wrappers/formWrappers/FormHeader";
+import FastImage from "react-native-fast-image";
 
 const Referrals = ({ modalVisible, setModalVisible }) => {
   const profile_data = useSelector(
@@ -64,7 +65,7 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
           </View>
 
           <View style={{ alignSelf: "center" }}>
-            <Image
+            <FastImage
               source={require("../../../assets/images/Setting/refImage.png")}
               style={{
                 // width: rspW(72.6),

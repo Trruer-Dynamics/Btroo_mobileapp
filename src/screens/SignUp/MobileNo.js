@@ -28,6 +28,7 @@ import { apiUrl } from "../../constants";
 import CentralModal from "../../components/modals/CentralModal";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import FormInputPhoneNumber from "../../components/formComponents/FormInputPhoneNumber";
+import FastImage from "react-native-fast-image";
 
 const MobileNo = ({ navigation, route }) => {
   // All states
@@ -223,7 +224,7 @@ const MobileNo = ({ navigation, route }) => {
                   marginBottom: rspH(6),
                 }}
               >
-                <Image
+                <FastImage
                   source={require("../../assets/images/FormImages/PhVerify.png")}
                   resizeMode="contain"
                   style={{ ...styles.ph_icon_img }}

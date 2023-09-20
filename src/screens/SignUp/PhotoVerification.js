@@ -49,7 +49,7 @@ const PhotoVerification = ({ navigation }) => {
 
           {/* Inputs Container*/}
           <View style={styles.inputCont}>
-            <Image
+            <FastImage
               source={require("../../assets/images/PicVerifyBL.png")}
               style={styles.poseImage}
               // resizeMode="contain"

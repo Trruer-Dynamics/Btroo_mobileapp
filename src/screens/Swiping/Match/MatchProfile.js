@@ -45,13 +45,14 @@ import CentralModal from "../../../components/modals/CentralModal";
 import ExtendTime from "../../../components/screenComponents/matching/ExtendTime";
 import { setSessionExpired } from "../../../store/reducers/authentication/authentication";
 import Paginator from "../../../components/screenComponents/swiping/Paginator";
+import FastImage from "react-native-fast-image";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item.image);
 
   return (
     <View style={styles.item2}>
-      <Image
+      <FastImage
         source={{ uri: imageUri }}
         style={{ width: "100%", height: "98%" }}
         resizeMode="contain"
@@ -335,13 +336,13 @@ const MatchProfile = ({ route }) => {
                         }
                       }}
                     >
-                      <Image
+                      <FastImage
                         style={styles.profileImage}
                         source={{ uri: profile?.prof_img }}
                       />
                     </TouchableOpacity>
                   ) : (
-                    <Image
+                    <FastImage
                       style={styles.profileImage}
                       source={
                         profile?.userprofile?.gender == "Woman"
@@ -403,7 +404,7 @@ const MatchProfile = ({ route }) => {
                     <View
                       style={{ flexDirection: "row", alignItems: "center" }}
                     >
-                      <Image
+                      <FastImage
                         source={require("../../../assets/images/Swiping/BioIcons/City.png")}
                         style={{
                           width: rspW(6.75),
@@ -428,7 +429,7 @@ const MatchProfile = ({ route }) => {
                         width: "100%",
                       }}
                     >
-                      <Image
+                      <FastImage
                         source={require("../../../assets/images/Swiping/BioIcons/Education.png")}
                         style={{
                           width: rspW(6.75),
@@ -462,7 +463,7 @@ const MatchProfile = ({ route }) => {
                         justifyContent: "space-between",
                       }}
                     >
-                      <Image
+                      <FastImage
                         source={
                           profile?.userprofile?.drinking
                             ? DrinkingYes
@@ -472,7 +473,7 @@ const MatchProfile = ({ route }) => {
                           ...styles.habitsImage,
                         }}
                       />
-                      <Image
+                      <FastImage
                         source={
                           profile?.userprofile?.smoking ? SmokingYes : SmokingNo
                         }
@@ -480,7 +481,7 @@ const MatchProfile = ({ route }) => {
                           ...styles.habitsImage,
                         }}
                       />
-                      <Image
+                      <FastImage
                         source={
                           profile?.userprofile?.marijuana
                             ? MarijuanaYes
@@ -527,7 +528,7 @@ const MatchProfile = ({ route }) => {
                       <View
                         style={{ flexDirection: "row", alignItems: "center" }}
                       >
-                        <Image
+                        <FastImage
                           source={require("../../../assets/images/Swiping/BioIcons/Occupation.png")}
                           style={{
                             width: rspW(6.75),
@@ -554,7 +555,7 @@ const MatchProfile = ({ route }) => {
                           alignItems: "center",
                         }}
                       >
-                        <Image
+                        <FastImage
                           source={require("../../../assets/images/Swiping/BioIcons/Height.png")}
                           style={{
                             width: rspW(6.75),
@@ -584,7 +585,7 @@ const MatchProfile = ({ route }) => {
                       >
                         {pets_list.map((img, indx) => {
                           return (
-                            <Image
+                            <FastImage
                               source={{ uri: img[1] }}
                               style={styles.interestImage}
                               resizeMode="cover"
@@ -624,7 +625,7 @@ const MatchProfile = ({ route }) => {
                   >
                     {interest_list.map((img, idx) => {
                       return (
-                        <Image
+                        <FastImage
                           source={{ uri: img[1] }}
                           style={styles.interestImage}
                           resizeMode="cover"
@@ -667,7 +668,7 @@ const MatchProfile = ({ route }) => {
                       <View
                         style={{ flexDirection: "row", alignItems: "center" }}
                       >
-                        <Image
+                        <FastImage
                           source={require("../../../assets/images/Swiping/BioIcons/Occupation.png")}
                           style={{
                             width: rspW(6.75),
@@ -694,7 +695,7 @@ const MatchProfile = ({ route }) => {
                           alignItems: "center",
                         }}
                       >
-                        <Image
+                        <FastImage
                           source={require("../../../assets/images/Swiping/BioIcons/Height.png")}
                           style={{
                             width: rspW(6.75),

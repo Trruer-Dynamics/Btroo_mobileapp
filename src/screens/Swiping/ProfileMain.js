@@ -35,13 +35,14 @@ import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import truncateStr from "../../components/functions/truncateStr";
 import Paginator from "../../components/screenComponents/swiping/Paginator";
 import FullModal from "../../components/modals/FullModal";
+import FastImage from "react-native-fast-image";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item[0]);
 
   return (
     <View style={styles.item2}>
-      <Image
+      <FastImage
         source={{ uri: imageUri }}
         style={{ width: "100%", height: "98%" }}
         resizeMode="contain"
@@ -178,7 +179,7 @@ const ProfileMain = ({ navigation }) => {
                 setmodalVisible(true);
               }}
             >
-              <Image
+              <FastImage
                 style={styles.profileImage}
                 source={{ uri: profile_imgs[0][1] }}
               />
@@ -226,7 +227,7 @@ const ProfileMain = ({ navigation }) => {
                   }}
                 >
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Image
+                    <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/City.png")}
                       style={{
                         width: rspW(6.75),
@@ -252,7 +253,7 @@ const ProfileMain = ({ navigation }) => {
                       width: "100%",
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/Education.png")}
                       style={{
                         width: rspW(6.75),
@@ -280,15 +281,18 @@ const ProfileMain = ({ navigation }) => {
                     ...styles.boxShadowCont,
                     paddingHorizontal: rspW(3.2),
                     justifyContent: "center",
+                    // backgroundColor:'red',
                   }}
                 >
                   <View
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
+                      // backgroundColor:'red',
+                      // height:'100%',
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={
                         profile_data?.userprofile?.drinking
                           ? DrinkingYes
@@ -298,7 +302,7 @@ const ProfileMain = ({ navigation }) => {
                         ...styles.habitsImage,
                       }}
                     />
-                    <Image
+                    <FastImage
                       source={
                         profile_data?.userprofile?.smoking
                           ? SmokingYes
@@ -308,7 +312,7 @@ const ProfileMain = ({ navigation }) => {
                         ...styles.habitsImage,
                       }}
                     />
-                    <Image
+                    <FastImage
                       source={
                         profile_data?.userprofile?.marijuana
                           ? MarijuanaYes
@@ -358,7 +362,7 @@ const ProfileMain = ({ navigation }) => {
                       paddingBottom: rspH(0.4),
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/Occupation.png")}
                       style={{
                         width: rspW(6.75),
@@ -387,7 +391,7 @@ const ProfileMain = ({ navigation }) => {
                       alignItems: "center",
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/Height.png")}
                       style={{
                         width: rspW(6.75),
@@ -417,7 +421,7 @@ const ProfileMain = ({ navigation }) => {
                   >
                     {pets_list.map((img, indx) => {
                       return (
-                        <Image
+                        <FastImage
                           source={{ uri: img[1] }}
                           style={styles.interestImage}
                           resizeMode="cover"
@@ -456,7 +460,7 @@ const ProfileMain = ({ navigation }) => {
                 >
                   {interest_list.map((img, idx) => {
                     return (
-                      <Image
+                      <FastImage
                         source={{ uri: img[1] }}
                         style={styles.interestImage}
                         resizeMode="cover"
@@ -709,7 +713,7 @@ const styles = StyleSheet.create({
   habitsImage: {
     width: rspW(10.1),
     height: rspH(4.7),
-    resizeMode: "contain",
+    resizeMode: 'contain',
   },
 
   // modal conatainer

@@ -26,6 +26,7 @@ import Match from "../../screens/Swiping/Match/Match";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import MatchStack from "../../screens/Swiping/Match/MatchStack";
+import FastImage from "react-native-fast-image";
 
 const BTab = createBottomTabNavigator();
 
@@ -66,7 +67,7 @@ const Item = ({ item, setmodalVisible }) => {
       //   setmodalVisible(true);
       // }}
       >
-        <Image
+        <FastImage
           source={item.image}
           style={{ width: "100%", height: "100%", borderRadius: 20 }}
           resizeMode="cover"
@@ -113,7 +114,7 @@ const BottomTab = () => {
           tabBarIcon: (tabInfo) => {
             if (tabInfo.focused) {
               return (
-                <Image
+                <FastImage
                   // source={require('../../assets/images/BottomTab/setting_active.png')}
                   source={require("../../assets/images/BottomTab/Settings.jpg")}
                   tintColor={"#fff"}
@@ -122,7 +123,7 @@ const BottomTab = () => {
               );
             } else {
               return (
-                <Image
+                <FastImage
                   source={require("../../assets/images/BottomTab/Settings.jpg")}
                   style={{ width: 33, height: 33 }}
                 />
@@ -140,7 +141,7 @@ const BottomTab = () => {
           tabBarIcon: (tabInfo) => {
             if (tabInfo.focused) {
               return (
-                <Image
+                <FastImage
                   source={require("../../assets/images/BottomTab/swiper_active.png")}
                   style={{ width: 43, height: 33 }}
                   resizeMode="stretch"
@@ -148,7 +149,7 @@ const BottomTab = () => {
               );
             } else {
               return (
-                <Image
+                <FastImage
                   source={require("../../assets/images/BottomTab/swiper.png")}
                   style={{ width: 43, height: 33 }}
                   resizeMode="stretch"
@@ -168,7 +169,7 @@ const BottomTab = () => {
           tabBarIcon: (tabInfo) => {
             if (tabInfo.focused) {
               return (
-                <Image
+                <FastImage
                   tintColor={"#fff"}
                   source={require("../../assets/images/BottomTab/Chat.jpg")}
                   style={{ width: 34, height: 33 }}
@@ -177,7 +178,7 @@ const BottomTab = () => {
               );
             } else {
               return (
-                <Image
+                <FastImage
                   source={require("../../assets/images/BottomTab/Chat.jpg")}
                   style={{ width: 34, height: 33 }}
                   resizeMode="stretch"
@@ -196,7 +197,7 @@ const BottomTab = () => {
           tabBarIcon: (tabInfo) => {
             if (tabInfo.focused) {
               return (
-                <Image
+                <FastImage
                   tintColor={"#fff"}
                   source={require("../../assets/images/BottomTab/Profile.jpg")}
                   style={{ width: 33, height: 33 }}
@@ -205,7 +206,7 @@ const BottomTab = () => {
               );
             } else {
               return (
-                <Image
+                <FastImage
                   source={require("../../assets/images/BottomTab/Profile.jpg")}
                   style={{ width: 33, height: 33 }}
                   resizeMode="stretch"

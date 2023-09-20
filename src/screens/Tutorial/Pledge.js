@@ -22,6 +22,7 @@ import FooterBtn from "../../components/Buttons/FooterBtn";
 
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
+import FastImage from "react-native-fast-image";
 
 const Pledge = ({ navigation }) => {
   const onNextPress = () => {
@@ -44,7 +45,7 @@ const Pledge = ({ navigation }) => {
           <View>
             {/* Inputs Container*/}
             <View style={styles.inputCont}>
-              <Image
+              <FastImage
                 source={require("../../assets/images/Pledge.jpg")}
                 style={{
                   alignSelf: "center",

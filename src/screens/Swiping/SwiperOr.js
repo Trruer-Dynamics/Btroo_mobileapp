@@ -69,6 +69,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import messaging from "@react-native-firebase/messaging";
 import { setPromptFillingStart } from "../../store/reducers/authentication/authentication";
 import { UserContext } from "../../context/user";
+import FastImage from "react-native-fast-image";
 
 const SwiperOr = ({}) => {
   const navigation = useNavigation();
@@ -808,7 +809,7 @@ const SwiperOr = ({}) => {
                     setshowFilter(!showFilter);
                   }}
                 >
-                  <Image
+                  <FastImage
                     source={require("../../assets/images/Swiping/Filter3.png")}
                     style={{ width: 26, height: 26 }}
                   />

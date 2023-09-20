@@ -19,6 +19,7 @@ import {
 } from "../store/reducers/authentication/authentication";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import useIsReady from "../components/functions/isScreenReady";
+import FastImage from "react-native-fast-image";
 
 const Intro = () => {
   const dispatch = useDispatch();
@@ -81,7 +82,7 @@ const Intro = () => {
 
           {/* Logo Area */}
           <View style={styles.logoArea}>
-            <Image
+            <FastImage
               style={styles.logo}
               source={require("../assets/images/WelcomeScreen/btroo_logo.jpg")}
             />

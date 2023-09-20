@@ -34,6 +34,7 @@
     "react-native-autogrow-textinput-ts": "^1.1.2",
     "react-native-compressor": "^1.7.0",
     "react-native-date-picker": "^4.2.13",
+    "react-native-fast-image": "^8.6.3",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.11.0",
     "react-native-image-crop-picker": "^0.39.0",

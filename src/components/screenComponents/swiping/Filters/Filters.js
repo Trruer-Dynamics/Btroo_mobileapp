@@ -47,6 +47,7 @@ import {
   setSelectedInterests,
   setSelectedLanguages,
 } from "../../../../store/reducers/filter/filter";
+import { offlineAlert } from "../../../functions/offflineAlert";
 
 const Filters = ({
   filterRefresh = false,
@@ -169,11 +170,7 @@ const Filters = ({
       distance: distance,
       language: selected_languages_list,
       interests: selected_interest_list,
-      // habit: {
-      //   smoking: habits_list[0][1] ? 1 : 0,
-      //   drinking: habits_list[1][1] ? 1 : 0,
-      //   marijuana: habits_list[2][1] ? 1 : 0,
-      // },
+      
       habit: {
         smoking: [habits_list[0][1], habits_list[0][2]],
         drinking: [habits_list[1][1], habits_list[1][2]],
@@ -184,6 +181,9 @@ const Filters = ({
       height_min: minheight,
       height_max: maxheight,
     };
+
+    offlineAlert()
+
 
     try {
       const resp = await axios.put(url, body, {
@@ -216,6 +216,7 @@ const Filters = ({
         dispatch(setSessionExpired(true));
       }
     } catch (error) {
+      // offlineAlert()
       dispatch(setSessionExpired(true));
     }
   };

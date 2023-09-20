@@ -30,6 +30,7 @@ import { apiUrl } from "../../../constants";
 import Loader from "../../../components/loader/Loader";
 import { setSessionExpired } from "../../../store/reducers/authentication/authentication";
 import truncateStr from "../../../components/functions/truncateStr";
+import FastImage from "react-native-fast-image";
 
 const ChatItem = (item) => {
   return (
@@ -76,7 +77,7 @@ const ChatItem = (item) => {
             left: rspW(-4.8),
           }}
         >
-          <Image
+          <FastImage
             source={require("../../../assets/images/Matching/Message/LeftCut.png")}
             style={{
               width: rspW(10.24),
@@ -94,7 +95,7 @@ const ChatItem = (item) => {
             right: rspW(-5),
           }}
         >
-          <Image
+          <FastImage
             source={require("../../../assets/images/Matching/Message/RightCut.png")}
             style={{
               width: rspW(10.3),
@@ -108,7 +109,7 @@ const ChatItem = (item) => {
   );
 };
 
-const ChatTut = ({ profile }) => {
+const ChatTut = ({ profile, repeat_tut }) => {
   const navigation = useNavigation();
   const [chatlist, setchatlist] = useState([]);
 
@@ -231,7 +232,7 @@ const ChatTut = ({ profile }) => {
                       });
                     }}
                   >
-                    <Image
+                    <FastImage
                       source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage1.png")}
                       style={styles.profilePhoto}
                     />
@@ -273,7 +274,7 @@ const ChatTut = ({ profile }) => {
                 style={styles.iceBreakerCont}
                 onPress={() => setmodalVisible(true)}
               >
-                <Image
+                <FastImage
                   source={require("../../../assets/images/Matching/Message/Icebreaker.png")}
                   style={styles.iceBreakerImg}
                 />
@@ -296,14 +297,14 @@ const ChatTut = ({ profile }) => {
                 placeholder="Enter Message Here..."
               />
               {msg == "" ? (
-                <Image
+                <FastImage
                   source={require("../../../assets/images/Matching/Message/sendMsg.png")}
                   style={styles.sendBtn}
                   resizeMode="contain"
                 />
               ) : (
                 <TouchableOpacity>
-                  <Image
+                  <FastImage
                     source={require("../../../assets/images/Matching/Message/sendMsgActive.png")}
                     style={styles.sendBtn}
                     resizeMode="contain"
@@ -347,7 +348,12 @@ const ChatTut = ({ profile }) => {
                     if (chat_step < 3) {
                       setchat_step(chat_step + 1);
                     } else {
+                      if (repeat_tut) {
+                        navigation.navigate('SettingsScreen')
+                      }
+                      else{
                       chatTutDone();
+                    }
                     }
                   }}
                   style={{
@@ -388,7 +394,7 @@ const ChatTut = ({ profile }) => {
               }}
               onPress={() => setmodalVisible(true)}
             >
-              <Image
+              <FastImage
                 source={require("../../../assets/images/Matching/Message/Icebreaker.png")}
                 style={styles.iceBreakerImg}
               />
@@ -403,7 +409,7 @@ const ChatTut = ({ profile }) => {
               style={{ ...styles.profilePhotoHighCont, ...styles.highCont }}
               onPress={() => setmodalVisible(true)}
             >
-              <Image
+              <FastImage
                 source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage1.png")}
                 style={styles.profilePhoto}
               />
@@ -415,7 +421,7 @@ const ChatTut = ({ profile }) => {
               style={{ ...styles.profilePhotoHighCont, ...styles.highCont }}
               onPress={() => setmodalVisible(true)}
             >
-              <Image
+              <FastImage
                 source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")}
                 style={styles.profilePhoto}
               />
@@ -426,7 +432,7 @@ const ChatTut = ({ profile }) => {
               style={{ ...styles.profilePhotoHighCont, ...styles.highCont }}
               onPress={() => setmodalVisible(true)}
             >
-              <Image
+              <FastImage
                 source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage3.png")}
                 style={styles.profilePhoto}
               />

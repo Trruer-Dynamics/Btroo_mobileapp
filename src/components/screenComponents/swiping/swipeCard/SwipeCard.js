@@ -60,6 +60,7 @@ import {
   setSessionExpired,
   setStatusBarArgs,
 } from "../../../../store/reducers/authentication/authentication";
+import FastImage from "react-native-fast-image";
 
 const Item = ({
   item,
@@ -100,7 +101,7 @@ const Item = ({
                   zIndex: 2,
                 }}
               >
-                <Image
+                <FastImage
                   source={require("../../../../assets/images/Swiping/Actions/Softspot.png")}
                   style={{
                     width: rspW(14.5),
@@ -109,7 +110,7 @@ const Item = ({
                 />
               </View>
 
-              <Image
+              <FastImage
                 source={require("../../../../assets/images/Swiping/Masked/Exclude_2.png")}
                 style={{
                   width: rspW(89),
@@ -126,7 +127,7 @@ const Item = ({
             </>
           )}
 
-          <Image
+          <FastImage
             source={{ uri: imageUri }}
             style={{
               backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
@@ -150,7 +151,7 @@ const Item2 = ({ item }) => {
 
   return (
     <View style={styles.item2}>
-      <Image
+      <FastImage
         // source={{uri: imageUri}}
         source={{ uri: imageUri }}
         style={{ width: "100%", height: "98%" }}
@@ -393,7 +394,7 @@ const SwipeCard = ({
           ]}
         >
           <View style={styles.actionSetCont}>
-            <Image
+            <FastImage
               source={require("../../../../assets/images/Swiping/Actions/Fancy.png")}
               style={{
                 width: rspW(16.92),
@@ -414,7 +415,7 @@ const SwipeCard = ({
           ]}
         >
           <View style={styles.actionSetCont}>
-            <Image
+            <FastImage
               source={require("../../../../assets/images/Swiping/Actions/Softspot.png")}
               style={{
                 width: rspW(16.92),
@@ -438,7 +439,7 @@ const SwipeCard = ({
           ]}
         >
           <View style={[styles.actionSetCont]}>
-            <Image
+            <FastImage
               source={require("../../../../assets/images/Swiping/Actions/Pass.png")}
               style={{
                 width: rspW(16.92),
@@ -600,7 +601,7 @@ const SwipeCard = ({
                     setshowFilter(!showFilter);
                   }}
                 >
-                  <Image
+                  <FastImage
                     source={require("../../../../assets/images/Swiping/Filter3.png")}
                     style={{ width: 26, height: 26 }}
                   />
@@ -637,7 +638,7 @@ const SwipeCard = ({
                         setreport("");
                       }}
                     >
-                      <Image
+                      <FastImage
                         source={require("../../../../assets/images/Swiping/Actions/Pass.png")}
                         style={{
                           width: rspW(8.695),
@@ -664,7 +665,7 @@ const SwipeCard = ({
                         setreport("");
                       }}
                     >
-                      <Image
+                      <FastImage
                         source={require("../../../../assets/images/Swiping/Actions/Softspot.png")}
                         style={{
                           width: rspW(9.8),
@@ -700,7 +701,7 @@ const SwipeCard = ({
                       }}
                       style={styles.actionCont}
                     >
-                      <Image
+                      <FastImage
                         source={require("../../../../assets/images/Swiping/Actions/Fancy.png")}
                         style={{
                           width: rspW(8.46),
@@ -822,7 +823,7 @@ const SwipeCard = ({
                       <View
                         style={{ flexDirection: "row", alignItems: "baseline" }}
                       >
-                        <Image
+                        <FastImage
                           source={require("../../../../assets/images/Swiping/BioIcons/City.png")}
                           style={{
                             width: rspW(6.75),
@@ -848,7 +849,7 @@ const SwipeCard = ({
                           width: "100%",
                         }}
                       >
-                        <Image
+                        <FastImage
                           source={require("../../../../assets/images/Swiping/BioIcons/Education.png")}
                           style={{
                             width: rspW(6.75),
@@ -883,19 +884,19 @@ const SwipeCard = ({
                           justifyContent: "space-between",
                         }}
                       >
-                        <Image
+                        <FastImage
                           source={card_itm?.drinking ? DrinkingYes : DrinkingNo}
                           style={{
                             ...styles.habitsImage,
                           }}
                         />
-                        <Image
+                        <FastImage
                           source={card_itm?.smoking ? SmokingYes : SmokingNo}
                           style={{
                             ...styles.habitsImage,
                           }}
                         />
-                        <Image
+                        <FastImage
                           source={
                             card_itm?.marijuana ? MarijuanaYes : MarijuanaNo
                           }
@@ -941,7 +942,7 @@ const SwipeCard = ({
                       >
                         {interest_list.map((img, idx) => {
                           return (
-                            <Image
+                            <FastImage
                               source={{ uri: img[1] }}
                               style={styles.interestImage}
                               resizeMode="cover"
@@ -987,7 +988,7 @@ const SwipeCard = ({
                       >
                         {pets_list.map((img, indx) => {
                           return (
-                            <Image
+                            <FastImage
                               source={{ uri: img[1] }}
                               style={styles.interestImage}
                               resizeMode="cover"

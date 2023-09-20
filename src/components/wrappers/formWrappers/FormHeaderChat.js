@@ -11,6 +11,7 @@ import fontFamily from "../../../styles/fontFamily";
 import colors from "../../../styles/colors";
 import { rspF, rspH, rspW, srn_height } from "../../../styles/responsiveSize";
 import ADIcon from "react-native-vector-icons/AntDesign";
+import FastImage from "react-native-fast-image";
 
 const FormHeaderChat = ({
   title = "",
@@ -63,7 +64,7 @@ const FormHeaderChat = ({
           alignItems: "center",
         }}
       >
-        <Image
+        <FastImage
           source={{ uri: image }}
           style={{ width: rspW(10), height: rspW(10), borderRadius: rspW(5) }}
           // resizeMode='contain'

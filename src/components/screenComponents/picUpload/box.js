@@ -15,6 +15,7 @@ import colors from "../../../styles/colors";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import fontFamily from "../../../styles/fontFamily";
+import FastImage from "react-native-fast-image";
 
 const Box = ({
   item,
@@ -72,7 +73,7 @@ const Box = ({
             </View>
           )}
 
-          <Image
+          <FastImage
             source={{ uri: `${item[1]}` }}
             resizeMode="cover"
             style={{
