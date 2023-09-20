@@ -34,6 +34,7 @@ import {
 import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
 import Loader from "../../../components/loader/Loader";
 import { initialWindowMetrics } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 const insets = initialWindowMetrics.insets;
 
 const DATA = [
@@ -50,8 +51,9 @@ const DATA = [
   },
 ];
 
-const MatchTut = () => {
+const MatchTut = ({repeat_tut}) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation()
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -245,14 +247,21 @@ const MatchTut = () => {
                 />
                 <TouchableOpacity
                   onPress={() => {
+                    if (repeat_tut) {
+                      navigation.navigate('Match',{
+                        repeat_tut: false
+                      })
+                    }
+                    else{
                     matchTutDone();
+                  }
                   }}
                   style={{
                     ...styles.centralModalTextNextCont,
                     marginVertical: 12,
                   }}
                 >
-                  <Text style={styles.centralModalTextNext}>{"OK"}</Text>
+                  <Text style={styles.centralModalTextNext}>OK</Text>
                 </TouchableOpacity>
               </View>
             </View>

@@ -52,6 +52,7 @@ const MobileNo = ({ navigation, route }) => {
   const [loading, setloading] = useState(false);
 
   const checkUserAvailable = async () => {
+
     setloading(true);
     // Validation for Israel mobile number validation
     let up_ph =
@@ -141,9 +142,9 @@ const MobileNo = ({ navigation, route }) => {
             ph_no.length <= max_ph_no && ph_no.length >= min_ph_no
       ) {
         if (route.params.action != "signup") {
-          await checkUserAvailable();
+        await checkUserAvailable();
         } else {
-          await showConfirmDialog();
+        await showConfirmDialog();
         }
       }
     }
@@ -167,7 +168,7 @@ const MobileNo = ({ navigation, route }) => {
       setloading(false);
     } catch (error) {
       console.log("SignIn", error.message, typeof error.message);
-
+      
       setloading(false);
     }
   };
@@ -175,6 +176,7 @@ const MobileNo = ({ navigation, route }) => {
   // To otp status of phone number
   const onAuthStateChanged = (user) => {
     // console.log("\nonAuthStateChanged", user, "\n");
+
   };
 
   useEffect(() => {
@@ -247,6 +249,7 @@ const MobileNo = ({ navigation, route }) => {
                   placeholder={"Phone Number"}
                   placeholderTextColor={colors.blue}
                   disabled={selected_ph_code_id == ""}
+                  
                   maxLength={12}
                   error_cond={
                     clickBtn &&
@@ -264,6 +267,7 @@ const MobileNo = ({ navigation, route }) => {
                   setvalue_blr={setph_no_blr}
                   s_allow={false}
                   a_allow={false}
+                  
                 />
               </View>
             </View>
@@ -374,7 +378,7 @@ const MobileNo = ({ navigation, route }) => {
                 title={"OK"}
                 disabled={false}
                 onPress={async () => {
-                  setshow_alert(false);
+                   setshow_alert(false);
                   navigation.navigate("Intro");
                 }}
               />

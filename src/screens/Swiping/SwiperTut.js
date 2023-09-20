@@ -33,6 +33,7 @@ import { apiUrl } from "../../constants";
 import axios from "axios";
 import Loader from "../../components/loader/Loader";
 import { setSessionExpired } from "../../store/reducers/authentication/authentication";
+import { useNavigation } from "@react-navigation/native";
 
 const DATA = [
   {
@@ -133,7 +134,10 @@ const Item2 = ({ item }) => {
   );
 };
 
-const SwiperTut = ({ navigation }) => {
+const SwiperTut = ({ repeat_tut }) => {
+
+  const navigation = useNavigation()
+
   const [masked, setmasked] = useState(false);
   const dispatch = useDispatch();
 
@@ -892,7 +896,10 @@ const SwiperTut = ({ navigation }) => {
                   >
                     {/* Tut Text */}
                     <View style={styles.centralModalTextCont}>
-                      <Text style={styles.centralModalText}>
+                      <Text style={styles.centralModalText}
+                      numberOfLines={3}
+                      adjustsFontSizeToFit
+                      >
                         {instruction_list[step]}
                       </Text>
                     </View>
@@ -911,6 +918,12 @@ const SwiperTut = ({ navigation }) => {
                         onPress={() => {
                           setswipe_tut_l(false);
                           swipeTutDone();
+                         
+                          if (repeat_tut) {
+                            navigation.navigate('Match',{
+                              repeat_tut:true
+                            })
+                          }
                         }}
                         style={styles.centralModalTextNextCont}
                       >

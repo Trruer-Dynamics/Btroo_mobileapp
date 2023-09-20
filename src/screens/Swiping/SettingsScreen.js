@@ -421,7 +421,7 @@ const SettingsScreen = ({ navigation }) => {
         },
       },
       {
-        text: "NO",
+        text: "No",
         onPress: () => {},
       },
     ]);
@@ -888,9 +888,7 @@ const SettingsScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  // navigation.navigate("Info", {
-                  //   heading: "FAQ",
-                  // });
+                  
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/faqs/"
                   );
@@ -907,12 +905,12 @@ const SettingsScreen = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => {
                   dispatch(setSwipeTut(true));
-                  // navigation.navigate('BottomTab', {
-                  //   screen: 'Swiper',
-                  // });
-                  navigation.navigate("Swiper");
+                  
+                  navigation.navigate("Swiper",{
+                    repeat_tut: true,
+                  })
                 }}
-                // onPress={()=> setcmodal(true)}
+
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -959,7 +957,6 @@ const SettingsScreen = ({ navigation }) => {
               </View>
 
               <TouchableOpacity
-                // onPress={()=> setcmodal(true)}
                 onPress={() => {
                   navigation.navigate("Info", {
                     heading: "Terms of Service",
@@ -977,7 +974,6 @@ const SettingsScreen = ({ navigation }) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                // onPress={()=> setcmodal(true)}
                 onPress={() => {
                   navigation.navigate("Info", {
                     heading: "Privacy Policy",
@@ -1014,10 +1010,6 @@ const SettingsScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  // navigation.navigate('Info', {
-                  //   heading: 'Community Guidelines',
-                  // });
-
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/community-guidelines/"
                   );
@@ -1035,11 +1027,9 @@ const SettingsScreen = ({ navigation }) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                // onPress={()=> setcmodal(true)}
+
                 onPress={() => {
-                  // navigation.navigate('Info', {
-                  //   heading: 'Photo Guidelines',
-                  // });
+                  
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
                   );

@@ -26,7 +26,11 @@ const Box = ({
   setactiveIndx,
   positions,
   deleteProfileImage,
+ 
+  up_img_len=9,
+
 }) => {
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -77,7 +81,9 @@ const Box = ({
               borderRadius: rspW(2.5),
             }}
           />
-          <TouchableOpacity
+        {
+         up_img_len > 3 &&
+        <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => {
               deleteProfileImage(index);
@@ -91,7 +97,7 @@ const Box = ({
             }}
           >
             <ADIcon name="minuscircle" size={20} color={colors.error} />
-          </TouchableOpacity>
+          </TouchableOpacity>}
           <View
             style={{
               ...styles.positionCont,

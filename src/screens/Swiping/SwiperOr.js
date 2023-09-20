@@ -92,6 +92,7 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.is_promptsfillingstarted
   );
 
+  
   const profile_refresh = useSelector(
     (state) => state.authentication.profile_refresh
   );

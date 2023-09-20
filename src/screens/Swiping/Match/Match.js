@@ -158,6 +158,14 @@ const Match = () => {
             mth.no_of_extend = no_of_extend;
             mth.userprofile = mth_user.userprofile;
 
+            console.log("mth_user.userprofile.image",mth_user.userprofile.image)
+
+
+            let prf_img = mth_user.userprofile.image.find(c => c.position == 0)
+
+            console.log("prf_img",prf_img)
+
+
             mth.matchType =
               lastMessage == "" ? "New Match" : ym ? "" : "Your move";
             mth.start_date = new Date(start_date);
@@ -165,7 +173,7 @@ const Match = () => {
             mth.seen = seen_by.includes(lg_id);
             mth.user_id = mth_user.id;
             mth.for_user_id = profile_data.userprofile.id;
-            mth.prof_img = mth_user.userprofile.image[0].cropedimage;
+            mth.prof_img = prf_img.cropedimage;
             mth.prof_rvl = resp_data[p].user1_profile_reveal;
             mth.publicprompts = mth_user.userprofile.publicprompts;
             mth.privateprompts = mth_user.userprofile.privateprompts;

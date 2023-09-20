@@ -38,7 +38,9 @@ import { apiUrl } from "../../constants";
 import axios from "axios";
 import {
   setProfileImgs,
+  setProfileRefresh,
   setProfiledata,
+  setPromptFillingComplete,
   setSessionExpired,
 } from "../../store/reducers/authentication/authentication";
 import Loader from "../../components/loader/Loader";
@@ -895,14 +897,15 @@ const EditProfile = ({ navigation }) => {
       };
 
       if (code == 200) {
-        // if (profile_data?.userprivateprompts.length > 0) {
+        if (profile_data?.userprivateprompts.length > 0) {
           updatePrompts(user_prof_data);
-        // } 
-        // else {
+        } 
+        else {
+          savePrompts(user_prof_data);
         //   setloading(false);
         //   dispatch(setProfiledata(user_prof_data));
         //   navigation.navigate("ProfileMain");
-        // }
+        }
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       } else {
@@ -914,12 +917,75 @@ const EditProfile = ({ navigation }) => {
     }
   };
 
-  const updatePrompts = async (user_prof_data) => {
 
-    console.log("updatePrompts")
-
+  const savePrompts = async (user_prof_data) => {
+   
     const url = apiUrl + "createuserpormpts/";
 
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    const data = {
+      userid: profile_data.user.id,
+      publicprompts: [
+        {
+          prompstid: public_prompt1_q[0],
+          answer: public_prompt1_a,
+        },
+        {
+          prompstid: public_prompt2_q[0],
+          answer: public_prompt2_a,
+        },
+      ],
+      privateprompts: [
+        {
+          prompstid: private_prompt1_q[0],
+          answer: private_prompt1_a,
+        },
+        {
+          prompstid: private_prompt2_q[0],
+          answer: private_prompt2_a,
+        },
+      ],
+      refralcode: "",
+    };
+
+    try {
+      const resp = await axios.post(url, data, { headers });
+      setchanges_made(false); 
+      let code = resp.data.code;
+     console.log("savePrompts code", code)
+      if (code == 200) {
+        let user_prof_datap = {
+          ...user_prof_data,
+          userpublicprompts: [
+            [public_prompt1_q, public_prompt1_a],
+            [public_prompt2_q, public_prompt2_a],
+          ],
+          userprivateprompts: [
+            [private_prompt1_q, private_prompt1_a],
+            [private_prompt2_q, private_prompt2_a],
+          ],
+        };
+        dispatch(setPromptFillingComplete(true));
+        dispatch(setProfiledata(user_prof_datap));
+        setloading(false);
+        navigation.navigate("ProfileMain");
+      } else if (code == 401) {
+        setloading(false);
+        dispatch(setSessionExpired(true));
+      }
+    } catch (error) {
+      setloading(false);
+      dispatch(setSessionExpired(true));
+    }
+  };
+
+  const updatePrompts = async (user_prof_data) => {
+
+    const url = apiUrl + "createuserpormpts/";
     const headers = {
       Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
@@ -1188,6 +1254,8 @@ const EditProfile = ({ navigation }) => {
                         setpos_change={setpos_change}
                       >
                         <Box
+
+                          up_img_len = {pic_list.filter(v => v[0] != "").length}
                           positions={positions}
                           index={index}
                           loading={loading_img}
@@ -1197,6 +1265,7 @@ const EditProfile = ({ navigation }) => {
                           modalVisible={modalVisible}
                           setmodalVisible={setmodalVisible}
                           deleteProfileImage={deleteProfileImage}
+                          editscreen={true}
                         />
                       </Draggable>
                     );
@@ -1583,7 +1652,6 @@ const EditProfile = ({ navigation }) => {
                               }}
                               value={public_prompt1_a}
                               onFocus={() => {
-                                console.log("onFocus")
                                 setpublic_prompt1_blr(true)}}
                               onChangeText={(val) => {
                                 setpublic_prompt1_a(val);
@@ -1899,7 +1967,6 @@ const EditProfile = ({ navigation }) => {
                   //     private_prompt2_q_id != 0 &&
                   //     private_prompt2_a != ""
                   //   ) {
-                  //     console.log("Here2");
                   //     onNextPress();
                   //   } 
                   //   else {
@@ -1922,11 +1989,11 @@ const EditProfile = ({ navigation }) => {
                         private_prompt2_q_id != 0 &&
                         private_prompt2_a != ""
                       ) {
-                        console.log("Here3");
+
 
                         onNextPress();
                       } else {
-                        console.log("Here4");
+           
                         // if (profile_data?.userprivateprompts?.length > 0) {
                         if (public_prompt1_q_id == 0) {
                           pup_q1_ref.current.measure(
