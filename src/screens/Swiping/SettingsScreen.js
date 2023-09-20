@@ -410,9 +410,7 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   const showConfirmDialog = () => {
-    console.log("session expired", is_session_expired);
-    // return Alert.alert("Are you Sure", "sdsd")
-
+    
     return Alert.alert("Are You Sure?", "You want to logout", [
       {
         text: "Yes",

@@ -120,9 +120,11 @@ const ProfileMain = ({ navigation }) => {
         v.interestmaster.iconblue,
       ]);
 
+      // console.log("usr_interest",usr_interest[0])
       setinterest_list(usr_interest);
 
       let actv = profile_imgs.filter((v) => v[0] != "");
+      console.log("profile_imgs",profile_imgs[0])
       setactive_prf_imgs(actv);
 
       return () => {

@@ -58,46 +58,8 @@ const UserProvider = ({ children, navigationRef }) => {
       });
   };
 
-  const removeToken = async () => {
-    console.log("removeToken");
-    const url = apiUrl + "token_remove/";
-
-    const headers = {
-      Authorization: `Bearer ${access_token}`,
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      profile_id: profile_data.userprofile.id,
-      token: DeviceToken,
-    };
-
-    try {
-      const resp = await axios.post(url, data, { headers });
-      let user_data = resp.data.data;
-      console.log("user_data", user_data);
-      dispatch(setDeviceToken(""));
-    } catch (error) {}
-  };
-
-  useLayoutEffect(() => {
-    RNScreenshotPrevent.enabled(false);
-    RNScreenshotPrevent.enableSecureView();
-  }, []);
-
-  useEffect(() => {
-    const subscription = AppState.addEventListener("change", (nextAppState) => {
-      appState.current = nextAppState;
-      setAppStateVisible(appState.current);
-    });
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
-
   const resetNav =async ()=>{
-    console.log("resetNav")
+
     const resetAction =  navigation.reset({
       index: 0,
       routes: [{ name: "Intro" }],
@@ -108,7 +70,7 @@ const UserProvider = ({ children, navigationRef }) => {
 
 
   const emptyAll = async ()=>{
-    console.log("emptyAll")
+
     dispatch(setUserLoggined(false));
     dispatch(setAccessToken(""));
     dispatch(setSessionExpired(false));
@@ -128,9 +90,47 @@ const UserProvider = ({ children, navigationRef }) => {
     }
   };
 
+  const removeToken = async () => {
+
+    const url = apiUrl + "token_remove/";
+
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    const data = {
+      profile_id: profile_data.userprofile.id,
+      token: DeviceToken,
+    };
+
+    try {
+      const resp = await axios.post(url, data, { headers });
+      let user_data = resp.data.data;
+    
+      dispatch(setDeviceToken(""));
+    } catch (error) {}
+  };
+
+  useLayoutEffect(() => {
+    // RNScreenshotPrevent.enabled(false);
+    // RNScreenshotPrevent.enableSecureView();
+  }, []);
+
   useEffect(() => {
-    console.log("is_session_expired", is_session_expired);
-    console.log("DeviceToken", DeviceToken);
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
+      appState.current = nextAppState;
+      setAppStateVisible(appState.current);
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
+
+
+  useEffect(() => {
     clearData();
   }, [is_session_expired]);
 

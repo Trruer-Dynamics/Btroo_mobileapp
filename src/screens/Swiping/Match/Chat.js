@@ -582,8 +582,6 @@ const Chat = ({ profile }) => {
       profileid2: profile.userprofile.id,
     };
 
-    console.log("data", data);
-
     try {
       const response = await axios.post(api, data, {
         headers,
