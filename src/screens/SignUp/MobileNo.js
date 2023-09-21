@@ -2,13 +2,12 @@ import {
   Alert,
   StyleSheet,
   View,
-  Image,
   SafeAreaView,
   Text,
   Platform,
   Keyboard,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import countries_with_ph_no from "../../data/countries_with_ph_no";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
 import colors from "../../styles/colors";
@@ -29,6 +28,9 @@ import CentralModal from "../../components/modals/CentralModal";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import FormInputPhoneNumber from "../../components/formComponents/FormInputPhoneNumber";
 import FastImage from "react-native-fast-image";
+import { useFocusEffect } from "@react-navigation/native";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
+import { useDispatch } from "react-redux";
 
 const MobileNo = ({ navigation, route }) => {
   // All states
@@ -53,7 +55,6 @@ const MobileNo = ({ navigation, route }) => {
   const [loading, setloading] = useState(false);
 
   const checkUserAvailable = async () => {
-
     setloading(true);
     // Validation for Israel mobile number validation
     let up_ph =
@@ -137,15 +138,13 @@ const MobileNo = ({ navigation, route }) => {
       // Open Otp Modal
       if (
         selected_ph_code_id == "IL" && ph_no.startsWith("0")
-          ? // ph_no.length > 0 &&
-            ph_no.length <= max_ph_no + 1 && ph_no.length >= min_ph_no + 1
-          : // ph_no.length > 0 &&
-            ph_no.length <= max_ph_no && ph_no.length >= min_ph_no
+          ? ph_no.length <= max_ph_no + 1 && ph_no.length >= min_ph_no + 1
+          : ph_no.length <= max_ph_no && ph_no.length >= min_ph_no
       ) {
         if (route.params.action != "signup") {
-        await checkUserAvailable();
+          await checkUserAvailable();
         } else {
-        await showConfirmDialog();
+          await showConfirmDialog();
         }
       }
     }
@@ -157,11 +156,11 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      // setconfirm(confirmation);
-      // console.log('\n')
-      // console.log("confirmation",JSON.stringify(confirmation))
-      // console.log('\n')
+      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      setconfirm(confirmation);
+      console.log("\n");
+      console.log("confirmation", JSON.stringify(confirmation));
+      console.log("\n");
 
       setOtpShowBox(true);
 
@@ -169,7 +168,7 @@ const MobileNo = ({ navigation, route }) => {
       setloading(false);
     } catch (error) {
       console.log("SignIn", error.message, typeof error.message);
-      
+      Alert.alert("Error", "Please try after sometime.");
       setloading(false);
     }
   };
@@ -177,7 +176,6 @@ const MobileNo = ({ navigation, route }) => {
   // To otp status of phone number
   const onAuthStateChanged = (user) => {
     // console.log("\nonAuthStateChanged", user, "\n");
-
   };
 
   useEffect(() => {
@@ -185,6 +183,15 @@ const MobileNo = ({ navigation, route }) => {
 
     return subscriber; // unsubscribe on unmount
   }, []);
+
+  const dispatch = useDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <>
@@ -250,7 +257,6 @@ const MobileNo = ({ navigation, route }) => {
                   placeholder={"Phone Number"}
                   placeholderTextColor={colors.blue}
                   disabled={selected_ph_code_id == ""}
-                  
                   maxLength={12}
                   error_cond={
                     clickBtn &&
@@ -268,7 +274,6 @@ const MobileNo = ({ navigation, route }) => {
                   setvalue_blr={setph_no_blr}
                   s_allow={false}
                   a_allow={false}
-                  
                 />
               </View>
             </View>
@@ -379,7 +384,7 @@ const MobileNo = ({ navigation, route }) => {
                 title={"OK"}
                 disabled={false}
                 onPress={async () => {
-                   setshow_alert(false);
+                  setshow_alert(false);
                   navigation.navigate("Intro");
                 }}
               />

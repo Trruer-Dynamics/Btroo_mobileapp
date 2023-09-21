@@ -17,7 +17,6 @@ import FormSelector from "../../../formComponents/FormSelector";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch, useSelector } from "react-redux";
 import FormHeader from "../../../wrappers/formWrappers/FormHeader";
-import { setProfiledata } from "../../../../store/reducers/authentication/authentication";
 import AutoGrowingTextInput from "react-native-autogrow-textinput-ts";
 import fontFamily from "../../../../styles/fontFamily";
 
@@ -95,7 +94,6 @@ const PrivatePrompts = ({
               style={{
                 alignSelf: "center",
                 width: "100%",
-                // backgroundColor:'red',
                 marginTop: rspH(6.8),
               }}
             >

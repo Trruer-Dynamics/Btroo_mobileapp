@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   ScrollView,
   SafeAreaView,
   Platform,
@@ -121,11 +120,8 @@ const ProfileMain = ({ navigation }) => {
         v.interestmaster.iconblue,
       ]);
 
-      // console.log("usr_interest",usr_interest[0])
       setinterest_list(usr_interest);
-
       let actv = profile_imgs.filter((v) => v[0] != "");
-      console.log("profile_imgs",profile_imgs[0])
       setactive_prf_imgs(actv);
 
       return () => {
@@ -281,15 +277,12 @@ const ProfileMain = ({ navigation }) => {
                     ...styles.boxShadowCont,
                     paddingHorizontal: rspW(3.2),
                     justifyContent: "center",
-                    // backgroundColor:'red',
                   }}
                 >
                   <View
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      // backgroundColor:'red',
-                      // height:'100%',
                     }}
                   >
                     <FastImage
@@ -612,7 +605,6 @@ const styles = StyleSheet.create({
   editBtn: {
     justifyContent: "center",
     backgroundColor: colors.white,
-    // width: rspW(23.6),
     paddingHorizontal: rspW(5),
     height: rspH(3),
     shadowOffset: {
@@ -713,7 +705,7 @@ const styles = StyleSheet.create({
   habitsImage: {
     width: rspW(10.1),
     height: rspH(4.7),
-    resizeMode: 'contain',
+    resizeMode: "contain",
   },
 
   // modal conatainer

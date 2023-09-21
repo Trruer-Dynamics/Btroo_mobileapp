@@ -1,4 +1,4 @@
-import { StyleSheet, View, Animated, useWindowDimensions } from "react-native";
+import { StyleSheet, View, Animated } from "react-native";
 import React, { memo } from "react";
 import { rspW } from "../../../styles/responsiveSize";
 
@@ -12,8 +12,6 @@ const Paginator = ({ data, currentIndex }) => {
               styles.dot,
               {
                 width: i == currentIndex ? 8 : 6,
-                // height: 6,
-
                 borderRadius: i == currentIndex ? 4 : 3,
                 opacity: i == currentIndex ? 1 : 0.3,
               },
@@ -32,7 +30,6 @@ const styles = StyleSheet.create({
   dot: {
     aspectRatio: 1,
     backgroundColor: "#fff",
-    // marginHorizontal: rspW(0.8),
     marginHorizontal: rspW(0.8),
   },
   carouselDotCont: {

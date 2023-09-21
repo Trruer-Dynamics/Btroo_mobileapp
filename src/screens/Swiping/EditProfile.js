@@ -147,7 +147,6 @@ const EditProfile = ({ navigation }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
@@ -393,7 +392,6 @@ const EditProfile = ({ navigation }) => {
         ifFail(activeIndx);
       }
     } catch (error) {
-      dispatch(setSessionExpired(true));
       setloading_img(false);
       ifFail(activeIndx);
     }
@@ -462,7 +460,6 @@ const EditProfile = ({ navigation }) => {
       }
     } catch (error) {
       setloading_img(false);
-      dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
     }
   };
@@ -495,7 +492,6 @@ const EditProfile = ({ navigation }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
@@ -625,7 +621,6 @@ const EditProfile = ({ navigation }) => {
       })
       .catch((err) => {
         setcity_refresh(false);
-        dispatch(setSessionExpired(true));
       });
   };
 
@@ -672,9 +667,6 @@ const EditProfile = ({ navigation }) => {
         text: "OK",
         onPress: () => {
           navigation.navigate("ProfileMain");
-
-          // setOtpShowBox(true);
-          // signInWithPhoneNumber(`+${selected_ph_code?.phone}  ${ph_no}`);
         },
       },
     ]);
@@ -702,9 +694,7 @@ const EditProfile = ({ navigation }) => {
           setpreference_list(tmp_lis);
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const getEducation = async () => {
@@ -723,9 +713,7 @@ const EditProfile = ({ navigation }) => {
           seteducation_list(tmp_lis);
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const getInterests = async () => {
@@ -751,9 +739,7 @@ const EditProfile = ({ navigation }) => {
           console.warn("Error occur while getInterests");
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const getLanguages = async () => {
@@ -774,9 +760,7 @@ const EditProfile = ({ navigation }) => {
           console.warn("Error occur while getLanguages");
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const getPets = async () => {
@@ -802,9 +786,7 @@ const EditProfile = ({ navigation }) => {
           console.warn("Error occur while getPets");
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const getPoliticalInclinations = async () => {
@@ -825,9 +807,7 @@ const EditProfile = ({ navigation }) => {
           console.warn("Error occur while getPoliticalInclination");
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const saveProfileData = async () => {
@@ -899,12 +879,11 @@ const EditProfile = ({ navigation }) => {
       if (code == 200) {
         if (profile_data?.userprivateprompts.length > 0) {
           updatePrompts(user_prof_data);
-        } 
-        else {
+        } else {
           savePrompts(user_prof_data);
-        //   setloading(false);
-        //   dispatch(setProfiledata(user_prof_data));
-        //   navigation.navigate("ProfileMain");
+          //   setloading(false);
+          //   dispatch(setProfiledata(user_prof_data));
+          //   navigation.navigate("ProfileMain");
         }
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
@@ -913,13 +892,10 @@ const EditProfile = ({ navigation }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
-
   const savePrompts = async (user_prof_data) => {
-   
     const url = apiUrl + "createuserpormpts/";
 
     const headers = {
@@ -954,9 +930,9 @@ const EditProfile = ({ navigation }) => {
 
     try {
       const resp = await axios.post(url, data, { headers });
-      setchanges_made(false); 
+      setchanges_made(false);
       let code = resp.data.code;
-     console.log("savePrompts code", code)
+
       if (code == 200) {
         let user_prof_datap = {
           ...user_prof_data,
@@ -979,12 +955,10 @@ const EditProfile = ({ navigation }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
   const updatePrompts = async (user_prof_data) => {
-
     const url = apiUrl + "createuserpormpts/";
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -1022,8 +996,6 @@ const EditProfile = ({ navigation }) => {
 
       let code = resp.data.code;
 
-      console.log("updatePrompts code", code)
-
       if (code == 200) {
         let user_prof_datap = {
           ...user_prof_data,
@@ -1046,7 +1018,6 @@ const EditProfile = ({ navigation }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
@@ -1254,8 +1225,7 @@ const EditProfile = ({ navigation }) => {
                         setpos_change={setpos_change}
                       >
                         <Box
-
-                          up_img_len = {pic_list.filter(v => v[0] != "").length}
+                          up_img_len={pic_list.filter((v) => v[0] != "").length}
                           positions={positions}
                           index={index}
                           loading={loading_img}
@@ -1640,19 +1610,17 @@ const EditProfile = ({ navigation }) => {
                                     ? colors.white
                                     : "#F8F8F8",
                                 borderColor:
-                                   public_prompt1_a.length > 2
+                                  public_prompt1_a.length > 2
                                     ? colors.blue
-                                    : 
-                                    public_prompt1_blr ?
-                                    colors.error
-                                    :
-                                    colors.grey
-                                    ,
+                                    : public_prompt1_blr
+                                    ? colors.error
+                                    : colors.grey,
                                 textAlignVertical: "top",
                               }}
                               value={public_prompt1_a}
                               onFocus={() => {
-                                setpublic_prompt1_blr(true)}}
+                                setpublic_prompt1_blr(true);
+                              }}
                               onChangeText={(val) => {
                                 setpublic_prompt1_a(val);
 
@@ -1664,10 +1632,6 @@ const EditProfile = ({ navigation }) => {
                                 setpublic_prompt1_blr(true);
                               }}
                               editable={public_prompt1_q != ""}
-                              // disabled={public_prompt1_q == ""}
-
-                              // placeholderTextColor={'black'}
-
                               maxHeight={rspH(11.5)}
                               minHeight={rspH(11.5)}
                             />
@@ -1712,11 +1676,10 @@ const EditProfile = ({ navigation }) => {
                                 borderColor:
                                   public_prompt2_a.length > 2
                                     ? colors.blue
-                                    : public_prompt2_blr ?
-                                    colors.error
-                                    :
-                                    colors.grey,
-                                    
+                                    : public_prompt2_blr
+                                    ? colors.error
+                                    : colors.grey,
+
                                 textAlignVertical: "top",
                               }}
                               onFocus={() => setpublic_prompt2_blr(true)}
@@ -1806,10 +1769,9 @@ const EditProfile = ({ navigation }) => {
                                 borderColor:
                                   private_prompt1_a.length > 2
                                     ? colors.blue
-                                    : private_prompt1_blr ?
-                                    colors.error
-                                    :
-                                    colors.grey,
+                                    : private_prompt1_blr
+                                    ? colors.error
+                                    : colors.grey,
                                 textAlignVertical: "top",
                               }}
                               value={private_prompt1_a}
@@ -1869,10 +1831,9 @@ const EditProfile = ({ navigation }) => {
                                 borderColor:
                                   private_prompt2_a.length > 2
                                     ? colors.blue
-                                    : private_prompt2_blr ?
-                                    colors.error
-                                    :
-                                    colors.grey,
+                                    : private_prompt2_blr
+                                    ? colors.error
+                                    : colors.grey,
                                 textAlignVertical: "top",
                               }}
                               value={private_prompt2_a}
@@ -1921,16 +1882,15 @@ const EditProfile = ({ navigation }) => {
                     (!habits_list[0][1] && !habits_list[0][2]) ||
                     (!habits_list[1][1] && !habits_list[1][2]) ||
                     (!habits_list[2][1] && !habits_list[2][2]) ||
-                    // (profile_data?.userprivateprompts.length > 0 &&
-                      (public_prompt1_q_id == 0 ||
-                        public_prompt1_a == "" ||
-                        public_prompt2_q_id == 0 ||
-                        public_prompt2_a == "" ||
-                        private_prompt1_q_id == 0 ||
-                        private_prompt1_a == "" ||
-                        private_prompt2_q_id == 0 ||
-                        private_prompt2_a == "")
-                        // )
+                    public_prompt1_q_id == 0 ||
+                    public_prompt1_a == "" ||
+                    public_prompt2_q_id == 0 ||
+                    public_prompt2_a == "" ||
+                    private_prompt1_q_id == 0 ||
+                    private_prompt1_a == "" ||
+                    private_prompt2_q_id == 0 ||
+                    private_prompt2_a == ""
+                    // )
                   }
                   onPress={() => {
                     let smok = habits_list[0][1]
@@ -1949,175 +1909,149 @@ const EditProfile = ({ navigation }) => {
                       ? false
                       : null;
 
-                  // if (
-                  //     changes_made &&
-                  //     height_cm >= 60 &&
-                  //     height_cm <= 270 &&
-                  //     occupation != "" &&
-                  //     smok != null &&
-                  //     drik != null &&
-                  //     marij != null &&
-                  //     // profile_data?.userprivateprompts.length == 0
-                  //     public_prompt1_q_id != 0 &&
-                  //     public_prompt1_a != "" &&
-                  //     public_prompt2_q_id != 0 &&
-                  //     public_prompt2_a != "" &&
-                  //     private_prompt1_q_id != 0 &&
-                  //     private_prompt1_a != "" &&
-                  //     private_prompt2_q_id != 0 &&
-                  //     private_prompt2_a != ""
-                  //   ) {
-                  //     onNextPress();
-                  //   } 
-                  //   else {
+                    if (
+                      changes_made &&
+                      height_cm >= 60 &&
+                      height_cm <= 270 &&
+                      occupation != "" &&
+                      smok != null &&
+                      drik != null &&
+                      marij != null &&
+                      public_prompt1_q_id != 0 &&
+                      public_prompt1_a != "" &&
+                      public_prompt2_q_id != 0 &&
+                      public_prompt2_a != "" &&
+                      private_prompt1_q_id != 0 &&
+                      private_prompt1_a != "" &&
+                      private_prompt2_q_id != 0 &&
+                      private_prompt2_a != ""
+                    ) {
+                      onNextPress();
+                    } else {
+                      // if (profile_data?.userprivateprompts?.length > 0) {
+                      if (public_prompt1_q_id == 0) {
+                        pup_q1_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
+                      } else if (public_prompt1_a == "") {
+                        pup_a1_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
 
-                      if (
-                        // profile_data?.userprivateprompts.length > 0 &&
-                        changes_made &&
-                        height_cm >= 60 &&
-                        height_cm <= 270 &&
-                        occupation != "" &&
-                        smok != null &&
-                        drik != null &&
-                        marij != null &&
-                        public_prompt1_q_id != 0 &&
-                        public_prompt1_a != "" &&
-                        public_prompt2_q_id != 0 &&
-                        public_prompt2_a != "" &&
-                        private_prompt1_q_id != 0 &&
-                        private_prompt1_a != "" &&
-                        private_prompt2_q_id != 0 &&
-                        private_prompt2_a != ""
-                      ) {
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
+                      } else if (public_prompt2_q_id == 0) {
+                        pup_q2_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
 
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
+                      } else if (public_prompt2_a == "") {
+                        pup_a2_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
 
-                        onNextPress();
-                      } else {
-           
-                        // if (profile_data?.userprivateprompts?.length > 0) {
-                        if (public_prompt1_q_id == 0) {
-                          pup_q1_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        } else if (public_prompt1_a == "") {
-                          pup_a1_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
+                      } else if (private_prompt1_q_id == 0) {
+                        prp_q1_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
 
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        } else if (public_prompt2_q_id == 0) {
-                          pup_q2_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
+                      } else if (private_prompt1_a == "") {
+                        prp_a1_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
 
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        } else if (public_prompt2_a == "") {
-                          pup_a2_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
+                      } else if (private_prompt2_q_id == 0) {
+                        prp_q2_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
 
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        } else if (private_prompt1_q_id == 0) {
-                          prp_q1_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
+                      } else if (private_prompt2_a == "") {
+                        prp_a2_ref.current.measure(
+                          (x, y, width, height, pageX, pageY) => {
+                            pageY = pageY + current_pos;
 
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        } else if (private_prompt1_a == "") {
-                          prp_a1_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
-
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        } else if (private_prompt2_q_id == 0) {
-                          prp_q2_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
-
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        } else if (private_prompt2_a == "") {
-                          prp_a2_ref.current.measure(
-                            (x, y, width, height, pageX, pageY) => {
-                              pageY = pageY + current_pos;
-
-                              scrollViewRef.current.scrollToPosition(
-                                0,
-                                pageY - rspH(16),
-                                true
-                              );
-                            }
-                          );
-                        }
-
-                        if (public_prompt1_q_id == 0) {
-                          setpublic_prompt1_q_blr(true);
-                        }
-                        if (public_prompt1_a == "") {
-                          setpublic_prompt1_blr(true);
-                        }
-                        if (public_prompt2_q_id == 0) {
-                          setpublic_prompt2_q_blr(true);
-                        }
-                        if (public_prompt2_a == "") {
-                          setpublic_prompt2_blr(true);
-                        }
-                        if (private_prompt1_q_id == 0) {
-                          setprivate_prompt1_q_blr(true);
-                        }
-                        if (private_prompt1_a == "") {
-                          setprivate_prompt1_blr(true);
-                        }
-                        if (private_prompt2_q_id == 0) {
-                          setprivate_prompt2_q_blr(true);
-                        }
-                        if (private_prompt2_a == "") {
-                          setprivate_prompt2_blr(true);
-                        }
-                        // }
+                            scrollViewRef.current.scrollToPosition(
+                              0,
+                              pageY - rspH(16),
+                              true
+                            );
+                          }
+                        );
                       }
+
+                      if (public_prompt1_q_id == 0) {
+                        setpublic_prompt1_q_blr(true);
+                      }
+                      if (public_prompt1_a == "") {
+                        setpublic_prompt1_blr(true);
+                      }
+                      if (public_prompt2_q_id == 0) {
+                        setpublic_prompt2_q_blr(true);
+                      }
+                      if (public_prompt2_a == "") {
+                        setpublic_prompt2_blr(true);
+                      }
+                      if (private_prompt1_q_id == 0) {
+                        setprivate_prompt1_q_blr(true);
+                      }
+                      if (private_prompt1_a == "") {
+                        setprivate_prompt1_blr(true);
+                      }
+                      if (private_prompt2_q_id == 0) {
+                        setprivate_prompt2_q_blr(true);
+                      }
+                      if (private_prompt2_a == "") {
+                        setprivate_prompt2_blr(true);
+                      }
+                      // }
+                    }
                     // }
                   }}
                 />

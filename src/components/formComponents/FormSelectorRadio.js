@@ -1,19 +1,13 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  FlatList,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   Text,
   View,
-  TextInput,
   Modal,
   TouchableOpacity,
-  Alert,
   Platform,
 } from "react-native";
-import { Pressable } from "react-native/Libraries/Components/Pressable/Pressable";
-import countries_with_ph_no from "../../data/countries_with_ph_no";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import {
@@ -25,10 +19,7 @@ import {
 } from "../../styles/responsiveSize";
 import FormComponentsWrapper from "../wrappers/formComponentsWrappers/FormComponentsWrapper";
 import FormComponentsWrapperHeader from "../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
-import FormInput from "./FormInput";
-import SearchInput from "./SearchInput";
 import ADIcon from "react-native-vector-icons/AntDesign";
-import FAIcon from "react-native-vector-icons/FontAwesome";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "./ErrorContainer";
 import FooterBtn from "../Buttons/FooterBtn";

@@ -4,7 +4,12 @@ import { apiUrl } from "../constants";
 import messaging from "@react-native-firebase/messaging";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { CommonActions,  useNavigation, StackActions,NavigationAction } from "@react-navigation/native";
+import {
+  CommonActions,
+  useNavigation,
+  StackActions,
+  NavigationAction,
+} from "@react-navigation/native";
 
 import {
   setAccessToken,
@@ -58,40 +63,31 @@ const UserProvider = ({ children, navigationRef }) => {
       });
   };
 
-  const resetNav =async ()=>{
-
-    const resetAction =  navigation.reset({
+  const resetNav = async () => {
+    const resetAction = navigation.reset({
       index: 0,
       routes: [{ name: "Intro" }],
     });
     navigation.dispatch(resetAction);
+  };
 
-  }
-
-
-  const emptyAll = async ()=>{
-
+  const emptyAll = async () => {
     dispatch(setUserLoggined(false));
     dispatch(setAccessToken(""));
     dispatch(setSessionExpired(false));
     dispatch(setProfiledata({}));
     dispatch(setProfileImgs([]));
-
-  }
+  };
 
   const clearData = async () => {
-
     if (is_session_expired == true && user_loggined) {
-   
-      await resetNav()
+      await resetNav();
       await removeToken();
-      await emptyAll()
-
+      await emptyAll();
     }
   };
 
   const removeToken = async () => {
-
     const url = apiUrl + "token_remove/";
 
     const headers = {
@@ -107,7 +103,7 @@ const UserProvider = ({ children, navigationRef }) => {
     try {
       const resp = await axios.post(url, data, { headers });
       let user_data = resp.data.data;
-    
+
       dispatch(setDeviceToken(""));
     } catch (error) {}
   };
@@ -127,8 +123,6 @@ const UserProvider = ({ children, navigationRef }) => {
       subscription.remove();
     };
   }, []);
-
-
 
   useEffect(() => {
     clearData();

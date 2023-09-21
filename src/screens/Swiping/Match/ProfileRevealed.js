@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { rspF, rspH, rspW, scrn_height } from "../../../styles/responsiveSize";
 import colors from "../../../styles/colors";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FormWrapperFooter from "../../../components/wrappers/formWrappers/FormWrapperFooter";
 import FooterBtn from "../../../components/Buttons/FooterBtn";
 import fontFamily from "../../../styles/fontFamily";
@@ -15,6 +15,7 @@ import { apiUrl } from "../../../constants";
 import axios from "axios";
 import { setSessionExpired } from "../../../store/reducers/authentication/authentication";
 import FastImage from "react-native-fast-image";
+import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 
 const ProfileRevealed = ({ route }) => {
   const navigation = useNavigation();
@@ -31,7 +32,6 @@ const ProfileRevealed = ({ route }) => {
   const [updated_prof, setupdated_prof] = useState(null);
 
   const getRvlProfData = async () => {
-    // setloading(true)
     const data = {
       profile_id: profile.userprofile.id,
     };
@@ -60,7 +60,6 @@ const ProfileRevealed = ({ route }) => {
       }
     } catch (error) {
       setreport("");
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -68,6 +67,13 @@ const ProfileRevealed = ({ route }) => {
   useLayoutEffect(() => {
     getRvlProfData();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <>

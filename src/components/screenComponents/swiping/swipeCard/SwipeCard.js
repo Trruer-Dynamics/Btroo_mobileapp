@@ -94,10 +94,7 @@ const Item = ({
                 style={{
                   position: "absolute",
                   top: rspH(0.54),
-                  // top: rspH(0.54),
-
                   left: 0,
-
                   zIndex: 2,
                 }}
               >
@@ -119,8 +116,6 @@ const Item = ({
                   top: 0,
                   left: 0,
                   zIndex: 1,
-                  //  borderRadius
-                  //  borderTopRightRadius: 30,
                 }}
                 resizeMode="stretch"
               />
@@ -152,7 +147,6 @@ const Item2 = ({ item }) => {
   return (
     <View style={styles.item2}>
       <FastImage
-        // source={{uri: imageUri}}
         source={{ uri: imageUri }}
         style={{ width: "100%", height: "98%" }}
         resizeMode="contain"
@@ -318,7 +312,6 @@ const SwipeCard = ({
         dispatch(setSessionExpired(true));
       }
     } catch (error) {
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -348,7 +341,6 @@ const SwipeCard = ({
       }
     } catch (error) {
       // setloading(false);
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -504,7 +496,6 @@ const SwipeCard = ({
         <View style={{ ...styles.container }}>
           <View
             style={{
-              // paddingBottom: showPrompts ? rspH(11.2) : 0,
               paddingBottom: rspH(Platform.OS == "ios" ? 14.2 : 9),
             }}
           >
@@ -1202,7 +1193,6 @@ const styles = StyleSheet.create({
   profileDetailContNText: {
     color: colors.blue,
     fontFamily: fontFamily.semi_bold,
-    // fontSize: rspF(2.138),
     fontSize: rspF(Platform.OS == "ios" ? 2 : 1.8),
     lineHeight: rspF(2.18),
   },

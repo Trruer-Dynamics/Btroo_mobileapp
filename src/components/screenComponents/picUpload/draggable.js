@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import Animated, {
   runOnJS,
@@ -8,7 +8,6 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-
 import { MARGIN, getOrder, getPosition } from "./utils";
 
 const Draggable = ({

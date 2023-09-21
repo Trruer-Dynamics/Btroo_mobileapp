@@ -34,17 +34,9 @@ export default FormComponentsWrapper;
 
 const styles = StyleSheet.create({
   container: {
-    // height:scrn_height,
     height: Platform.OS == "ios" ? scrn_height - 80 : scrn_height,
-
     alignSelf: "center",
-    // backgroundColor:'yellow',
-    // position: 'absolute',
-    // top: 0,
-    // bottom: 0,
     width: scrn_width,
     paddingHorizontal: rspW(10),
-    // paddingVertical: rspH(7.04),
-    // justifyContent: 'space-between',
   },
 });

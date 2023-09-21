@@ -11,7 +11,6 @@ import { persistor, store } from "./src/store/Store";
 import "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-
 const root = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>

@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { Alert, Platform } from "react-native";
 import messaging from "@react-native-firebase/messaging";
 import PushNotification from "react-native-push-notification";
@@ -12,7 +6,6 @@ import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import { UserContext } from "../context/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { setProfileRevealed } from "../store/reducers/authentication/authentication";
 
 const NotificationController = (props) => {
   const { sckop, newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);

@@ -1,14 +1,11 @@
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
-  Image,
   SafeAreaView,
   Platform,
-  StatusBar,
 } from "react-native";
-import React, { useLayoutEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import {
   rspH,
   rspW,
@@ -26,8 +23,9 @@ import { setStatusBarArgs } from "../../../store/reducers/authentication/authent
 import Loader from "../../loader/Loader";
 import { Image as CompImage } from "react-native-compressor";
 import FastImage from "react-native-fast-image";
+import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 
-const PhotoVerifyCamera = ({}) => {
+const PhotoVerifyCamera = ({ route }) => {
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
@@ -97,15 +95,6 @@ const PhotoVerifyCamera = ({}) => {
       dispatch(
         setStatusBarArgs({ barStyle: "light-content", backgroundColor: "#000" })
       );
-      // if (Platform.OS == 'android') {
-      //   dispatch(
-      //     setStatusBarArgs({
-      //       barStyle: 'light-content',
-      //       backgroundColor: 'transparent',
-      //     }),
-      //   );
-      //   StatusBar.setTranslucent(true);
-      // }
 
       return () => {
         dispatch(
@@ -114,10 +103,14 @@ const PhotoVerifyCamera = ({}) => {
             backgroundColor: "#fff",
           })
         );
-        // if (Platform.OS == 'android') {
-        //   StatusBar.setTranslucent(false);
-        // }
       };
+    }, [])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
     }, [])
   );
 
@@ -130,7 +123,6 @@ const PhotoVerifyCamera = ({}) => {
           style={{
             position: "absolute",
             zIndex: 2,
-            // top: rspH(7.04),
             top: rspH(Platform.OS == "ios" ? 7.04 : 4),
             left: rspW(9.8),
             justifyContent: "center",
@@ -139,14 +131,6 @@ const PhotoVerifyCamera = ({}) => {
             width: rspW(7.64),
             borderRadius: rspW(4),
           }}
-          //   style={{
-          //     // backgroundColor:'red',
-          //     justifyContent:'center',
-          //   alignItems:'center',
-          //   height: rspW(7.64),
-          //    width:rspW(7.64),
-          //   borderRadius: rspW(4),
-          // }}
           onPress={() => {
             navigation.navigate("PhotoVerification");
           }}
@@ -232,20 +216,13 @@ export default PhotoVerifyCamera;
 const styles = StyleSheet.create({
   mainCont: {
     backgroundColor: "#000",
-    // height: scrn_height,
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
-    // backgroundColor:'green',
-
-    // position:'relative',
   },
   camCont: {
     height: Platform.OS == "ios" ? scrn_height * 0.88 : scrn_height * 0.9085,
-    // height:  scrn_height * 0.88 ,
-
     width: scrn_width,
-    // backgroundColor:'green',
   },
   btnCont: {
     width: scrn_width,

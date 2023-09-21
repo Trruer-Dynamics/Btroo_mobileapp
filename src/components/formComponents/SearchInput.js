@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -26,16 +26,13 @@ const SearchInput = ({
         styles.searchContainer,
         {
           height: rspH(Platform.OS == "ios" ? 4.7 : 5),
-          // width: rspW(75.9),
-          width: rspW(75.9),
+          width: width,
         },
       ]}
     >
       <TextInput
         style={{
-          // textAlign:'center',
           width: "90%",
-          //   borderRadius: 5,
           fontSize: rspF(1.9),
           paddingHorizontal: rspW(4),
           fontFamily: fontFamily.regular,
@@ -53,8 +50,6 @@ const SearchInput = ({
         value={search}
         placeholder={"Search"}
         placeholderTextColor={colors.black}
-        // onFocus={()=> setfocused(true)}
-        // onBlur={()=> setfocused(false)}
       />
       <TouchableOpacity
         onPress={() => {

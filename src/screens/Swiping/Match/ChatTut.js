@@ -168,7 +168,6 @@ const ChatTut = ({ profile, repeat_tut }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -349,11 +348,10 @@ const ChatTut = ({ profile, repeat_tut }) => {
                       setchat_step(chat_step + 1);
                     } else {
                       if (repeat_tut) {
-                        navigation.navigate('SettingsScreen')
+                        navigation.navigate("SettingsScreen");
+                      } else {
+                        chatTutDone();
                       }
-                      else{
-                      chatTutDone();
-                    }
                     }
                   }}
                   style={{

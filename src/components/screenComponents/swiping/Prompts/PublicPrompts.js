@@ -12,17 +12,10 @@ import FormWrapper from "../../../wrappers/formWrappers/FormWrapper";
 import FormWrapperFooter from "../../../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../../formComponents/ErrorContainer";
 import FooterBtn from "../../../Buttons/FooterBtn";
-import FormInput from "../../../formComponents/FormInput";
 import FormSelector from "../../../formComponents/FormSelector";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch, useSelector } from "react-redux";
 import FormHeader from "../../../wrappers/formWrappers/FormHeader";
-import {
-  setProfiledata,
-  setSessionExpired,
-} from "../../../../store/reducers/authentication/authentication";
-import { apiUrl } from "../../../../constants";
-import axios from "axios";
 import fontFamily from "../../../../styles/fontFamily";
 import AutoGrowingTextInput from "react-native-autogrow-textinput-ts";
 
@@ -52,13 +45,6 @@ const PublicPrompts = ({
   const [public_prompt2_q_blr, setpublic_prompt2_q_blr] = useState(false);
 
   const [pup_blr, setpup_blr] = useState(false);
-
-  const profile_data = useSelector(
-    (state) => state.authentication.profile_data
-  );
-  const access_token = useSelector(
-    (state) => state.authentication.access_token
-  );
 
   const dispatch = useDispatch();
 
@@ -186,20 +172,6 @@ const PublicPrompts = ({
                   />
                 </View>
                 <View>
-                  {/* <FormInput
-                    value={public_prompt2_a}
-                    setvalue={setpublic_prompt2_a}
-                    width={'100%'}
-                    maxLength={250}
-                    placeholder={'Type your answer'}
-                    error_cond={public_prompt2_a.length < 3}
-                    keyboardType="default"
-                    value_blr={public_prompt2_blr}
-                    setvalue_blr={setpublic_prompt2_blr}
-                    multiline={true}
-                    disabled={public_prompt2_q == ''}
-                  /> */}
-
                   <AutoGrowingTextInput
                     maxLength={250}
                     placeholder="Type your answer"

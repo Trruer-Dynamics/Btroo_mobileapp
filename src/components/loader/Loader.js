@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, ActivityIndicator, SafeAreaView } from "react-native";
 
 import React from "react";
 
@@ -17,18 +11,12 @@ const Loader = () => {
     <SafeAreaView
       style={{
         position: "absolute",
-
         alignSelf: "center",
-
         height: scrn_height,
-
         width: scrn_width,
-
         backgroundColor: "#0000003c",
-
         zIndex: 100,
-
-        justifyContent: "center", //  justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       <ActivityIndicator size="large" color={colors.blue} />

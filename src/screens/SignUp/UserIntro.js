@@ -44,8 +44,10 @@ import {
   setMatchTut,
   setSwipeTut,
 } from "../../store/reducers/tutorial/tutorial";
+import { useFocusEffect } from "@react-navigation/native";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
-const UserIntro = ({ navigation }) => {
+const UserIntro = ({ navigation, route }) => {
   const [step, setstep] = useState(1);
 
   const access_token = useSelector(
@@ -445,7 +447,6 @@ const UserIntro = ({ navigation }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
@@ -650,6 +651,13 @@ const UserIntro = ({ navigation }) => {
     getPets();
     getPoliticalInclinations();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <>

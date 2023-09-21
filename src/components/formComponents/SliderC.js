@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Slider from "react-native-a11y-slider";
 import FormInputContainer from "./FormInputContainer";

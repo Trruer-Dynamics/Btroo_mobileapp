@@ -1,6 +1,4 @@
 import {
-  SafeAreaView,
-  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -24,9 +22,6 @@ const FormWrapper = ({ children, containerStyle = {} }) => {
         style={{
           ...styles.container,
           ...containerStyle,
-
-          //  height: scrn_height - (Platform.OS == 'android'? insets.top : insets.bottom + insets.top)
-          // height: Platform.OS == 'ios'? safe_height : scrn_height,
           height: safe_height,
         }}
       >
@@ -41,14 +36,9 @@ export default memo(FormWrapper);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    // backgroundColor: colors.error,
-
     paddingHorizontal: rspW(10),
     paddingTop: rspH(3),
     justifyContent: "space-between",
-
     position: "relative",
-
-    // backgroundColor:'red',
   },
 });

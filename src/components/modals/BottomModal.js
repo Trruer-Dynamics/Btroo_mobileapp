@@ -42,9 +42,7 @@ const BottomModal = ({
       >
         <SafeAreaView
           style={{
-            // flex:1,
             height: Platform.OS == "ios" ? scrn_height : rspH(99),
-            // height: scrn_height,
             position: "relative",
           }}
         >
@@ -52,10 +50,7 @@ const BottomModal = ({
             activeOpacity={1}
             style={{
               backgroundColor: "#00000087",
-              // backgroundColor: 'red',
-
               flexGrow: 1,
-              // flex:1,
             }}
             onPress={() => {
               setModalVisible(false);
@@ -66,7 +61,6 @@ const BottomModal = ({
             style={{
               ...styles.modalView,
               ...extContainerStyle,
-              // bottom: rspH(2.86),
               bottom: rspH(0),
               padding: rspW(padding),
             }}
@@ -92,9 +86,7 @@ const BottomModal = ({
 const styles = StyleSheet.create({
   modalView: {
     position: "absolute",
-
     backgroundColor: "#ffffff",
-
     alignItems: "center",
     width: scrn_width,
     borderTopLeftRadius: rspW(3),

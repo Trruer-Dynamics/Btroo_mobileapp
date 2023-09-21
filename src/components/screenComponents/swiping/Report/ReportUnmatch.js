@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Platform,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import FormComponentsWrapper from "../../../wrappers/formComponentsWrappers/FormComponentsWrapper";
@@ -20,6 +21,7 @@ import {
 import colors from "../../../../styles/colors";
 import CentralModal from "../../../modals/CentralModal";
 import FooterBtn from "../../../Buttons/FooterBtn";
+import { useSelector } from "react-redux";
 
 const Item = ({ item, onPress, action }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item]}>
@@ -48,6 +50,9 @@ const ReportUnmatch = ({
   unmatchProfile,
 }) => {
   const [report_list, setreport_list] = useState(["Unmatch", "Report"]);
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
 
   const renderItem = ({ item }) => {
     return (
@@ -55,14 +60,16 @@ const ReportUnmatch = ({
         action={action}
         item={item}
         onPress={() => {
-          // setreportConfirm(true)
-
-          setaction(item);
-          if (item == "Report") {
-            setactionNo(2);
+          if (is_network_connected) {
+            setaction(item);
+            if (item == "Report") {
+              setactionNo(2);
+            } else {
+              setactionNo(1);
+              setreportConfirm(true);
+            }
           } else {
-            setactionNo(1);
-            setreportConfirm(true);
+            Alert.alert("Warning", "You are Offline");
           }
         }}
       />

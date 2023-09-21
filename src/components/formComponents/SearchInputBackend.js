@@ -1,12 +1,11 @@
 import {
   StyleSheet,
-  Text,
   View,
   TextInput,
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -24,7 +23,6 @@ const SearchInputBackend = ({
       style={[
         styles.searchContainer,
         {
-          // height: height,
           height: rspH(Platform.OS == "ios" ? 4.7 : 5),
           width: width,
         },
@@ -32,15 +30,11 @@ const SearchInputBackend = ({
     >
       <TextInput
         style={{
-          // textAlign:'center',
           width: "90%",
-          //   borderRadius: 5,
           fontSize: rspF(1.9),
           paddingHorizontal: rspW(4),
           fontFamily: fontFamily.regular,
           color: "#000",
-          // backgroundColor:'red',
-          // lineHeight: 16.61,
           lineHeight: rspF(2),
         }}
         onChangeText={(text) => {
@@ -51,8 +45,6 @@ const SearchInputBackend = ({
         value={search}
         placeholder={"Search"}
         placeholderTextColor={colors.black}
-        // onFocus={()=> setfocused(true)}
-        // onBlur={()=> setfocused(false)}
       />
       <TouchableOpacity
         onPress={() => {

@@ -136,8 +136,7 @@ const Item2 = ({ item }) => {
 };
 
 const SwiperTut = ({ repeat_tut }) => {
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const [masked, setmasked] = useState(false);
   const dispatch = useDispatch();
@@ -250,7 +249,6 @@ const SwiperTut = ({ repeat_tut }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -897,9 +895,10 @@ const SwiperTut = ({ repeat_tut }) => {
                   >
                     {/* Tut Text */}
                     <View style={styles.centralModalTextCont}>
-                      <Text style={styles.centralModalText}
-                      numberOfLines={3}
-                      adjustsFontSizeToFit
+                      <Text
+                        style={styles.centralModalText}
+                        numberOfLines={3}
+                        adjustsFontSizeToFit
                       >
                         {instruction_list[step]}
                       </Text>
@@ -919,11 +918,11 @@ const SwiperTut = ({ repeat_tut }) => {
                         onPress={() => {
                           setswipe_tut_l(false);
                           swipeTutDone();
-                         
+
                           if (repeat_tut) {
-                            navigation.navigate('Match',{
-                              repeat_tut:true
-                            })
+                            navigation.navigate("Match", {
+                              repeat_tut: true,
+                            });
                           }
                         }}
                         style={styles.centralModalTextNextCont}

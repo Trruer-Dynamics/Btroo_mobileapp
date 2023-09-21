@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import colors from "../../../styles/colors";
 import fontFamily from "../../../styles/fontFamily";
@@ -92,7 +85,6 @@ const styles = StyleSheet.create({
     fontSize: rspF(2.488),
     fontFamily: fontFamily.bold,
     color: colors.black,
-    // letterSpacing: 1,
   },
   paraCont: {
     marginBottom: rspH(7.04),
@@ -105,7 +97,6 @@ const styles = StyleSheet.create({
     color: colors.blue,
   },
   bottomBtn: {
-    // backgroundColor:'red',
     marginTop: rspH(2.5),
     width: rspW(67),
     height: rspH(3.7),
@@ -115,7 +106,6 @@ const styles = StyleSheet.create({
     lineHeight: rspF(2.1),
     fontSize: rspF(2.02),
     fontFamily: fontFamily.bold,
-    // backgroundColor:'red',
     color: colors.blue,
     letterSpacing: 1,
   },

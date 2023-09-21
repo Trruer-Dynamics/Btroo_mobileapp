@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   Animated,
   SafeAreaView,
   PermissionsAndroid,
@@ -64,12 +63,17 @@ import {
 } from "../../store/reducers/filter/filter";
 import SwipeCard from "../../components/screenComponents/swiping/swipeCard/SwipeCard";
 
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 
 import messaging from "@react-native-firebase/messaging";
 import { setPromptFillingStart } from "../../store/reducers/authentication/authentication";
 import { UserContext } from "../../context/user";
 import FastImage from "react-native-fast-image";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const SwiperOr = ({}) => {
   const navigation = useNavigation();
@@ -93,7 +97,6 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.is_promptsfillingstarted
   );
 
-  
   const profile_refresh = useSelector(
     (state) => state.authentication.profile_refresh
   );
@@ -268,7 +271,6 @@ const SwiperOr = ({}) => {
 
       setcurrent_address(response.data.display_name);
     } catch (error) {
-      dispatch(setSessionExpired(true));
       setloading2(true);
     }
   };
@@ -329,7 +331,6 @@ const SwiperOr = ({}) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -412,7 +413,6 @@ const SwiperOr = ({}) => {
         }
       })
       .catch((err) => {
-        dispatch(setSessionExpired(true));
         setloading(false);
       });
   };
@@ -435,7 +435,6 @@ const SwiperOr = ({}) => {
         }
       })
       .catch((err) => {
-        dispatch(setSessionExpired(true));
         setloading(false);
       });
   };
@@ -467,7 +466,6 @@ const SwiperOr = ({}) => {
       })
       .catch((err) => {
         setloading(false);
-        dispatch(setSessionExpired(true));
       });
   };
 
@@ -490,7 +488,6 @@ const SwiperOr = ({}) => {
       })
       .catch((err) => {
         setloading(false);
-        dispatch(setSessionExpired(true));
       });
   };
 
@@ -511,9 +508,7 @@ const SwiperOr = ({}) => {
           dispatch(setSessionExpired(true));
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const getFilterProfiles = async () => {
@@ -545,9 +540,7 @@ const SwiperOr = ({}) => {
           setempty_profile_call(false);
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const getRejectedProfiles = async () => {
@@ -626,7 +619,6 @@ const SwiperOr = ({}) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -665,7 +657,6 @@ const SwiperOr = ({}) => {
         setmob_ip(ip);
       })
       .catch((error) => {
-        dispatch(setSessionExpired(true));
         setloading2(true);
       });
   };

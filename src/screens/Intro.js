@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   StatusBar,
-  Image,
   TouchableOpacity,
   Platform,
 } from "react-native";
@@ -20,8 +19,9 @@ import {
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import useIsReady from "../components/functions/isScreenReady";
 import FastImage from "react-native-fast-image";
+import { setCurrentScreen } from "../store/reducers/screen/screen";
 
-const Intro = () => {
+const Intro = ({ route }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
@@ -59,6 +59,13 @@ const Intro = () => {
           StatusBar.setTranslucent(false);
         }
       };
+    }, [])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
     }, [])
   );
 

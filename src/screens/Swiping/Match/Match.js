@@ -61,7 +61,6 @@ const Match = () => {
   const matches = useSelector((state) => state.chats.matches);
 
   const updateKeepMatching = async () => {
-    console.log("updateKeepMatching");
     // setloading(true);
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
@@ -98,16 +97,11 @@ const Match = () => {
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const getMatches = async () => {
-    console.log("getMatches");
-
     const url = apiUrl + `activechatroomlist/`;
-
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -158,13 +152,9 @@ const Match = () => {
             mth.no_of_extend = no_of_extend;
             mth.userprofile = mth_user.userprofile;
 
-            console.log("mth_user.userprofile.image",mth_user.userprofile.image)
-
-
-            let prf_img = mth_user.userprofile.image.find(c => c.position == 0)
-
-            console.log("prf_img",prf_img)
-
+            let prf_img = mth_user.userprofile.image.find(
+              (c) => c.position == 0
+            );
 
             mth.matchType =
               lastMessage == "" ? "New Match" : ym ? "" : "Your move";
@@ -188,9 +178,7 @@ const Match = () => {
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const renderItem = ({ item }) => {
@@ -232,9 +220,7 @@ const Match = () => {
           getMatches();
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
@@ -253,12 +239,7 @@ const Match = () => {
         let c_user_matches = matches.filter(
           (v) => v.for_user_id == profile_data.userprofile.id
         );
-        console.log(
-          "c_user_matches len",
-          c_user_matches.length,
-          is_network_connected
-        );
-        // console.log("c_user_matches",c_user_matches)
+
         if (!is_network_connected && c_user_matches.length > 0) {
           setmatch_list(c_user_matches);
         }

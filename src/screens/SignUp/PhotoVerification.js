@@ -1,33 +1,18 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  Image,
-  Platform,
-  SafeAreaView,
-  StatusBar,
-} from "react-native";
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import { StyleSheet, View, Platform, SafeAreaView } from "react-native";
+import React from "react";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
 
-import {
-  rspH,
-  rspW,
-  rspF,
-  scrn_height,
-  scrn_width,
-} from "../../styles/responsiveSize";
+import { rspH, rspW, scrn_height } from "../../styles/responsiveSize";
 import FooterBtn from "../../components/Buttons/FooterBtn";
-import fontFamily from "../../styles/fontFamily";
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import { useDispatch } from "react-redux";
 import { setUserLoggined } from "../../store/reducers/authentication/authentication";
+import { useFocusEffect } from "@react-navigation/native";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
-const PhotoVerification = ({ navigation }) => {
+const PhotoVerification = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   const onNextPress = () => {
@@ -36,6 +21,13 @@ const PhotoVerification = ({ navigation }) => {
     // dispatch(setUserLoggined(true));
     // navigation.navigate('Pledge');
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <SafeAreaView style={{ height: scrn_height, backgroundColor: "#fff" }}>
@@ -64,9 +56,7 @@ const PhotoVerification = ({ navigation }) => {
           </View>
         </View>
 
-        <FormWrapperFooter
-        // containerStyle={{bottom: rspH(-3.2)}}
-        >
+        <FormWrapperFooter>
           {/* Error Show Here */}
 
           <ErrorContainer error_msg="" />
@@ -87,17 +77,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#C6E3F4",
     borderRadius: rspW(7.64),
     width: rspW(71.25),
-    // width: rspW(71.25),
     height: rspH(38.4),
-    // height: rspH(38.4),
     alignSelf: "center",
   },
 
   poseImage: {
     alignSelf: "flex-end",
-
     width: rspW(71.25),
-    // width: 280,
     height: rspH(38.4),
   },
   middleTitle: {

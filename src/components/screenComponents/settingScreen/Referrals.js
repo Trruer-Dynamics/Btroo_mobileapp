@@ -2,12 +2,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  TextInput,
   TouchableOpacity,
-  ScrollView,
   SafeAreaView,
-  Platform,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import Clipboard from "@react-native-clipboard/clipboard";
@@ -16,8 +12,6 @@ import fontFamily from "../../../styles/fontFamily";
 import colors from "../../../styles/colors";
 import { rspH, rspW, rspF, scrn_height } from "../../../styles/responsiveSize";
 import Share from "react-native-share";
-import ADIcon from "react-native-vector-icons/AntDesign";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useSelector } from "react-redux";
 import Toast from "../../toast/Toast";
 import FormHeader from "../../wrappers/formWrappers/FormHeader";
@@ -43,11 +37,6 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
 
   return (
     <SafeAreaView style={{ height: scrn_height, backgroundColor: "#fff" }}>
-      {/* <KeyboardAwareScrollView
-        enableOnAndroid={true}
-        style={{flex: 1, backgroundColor: '#fff'}}
-        bounces={false}
-        showsVerticalScrollIndicator={false}> */}
       <View style={{ paddingHorizontal: rspW(10) }}>
         <View style={{ marginTop: rspH(2.35) }}>
           <View
@@ -68,8 +57,6 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
             <FastImage
               source={require("../../../assets/images/Setting/refImage.png")}
               style={{
-                // width: rspW(72.6),
-                // height: rspW(72.6),
                 width: rspW(75),
                 height: rspW(75),
               }}
@@ -91,7 +78,6 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              // width: rspW(68.6),
               width: rspW(68.6),
               height: rspH(5.8),
               alignSelf: "center",
@@ -100,13 +86,11 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
               marginTop: rspH(2.9),
               marginBottom: rspH(2.8),
               paddingHorizontal: rspW(5.1),
-              // backgroundColor:'red',
             }}
           >
             <Text style={styles.ref_txt}>{user_ref_code}</Text>
 
             <TouchableOpacity
-              // style={{backgroundColor:'green'}}
               onPress={() => {
                 Clipboard.setString(user_ref_code);
                 setshow_toast(true);
@@ -159,8 +143,6 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
         visible={show_toast}
         setvisible={setshow_toast}
       />
-
-      {/* </KeyboardAwareScrollView> */}
     </SafeAreaView>
   );
 };

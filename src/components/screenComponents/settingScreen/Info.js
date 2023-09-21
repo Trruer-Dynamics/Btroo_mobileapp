@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { memo, useLayoutEffect, useState } from "react";
-import ADIcon from "react-native-vector-icons/AntDesign";
 import {
   rspH,
   rspF,
@@ -9,27 +8,22 @@ import {
   scrn_width,
 } from "../../../styles/responsiveSize";
 import fontFamily from "../../../styles/fontFamily";
-import colors from "../../../styles/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 import { apiUrl } from "../../../constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RenderHTML from "react-native-render-html";
 import Loader from "../../loader/Loader";
 import Accordion from "../../Accordion";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import FormHeader from "../../wrappers/formWrappers/FormHeader";
 import LinearGradient from "react-native-linear-gradient";
+import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 
 const Info = ({ navigation, route }) => {
-  // const [heading, setheading] = useState("Terms And Services")
   const { heading } = route.params;
-
   const [para, setpara] = useState("");
-
   const [loading, setloading] = useState(false);
-
-  const [arr, setarr] = useState([]);
 
   const tagsStyles = {
     p: {
@@ -158,6 +152,15 @@ const Info = ({ navigation, route }) => {
     }
   }, []);
 
+  const dispatch = useDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
+
   return (
     <SafeAreaView
       style={{
@@ -207,21 +210,6 @@ const Info = ({ navigation, route }) => {
               source={source}
               tagsStyles={tagsStyles}
             />
-
-            {/* TO render FAQ */}
-            {arr.length > 0 && (
-              <View style={{ marginTop: rspH(2.35) }}>
-                {arr.map((v) => {
-                  return (
-                    <Accordion
-                      key={v.id}
-                      heading={v.question}
-                      para={v.answer}
-                    />
-                  );
-                })}
-              </View>
-            )}
           </View>
         </KeyboardAwareScrollView>
       </LinearGradient>
@@ -235,6 +223,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: rspW(7.64),
-    // backgroundColor: '#6B9DFF',
   },
 });

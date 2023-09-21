@@ -24,10 +24,8 @@ const FormComponentsWrapperHeader = ({
     <View style={{ marginBottom: marginBottom }}>
       <View
         style={{
-          // SalignSelf: 'center',
           flexDirection: "row",
           alignItems: "center",
-          // backgroundColor:'red',
           height: rspH(3.8),
           justifyContent: left_icon ? "space-between" : "center",
         }}
@@ -36,7 +34,6 @@ const FormComponentsWrapperHeader = ({
           {left_icon && (
             <TouchableOpacity
               style={{
-                // backgroundColor:'red',
                 justifyContent: "center",
                 alignItems: "center",
                 height: rspW(7.64),
@@ -50,8 +47,6 @@ const FormComponentsWrapperHeader = ({
               <ADIcon size={20} name="left" color={colors.blue} />
             </TouchableOpacity>
           )}
-          {/* <Text style={[styles.headerTitle]}></Text> */}
-
           <Text style={[styles.headerTitle]}>{title}</Text>
           <Text style={[styles.headerTitle]}>{"   "}</Text>
         </>
@@ -65,14 +60,9 @@ export default FormComponentsWrapperHeader;
 const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: fontFamily.bold,
-    // fontSize: rspF(3.2),
-    // backgroundColor: colors.error,
     fontSize: rspF(2.7),
     color: colors.black,
-    // lineHeight: rspF(3.21),
     lineHeight: rspF(2.8),
-
-    // marginBottom: rspH(1.2),
     letterSpacing: 1,
   },
 });

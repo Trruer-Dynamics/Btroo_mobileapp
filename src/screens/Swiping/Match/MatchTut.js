@@ -51,9 +51,9 @@ const DATA = [
   },
 ];
 
-const MatchTut = ({repeat_tut}) => {
+const MatchTut = ({ repeat_tut }) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -104,9 +104,7 @@ const MatchTut = ({repeat_tut}) => {
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const matchTutDone = async () => {
@@ -138,7 +136,6 @@ const MatchTut = ({repeat_tut}) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -248,17 +245,16 @@ const MatchTut = ({repeat_tut}) => {
                 <TouchableOpacity
                   onPress={() => {
                     if (repeat_tut) {
-                      navigation.navigate('Chat',{
+                      navigation.navigate("Chat", {
                         repeat_tut: true,
                         reveal: false,
                         profile: {
-                          userprofile: {name : 'bTroo'}
+                          userprofile: { name: "bTroo" },
                         },
-                      })
+                      });
+                    } else {
+                      matchTutDone();
                     }
-                    else{
-                    matchTutDone();
-                  }
                   }}
                   style={{
                     ...styles.centralModalTextNextCont,

@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   ScrollView,
   SafeAreaView,
   Platform,
@@ -46,6 +45,7 @@ import ExtendTime from "../../../components/screenComponents/matching/ExtendTime
 import { setSessionExpired } from "../../../store/reducers/authentication/authentication";
 import Paginator from "../../../components/screenComponents/swiping/Paginator";
 import FastImage from "react-native-fast-image";
+import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item.image);
@@ -140,9 +140,7 @@ const MatchProfile = ({ route }) => {
           setleftHrs(leftHrs + 48);
         }
       })
-      .catch((err) => {
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const unmatchProfile = async () => {
@@ -166,7 +164,6 @@ const MatchProfile = ({ route }) => {
         dispatch(setSessionExpired(true));
       }
     } catch (error) {
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -195,7 +192,6 @@ const MatchProfile = ({ route }) => {
       }
     } catch (error) {
       setreport("");
-      dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -255,6 +251,13 @@ const MatchProfile = ({ route }) => {
       />
     );
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <>

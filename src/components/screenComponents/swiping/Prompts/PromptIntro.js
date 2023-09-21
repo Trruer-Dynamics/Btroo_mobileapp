@@ -1,18 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  Image,
-  SafeAreaView,
-  Platform,
-  Alert,
-} from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import { rspF, rspH, rspW } from "../../../../styles/responsiveSize";
 import colors from "../../../../styles/colors";
-
 import FormWrapperFooter from "../../../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../../formComponents/ErrorContainer";
 import FooterBtn from "../../../Buttons/FooterBtn";

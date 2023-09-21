@@ -1,14 +1,5 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  StatusBar,
-  Platform,
-} from "react-native";
-import React, { useState } from "react";
+import { View, SafeAreaView, Platform } from "react-native";
+import React from "react";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
 
 import {
@@ -23,6 +14,9 @@ import FooterBtn from "../../components/Buttons/FooterBtn";
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
 import FastImage from "react-native-fast-image";
+import { useDispatch } from "react-redux";
+import { useFocusEffect } from "@react-navigation/native";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const Pledge = ({ navigation }) => {
   const onNextPress = () => {
@@ -31,6 +25,15 @@ const Pledge = ({ navigation }) => {
     });
     // navigation.goBack()
   };
+
+  const dispatch = useDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }} bounces={false}>
@@ -44,7 +47,7 @@ const Pledge = ({ navigation }) => {
           {/* Main Form UI */}
           <View>
             {/* Inputs Container*/}
-            <View style={styles.inputCont}>
+            <View>
               <FastImage
                 source={require("../../assets/images/Pledge.jpg")}
                 style={{
@@ -72,7 +75,3 @@ const Pledge = ({ navigation }) => {
 };
 
 export default Pledge;
-
-const styles = StyleSheet.create({
-  inputCont: {},
-});

@@ -4,10 +4,8 @@ import {
   StyleSheet,
   View,
   TouchableWithoutFeedback,
-  Touchable,
   TouchableOpacity,
 } from "react-native";
-import { scrn_height } from "../../styles/responsiveSize";
 
 const CentralModal = ({
   modalVisible,

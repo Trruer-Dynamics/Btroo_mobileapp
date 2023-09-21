@@ -3,7 +3,6 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   SafeAreaView,
   Platform,
   Keyboard,
@@ -499,9 +498,7 @@ const Chat = ({ profile }) => {
           dispatch(setIceBreakers(active_ibs));
         }
       })
-      .catch((err) => {
-        // dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const chatRvlTutDone = async () => {
@@ -532,7 +529,6 @@ const Chat = ({ profile }) => {
       }
     } catch (error) {
       setloading(false);
-      // dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -564,7 +560,6 @@ const Chat = ({ profile }) => {
       }
     } catch (error) {
       setloading(false);
-      // dispatch(setSessionExpired(true));
       return false;
     }
   };
@@ -594,7 +589,6 @@ const Chat = ({ profile }) => {
       console.log("revealProfileTime resp", response);
     } catch (error) {
       setloading(false);
-      // dispatch(setSessionExpired(true));
       console.log("revealProfileTime error", error);
       return false;
     }
@@ -655,9 +649,6 @@ const Chat = ({ profile }) => {
             k += 1;
           }
 
-          console.log("chats_msgs.length", chats_msgs.length);
-          console.log("tmp_lis.length", tmp_lis.length);
-
           if (chats_msgs.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
             setchatlist(tmp);
@@ -671,7 +662,6 @@ const Chat = ({ profile }) => {
         }
       })
       .catch((err) => {
-        console.log("getPrevChats err", err);
         setloading(false);
       });
   };
@@ -690,8 +680,6 @@ const Chat = ({ profile }) => {
   };
 
   const connectSocket = async () => {
-    console.log("connectSocket Call");
-
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
 
     ws.current.onopen = (e) => {
@@ -763,8 +751,6 @@ const Chat = ({ profile }) => {
           ];
         } catch (error) {}
       } else {
-        console.log(Platform.OS, " othe on message", data.sender);
-
         setchatlist_remain([data, ...chatlist_remain]);
       }
     };
@@ -822,7 +808,6 @@ const Chat = ({ profile }) => {
 
   useEffect(() => {
     if (chatlist.length > 0) {
-      console.log("chatlist 0", chatlist[0]);
       dispatch(setChatMsgs(chatlist));
     }
   }, [chatlist]);
@@ -835,7 +820,6 @@ const Chat = ({ profile }) => {
     return () => {
       if (connectSocketS) {
         if (ws.current.readyState == 1) {
-          console.log("useEffect Close");
           ws.current.close();
         }
       }
@@ -1025,14 +1009,7 @@ const Chat = ({ profile }) => {
   }, []);
 
   useEffect(() => {
-    // dispatch(setDraftMsgs([]))
-    // dispatch(setChatMsgs([]))
-    console.log("profile", profile.chat_id);
-
     let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
-    console.log("tmp[0]", tmp[0], tmp.length);
-
-    console.log("is_network_connected", is_network_connected);
 
     if (!is_network_connected && tmp.length > 0) {
       setchatlist(tmp);
@@ -1132,7 +1109,10 @@ const Chat = ({ profile }) => {
                             }
                           }}
                         >
-                          <FastImage source={rvl_img} style={styles.profilePhoto} />
+                          <FastImage
+                            source={rvl_img}
+                            style={styles.profilePhoto}
+                          />
                         </TouchableOpacity>
                       )}
                     </>
@@ -1327,11 +1307,8 @@ const Chat = ({ profile }) => {
                           ung_id,
                           profile.chat_id,
                         ];
-                        console.log("nitm", nitm);
                         tmp_lis.unshift(nitm);
-
                         setchatlist(tmp_lis);
-
                         chatlist_ref.current = tmp_lis;
                         setreplySet(false);
 

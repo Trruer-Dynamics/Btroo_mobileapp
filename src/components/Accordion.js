@@ -27,9 +27,7 @@ const Accordion = ({ key, heading = "heading", para = "para" }) => {
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View
             style={{
-              // backgroundColor: colors.lightBlue,
               backgroundColor: colors.white,
-
               width: rspW(2.5),
               height: rspW(2.5),
               borderRadius: rspW(1.3),

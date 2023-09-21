@@ -39,6 +39,8 @@ import { Image as CompImage } from "react-native-compressor";
 import Draggable from "../../components/screenComponents/picUpload/draggable";
 import Box from "../../components/screenComponents/picUpload/box";
 import _ from "lodash";
+import { useFocusEffect } from "@react-navigation/native";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const PicUpload = ({ navigation, route }) => {
   const active_user_location_details = useSelector(
@@ -201,7 +203,6 @@ const PicUpload = ({ navigation, route }) => {
       }
     } catch (error) {
       setmainloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
@@ -269,10 +270,10 @@ const PicUpload = ({ navigation, route }) => {
       }
     } catch (error) {
       setmainloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
+  // Save Image Api
   const saveProfileImage = async (mnImage, crpImage) => {
     setloading(true);
 
@@ -312,6 +313,8 @@ const PicUpload = ({ navigation, route }) => {
       let data = resp.data.data;
       let code = resp.data.code;
 
+      console.log("save Image data", data);
+
       if (code == 200) {
         let n_img = data.image;
         let pid = data.id;
@@ -336,7 +339,7 @@ const PicUpload = ({ navigation, route }) => {
         ifFail(activeIndx);
       }
     } catch (error) {
-      dispatch(setSessionExpired(true));
+      console.log("save image error", error);
       setloading(false);
       ifFail(activeIndx);
     }
@@ -405,7 +408,6 @@ const PicUpload = ({ navigation, route }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
       ifFail(activeIndx, tmp_a);
     }
   };
@@ -512,6 +514,13 @@ const PicUpload = ({ navigation, route }) => {
       setper_modal(false);
     }
   }, [galler_per, camera_per, appStateVisible]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <>

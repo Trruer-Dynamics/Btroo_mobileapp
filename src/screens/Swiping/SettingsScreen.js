@@ -3,76 +3,53 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   ScrollView,
   SafeAreaView,
-  StatusBar,
   Alert,
   Linking,
   Platform,
-  TouchableWithoutFeedback,
 } from "react-native";
-import React, {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import {
-  rspF,
-  rspH,
-  rspW,
-  scrn_height,
-  scrn_width,
-  srn_height,
-} from "../../styles/responsiveSize";
+import { rspF, rspH, rspW, scrn_height } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
 import FormInputContainer from "../../components/formComponents/FormInputContainer";
 import FormInput from "../../components/formComponents/FormInput";
 import { Switch } from "react-native-switch";
 import CentralModal from "../../components/modals/CentralModal";
 import FooterBtn from "../../components/Buttons/FooterBtn";
 import FullModal from "../../components/modals/FullModal";
-import ReferralCode from "../../components/screenComponents/swiping/Prompts/ReferralCode";
 import Referrals from "../../components/screenComponents/settingScreen/Referrals";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setAccessToken,
-  setActiveUserLocationDetails,
   setProfiledata,
   setSessionExpired,
-  setUserLoggined,
 } from "../../store/reducers/authentication/authentication";
 import { apiUrl } from "../../constants";
 import axios from "axios";
-import { CommonActions, useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { setSwipeTut } from "../../store/reducers/tutorial/tutorial";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { UserContext } from "../../context/user";
 import Loader from "../../components/loader/Loader";
 import FastImage from "react-native-fast-image";
+import OffflineAlert from "../../components/functions/OfflineAlert";
 const insets = initialWindowMetrics.insets;
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = ({ navigation, route }) => {
   const scrollViewRef = useRef();
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
   );
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
-  );
-  const profile_imgs = useSelector(
-    (state) => state.authentication.profile_imgs
-  );
-
-  const is_session_expired = useSelector(
-    (state) => state.authentication.is_session_expired
   );
 
   const [loading, setloading] = useState(false);
@@ -84,14 +61,9 @@ const SettingsScreen = ({ navigation }) => {
     setkeep_matching(kp_mtch);
   }, [kp_mtch]);
 
-  const active_user_location_details = useSelector(
-    (state) => state.authentication.active_user_location_details
-  );
-
   const dispatch = useDispatch();
 
   const [referral, setreferral] = useState(false);
-  const [referral_link, setreferral_link] = useState("");
 
   const [phone_number, setphone_number] = useState("");
   const [phone_number_blr, setphone_number_blr] = useState(false);
@@ -122,10 +94,7 @@ const SettingsScreen = ({ navigation }) => {
 
   const [contact, setcontact] = useState("");
 
-  const { DeviceToken } = useContext(UserContext);
-
   const updateShowProfile = async () => {
-    // setloading(true);
     const url =
       apiUrl + `show_profile_notification_update/${profile_data.user.id}`;
 
@@ -145,7 +114,6 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let status = resp.data.status;
-      // setloading(false);
 
       if (resp.data.code == 200) {
         setshow_my_profile(!show_my_profile);
@@ -162,15 +130,10 @@ const SettingsScreen = ({ navigation }) => {
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      // setloading(false);
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const updateKeepMatching = async () => {
-    // setloading(true);
-
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
 
@@ -190,7 +153,6 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      // setloading(false);
 
       if (code == 200) {
         setkeep_matching(!keep_matching);
@@ -207,15 +169,10 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      // setloading(false);
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const updateNewMessage = async () => {
-    // setloading(true);
-
     const url =
       apiUrl + `new_message_notification_update/${profile_data.user.id}`;
 
@@ -233,7 +190,6 @@ const SettingsScreen = ({ navigation }) => {
           headers,
         }
       );
-      // setloading(false);
 
       let code = resp.data.code;
 
@@ -252,15 +208,10 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      // setloading(false);
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const updateNewMatch = async () => {
-    // setloading(true);
-
     const url =
       apiUrl + `new_match_notification_update/${profile_data.user.id}`;
 
@@ -280,7 +231,6 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      // setloading(false);
 
       if (code == 200) {
         setnew_match(!new_match);
@@ -297,15 +247,10 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      // setloading(false);
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const updateProfileReveal = async () => {
-    // setloading(true);
-
     const url =
       apiUrl + `profile_reveal_notification_update/${profile_data.user.id}`;
 
@@ -325,7 +270,6 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      // setloading(false);
 
       if (code == 200) {
         setprofile_reveal(!profile_reveal);
@@ -341,15 +285,10 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      // setloading(false);
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const updateOthers = async () => {
-    // setloading(true);
-
     const url = apiUrl + `other_notification_update/${profile_data.user.id}`;
 
     const headers = {
@@ -368,7 +307,6 @@ const SettingsScreen = ({ navigation }) => {
       );
 
       let code = resp.data.code;
-      // setloading(false);
 
       if (code == 200) {
         setothers(!others);
@@ -385,33 +323,25 @@ const SettingsScreen = ({ navigation }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      // setloading(false);
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   const getContact = async () => {
-    // setloading(true);
     await axios
       .get(apiUrl + `get_user_contact/`)
       .then((resp) => {
         let contact_data = resp.data.data;
-        // setloading(false);
+
         if (resp.data.code == 200) {
           setcontact(contact_data.usercontact);
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
         }
       })
-      .catch((err) => {
-        // setloading(false);
-        dispatch(setSessionExpired(true));
-      });
+      .catch((err) => {});
   };
 
   const showConfirmDialog = () => {
-    
     return Alert.alert("Are You Sure?", "You want to logout", [
       {
         text: "Yes",
@@ -462,6 +392,7 @@ const SettingsScreen = ({ navigation }) => {
 
   return (
     <>
+      {!is_network_connected && <OffflineAlert />}
       {loading && <Loader />}
       <SafeAreaView
         style={{
@@ -482,7 +413,6 @@ const SettingsScreen = ({ navigation }) => {
           <View
             style={{
               height: rspH(Platform.OS == "ios" ? 72 : 76) + insets.top,
-              // height: scrn_height,
               paddingHorizontal: rspW(10),
               alignItems: "center",
               backgroundColor: colors.white,
@@ -493,9 +423,8 @@ const SettingsScreen = ({ navigation }) => {
               showsVerticalScrollIndicator={false}
               style={{
                 width: "100%",
-                // height: '100%',
                 paddingBottom: rspH(Platform.OS == "ios" ? 10 : 15),
-                }}
+              }}
               bounces={false}
             >
               <View>
@@ -519,7 +448,6 @@ const SettingsScreen = ({ navigation }) => {
                     style={{
                       position: "absolute",
                       bottom: rspH(Platform.OS == "ios" ? -1.3 : -2),
-
                       right: 0,
                     }}
                   >
@@ -527,7 +455,6 @@ const SettingsScreen = ({ navigation }) => {
                       source={require("../../assets/images/Setting/BannerImg.png")}
                       resizeMode="contain"
                       style={{
-                        // width: rspW(29),
                         width: rspW(32),
                         height: rspW(29),
                       }}
@@ -569,9 +496,7 @@ const SettingsScreen = ({ navigation }) => {
                 <View
                   style={{
                     width: "100%",
-                    
                     paddingTop: rspH(2.8),
-                    // paddingTop: rspH(7.2),
                   }}
                 >
                   <View
@@ -589,12 +514,9 @@ const SettingsScreen = ({ navigation }) => {
                       value={phone_number}
                       setvalue={setphone_number}
                       width={"100%"}
-                      // height={rspH(5.9)}
                       placeholder={"Add your phone number"}
                       placeholderTextColor={colors.black}
                       error_cond={phone_number.length < 2}
-                      // keyboardType="default"
-
                       maxLength={15}
                       disabled={true}
                       value_blr={phone_number_blr}
@@ -684,7 +606,6 @@ const SettingsScreen = ({ navigation }) => {
                     </View>
                     <View
                       style={{
-                        // marginTop: rspH(1.68),
                         marginTop: rspH(1.68),
                       }}
                     >
@@ -699,19 +620,15 @@ const SettingsScreen = ({ navigation }) => {
                 <View
                   style={{
                     height: rspH(0.59),
-                    // height: rspH(0.59),
                     width: "100%",
                     backgroundColor: colors.blue,
-                    // marginBottom: rspH(1.58),
                     marginBottom: rspH(1.58),
                   }}
                 />
 
                 <View
                   style={{
-                    // marginBottom: rspH(1.9),
                     marginBottom: rspH(1.9),
-
                     width: "100%",
                   }}
                 >
@@ -760,7 +677,6 @@ const SettingsScreen = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      // marginBottom: rspH(2.05),
                       marginBottom: rspH(1.8),
                       alignItems: "center",
                     }}
@@ -799,7 +715,6 @@ const SettingsScreen = ({ navigation }) => {
                       flexDirection: "row",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      // marginBottom: rspH(2.05),
                       marginBottom: rspH(1.8),
                     }}
                   >
@@ -836,7 +751,6 @@ const SettingsScreen = ({ navigation }) => {
                     style={{
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      // marginBottom: rspH(2.05),
                       marginBottom: rspH(1.8),
                       alignItems: "center",
                     }}
@@ -887,7 +801,6 @@ const SettingsScreen = ({ navigation }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/faqs/"
                   );
@@ -904,12 +817,11 @@ const SettingsScreen = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => {
                   dispatch(setSwipeTut(true));
-                  
-                  navigation.navigate("Swiper",{
-                    repeat_tut: true,
-                  })
-                }}
 
+                  navigation.navigate("Swiper", {
+                    repeat_tut: true,
+                  });
+                }}
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -929,7 +841,6 @@ const SettingsScreen = ({ navigation }) => {
                   onPress={() => {
                     Linking.openURL(`mailto:${contact}`);
                   }}
-                  // onPress={()=> setcmodal(true)}
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -995,7 +906,6 @@ const SettingsScreen = ({ navigation }) => {
                     heading: "Privacy Preference",
                   });
                 }}
-                // onPress={()=> setcmodal(true)}
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -1013,7 +923,6 @@ const SettingsScreen = ({ navigation }) => {
                     "https://btroo.midnightpoha.com/index.php/community-guidelines/"
                   );
                 }}
-                // onPress={()=> setcmodal(true)}
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -1026,9 +935,7 @@ const SettingsScreen = ({ navigation }) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-
                 onPress={() => {
-                  
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
                   );
@@ -1090,9 +997,7 @@ const SettingsScreen = ({ navigation }) => {
                   justifyContent: "center",
                   backgroundColor: "#fff",
                   height: rspH(Platform.OS == "ios" ? 52 : 56),
-                  // height: rspH(54.38),
                   borderRadius: rspW(5.1),
-                  // width: rspW(76.5), 76.5
                   width: rspW(80),
                 }}
               >
@@ -1108,7 +1013,6 @@ const SettingsScreen = ({ navigation }) => {
                     <View
                       style={{
                         marginBottom: rspH(5.9),
-                        // marginBottom: rspH(5.9),
                       }}
                     >
                       <Text style={styles.modalPara}>
@@ -1173,7 +1077,6 @@ const SettingsScreen = ({ navigation }) => {
                     <View
                       style={{
                         width: "100%",
-                        //  marginTop:-10
                       }}
                     >
                       <FooterBtn
@@ -1211,15 +1114,12 @@ const styles = StyleSheet.create({
   },
 
   bannerCont: {
-    // width: rspW(75),
     width: rspW(78),
     height: rspH(Platform.OS == "ios" ? 15 : 16),
-    // borderRadius: rspW(10),
     borderRadius: rspW(10),
     backgroundColor: "#6B9DFF",
     paddingLeft: rspW(5),
     paddingVertical: rspH(2.4),
-
     alignSelf: "center",
   },
   bannerTxt: {
@@ -1258,18 +1158,13 @@ const styles = StyleSheet.create({
   },
   para: {
     fontSize: rspF(Platform.OS == "android" ? 1.302 : 1.32),
-    // fontSize: rspF(1.302),
     lineHeight: rspF(1.322),
-    // lineHeight: rspF(1.31),
     fontFamily: fontFamily.light,
     color: colors.black,
   },
   modalPara: {
     fontSize: rspF(1.9),
-    // lineHeight: rspH(2.5),
     lineHeight: rspH(2.5),
-
-    // backgroundColor:colors.error,
     fontFamily: fontFamily.regular,
     color: colors.blue,
     textAlign: "center",

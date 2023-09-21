@@ -35,7 +35,7 @@ const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
       width: rspW(75.9),
       backgroundColor:
         selected_lis2.indexOf(item[0]) > -1
-          ? colors.lightBlue + "46" // foor opacity
+          ? colors.lightBlue + "46" // for opacity
           : colors.lightGrey,
     }}
   >

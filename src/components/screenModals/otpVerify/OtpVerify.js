@@ -56,6 +56,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { UserContext } from "../../../context/user";
 import messaging from "@react-native-firebase/messaging";
+import { startOtpListener } from "react-native-otp-verify";
 
 const OtpVerify = ({
   onResend,
@@ -208,7 +209,6 @@ const OtpVerify = ({
     } catch (error) {
       setModalVisible(false);
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 
@@ -244,7 +244,6 @@ const OtpVerify = ({
 
       setloading(false);
     } catch (error) {
-      dispatch(setSessionExpired(true));
       setloading(false);
     }
   };
@@ -408,14 +407,35 @@ const OtpVerify = ({
         }
       }
     } catch (error) {
-      dispatch(setSessionExpired(true));
       setloading(false);
     }
   };
 
   // To verify sent otp
   const verifyOtp = async () => {
-    if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
+    // if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
+    //   setotperr(false);
+
+    //   dispatch(
+    //     setActiveUserLocationDetails({
+    //       ...active_user_location_details,
+    //       mobile: "+" + ph_code + "" + ph_no,
+    //     })
+    //   );
+
+    //   if (action == "login") {
+    //     userLogin(); // if action is login call login api
+    //   } else {
+    //     sendActiveUserDetails(); // if action is signup call signup api
+    //   }
+    // } else {
+    //   setotperr(true); // if otp is invalid
+    // }
+
+    try {
+      setloading(true);
+      await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
+
       setotperr(false);
 
       dispatch(
@@ -426,37 +446,14 @@ const OtpVerify = ({
       );
 
       if (action == "login") {
-        userLogin(); // if action is login call login api
+        userLogin();
       } else {
-        sendActiveUserDetails(); // if action is signup call signup api
+        sendActiveUserDetails();
       }
-    } else {
-      setotperr(true); // if otp is invalid
+    } catch (error) {
+      setloading(false);
+      setotperr(true);
     }
-
-    // try {
-    //   setloading(true)
-    //   await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
-
-    //   setotperr(false);
-
-    //   dispatch(
-    //     setActiveUserLocationDetails({
-    //       ...active_user_location_details,
-    //       mobile: '+' + ph_code + '' + ph_no,
-    //     }),
-    //   );
-
-    //   if (action == 'login') {
-    //     userLogin();
-    //   } else {
-    //     sendActiveUserDetails();
-    //   }
-
-    // } catch (error) {
-    //   setloading(false)
-    //   setotperr(true)
-    // }
   };
 
   // To resend OTP after 30 seconds
@@ -470,6 +467,32 @@ const OtpVerify = ({
     setcounter(30);
     setotperr(false);
     onResend();
+  };
+
+  const listenOtp = async () => {
+    try {
+      startOtpListener((message) => {
+        const otp = /(\d{6})/g.exec(message)[1];
+        console.log("otp", otp);
+        setotp1(otp[0]);
+        setotp1blr(true);
+        setotp2(otp[1]);
+        setotp2blr(true);
+        setotp3(otp[2]);
+        setotp3blr(true);
+        setotp4(otp[3]);
+        setotp4blr(true);
+        setotp5(otp[4]);
+        setotp5blr(true);
+        setotp6(otp[5]);
+        setotp6blr(true);
+
+        console.log("message", message);
+        // Alert.alert(`${otp}`,message)
+      });
+    } catch (err) {
+      console.log("err", err);
+    }
   };
 
   // 30 seconds timer
@@ -490,25 +513,24 @@ const OtpVerify = ({
     });
   }, []);
 
+  useLayoutEffect(() => {
+    if (Platform.OS == "android") {
+      listenOtp();
+    }
+  }, []);
+
   return (
     <KeyboardAwareScrollView
       enableOnAndroid={true}
       bounces={false}
       showsVerticalScrollIndicator={false}
-      // extraScrollHeight={Platform.OS == 'android' ?rspH(12): rspH(0)}
       extraScrollHeight={
         Platform.OS == "android" ? rspH(keyboard_hgt > 28 ? 12 : 5) : rspH(0)
       }
-      // extraScrollHeight={Platform.OS == 'android' ?rspH(keyboard_hgt): rspH(0)}
-
-      // extraHeight={rspH(-30)}
       style={{
         position: "absolute",
         top: 0,
         alignSelf: "center",
-        // backgroundColor:'green',
-        // backgroundColor:'#fff',
-
         width: scrn_width,
         height: scrn_height,
       }}
@@ -601,6 +623,7 @@ const OtpVerify = ({
         <View style={styles.otp_input_container}>
           <TextInput
             autoComplete="sms-otp"
+            textContentType="oneTimeCode"
             style={{
               ...styles.otp_input,
               borderColor:
@@ -642,6 +665,7 @@ const OtpVerify = ({
 
           <TextInput
             autoComplete="sms-otp"
+            textContentType="oneTimeCode"
             onBlur={() => setotp2blr(true)}
             style={{
               ...styles.otp_input,
@@ -672,12 +696,10 @@ const OtpVerify = ({
                 }
               }
             }}
-            // editable={!false}
             ref={ref_inpt2}
             value={otp2}
             placeholder={""}
             placeholderTextColor={colors.blue}
-            // placeholderTextColor={disabled? colors.grey : placeholderTextColor}
             keyboardType={"number-pad"}
             onSubmitEditing={() => {
               ref_inpt3.current?.focus();
@@ -685,6 +707,7 @@ const OtpVerify = ({
           />
           <TextInput
             autoComplete="sms-otp"
+            textContentType="oneTimeCode"
             onBlur={() => setotp3blr(true)}
             style={{
               ...styles.otp_input,
@@ -716,12 +739,10 @@ const OtpVerify = ({
                 }
               }
             }}
-            // editable={!false}
             ref={ref_inpt3}
             value={otp3}
             placeholder={""}
             placeholderTextColor={colors.blue}
-            // placeholderTextColor={disabled? colors.grey : placeholderTextColor}
             keyboardType={"number-pad"}
             onSubmitEditing={() => {
               ref_inpt4.current?.focus();
@@ -729,6 +750,7 @@ const OtpVerify = ({
           />
           <TextInput
             autoComplete="sms-otp"
+            textContentType="oneTimeCode"
             onBlur={() => setotp4blr(true)}
             style={{
               ...styles.otp_input,
@@ -760,12 +782,10 @@ const OtpVerify = ({
                 }
               }
             }}
-            // editable={!false}
             ref={ref_inpt4}
             value={otp4}
             placeholder={""}
             placeholderTextColor={colors.blue}
-            // placeholderTextColor={disabled? colors.grey : placeholderTextColor}
             keyboardType={"number-pad"}
             onSubmitEditing={() => {
               ref_inpt5.current?.focus();
@@ -773,6 +793,7 @@ const OtpVerify = ({
           />
           <TextInput
             autoComplete="sms-otp"
+            textContentType="oneTimeCode"
             onBlur={() => setotp5blr(true)}
             style={{
               ...styles.otp_input,
@@ -816,6 +837,7 @@ const OtpVerify = ({
           />
           <TextInput
             autoComplete="sms-otp"
+            textContentType="oneTimeCode"
             onBlur={() => setotp6blr(true)}
             style={{
               ...styles.otp_input,
@@ -846,12 +868,10 @@ const OtpVerify = ({
                 }
               }
             }}
-            // editable={!false}
             ref={ref_inpt6}
             value={otp6}
             placeholder={""}
             placeholderTextColor={colors.blue}
-            // placeholderTextColor={disabled? colors.grey : placeholderTextColor}
             keyboardType={"number-pad"}
           />
         </View>

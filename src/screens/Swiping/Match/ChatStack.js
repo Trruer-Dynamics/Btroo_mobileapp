@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ChatTut from "./ChatTut";
 import Chat from "./Chat";
 
@@ -9,9 +9,9 @@ const ChatStack = ({ route }) => {
 
   const chat_tut = useSelector((state) => state.tutorial.chat_tut);
 
-  const repeat_tut = route.params?.repeat_tut ? route.params?.repeat_tut : false
-
-  console.log("chat repeat_tut",repeat_tut)
+  const repeat_tut = route.params?.repeat_tut
+    ? route.params?.repeat_tut
+    : false;
 
   return (
     <View>

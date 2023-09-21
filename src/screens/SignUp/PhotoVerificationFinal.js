@@ -34,6 +34,8 @@ import {
 } from "../../store/reducers/authentication/authentication";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import FastImage from "react-native-fast-image";
+import { useFocusEffect } from "@react-navigation/native";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
 const insets = initialWindowMetrics.insets;
 
 const PhotoVerificationFinal = ({ navigation, route }) => {
@@ -105,9 +107,15 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(setCurrentScreen(route.name));
+      return () => {};
+    }, [])
+  );
 
   return (
     <SafeAreaView style={{ height: scrn_height, backgroundColor: "#fff" }}>

@@ -111,7 +111,6 @@ const ReferralCode = ({
       }
     } catch (error) {
       setloading(false);
-      dispatch(setSessionExpired(true));
     }
   };
 

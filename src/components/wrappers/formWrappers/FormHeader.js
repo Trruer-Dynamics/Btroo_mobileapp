@@ -28,12 +28,8 @@ const FormHeader = ({
         style={{
           flexDirection: "row",
           position: "relative",
-          // justifyContent: left÷
           justifyContent: "center",
-          // backgroundColor:'red',
-          // alignItems:'center',
           width: "100%",
-          // alignItems:'center',
         }}
       >
         {left_icon && (
@@ -42,12 +38,9 @@ const FormHeader = ({
               position: "absolute",
               left: 0,
               top: rspH(rightComp != null ? 0 : 0),
-              // top: rspH(0.5),
-
               alignSelf: "center",
               justifyContent: "center",
               alignItems: "center",
-
               height: rspW(7.6),
               width: rspW(7.6),
               borderRadius: rspW(3.8),
@@ -95,10 +88,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: fontFamily.bold,
     color: colors.black,
-    // lineHeight: rspF(2.8),
-    // lineHeight: rspF(4),
     lineHeight: rspF(Platform.OS == "ios" ? 4 : 3.2),
-    // marginBottom: rspH(1.8),
     alignSelf: "center",
   },
   headerPara: {
@@ -108,6 +98,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: colors.blue,
     lineHeight: rspF(2.2),
-    // backgroundColor:'green',
   },
 });

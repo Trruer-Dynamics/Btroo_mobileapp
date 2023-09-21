@@ -7,46 +7,24 @@ import {
   StatusBar,
   BackHandler,
   AppState,
-  Dimensions,
-  PermissionsAndroid,
-  Alert,
-  SafeAreaView,
-  DeviceEventEmitter,
-  NativeModules,
 } from "react-native";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useLayoutEffect } from "react";
 
 import Navigation from "./src/navigation";
 import SplashScreen from "react-native-splash-screen";
-
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 import Entypo from "react-native-vector-icons/Entypo";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import FontAwesome5Pro from "react-native-vector-icons/FontAwesome5Pro";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Foundation from "react-native-vector-icons/Foundation";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Octicons from "react-native-vector-icons/Octicons";
 import { useDispatch, useSelector } from "react-redux";
-import PushNotification from "react-native-push-notification";
-import { scrn_height } from "./src/styles/responsiveSize";
-import { setSafeHeight } from "./src/store/reducers/screen/screen";
-import messaging from "@react-native-firebase/messaging";
-import Test from "./Test";
-import axios from "axios";
-import { apiUrl } from "./src/constants";
-import { getHash, startOtpListener } from "react-native-otp-verify";
+import { getHash } from "react-native-otp-verify";
 import NetInfo from "@react-native-community/netinfo";
 import _ from "lodash";
 import { setNetworkConnect } from "./src/store/reducers/authentication/authentication";
@@ -110,8 +88,6 @@ Octicons.loadFont()
   });
 
 const App = () => {
-  // const { ScreenshotOverlay } = NativeModules;
-
   const dispatch = useDispatch();
 
   const status_bg = useSelector(
@@ -147,22 +123,9 @@ const App = () => {
       });
   };
 
-  const listenOtp = () => {
-    try {
-      startOtpListener((message) => {
-        const otp = /(\d{6})/g.exec(message)[1];
-        console.log("otp", otp);
-        console.log("message", message);
-      });
-    } catch (err) {
-      console.log("err", err);
-    }
-  };
-
   const smsSetup = useCallback(() => {
     if (Platform.OS == "android") {
       getAppHash();
-      // listenOtp()
     }
   }, []);
 
@@ -191,26 +154,11 @@ const App = () => {
     if (state.isConnected) {
       console.log("\n", Platform.OS, "Network Connected");
       dispatch(setNetworkConnect(true));
-      // alert('Network Connected')
     } else {
       console.log("\n", Platform.OS, "Network Disconnected");
       dispatch(setNetworkConnect(false));
-      // alert('Network Disconnected')
     }
   };
-
-  // useEffect(() => {
-  //   console.log("count 3",count)
-  //   unsubscribe()
-  //   const timer =
-  //     setTimeout(() => {
-  //       setcount(count + 1)
-  //     }, 10000);
-  //   return () => clearTimeout(timer)
-
-  // }, [count]);
-
-  // const netinfoSub = NetInfo.addEventListener(handleNetworkChange)
 
   const debounceHandleNet = _.debounce(handleNetworkChange, 500, {
     leading: false,

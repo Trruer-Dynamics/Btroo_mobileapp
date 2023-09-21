@@ -1,11 +1,4 @@
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { memo } from "react";
 import fontFamily from "../../../styles/fontFamily";
 import colors from "../../../styles/colors";
@@ -26,26 +19,17 @@ const FormHeaderChat = ({
       style={{
         flexDirection: "row",
         position: "relative",
-        // justifyContent: left÷
         justifyContent: "space-between",
-        // backgroundColor:'red',
         alignItems: "center",
         height: srn_height * 0.06,
         marginBottom: rspH(1.4),
         width: "100%",
-        // alignItems:'center',
       }}
     >
       <TouchableOpacity
         style={{
-          // position: 'absolute',
-          // left: 0,
-          // top: rspH(0),
-
-          // alignSelf: 'flex-start',
           justifyContent: "center",
           alignItems: "center",
-
           height: rspW(7.6),
           width: rspW(7.6),
           borderRadius: rspW(3.8),
@@ -67,7 +51,6 @@ const FormHeaderChat = ({
         <FastImage
           source={{ uri: image }}
           style={{ width: rspW(10), height: rspW(10), borderRadius: rspW(5) }}
-          // resizeMode='contain'
         />
       </TouchableOpacity>
       <TouchableOpacity
@@ -109,8 +92,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: fontFamily.bold,
     color: colors.black,
-    // textAlign:'center',
-    // lineHeight: rspF(2.8),
     lineHeight: rspF(4),
     marginBottom: rspH(1.8),
     alignSelf: "center",

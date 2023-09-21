@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -8,8 +7,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-
-import { MARGIN, SIZE } from "./utils";
 import { rspF, rspH, rspW } from "../../../styles/responsiveSize";
 import colors from "../../../styles/colors";
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -27,11 +24,9 @@ const Box = ({
   setactiveIndx,
   positions,
   deleteProfileImage,
- 
-  up_img_len=9,
 
+  up_img_len = 9,
 }) => {
-
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -52,16 +47,10 @@ const Box = ({
                 width: rspW(23),
                 height: rspW(23),
                 position: "absolute",
-
                 alignSelf: "center",
-
                 borderRadius: rspW(2.5),
-
                 backgroundColor: "#0000003c",
-                // backgroundColor:'red',
-
                 zIndex: 100,
-
                 justifyContent: "center",
               }}
             >
@@ -82,23 +71,23 @@ const Box = ({
               borderRadius: rspW(2.5),
             }}
           />
-        {
-         up_img_len > 3 &&
-        <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => {
-              deleteProfileImage(index);
-            }}
-            style={{
-              position: "absolute",
-              right: rspW(-2.5),
-              top: rspW(-2.5),
-              backgroundColor: "#fff",
-              borderRadius: rspW(6),
-            }}
-          >
-            <ADIcon name="minuscircle" size={20} color={colors.error} />
-          </TouchableOpacity>}
+          {up_img_len > 3 && (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                deleteProfileImage(index);
+              }}
+              style={{
+                position: "absolute",
+                right: rspW(-2.5),
+                top: rspW(-2.5),
+                backgroundColor: "#fff",
+                borderRadius: rspW(6),
+              }}
+            >
+              <ADIcon name="minuscircle" size={20} color={colors.error} />
+            </TouchableOpacity>
+          )}
           <View
             style={{
               ...styles.positionCont,
@@ -138,15 +127,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: rspW(1),
-    // margin: rspW(2),
     zIndex: 2,
   },
   positionCont: {
     position: "absolute",
     left: rspW(1),
     top: rspH(8),
-
-    // backgroundColor: 'red',
     backgroundColor: "#00000089",
     paddingTop: rspH(0.5),
     borderRadius: rspW(6),

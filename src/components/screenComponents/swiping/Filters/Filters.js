@@ -1,20 +1,5 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  SafeAreaView,
-  StatusBar,
-  Alert,
-  Platform,
-} from "react-native";
-import React, {
-  useState,
-  useCallback,
-  useLayoutEffect,
-  useEffect,
-} from "react";
+import { StyleSheet, View, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
 import FormComponentsWrapper from "../../../wrappers/formComponentsWrappers/FormComponentsWrapper";
 import FormComponentsWrapperHeader from "../../../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
 import fontFamily from "../../../../styles/fontFamily";
@@ -23,10 +8,7 @@ import colors from "../../../../styles/colors";
 import FormWrapperFooter from "../../../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../../formComponents/ErrorContainer";
 import FooterBtn from "../../../Buttons/FooterBtn";
-import FormSelector from "../../../formComponents/FormSelector";
 import FormSelectorFilter from "../../../formComponents/FormSelectorFilter";
-import Slider from "react-native-a11y-slider";
-import FormInputContainer from "../../../formComponents/FormInputContainer";
 import SliderC from "../../../formComponents/SliderC";
 import FormSelectorRadio from "../../../formComponents/FormSelectorRadio";
 import axios from "axios";
@@ -47,7 +29,6 @@ import {
   setSelectedInterests,
   setSelectedLanguages,
 } from "../../../../store/reducers/filter/filter";
-import { offlineAlert } from "../../../functions/offflineAlert";
 
 const Filters = ({
   filterRefresh = false,
@@ -73,7 +54,6 @@ const Filters = ({
   const access_token = useSelector(
     (state) => state.authentication.access_token
   );
-  // let usr_preference = profile_data.userpreferances.map(v => v.gendermaster.id)
 
   const preferences_list = useSelector((state) => state.allData.all_genders);
   const languages_list = useSelector((state) => state.allData.all_languages);
@@ -94,7 +74,6 @@ const Filters = ({
 
   const [preferences, setpreferences] = useState("");
   const [preferences_id, setpreferences_id] = useState(0);
-  // const [preferences_list, setpreference_list] = useState([]);
 
   const [selected_preferences_list, setselected_preferences_list] = useState(
     []
@@ -110,7 +89,6 @@ const Filters = ({
   //Languages
   const [languages, setlanguages] = useState("");
   const [languages_id, setlanguages_id] = useState(0);
-  // const [languages_list, setlanguages_list] = useState([]);
   const [selected_languages_list, setselected_languages_list] = useState([]);
   const [languages_blr, setlanguages_blr] = useState(false);
 
@@ -125,7 +103,6 @@ const Filters = ({
   // Interests
   const [interest, setinterest] = useState("");
   const [interest_id, setinterest_id] = useState(0);
-  // const [interest_list, setinterest_list] = useState([]);
   const [selected_interest_list, setselected_interest_list] = useState([]);
   const [interest_blr, setinterest_blr] = useState(false);
 
@@ -141,13 +118,7 @@ const Filters = ({
   const [refresh, setrefresh] = useState(false);
 
   const onNextPress = () => {
-    if (
-      changes_made
-      // &&
-      // selected_preferences_list.length > 0 &&
-      // selected_languages_list.length > 0 &&
-      // selected_interest_list.length > 0
-    ) {
+    if (changes_made) {
       updateFilterData();
     }
   };
@@ -170,7 +141,7 @@ const Filters = ({
       distance: distance,
       language: selected_languages_list,
       interests: selected_interest_list,
-      
+
       habit: {
         smoking: [habits_list[0][1], habits_list[0][2]],
         drinking: [habits_list[1][1], habits_list[1][2]],
@@ -182,9 +153,6 @@ const Filters = ({
       height_max: maxheight,
     };
 
-    offlineAlert()
-
-
     try {
       const resp = await axios.put(url, body, {
         headers,
@@ -195,7 +163,6 @@ const Filters = ({
         if (setfilterRefresh != null) {
           setfilterRefresh(!filterRefresh);
         }
-        // setfilterRefresh(!filterRefresh)
 
         dispatch(
           setProfiledata({
@@ -215,10 +182,7 @@ const Filters = ({
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-      // offlineAlert()
-      dispatch(setSessionExpired(true));
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -229,18 +193,6 @@ const Filters = ({
     ) {
       setselected_languages_list(selected_languages);
       setselected_interest_list(selected_interests);
-
-      // sethabits_list([
-      //   ["Smoking", selected_habits[0], !selected_habits[0]],
-      //   ["Drinking", selected_habits[1], !selected_habits[1]],
-      //   ["Marijuana", selected_habits[2], !selected_habits[2]],
-      // ]);
-
-      // sethabits_list([
-      //   ["Smoking", selected_habits[0],selected_habits[0] != null? !selected_habits[0] : null],
-      //   ["Drinking", selected_habits[1], selected_habits[1] != null? !selected_habits[1] : null],
-      //   ["Marijuana", selected_habits[2], selected_habits[2] != null? !selected_habits[2] : null],
-      // ]);
 
       sethabits_list([
         ["Smoking", selected_habits[0][0], selected_habits[0][1]],
@@ -423,15 +375,7 @@ const Filters = ({
               {/* Next Btn To Navigate to Next Form Components */}
               <FooterBtn
                 title={"Save"}
-                disabled={
-                  !(
-                    changes_made
-                    // ||
-                    // selected_preferences_list.length == 0 ||
-                    // selected_languages_list.length == 0 ||
-                    // selected_interest_list.length == 0
-                  )
-                }
+                disabled={!changes_made}
                 onPress={onNextPress}
               />
             </FormWrapperFooter>
@@ -446,8 +390,6 @@ export default Filters;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // backgroundColor:'red',
     justifyContent: "space-between",
   },
   item: {

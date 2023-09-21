@@ -11,7 +11,6 @@ import FormComponentsWrapperHeader from "../../wrappers/formComponentsWrappers/F
 import fontFamily from "../../../styles/fontFamily";
 import { scrn_height, rspF, rspH, rspW } from "../../../styles/responsiveSize";
 import colors from "../../../styles/colors";
-import FormHeader from "../../wrappers/formWrappers/FormHeader";
 
 const Item = ({ item, onPress, icebreaker }) => (
   <TouchableOpacity
@@ -21,20 +20,12 @@ const Item = ({ item, onPress, icebreaker }) => (
       {
         backgroundColor:
           item == icebreaker
-            ? colors.lightBlue + "46" // foor opacity
+            ? colors.lightBlue + "46" // for opacity
             : colors.lightGrey,
       },
     ]}
   >
-    <Text
-      style={[
-        styles.title,
-
-        // {color: item == icebreaker ? colors.blue : colors.black},
-      ]}
-    >
-      {item}
-    </Text>
+    <Text style={[styles.title]}>{item}</Text>
   </TouchableOpacity>
 );
 
@@ -54,7 +45,6 @@ const IceBreaker = ({
         onPress={() => {
           seticebreaker(item);
           setModalVisible(!modalVisible);
-          // setmsg((messg) => messg + item);
           setmsg(item);
         }}
       />
@@ -102,7 +92,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: rspW(5.1),
     justifyContent: "flex-start",
-    // height: rspH(5.6),
     paddingVertical: rspH(1.35),
     marginBottom: rspH(1.4),
     borderRadius: rspW(1.3),
@@ -110,19 +99,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: rspF(1.9),
     fontFamily: fontFamily.medium,
-    // lineHeight: rspF(1.93),
     lineHeight: rspF(2.3),
     color: colors.black,
   },
   emptysearchContainer: {
-    // height: rspH(4.7),
     height: rspH(2.8),
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // borderWidth: 1,
-    // backgroundColor: '#DCDCDC33', // 0.2 opacity added,
-    // borderColor: '#DCDCDC',
     paddingHorizontal: rspW(4),
     borderRadius: rspW(2.5),
     marginBottom: rspH(3.9),
