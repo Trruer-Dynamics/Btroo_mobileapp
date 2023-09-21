@@ -56,7 +56,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { UserContext } from "../../../context/user";
 import messaging from "@react-native-firebase/messaging";
-import { startOtpListener } from "react-native-otp-verify";
+import { removeListener, startOtpListener } from "react-native-otp-verify";
 
 const OtpVerify = ({
   onResend,
@@ -413,29 +413,7 @@ const OtpVerify = ({
 
   // To verify sent otp
   const verifyOtp = async () => {
-    // if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
-    //   setotperr(false);
-
-    //   dispatch(
-    //     setActiveUserLocationDetails({
-    //       ...active_user_location_details,
-    //       mobile: "+" + ph_code + "" + ph_no,
-    //     })
-    //   );
-
-    //   if (action == "login") {
-    //     userLogin(); // if action is login call login api
-    //   } else {
-    //     sendActiveUserDetails(); // if action is signup call signup api
-    //   }
-    // } else {
-    //   setotperr(true); // if otp is invalid
-    // }
-
-    try {
-      setloading(true);
-      await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
-
+    if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
       setotperr(false);
 
       dispatch(
@@ -446,14 +424,36 @@ const OtpVerify = ({
       );
 
       if (action == "login") {
-        userLogin();
+        userLogin(); // if action is login call login api
       } else {
-        sendActiveUserDetails();
+        sendActiveUserDetails(); // if action is signup call signup api
       }
-    } catch (error) {
-      setloading(false);
-      setotperr(true);
+    } else {
+      setotperr(true); // if otp is invalid
     }
+
+    // try {
+    //   setloading(true);
+    //   await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
+
+    //   setotperr(false);
+
+    //   dispatch(
+    //     setActiveUserLocationDetails({
+    //       ...active_user_location_details,
+    //       mobile: "+" + ph_code + "" + ph_no,
+    //     })
+    //   );
+
+    //   if (action == "login") {
+    //     userLogin();
+    //   } else {
+    //     sendActiveUserDetails();
+    //   }
+    // } catch (error) {
+    //   setloading(false);
+    //   setotperr(true);
+    // }
   };
 
   // To resend OTP after 30 seconds
@@ -469,9 +469,10 @@ const OtpVerify = ({
     onResend();
   };
 
+
   const listenOtp = async () => {
     try {
-      startOtpListener((message) => {
+    startOtpListener((message) => {
         const otp = /(\d{6})/g.exec(message)[1];
         console.log("otp", otp);
         setotp1(otp[0]);
@@ -517,6 +518,12 @@ const OtpVerify = ({
     if (Platform.OS == "android") {
       listenOtp();
     }
+
+    return ()=>{
+     removeListener()
+    }
+
+
   }, []);
 
   return (

@@ -19,6 +19,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import FormHeader from "../../wrappers/formWrappers/FormHeader";
 import LinearGradient from "react-native-linear-gradient";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Info = ({ navigation, route }) => {
   const { heading } = route.params;

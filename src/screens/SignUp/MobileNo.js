@@ -156,11 +156,11 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      setconfirm(confirmation);
-      console.log("\n");
-      console.log("confirmation", JSON.stringify(confirmation));
-      console.log("\n");
+      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      // setconfirm(confirmation);
+      // console.log("\n");
+      // console.log("confirmation", JSON.stringify(confirmation));
+      // console.log("\n");
 
       setOtpShowBox(true);
 

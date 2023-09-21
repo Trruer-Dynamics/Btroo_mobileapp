@@ -82,6 +82,7 @@ const FormCountrySelector = ({
           setblr_value(true);
         }}
       >
+        {/* Code Placehoder if number not selected */}
         <View style={{ position: "absolute", top: rspH(0.6), zIndex: 2 }}>
           {selectedValue && <Text style={{ ...styles.inp_title }}>Code</Text>}
         </View>
@@ -95,6 +96,7 @@ const FormCountrySelector = ({
             justifyContent: "center",
           }}
         >
+          {/* Show Country Code here */}
           <Text
             style={{
               ...styles.txt,
@@ -106,6 +108,8 @@ const FormCountrySelector = ({
         </View>
       </TouchableOpacity>
 
+
+      {/* Modal to open country list with code */}
       <Modal animationType="slide" transparent={false} visible={code_press}>
         <SafeAreaView style={{ flex: 1 }}>
           <FormComponentsWrapper
@@ -125,6 +129,7 @@ const FormCountrySelector = ({
               }}
             />
             <View style={{ alignSelf: "center" }}>
+              {/* Search Input for countries attribute */}
               <SearchCountryInput
                 search={search_country}
                 setsearch={setsearch_country}
@@ -136,6 +141,7 @@ const FormCountrySelector = ({
                   height: rspH(Platform.OS == "ios" ? 59.6 : 64),
                 }}
               >
+                {/* To render all countries */}
                 <FlatList
                   data={search_country ? filterdatalist : datalist}
                   renderItem={renderItem}

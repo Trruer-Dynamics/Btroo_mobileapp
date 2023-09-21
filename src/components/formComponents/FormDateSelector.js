@@ -30,6 +30,7 @@ const FormDateSelector = ({
         ]}
         onPress={onPress}
       >
+        {/* To Show date in specific format */}
         <Text style={{ ...styles.txt }}>
           {String(date) != ""
             ? `${date?.toLocaleString("default", {

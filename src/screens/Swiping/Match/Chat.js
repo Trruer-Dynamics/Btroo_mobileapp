@@ -47,7 +47,6 @@ import Loader from "../../../components/loader/Loader";
 import { UserContext } from "../../../context/user";
 import FormHeaderChat from "../../../components/wrappers/formWrappers/FormHeaderChat";
 import AutoGrowingTextInput from "react-native-autogrow-textinput-ts";
-import { useFocusEffect } from "@react-navigation/native";
 import truncateStr from "../../../components/functions/truncateStr";
 import {
   setSessionExpired,

@@ -10,6 +10,7 @@ import MatchStack from "../../screens/Swiping/Match/MatchStack";
 import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 import { useDispatch } from "react-redux";
+import { rspF, rspH , rspW} from "../../styles/responsiveSize";
 
 const BTab = createBottomTabNavigator();
 
