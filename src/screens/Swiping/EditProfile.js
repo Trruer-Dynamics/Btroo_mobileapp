@@ -7,6 +7,7 @@ import {
   Platform,
   Alert,
   Linking,
+  Keyboard,
 } from "react-native";
 import React, {
   useContext,
@@ -72,6 +73,9 @@ const EditProfile = ({ navigation }) => {
   const { appStateVisible } = useContext(UserContext);
 
   const scrollViewRef = useRef();
+
+ 
+
 
   const [current_pos, setcurrent_pos] = useState(0);
 
@@ -1189,9 +1193,15 @@ const EditProfile = ({ navigation }) => {
 
                 setcurrent_pos(y);
               }}
+           
               enableOnAndroid={true}
-              extraScrollHeight={Platform.OS == "ios" ? 0 : scrn_height / 6}
-              extraHeight={Platform.OS == "ios" ? scrn_height / 6 : 0}
+              // extraScrollHeight={Platform.OS == "ios" ? 0 : scrn_height / 6}
+              // extraHeight={Platform.OS == "ios" ? scrn_height / 6 : 0}
+
+              // extraScrollHeight={Platform.OS == "ios" ? 0 : 0}
+              extraScrollHeight={Platform.OS == "ios" ? - scrn_height * 0.22 : 0}
+              extraHeight={Platform.OS == "ios" ? scrn_height * 0.38 : scrn_height * 0.23}              
+              
               style={{
                 flex: 1,
                 backgroundColor: "#fff",

@@ -880,12 +880,15 @@ const SwipeCard = ({
                           style={{
                             ...styles.habitsImage,
                           }}
+                          resizeMode='contain'
                         />
                         <FastImage
                           source={card_itm?.smoking ? SmokingYes : SmokingNo}
                           style={{
                             ...styles.habitsImage,
+                            
                           }}
+                          resizeMode='contain'
                         />
                         <FastImage
                           source={
@@ -894,6 +897,7 @@ const SwipeCard = ({
                           style={{
                             ...styles.habitsImage,
                           }}
+                          resizeMode='contain'
                         />
                       </View>
                     </View>
@@ -1222,7 +1226,9 @@ const styles = StyleSheet.create({
   },
   habitsImage: {
     width: rspW(10.1),
-    height: rspH(4.7),
-    resizeMode: "contain",
+    aspectRatio:1,
+    // resizeMode:1,
+    // height: rspH(4.7),
+
   },
 });

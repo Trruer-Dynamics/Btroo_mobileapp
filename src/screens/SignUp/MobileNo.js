@@ -19,7 +19,7 @@ import ErrorContainer from "../../components/formComponents/ErrorContainer";
 import { scrn_height, rspW, rspH, rspF } from "../../styles/responsiveSize";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import fontFamily from "../../styles/fontFamily";
-
+import _ from "lodash";
 import Loader from "../../components/loader/Loader";
 import auth from "@react-native-firebase/auth";
 import axios from "axios";
@@ -178,6 +178,40 @@ const MobileNo = ({ navigation, route }) => {
     // console.log("\nonAuthStateChanged", user, "\n");
   };
 
+const [alr, setalr] = useState(false)
+const [alrMd, setalrMd] = useState(false)
+
+  const showAlrdyAlert = async () => {
+    console.log("This Call")
+    //   Alert.
+    setTimeout(() => {
+      alert(
+        "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
+      );
+
+    }, 100);
+   
+
+    setalr(false)
+
+  };
+
+  //Debounce the showAlert function with a delay of 300 milliseconds
+  const debounceShowConfirmDialog = _.debounce(showAlrdyAlert, 5000, {
+    leading: true,
+    trailing: false,
+  });
+
+  useEffect(() => {
+    console.log("alr",alr)
+    if (alr && showOtpBox == false) {
+      // setalrMd(true)
+      //  showAlrdyAlert()
+      debounceShowConfirmDialog()
+    }
+  }, [alr,showOtpBox ])
+  
+
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
 
@@ -327,6 +361,8 @@ const MobileNo = ({ navigation, route }) => {
             onResend={() =>
               signInWithPhoneNumber(`+${selected_ph_code?.phone}  ${ph_no}`)
             }
+            // debounceShowConfirmDialog={debounceShowConfirmDialog}
+            setalr={setalr}
             selected_ph_code={selected_ph_code}
             loading={loading}
             setloading={setloading}
@@ -386,6 +422,56 @@ const MobileNo = ({ navigation, route }) => {
                 onPress={async () => {
                   setshow_alert(false);
                   navigation.navigate("Intro");
+                }}
+              />
+            </FormWrapperFooter>
+          </View>
+        </CentralModal>
+
+        <CentralModal
+          modalVisible={alrMd}
+          setModalVisible={() => setalrMd(false)}
+          containerStyle={{
+            paddingTop: rspH(19.6),
+          }}
+        >
+          <View
+            style={{
+              width: rspW(86),
+              height: rspH(37.5),
+              backgroundColor: "#fff",
+              // borderRadius: rspW(4),
+              borderRadius: rspW(4),
+            }}
+          >
+            <View
+              style={{
+                padding: rspW(7),
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: rspF(2.6),
+                  fontFamily: fontFamily.regular,
+                  lineHeight: rspF(3.2),
+                  color: colors.black,
+                  textAlign: "center",
+                }}
+              >
+                It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account.
+              </Text>
+            </View>
+            <FormWrapperFooter>
+              {/* Error Show Here */}
+
+              <ErrorContainer error_msg={""} />
+
+              {/* Next Btn To Navigate to Next Form Components */}
+              <FooterBtn
+                title={"OK"}
+                disabled={false}
+                onPress={async () => {
+                  setalrMd(false);
                 }}
               />
             </FormWrapperFooter>

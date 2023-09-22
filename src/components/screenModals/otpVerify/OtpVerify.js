@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
   Platform,
 } from "react-native";
-import _ from "lodash";
+
 import React, {
   useRef,
   useState,
@@ -67,6 +67,8 @@ const OtpVerify = ({
   action = "",
   confirm,
   selected_ph_code,
+  // debounceShowConfirmDialog,
+  setalr,
 }) => {
   // Firebase Device TOken defined in user.js
   const { DeviceToken, setDeviceToken } = useContext(UserContext);
@@ -106,17 +108,15 @@ const OtpVerify = ({
   const [keyboard_hgt, setkeyboard_hgt] = useState(0);
 
   const showAlrdyAlert = async () => {
+    
     Alert.alert(
-      "",
-      "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
-    );
-  };
+    "",
+    "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
+  );
 
-  //Debounce the showAlert function with a delay of 300 milliseconds
-  const debounceShowConfirmDialog = _.debounce(showAlrdyAlert, 200, {
-    leading: true,
-    trailing: false,
-  });
+  // setalr(false)
+
+};
 
   // To register mobile number
   const sendActiveUserDetails = async () => {
@@ -149,16 +149,31 @@ const OtpVerify = ({
       // is_introduceyourselfcompleted: true,
     };
 
+
+
     try {
+
+      console.log('account d')
       const response = await axios.post(apiUrl + "account/", data);
       let user_data = response.data.data;
       let user_code = response.data.code;
 
+      console.log("acccont user_code", user_code)
       setloading(false);
-
+      // setModalVisible(false);
       if (user_code == 400) {
-        setModalVisible(false);
-        await debounceShowConfirmDialog();
+      //  
+      setModalVisible(false);
+        // await debounceShowConfirmDialog();
+        // setalr(true)
+        setTimeout(() => {
+          alert(
+            "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
+          );
+    
+        }, 100);
+       
+        
       } else if (user_code == 200) {
         await dispatch(setSessionExpired(false));
 
@@ -202,11 +217,12 @@ const OtpVerify = ({
         dispatch(setProfiledata(user_prof_data));
 
         navigation.navigate("UserIntro");
-        setModalVisible(false);
+      setModalVisible(false);
       } else {
-        setModalVisible(false);
+      setModalVisible(false);
       }
     } catch (error) {
+      console.log("account err", error)
       setModalVisible(false);
       setloading(false);
     }
@@ -473,6 +489,7 @@ const OtpVerify = ({
   const listenOtp = async () => {
     try {
     startOtpListener((message) => {
+      if (message) {
         const otp = /(\d{6})/g.exec(message)[1];
         console.log("otp", otp);
         setotp1(otp[0]);
@@ -490,6 +507,8 @@ const OtpVerify = ({
 
         console.log("message", message);
         // Alert.alert(`${otp}`,message)
+      }
+        
       });
     } catch (err) {
       console.log("err", err);
@@ -525,6 +544,9 @@ const OtpVerify = ({
 
 
   }, []);
+
+  
+  
 
   return (
     <KeyboardAwareScrollView

@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   StatusBar,
+  Image,
   TouchableOpacity,
   Platform,
 } from "react-native";
@@ -18,8 +19,8 @@ import {
 } from "../store/reducers/authentication/authentication";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import useIsReady from "../components/functions/isScreenReady";
-import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../store/reducers/screen/screen";
+import FastImage from "react-native-fast-image";
 
 const Intro = ({ route }) => {
   const dispatch = useDispatch();
@@ -92,6 +93,7 @@ const Intro = ({ route }) => {
             <FastImage
               style={styles.logo}
               source={require("../assets/images/WelcomeScreen/btroo_logo.jpg")}
+              resizeMode = "contain"
             />
           </View>
 
@@ -229,7 +231,8 @@ const styles = StyleSheet.create({
 
   logo: {
     width: rspW(76),
-    resizeMode: "contain",
+    // height: rspH(10),
+    aspectRatio:1,
   },
 
   paraContainer: {

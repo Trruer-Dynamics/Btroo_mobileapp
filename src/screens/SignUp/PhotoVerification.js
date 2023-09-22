@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { setUserLoggined } from "../../store/reducers/authentication/authentication";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
+import FastImage from "react-native-fast-image";
 
 const PhotoVerification = ({ navigation, route }) => {
   const dispatch = useDispatch();
