@@ -33,7 +33,7 @@ import { apiUrl } from "../../constants";
 import axios from "axios";
 import Loader from "../../components/loader/Loader";
 import { setSessionExpired } from "../../store/reducers/authentication/authentication";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
 
 const DATA = [
@@ -173,7 +173,7 @@ const SwiperTut = ({ repeat_tut }) => {
   ]);
 
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
-  const [swipe_tut_l, setswipe_tut_l] = useState(swipe_tut);
+  const [swipe_tut_l, setswipe_tut_l] = useState(swipe_tut||repeat_tut);
   const [step, setstep] = useState(0);
   const [instruction_list, setinstruction_list] = useState([
     "Fancy someone you think \nyou can click with. If they \nlike you back you could \nspeak later on. ",
@@ -221,6 +221,7 @@ const SwiperTut = ({ repeat_tut }) => {
   const viewConfig2 = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
   const swipeTutDone = async () => {
+    console.log("swipeTutDone")
     setloading(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -242,7 +243,10 @@ const SwiperTut = ({ repeat_tut }) => {
 
       let resp_data = response.data;
 
+    console.log("swipeTutDone",resp_data)
+
       if (resp_data.code == 200) {
+        console.log("Here")
         dispatch(setSwipeTut(false));
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
@@ -261,6 +265,18 @@ const SwiperTut = ({ repeat_tut }) => {
   const renderItem2 = ({ item }) => (
     <Item2 item={item} setmodalVisible={setmodalVisible} />
   );
+
+    
+  useFocusEffect(
+    React.useCallback(() => {
+      setswipe_tut_l(swipe_tut || repeat_tut)
+      setstep(0)
+      return () => {
+        // dispatch(setRepeatTut(false))
+      };
+    }, [])
+  );
+
 
   return (
     <>
@@ -504,18 +520,21 @@ const SwiperTut = ({ repeat_tut }) => {
                       style={{
                         ...styles.habitsImage,
                       }}
+                      resizeMode='contain'
                     />
                     <FastImage
                       source={SmokingNo}
                       style={{
                         ...styles.habitsImage,
                       }}
+                      resizeMode='contain'
                     />
                     <FastImage
                       source={MarijuanaNo}
                       style={{
                         ...styles.habitsImage,
                       }}
+                      resizeMode='contain'
                     />
                   </View>
                 </View>
@@ -917,12 +936,12 @@ const SwiperTut = ({ repeat_tut }) => {
                       <TouchableOpacity
                         onPress={() => {
                           setswipe_tut_l(false);
-                          swipeTutDone();
-
+               
                           if (repeat_tut) {
-                            navigation.navigate("Match", {
-                              repeat_tut: true,
-                            });
+                            navigation.navigate("Match");
+                          }
+                          else{
+                            swipeTutDone();
                           }
                         }}
                         style={styles.centralModalTextNextCont}
@@ -1027,18 +1046,21 @@ const SwiperTut = ({ repeat_tut }) => {
                                 style={{
                                   ...styles.habitsImage,
                                 }}
+                                resizeMode='contain'
                               />
                               <FastImage
                                 source={SmokingNo}
                                 style={{
                                   ...styles.habitsImage,
                                 }}
+                                resizeMode='contain'
                               />
                               <FastImage
                                 source={MarijuanaNo}
                                 style={{
                                   ...styles.habitsImage,
                                 }}
+                                resizeMode='contain'
                               />
                             </View>
                           </View>
@@ -1462,7 +1484,6 @@ const styles = StyleSheet.create({
 
   habitsImage: {
     width: rspW(10.1),
-    height: rspH(4.7),
-    resizeMode: "contain",
+    aspectRatio:1,
   },
 });

@@ -202,6 +202,7 @@ const PhotoVerifyCamera = ({ route }) => {
             <FastImage
               source={require("../../../assets/images/FormImages/switch_camera.png")}
               style={styles.switchCamera}
+              resizeMode='contain'
             />
           </TouchableOpacity>
         </View>
@@ -270,6 +271,5 @@ const styles = StyleSheet.create({
   switchCamera: {
     height: rspH(6.8),
     width: rspW(7.64),
-    resizeMode: "contain",
   },
 });

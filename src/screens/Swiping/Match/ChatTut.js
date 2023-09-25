@@ -22,15 +22,16 @@ import fontFamily from "../../../styles/fontFamily";
 import IceBreaker from "../../../components/screenComponents/matching/IceBreaker";
 import FullModal from "../../../components/modals/FullModal";
 import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import { setChatTut } from "../../../store/reducers/tutorial/tutorial";
+import { setChatTut, setRepeatTut } from "../../../store/reducers/tutorial/tutorial";
 import axios from "axios";
 import { apiUrl } from "../../../constants";
 import Loader from "../../../components/loader/Loader";
 import { setSessionExpired } from "../../../store/reducers/authentication/authentication";
 import truncateStr from "../../../components/functions/truncateStr";
 import FastImage from "react-native-fast-image";
+import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 
 const ChatItem = (item) => {
   return (
@@ -205,6 +206,14 @@ const ChatTut = ({ profile, repeat_tut }) => {
     );
   };
 
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        dispatch(setRepeatTut(false))
+      };
+    }, [])
+  );
+
   return (
     <>
       {loading && <Loader />}
@@ -348,6 +357,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
                       setchat_step(chat_step + 1);
                     } else {
                       if (repeat_tut) {
+                        dispatch(setRepeatTut(false))
                         navigation.navigate("SettingsScreen");
                       } else {
                         chatTutDone();

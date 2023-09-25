@@ -5,6 +5,7 @@ const initialState = {
   match_tut: true,
   chat_tut: true,
   chat_reveal_tut: true,
+  repeat_tut: false,
 };
 
 export const tutorialSlice = createSlice({
@@ -23,10 +24,13 @@ export const tutorialSlice = createSlice({
     setChatRevealTut: (state, action) => {
       state.chat_reveal_tut = action.payload;
     },
+    setRepeatTut: (state, action) => {
+      state.repeat_tut = action.payload;
+    },
   },
 });
 
-export const { setSwipeTut, setMatchTut, setChatTut, setChatRevealTut } =
+export const { setSwipeTut, setMatchTut, setChatTut, setChatRevealTut,setRepeatTut } =
   tutorialSlice.actions;
 
 export default tutorialSlice.reducer;

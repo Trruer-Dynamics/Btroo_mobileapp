@@ -1227,8 +1227,5 @@ const styles = StyleSheet.create({
   habitsImage: {
     width: rspW(10.1),
     aspectRatio:1,
-    // resizeMode:1,
-    // height: rspH(4.7),
-
   },
 });

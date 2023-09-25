@@ -29,13 +29,14 @@ import {
 import { apiUrl } from "../../constants";
 import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
-import { setSwipeTut } from "../../store/reducers/tutorial/tutorial";
+import { setRepeatTut, setSwipeTut } from "../../store/reducers/tutorial/tutorial";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { UserContext } from "../../context/user";
 import Loader from "../../components/loader/Loader";
 import FastImage from "react-native-fast-image";
 import OffflineAlert from "../../components/functions/OfflineAlert";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
 const insets = initialWindowMetrics.insets;
 
 const SettingsScreen = ({ navigation, route }) => {
@@ -379,6 +380,7 @@ const SettingsScreen = ({ navigation, route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      dispatch(setCurrentScreen("SettingsScreen"));
       // Do something when the screen is focused
       setphone_number(profile_data?.user?.username);
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
@@ -816,11 +818,9 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  dispatch(setSwipeTut(true));
-
-                  navigation.navigate("Swiper", {
-                    repeat_tut: true,
-                  });
+                  // dispatch(setSwipeTut(true));
+                  dispatch(setRepeatTut(true))
+                  navigation.navigate("Swiper");
                 }}
                 style={{
                   flexDirection: "row",

@@ -116,7 +116,7 @@ const App = () => {
   const getAppHash = () => {
     getHash()
       .then((hash) => {
-        console.log("App Hash", hash[0]);
+        // console.log("App Hash", hash[0]);
       })
       .catch((err) => {
         console.log("err while hash", err);
@@ -152,10 +152,8 @@ const App = () => {
 
   const handleNetworkChange = (state) => {
     if (state.isConnected) {
-      console.log("\n", Platform.OS, "Network Connected");
       dispatch(setNetworkConnect(true));
     } else {
-      console.log("\n", Platform.OS, "Network Disconnected");
       dispatch(setNetworkConnect(false));
     }
   };

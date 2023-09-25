@@ -8,15 +8,12 @@ import React from "react";
 import Match from "../../screens/Swiping/Match/Match";
 import MatchStack from "../../screens/Swiping/Match/MatchStack";
 import FastImage from "react-native-fast-image";
-import { setCurrentScreen } from "../../store/reducers/screen/screen";
-import { useDispatch } from "react-redux";
 import { rspF, rspH , rspW} from "../../styles/responsiveSize";
 
 const BTab = createBottomTabNavigator();
 
 const BottomTab = () => {
-  const dispatch = useDispatch();
-
+  
   return (
     <>
       <BTab.Navigator
@@ -46,7 +43,7 @@ const BottomTab = () => {
             tabBarInactiveTintColor: colors.grey,
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-                dispatch(setCurrentScreen("SettingsScreen"));
+              
                 return (
                   <FastImage
                     source={require("../../assets/images/BottomTab/Settings.jpg")}
@@ -73,7 +70,7 @@ const BottomTab = () => {
             tabBarInactiveTintColor: colors.grey,
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-                dispatch(setCurrentScreen("Swiper"));
+                
                 return (
                   <FastImage
                     source={require("../../assets/images/BottomTab/swiper_active.png")}
@@ -102,7 +99,7 @@ const BottomTab = () => {
 
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-                dispatch(setCurrentScreen("Match"));
+           
                 return (
                   <FastImage
                     tintColor={"#fff"}
@@ -131,7 +128,6 @@ const BottomTab = () => {
             tabBarInactiveTintColor: colors.grey,
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-                dispatch(setCurrentScreen("Profile"));
 
                 return (
                   <FastImage

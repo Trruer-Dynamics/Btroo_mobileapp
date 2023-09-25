@@ -1,21 +1,44 @@
 import React from "react";
 import SwiperOr from "./SwiperOr";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SwiperTut from "./SwiperTut";
 import OffflineAlert from "../../components/functions/OfflineAlert";
+import { useFocusEffect } from "@react-navigation/native";
+import { setCurrentScreen } from "../../store/reducers/screen/screen";
+import { setRepeatTut } from "../../store/reducers/tutorial/tutorial";
 
 const Swiper = ({ route }) => {
-  let repeat_tut = route.params?.repeat_tut ? route.params?.repeat_tut : false;
+
 
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
+  const repeat_tut = useSelector((state) => state.tutorial.repeat_tut);
+
   const is_network_connected = useSelector(
     (state) => state.authentication.is_network_connected
   );
 
+  const dispatch = useDispatch()
+  
+  useFocusEffect(
+    React.useCallback(() => {
+
+      console.log("swipe_tut",swipe_tut)
+      console.log("repeat_tut",repeat_tut)
+
+      console.log("swipe_tut || repeat_tut",swipe_tut || repeat_tut)
+
+      dispatch(setCurrentScreen("Swiper"))
+      return () => {
+        // dispatch(setRepeatTut(false))
+      };
+    }, [])
+  );
+
+
   return (
     <>
       {!is_network_connected && <OffflineAlert />}
-      {swipe_tut ? <SwiperTut repeat_tut={repeat_tut} /> : <SwiperOr />}
+      {swipe_tut || repeat_tut ? <SwiperTut repeat_tut={repeat_tut} /> : <SwiperOr />}
     </>
   );
 };

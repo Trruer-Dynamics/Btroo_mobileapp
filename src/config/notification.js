@@ -43,6 +43,10 @@ const NotificationController = (props) => {
       mth.userprofile = { name: dt.Name, id: dt.profile_id };
       mth.expiry_date = new Date(expiry_date);
       mth.user_id = dt.image.user;
+      // let prf_img = dt.userprofile.image.find(
+      //   (c) => c.position == 0
+      // );
+
       mth.prof_img = dt.image.cropedimage;
       mth.prof_rvl = true;
       mth.all_images = [];

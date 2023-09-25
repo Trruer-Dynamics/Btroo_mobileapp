@@ -67,8 +67,7 @@ const OtpVerify = ({
   action = "",
   confirm,
   selected_ph_code,
-  // debounceShowConfirmDialog,
-  setalr,
+ 
 }) => {
   // Firebase Device TOken defined in user.js
   const { DeviceToken, setDeviceToken } = useContext(UserContext);
@@ -153,19 +152,16 @@ const OtpVerify = ({
 
     try {
 
-      console.log('account d')
       const response = await axios.post(apiUrl + "account/", data);
       let user_data = response.data.data;
       let user_code = response.data.code;
 
-      console.log("acccont user_code", user_code)
       setloading(false);
       // setModalVisible(false);
       if (user_code == 400) {
       //  
       setModalVisible(false);
-        // await debounceShowConfirmDialog();
-        // setalr(true)
+        
         setTimeout(() => {
           alert(
             "It seems like this phone number is already registered with us. Please login with this number or use a different number to create an account."
@@ -222,7 +218,6 @@ const OtpVerify = ({
       setModalVisible(false);
       }
     } catch (error) {
-      console.log("account err", error)
       setModalVisible(false);
       setloading(false);
     }
@@ -467,6 +462,7 @@ const OtpVerify = ({
     //     sendActiveUserDetails();
     //   }
     // } catch (error) {
+    //   console.log("error", error)
     //   setloading(false);
     //   setotperr(true);
     // }
@@ -489,8 +485,10 @@ const OtpVerify = ({
   const listenOtp = async () => {
     try {
     startOtpListener((message) => {
-      if (message) {
-        const otp = /(\d{6})/g.exec(message)[1];
+      console.log("message",message)
+      
+        try {
+          const otp = /(\d{6})/g.exec(message)[1];
         console.log("otp", otp);
         setotp1(otp[0]);
         setotp1blr(true);
@@ -504,14 +502,15 @@ const OtpVerify = ({
         setotp5blr(true);
         setotp6(otp[5]);
         setotp6blr(true);
-
-        console.log("message", message);
-        // Alert.alert(`${otp}`,message)
-      }
+        }
+        catch (err) {
+          console.log("otp auto listen error", err) 
+        }
+      
         
       });
     } catch (err) {
-      console.log("err", err);
+      console.log("out otp listener err", err);
     }
   };
 
@@ -699,7 +698,7 @@ const OtpVerify = ({
             style={{
               ...styles.otp_input,
               borderColor:
-                (btnClick && otp1 == "") || otperr
+                (btnClick && otp2 == "") || otperr
                   ? colors.error
                   : otp2blr && otp2 != ""
                   ? colors.blue
@@ -741,7 +740,7 @@ const OtpVerify = ({
             style={{
               ...styles.otp_input,
               borderColor:
-                (btnClick && otp1 == "") || otperr
+                (btnClick && otp3 == "") || otperr
                   ? colors.error
                   : otp3blr && otp3 != ""
                   ? colors.blue
@@ -784,7 +783,7 @@ const OtpVerify = ({
             style={{
               ...styles.otp_input,
               borderColor:
-                (btnClick && otp1 == "") || otperr
+                (btnClick && otp4 == "") || otperr
                   ? colors.error
                   : otp4blr && otp4 != ""
                   ? colors.blue
@@ -827,7 +826,7 @@ const OtpVerify = ({
             style={{
               ...styles.otp_input,
               borderColor:
-                (btnClick && otp1 == "") || otperr
+                (btnClick && otp5 == "") || otperr
                   ? colors.error
                   : otp5blr && otp5 != ""
                   ? colors.blue
@@ -871,7 +870,7 @@ const OtpVerify = ({
             style={{
               ...styles.otp_input,
               borderColor:
-                (btnClick && otp1 == "") || otperr
+                (btnClick && otp6 == "") || otperr
                   ? colors.error
                   : otp6blr && otp6 != ""
                   ? colors.blue
