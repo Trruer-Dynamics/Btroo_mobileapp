@@ -108,7 +108,6 @@ const FormCountrySelector = ({
         </View>
       </TouchableOpacity>
 
-
       {/* Modal to open country list with code */}
       <Modal animationType="slide" transparent={false} visible={code_press}>
         <SafeAreaView style={{ flex: 1 }}>

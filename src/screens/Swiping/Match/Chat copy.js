@@ -172,7 +172,7 @@ const ChatItem = ({
       style={{
         flex: 1,
         position: "relative",
-
+        // backgroundColor:'red',
         // marginBottom: rspH(2.35) ,
         marginBottom: rspH(btmMarg),
       }}
@@ -242,28 +242,47 @@ const ChatItem = ({
               style={{
                 backgroundColor: item[1] == 0 ? "#e6e8eb" : "#4986CA",
 
-                borderLeftColor: "#000",
-                paddingVertical: rspH(1.2),
-                // paddingHorizontal: rspW(5.8),
-                paddingHorizontal: rspW(3.8),
+                // borderLeftColor: "#000",
+                // borderLeftWidth: 2,
+                // paddingVertical: rspH(1.2),
+                paddingVertical: rspH(1),
 
-                marginBottom: rspH(1.2),
-                maxWidth: rspW(52),
-                borderRadius: rspW(3),
+                marginTop: rspH(-0.5),
+                marginHorizontal: rspW(-0.8),
+                // paddingHorizontal: rspW(5.8),
+                // paddingHorizontal: rspW(3.8),
+                // paddingHorizontal: rspW(1),
+
+                // marginBottom: rspH(1.2),
+                marginBottom: rspH(0.6),
+
+                // maxWidth: rspW(52),
+                maxWidth: rspW(80),
+
+                // borderRadius: rspW(3),
+                borderRadius: rspW(2),
+                // borderLeftWidth: rspW(0.6),
+                borderLeftWidth: rspW(1),
+
                 flexDirection: "row",
                 justifyContent: "space-between",
               }}
             >
               <View
                 style={{
-                  borderLeftWidth: rspW(0.6),
-                  paddingHorizontal: rspF(1.6),
+                  // borderLeftWidth: rspW(0.6),
+                  // borderLeftWidth: rspW(0.6),
+
+                  // paddingHorizontal: rspF(1.6),
+                  paddingHorizontal: rspF(1),
                 }}
               >
                 <Text
                   style={{
+                    fontSize: rspF(1.8),
                     ...styles.rpyMsgHead,
                     color: item[1] == 0 ? colors.black : colors.white,
+                    paddingBottom: rspH(0.2),
                   }}
                 >
                   {chatlist.find((v) => v[4] == item[5])[1] == "1"
@@ -298,27 +317,6 @@ const ChatItem = ({
             >
               {item[0]}
             </Text>
-            {/* {item[5] == null && (
-              <View
-                style={{
-                  marginRight: rspW(-3),
-                  marginBottom: rspH(-1.5),
-                  paddingLeft: rspW(2),
-                  justifyContent: "flex-end",
-                  zIndex: 2,
-                }}
-              >
-                <Text
-                  style={{
-                    ...styles.chatTimeTxt,
-                    textAlign: "right",
-                    color: item[1] == 0 ? colors.black : colors.white,
-                  }}
-                >
-                  {c_time}
-                </Text>
-              </View>
-            )} */}
           </View>
           {item[1] == 0 ? (
             <View
@@ -363,10 +361,14 @@ const ChatItem = ({
           <View
             style={{
               // backgroundColor:'red',
-              paddingTop: rspH(1),
-              marginRight: rspW(-2.7),
+              // paddingTop: rspH(1),
+              paddingTop: rspH(0.3),
+              // marginRight: rspW(-2.7),
+              marginRight: rspW(0),
+
               // marginBottom: rspH(-1.5),
               paddingLeft: rspW(2),
+
               // justifyContent: "flex-end",
               zIndex: 2,
             }}
@@ -374,6 +376,7 @@ const ChatItem = ({
             <View
               style={{
                 marginBottom: rspH(-1.3),
+                marginBottom: rspH(-1),
               }}
             >
               <Text
@@ -761,7 +764,6 @@ const Chat = ({ profile }) => {
         {item[6] != "" && (
           <View
             style={{
-              // minWidth: rspW(18.1),
               paddingHorizontal: rspW(2.5),
               paddingTop: rspH(1.1),
               paddingBottom: rspH(0.7),
@@ -1195,9 +1197,16 @@ const Chat = ({ profile }) => {
                         : "#4986CA",
                     borderLeftWidth: rspW(1),
                     borderLeftColor: "#000",
-                    paddingVertical: rspH(1.2),
-                    paddingHorizontal: rspW(5.8),
-                    marginTop: 10,
+                    // paddingVertical: rspH(1.2),
+                    paddingVertical: rspH(0.8),
+
+                    // paddingHorizontal: rspW(5.8),
+                    paddingLeft: rspW(1.8),
+                    paddingRight: rspW(2.4),
+
+                    // marginTop: 10,
+                    marginTop: rspH(0.7),
+
                     width: rspW(90),
                     borderRadius: rspW(2),
                     flexDirection: "row",
@@ -1207,11 +1216,14 @@ const Chat = ({ profile }) => {
                   <View style={{ width: "96%" }}>
                     <Text
                       style={{
+                        fontSize: rspF(1.8),
                         color:
                           chatlist.find((v) => v[4] == actreplyID)[1] == 0
                             ? colors.black
                             : colors.white,
                         fontWeight: "600",
+                        // lineHeight: rspF(2.4),
+                        paddingBottom: rspH(0.2),
                       }}
                     >
                       {chatlist.find((v) => v[4] == actreplyID)[1] == "1"
@@ -1422,19 +1434,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   chatCont: {
-    paddingVertical: rspH(1.9),
-    paddingHorizontal: rspW(4),
+    // paddingVertical: rspH(1.9),
+    paddingTop: rspH(1),
+    paddingBottom: rspH(1.4),
+    // paddingHorizontal: rspW(4),
+    paddingHorizontal: rspW(2),
     borderRadius: rspW(5.1),
     borderRadius: rspW(2),
-    marginHorizontal: rspW(4),
+    // marginHorizontal: rspW(4),
+    marginHorizontal: rspW(1),
   },
   chatMsgTxt: {
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
     lineHeight: rspF(2.1),
-    // minWidth: rspW(10),
-    minWidth: rspW(12),
-    maxWidth: rspW(45),
+
+    minWidth: rspW(24),
+    maxWidth: rspW(80),
     letterSpacing: Platform.OS == "ios" ? 0 : 0.5,
   },
   rpyMsgHead: {
@@ -1448,7 +1464,7 @@ const styles = StyleSheet.create({
     fontSize: rspF(1.5),
     fontFamily: fontFamily.bold,
     lineHeight: rspF(1.8),
-
+    minWidth: rspW(26),
     color: colors.black,
   },
   chatTimeTxt: {

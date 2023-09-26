@@ -8,8 +8,6 @@ import { setCurrentScreen } from "../../store/reducers/screen/screen";
 import { setRepeatTut } from "../../store/reducers/tutorial/tutorial";
 
 const Swiper = ({ route }) => {
-
-
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
   const repeat_tut = useSelector((state) => state.tutorial.repeat_tut);
 
@@ -17,28 +15,26 @@ const Swiper = ({ route }) => {
     (state) => state.authentication.is_network_connected
   );
 
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   useFocusEffect(
     React.useCallback(() => {
 
-      console.log("swipe_tut",swipe_tut)
-      console.log("repeat_tut",repeat_tut)
-
-      console.log("swipe_tut || repeat_tut",swipe_tut || repeat_tut)
-
-      dispatch(setCurrentScreen("Swiper"))
+      dispatch(setCurrentScreen("Swiper"));
       return () => {
         // dispatch(setRepeatTut(false))
       };
     }, [])
   );
 
-
   return (
     <>
       {!is_network_connected && <OffflineAlert />}
-      {swipe_tut || repeat_tut ? <SwiperTut repeat_tut={repeat_tut} /> : <SwiperOr />}
+      {swipe_tut || repeat_tut ? (
+        <SwiperTut repeat_tut={repeat_tut} />
+      ) : (
+        <SwiperOr />
+      )}
     </>
   );
 };

@@ -475,7 +475,7 @@ const MatchProfile = ({ route }) => {
                         style={{
                           ...styles.habitsImage,
                         }}
-                        resizeMode= "contain"
+                        resizeMode="contain"
                       />
                       <FastImage
                         source={
@@ -484,7 +484,7 @@ const MatchProfile = ({ route }) => {
                         style={{
                           ...styles.habitsImage,
                         }}
-                        resizeMode= "contain"
+                        resizeMode="contain"
                       />
                       <FastImage
                         source={
@@ -495,7 +495,7 @@ const MatchProfile = ({ route }) => {
                         style={{
                           ...styles.habitsImage,
                         }}
-                        resizeMode= "contain"
+                        resizeMode="contain"
                       />
                     </View>
                   </View>
@@ -739,6 +739,7 @@ const MatchProfile = ({ route }) => {
                             borderRadius: 5,
                             marginRight: 10,
                             backgroundColor: colors.lightBlue + "99",
+                            backgroundColor: colors.blue,
                             alignItems: "center",
                             justifyContent: "center",
                           }}
@@ -746,6 +747,7 @@ const MatchProfile = ({ route }) => {
                           <Text
                             style={{
                               ...styles.profileDetailContHeading,
+                              color: colors.white,
                               textAlign: "center",
                             }}
                           >
@@ -1010,7 +1012,6 @@ const styles = StyleSheet.create({
     width: rspW(10.1),
     aspectRatio: 1,
     // height: rspH(4.7),
-
   },
 
   dotsCont: {

@@ -74,9 +74,6 @@ const EditProfile = ({ navigation }) => {
 
   const scrollViewRef = useRef();
 
- 
-
-
   const [current_pos, setcurrent_pos] = useState(0);
 
   const [changes_made, setchanges_made] = useState(false);
@@ -86,6 +83,9 @@ const EditProfile = ({ navigation }) => {
   const positions = useSharedValue(
     Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx })))
   );
+  
+  const [pos2, setpos2] = useState(Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx }))))
+
   const [pos_change, setpos_change] = useState(false);
 
   const changeImgPosition = async () => {
@@ -168,6 +168,7 @@ const EditProfile = ({ navigation }) => {
   //All data states
 
   const [refresh, setrefresh] = useState(false);
+  const [count, setcount] = useState(0)
 
   const [selected_pets_list, setselected_pets_list] = useState([]);
 
@@ -294,8 +295,11 @@ const EditProfile = ({ navigation }) => {
     return true;
   };
 
+  
+
+
   const atLast = async (tmp_lis) => {
-    await setpic_list(tmp_lis);
+    setpic_list(tmp_lis);
     setrefresh(!refresh);
   };
 
@@ -332,6 +336,8 @@ const EditProfile = ({ navigation }) => {
     }
 
     positions.value = up_pos;
+    setpos2(up_pos)
+
 
     dispatch(setProfileImgs(tmp_lis));
     await atLast(tmp_lis);
@@ -1032,7 +1038,9 @@ const EditProfile = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
+   
     if (pos_change) {
+      setrefresh(!refresh)
       setchanges_made(true);
     }
   }, [pos_change]);
@@ -1148,6 +1156,8 @@ const EditProfile = ({ navigation }) => {
     }
   }, [galler_per, camera_per, appStateVisible]);
 
+
+  
   return (
     <>
       {loading && <Loader />}
@@ -1193,15 +1203,15 @@ const EditProfile = ({ navigation }) => {
 
                 setcurrent_pos(y);
               }}
-           
               enableOnAndroid={true}
               // extraScrollHeight={Platform.OS == "ios" ? 0 : scrn_height / 6}
               // extraHeight={Platform.OS == "ios" ? scrn_height / 6 : 0}
 
               // extraScrollHeight={Platform.OS == "ios" ? 0 : 0}
-              extraScrollHeight={Platform.OS == "ios" ? - scrn_height * 0.22 : 0}
-              extraHeight={Platform.OS == "ios" ? scrn_height * 0.38 : scrn_height * 0.23}              
-              
+              extraScrollHeight={Platform.OS == "ios" ? -scrn_height * 0.22 : 0}
+              extraHeight={
+                Platform.OS == "ios" ? scrn_height * 0.38 : scrn_height * 0.23
+              }
               style={{
                 flex: 1,
                 backgroundColor: "#fff",
@@ -1233,8 +1243,10 @@ const EditProfile = ({ navigation }) => {
                         refresh={refresh}
                         setrefresh={setrefresh}
                         setpos_change={setpos_change}
+                        setpos2={setpos2}
                       >
-                        <Box
+                      
+                          <Box
                           up_img_len={pic_list.filter((v) => v[0] != "").length}
                           positions={positions}
                           index={index}
@@ -1246,6 +1258,7 @@ const EditProfile = ({ navigation }) => {
                           setmodalVisible={setmodalVisible}
                           deleteProfileImage={deleteProfileImage}
                           editscreen={true}
+                          pos2={pos2}
                         />
                       </Draggable>
                     );
@@ -1271,7 +1284,7 @@ const EditProfile = ({ navigation }) => {
                       selectedValue={city[1]}
                       pull_refresh={true}
                       refreshing={city_refresh}
-                      setref
+                      
                       reshing={setcity_refresh}
                       onRefresh={(rpage) => {
                         getLocation(rpage, true);

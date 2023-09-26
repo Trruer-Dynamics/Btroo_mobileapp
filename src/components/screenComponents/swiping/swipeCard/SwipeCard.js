@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import {
-  TouchableOpacity as TouchableOpacityG,
+  TouchableOpacity as TouchableOpacityB,
   ScrollView,
 } from "react-native-gesture-handler";
 
@@ -74,14 +74,19 @@ const Item = ({
   const [img_load, setimg_load] = useState(false);
 
   return (
-    <View
+    // <View
+    //   style={{
+    //     ...styles.item,
+    //     zIndex: 2,
+    //     position: "relative",
+    //   }}
+    // >
+      <TouchableOpacityB
       style={{
         ...styles.item,
         zIndex: 2,
         position: "relative",
       }}
-    >
-      <TouchableOpacityG
         activeOpacity={1}
         onPress={() => {
           setmodalVisible(true);
@@ -136,8 +141,8 @@ const Item = ({
             }}
           />
         </>
-      </TouchableOpacityG>
-    </View>
+      </TouchableOpacityB>
+    // {/* </View> */}
   );
 };
 
@@ -783,7 +788,7 @@ const SwipeCard = ({
               showsVerticalScrollIndicator={false}
               scrollEventThrottle={300}
             >
-              <TouchableOpacityG
+              <TouchableOpacityB
                 activeOpacity={1}
                 onLongPress={() => {
                   setbio_enlarge(true);
@@ -880,15 +885,14 @@ const SwipeCard = ({
                           style={{
                             ...styles.habitsImage,
                           }}
-                          resizeMode='contain'
+                          resizeMode="contain"
                         />
                         <FastImage
                           source={card_itm?.smoking ? SmokingYes : SmokingNo}
                           style={{
                             ...styles.habitsImage,
-                            
                           }}
-                          resizeMode='contain'
+                          resizeMode="contain"
                         />
                         <FastImage
                           source={
@@ -897,7 +901,7 @@ const SwipeCard = ({
                           style={{
                             ...styles.habitsImage,
                           }}
-                          resizeMode='contain'
+                          resizeMode="contain"
                         />
                       </View>
                     </View>
@@ -994,7 +998,7 @@ const SwipeCard = ({
                     </View>
                   )}
                 </View>
-              </TouchableOpacityG>
+              </TouchableOpacityB>
             </ScrollView>
           </View>
 
@@ -1226,6 +1230,6 @@ const styles = StyleSheet.create({
   },
   habitsImage: {
     width: rspW(10.1),
-    aspectRatio:1,
+    aspectRatio: 1,
   },
 });

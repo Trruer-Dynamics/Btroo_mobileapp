@@ -18,6 +18,7 @@ import FastImage from "react-native-fast-image";
 const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
   const navigation = useNavigation();
 
+  // To get left hours
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
   let leftHrs = hours;
 

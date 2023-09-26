@@ -8,12 +8,11 @@ import React from "react";
 import Match from "../../screens/Swiping/Match/Match";
 import MatchStack from "../../screens/Swiping/Match/MatchStack";
 import FastImage from "react-native-fast-image";
-import { rspF, rspH , rspW} from "../../styles/responsiveSize";
+import { rspF, rspH, rspW } from "../../styles/responsiveSize";
 
 const BTab = createBottomTabNavigator();
 
 const BottomTab = () => {
-  
   return (
     <>
       <BTab.Navigator
@@ -43,7 +42,6 @@ const BottomTab = () => {
             tabBarInactiveTintColor: colors.grey,
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-              
                 return (
                   <FastImage
                     source={require("../../assets/images/BottomTab/Settings.jpg")}
@@ -70,7 +68,6 @@ const BottomTab = () => {
             tabBarInactiveTintColor: colors.grey,
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-                
                 return (
                   <FastImage
                     source={require("../../assets/images/BottomTab/swiper_active.png")}
@@ -99,7 +96,6 @@ const BottomTab = () => {
 
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-           
                 return (
                   <FastImage
                     tintColor={"#fff"}
@@ -128,7 +124,6 @@ const BottomTab = () => {
             tabBarInactiveTintColor: colors.grey,
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
-
                 return (
                   <FastImage
                     tintColor={"#fff"}

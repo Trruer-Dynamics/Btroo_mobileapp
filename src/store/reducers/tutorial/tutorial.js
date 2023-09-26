@@ -30,7 +30,12 @@ export const tutorialSlice = createSlice({
   },
 });
 
-export const { setSwipeTut, setMatchTut, setChatTut, setChatRevealTut,setRepeatTut } =
-  tutorialSlice.actions;
+export const {
+  setSwipeTut,
+  setMatchTut,
+  setChatTut,
+  setChatRevealTut,
+  setRepeatTut,
+} = tutorialSlice.actions;
 
 export default tutorialSlice.reducer;

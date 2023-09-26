@@ -131,6 +131,7 @@ const MobileNo = ({ navigation, route }) => {
 
   // On Next Button Press
   const onNextPress = async () => {
+
     Keyboard.dismiss();
     if (ph_no.length > 0) {
       setclickBtn(true);
@@ -156,11 +157,11 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      // setconfirm(confirmation);
-      // console.log("\n");
-      // console.log("confirmation", JSON.stringify(confirmation));
-      // console.log("\n");
+      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      setconfirm(confirmation);
+      console.log("\n");
+      console.log("confirmation", JSON.stringify(confirmation));
+      console.log("\n");
 
       setOtpShowBox(true);
 
@@ -177,13 +178,6 @@ const MobileNo = ({ navigation, route }) => {
   const onAuthStateChanged = (user) => {
     // console.log("\nonAuthStateChanged", user, "\n");
   };
-
-
-
-  
-
-
-  
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
@@ -334,7 +328,6 @@ const MobileNo = ({ navigation, route }) => {
             onResend={() =>
               signInWithPhoneNumber(`+${selected_ph_code?.phone}  ${ph_no}`)
             }
-    
             selected_ph_code={selected_ph_code}
             loading={loading}
             setloading={setloading}
@@ -399,7 +392,6 @@ const MobileNo = ({ navigation, route }) => {
             </FormWrapperFooter>
           </View>
         </CentralModal>
-
       </SafeAreaView>
     </>
   );

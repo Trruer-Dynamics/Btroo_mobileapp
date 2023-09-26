@@ -294,7 +294,7 @@ const ProfileMain = ({ navigation }) => {
                       style={{
                         ...styles.habitsImage,
                       }}
-                      resizeMode='contain'
+                      resizeMode="contain"
                     />
                     <FastImage
                       source={
@@ -305,7 +305,7 @@ const ProfileMain = ({ navigation }) => {
                       style={{
                         ...styles.habitsImage,
                       }}
-                      resizeMode='contain'
+                      resizeMode="contain"
                     />
                     <FastImage
                       source={
@@ -316,7 +316,7 @@ const ProfileMain = ({ navigation }) => {
                       style={{
                         ...styles.habitsImage,
                       }}
-                      resizeMode='contain'
+                      resizeMode="contain"
                     />
                   </View>
                 </View>
@@ -500,7 +500,9 @@ const ProfileMain = ({ navigation }) => {
                           paddingHorizontal: 15,
                           borderRadius: 5,
                           marginRight: 10,
-                          backgroundColor: colors.lightBlue + "99",
+                          // backgroundColor: colors.lightBlue + "99",
+                          backgroundColor: colors.blue,
+
                           alignItems: "center",
                           justifyContent: "center",
                         }}
@@ -508,6 +510,7 @@ const ProfileMain = ({ navigation }) => {
                         <Text
                           style={{
                             ...styles.profileDetailContHeading,
+                            color: colors.white,
                             textAlign: "center",
                           }}
                         >
@@ -707,9 +710,8 @@ const styles = StyleSheet.create({
 
   habitsImage: {
     width: rspW(10.1),
-    aspectRatio:1,
+    aspectRatio: 1,
     // height: rspH(4.7),
-    
   },
 
   // modal conatainer

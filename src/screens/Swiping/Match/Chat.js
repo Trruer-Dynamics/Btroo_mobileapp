@@ -246,24 +246,23 @@ const ChatItem = ({
                 // borderLeftWidth: 2,
                 // paddingVertical: rspH(1.2),
                 paddingVertical: rspH(1),
-                
+
                 marginTop: rspH(-0.5),
                 marginHorizontal: rspW(-0.8),
                 // paddingHorizontal: rspW(5.8),
                 // paddingHorizontal: rspW(3.8),
                 // paddingHorizontal: rspW(1),
 
-
                 // marginBottom: rspH(1.2),
                 marginBottom: rspH(0.6),
 
                 // maxWidth: rspW(52),
                 maxWidth: rspW(80),
+
                 // borderRadius: rspW(3),
                 borderRadius: rspW(2),
                 // borderLeftWidth: rspW(0.6),
                 borderLeftWidth: rspW(1),
-
 
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -276,7 +275,6 @@ const ChatItem = ({
 
                   // paddingHorizontal: rspF(1.6),
                   paddingHorizontal: rspF(1),
-
                 }}
               >
                 <Text
@@ -284,7 +282,7 @@ const ChatItem = ({
                     fontSize: rspF(1.8),
                     ...styles.rpyMsgHead,
                     color: item[1] == 0 ? colors.black : colors.white,
-                    paddingBottom:rspH(0.2),
+                    paddingBottom: rspH(0.2),
                   }}
                 >
                   {chatlist.find((v) => v[4] == item[5])[1] == "1"
@@ -319,27 +317,6 @@ const ChatItem = ({
             >
               {item[0]}
             </Text>
-            {/* {item[5] == null && (
-              <View
-                style={{
-                  marginRight: rspW(-3),
-                  marginBottom: rspH(-1.5),
-                  paddingLeft: rspW(2),
-                  justifyContent: "flex-end",
-                  zIndex: 2,
-                }}
-              >
-                <Text
-                  style={{
-                    ...styles.chatTimeTxt,
-                    textAlign: "right",
-                    color: item[1] == 0 ? colors.black : colors.white,
-                  }}
-                >
-                  {c_time}
-                </Text>
-              </View>
-            )} */}
           </View>
           {item[1] == 0 ? (
             <View
@@ -391,7 +368,7 @@ const ChatItem = ({
 
               // marginBottom: rspH(-1.5),
               paddingLeft: rspW(2),
-              
+
               // justifyContent: "flex-end",
               zIndex: 2,
             }}
@@ -400,7 +377,6 @@ const ChatItem = ({
               style={{
                 marginBottom: rspH(-1.3),
                 marginBottom: rspH(-1),
-
               }}
             >
               <Text
@@ -630,10 +606,12 @@ const Chat = ({ profile }) => {
     await axios
       .get(url, { headers })
       .then((resp) => {
-        setloading(false);
+        // setloading(false);
 
         let resp_data = resp.data.data;
         let code = resp.data.code;
+
+        console.log("getPrevChat", resp_data.length);
 
         if (code == 200) {
           let tmp_lis = [...list];
@@ -641,6 +619,7 @@ const Chat = ({ profile }) => {
           let tmp_2 = [];
           for (let i = 0; i < resp_data.length; i++) {
             const ele = resp_data[i];
+
             let turn = ele.sender == profile_data.user.id ? 1 : 0;
             let day_tmp = moment(new Date(ele.timestamp))
               .calendar()
@@ -675,7 +654,13 @@ const Chat = ({ profile }) => {
             k += 1;
           }
 
-          if (chats_msgs.length > tmp_lis.length) {
+          let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id);
+
+          console.log(
+            "chats_msgs.length > tmp_lis.length",
+            tmps.length > tmp_lis.length
+          );
+          if (tmps.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
             setchatlist(tmp);
             chatlist_ref.current = tmp;
@@ -688,7 +673,7 @@ const Chat = ({ profile }) => {
         }
       })
       .catch((err) => {
-        setloading(false);
+        // setloading(false);
       });
   };
 
@@ -788,7 +773,6 @@ const Chat = ({ profile }) => {
         {item[6] != "" && (
           <View
             style={{
-              // minWidth: rspW(18.1),
               paddingHorizontal: rspW(2.5),
               paddingTop: rspH(1.1),
               paddingBottom: rspH(0.7),
@@ -989,6 +973,7 @@ const Chat = ({ profile }) => {
   }, [rvl_activate]);
 
   useLayoutEffect(() => {
+    setloading(true);
     if (profile.matchType == "New Match") {
       setmsg("Hi!");
     }
@@ -1148,38 +1133,52 @@ const Chat = ({ profile }) => {
             )}
           </View>
 
-          <FlashList
-            keyboardDismissMode="interactive"
-            estimatedItemSize={10}
-            data={chatlist}
-            contentContainerStyle={{
-              paddingHorizontal: rspW(6.2),
-              flexDirection: "column-reverse",
-            }}
-            ref={scrollViewRef}
-            inverted
-            keyboardShouldPersistTaps={
-              Platform.OS == "android" ? "always" : "never"
-            }
-            onContentSizeChange={() => {
-              let lastMsg = chatlist[0];
-              let sender = "";
-              if (lastMsg) {
-                sender = lastMsg[3];
-                let login_user = profile_data.user.id;
-
-                if (login_user === sender) {
-                  scrollViewRef.current.scrollToIndex({
-                    index: 0,
-                    animated: false,
-                  });
-                }
+          {chatlist && chatlist.length > 0 ? (
+            <FlashList
+              keyboardDismissMode="interactive"
+              estimatedItemSize={100}
+              onLoad={() => {
+                setloading(false);
+                console.log("onLoad");
+              }}
+              // extraData={chatlist}
+              data={chatlist}
+              contentContainerStyle={{
+                paddingHorizontal: rspW(6.2),
+                flexDirection: "column-reverse",
+              }}
+              ref={scrollViewRef}
+              inverted
+              keyboardShouldPersistTaps={
+                Platform.OS == "android" ? "always" : "never"
               }
-            }}
-            renderItem={renderItem}
-            keyExtractor={(_, index) => index}
-            bounces={false}
-          />
+              onContentSizeChange={() => {
+                let lastMsg = chatlist[0];
+                let sender = "";
+                if (lastMsg) {
+                  sender = lastMsg[3];
+                  let login_user = profile_data.user.id;
+
+                  if (login_user === sender) {
+                    scrollViewRef.current.scrollToIndex({
+                      index: 0,
+                      animated: false,
+                    });
+                  }
+                }
+              }}
+              renderItem={renderItem}
+              keyExtractor={(_, index) => index}
+              bounces={false}
+            />
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                // backgroundColor:'red'
+              }}
+            />
+          )}
 
           <View
             style={{
@@ -1229,7 +1228,6 @@ const Chat = ({ profile }) => {
                     paddingLeft: rspW(1.8),
                     paddingRight: rspW(2.4),
 
-
                     // marginTop: 10,
                     marginTop: rspH(0.7),
 
@@ -1249,7 +1247,7 @@ const Chat = ({ profile }) => {
                             : colors.white,
                         fontWeight: "600",
                         // lineHeight: rspF(2.4),
-                        paddingBottom:rspH(0.2),
+                        paddingBottom: rspH(0.2),
                       }}
                     >
                       {chatlist.find((v) => v[4] == actreplyID)[1] == "1"
@@ -1469,14 +1467,13 @@ const styles = StyleSheet.create({
     borderRadius: rspW(2),
     // marginHorizontal: rspW(4),
     marginHorizontal: rspW(1),
-
   },
   chatMsgTxt: {
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
     lineHeight: rspF(2.1),
-    // minWidth: rspW(10),
-    minWidth: rspW(12),
+
+    minWidth: rspW(24),
     maxWidth: rspW(80),
     letterSpacing: Platform.OS == "ios" ? 0 : 0.5,
   },
@@ -1491,7 +1488,7 @@ const styles = StyleSheet.create({
     fontSize: rspF(1.5),
     fontFamily: fontFamily.bold,
     lineHeight: rspF(1.8),
-
+    minWidth: rspW(26),
     color: colors.black,
   },
   chatTimeTxt: {

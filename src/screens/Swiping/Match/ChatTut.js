@@ -24,7 +24,10 @@ import FullModal from "../../../components/modals/FullModal";
 import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import { setChatTut, setRepeatTut } from "../../../store/reducers/tutorial/tutorial";
+import {
+  setChatTut,
+  setRepeatTut,
+} from "../../../store/reducers/tutorial/tutorial";
 import axios from "axios";
 import { apiUrl } from "../../../constants";
 import Loader from "../../../components/loader/Loader";
@@ -209,7 +212,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
   useFocusEffect(
     React.useCallback(() => {
       return () => {
-        dispatch(setRepeatTut(false))
+        dispatch(setRepeatTut(false));
       };
     }, [])
   );
@@ -357,7 +360,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
                       setchat_step(chat_step + 1);
                     } else {
                       if (repeat_tut) {
-                        dispatch(setRepeatTut(false))
+                        dispatch(setRepeatTut(false));
                         navigation.navigate("SettingsScreen");
                       } else {
                         chatTutDone();

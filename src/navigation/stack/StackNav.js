@@ -36,6 +36,7 @@ const StackNav = () => {
           headerShown: false,
           gestureEnabled: false,
         }}
+        // show screen according to authentication
         initialRouteName={user_loggined ? "BottomTab" : "Splash"}
       >
         <Stack.Screen name="Splash" component={Splash} />

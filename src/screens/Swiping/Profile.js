@@ -8,7 +8,7 @@ import { setCurrentScreen } from "../../store/reducers/screen/screen";
 import { useFocusEffect } from "@react-navigation/native";
 
 const Profile = ({ route }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const Stack = createStackNavigator();
 
   const is_network_connected = useSelector(
@@ -17,9 +17,8 @@ const Profile = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      dispatch(setCurrentScreen("Profile"))
-      return () => {
-      };
+      dispatch(setCurrentScreen("Profile"));
+      return () => {};
     }, [])
   );
 

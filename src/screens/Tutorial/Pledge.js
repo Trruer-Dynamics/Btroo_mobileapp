@@ -18,7 +18,7 @@ import { useDispatch } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
-const Pledge = ({ navigation,route }) => {
+const Pledge = ({ navigation, route }) => {
   const onNextPress = () => {
     navigation.navigate("BottomTab", {
       screen: "Swiper",

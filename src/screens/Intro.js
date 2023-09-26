@@ -93,7 +93,7 @@ const Intro = ({ route }) => {
             <FastImage
               style={styles.logo}
               source={require("../assets/images/WelcomeScreen/btroo_logo.jpg")}
-              resizeMode = "contain"
+              resizeMode="contain"
             />
           </View>
 
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   logo: {
     width: rspW(76),
     // height: rspH(10),
-    aspectRatio:1,
+    aspectRatio: 1,
   },
 
   paraContainer: {

@@ -37,9 +37,6 @@ const Navigation = () => {
   );
 
   useEffect(() => {
-    console.log("current_screen", current_screen);
-    console.log("is_network_connected", is_network_connected);
-
     dispatch(setProfileRefresh(!profile_refresh));
 
     if (!is_network_connected) {
@@ -50,6 +47,7 @@ const Navigation = () => {
         current_screen != "Swiper" &&
         current_screen != "SettingsScreen" &&
         current_screen != "Profile" &&
+        current_screen != "ProfileRevealed" &&
         current_screen != "MatchProfile" &&
         current_screen != ""
       ) {

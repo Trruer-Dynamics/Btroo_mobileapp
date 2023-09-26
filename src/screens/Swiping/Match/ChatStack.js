@@ -12,13 +12,13 @@ const ChatStack = ({ route }) => {
   const chat_tut = useSelector((state) => state.tutorial.chat_tut);
   const repeat_tut = useSelector((state) => state.tutorial.repeat_tut);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useFocusEffect(
     React.useCallback(() => {
-        console.log("chat screen focused")
+    
       return () => {
-        dispatch(setRepeatTut(false))
+        dispatch(setRepeatTut(false));
       };
     }, [])
   );

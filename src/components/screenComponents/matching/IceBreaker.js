@@ -53,6 +53,7 @@ const IceBreaker = ({
 
   return (
     <FormComponentsWrapper>
+      {/* Common Component Header */}
       <FormComponentsWrapperHeader
         title={"Icebreakers"}
         visible={modalVisible}
@@ -63,9 +64,10 @@ const IceBreaker = ({
       <View>
         <Text style={styles.para}></Text>
       </View>
-
+      {/* To add Empty Space */}
       <View style={styles.emptysearchContainer} />
 
+      {/* Item List */}
       <FlatList
         data={icebreaker_list}
         renderItem={renderItem}

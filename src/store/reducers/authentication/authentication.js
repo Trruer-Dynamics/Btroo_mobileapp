@@ -13,7 +13,7 @@ const initialState = {
   is_session_expired: false,
   is_profile_revealed: false,
   is_socket_closed: true,
-  is_network_connected: false,
+  is_network_connected: true,
   active_user_location_details: {
     mobile: "",
 

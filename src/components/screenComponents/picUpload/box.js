@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,8 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import fontFamily from "../../../styles/fontFamily";
 import FastImage from "react-native-fast-image";
+import { runOnJS, useAnimatedReaction, useDerivedValue } from "react-native-reanimated";
+import { refresh } from "@react-native-community/netinfo";
 
 const Box = ({
   item,
@@ -24,9 +26,16 @@ const Box = ({
   setactiveIndx,
   positions,
   deleteProfileImage,
-
   up_img_len = 9,
+  pos2,
 }) => {
+
+
+  // useEffect(()=>{
+  //   setactiveIndx(index)
+  // },[refresh])
+  
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
@@ -98,7 +107,7 @@ const Box = ({
                 ...styles.positionTxt,
               }}
             >
-              {positions.value[index] + 1}
+              {pos2[index] + 1}
             </Text>
           </View>
         </View>
@@ -116,7 +125,7 @@ const Box = ({
   );
 };
 
-export default Box;
+export default memo(Box);
 
 const styles = StyleSheet.create({
   uploadSec: {

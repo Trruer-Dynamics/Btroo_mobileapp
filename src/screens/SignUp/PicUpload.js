@@ -66,7 +66,9 @@ const PicUpload = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
 
+
   // draggable positions
+  // empty pic item list with format
   const [pic_list, setpic_list] = useState([
     ["", "", true, "1", ""],
     ["", "", false, "2", ""],
@@ -78,10 +80,15 @@ const PicUpload = ({ navigation, route }) => {
     ["", "", false, "8", ""],
     ["", "", false, "9", ""],
   ]);
+
+  // generate 9 positions from 0 to 8 for pic items
   const positions = useSharedValue(
     Object.assign({}, ...pic_list.map((item, indx) => ({ [indx]: indx })))
   );
 
+  const [pos2, setpos2] = useState(Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx }))))
+
+  // to control image upload modal
   const [modalVisible, setmodalVisible] = useState(false);
   const [activeIndx, setactiveIndx] = useState(0);
 
@@ -92,6 +99,7 @@ const PicUpload = ({ navigation, route }) => {
 
   const [pic_blr, setpic_blr] = useState(false);
 
+  // if we fail to upload image in backend then reset list
   const ifFail = async (del_indx, tmp_a = []) => {
     let tmp_ls = [...pic_list];
     if (tmp_a.length > 0) {
@@ -105,12 +113,13 @@ const PicUpload = ({ navigation, route }) => {
     return true;
   };
 
+  // set final list and refresh screen to show changes
   const atLast = async (tmp_lis) => {
     setpic_list(tmp_lis);
-
-    setrefresh(!refresh);
+    setrefresh(!refresh)
   };
 
+  // at Last Confirm  image positions and three images uploaded
   const confirmImageUploads = async () => {
     setmainloading(true);
 
@@ -136,7 +145,9 @@ const PicUpload = ({ navigation, route }) => {
       });
   };
 
+  // If Next Button Press
   const onNextPress = () => {
+    // Validation : atleast three images uploaded
     let tup = pic_list.filter((v) => v[0] != "").length;
     if (tup >= 3) {
       changeImgPosition();
@@ -144,6 +155,8 @@ const PicUpload = ({ navigation, route }) => {
     }
   };
 
+
+ // To rearrange positions of all images after deleting image
   const reArrangeList = async (indx) => {
     let tmp_lis = _.cloneDeep(pic_list);
     tmp_lis.splice(indx, 1);
@@ -167,11 +180,15 @@ const PicUpload = ({ navigation, route }) => {
       up_pos[m] = m;
     }
 
-    positions.value = up_pos;
 
+    positions.value = up_pos;
+    setpos2(up_pos)
+    setrefresh(!refresh);
     dispatch(setProfileImgs(tmp_lis));
     await atLast(tmp_lis);
   };
+
+  
 
   const deleteProfileImage = async (indx) => {
     setmainloading(true);
@@ -206,6 +223,8 @@ const PicUpload = ({ navigation, route }) => {
     }
   };
 
+
+// To changed position of images in backend
   const changeImgPosition = async () => {
     // Set the API endpoint URL
     setmainloading(true);
@@ -253,6 +272,7 @@ const PicUpload = ({ navigation, route }) => {
       ele[3] = positions.value[t];
     }
 
+    // sort piclist according to its position
     up_pos_lis = up_pos_lis.sort((a, b) => a[3] - b[3]);
 
     try {
@@ -263,7 +283,8 @@ const PicUpload = ({ navigation, route }) => {
       let user_data = resp.data.data;
 
       if (code == 200) {
-        await dispatch(setProfileImgs(up_pos_lis));
+        // save imag urls locally in mobile
+        dispatch(setProfileImgs(up_pos_lis));
         confirmImageUploads();
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
@@ -313,23 +334,23 @@ const PicUpload = ({ navigation, route }) => {
       let data = resp.data.data;
       let code = resp.data.code;
 
-      console.log("save Image data", data);
-
       if (code == 200) {
         let n_img = data.image;
         let pid = data.id;
         let crp_imgd = data.cropedimage;
 
         let tmp_lst = [...pic_list];
+        // create format of image item
         tmp_lst[activeIndx] = [n_img, crp_imgd, true, activeIndx + 1, pid];
 
+        // If active Tab is not last activated futher Tab to upload image
         if (activeIndx < 8 && !tmp_lst[activeIndx + 1][2]) {
           tmp_lst[activeIndx + 1] = ["", "", true, String(activeIndx + 2), ""];
         }
 
         setpic_list(tmp_lst);
         dispatch(setProfileImgs(tmp_lst));
-        setrefresh(!refresh);
+        // setrefresh(!refresh);
 
         setloading(false);
       } else if (code == 401) {
@@ -339,7 +360,6 @@ const PicUpload = ({ navigation, route }) => {
         ifFail(activeIndx);
       }
     } catch (error) {
-      console.log("save image error", error);
       setloading(false);
       ifFail(activeIndx);
     }
@@ -397,7 +417,7 @@ const PicUpload = ({ navigation, route }) => {
         setpic_list(tmp_lis);
 
         dispatch(setProfileImgs(tmp_lis));
-        setrefresh(!refresh);
+        // setrefresh(!refresh);
 
         setloading(false);
       } else if (code == 401) {
@@ -522,6 +542,7 @@ const PicUpload = ({ navigation, route }) => {
     }, [])
   );
 
+
   return (
     <>
       {mainloading && <Loader />}
@@ -559,12 +580,15 @@ const PicUpload = ({ navigation, route }) => {
                     activeIndx={activeIndx}
                     item={item}
                     pic_list={pic_list}
+                    setpos2={setpos2}
                     refresh={refresh}
                     setrefresh={setrefresh}
+
                   >
                     <Box
                       positions={positions}
                       index={index}
+                      refresh={refresh}
                       loading={loading}
                       item={item}
                       activeIndx={activeIndx}
@@ -572,6 +596,7 @@ const PicUpload = ({ navigation, route }) => {
                       modalVisible={modalVisible}
                       setmodalVisible={setmodalVisible}
                       deleteProfileImage={deleteProfileImage}
+                      pos2={pos2}
                     />
                   </Draggable>
                 );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import Animated, {
   runOnJS,
@@ -20,6 +20,7 @@ const Draggable = ({
   refresh,
   setrefresh,
   setpos_change = null,
+  setpos2,
 }) => {
   const position = getPosition(positions.value[id]);
   const translateX = useSharedValue(position.x);
@@ -27,17 +28,20 @@ const Draggable = ({
   const isGestureActive = useSharedValue(false);
   const isDraggable = useSharedValue(false);
 
+
   useAnimatedReaction(
-    () => positions.value[id],
-
+    () => 
+    positions.value[id],
     (newOrder) => {
+      
       const newPostions = getPosition(newOrder);
-
       translateX.value = withTiming(newPostions.x);
-
       translateY.value = withTiming(newPostions.y);
+      
     }
   );
+
+  
 
   const setDraggable = () => {
     if (item[1] != "") {
@@ -49,6 +53,8 @@ const Draggable = ({
 
   const refreshScreen = () => {
     setrefresh(!refresh);
+    setpos2(positions.value)
+    
   };
 
   const imgPosChange = () => {
@@ -200,6 +206,8 @@ const Draggable = ({
       ],
     };
   });
+
+  
 
   return (
     <Animated.View style={{ ...animatedStyle }}>

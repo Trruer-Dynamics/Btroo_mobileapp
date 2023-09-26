@@ -64,14 +64,21 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const resetNav = async () => {
-    const resetAction = navigation.reset({
-      index: 0,
-      routes: [{ name: "Intro" }],
-    });
-    navigation.dispatch(resetAction);
+
+    try {
+      const resetAction = navigation.reset({
+        index: 0,
+        routes: [{ name: "Intro" }],
+      });
+      navigation.dispatch(resetAction);
+    } catch (error) {
+      console.log("resetNav", error)
+    }
+   
   };
 
   const emptyAll = async () => {
+
     dispatch(setUserLoggined(false));
     dispatch(setAccessToken(""));
     dispatch(setSessionExpired(false));
@@ -88,6 +95,7 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const removeToken = async () => {
+  
     const url = apiUrl + "token_remove/";
 
     const headers = {
@@ -127,6 +135,8 @@ const UserProvider = ({ children, navigationRef }) => {
   useEffect(() => {
     clearData();
   }, [is_session_expired]);
+
+
 
   useLayoutEffect(() => {
     notificationListener();

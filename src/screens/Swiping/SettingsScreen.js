@@ -29,7 +29,10 @@ import {
 import { apiUrl } from "../../constants";
 import axios from "axios";
 import { useFocusEffect } from "@react-navigation/native";
-import { setRepeatTut, setSwipeTut } from "../../store/reducers/tutorial/tutorial";
+import {
+  setRepeatTut,
+  setSwipeTut,
+} from "../../store/reducers/tutorial/tutorial";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { UserContext } from "../../context/user";
@@ -819,7 +822,7 @@ const SettingsScreen = ({ navigation, route }) => {
               <TouchableOpacity
                 onPress={() => {
                   // dispatch(setSwipeTut(true));
-                  dispatch(setRepeatTut(true))
+                  dispatch(setRepeatTut(true));
                   navigation.navigate("Swiper");
                 }}
                 style={{

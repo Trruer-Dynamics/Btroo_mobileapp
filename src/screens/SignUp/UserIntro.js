@@ -605,6 +605,7 @@ const UserIntro = ({ navigation, route }) => {
             v.icongrey,
           ]);
 
+
           setpets_list(tmp_lis);
         } else {
           console.warn("Error occur while getPets");
