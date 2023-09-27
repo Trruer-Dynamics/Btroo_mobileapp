@@ -28,6 +28,7 @@ import { getHash } from "react-native-otp-verify";
 import NetInfo from "@react-native-community/netinfo";
 import _ from "lodash";
 import { setNetworkConnect } from "./src/store/reducers/authentication/authentication";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 AntDesign.loadFont()
   .then()

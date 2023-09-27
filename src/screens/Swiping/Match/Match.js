@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-import React, { useState, useEffect, useContext, useLayoutEffect } from "react";
+import React, { useState, useEffect, useContext, useLayoutEffect, useCallback } from "react";
 import FormWrapper from "../../../components/wrappers/formWrappers/FormWrapper";
 import MatchItem from "../../../components/screenComponents/matching/MatchItem";
 import colors from "../../../styles/colors";
@@ -181,7 +181,7 @@ const Match = () => {
     } catch (error) {}
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = useCallback(({ item }) => {
     return (
       <MatchItem
         item={item}
@@ -190,7 +190,7 @@ const Match = () => {
         setextendTimeMatchID={setextendTimeMatchID}
       />
     );
-  };
+  },[])
 
   const extendTime = async () => {
     let tmstmp = new Date().toISOString().slice(0, -5).split("T");

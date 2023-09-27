@@ -209,8 +209,7 @@ const OtpVerify = ({
   };
 
   const getDeviceToken = async () => {
-    const registered = await messaging().registerDeviceForRemoteMessages();
-
+   
     if (Platform.OS == "ios") {
       const apn_tok = await messaging().getAPNSToken();
     }
@@ -636,16 +635,17 @@ const OtpVerify = ({
               borderColor:
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
-                  : otp1blr && otp1 != ""
-                  ? colors.blue
+                  : otp1blr && otp1.length == 6
+                                    ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp1blr ? "#fff" : "#F8F8F8",
             }}
-            onBlur={() => setotp1blr(true)}
+            // onBlur={() => setotp1blr(true)}
             returnKeyType="next"
             blurOnSubmit={false}
             maxLength={6}
             onChangeText={(text) => {
+              setotp1blr(true)
               setotperr(false);
 
               let last = text.charAt(text.length - 1);

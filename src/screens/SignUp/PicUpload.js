@@ -300,6 +300,7 @@ const PicUpload = ({ navigation, route }) => {
 
     let active_itm = [];
 
+    // get active item
     active_itm = pic_list[activeIndx];
 
     const url = apiUrl + "userimage/";
@@ -357,14 +358,17 @@ const PicUpload = ({ navigation, route }) => {
         dispatch(setSessionExpired(true));
       } else {
         setloading(false);
+        // If somee other error occur empty active image position
         ifFail(activeIndx);
       }
     } catch (error) {
       setloading(false);
+      // If somee other error occur empty active image position
       ifFail(activeIndx);
     }
   };
 
+  // Update Profile Api set image on position pressed
   const updateProfileImage = async (mnImage, crpImage, tmp_a) => {
     setloading(true);
 
@@ -432,6 +436,8 @@ const PicUpload = ({ navigation, route }) => {
     }
   };
 
+
+// Use to compress images 
   const compressImg = async (img) => {
     // Compressor
     const compr_img = await CompImage.compress(img, {
@@ -440,6 +446,7 @@ const PicUpload = ({ navigation, route }) => {
     return compr_img;
   };
 
+  // load image finally after compress to list
   const finalLoad = async (img, crp_img) => {
     let n_img = await compressImg(img);
     let comp_crp_img = await compressImg(crp_img);
@@ -571,8 +578,12 @@ const PicUpload = ({ navigation, route }) => {
 
             {/* Inputs Container*/}
             <View style={styles.inputCont}>
+
+            {/* Pic Upload Grids List */}
+
               {pic_list.map((item, index) => {
                 return (
+                  // Draggable to drag component
                   <Draggable
                     key={index}
                     positions={positions}
@@ -583,7 +594,6 @@ const PicUpload = ({ navigation, route }) => {
                     setpos2={setpos2}
                     refresh={refresh}
                     setrefresh={setrefresh}
-
                   >
                     <Box
                       positions={positions}

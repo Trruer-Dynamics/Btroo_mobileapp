@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   BackHandler,
   AppState,
+  FlatList,
 } from "react-native";
 import React, {
   useState,
@@ -16,6 +17,7 @@ import React, {
   useEffect,
   useRef,
   useContext,
+  useCallback,
 } from "react";
 import moment from "moment";
 import ETIcon from "react-native-vector-icons/Entypo";
@@ -84,6 +86,7 @@ const ChatItem = ({
   setchatlist,
   scrollViewRef,
   profile,
+  setrply_animation,
   dispatch,
 }) => {
   const vibtr = async () => {
@@ -150,7 +153,8 @@ const ChatItem = ({
 
   const animation2 = useSharedValue(1);
   const fadeIn = async () => {
-    animation2.value = withDelay(
+    animation2.value = 
+    withDelay(
       500,
       withTiming(100, {
         duration: 2000,
@@ -233,7 +237,7 @@ const ChatItem = ({
                 setrply_item_indx(rply_itm_indx);
                 let tmp_lis = [...chatlist];
                 setchatlist(tmp_lis);
-
+                setrply_animation(true)
                 scrollViewRef.current.scrollToIndex({
                   index: rply_itm_indx,
                   animated: true,
@@ -403,6 +407,7 @@ const ChatItem = ({
                 setrply_item_indx(null);
                 let tmp_lis = [...chatlist];
                 setchatlist(tmp_lis);
+                setrply_animation(false)
               }, 1800);
             });
           }}
@@ -410,7 +415,8 @@ const ChatItem = ({
             {
               paddingVertical: rspH(0.4),
               position: "absolute",
-              width: "100%",
+              left : rspW(-3.5),
+              width: scrn_width * 0.95,
               height: "100%",
               backgroundColor: "#2364aa4e",
             },
@@ -469,6 +475,7 @@ const Chat = ({ profile }) => {
   const socket_con = useRef(null);
   const [chatlist_remain, setchatlist_remain] = useState([]);
   const [rply_item_indx, setrply_item_indx] = useState(null);
+  const [rply_animation, setrply_animation] = useState(false)
 
   const [chatPage, setchatPage] = useState(1);
 
@@ -668,12 +675,18 @@ const Chat = ({ profile }) => {
             setchatlist(tmp_lis);
             chatlist_ref.current = tmp_lis;
           }
+          
+          if (tmp_lis.length == 0) {
+            setloading(false);
+          }
+          
 
           setconnectSocketS(true);
         }
+        
       })
       .catch((err) => {
-        // setloading(false);
+        setloading(false);
       });
   };
 
@@ -767,7 +780,7 @@ const Chat = ({ profile }) => {
     };
   };
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = useCallback( ({ item, index }) => {
     return (
       <GestureHandlerRootView>
         {item[6] != "" && (
@@ -805,6 +818,7 @@ const Chat = ({ profile }) => {
           dispatch={dispatch}
           rply_item_indx={rply_item_indx}
           setrply_item_indx={setrply_item_indx}
+          setrply_animation={setrply_animation}
           scrollViewRef={scrollViewRef}
           replySet={replySet}
           setreplySet={setreplySet}
@@ -813,14 +827,16 @@ const Chat = ({ profile }) => {
           setchatlist={setchatlist}
         />
       </GestureHandlerRootView>
-    );
-  };
+    )
+            },[chatlist])
 
   useEffect(() => {
     if (chatlist.length > 0) {
-      dispatch(setChatMsgs(chatlist));
+      dispatch(setChatMsgs([]));
     }
   }, [chatlist]);
+
+  
 
   useEffect(() => {
     if (connectSocketS) {
@@ -973,7 +989,7 @@ const Chat = ({ profile }) => {
   }, [rvl_activate]);
 
   useLayoutEffect(() => {
-    setloading(true);
+    // setloading(false);
     if (profile.matchType == "New Match") {
       setmsg("Hi!");
     }
@@ -1024,6 +1040,7 @@ const Chat = ({ profile }) => {
 
     if (!is_network_connected && tmp.length > 0) {
       setchatlist(tmp);
+      setloading(false)
     }
 
     if (is_network_connected && drafts_msgs.length > 0) {
@@ -1032,10 +1049,34 @@ const Chat = ({ profile }) => {
   }, [is_network_connected]);
 
   useLayoutEffect(() => {
+    setloading(false)
     if (is_network_connected) {
       getPrevChats(chatlist);
     }
   }, []);
+
+
+  useEffect(() => {
+    console.log("rply_animation",rply_animation)
+    if (chatlist.length > 0 && !rply_animation) {
+      let lastMsg = chatlist[0];
+    let sender = "";
+    if (lastMsg) {
+      sender = lastMsg[3];
+      let login_user = profile_data.user.id;
+      if (login_user === sender) {
+        scrollViewRef.current.scrollToIndex({
+          index: 0,
+          animated: false,
+        });
+      }
+    }
+    }
+
+    
+    
+  }, [chatlist])
+  
 
   return (
     <>
@@ -1127,18 +1168,21 @@ const Chat = ({ profile }) => {
                         </TouchableOpacity>
                       )}
                     </>
-                  );
+                  ); 
                 }}
               />
             )}
           </View>
 
-          {chatlist && chatlist.length > 0 ? (
+       
             <FlashList
               keyboardDismissMode="interactive"
               estimatedItemSize={100}
               onLoad={() => {
                 setloading(false);
+                if (chatlist.length > 0) {
+                  setloading(false)
+                }
                 console.log("onLoad");
               }}
               // extraData={chatlist}
@@ -1147,38 +1191,35 @@ const Chat = ({ profile }) => {
                 paddingHorizontal: rspW(6.2),
                 flexDirection: "column-reverse",
               }}
+              
               ref={scrollViewRef}
               inverted
               keyboardShouldPersistTaps={
                 Platform.OS == "android" ? "always" : "never"
               }
               onContentSizeChange={() => {
-                let lastMsg = chatlist[0];
-                let sender = "";
-                if (lastMsg) {
-                  sender = lastMsg[3];
-                  let login_user = profile_data.user.id;
-
-                  if (login_user === sender) {
-                    scrollViewRef.current.scrollToIndex({
-                      index: 0,
-                      animated: false,
-                    });
-                  }
-                }
+               
+                // let lastMsg = chatlist[0];
+                // let sender = "";
+                // if (lastMsg) {
+                //   sender = lastMsg[3];
+                //   let login_user = profile_data.user.id;
+                //   if (login_user === sender) {
+                //     scrollViewRef.current.scrollToIndex({
+                //       index: 0,
+                //       animated: false,
+                //     });
+                //   }
+                // }
               }}
               renderItem={renderItem}
               keyExtractor={(_, index) => index}
+              bouncesZoom={false}
               bounces={false}
+              removeClippedSubviews={true}
+          
             />
-          ) : (
-            <View
-              style={{
-                flex: 1,
-                // backgroundColor:'red'
-              }}
-            />
-          )}
+         
 
           <View
             style={{

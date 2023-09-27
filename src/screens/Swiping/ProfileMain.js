@@ -177,7 +177,7 @@ const ProfileMain = ({ navigation }) => {
             >
               <FastImage
                 style={styles.profileImage}
-                source={{ uri: profile_imgs[0][1] }}
+                source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
               />
             </TouchableOpacity>
 

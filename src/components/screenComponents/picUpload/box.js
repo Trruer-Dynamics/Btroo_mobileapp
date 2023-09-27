@@ -31,15 +31,11 @@ const Box = ({
 }) => {
 
 
-  // useEffect(()=>{
-  //   setactiveIndx(index)
-  // },[refresh])
-  
-
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       onPress={() => {
+        // open image upload modal if active
         if (item[2]) {
           setmodalVisible(true);
           setactiveIndx(index);
@@ -49,6 +45,7 @@ const Box = ({
     >
       {item[0] != "" ? (
         <View style={{ position: "relative" }}>
+          {/* show loader if image saving in backend */}
           {loading && activeIndx == index && (
             //   true
             <View
@@ -80,6 +77,7 @@ const Box = ({
               borderRadius: rspW(2.5),
             }}
           />
+          {/* Use in Edit pRofile Scrren to add validation of compulsory three images */}
           {up_img_len > 3 && (
             <TouchableOpacity
               activeOpacity={0.8}

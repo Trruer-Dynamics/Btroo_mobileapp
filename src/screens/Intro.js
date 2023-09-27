@@ -168,6 +168,7 @@ const Intro = ({ route }) => {
                       action: "signup",
                     })
                   );
+                  // navigation.navigate('UserIntro')
                   navigation.navigate("MobileNo", { action: "signup" });
                 }}
               >

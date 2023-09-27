@@ -7,8 +7,6 @@ import axios from "axios";
 import {
   CommonActions,
   useNavigation,
-  StackActions,
-  NavigationAction,
 } from "@react-navigation/native";
 
 import {
@@ -66,7 +64,7 @@ const UserProvider = ({ children, navigationRef }) => {
   const resetNav = async () => {
 
     try {
-      const resetAction = navigation.reset({
+      const resetAction =  CommonActions.reset({
         index: 0,
         routes: [{ name: "Intro" }],
       });
