@@ -11,7 +11,7 @@ import React from "react";
 import Video from "react-native-video";
 import fontFamily from "../styles/fontFamily";
 import colors from "../styles/colors";
-import { rspW, rspH, rspF } from "../styles/responsiveSize";
+import { rspW, rspH, rspF, scrn_height } from "../styles/responsiveSize";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveUserLocationDetails,
@@ -33,35 +33,35 @@ const Intro = ({ route }) => {
   // this custom hook is to check the screen is loaded completly or not
   const isReady = useIsReady();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      // To Show transparent status bar, only applicable for android device
-      if (Platform.OS == "android") {
-        dispatch(
-          setStatusBarArgs({
-            barStyle: "dark-content",
-            backgroundColor: "transparent",
-          })
-        );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     // To Show transparent status bar, only applicable for android device
+  //     if (Platform.OS == "android") {
+  //       dispatch(
+  //         setStatusBarArgs({
+  //           barStyle: "dark-content",
+  //           backgroundColor: "transparent",
+  //         })
+  //       );
 
-        StatusBar.setTranslucent(true);
-      }
+  //       StatusBar.setTranslucent(true);
+  //     }
 
-      return () => {
-        // remove transparency from status bar while navigating to other screen
-        dispatch(
-          setStatusBarArgs({
-            barStyle: "dark-content",
-            backgroundColor: "#fff",
-          })
-        );
+  //     return () => {
+  //       // remove transparency from status bar while navigating to other screen
+  //       dispatch(
+  //         setStatusBarArgs({
+  //           barStyle: "dark-content",
+  //           backgroundColor: "#fff",
+  //         })
+  //       );
 
-        if (Platform.OS == "android") {
-          StatusBar.setTranslucent(false);
-        }
-      };
-    }, [])
-  );
+  //       if (Platform.OS == "android") {
+  //         StatusBar.setTranslucent(false);
+  //       }
+  //     };
+  //   }, [])
+  // );
 
   useFocusEffect(
     React.useCallback(() => {
@@ -74,7 +74,11 @@ const Intro = ({ route }) => {
     <>
       {/* Load video only when screen properly load */}
       {isReady && (
-        <View style={{ flex: 1 }}>
+        <View style={{ 
+          flex: 1 , 
+        // marginTop: StatusBar.currentHeight
+        // height: scrn_height + StatusBar.currentHeight,
+        }}>
           {/* Background Video */}
 
           <Video
@@ -211,6 +215,7 @@ export default Intro;
 const styles = StyleSheet.create({
   backgroundVideo: {
     height: "100%",
+    // height: scrn_height,
     position: "absolute",
     top: 0,
     left: 0,

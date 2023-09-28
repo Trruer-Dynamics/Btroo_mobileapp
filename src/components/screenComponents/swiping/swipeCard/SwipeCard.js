@@ -454,7 +454,7 @@ const SwipeCard = ({
       dispatch(setStatusBarArgs({ barStyle: "light-content" }));
 
       if (Platform.OS == "android") {
-        StatusBar.setTranslucent(false);
+        // StatusBar.setTranslucent(false);
       }
     } else {
       dispatch(

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, StatusBar } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { scrn_width } from "../styles/responsiveSize";
 import FastImage from "react-native-fast-image";

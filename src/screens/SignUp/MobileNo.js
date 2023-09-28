@@ -157,11 +157,11 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      setconfirm(confirmation);
-      console.log("\n");
-      console.log("confirmation", JSON.stringify(confirmation));
-      console.log("\n");
+      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      // setconfirm(confirmation);
+      // console.log("\n");
+      // console.log("confirmation", JSON.stringify(confirmation));
+      // console.log("\n");
 
       setOtpShowBox(true);
 
@@ -198,14 +198,17 @@ const MobileNo = ({ navigation, route }) => {
     <>
       {loading && <Loader />}
 
-      <SafeAreaView style={{ height: scrn_height, backgroundColor: "#fff" }}>
+      <SafeAreaView style={{ height: '100%', backgroundColor: "#fff" }}>
         {/* To Autoscroll Input Field on keyboard appear */}
         <KeyboardAwareScrollView
           enableOnAndroid={true}
           bounces={false}
           showsVerticalScrollIndicator={false}
           style={{ backgroundColor: "#fff", position: "relative" }}
-          extraScrollHeight={Platform.OS == "ios" ? rspH(22) : rspH(28)} // To show Next Button on Keyboard Appear
+          extraHeight={Platform.OS == "ios" ? rspH(30) : rspH(75)}
+          extraScrollHeight={Platform.OS == "ios" ? 0 : rspH(-40)} 
+
+          // To show Next Button on Keyboard Appear
           keyboardShouldPersistTaps={"always"}
         >
           {/* To Wrap all Form for constant paddings , bg color , margins etc */}

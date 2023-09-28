@@ -832,7 +832,7 @@ const Chat = ({ profile }) => {
 
   useEffect(() => {
     if (chatlist.length > 0) {
-      dispatch(setChatMsgs([]));
+      dispatch(setChatMsgs(chatlist));
     }
   }, [chatlist]);
 
@@ -1057,7 +1057,7 @@ const Chat = ({ profile }) => {
 
 
   useEffect(() => {
-    console.log("rply_animation",rply_animation)
+
     if (chatlist.length > 0 && !rply_animation) {
       let lastMsg = chatlist[0];
     let sender = "";

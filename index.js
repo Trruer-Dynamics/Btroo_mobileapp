@@ -14,9 +14,9 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 const root = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <SafeAreaProvider>
+      {/* <SafeAreaProvider> */}
         <App />
-      </SafeAreaProvider>
+      {/* </SafeAreaProvider> */}
     </PersistGate>
   </Provider>
 );

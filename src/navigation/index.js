@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
 import React, { useRef, useLayoutEffect, useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNav from "./stack/StackNav";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { scrn_height } from "../styles/responsiveSize";
 import { setSafeHeight } from "../store/reducers/screen/screen";
 import OffflineAlert from "../components/functions/OfflineAlert";
-import { setProfileRefresh } from "../store/reducers/authentication/authentication";
+import { setProfileRefresh, setStatusBarArgs } from "../store/reducers/authentication/authentication";
 
 const insets = initialWindowMetrics.insets;
 
@@ -36,7 +36,7 @@ const Navigation = () => {
     (state) => state.authentication.profile_refresh
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(setProfileRefresh(!profile_refresh));
 
     if (!is_network_connected) {
@@ -56,6 +56,28 @@ const Navigation = () => {
     } else {
       setoffAlert(false);
     }
+
+    if (current_screen == 'Intro' || current_screen == 'PhotoVerifyCamera') {
+      if (Platform.OS == "android") {
+        dispatch(
+          setStatusBarArgs({
+            barStyle: "light-content",
+            backgroundColor: "#000",
+          })
+        );
+
+      }
+    }
+    else{
+        dispatch(
+          setStatusBarArgs({
+            barStyle: "dark-content",
+            backgroundColor: "#ffff",
+          })
+        );
+
+    }
+
   }, [is_network_connected, current_screen]);
 
   return (
