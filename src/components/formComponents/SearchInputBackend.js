@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React from "react";
+import React,{useState} from "react";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -18,6 +18,9 @@ const SearchInputBackend = ({
   setsearch,
   refreshing,
 }) => {
+
+  const [placeholder, setplaceholder] = useState('Search')
+
   return (
     <View
       style={[
@@ -37,13 +40,16 @@ const SearchInputBackend = ({
           color: "#000",
           lineHeight: rspF(2),
         }}
+        onFocus={()=>{
+          setplaceholder("")
+        }}
         onChangeText={(text) => {
           if (!refreshing) {
             setsearch(text);
           }
         }}
         value={search}
-        placeholder={"Search"}
+        placeholder={placeholder}
         placeholderTextColor={colors.black}
       />
       <TouchableOpacity

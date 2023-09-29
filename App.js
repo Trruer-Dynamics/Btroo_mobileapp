@@ -103,7 +103,6 @@ const App = () => {
     (state) => state.authentication.statusBarArg
   );
 
-  const [is_trans, setis_trans] = useState(false)
 
   LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
   LogBox.ignoreAllLogs(); //Ignore all log notifications

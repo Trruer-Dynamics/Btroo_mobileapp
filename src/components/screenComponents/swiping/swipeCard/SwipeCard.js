@@ -833,7 +833,7 @@ const SwipeCard = ({
                           numberOfLines={1}
                         >
                           {card_itm?.city?.length > 11
-                            ? card_itm?.city.substring(0, 7) + "..."
+                            ? card_itm?.city.substring(0, 9) + "..."
                             : card_itm?.city}
                         </Text>
                       </View>
@@ -858,8 +858,9 @@ const SwipeCard = ({
                           numberOfLines={1}
                           style={styles.profileDetailContNText}
                         >
+                          {/* Undergraduate */}
                           {card_itm?.education?.length > 11
-                            ? card_itm?.education?.substring(0, 7) + "..."
+                            ? card_itm?.education?.substring(0, 9) + "..."
                             : card_itm?.education}
                         </Text>
                       </View>

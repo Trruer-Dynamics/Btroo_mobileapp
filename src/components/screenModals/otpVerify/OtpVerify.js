@@ -431,9 +431,7 @@ const OtpVerify = ({
     // try {
     //   setloading(true);
     //   await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
-
     //   setotperr(false);
-
     //   dispatch(
     //     setActiveUserLocationDetails({
     //       ...active_user_location_details,

@@ -14,6 +14,7 @@ import fontFamily from "../../../styles/fontFamily";
 import FAIcon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
+import { FemaleAvatar, MaleAvatar } from "../../../assets";
 
 const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
   const navigation = useNavigation();
@@ -21,6 +22,8 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
   // To get left hours
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
   let leftHrs = hours;
+
+  console.log("item",item.userprofile)
 
   return (
     <TouchableOpacity
@@ -48,7 +51,8 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
           source={
             item.prof_rvl
               ? { uri: item.prof_img }
-              : require("../../../assets/images/Matching/Avatars/MaleAvatar.png")
+              : item.userprofile.gender =='Man'?
+              MaleAvatar : FemaleAvatar
           }
           style={styles.profileImage}
         />

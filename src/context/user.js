@@ -1,4 +1,4 @@
-import { AppState, StyleSheet } from "react-native";
+import { AppState, NativeEventEmitter, StyleSheet } from "react-native";
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { apiUrl } from "../constants";
 import messaging from "@react-native-firebase/messaging";
@@ -114,6 +114,7 @@ const UserProvider = ({ children, navigationRef }) => {
     } catch (error) {}
   };
 
+  // Disable Screenshot
   useLayoutEffect(() => {
     // RNScreenshotPrevent.enabled(false);
     // RNScreenshotPrevent.enableSecureView();
@@ -134,11 +135,12 @@ const UserProvider = ({ children, navigationRef }) => {
     clearData();
   }, [is_session_expired]);
 
-
-
   useLayoutEffect(() => {
     notificationListener();
   }, [user_loggined]);
+
+
+
 
   return (
     <UserContext.Provider

@@ -145,11 +145,11 @@ const ProfileMain = ({ navigation }) => {
         >
           <FormHeader
             title={
-              (profile_data?.userprofile?.name.split(" ")[0].length < 8
+              (profile_data?.userprofile?.name.split(" ")[0].length < 9
                 ? profile_data?.userprofile?.name.split(" ")[0]
                 : truncateStr(
                     profile_data?.userprofile?.name.split(" ")[0],
-                    7
+                    8
                   )) +
               ", " +
               age
@@ -236,7 +236,8 @@ const ProfileMain = ({ navigation }) => {
                       numberOfLines={1}
                     >
                       {profile_data?.userprofile?.city?.length > 11
-                        ? profile_data?.userprofile?.city.substring(0, 7) +
+                        ? 
+                        profile_data?.userprofile?.city.substring(0, 9) +
                           "..."
                         : profile_data?.userprofile?.city}
                     </Text>
@@ -264,7 +265,7 @@ const ProfileMain = ({ navigation }) => {
                       {profile_data?.userprofile?.education?.length > 11
                         ? profile_data?.userprofile?.education?.substring(
                             0,
-                            7
+                            9
                           ) + "..."
                         : profile_data?.userprofile?.education}
                     </Text>
@@ -373,7 +374,7 @@ const ProfileMain = ({ navigation }) => {
                       {profile_data?.userprofile?.occupation?.length > 11
                         ? profile_data?.userprofile?.occupation.substring(
                             0,
-                            8
+                            9
                           ) + "..."
                         : profile_data?.userprofile?.occupation}
                     </Text>

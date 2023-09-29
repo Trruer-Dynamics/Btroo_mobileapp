@@ -420,7 +420,7 @@ const MatchProfile = ({ route }) => {
                         numberOfLines={1}
                       >
                         {profile?.userprofile?.city?.length > 11
-                          ? profile?.userprofile?.city.substring(0, 7) + "..."
+                          ? profile?.userprofile?.city.substring(0, 9) + "..."
                           : profile?.userprofile?.city}
                       </Text>
                     </View>
@@ -445,7 +445,7 @@ const MatchProfile = ({ route }) => {
                         style={styles.profileDetailContNText}
                       >
                         {profile?.userprofile?.education?.length > 11
-                          ? profile?.userprofile?.education?.substring(0, 7) +
+                          ? profile?.userprofile?.education?.substring(0, 9) +
                             "..."
                           : profile?.userprofile?.education}
                       </Text>
@@ -547,7 +547,7 @@ const MatchProfile = ({ route }) => {
                           numberOfLines={1}
                         >
                           {profile?.userprofile?.occupation?.length > 11
-                            ? profile?.userprofile?.occupation.substring(0, 8) +
+                            ? profile?.userprofile?.occupation.substring(0, 9) +
                               "..."
                             : profile?.userprofile?.occupation}
                         </Text>
@@ -687,7 +687,7 @@ const MatchProfile = ({ route }) => {
                           numberOfLines={1}
                         >
                           {profile?.userprofile?.occupation?.length > 11
-                            ? profile?.userprofile?.occupation.substring(0, 8) +
+                            ? profile?.userprofile?.occupation.substring(0, 9) +
                               "..."
                             : profile?.userprofile?.occupation}
                         </Text>
