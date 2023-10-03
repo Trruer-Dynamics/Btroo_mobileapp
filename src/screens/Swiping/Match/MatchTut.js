@@ -35,6 +35,10 @@ import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
 import Loader from "../../../components/loader/Loader";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { FemaleAvatar } from "../../../assets";
+import FastImage from "react-native-fast-image";
+import FAIcon from "react-native-vector-icons/FontAwesome";
+
 const insets = initialWindowMetrics.insets;
 
 const DATA = [
@@ -67,6 +71,14 @@ const MatchTut = ({ repeat_tut }) => {
   const [keep_matching, setkeep_matching] = useState(true);
 
   const [extendVisible, setextendVisible] = useState(false);
+
+
+  const [match_tut_para, setmatch_tut_para] = useState([
+    `Matches are created each \nmorning if someone you \nfancy has also fancied you \nback. You can talk to up to \nthree matches at any \ngiven time. Don’t worry, \nyou won’t lose any of the \nother matches.`
+    ,
+    `Any conversation lasts 72 \nhours. However, you can \nalways extend it by \nclicking here if you feel \nthat you and your match \nneed some more time.`
+  ])
+  const [match_tut_step, setmatch_tut_step] = useState(0)
 
   const updateKeepMatching = async () => {
     const url =
@@ -226,12 +238,10 @@ const MatchTut = ({ repeat_tut }) => {
         {/* Match Chat Tutorial */}
         <>
           <View style={styles.mainTutCont}>
-            <View style={styles.centralModalContMatch}>
-              <View style={styles.centralModalTextCont}>
+            <View style={{...styles.centralModalContMatch, height: match_tut_step == 0? rspH(Platform.OS == 'ios'? 40 : 41) : rspH(36),}}>
+              <View style={{...styles.centralModalTextCont}}>
                 <Text style={styles.centralModalText}>
-                  Any conversation lasts 72{"\n"}hours. However, you can{"\n"}
-                  always extend it by{"\n"}clicking here if you feel{"\n"}that
-                  you and your match{"\n"}need some more time.
+                 {match_tut_para[match_tut_step]}
                 </Text>
               </View>
 
@@ -244,6 +254,10 @@ const MatchTut = ({ repeat_tut }) => {
                 />
                 <TouchableOpacity
                   onPress={() => {
+                    if (match_tut_step == 0) {
+                      setmatch_tut_step(1)
+                    }
+                    else{
                     if (repeat_tut) {
                       navigation.navigate("Chat", {
                         repeat_tut: true,
@@ -255,18 +269,111 @@ const MatchTut = ({ repeat_tut }) => {
                     } else {
                       matchTutDone();
                     }
+                  }
                   }}
                   style={{
                     ...styles.centralModalTextNextCont,
                     marginVertical: 12,
                   }}
                 >
-                  <Text style={styles.centralModalTextNext}>OK</Text>
+                  <Text style={styles.centralModalTextNext}>
+                  {match_tut_step == 0 ?
+                    'NEXT'
+                    :
+                    'OK'
+                  }
+                    </Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
 
+{
+match_tut_step == 0 ?
+<View
+style={[styles.highCont,
+  styles.matchitem_cont]}
+>
+<View
+      style={[styles.item]}
+      
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+         
+        }}
+        
+      >
+        <FastImage
+          source={
+            FemaleAvatar
+          }
+          style={styles.profileImage}
+        />
+        <View>
+          <Text style={styles.profileName}>
+            bTroo
+            {", "}
+            44
+          </Text>
+
+          <Text style={styles.profileProfession}>
+            Teacher
+          </Text>
+
+          <Text style={styles.profileMessage}>
+            Hello How are y..
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.rightCont}>
+  
+      <View
+            style={{
+              ...styles.matchTypeCont,
+              justifyContent: "center",
+            }}
+          >
+            <View style={{ marginRight: rspW(1) }}>
+              <Text style={{ ...styles.matchTypeContTxt }}>
+                Your Turn
+              </Text>
+            </View>
+         
+              <FAIcon
+                name={"envelope"}
+                size={10}
+                color={colors.white}
+              />
+            
+      </View>
+        
+        <View />
+        <View
+          style={{
+            position: "absolute",
+            bottom: rspH(Platform.OS == "ios" ? 0.6 : 0.6),
+            width: rspW(23),
+          }}
+         
+        >
+          <Text
+            style={{
+              ...styles.timeDoneTxt,
+              color: colors.black ,
+            }}
+          >
+            72 Hours Left
+          </Text>
+        </View>
+      </View>
+    </View>
+    </View>
+  :
           <View style={{ ...styles.highCont, ...styles.timeHighCont }}>
             <Text
               style={{
@@ -276,7 +383,7 @@ const MatchTut = ({ repeat_tut }) => {
             >
               72 Hours Left
             </Text>
-          </View>
+          </View>}
         </>
       </SafeAreaView>
     </>
@@ -344,12 +451,11 @@ const styles = StyleSheet.create({
   // Match Chat Tut
   centralModalContMatch: {
     position: "absolute",
-    height: rspH(35),
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
-    top: rspH(45),
-    top: scrn_height / 2.4,
+    // top: rspH(45),
+    top: Platform.OS == 'ios'? scrn_height / 2.4 : scrn_height / 2.54,
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
@@ -358,9 +464,21 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white,
+    backgroundColor: colors.white ,
     alignItems: "center",
     justifyContent: "center",
+  },
+  matchitem_cont : {
+    // top: Platform.OS == "android" ? rspH(10.2) + insets.top : srn_height / 5.1,
+    top: Platform.OS == "ios" ? rspH(8.25) + insets.top : srn_height / 12,
+
+    // right: rspW(9.2),
+
+    width: rspW(86),
+    height: rspH(11.6),
+    alignSelf:'center',
+    // borderRadius: rspH(1.5), 
+    borderRadius: rspW(2.5),
   },
   timeHighCont: {
     top: Platform.OS == "android" ? rspH(10.2) + insets.top : srn_height / 5.1,
@@ -373,10 +491,86 @@ const styles = StyleSheet.create({
     fontSize: rspF(Platform.OS == "ios" ? 1.3 : 1.15),
     lineHeight: rspF(1.31),
     fontFamily: fontFamily.light,
+    textAlign:'center',
   },
 
   profilePhoto: {
     width: rspW(12.56),
     height: rspW(12.56),
   },
+
+  item: {
+    position: "relative",
+    // width: rspW(81.3),
+    width: rspW(81.3),
+    height: rspH(9.64),
+    borderRadius: rspW(2.5),
+    borderWidth: rspW(0.8),
+    borderColor: colors.blue,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: rspW(2.5),
+    backgroundColor: "#fff",
+    // marginBottom: rspH(2.9),
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
+  },
+  profileImage: {
+    width: rspW(10),
+    height: rspW(10),
+    marginRight: rspW(2.5),
+    borderRadius: rspW(5),
+  },
+  profileName: {
+    fontSize: rspF(2.38),
+    color: colors.black,
+    fontFamily: fontFamily.bold,
+    lineHeight: rspF(2.42),
+    letterSpacing: Platform.OS == "ios" ? 0 : 1,
+  },
+  profileProfession: {
+    fontSize: rspF(2.02),
+    color: colors.black,
+    fontFamily: fontFamily.regular,
+    lineHeight: rspF(2.1),
+  },
+  profileMessage: {
+    fontSize: rspF(1.1),
+    color: colors.black,
+    fontFamily: fontFamily.regular,
+    lineHeight: rspF(Platform.OS == "ios" ? 2 : 1.6),
+  },
+  rightCont: {
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  matchTypeCont: {
+    width: rspW(20.9),
+    height: rspH(1.9),
+    borderRadius: rspW(1),
+    backgroundColor: colors.blue,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: rspW(2),
+    paddingVertical: rspH(0.25),
+  },
+  matchTypeContTxt: {
+    color: colors.white,
+    fontSize: rspF(1.302),
+    lineHeight: rspF(1.31),
+    fontFamily: fontFamily.bold,
+  },
+  // timeDoneTxt: {
+  //   fontSize: rspF(Platform.OS == "ios" ? 1.302 : 1.1),
+  //   lineHeight: rspF(1.31),
+  //   fontFamily: fontFamily.light,
+  //   textAlign: "center",
+  // },
 });

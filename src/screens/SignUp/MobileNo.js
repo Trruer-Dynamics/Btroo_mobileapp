@@ -6,6 +6,7 @@ import {
   Text,
   Platform,
   Keyboard,
+  UIManager,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import countries_with_ph_no from "../../data/countries_with_ph_no";
@@ -31,6 +32,8 @@ import FastImage from "react-native-fast-image";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 import { useDispatch } from "react-redux";
+
+UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
 
 const MobileNo = ({ navigation, route }) => {
   // All states
@@ -353,7 +356,6 @@ const MobileNo = ({ navigation, route }) => {
           <View
             style={{
               width: rspW(86),
-              height: rspH(37.5),
               backgroundColor: "#fff",
               // borderRadius: rspW(4),
               borderRadius: rspW(4),

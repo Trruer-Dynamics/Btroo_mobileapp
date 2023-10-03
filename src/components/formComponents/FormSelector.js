@@ -17,6 +17,8 @@ import FormComponentsWrapper from "../wrappers/formComponentsWrappers/FormCompon
 import FormComponentsWrapperHeader from "../wrappers/formComponentsWrappers/FormComponentsWrapperHeader";
 import SearchInput from "./SearchInput";
 import SearchInputBackend from "./SearchInputBackend";
+import _ from "lodash";
+
 
 const Item = ({ item, onPress, selectedValue, multiline }) => (
   <TouchableOpacity
@@ -121,14 +123,25 @@ const FormSelector = ({
         );
       }
     }
-  };
+  }
+
+  // Debounce the showAlert function with a delay of 300 milliseconds
+  const delayBack = _.debounce((bool)=>{
+    onBackendSearch(bool)
+  }, 500, {
+    leading: false,
+    trailing: true,
+  });
 
   useEffect(() => {
+    console.log('TimOut ',backend_search_txt)
     const delay = setTimeout(() => {
+      
       if (backend_search) {
-        onBackendSearch(backend_search_txt);
+        onBackendSearch(backend_search)
+        // delayBack(backend_search)
       }
-    }, 500);
+    }, 380);
     return () => clearTimeout(delay);
   }, [backend_search_txt]);
 

@@ -903,22 +903,6 @@ const SettingsScreen = ({ navigation, route }) => {
                 </Text>
               </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("Info", {
-                    heading: "Privacy Preference",
-                  });
-                }}
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: rspH(2.05),
-                }}
-              >
-                <Text style={{ ...styles.titleS, color: colors.black }}>
-                  Privacy Preference
-                </Text>
-              </TouchableOpacity>
 
               <TouchableOpacity
                 onPress={() => {

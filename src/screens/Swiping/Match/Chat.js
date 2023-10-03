@@ -136,8 +136,11 @@ const ChatItem = ({
 
   let c_time = "07:00";
 
-  c_time = moment(item[2]).format("LT").padStart(8, "0");
+  c_time = moment(item[2]).format('HH:mm').padStart(5,"0")
 
+// c_time = moment(item[2]).format("LT").padStart(8, "0");
+
+  
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: animation.value }],
@@ -704,6 +707,9 @@ const Chat = ({ profile }) => {
   };
 
   const connectSocket = async () => {
+
+    console.log("connectSocket")
+
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
 
     ws.current.onopen = (e) => {
@@ -729,7 +735,7 @@ const Chat = ({ profile }) => {
     };
 
     ws.current.onerror = (e) => {
-      console.log("Error");
+      console.log("Error",e);
       dispatch(setSocketClose(true));
     };
 
@@ -919,7 +925,7 @@ const Chat = ({ profile }) => {
   }, [chatlist_remain]);
 
   useEffect(() => {
-    if (chatlist.length >= 25 && !profile.prof_rvl && !rvl_activate) {
+    if (!profile.prof_rvl && !rvl_activate) {
       let mymsgs = chatlist.filter((v) => v[1] == 1);
       let othmsgs = chatlist.filter((v) => v[1] == 0);
       let mycount = mymsgs
@@ -931,7 +937,7 @@ const Chat = ({ profile }) => {
         .flat()
         .join().length;
 
-      if (mycount >= 120 && othcount >= 120) {
+      // if (mycount >= 120 && othcount >= 120) {
         let tmpl = [];
         let turn = 0;
         for (let j = 0; j < chatlist.length; j++) {
@@ -966,17 +972,24 @@ const Chat = ({ profile }) => {
         if (tmpl3.length > 0) {
           let total_time = new Date(tmpl3.reduce((a, b) => a + b)).getMinutes();
           let avg_time = total_time / chatlist.length;
+          const ttact = false 
+          if (avg_time <= 5 && chatlist.length >= 25  && (mycount >= 120 && othcount >= 120)) {
+            ttact = true
+          }
+          else if (chatlist.length >= 40  && (mycount >= 130 && othcount >= 130)) {
+            ttact = true
+          }
 
-          if (avg_time <= 5) {
+          if (ttact) {
             setrvl_activate(true);
-
             if (chat_reveal_tut == true) {
               Keyboard.dismiss();
               setshow_rvl_tut(true);
             }
-          }
+          }          
+
         }
-      }
+      // }
     }
   }, [chatlist]);
 

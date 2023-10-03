@@ -116,10 +116,9 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
               const url = "";
               const title = "Referrals";
               const message =
-                "Hey Guys join btroo " +
-                profile_data.userprofile.name.split(" ")[0] +
+                `Are you tired of superficial dating apps that only focus on physical attraction? Join bTroo and build the emotional connection first with amazing people on the app. Use Code: ${profile_data.userprofile.name.split(" ")[0] +
                 "_" +
-                profile_data.userprofile.referral_code;
+                profile_data.userprofile.referral_code}`;
 
               const options = {
                 title,

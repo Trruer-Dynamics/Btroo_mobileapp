@@ -80,27 +80,11 @@ const OtpVerify = ({
 
   const [loading, setloading] = useState(false);
 
-  
-
   const [otp1, setotp1] = useState(otp[0] == "0" ? "" : otp);
   const [otp1blr, setotp1blr] = useState(false);
-  const [otp2blr, setotp2blr] = useState(false);
-  const [otp3blr, setotp3blr] = useState(false);
-  const [otp4blr, setotp4blr] = useState(false);
-  const [otp5blr, setotp5blr] = useState(false);
-  const [otp6blr, setotp6blr] = useState(false);
-  const [otp2, setotp2] = useState(otp[1] == "0" ? "" : otp[1]);
-  const [otp3, setotp3] = useState(otp[2] == "0" ? "" : otp[2]);
-  const [otp4, setotp4] = useState(otp[3] == "0" ? "" : otp[3]);
-  const [otp5, setotp5] = useState(otp[4] == "0" ? "" : otp[4]);
-  const [otp6, setotp6] = useState(otp[5] == "0" ? "" : otp[5]);
-
+ 
   const ref_inpt1 = useRef();
   const ref_inpt2 = useRef();
-  const ref_inpt3 = useRef();
-  const ref_inpt4 = useRef();
-  const ref_inpt5 = useRef();
-  const ref_inpt6 = useRef();
 
   const [otperr, setotperr] = useState(false);
   const [counter, setcounter] = useState(30); // 30 seconds limit
@@ -409,7 +393,7 @@ const OtpVerify = ({
 
   // To verify sent otp
   const verifyOtp = async () => {
-    if (otp1 + otp2 + otp3 + otp4 + otp5 + otp6 == "000000") {
+    if (otp1 == "000000") {
       setotperr(false);
 
       dispatch(
@@ -430,7 +414,7 @@ const OtpVerify = ({
 
     // try {
     //   setloading(true);
-    //   await confirm.confirm(otp1 + otp2 + otp3 + otp4 + otp5 + otp6);
+    //   await confirm.confirm(otp1);
     //   setotperr(false);
     //   dispatch(
     //     setActiveUserLocationDetails({
@@ -454,11 +438,7 @@ const OtpVerify = ({
   // To resend OTP after 30 seconds
   const resendOtp = () => {
     setotp1("");
-    // setotp2("");
-    // setotp3("");
-    // setotp4("");
-    // setotp5("");
-    // setotp6("");
+   
     setcounter(30);
     setotperr(false);
     onResend();
@@ -474,16 +454,7 @@ const OtpVerify = ({
           console.log("otp", otp);
           setotp1(otp);
           setotp1blr(true);
-          // setotp2(otp[1]);
-          // setotp2blr(true);
-          // setotp3(otp[2]);
-          // setotp3blr(true);
-          // setotp4(otp[3]);
-          // setotp4blr(true);
-          // setotp5(otp[4]);
-          // setotp5blr(true);
-          // setotp6(otp[5]);
-          // setotp6blr(true);
+    
         } catch (err) {
           console.log("otp auto listen error", err);
         }

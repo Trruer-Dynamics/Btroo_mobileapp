@@ -23,8 +23,6 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
   let leftHrs = hours;
 
-  console.log("item",item.userprofile)
-
   return (
     <TouchableOpacity
       style={styles.item}

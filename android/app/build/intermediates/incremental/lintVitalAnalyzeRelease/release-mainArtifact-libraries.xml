@@ -273,6 +273,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-device-info::release"
+      jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-device-info/android/build/.transforms/9a49947410f822643079d5fc5ba75aee/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-device-info/android/build/.transforms/9a49947410f822643079d5fc5ba75aee/transformed/out/jars/libs/R.jar"
+      resolved="btroo:react-native-device-info:unspecified"
+      folder="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-device-info/android/build/.transforms/9a49947410f822643079d5fc5ba75aee/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="/Users/rahul/Desktop/BtrooProject/Btroo_New/android@@:react-native-fast-image::release"
       jars="/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fast-image/android/build/.transforms/90751f388e45aeef68529670a8efddd6/transformed/out/jars/classes.jar:/Users/rahul/Desktop/BtrooProject/Btroo_New/node_modules/react-native-fast-image/android/build/.transforms/90751f388e45aeef68529670a8efddd6/transformed/out/jars/libs/R.jar"
       resolved="btroo:react-native-fast-image:unspecified"
@@ -1607,6 +1620,19 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="com.google.android.gms:play-services-iid:17.0.0@aar"
+      jars="/Users/rahul/.gradle/caches/transforms-3/481dc29721caed0573831bcfdd8ccf63/transformed/jetified-play-services-iid-17.0.0/jars/classes.jar"
+      resolved="com.google.android.gms:play-services-iid:17.0.0"
+      folder="/Users/rahul/.gradle/caches/transforms-3/481dc29721caed0573831bcfdd8ccf63/transformed/jetified-play-services-iid-17.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="com.google.android.gms:play-services-auth-base:18.0.4@aar"
       jars="/Users/rahul/.gradle/caches/transforms-3/c9a62aa7ada4dc8be27255e8067e2b2b/transformed/jetified-play-services-auth-base-18.0.4/jars/classes.jar"
       resolved="com.google.android.gms:play-services-auth-base:18.0.4"
@@ -2121,6 +2147,19 @@
       jars="/Users/rahul/.gradle/caches/transforms-3/f3cc7ccb50e6362fb2d8829407d934c3/transformed/jetified-time4j-android-4.8-2021a/jars/classes.jar"
       resolved="net.time4j:time4j-android:4.8-2021a"
       folder="/Users/rahul/.gradle/caches/transforms-3/f3cc7ccb50e6362fb2d8829407d934c3/transformed/jetified-time4j-android-4.8-2021a"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="com.android.installreferrer:installreferrer:1.1.2@aar"
+      jars="/Users/rahul/.gradle/caches/transforms-3/44c6fcf38a2cd09990fe979d5595215e/transformed/jetified-installreferrer-1.1.2/jars/classes.jar"
+      resolved="com.android.installreferrer:installreferrer:1.1.2"
+      folder="/Users/rahul/.gradle/caches/transforms-3/44c6fcf38a2cd09990fe979d5595215e/transformed/jetified-installreferrer-1.1.2"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

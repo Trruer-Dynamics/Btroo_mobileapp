@@ -17,6 +17,9 @@ const SearchCountryInput = ({
   datalist,
   setfilterdatalist,
 }) => {
+
+  const [placeholder, setplaceholder] = React.useState('Search')
+
   return (
     <View
       style={[
@@ -36,6 +39,12 @@ const SearchCountryInput = ({
           lineHeight: rspF(2),
           color: "#000",
         }}
+        onFocus={()=>{
+          setplaceholder("")
+        }}
+        onBlur={()=>{
+          setplaceholder("Search")
+        }}
         onChangeText={(text) => {
           setsearch(text);
           setfilterdatalist(
@@ -54,7 +63,7 @@ const SearchCountryInput = ({
           );
         }}
         value={search}
-        placeholder={"Search"}
+        placeholder={placeholder}
         placeholderTextColor={colors.black}
       />
       <TouchableOpacity

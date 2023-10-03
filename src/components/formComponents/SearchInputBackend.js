@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React,{useState} from "react";
+import React from "react";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import Ionicon from "react-native-vector-icons/Ionicons";
@@ -19,7 +19,7 @@ const SearchInputBackend = ({
   refreshing,
 }) => {
 
-  const [placeholder, setplaceholder] = useState('Search')
+  const [placeholder, setplaceholder] = React.useState('Search')
 
   return (
     <View
@@ -43,10 +43,13 @@ const SearchInputBackend = ({
         onFocus={()=>{
           setplaceholder("")
         }}
+        onBlur={()=>{
+          setplaceholder("Search")
+        }}
         onChangeText={(text) => {
-          if (!refreshing) {
+          // if (!refreshing) {
             setsearch(text);
-          }
+          // }
         }}
         value={search}
         placeholder={placeholder}

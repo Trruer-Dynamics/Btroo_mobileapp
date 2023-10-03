@@ -61,6 +61,7 @@ import {
   setStatusBarArgs,
 } from "../../../../store/reducers/authentication/authentication";
 import FastImage from "react-native-fast-image";
+import { withTiming } from "react-native-reanimated";
 
 const Item = ({
   item,
@@ -87,6 +88,7 @@ const Item = ({
         zIndex: 2,
         position: "relative",
       }}
+      
         activeOpacity={1}
         onPress={() => {
           setmodalVisible(true);
@@ -264,35 +266,39 @@ const SwipeCard = ({
     outputRange: [0, -20],
   });
 
+
+
   const rotate = swipe.x.interpolate({
     inputRange: [-100, 0, 100],
 
     outputRange: ["-4deg", "0deg", "4deg"],
   });
 
-  const likeOpacity = leftX.interpolate({
-    inputRange: [20, 100],
-
-    outputRange: [0, 1],
-
-    extrapolate: "clamp",
-  });
-
-  const superLikeOpacity = upY.interpolate({
-    inputRange: [-100, -20],
-
-    outputRange: [1, 0],
-
-    extrapolate: "clamp",
-  });
-
   const rejectOpacity = rightX.interpolate({
-    inputRange: [-100, -20],
-
-    outputRange: [1, 0],
-
+    inputRange: [0, 1],
+    outputRange: [0, 1],
     extrapolate: "clamp",
   });
+  const superLikeOpacity = upY.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+  const likeOpacity = leftX.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+
+  
+
+  // const rejectOpacity = rightX.interpolate({
+  //   inputRange: [-100, -20],
+
+  //   outputRange: [1, 0],
+
+  //   extrapolate: "clamp",
+  // });
 
   const reportProfile = async () => {
     const data = {
@@ -311,8 +317,16 @@ const SwipeCard = ({
       let resp_data = response.data;
 
       if (resp_data.code == 200) {
-        handleChoiceButtons(-1);
-        swipeProfile(false, false);
+        rightX.setValue(1)
+                        
+        Animated.timing(iconTranslateY, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+            }).start();
+
+        handleChoiceButtons(0);
+        // swipeProfile(false, false);
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
@@ -567,6 +581,7 @@ const SwipeCard = ({
             {/* Profile Images Carousel */}
             {!bio_enlarge && (
               <View style={styles.imageCont}>
+               
                 <FlatList
                   initialScrollIndex={0}
                   data={card_itm.image}
@@ -587,6 +602,7 @@ const SwipeCard = ({
                   viewabilityConfig={viewConfig}
                   ref={slidesRef}
                 />
+     
 
                 {/* Filter */}
                 <TouchableOpacity
@@ -610,28 +626,37 @@ const SwipeCard = ({
                     {/* Action */}
                     <TouchableOpacity
                       style={styles.actionCont}
+                     
                       onPressIn={() => {
-                        rightX.setValue(-100);
-                        Animated.timing(iconRotate, {
-                          toValue: -1,
-                          duration: 500,
-                          useNativeDriver: true,
-                        }).start();
-                        Animated.timing(iconTranslateX, {
-                          toValue: -1,
-                          duration: 500,
-                          useNativeDriver: true,
-                        }).start();
+                        rightX.setValue(1)
+                        
                         Animated.timing(iconTranslateY, {
                           toValue: 1,
                           duration: 500,
                           useNativeDriver: true,
                         }).start();
                       }}
-                      onPressOut={() => {
-                        handleChoiceButtons(-1);
+
+                      onPress={()=>{
+                        console.log('Pass onPress')
+                        handleChoiceButtons(0);
                         swipeProfile(false, false);
                         setreport("");
+
+                      }}
+                      onPressOut={() => {
+                        Animated.timing(rightX, {
+                          toValue: 0,
+                          duration: 500,
+                          useNativeDriver: true,
+                        }).start();
+
+                        Animated.timing(iconTranslateY, {
+                          toValue: 0,
+                          duration: 500,
+                          useNativeDriver: true,
+                        }).start()
+                        
                       }}
                     >
                       <FastImage
@@ -646,19 +671,37 @@ const SwipeCard = ({
                     {/* Action */}
                     <TouchableOpacity
                       style={styles.actionCont}
-                      onPressIn={() => {
-                        upY.setValue(-100);
+                      
 
+                      onPressIn={() => {
+                        upY.setValue(1)
+                      
                         Animated.timing(iconTranslateY, {
                           toValue: 1,
                           duration: 500,
                           useNativeDriver: true,
                         }).start();
                       }}
-                      onPressOut={() => {
+
+                      onPress={()=>{
+                        console.log('SoftSpot onPress')
                         handleChoiceButtons(0);
                         swipeProfile(true, true);
                         setreport("");
+
+                      }}
+                      onPressOut={() => {
+                        Animated.timing(upY, {
+                          toValue: 0,
+                          duration: 500,
+                          useNativeDriver: true,
+                        }).start()
+
+                        Animated.timing(iconTranslateY, {
+                          toValue: 0,
+                          duration: 500,
+                          useNativeDriver: true,
+                        }).start()
                       }}
                     >
                       <FastImage
@@ -672,28 +715,36 @@ const SwipeCard = ({
 
                     {/* Action */}
                     <TouchableOpacity
+                      
                       onPressIn={() => {
-                        leftX.setValue(100);
-                        Animated.timing(iconRotate, {
-                          toValue: 1,
-                          duration: 500,
-                          useNativeDriver: true,
-                        }).start();
-                        Animated.timing(iconTranslateX, {
-                          toValue: 1,
-                          duration: 500,
-                          useNativeDriver: true,
-                        }).start();
+                        leftX.setValue(1)
+                    
                         Animated.timing(iconTranslateY, {
                           toValue: 1,
                           duration: 500,
                           useNativeDriver: true,
                         }).start();
                       }}
-                      onPressOut={() => {
-                        handleChoiceButtons(1);
+
+                      onPress={()=>{
+                        console.log('Fancy onPress')
+                        handleChoiceButtons(0);
                         swipeProfile(true, false);
                         setreport("");
+
+                      }}
+                      onPressOut={() => {
+                        Animated.timing(leftX, {
+                          toValue: 0,
+                          duration: 500,
+                          useNativeDriver: true,
+                        }).start();
+                        
+                        Animated.timing(iconTranslateY, {
+                          toValue: 0,
+                          duration: 500,
+                          useNativeDriver: true,
+                        }).start()
                       }}
                       style={styles.actionCont}
                     >
@@ -751,6 +802,7 @@ const SwipeCard = ({
                 </TouchableOpacity>
 
                 {/*  FullScreen Carousel */}
+
                 <FlatList
                   initialScrollIndex={0}
                   data={card_itm.image}
@@ -1129,7 +1181,7 @@ const styles = StyleSheet.create({
     width: rspW(26),
     height: rspW(26),
     borderRadius: rspW(4),
-    backgroundColor: colors.blue + "85",
+    // backgroundColor: colors.blue + "85",
     alignItems: "center",
     justifyContent: "center",
   },

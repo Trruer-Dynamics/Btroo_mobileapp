@@ -202,7 +202,7 @@
     <color name="background_material_light">@color/material_grey_50</color>
     <color name="beige">#F5F5DC</color>
     <color name="bisque">#FFE4C4</color>
-    <color name="black">#000000</color>
+    <color name="black">#80000000</color>
     <color name="blanchedalmond">#FFEBCD</color>
     <color name="blue">#0000FF</color>
     <color name="blueviolet">#8A2BE2</color>
@@ -1375,8 +1375,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         
         <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
-      
-       
+        
     </style>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>

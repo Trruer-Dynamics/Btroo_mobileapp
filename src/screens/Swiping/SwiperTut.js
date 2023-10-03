@@ -10,7 +10,7 @@ import {
   Platform,
 } from "react-native";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 import colors from "../../styles/colors";
 import {
   rspF,
@@ -35,35 +35,101 @@ import Loader from "../../components/loader/Loader";
 import { setSessionExpired } from "../../store/reducers/authentication/authentication";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
+import { setAllGenders } from "../../store/reducers/allData/allData";
 
 const DATA = [
   {
     id: 1,
-    title: "First Item",
     image: require("../../assets/images/Tutorial/Tut1.png"),
     image2: require("../../assets/images/Tutorial/Tut2.png"),
   },
   {
     id: 2,
-    title: "Second Item",
     image: require("../../assets/images/Tutorial/Tut1.png"),
     image2: require("../../assets/images/Tutorial/Tut2.png"),
   },
   {
     id: 3,
-    title: "Third Item",
     image: require("../../assets/images/Tutorial/Tut1.png"),
     image2: require("../../assets/images/Tutorial/Tut2.png"),
   },
   {
     id: 4,
-    title: "Fourth Item",
+    image: require("../../assets/images/Tutorial/Tut1.png"),
+    image2: require("../../assets/images/Tutorial/Tut2.png"),
+  },
+  {
+    id: 5,
+    image: require("../../assets/images/Tutorial/Tut1.png"),
+    image2: require("../../assets/images/Tutorial/Tut2.png"),
+  },
+  {
+    id: 6,
+    image: require("../../assets/images/Tutorial/Tut1.png"),
+    image2: require("../../assets/images/Tutorial/Tut2.png"),
+  },
+  {
+    id: 7,
+    image: require("../../assets/images/Tutorial/Tut1.png"),
+    image2: require("../../assets/images/Tutorial/Tut2.png"),
+  },
+  {
+    id: 8,
     image: require("../../assets/images/Tutorial/Tut1.png"),
     image2: require("../../assets/images/Tutorial/Tut2.png"),
   },
 ];
 
+const DATA2 = [
+  {
+    id: 1,
+    // image: require("../../assets/images/Tutorial/Tut1.png"),
+    image: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg"),
+  },
+  {
+    id: 2,
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo2.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo2.jpg"),
+  },
+  {
+    id: 3,
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo3.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo3.jpg"),
+  },
+  {
+    id: 4,
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo4.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo4.jpg"),
+  },
+  {
+    id: 5,
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo5.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo5.jpg"),
+  },
+  {
+    id: 6,
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo6.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo6.jpg"),
+  },
+  {
+    id: 7,
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo7.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo7.jpg"),
+  },
+  {
+    id: 8,
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo8.jpg"),
+    image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo8.jpg"),
+  },
+  
+];
+
+
+
 const Item = ({ item, setmodalVisible, masked }) => {
+
+  console.log("item",item.image)
   return (
     <View style={{ ...styles.item, position: "relative" }}>
       <TouchableOpacity
@@ -109,11 +175,17 @@ const Item = ({ item, setmodalVisible, masked }) => {
           )}
 
           <FastImage
+
+          // require("../../assets/images/Tutorial/Tut1.png")
+          // require('../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg')
             source={item.image}
+          
             style={{
-              width: "100%",
+              width: "99%",
               height: "100%",
               borderRadius: rspW(5.1),
+              zIndex: 2,
+              
             }}
             resizeMode="cover"
           />
@@ -190,6 +262,10 @@ const SwiperTut = ({ repeat_tut }) => {
     (state) => state.authentication.profile_data
   );
 
+
+  // Preference Type to show Tutorial according to Login user preferance
+  const [pref_type, setpref_type] = useState('Woman')
+
   // Report Control
   const [openReport, setopenReport] = useState(false);
 
@@ -252,6 +328,42 @@ const SwiperTut = ({ repeat_tut }) => {
     }
   };
 
+  const getGenders = async () => {
+    // setloading(true);
+
+
+    await axios
+      .get(apiUrl + "getactivegender/")
+      .then((resp) => {
+        if (resp.status == 200) {
+          let tmp = resp.data.data;
+
+          let sorted_tmp = tmp.sort(function (a, b) {
+            return a["position"] - b["position"];
+          });
+
+          let tmp_lis = sorted_tmp.map((v) => [v.id, v.gender]);
+          // console.log("tmp_lis",tmp_lis)
+          dispatch(setAllGenders(tmp_lis));
+          // console.log("profile_data.userpreferances",profile_data.userpreferances)
+         let w_gen = tmp_lis.find(v => v[1] == 'Woman')
+        
+         let w_pref = profile_data.userpreferances.filter(v => v == w_gen[0])
+     
+        if (w_pref.length > 0) {
+          setpref_type("Woman") 
+        }
+        else{
+          setpref_type("Man") 
+        }
+
+        }
+      })
+      .catch((err) => {
+        // setloading(false);
+      });
+  };
+
   // Main Carosel Item Render Function
   const renderItem = ({ item }) => (
     <Item item={item} masked={masked} setmodalVisible={setmodalVisible} />
@@ -263,6 +375,8 @@ const SwiperTut = ({ repeat_tut }) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      
+     
       setswipe_tut_l(swipe_tut || repeat_tut);
       setstep(0);
       return () => {
@@ -270,6 +384,10 @@ const SwiperTut = ({ repeat_tut }) => {
       };
     }, [])
   );
+
+  useLayoutEffect(() => {
+    getGenders()
+  }, [])
 
   return (
     <>
@@ -302,7 +420,7 @@ const SwiperTut = ({ repeat_tut }) => {
           {/* Profile Images Carousel */}
           <View style={styles.imageCont}>
             <FlatList
-              data={profiles}
+              data={pref_type == 'Woman' ? DATA: DATA2}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               horizontal
@@ -377,7 +495,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
               {/* Main Carousel Pagintors / Dots */}
               <Paginator
-                data={profiles}
+                data={pref_type == 'Woman' ? DATA: DATA2}
                 scrollX={scrollX}
                 currentIndex={currentIndex}
               />
@@ -409,7 +527,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
               {/*  FullScreen Carousel */}
               <FlatList
-                data={profiles}
+                data={pref_type == 'Woman' ? DATA: DATA2}
                 renderItem={renderItem2}
                 keyExtractor={(item) => item.id}
                 horizontal
@@ -429,7 +547,7 @@ const SwiperTut = ({ repeat_tut }) => {
               />
 
               <Paginator
-                data={profiles}
+                data={pref_type == 'Woman' ? DATA: DATA2}
                 scrollX={scrollX2}
                 currentIndex={currentIndex2}
               />
@@ -782,7 +900,7 @@ const SwiperTut = ({ repeat_tut }) => {
                     <View style={{ ...styles.carouselHighlightCont }}>
                       <View style={styles.imageCont}>
                         <FlatList
-                          data={DATA}
+                          data={pref_type == 'Woman' ? DATA: DATA2}
                           renderItem={renderItem}
                           keyExtractor={(item) => item.id}
                           horizontal
@@ -853,7 +971,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
                           {/* Main Carousel Pagintors / Dots */}
                           <Paginator
-                            data={DATA}
+                            data={pref_type == 'Woman' ? DATA: DATA2}
                             scrollX={scrollX}
                             currentIndex={currentIndex}
                           />
@@ -1257,8 +1375,11 @@ const styles = StyleSheet.create({
   },
 
   item: {
+    // borderRadius: rspW(5.1),
+    // width: rspW(89),
     borderRadius: rspW(5.1),
-    width: rspW(89),
+    width: rspW(88),
+    marginRight: rspW(1),
   },
 
   actionsCont: {
