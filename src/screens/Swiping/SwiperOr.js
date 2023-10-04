@@ -336,14 +336,13 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterData = async () => {
-    console.log("profile_data.user.id",profile_data.user.id)
+
     setloading(true);
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
 
-    console.log("access_token",access_token)
 
     await axios
       .get(apiUrl + `FilterUpdateGet/${profile_data.user.id}`, { headers })

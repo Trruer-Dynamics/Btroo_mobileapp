@@ -183,7 +183,7 @@ const Item = ({ item, setmodalVisible, masked }) => {
               width: "99%",
               height: "100%",
               borderRadius: rspW(5.1),
-              zIndex: -2,
+              zIndex: 2,
               
             }}
             resizeMode="cover"
@@ -514,7 +514,6 @@ const SwiperTut = ({ repeat_tut }) => {
                     useNativeDriver: false,
                   }
                 )}
-                
                 scrollEventThrottle={32}
                 onViewableItemsChanged={viewableItemsChanged2}
                 viewabilityConfig={viewConfig2}
@@ -631,11 +630,15 @@ const SwiperTut = ({ repeat_tut }) => {
                 <View style={styles.promptContainer}>
                   <View style={styles.promptQuestionContainer}>
                     <Text style={styles.promptQuestion}>
-                      The sign of a great first date
+                      Public Prompt Question 1?
                     </Text>
                   </View>
-                  <Text style={styles.promptAnswer} >
-                  A great first date is when you feel like you’ve met your soulmate, and you can’t believe how lucky you are. It’s when you make each other laugh so hard that your stomach hurts, and you tease each other with playful banter. It’s when you open up about your hopes, fears, and secrets, and you feel a deep bond. It’s when you kiss goodnight, and you feel butterflies in your stomach. A great first date is when you text each other right after, and you can’t wait for the next one. 😉
+                  <Text style={styles.promptAnswer}>
+                    Public Prompt Question 1 Answer Public Prompt Question 1
+                    {"\n"}
+                    Answer Public Prompt
+                    {"\n"}
+                    prompt
                   </Text>
                 </View>
               )}
@@ -695,12 +698,7 @@ const SwiperTut = ({ repeat_tut }) => {
                     resizeMode="cover"
                   />
                   <FastImage
-                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Listening_to_Music.png")}
-                    style={styles.interestImage}
-                    resizeMode="cover"
-                  />
-                  <FastImage
-                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Movies.png")}
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Guitar.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
@@ -712,11 +710,15 @@ const SwiperTut = ({ repeat_tut }) => {
                 <View style={styles.promptContainer}>
                   <View style={styles.promptQuestionContainer}>
                     <Text style={styles.promptQuestion}>
-                      What's your favorite way to spend a rainy weekend at home by yourself
+                      Public Prompt Question 2?
                     </Text>
                   </View>
                   <Text style={styles.promptAnswer}>
-                  My favorite way to spend a rainy weekend at home by myself is to enjoy some quality me-time. I like to watch TV and catch up on my favorite shows or movies, or maybe discover something new. I also love to read books and immerse myself in different worlds and stories. I find reading very relaxing and stimulating at the same time. And of course, I like to cook something delicious and healthy for myself, or maybe try a new recipe. Cooking is a great way to express my creativity and have fun. A rainy weekend at home by myself is a perfect opportunity to do the things I love and pamper myself. 
+                    Public Prompt Question 2 Answer Public Prompt Question 2
+                    {"\n"}
+                    Answer Public Prompt
+                    {"\n"}
+                    prompt
                   </Text>
                 </View>
               )}
@@ -726,11 +728,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   ...styles.profileDetailsSubCont2,
                   ...styles.boxShadowCont,
                   width: rspW(39.5),
-                  marginLeft: rspW(1),
-                  // marginBottom: rspH(0.6),
-                  marginBottom: rspH(3.6),
-
-                  alignSelf:'flex-start',
+                  marginBottom: rspH(0.6),
                 }}
               >
                 <Text style={styles.profileDetailContHeading}>Pets</Text>
@@ -740,12 +738,51 @@ const SwiperTut = ({ repeat_tut }) => {
                   showsHorizontalScrollIndicator={false}
                 >
                   <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Ant.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Hamster.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/GuineaPig.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Bird.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Butterfly.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Cat.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+
+                  <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                 
-                  
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Chicken.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Ferret.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
                 </ScrollView>
               </View>
             </View>
@@ -849,7 +886,6 @@ const SwiperTut = ({ repeat_tut }) => {
                           showsHorizontalScrollIndicator={false}
                           pagingEnabled
                           bounces={false}
-                          
                           onScroll={Animated.event(
                             [
                               {
@@ -1123,11 +1159,15 @@ const SwiperTut = ({ repeat_tut }) => {
                         <View style={styles.promptContainer}>
                           <View style={styles.promptQuestionContainer}>
                             <Text style={styles.promptQuestion}>
-                              The sign of a great first date
+                              Public Prompt Question 1?
                             </Text>
                           </View>
                           <Text style={styles.promptAnswer}>
-                          A great first date is when you feel like you’ve met your soulmate, and you can’t believe how lucky you are. It’s when you make each other laugh so hard that your stomach hurts, and you tease each other with playful banter. It’s when you open up about your hopes, fears, and secrets, and you feel a deep bond. It’s when you kiss goodnight, and you feel butterflies in your stomach. A great first date is when you text each other right after, and you can’t wait for the next one. 😉
+                            Public Prompt Question 1 Answer Public Prompt
+                            Question 1{"\n"}
+                            Answer Public Prompt
+                            {"\n"}
+                            prompt
                           </Text>
                         </View>
 
@@ -1193,11 +1233,15 @@ const SwiperTut = ({ repeat_tut }) => {
                         <View style={styles.promptContainer}>
                           <View style={styles.promptQuestionContainer}>
                             <Text style={styles.promptQuestion}>
-                            What's your favorite way to spend a rainy weekend at home by yourself
+                              Public Prompt Question 2?
                             </Text>
                           </View>
                           <Text style={styles.promptAnswer}>
-                          My favorite way to spend a rainy weekend at home by myself is to enjoy some quality me-time. I like to watch TV and catch up on my favorite shows or movies, or maybe discover something new. I also love to read books and immerse myself in different worlds and stories. I find reading very relaxing and stimulating at the same time. And of course, I like to cook something delicious and healthy for myself, or maybe try a new recipe. Cooking is a great way to express my creativity and have fun. A rainy weekend at home by myself is a perfect opportunity to do the things I love and pamper myself. 
+                            Public Prompt Question 2 Answer Public Prompt
+                            Question 2{"\n"}
+                            Answer Public Prompt
+                            {"\n"}
+                            prompt
                           </Text>
                         </View>
 
@@ -1216,14 +1260,52 @@ const SwiperTut = ({ repeat_tut }) => {
                             horizontal
                             showsHorizontalScrollIndicator={false}
                           >
-                            
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Ant.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Hamster.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/GuineaPig.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Bird.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Butterfly.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Cat.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
 
                             <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Chicken.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Ferret.png")}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
                           </ScrollView>
                         </View>
                       </View>
@@ -1234,8 +1316,6 @@ const SwiperTut = ({ repeat_tut }) => {
             </SafeAreaView>
           )}
         </>
-
-       
       </SafeAreaView>
     </>
   );
@@ -1267,7 +1347,6 @@ const styles = StyleSheet.create({
   },
 
   imageCont: {
-    zIndex:5,
     width: rspW(89),
     // height: rspH(42),
     height: rspH(Platform.OS == "ios" ? 42 : 48.3),
@@ -1280,7 +1359,6 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     borderRadius: rspW(5.1),
     width: rspW(89),
-    zIndex:5,
     // marginRight: rspW(1),
     // marginLeft: rspW(1),
   },
@@ -1369,7 +1447,7 @@ const styles = StyleSheet.create({
   // Prompt
   promptContainer: {
     width: rspW(82),
-    // height: rspH(12.9),
+    height: rspH(12.9),
     marginTop: rspH(2.35),
     marginBottom: rspH(-1.7),
     paddingHorizontal: rspW(2.5),
@@ -1384,7 +1462,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
-    textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1392,7 +1469,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    textAlign: "justify",
   },
 
   mainTutCont: {

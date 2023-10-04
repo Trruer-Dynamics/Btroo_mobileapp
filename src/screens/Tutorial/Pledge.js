@@ -15,14 +15,20 @@ import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrappe
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
 import FastImage from "react-native-fast-image";
 import { useDispatch } from "react-redux";
-import { useFocusEffect } from "@react-navigation/native";
+import { StackActions, useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const Pledge = ({ navigation, route }) => {
   const onNextPress = () => {
-    navigation.navigate("BottomTab", {
+
+    navigation.dispatch(StackActions.replace("BottomTab", {
       screen: "Swiper",
-    });
+    }))
+
+    // navigation.navigate("BottomTab", {
+    //   screen: "Swiper",
+    // });
+    
     // navigation.goBack()
   };
 

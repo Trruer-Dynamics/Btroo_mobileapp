@@ -106,12 +106,9 @@ const UserProvider = ({ children, navigationRef }) => {
       token: DeviceToken,
     };
 
-    console.log("rmt data", data)
-
     try {
       const resp = await axios.post(url, data, { headers });
       let user_data = resp.data.data;
-      console.log("rmt user_data",user_data)
       dispatch(setDeviceToken(""));
     } catch (error) {}
   };

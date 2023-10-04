@@ -2,12 +2,14 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { scrn_width } from "../styles/responsiveSize";
 import FastImage from "react-native-fast-image";
+import { StackActions } from "@react-navigation/native";
 
 const Splash = ({ navigation }) => {
   useLayoutEffect(() => {
     // Time until splash screen visible
     setTimeout(() => {
-      navigation.navigate("Intro");
+      // navigation.navigate("Intro");
+      navigation.dispatch(StackActions.replace('Intro'))
     }, 1200);
   }, []);
 

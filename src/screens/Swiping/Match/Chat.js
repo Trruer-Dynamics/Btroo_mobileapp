@@ -951,7 +951,8 @@ const Chat = ({ profile }) => {
           }
         }
 
-        let tmpl2 = tmpl[tmpl.length - 1][1] == 0 ? tmpl.slice(0, -1) : tmpl;
+        if (tmpl.length  > 0) {
+          let tmpl2 = tmpl[tmpl.length - 1][1] == 0 ? tmpl.slice(0, -1) : tmpl;
         tmp_11 = tmpl2.map((v) => v[2]);
 
         let tmpl3 = [];
@@ -972,7 +973,7 @@ const Chat = ({ profile }) => {
         if (tmpl3.length > 0) {
           let total_time = new Date(tmpl3.reduce((a, b) => a + b)).getMinutes();
           let avg_time = total_time / chatlist.length;
-          const ttact = false 
+          let ttact = false 
           if (avg_time <= 5 && chatlist.length >= 25  && (mycount >= 120 && othcount >= 120)) {
             ttact = true
           }
@@ -989,6 +990,8 @@ const Chat = ({ profile }) => {
           }          
 
         }
+        }
+        
       // }
     }
   }, [chatlist]);
@@ -1526,7 +1529,7 @@ const styles = StyleSheet.create({
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
     lineHeight: rspF(2.1),
-
+    textAlign:'justify',
     minWidth: rspW(24),
     maxWidth: rspW(80),
     letterSpacing: Platform.OS == "ios" ? 0 : 0.5,
@@ -1544,6 +1547,7 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.8),
     minWidth: rspW(26),
     color: colors.black,
+    textAlign:'justify',
   },
   chatTimeTxt: {
     fontSize: rspF(1.302),
