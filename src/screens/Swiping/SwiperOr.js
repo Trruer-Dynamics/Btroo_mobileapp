@@ -451,7 +451,6 @@ const SwiperOr = ({}) => {
 
         if (resp.status == 200) {
           let tmp = resp.data.data;
-
           let sorted_tmp = tmp.sort(function (a, b) {
             return a["position"] - b["position"];
           });
