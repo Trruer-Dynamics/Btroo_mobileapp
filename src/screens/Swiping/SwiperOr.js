@@ -683,7 +683,7 @@ const SwiperOr = ({}) => {
   useLayoutEffect(() => {
     setloading2(true);
     setwarn_step(0);
-    // getGenders();
+    getGenders();
     getInterests();
     getLanguages();
     getFilterData();
