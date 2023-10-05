@@ -70,7 +70,7 @@ const UserProvider = ({ children, navigationRef }) => {
       });
       navigation.dispatch(resetAction);
     } catch (error) {
-      console.log("resetNav", error)
+      
     }
    
   };
@@ -80,8 +80,8 @@ const UserProvider = ({ children, navigationRef }) => {
     dispatch(setUserLoggined(false));
     dispatch(setAccessToken(""));
     dispatch(setSessionExpired(false));
-    dispatch(setProfiledata({}));
-    dispatch(setProfileImgs([]));
+    // dispatch(setProfiledata({}));
+    // dispatch(setProfileImgs([]));
   };
 
   const clearData = async () => {

@@ -849,7 +849,7 @@ const UserIntro = ({ navigation, route }) => {
                     <FormInput
                       value={occupation}
                       setvalue={setoccupation}
-                      maxLength={15}
+                      maxLength={20}
                       width={"100%"}
                       height={rspW(12.76)}
                       placeholder={"Enter Occupation"}

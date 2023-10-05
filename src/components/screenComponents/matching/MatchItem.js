@@ -5,8 +5,9 @@ import {
   Image,
   TouchableOpacity,
   Platform,
+  Animated,
 } from "react-native";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import colors from "../../../styles/colors";
 import truncateStr from "../../functions/truncateStr";
 import { rspH, rspW, rspF } from "../../../styles/responsiveSize";
@@ -19,9 +20,15 @@ import { FemaleAvatar, MaleAvatar } from "../../../assets";
 const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
   const navigation = useNavigation();
 
+  const AnimatedFI = Animated.createAnimatedComponent(FastImage)
+  
+
   // To get left hours
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
   let leftHrs = hours;
+
+  const [img_src, setimg_src] = useState(false)
+  const img_src_r = React.useRef("")
 
   return (
     <TouchableOpacity
@@ -45,15 +52,48 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
           alignItems: "center",
         }}
       >
+       {
+       Platform.OS == 'ios'?
+       <>
         <FastImage
+        useLastImageAsDefaultSource={item.prof_rvl? true : false}
           source={
             item.prof_rvl
               ? { uri: item.prof_img }
               : item.userprofile.gender =='Man'?
               MaleAvatar : FemaleAvatar
           }
+          onLoad={()=>{
+            img_src_r.current =
+                item.prof_rvl
+              ? { uri: item.prof_img }
+              : item.userprofile.gender =='Man'?
+              MaleAvatar : FemaleAvatar
+
+              setimg_src(!img_src)
+          }}
+          style={{width:0.1,height:0.1,opacity:0}}
+        />
+                <FastImage
+                          useLastImageAsDefaultSource={item.prof_rvl? true : false}
+          source={
+            img_src_r.current
+          }
           style={styles.profileImage}
         />
+        </>
+        :
+        <FastImage
+        useLastImageAsDefaultSource={item.prof_rvl? true : false}
+          source={
+            item.prof_rvl
+              ? { uri: item.prof_img }
+              : item.userprofile.gender =='Man'?
+              MaleAvatar : FemaleAvatar
+          }
+          
+          style={styles.profileImage}
+        />}
         <View>
           <Text style={styles.profileName}>
             {item?.userprofile?.name.split(" ")[0].length < 9

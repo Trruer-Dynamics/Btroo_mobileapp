@@ -638,7 +638,6 @@ const SwipeCard = ({
                       }}
 
                       onPress={()=>{
-                        console.log('Pass onPress')
                         handleChoiceButtons(0);
                         swipeProfile(false, false);
                         setreport("");
@@ -684,7 +683,6 @@ const SwipeCard = ({
                       }}
 
                       onPress={()=>{
-                        console.log('SoftSpot onPress')
                         handleChoiceButtons(0);
                         swipeProfile(true, true);
                         setreport("");
@@ -727,7 +725,6 @@ const SwipeCard = ({
                       }}
 
                       onPress={()=>{
-                        console.log('Fancy onPress')
                         handleChoiceButtons(0);
                         swipeProfile(true, false);
                         setreport("");
@@ -1273,6 +1270,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
+    textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1280,6 +1278,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
+    textAlign: "justify",
   },
   habitsImage: {
     width: rspW(10.1),

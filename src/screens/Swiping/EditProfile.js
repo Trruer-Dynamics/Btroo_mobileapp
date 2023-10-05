@@ -1380,7 +1380,7 @@ const EditProfile = ({ navigation }) => {
                       value={occupation}
                       setvalue={setoccupation}
                       width={"100%"}
-                      maxLength={15}
+                      maxLength={20}
                       height={rspW(12.76)}
                       placeholder={"Add your title"}
                       error_cond={occupation.length < 3}

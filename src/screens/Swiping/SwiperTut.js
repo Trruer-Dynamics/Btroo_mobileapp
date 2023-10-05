@@ -314,10 +314,9 @@ const SwiperTut = ({ repeat_tut }) => {
           });
 
           let tmp_lis = sorted_tmp.map((v) => [v.id, v.gender]);
-          // console.log("tmp_lis",tmp_lis)
           dispatch(setAllGenders(tmp_lis));
           setgender_lis(tmp_lis)
-          // console.log("profile_data.userpreferances",profile_data.userpreferances)
+          
          
         }
       })
@@ -337,12 +336,12 @@ const SwiperTut = ({ repeat_tut }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("Tut Focus")
+
      if (gender_lis.length > 0) {
       let w_gen = gender_lis.find(v => v[1] == 'Woman')
         
          let w_pref = profile_data.userpreferances.filter(v => v == w_gen[0])
-          console.log("w_pref",w_pref)
+          
         if (w_pref.length > 0) {
           setpref_type("Woman") 
         }

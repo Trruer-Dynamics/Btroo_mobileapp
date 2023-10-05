@@ -177,16 +177,6 @@ const MobileNo = ({ navigation, route }) => {
     }
   };
 
-  // To otp status of phone number
-  const onAuthStateChanged = (user) => {
-    // console.log("\nonAuthStateChanged", user, "\n");
-  };
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-
-    return subscriber; // unsubscribe on unmount
-  }, []);
 
   const dispatch = useDispatch();
 

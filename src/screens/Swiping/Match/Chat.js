@@ -480,7 +480,6 @@ const Chat = ({ profile }) => {
   const [rply_item_indx, setrply_item_indx] = useState(null);
   const [rply_animation, setrply_animation] = useState(false)
 
-  const [chatPage, setchatPage] = useState(1);
 
   const [rvl_activate, setrvl_activate] = useState(false);
   const [rvl_time, setrvl_time] = useState(false);
@@ -621,7 +620,7 @@ const Chat = ({ profile }) => {
         let resp_data = resp.data.data;
         let code = resp.data.code;
 
-        console.log("getPrevChat", resp_data.length);
+        
 
         if (code == 200) {
           let tmp_lis = [...list];
@@ -666,10 +665,7 @@ const Chat = ({ profile }) => {
 
           let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id);
 
-          console.log(
-            "chats_msgs.length > tmp_lis.length",
-            tmps.length > tmp_lis.length
-          );
+          
           if (tmps.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
             setchatlist(tmp);
@@ -743,7 +739,7 @@ const Chat = ({ profile }) => {
       const data = JSON.parse(e.data);
 
       if (data.sender != profile_data.user.id) {
-        console.log(Platform.OS, "on message", data.sender);
+        // console.log(Platform.OS, "on message", data.sender);
 
         try {
           let day_tmp = moment(new Date(data.datetime))
@@ -925,7 +921,16 @@ const Chat = ({ profile }) => {
   }, [chatlist_remain]);
 
   useEffect(() => {
-    if (!profile.prof_rvl && !rvl_activate) {
+
+    if (Platform.OS == 'ios') {
+      console.log("\n")
+      console.log("last msg", chatlist.length
+       > 0 ? chatlist[0][0] : 'No Msg Yet' )
+      console.log("no of msg",chatlist.length)
+    }
+  
+
+    if (chatlist.length> 0 && !profile.prof_rvl && !rvl_activate) {
       let mymsgs = chatlist.filter((v) => v[1] == 1);
       let othmsgs = chatlist.filter((v) => v[1] == 0);
       let mycount = mymsgs
@@ -937,7 +942,6 @@ const Chat = ({ profile }) => {
         .flat()
         .join().length;
 
-      // if (mycount >= 120 && othcount >= 120) {
         let tmpl = [];
         let turn = 0;
         for (let j = 0; j < chatlist.length; j++) {
@@ -956,14 +960,13 @@ const Chat = ({ profile }) => {
         tmp_11 = tmpl2.map((v) => v[2]);
 
         let tmpl3 = [];
-
+         
         l = 0;
         for (const iter of tmp_11) {
           if ((l + 1) % 2 !== 0) {
             let t1 = new Date(tmp_11[l]);
             let t2 = new Date(tmp_11[l + 1]);
             let diff = Math.abs(t2 - t1);
-
             tmpl3.push(diff);
           }
 
@@ -971,10 +974,23 @@ const Chat = ({ profile }) => {
         }
 
         if (tmpl3.length > 0) {
-          let total_time = new Date(tmpl3.reduce((a, b) => a + b)).getMinutes();
-          let avg_time = total_time / chatlist.length;
+      
+          let tot_min = tmpl3.reduce((a, b) => a + b)/1000/60
+          let avg_min = tot_min / tmpl3.length
+
           let ttact = false 
-          if (avg_time <= 5 && chatlist.length >= 25  && (mycount >= 120 && othcount >= 120)) {
+
+          if (Platform.OS == 'ios') {
+            console.log("time gap diff list", tmpl3)
+          console.log("my word count",mycount)
+          console.log("other word count",othcount)
+          console.log("tot_min",tot_min)
+          console.log("avg_min", avg_min)
+          console.log('\n')
+          }
+          
+
+          if (avg_min <= 5 && chatlist.length >= 25  && (mycount >= 120 && othcount >= 120)) {
             ttact = true
           }
           else if (chatlist.length >= 40  && (mycount >= 130 && othcount >= 130)) {
@@ -983,6 +999,9 @@ const Chat = ({ profile }) => {
 
           if (ttact) {
             setrvl_activate(true);
+
+            console.log("** Profile Acivated ***")
+            console.log("\n")
             if (chat_reveal_tut == true) {
               Keyboard.dismiss();
               setshow_rvl_tut(true);
@@ -992,7 +1011,6 @@ const Chat = ({ profile }) => {
         }
         }
         
-      // }
     }
   }, [chatlist]);
 
@@ -1199,7 +1217,7 @@ const Chat = ({ profile }) => {
                 if (chatlist.length > 0) {
                   setloading(false)
                 }
-                console.log("onLoad");
+     
               }}
               // extraData={chatlist}
               data={chatlist}

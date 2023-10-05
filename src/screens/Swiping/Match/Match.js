@@ -181,7 +181,9 @@ const Match = () => {
     } catch (error) {}
   };
 
-  const renderItem = useCallback(({ item }) => {
+  const renderItem =
+   useCallback(
+    ({ item }) => {
     return (
       <MatchItem
         item={item}
@@ -190,7 +192,8 @@ const Match = () => {
         setextendTimeMatchID={setextendTimeMatchID}
       />
     );
-  },[])
+  }
+  ,[])
 
   const extendTime = async () => {
     let tmstmp = new Date().toISOString().slice(0, -5).split("T");

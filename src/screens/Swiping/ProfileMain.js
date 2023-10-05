@@ -20,7 +20,7 @@ import {
 } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   DrinkingNo,
   DrinkingYes,
@@ -35,6 +35,10 @@ import truncateStr from "../../components/functions/truncateStr";
 import Paginator from "../../components/screenComponents/swiping/Paginator";
 import FullModal from "../../components/modals/FullModal";
 import FastImage from "react-native-fast-image";
+import axios from "axios";
+import { apiUrl } from "../../constants";
+import { setAccessToken, setProfileImgs, setProfiledata, setPromptFillingComplete, setPromptFillingStart } from "../../store/reducers/authentication/authentication";
+import { setChatRevealTut, setChatTut, setMatchTut, setSwipeTut } from "../../store/reducers/tutorial/tutorial";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item[0]);
@@ -62,6 +66,8 @@ const ProfileMain = ({ navigation }) => {
     "Urdu",
   ]);
 
+  const dispatch = useDispatch()
+
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
@@ -83,14 +89,91 @@ const ProfileMain = ({ navigation }) => {
   const viewConfig3 = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
   const [age, setage] = useState("");
-
   const [pets_list, setpets_list] = useState([]);
   const [interest_list, setinterest_list] = useState([]);
+  const [prof_imgr, setprof_imgr] = useState('')
+
+  const access_token = useSelector(
+    (state) => state.authentication.access_token
+  );
+
+  // console.log('access_token',access_token)
+
+  const getData = async () => {
+
+    console.log("getData")
+    // const headers = {
+    //   Authorization: `Bearer ${access_token}`,
+    //   "Content-Type": "application/json",
+    // };
+console.log("profile_data.user.id",profile_data.user.id)
+    await axios
+      .get(apiUrl + "login/?user_id="+ profile_data.user.id)
+      .then((resp) => {
+        console.log("resp",resp.data.data)
+        let user_data = resp.data.data;
+      let status_code = resp.data.code;
+
+      if (status_code == 200) {
+        console.log("user_data.userprefrances",user_data.userprofile.pets)
+        let resp_imgs = user_data.userprofile.image.sort((a, b) => {
+          let pos1 = a.position;
+          let pos2 = b.position;
+          if (pos1 < pos2) return -1;
+          if (pos1 > pos2) return 1;
+          return 0;
+        });
+
+        // // create a empty data list format for 9 images
+        let tmp1 = [
+          ["", "", false, "1", ""],
+          ["", "", false, "2", ""],
+          ["", "", false, "3", ""],
+          ["", "", false, "4", ""],
+          ["", "", false, "5", ""],
+          ["", "", false, "6", ""],
+          ["", "", false, "7", ""],
+          ["", "", false, "8", ""],
+          ["", "", false, "9", ""],
+        ];
+
+        // set images with active status
+        k = 0;
+        for (const img of resp_imgs) {
+          if ((resp_imgs.length > 1 && k > 0) || resp_imgs.length == 1) {
+            tmp1[k + 1] = ["", "", true, k + 2, ""];
+          }
+
+          tmp1[k] = [img.image, img.cropedimage, true, k + 1, img.id];
+          k += 1;
+        }
+
+        dispatch(setProfileImgs(tmp1));
+        
+
+        let user_prof_data = {
+          ...profile_data,
+        //   user: user_data.user,
+          userinterest: user_data.userprofile.interest,
+   
+          userpets: user_data.userprofile.pets,
+        //   userpreferances: u_pref,
+        //   userprofile: user_data.userprofile,
+        //   userpublicprompts: act_promptsm,
+        //   userprivateprompts: act_promptsm2,
+        };
+        dispatch(setProfiledata(user_prof_data));
+      }
+      })
+      .catch((err) => {
+        console.log("err",err)
+      });
+  };
 
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-
+      
       let dob = new Date(profile_data?.userprofile?.dob);
 
       var today = new Date();
@@ -128,6 +211,17 @@ const ProfileMain = ({ navigation }) => {
         // Do something when the screen is unfocused
       };
     }, [profile_data, profile_imgs])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      getData()
+      
+      return () => {
+        // Do something when the screen is unfocused
+      };
+    }, [])
   );
 
   // Full Screen Carosel Item Render Function
@@ -175,10 +269,31 @@ const ProfileMain = ({ navigation }) => {
                 setmodalVisible(true);
               }}
             >
+             { 
+             Platform.OS == 'ios'?
+             <>
               <FastImage
+              useLastImageAsDefaultSource
+              style={{width:0.1,height:0.1,opacity:0}}
+                source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
+                onLoad={()=>{
+                  setprof_imgr(profile_imgs[0][1])
+                }}
+              />
+
+<FastImage
+              useLastImageAsDefaultSource
+                style={styles.profileImage}
+                source={{ uri: prof_imgr }}
+                
+              />
+</>
+:
+              <FastImage
+              useLastImageAsDefaultSource
                 style={styles.profileImage}
                 source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
-              />
+              />}
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -419,6 +534,7 @@ const ProfileMain = ({ navigation }) => {
                     {pets_list.map((img, indx) => {
                       return (
                         <FastImage
+                        useLastImageAsDefaultSource
                           source={{ uri: img[1] }}
                           style={styles.interestImage}
                           resizeMode="cover"
@@ -458,6 +574,7 @@ const ProfileMain = ({ navigation }) => {
                   {interest_list.map((img, idx) => {
                     return (
                       <FastImage
+                      useLastImageAsDefaultSource
                         source={{ uri: img[1] }}
                         style={styles.interestImage}
                         resizeMode="cover"
@@ -700,6 +817,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.1),
     letterSpacing: 1,
+    textAlign:'justify',
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -707,6 +825,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
+    textAlign:'justify',
   },
 
   habitsImage: {

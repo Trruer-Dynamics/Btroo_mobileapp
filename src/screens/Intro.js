@@ -89,7 +89,9 @@ const Intro = ({ route }) => {
             resizeMode={"cover"}
             rate={1.0}
             ignoreSilentSwitch={"obey"}
-            onError={(err) => {}}
+            onError={(err) => {
+              console.log("err",err)
+            }}
           />
 
           {/* Logo Area */}

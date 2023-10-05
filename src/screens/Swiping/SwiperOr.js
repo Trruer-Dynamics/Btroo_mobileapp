@@ -545,7 +545,7 @@ const SwiperOr = ({}) => {
   };
 
   const getRejectedProfiles = async () => {
-    console.log("getRejectedProfiles")
+
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
