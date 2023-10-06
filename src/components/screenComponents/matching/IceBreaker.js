@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.medium,
     lineHeight: rspF(2.3),
     color: colors.black,
+    // textAlign:'justify',
   },
   emptysearchContainer: {
     height: rspH(2.8),

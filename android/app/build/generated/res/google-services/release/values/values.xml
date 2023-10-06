@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">724344904966-jl3haceqc1ltcrr3cdt14viag6gb9e7b.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">724344904966</string>
+    <string name="google_api_key" translatable="false">AIzaSyCEjj8jYskqnyth09uQXOdQWZI3CGB21-s</string>
+    <string name="google_app_id" translatable="false">1:724344904966:android:fa41bd429b236686635287</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCEjj8jYskqnyth09uQXOdQWZI3CGB21-s</string>
+    <string name="google_storage_bucket" translatable="false">btroo-2023.appspot.com</string>
+    <string name="project_id" translatable="false">btroo-2023</string>
+</resources>

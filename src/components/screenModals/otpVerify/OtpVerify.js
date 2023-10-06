@@ -193,18 +193,22 @@ const OtpVerify = ({
   };
 
   const getDeviceToken = async () => {
-   
+
     if (Platform.OS == "ios") {
       const apn_tok = await messaging().getAPNSToken();
     }
 
     const token = await messaging().getToken();
     setDeviceToken(token);
+
+
     return token;
   };
 
   const sendDeviceToken = async (prof_id, access_token) => {
+
     setloading(true);
+    
     let dvToken = await getDeviceToken();
     const data = {
       userprofile_id: prof_id,
@@ -215,11 +219,14 @@ const OtpVerify = ({
       Authorization: `Bearer ${access_token}`,
     };
 
+ 
     try {
       const response = await axios.post(apiUrl + "device_token/", data, {
         headers,
       });
+      
       let user_data = response.data.data;
+      
 
       setloading(false);
     } catch (error) {
@@ -257,10 +264,9 @@ const OtpVerify = ({
 
     try {
       const response = await axios.post(apiUrl + "login/", data);
-
       let user_data = response.data.data;
       let status_code = response.data.code;
-
+      
       setloading(false);
 
       if (status_code == 400) {
@@ -387,6 +393,7 @@ const OtpVerify = ({
         }
       }
     } catch (error) {
+      console.log("error", error)
       setloading(false);
     }
   };

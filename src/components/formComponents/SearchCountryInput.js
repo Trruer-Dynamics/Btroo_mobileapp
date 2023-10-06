@@ -36,7 +36,7 @@ const SearchCountryInput = ({
           fontSize: rspF(1.9),
           paddingHorizontal: rspW(4),
           fontFamily: fontFamily.regular,
-          lineHeight: rspF(2),
+          lineHeight: rspF(2.2),
           color: "#000",
         }}
         onFocus={()=>{

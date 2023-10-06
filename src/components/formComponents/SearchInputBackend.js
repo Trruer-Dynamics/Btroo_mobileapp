@@ -38,7 +38,7 @@ const SearchInputBackend = ({
           paddingHorizontal: rspW(4),
           fontFamily: fontFamily.regular,
           color: "#000",
-          lineHeight: rspF(2),
+          lineHeight: rspF(2.2),
         }}
         onFocus={()=>{
           setplaceholder("")

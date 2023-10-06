@@ -4,7 +4,9 @@ const initialState = {
   chats_msgs: [],
   drafts_msgs: [],
   matches: [],
+  matches_imgs: [],
   icebreakers: [],
+  rvl_time: false,
 };
 
 export const chatsSlice = createSlice({
@@ -20,13 +22,17 @@ export const chatsSlice = createSlice({
     setMatches: (state, action) => {
       state.matches = action.payload;
     },
+    setMatchesImgs: (state, action) => {
+      state.matches_imgs = action.payload;
+    },
     setIceBreakers: (state, action) => {
       state.icebreakers = action.payload;
     },
+    
   },
 });
 
-export const { setChatMsgs, setDraftMsgs, setMatches, setIceBreakers } =
+export const { setChatMsgs, setDraftMsgs, setMatches, setIceBreakers,setMatchesImgs } =
   chatsSlice.actions;
 
 export default chatsSlice.reducer;

@@ -8,6 +8,7 @@ import {
   Platform,
   FlatList,
   Animated,
+  Image,
 } from "react-native";
 import React, { useState, useRef } from "react";
 import ADIcon from "react-native-vector-icons/AntDesign";
@@ -115,7 +116,23 @@ console.log("profile_data.user.id",profile_data.user.id)
       let status_code = resp.data.code;
 
       if (status_code == 200) {
-        console.log("user_data.userprefrances",user_data.userprofile.pets)
+        console.log("user_data.publicprompts",user_data.userprofile.publicprompts)
+
+        let act_prompts = user_data.userprofile.publicprompts.filter(
+          (c) => c.active == true
+        );
+        let act_promptsm = act_prompts.map((c) => [
+          [c.promptsmaster, c.question],
+          c.answer,
+        ]);
+        let act_prompts2 = user_data.userprofile.privateprompts.filter(
+          (c) => c.active == true
+        );
+        let act_promptsm2 = act_prompts2.map((c) => [
+          [c.promptsmaster, c.question],
+          c.answer,
+        ]);
+
         let resp_imgs = user_data.userprofile.image.sort((a, b) => {
           let pos1 = a.position;
           let pos2 = b.position;
@@ -153,14 +170,13 @@ console.log("profile_data.user.id",profile_data.user.id)
 
         let user_prof_data = {
           ...profile_data,
-        //   user: user_data.user,
+          user: profile_data.user,
           userinterest: user_data.userprofile.interest,
-   
           userpets: user_data.userprofile.pets,
-        //   userpreferances: u_pref,
-        //   userprofile: user_data.userprofile,
-        //   userpublicprompts: act_promptsm,
-        //   userprivateprompts: act_promptsm2,
+          userpreferances: profile_data.userpreferances,
+          userprofile: profile_data.userprofile,
+          userpublicprompts: act_promptsm,
+          userprivateprompts: act_promptsm2,
         };
         dispatch(setProfiledata(user_prof_data));
       }
@@ -270,30 +286,32 @@ console.log("profile_data.user.id",profile_data.user.id)
               }}
             >
              { 
-             Platform.OS == 'ios'?
-             <>
-              <FastImage
-              useLastImageAsDefaultSource
-              style={{width:0.1,height:0.1,opacity:0}}
-                source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
-                onLoad={()=>{
-                  setprof_imgr(profile_imgs[0][1])
-                }}
-              />
+             Platform.OS == 'android'?
+//              <>
+//               <FastImage
+//               useLastImageAsDefaultSource
+//               style={{width:0.1,height:0.1,opacity:0}}
+//                 source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
+//                 onLoad={()=>{
+//                   setprof_imgr(profile_imgs[0][1])
+//                 }}
+//               />
 
 <FastImage
               useLastImageAsDefaultSource
                 style={styles.profileImage}
-                source={{ uri: prof_imgr }}
+                source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
                 
               />
-</>
+// </>
 :
-              <FastImage
-              useLastImageAsDefaultSource
+              <Image
+              // useLastImageAsDefaultSource
                 style={styles.profileImage}
                 source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
-              />}
+                // defaultSource={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
+              />
+            }
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -533,12 +551,23 @@ console.log("profile_data.user.id",profile_data.user.id)
                   >
                     {pets_list.map((img, indx) => {
                       return (
-                        <FastImage
-                        useLastImageAsDefaultSource
+                        <>
+                        { Platform.OS == 'ios'?
+                          <Image
+                        
                           source={{ uri: img[1] }}
                           style={styles.interestImage}
                           resizeMode="cover"
                         />
+                      :
+                      <FastImage
+                      useLastImageAsDefaultSource
+                          source={{ uri: img[1] }}
+                          style={styles.interestImage}
+                          resizeMode="cover"
+                      />
+                      }
+                        </>
                       );
                     })}
                   </ScrollView>
@@ -573,12 +602,26 @@ console.log("profile_data.user.id",profile_data.user.id)
                 >
                   {interest_list.map((img, idx) => {
                     return (
-                      <FastImage
-                      useLastImageAsDefaultSource
+                      
+                      <>
+                       {
+                       Platform.OS == 'ios'
+                       ?
+                       <Image
                         source={{ uri: img[1] }}
                         style={styles.interestImage}
                         resizeMode="cover"
                       />
+                    :
+                    <FastImage
+                    useLastImageAsDefaultSource
+                        source={{ uri: img[1] }}
+                        style={styles.interestImage}
+                        resizeMode="cover"
+                    />
+                    }
+                    
+                    </>
                     );
                   })}
                 </ScrollView>

@@ -27,6 +27,8 @@ export const tutorialSlice = createSlice({
     setRepeatTut: (state, action) => {
       state.repeat_tut = action.payload;
     },
+    
+
   },
 });
 

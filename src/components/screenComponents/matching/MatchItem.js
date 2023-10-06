@@ -15,20 +15,15 @@ import fontFamily from "../../../styles/fontFamily";
 import FAIcon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
-import { FemaleAvatar, MaleAvatar } from "../../../assets";
 
-const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
+const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID, prf_img }) => {
   const navigation = useNavigation();
-
-  const AnimatedFI = Animated.createAnimatedComponent(FastImage)
   
 
   // To get left hours
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
   let leftHrs = hours;
 
-  const [img_src, setimg_src] = useState(false)
-  const img_src_r = React.useRef("")
 
   return (
     <TouchableOpacity
@@ -53,43 +48,21 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
         }}
       >
        {
-       Platform.OS == 'ios'?
-       <>
-        <FastImage
-        useLastImageAsDefaultSource={item.prof_rvl? true : false}
-          source={
-            item.prof_rvl
-              ? { uri: item.prof_img }
-              : item.userprofile.gender =='Man'?
-              MaleAvatar : FemaleAvatar
-          }
-          onLoad={()=>{
-            img_src_r.current =
-                item.prof_rvl
-              ? { uri: item.prof_img }
-              : item.userprofile.gender =='Man'?
-              MaleAvatar : FemaleAvatar
-
-              setimg_src(!img_src)
-          }}
-          style={{width:0.1,height:0.1,opacity:0}}
-        />
-                <FastImage
-                          useLastImageAsDefaultSource={item.prof_rvl? true : false}
-          source={
-            img_src_r.current
-          }
-          style={styles.profileImage}
-        />
-        </>
+       Platform.OS == 'android'?
+        
+      <FastImage
+      useLastImageAsDefaultSource={item.prof_rvl? true : false}
+      source={
+        prf_img
+      }
+      
+      style={styles.profileImage}
+      />
         :
-        <FastImage
-        useLastImageAsDefaultSource={item.prof_rvl? true : false}
+        <Image
+      
           source={
-            item.prof_rvl
-              ? { uri: item.prof_img }
-              : item.userprofile.gender =='Man'?
-              MaleAvatar : FemaleAvatar
+            prf_img
           }
           
           style={styles.profileImage}

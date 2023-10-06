@@ -464,6 +464,8 @@ const Chat = ({ profile }) => {
   const [inp_btp, setinp_btp] = useState(2);
 
   const scrollViewRef = useRef(null);
+  const scrollViewRef2 = useRef(null);
+
   const inBottom = useRef(true);
 
   const ws = useRef();
@@ -474,6 +476,7 @@ const Chat = ({ profile }) => {
   const dispatch = useDispatch();
 
   const [chatlist, setchatlist] = useState([]);
+  const [scrollable, setscrollable] = useState(true)
   const chatlist_ref = useRef(null);
   const socket_con = useRef(null);
   const [chatlist_remain, setchatlist_remain] = useState([]);
@@ -597,7 +600,7 @@ const Chat = ({ profile }) => {
 
       let resp_data = response.data;
 
-      console.log("revealProfileTime resp", response);
+      console.log("revealProfileTime resp", resp_data);
     } catch (error) {
       setloading(false);
       console.log("revealProfileTime error", error);
@@ -782,7 +785,9 @@ const Chat = ({ profile }) => {
     };
   };
 
-  const renderItem = useCallback( ({ item, index }) => {
+  const renderItem = 
+  useCallback( 
+    ({ item, index }) => {
     return (
       <GestureHandlerRootView>
         {item[6] != "" && (
@@ -830,7 +835,8 @@ const Chat = ({ profile }) => {
         />
       </GestureHandlerRootView>
     )
-            },[chatlist])
+            }
+            ,[chatlist])
 
   useEffect(() => {
     if (chatlist.length > 0) {
@@ -997,7 +1003,8 @@ const Chat = ({ profile }) => {
             ttact = true
           }
 
-          if (ttact) {
+          if (ttact ) {
+            
             setrvl_activate(true);
 
             console.log("** Profile Acivated ***")
@@ -1016,9 +1023,10 @@ const Chat = ({ profile }) => {
 
   useEffect(() => {
     // console.log("rvl_activate",rvl_activate)
+    
     if (rvl_activate) {
-      setrvl_time(true);
-      // revealProfileTime()
+      console.log("rvl_activate",rvl_activate)
+      revealProfileTime()
     }
   }, [rvl_activate]);
 
@@ -1098,7 +1106,11 @@ const Chat = ({ profile }) => {
     if (lastMsg) {
       sender = lastMsg[3];
       let login_user = profile_data.user.id;
+      console.log("login_user",login_user)
+      console.log("sender",sender)
+      console.log(Platform.OS,"login_user === sender",login_user === sender)
       if (login_user === sender) {
+        console.log("Herer")
         scrollViewRef.current.scrollToIndex({
           index: 0,
           animated: false,
@@ -1211,6 +1223,7 @@ const Chat = ({ profile }) => {
        
             <FlashList
               keyboardDismissMode="interactive"
+
               estimatedItemSize={100}
               onLoad={() => {
                 setloading(false);
@@ -1219,7 +1232,7 @@ const Chat = ({ profile }) => {
                 }
      
               }}
-              // extraData={chatlist}
+              
               data={chatlist}
               contentContainerStyle={{
                 paddingHorizontal: rspW(6.2),
@@ -1231,26 +1244,19 @@ const Chat = ({ profile }) => {
               keyboardShouldPersistTaps={
                 Platform.OS == "android" ? "always" : "never"
               }
-              onContentSizeChange={() => {
-               
-                // let lastMsg = chatlist[0];
-                // let sender = "";
-                // if (lastMsg) {
-                //   sender = lastMsg[3];
-                //   let login_user = profile_data.user.id;
-                //   if (login_user === sender) {
-                //     scrollViewRef.current.scrollToIndex({
-                //       index: 0,
-                //       animated: false,
-                //     });
-                //   }
-                // }
+              maintainVisibleContentPosition={{
+                minIndexForVisible: 0
               }}
+              
               renderItem={renderItem}
               keyExtractor={(_, index) => index}
               bouncesZoom={false}
               bounces={false}
               removeClippedSubviews={true}
+              onContentSizeChange={()=>{
+                console.log("onContentSizeChange")
+                
+              }}
           
             />
          
