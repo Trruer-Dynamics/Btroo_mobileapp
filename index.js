@@ -15,7 +15,7 @@ const root = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
       {/* <SafeAreaProvider> */}
-        <App />
+      <App />
       {/* </SafeAreaProvider> */}
     </PersistGate>
   </Provider>

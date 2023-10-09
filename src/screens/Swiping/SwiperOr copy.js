@@ -226,21 +226,21 @@ const SwiperOr = ({}) => {
     (direction) => {
       scaleAnimation();
 
-      if (direction == 0) {
-        Animated.timing(swipe.y, {
-          toValue: -scrn_height,
+      // if (direction == 0) {
+      Animated.timing(swipe.y, {
+        toValue: -scrn_height,
 
-          duration: 800,
+        duration: 800,
 
-          useNativeDriver: true,
-        }).start(removeCard);
-      } else {
-        Animated.timing(swipe.x, {
-          toValue: direction * scrn_width * 2,
-          duration: 800,
-          useNativeDriver: true,
-        }).start(removeCard);
-      }
+        useNativeDriver: true,
+      }).start(removeCard);
+      // } else {
+      // Animated.timing(swipe.x, {
+      //   toValue: direction * scrn_width * 2,
+      //   duration: 800,
+      //   useNativeDriver: true,
+      // }).start(removeCard);
+      // }
     },
 
     [removeCard, swipe.x]
@@ -449,7 +449,6 @@ const SwiperOr = ({}) => {
 
         if (resp.status == 200) {
           let tmp = resp.data.data;
-
           let sorted_tmp = tmp.sort(function (a, b) {
             return a["position"] - b["position"];
           });
@@ -517,7 +516,7 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
     await axios
-      .get(apiUrl + "filter_user/" + profile_data.user.id + "?page=1", {
+      .get(apiUrl + "filter_user/" + profile_data.user.id, {
         headers,
       })
       .then((resp) => {
@@ -553,6 +552,7 @@ const SwiperOr = ({}) => {
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
         let resp_data = resp.data;
+
         if (resp_data.length == 0) {
           setwarn_step(2);
           setloading2(true);

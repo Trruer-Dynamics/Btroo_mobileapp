@@ -9,7 +9,7 @@ const Splash = ({ navigation }) => {
     // Time until splash screen visible
     setTimeout(() => {
       // navigation.navigate("Intro");
-      navigation.dispatch(StackActions.replace('Intro'))
+      navigation.dispatch(StackActions.replace("Intro"));
     }, 1200);
   }, []);
 

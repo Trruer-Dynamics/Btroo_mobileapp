@@ -8,8 +8,11 @@ import {
   BackHandler,
   AppState,
 } from "react-native";
-import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
-
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import Navigation from "./src/navigation";
 import SplashScreen from "react-native-splash-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -24,12 +27,9 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Octicons from "react-native-vector-icons/Octicons";
 import { useDispatch, useSelector } from "react-redux";
-import { getHash } from "react-native-otp-verify";
 import NetInfo from "@react-native-community/netinfo";
 import _ from "lodash";
 import { setNetworkConnect } from "./src/store/reducers/authentication/authentication";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { scrn_height } from "./src/styles/responsiveSize";
 
 AntDesign.loadFont()
   .then()
@@ -103,12 +103,10 @@ const App = () => {
     (state) => state.authentication.statusBarArg
   );
 
-
   LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
   LogBox.ignoreAllLogs(); //Ignore all log notifications
 
   StatusBar.setBarStyle(barStyle, true);
-
 
   useLayoutEffect(() => {
     SplashScreen.hide();
@@ -116,30 +114,7 @@ const App = () => {
     if (Platform.OS == "android") {
       StatusBar.setBackgroundColor(status_bg ? status_bg : "#fff");
     }
-
-  
   }, [status_bg, statusBarArg]);
-
-  const getAppHash = () => {
-    getHash()
-      .then((hash) => {
-        // console.log("App Hash", hash[0]);
-      })
-      .catch((err) => {
-        console.log("err while hash", err);
-      });
-  };
-
-  const smsSetup = useCallback(() => {
-    if (Platform.OS == "android") {
-      getAppHash();
-    }
-  }, []);
-
-  // get Hash Code for SMS
-  useLayoutEffect(() => {
-    smsSetup();
-  }, []);
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(

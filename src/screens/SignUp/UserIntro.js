@@ -406,6 +406,7 @@ const UserIntro = ({ navigation, route }) => {
       let code = resp.data.code;
       let user_data = resp.data.data;
 
+      
       if (code == 200) {
         let u_pref = user_data.userprefrances.map((v) => v.gendermaster.id);
 
@@ -604,7 +605,6 @@ const UserIntro = ({ navigation, route }) => {
             v.iconblue,
             v.icongrey,
           ]);
-
 
           setpets_list(tmp_lis);
         } else {

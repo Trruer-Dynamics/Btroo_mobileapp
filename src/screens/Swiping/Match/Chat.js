@@ -707,10 +707,7 @@ const Chat = ({ profile }) => {
 
   const connectSocket = async () => {
 
-    console.log("connectSocket")
-
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
-
     ws.current.onopen = (e) => {
       console.log("Open");
       socket_con.current = true;
@@ -742,7 +739,6 @@ const Chat = ({ profile }) => {
       const data = JSON.parse(e.data);
 
       if (data.sender != profile_data.user.id) {
-        // console.log(Platform.OS, "on message", data.sender);
 
         try {
           let day_tmp = moment(new Date(data.datetime))
@@ -926,15 +922,7 @@ const Chat = ({ profile }) => {
     }
   }, [chatlist_remain]);
 
-  useEffect(() => {
-
-    if (Platform.OS == 'ios') {
-      console.log("\n")
-      console.log("last msg", chatlist.length
-       > 0 ? chatlist[0][0] : 'No Msg Yet' )
-      console.log("no of msg",chatlist.length)
-    }
-  
+  useEffect(() => {  
 
     if (chatlist.length> 0 && !profile.prof_rvl && !rvl_activate) {
       let mymsgs = chatlist.filter((v) => v[1] == 1);
@@ -986,16 +974,6 @@ const Chat = ({ profile }) => {
 
           let ttact = false 
 
-          if (Platform.OS == 'ios') {
-            console.log("time gap diff list", tmpl3)
-          console.log("my word count",mycount)
-          console.log("other word count",othcount)
-          console.log("tot_min",tot_min)
-          console.log("avg_min", avg_min)
-          console.log('\n')
-          }
-          
-
           if (avg_min <= 5 && chatlist.length >= 25  && (mycount >= 120 && othcount >= 120)) {
             ttact = true
           }
@@ -1007,8 +985,6 @@ const Chat = ({ profile }) => {
             
             setrvl_activate(true);
 
-            console.log("** Profile Acivated ***")
-            console.log("\n")
             if (chat_reveal_tut == true) {
               Keyboard.dismiss();
               setshow_rvl_tut(true);
@@ -1022,10 +998,8 @@ const Chat = ({ profile }) => {
   }, [chatlist]);
 
   useEffect(() => {
-    // console.log("rvl_activate",rvl_activate)
     
     if (rvl_activate) {
-      console.log("rvl_activate",rvl_activate)
       revealProfileTime()
     }
   }, [rvl_activate]);
@@ -1106,11 +1080,8 @@ const Chat = ({ profile }) => {
     if (lastMsg) {
       sender = lastMsg[3];
       let login_user = profile_data.user.id;
-      console.log("login_user",login_user)
-      console.log("sender",sender)
-      console.log(Platform.OS,"login_user === sender",login_user === sender)
+      
       if (login_user === sender) {
-        console.log("Herer")
         scrollViewRef.current.scrollToIndex({
           index: 0,
           animated: false,
@@ -1225,38 +1196,27 @@ const Chat = ({ profile }) => {
               keyboardDismissMode="interactive"
 
               estimatedItemSize={100}
-              onLoad={() => {
-                setloading(false);
-                if (chatlist.length > 0) {
-                  setloading(false)
-                }
-     
-              }}
-              
+             
               data={chatlist}
               contentContainerStyle={{
                 paddingHorizontal: rspW(6.2),
                 flexDirection: "column-reverse",
               }}
               
+              
               ref={scrollViewRef}
               inverted
               keyboardShouldPersistTaps={
                 Platform.OS == "android" ? "always" : "never"
               }
-              maintainVisibleContentPosition={{
-                minIndexForVisible: 0
-              }}
+             
               
               renderItem={renderItem}
               keyExtractor={(_, index) => index}
               bouncesZoom={false}
               bounces={false}
               removeClippedSubviews={true}
-              onContentSizeChange={()=>{
-                console.log("onContentSizeChange")
-                
-              }}
+              
           
             />
          

@@ -18,8 +18,7 @@ const SearchInputBackend = ({
   setsearch,
   refreshing,
 }) => {
-
-  const [placeholder, setplaceholder] = React.useState('Search')
+  const [placeholder, setplaceholder] = React.useState("Search");
 
   return (
     <View
@@ -40,15 +39,15 @@ const SearchInputBackend = ({
           color: "#000",
           lineHeight: rspF(2.2),
         }}
-        onFocus={()=>{
-          setplaceholder("")
+        onFocus={() => {
+          setplaceholder("");
         }}
-        onBlur={()=>{
-          setplaceholder("Search")
+        onBlur={() => {
+          setplaceholder("Search");
         }}
         onChangeText={(text) => {
           // if (!refreshing) {
-            setsearch(text);
+          setsearch(text);
           // }
         }}
         value={search}

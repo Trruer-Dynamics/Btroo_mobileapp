@@ -28,11 +28,15 @@ export const chatsSlice = createSlice({
     setIceBreakers: (state, action) => {
       state.icebreakers = action.payload;
     },
-    
   },
 });
 
-export const { setChatMsgs, setDraftMsgs, setMatches, setIceBreakers,setMatchesImgs } =
-  chatsSlice.actions;
+export const {
+  setChatMsgs,
+  setDraftMsgs,
+  setMatches,
+  setIceBreakers,
+  setMatchesImgs,
+} = chatsSlice.actions;
 
 export default chatsSlice.reducer;

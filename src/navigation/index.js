@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { scrn_height } from "../styles/responsiveSize";
 import { setSafeHeight } from "../store/reducers/screen/screen";
 import OffflineAlert from "../components/functions/OfflineAlert";
-import { setProfileRefresh, setStatusBarArgs } from "../store/reducers/authentication/authentication";
+import {
+  setProfileRefresh,
+  setStatusBarArgs,
+} from "../store/reducers/authentication/authentication";
 
 const insets = initialWindowMetrics.insets;
 
@@ -57,7 +60,7 @@ const Navigation = () => {
       setoffAlert(false);
     }
 
-    if (current_screen == 'Intro' || current_screen == 'PhotoVerifyCamera') {
+    if (current_screen == "Intro" || current_screen == "PhotoVerifyCamera") {
       if (Platform.OS == "android") {
         dispatch(
           setStatusBarArgs({
@@ -65,19 +68,15 @@ const Navigation = () => {
             backgroundColor: "#000",
           })
         );
-
       }
+    } else {
+      dispatch(
+        setStatusBarArgs({
+          barStyle: "dark-content",
+          backgroundColor: "#ffff",
+        })
+      );
     }
-    else{
-        dispatch(
-          setStatusBarArgs({
-            barStyle: "dark-content",
-            backgroundColor: "#ffff",
-          })
-        );
-
-    }
-
   }, [is_network_connected, current_screen]);
 
   return (

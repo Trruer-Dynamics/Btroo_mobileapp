@@ -7,4 +7,3 @@ export { default as MarijuanaNo } from "./images/Swiping/HabitsNo/MarijuanaNo.pn
 
 export { default as MaleAvatar } from "./images/Matching/Avatars/MaleAvatar.png";
 export { default as FemaleAvatar } from "./images/Matching/Avatars/FemaleAvatar.png";
-

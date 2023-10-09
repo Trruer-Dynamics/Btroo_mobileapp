@@ -57,7 +57,6 @@ const NotificationController = (props) => {
 
     if (not_data?.type != "" && user_interact && user_loggined) {
       if (not_data?.type == "Match") {
-        
         setuser_interact(false);
         navigation.navigate("Match");
       } else if (not_data?.type == "Chat") {
@@ -147,7 +146,7 @@ const NotificationController = (props) => {
         message: body,
         title: title,
         body: data,
-        soundName:'default',
+        soundName: "default",
       };
       if (Platform.OS == "android") {
         notifObj = {

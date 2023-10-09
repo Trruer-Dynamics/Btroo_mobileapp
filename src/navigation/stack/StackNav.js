@@ -39,7 +39,6 @@ const StackNav = () => {
         // // show screen according to authentication
         initialRouteName={user_loggined ? "BottomTab" : "Splash"}
       >
-      
         <Stack.Screen name="Splash" component={Splash} />
 
         <Stack.Screen
@@ -49,7 +48,7 @@ const StackNav = () => {
             ...TransitionPresets.ModalSlideFromBottomIOS,
           }}
         />
-        
+
         {/* SignUp & Login */}
         <Stack.Screen name="MobileNo" component={MobileNo} />
         <Stack.Screen name="UserIntro" component={UserIntro} />
@@ -61,20 +60,16 @@ const StackNav = () => {
           component={PhotoVerificationFinal}
         />
 
-
-
         {/* Tutorial */}
         <Stack.Screen name="Pledge" component={Pledge} />
 
         {/* Swiping */}
-       
+
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="Chat" component={ChatStack} />
         <Stack.Screen name="MatchProfile" component={MatchProfile} />
         <Stack.Screen name="ProfileRevealed" component={ProfileRevealed} />
         <Stack.Screen name="Info" component={Info} />
-
-
       </Stack.Navigator>
     </>
   );

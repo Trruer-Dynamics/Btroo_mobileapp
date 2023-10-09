@@ -66,7 +66,6 @@ const PicUpload = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
 
-
   // draggable positions
   // empty pic item list with format
   const [pic_list, setpic_list] = useState([
@@ -86,7 +85,9 @@ const PicUpload = ({ navigation, route }) => {
     Object.assign({}, ...pic_list.map((item, indx) => ({ [indx]: indx })))
   );
 
-  const [pos2, setpos2] = useState(Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx }))))
+  const [pos2, setpos2] = useState(
+    Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx })))
+  );
 
   // to control image upload modal
   const [modalVisible, setmodalVisible] = useState(false);
@@ -116,7 +117,7 @@ const PicUpload = ({ navigation, route }) => {
   // set final list and refresh screen to show changes
   const atLast = async (tmp_lis) => {
     setpic_list(tmp_lis);
-    setrefresh(!refresh)
+    setrefresh(!refresh);
   };
 
   // at Last Confirm  image positions and three images uploaded
@@ -155,8 +156,7 @@ const PicUpload = ({ navigation, route }) => {
     }
   };
 
-
- // To rearrange positions of all images after deleting image
+  // To rearrange positions of all images after deleting image
   const reArrangeList = async (indx) => {
     let tmp_lis = _.cloneDeep(pic_list);
     tmp_lis.splice(indx, 1);
@@ -180,15 +180,12 @@ const PicUpload = ({ navigation, route }) => {
       up_pos[m] = m;
     }
 
-
     positions.value = up_pos;
-    setpos2(up_pos)
+    setpos2(up_pos);
     setrefresh(!refresh);
     dispatch(setProfileImgs(tmp_lis));
     await atLast(tmp_lis);
   };
-
-  
 
   const deleteProfileImage = async (indx) => {
     setmainloading(true);
@@ -223,8 +220,7 @@ const PicUpload = ({ navigation, route }) => {
     }
   };
 
-
-// To changed position of images in backend
+  // To changed position of images in backend
   const changeImgPosition = async () => {
     // Set the API endpoint URL
     setmainloading(true);
@@ -436,8 +432,7 @@ const PicUpload = ({ navigation, route }) => {
     }
   };
 
-
-// Use to compress images 
+  // Use to compress images
   const compressImg = async (img) => {
     // Compressor
     const compr_img = await CompImage.compress(img, {
@@ -549,7 +544,6 @@ const PicUpload = ({ navigation, route }) => {
     }, [])
   );
 
-
   return (
     <>
       {mainloading && <Loader />}
@@ -578,8 +572,7 @@ const PicUpload = ({ navigation, route }) => {
 
             {/* Inputs Container*/}
             <View style={styles.inputCont}>
-
-            {/* Pic Upload Grids List */}
+              {/* Pic Upload Grids List */}
 
               {pic_list.map((item, index) => {
                 return (

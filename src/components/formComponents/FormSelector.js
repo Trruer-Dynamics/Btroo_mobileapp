@@ -19,7 +19,6 @@ import SearchInput from "./SearchInput";
 import SearchInputBackend from "./SearchInputBackend";
 import _ from "lodash";
 
-
 const Item = ({ item, onPress, selectedValue, multiline }) => (
   <TouchableOpacity
     onPress={onPress}
@@ -123,22 +122,24 @@ const FormSelector = ({
         );
       }
     }
-  }
+  };
 
   // Debounce the showAlert function with a delay of 300 milliseconds
-  const delayBack = _.debounce((bool)=>{
-    onBackendSearch(bool)
-  }, 500, {
-    leading: false,
-    trailing: true,
-  });
+  const delayBack = _.debounce(
+    (bool) => {
+      onBackendSearch(bool);
+    },
+    500,
+    {
+      leading: false,
+      trailing: true,
+    }
+  );
 
   useEffect(() => {
-
     const delay = setTimeout(() => {
-      
       if (backend_search) {
-        onBackendSearch(backend_search)
+        onBackendSearch(backend_search);
         // delayBack(backend_search)
       }
     }, 380);
@@ -154,7 +155,7 @@ const FormSelector = ({
             height: rspH(5.8),
             width: width,
             borderColor:
-              blr_value && selectedValue == undefined
+              blr_value && selectedValue == undefined && error
                 ? colors.error
                 : selectedValue != undefined
                 ? colors.blue

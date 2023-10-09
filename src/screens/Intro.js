@@ -74,11 +74,13 @@ const Intro = ({ route }) => {
     <>
       {/* Load video only when screen properly load */}
       {isReady && (
-        <View style={{ 
-          flex: 1 , 
-        // marginTop: StatusBar.currentHeight
-        // height: scrn_height + StatusBar.currentHeight,
-        }}>
+        <View
+          style={{
+            flex: 1,
+            // marginTop: StatusBar.currentHeight
+            // height: scrn_height + StatusBar.currentHeight,
+          }}
+        >
           {/* Background Video */}
 
           <Video
@@ -90,7 +92,7 @@ const Intro = ({ route }) => {
             rate={1.0}
             ignoreSilentSwitch={"obey"}
             onError={(err) => {
-              console.log("err",err)
+              console.log("err", err);
             }}
           />
 

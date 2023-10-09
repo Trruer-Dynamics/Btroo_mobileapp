@@ -28,8 +28,8 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
 
   useLayoutEffect(() => {
     let refc =
-      profile_data.userprofile.name.split(" ")[0] +
-      "_" +
+      // profile_data.userprofile.name.split(" ")[0] +
+      // "_" +
       profile_data.userprofile.referral_code;
 
     setuser_ref_code(refc);
@@ -115,10 +115,12 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
             onPress={() => {
               const url = "";
               const title = "Referrals";
-              const message =
-                `Are you tired of superficial dating apps that only focus on physical attraction? Join bTroo and build the emotional connection first with amazing people on the app. Use Code: ${profile_data.userprofile.name.split(" ")[0] +
-                "_" +
-                profile_data.userprofile.referral_code}`;
+              const message = `Are you tired of superficial dating apps that only focus on physical attraction? Join bTroo and build the emotional connection first with amazing people on the app. Use Code: 
+                ${
+                  // profile_data.userprofile.name.split(" ")[0] +
+                  // "_" +
+                  profile_data.userprofile.referral_code
+                }`;
 
               const options = {
                 title,

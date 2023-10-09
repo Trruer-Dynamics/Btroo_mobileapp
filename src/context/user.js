@@ -4,10 +4,7 @@ import { apiUrl } from "../constants";
 import messaging from "@react-native-firebase/messaging";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import {
-  CommonActions,
-  useNavigation,
-} from "@react-navigation/native";
+import { CommonActions, useNavigation } from "@react-navigation/native";
 
 import {
   setAccessToken,
@@ -62,21 +59,16 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const resetNav = async () => {
-
     try {
-      const resetAction =  CommonActions.reset({
+      const resetAction = CommonActions.reset({
         index: 0,
         routes: [{ name: "Intro" }],
       });
       navigation.dispatch(resetAction);
-    } catch (error) {
-      
-    }
-   
+    } catch (error) {}
   };
 
   const emptyAll = async () => {
-
     dispatch(setUserLoggined(false));
     dispatch(setAccessToken(""));
     dispatch(setSessionExpired(false));
@@ -93,7 +85,6 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const removeToken = async () => {
-  
     const url = apiUrl + "token_remove/";
 
     const headers = {
@@ -137,9 +128,6 @@ const UserProvider = ({ children, navigationRef }) => {
   useLayoutEffect(() => {
     notificationListener();
   }, [user_loggined]);
-
-
-
 
   return (
     <UserContext.Provider

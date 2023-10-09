@@ -72,13 +72,11 @@ const MatchTut = ({ repeat_tut }) => {
 
   const [extendVisible, setextendVisible] = useState(false);
 
-
   const [match_tut_para, setmatch_tut_para] = useState([
-    `Matches are created each \nmorning if someone you \nfancy has also fancied you \nback. You can talk to up to \nthree matches at any \ngiven time. Don’t worry, \nyou won’t lose any of the \nother matches.`
-    ,
-    `Any conversation lasts 72 \nhours. However, you can \nalways extend it by \nclicking here if you feel \nthat you and your match \nneed some more time.`
-  ])
-  const [match_tut_step, setmatch_tut_step] = useState(0)
+    `Matches are created each \nmorning if someone you \nfancy has also fancied you \nback. You can talk to up to \nthree matches at any \ngiven time. Don’t worry, \nyou won’t lose any of the \nother matches.`,
+    `Any conversation lasts 72 \nhours. However, you can \nalways extend it by \nclicking here if you feel \nthat you and your match \nneed some more time.`,
+  ]);
+  const [match_tut_step, setmatch_tut_step] = useState(0);
 
   const updateKeepMatching = async () => {
     const url =
@@ -238,10 +236,18 @@ const MatchTut = ({ repeat_tut }) => {
         {/* Match Chat Tutorial */}
         <>
           <View style={styles.mainTutCont}>
-            <View style={{...styles.centralModalContMatch, height: match_tut_step == 0? rspH(Platform.OS == 'ios'? 40 : 41) : rspH(36),}}>
-              <View style={{...styles.centralModalTextCont}}>
+            <View
+              style={{
+                ...styles.centralModalContMatch,
+                height:
+                  match_tut_step == 0
+                    ? rspH(Platform.OS == "ios" ? 40 : 41)
+                    : rspH(36),
+              }}
+            >
+              <View style={{ ...styles.centralModalTextCont }}>
                 <Text style={styles.centralModalText}>
-                 {match_tut_para[match_tut_step]}
+                  {match_tut_para[match_tut_step]}
                 </Text>
               </View>
 
@@ -255,21 +261,20 @@ const MatchTut = ({ repeat_tut }) => {
                 <TouchableOpacity
                   onPress={() => {
                     if (match_tut_step == 0) {
-                      setmatch_tut_step(1)
-                    }
-                    else{
-                    if (repeat_tut) {
-                      navigation.navigate("Chat", {
-                        repeat_tut: true,
-                        reveal: false,
-                        profile: {
-                          userprofile: { name: "bTroo" },
-                        },
-                      });
+                      setmatch_tut_step(1);
                     } else {
-                      matchTutDone();
+                      if (repeat_tut) {
+                        navigation.navigate("Chat", {
+                          repeat_tut: true,
+                          reveal: false,
+                          profile: {
+                            userprofile: { name: "bTroo" },
+                          },
+                        });
+                      } else {
+                        matchTutDone();
+                      }
                     }
-                  }
                   }}
                   style={{
                     ...styles.centralModalTextNextCont,
@@ -277,113 +282,88 @@ const MatchTut = ({ repeat_tut }) => {
                   }}
                 >
                   <Text style={styles.centralModalTextNext}>
-                  {match_tut_step == 0 ?
-                    'NEXT'
-                    :
-                    'OK'
-                  }
-                    </Text>
+                    {match_tut_step == 0 ? "NEXT" : "OK"}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
           </View>
 
-{
-match_tut_step == 0 ?
-<View
-style={[styles.highCont,
-  styles.matchitem_cont]}
->
-<View
-      style={[styles.item]}
-      
-    >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-         
-        }}
-        
-      >
-        <FastImage
-          source={
-            FemaleAvatar
-          }
-          style={styles.profileImage}
-        />
-        <View>
-          <Text style={styles.profileName}>
-            bTroo
-            {", "}
-            44
-          </Text>
+          {match_tut_step == 0 ? (
+            <View style={[styles.highCont, styles.matchitem_cont]}>
+              <View style={[styles.item]}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <FastImage
+                    source={FemaleAvatar}
+                    style={styles.profileImage}
+                  />
+                  <View>
+                    <Text style={styles.profileName}>
+                      bTroo
+                      {", "}
+                      44
+                    </Text>
 
-          <Text style={styles.profileProfession}>
-            Teacher
-          </Text>
+                    <Text style={styles.profileProfession}>Teacher</Text>
 
-          <Text style={styles.profileMessage}>
-            Hello How are y..
-          </Text>
-        </View>
-      </View>
+                    <Text style={styles.profileMessage}>Hello How are y..</Text>
+                  </View>
+                </View>
 
-      <View style={styles.rightCont}>
-  
-      <View
-            style={{
-              ...styles.matchTypeCont,
-              justifyContent: "center",
-            }}
-          >
-            <View style={{ marginRight: rspW(1) }}>
-              <Text style={{ ...styles.matchTypeContTxt }}>
-                Your Turn
+                <View style={styles.rightCont}>
+                  <View
+                    style={{
+                      ...styles.matchTypeCont,
+                      justifyContent: "center",
+                    }}
+                  >
+                    <View style={{ marginRight: rspW(1) }}>
+                      <Text style={{ ...styles.matchTypeContTxt }}>
+                        Your Turn
+                      </Text>
+                    </View>
+
+                    <FAIcon name={"envelope"} size={10} color={colors.white} />
+                  </View>
+
+                  <View />
+                  <View
+                    style={{
+                      position: "absolute",
+                      bottom: rspH(Platform.OS == "ios" ? 0.6 : 0.6),
+                      width: rspW(23),
+                    }}
+                  >
+                    <Text
+                      style={{
+                        ...styles.timeDoneTxt,
+                        color: colors.black,
+                      }}
+                    >
+                      72 Hours Left
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View style={{ ...styles.highCont, ...styles.timeHighCont }}>
+              <Text
+                style={{
+                  ...styles.timeDoneTxt,
+                  color: colors.black,
+                }}
+              >
+                72 Hours Left
               </Text>
             </View>
-         
-              <FAIcon
-                name={"envelope"}
-                size={10}
-                color={colors.white}
-              />
-            
-      </View>
-        
-        <View />
-        <View
-          style={{
-            position: "absolute",
-            bottom: rspH(Platform.OS == "ios" ? 0.6 : 0.6),
-            width: rspW(23),
-          }}
-         
-        >
-          <Text
-            style={{
-              ...styles.timeDoneTxt,
-              color: colors.black ,
-            }}
-          >
-            72 Hours Left
-          </Text>
-        </View>
-      </View>
-    </View>
-    </View>
-  :
-          <View style={{ ...styles.highCont, ...styles.timeHighCont }}>
-            <Text
-              style={{
-                ...styles.timeDoneTxt,
-                color: colors.black,
-              }}
-            >
-              72 Hours Left
-            </Text>
-          </View>}
+          )}
         </>
       </SafeAreaView>
     </>
@@ -455,7 +435,7 @@ const styles = StyleSheet.create({
     borderRadius: rspW(4),
     backgroundColor: colors.white,
     // top: rspH(45),
-    top: Platform.OS == 'ios'? scrn_height / 2.4 : scrn_height / 2.54,
+    top: Platform.OS == "ios" ? scrn_height / 2.4 : scrn_height / 2.54,
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
@@ -464,11 +444,11 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white ,
+    backgroundColor: colors.white,
     alignItems: "center",
     justifyContent: "center",
   },
-  matchitem_cont : {
+  matchitem_cont: {
     // top: Platform.OS == "android" ? rspH(10.2) + insets.top : srn_height / 5.1,
     top: Platform.OS == "ios" ? rspH(8.25) + insets.top : srn_height / 12,
 
@@ -476,8 +456,8 @@ const styles = StyleSheet.create({
 
     width: rspW(86),
     height: rspH(11.6),
-    alignSelf:'center',
-    // borderRadius: rspH(1.5), 
+    alignSelf: "center",
+    // borderRadius: rspH(1.5),
     borderRadius: rspW(2.5),
   },
   timeHighCont: {
@@ -491,7 +471,7 @@ const styles = StyleSheet.create({
     fontSize: rspF(Platform.OS == "ios" ? 1.3 : 1.15),
     lineHeight: rspF(1.31),
     fontFamily: fontFamily.light,
-    textAlign:'center',
+    textAlign: "center",
   },
 
   profilePhoto: {

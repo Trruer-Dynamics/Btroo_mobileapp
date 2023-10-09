@@ -82,7 +82,7 @@ const OtpVerify = ({
 
   const [otp1, setotp1] = useState(otp[0] == "0" ? "" : otp);
   const [otp1blr, setotp1blr] = useState(false);
- 
+
   const ref_inpt1 = useRef();
   const ref_inpt2 = useRef();
 
@@ -91,7 +91,6 @@ const OtpVerify = ({
   const [btnClick, setbtnClick] = useState(false);
   const [keyboard_hgt, setkeyboard_hgt] = useState(0);
 
-  
   // To register mobile number
   const sendActiveUserDetails = async () => {
     setloading(true);
@@ -193,7 +192,6 @@ const OtpVerify = ({
   };
 
   const getDeviceToken = async () => {
-
     if (Platform.OS == "ios") {
       const apn_tok = await messaging().getAPNSToken();
     }
@@ -201,14 +199,12 @@ const OtpVerify = ({
     const token = await messaging().getToken();
     setDeviceToken(token);
 
-
     return token;
   };
 
   const sendDeviceToken = async (prof_id, access_token) => {
-
     setloading(true);
-    
+
     let dvToken = await getDeviceToken();
     const data = {
       userprofile_id: prof_id,
@@ -219,14 +215,12 @@ const OtpVerify = ({
       Authorization: `Bearer ${access_token}`,
     };
 
- 
     try {
       const response = await axios.post(apiUrl + "device_token/", data, {
         headers,
       });
-      
+
       let user_data = response.data.data;
-      
 
       setloading(false);
     } catch (error) {
@@ -235,7 +229,6 @@ const OtpVerify = ({
   };
 
   const userLogin = async () => {
-    
     setloading(true);
 
     let up_ph_no =
@@ -266,7 +259,7 @@ const OtpVerify = ({
       const response = await axios.post(apiUrl + "login/", data);
       let user_data = response.data.data;
       let status_code = response.data.code;
-      
+
       setloading(false);
 
       if (status_code == 400) {
@@ -328,6 +321,7 @@ const OtpVerify = ({
           k += 1;
         }
 
+       
         let user_prof_data = {
           user: user_data.user,
           userinterest: user_data.userinterest,
@@ -393,7 +387,7 @@ const OtpVerify = ({
         }
       }
     } catch (error) {
-      console.log("error", error)
+      console.log("error", error);
       setloading(false);
     }
   };
@@ -445,7 +439,7 @@ const OtpVerify = ({
   // To resend OTP after 30 seconds
   const resendOtp = () => {
     setotp1("");
-   
+
     setcounter(30);
     setotperr(false);
     onResend();
@@ -461,7 +455,6 @@ const OtpVerify = ({
           console.log("otp", otp);
           setotp1(otp);
           setotp1blr(true);
-    
         } catch (err) {
           console.log("otp auto listen error", err);
         }
@@ -612,7 +605,7 @@ const OtpVerify = ({
                 (btnClick && otp1 == "") || otperr
                   ? colors.error
                   : otp1blr && otp1.length == 6
-                                    ? colors.blue
+                  ? colors.blue
                   : "#DCDCDC",
               backgroundColor: otp1blr ? "#fff" : "#F8F8F8",
             }}
@@ -621,7 +614,7 @@ const OtpVerify = ({
             blurOnSubmit={false}
             maxLength={6}
             onChangeText={(text) => {
-              setotp1blr(true)
+              setotp1blr(true);
               setotperr(false);
 
               let last = text.charAt(text.length - 1);
@@ -645,8 +638,6 @@ const OtpVerify = ({
               ref_inpt2.current?.focus();
             }}
           />
-
-          
         </View>
 
         {/* Timer */}
@@ -681,16 +672,17 @@ const OtpVerify = ({
           <FooterBtn
             title={"Validate"}
             disabled={
-              otp1.length < 6
-              // !(otp1 
+              otp1.length < 6 ||
+              // !(otp1
               // && otp2 && otp3 && otp4 && otp5 && otp6
-              // ) 
-              ||
-               otperr}
+              // )
+              otperr
+            }
             onPress={() => {
-              if (otp1.length == 6
+              if (
+                otp1.length == 6
                 //  && otp2 && otp3 && otp4 && otp5 && otp6
-                 ) {
+              ) {
                 verifyOtp();
               }
             }}
@@ -748,7 +740,7 @@ const styles = StyleSheet.create({
     // height: rspW(12.76),
     height: rspW(12.8),
     // width: rspW(12.8),
-    width: '100%',
+    width: "100%",
 
     // textAlign: "center",
     borderWidth: 1,

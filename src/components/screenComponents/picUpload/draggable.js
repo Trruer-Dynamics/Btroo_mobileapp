@@ -22,7 +22,6 @@ const Draggable = ({
   setpos_change = null,
   setpos2,
 }) => {
-
   // get position of index item ( index item which is dragging)
   const position = getPosition(positions.value[id]);
 
@@ -36,20 +35,15 @@ const Draggable = ({
   // check if other item is in dragging or not
   const isDraggable = useSharedValue(false);
 
-
-  // translate positon after dragging 
+  // translate positon after dragging
   useAnimatedReaction(
-    () => 
-    positions.value[id],
+    () => positions.value[id],
     (newOrder) => {
       const newPostions = getPosition(newOrder);
       translateX.value = withTiming(newPostions.x);
       translateY.value = withTiming(newPostions.y);
-      
     }
   );
-
-  
 
   const setDraggable = () => {
     if (item[1] != "") {
@@ -62,8 +56,7 @@ const Draggable = ({
   // Refresh Screen to show changes
   const refreshScreen = () => {
     setrefresh(!refresh);
-    setpos2(positions.value)
-    
+    setpos2(positions.value);
   };
 
   // to activate save button after any changes occur
@@ -76,7 +69,6 @@ const Draggable = ({
   // Pan Gesture handler function
   const panGesture = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
-      
       runOnJS(setDraggable)();
       ctx.startX = translateX.value;
       ctx.startY = translateY.value;
@@ -103,7 +95,6 @@ const Draggable = ({
           if (idToSwap) {
             let actV = pic_list[idToSwap][1] != "";
             if (actV) {
-
               const newPostions = JSON.parse(JSON.stringify(positions.value));
 
               let exact_pos = newPostions[id];
@@ -115,7 +106,6 @@ const Draggable = ({
               let sort_lis0 = new_pos_list.sort((a, b) => a[1] - b[1]);
               let sort_lis = sort_lis0.map((a, b) => [b, a[0]]);
               let swipe_pos = sort_lis.find((v) => v[0] == exact_pos);
-
 
               // in ascending order
               if (newOrder > oldOrder) {
@@ -132,12 +122,12 @@ const Draggable = ({
 
                 let r_lst = lst.map((a) => [a[1], a[0]]);
 
-                // get first item position 
+                // get first item position
                 let first_ele = [String(swipe_pos[1]), newOrder];
-                
-                // add it in first position 
+
+                // add it in first position
                 r_lst.unshift(first_ele);
-                
+
                 // check if first position change then
                 if (swipe_pos[0] > 0) {
                   let prev_list = new_pos_list
@@ -157,7 +147,7 @@ const Draggable = ({
                 }
 
                 positions.value = f_obj;
-              } 
+              }
               //  In descending order
               else {
                 let rem_poses = sort_lis.slice(newOrder, exact_pos);
@@ -216,8 +206,7 @@ const Draggable = ({
     },
   });
 
-
- // To change position using styling translation 
+  // To change position using styling translation
   const animatedStyle = useAnimatedStyle(() => {
     const zIndex = isGestureActive.value ? 1000 : 1;
 
@@ -239,8 +228,6 @@ const Draggable = ({
       ],
     };
   });
-
-  
 
   return (
     <Animated.View style={{ ...animatedStyle }}>

@@ -49,8 +49,9 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID }) => {
           source={
             item.prof_rvl
               ? { uri: item.prof_img }
-              : item.userprofile.gender =='Man'?
-              MaleAvatar : FemaleAvatar
+              : item.userprofile.gender == "Man"
+              ? MaleAvatar
+              : FemaleAvatar
           }
           style={styles.profileImage}
         />

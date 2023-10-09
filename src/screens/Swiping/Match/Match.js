@@ -6,11 +6,23 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-import React, { useState, useEffect, useContext, useLayoutEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useLayoutEffect,
+  useCallback,
+} from "react";
 import FormWrapper from "../../../components/wrappers/formWrappers/FormWrapper";
 import MatchItem from "../../../components/screenComponents/matching/MatchItem";
 import colors from "../../../styles/colors";
-import { rspH, rspW, rspF, scrn_height, scrn_width } from "../../../styles/responsiveSize";
+import {
+  rspH,
+  rspW,
+  rspF,
+  scrn_height,
+  scrn_width,
+} from "../../../styles/responsiveSize";
 import fontFamily from "../../../styles/fontFamily";
 import { Switch } from "react-native-switch";
 import CentralModal from "../../../components/modals/CentralModal";
@@ -28,7 +40,10 @@ import Loader from "../../../components/loader/Loader";
 
 import { initialWindowMetrics } from "react-native-safe-area-context";
 import { UserContext } from "../../../context/user";
-import { setMatches, setMatchesImgs } from "../../../store/reducers/chats/chats";
+import {
+  setMatches,
+  setMatchesImgs,
+} from "../../../store/reducers/chats/chats";
 import { FemaleAvatar, MaleAvatar } from "../../../assets";
 import { FlashList } from "@shopify/flash-list";
 const insets = initialWindowMetrics.insets;
@@ -62,7 +77,6 @@ const Match = () => {
 
   const matches = useSelector((state) => state.chats.matches);
   const matches_imgs = useSelector((state) => state.chats.matches_imgs);
-
 
   const updateKeepMatching = async () => {
     // setloading(true);
@@ -123,9 +137,8 @@ const Match = () => {
 
       if (code == 200) {
         let match_tmp = [];
-        let matchs_imgs = []
+        let matchs_imgs = [];
         if (resp_data.length > 0) {
-          
           for (let p = 0; p < resp_data.length; p++) {
             let mth = {};
             let id = resp_data[p].id;
@@ -176,42 +189,43 @@ const Match = () => {
             match_tmp.push(mth);
             mth.all_images = mth_user.userprofile.image;
 
-            matchs_imgs.push([id,prf_img.cropedimage,resp_data[p].user1_profile_reveal])
+            matchs_imgs.push([
+              id,
+              prf_img.cropedimage,
+              resp_data[p].user1_profile_reveal,
+            ]);
           }
         }
 
-        
         setmatch_list(match_tmp);
         dispatch(setMatches(match_tmp));
-        dispatch(setMatchesImgs(matchs_imgs))
-
+        dispatch(setMatchesImgs(matchs_imgs));
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
     } catch (error) {}
   };
 
-  const renderItem =
-   useCallback(
+  const renderItem = useCallback(
     ({ item }) => {
+      let prf_img = item.prof_rvl
+        ? { uri: item.prof_img }
+        : item.userprofile.gender == "Man"
+        ? MaleAvatar
+        : FemaleAvatar;
 
-
-      let prf_img =item.prof_rvl
-  ? { uri: item.prof_img }
-  : item.userprofile.gender =='Man'?
-  MaleAvatar: FemaleAvatar
-
-    return (
-      <MatchItem
-        item={item}
-        visible={extendVisible}
-        setVisible={setextendVisible}
-        setextendTimeMatchID={setextendTimeMatchID}
-        prf_img={prf_img}
-      />
-    );
-  }
-  ,[match_list])
+      return (
+        <MatchItem
+          item={item}
+          visible={extendVisible}
+          setVisible={setextendVisible}
+          setextendTimeMatchID={setextendTimeMatchID}
+          prf_img={prf_img}
+        />
+      );
+    },
+    [match_list]
+  );
 
   const extendTime = async () => {
     let tmstmp = new Date().toISOString().slice(0, -5).split("T");
@@ -251,7 +265,7 @@ const Match = () => {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      
+
       if (is_network_connected) {
         getMatches();
       }
@@ -281,20 +295,15 @@ const Match = () => {
           }}
         >
           <FormHeader title="Matches" para={``} />
-          
 
           <SafeAreaView style={styles.container}>
-          
-          
-              <FlatList
+            <FlatList
               data={match_list}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               bouncesZoom={false}
-              bounces={false}     
+              bounces={false}
             />
-
-       
 
             <View
               style={{

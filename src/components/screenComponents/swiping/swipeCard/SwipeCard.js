@@ -82,68 +82,67 @@ const Item = ({
     //     position: "relative",
     //   }}
     // >
-      <TouchableOpacityB
+    <TouchableOpacityB
       style={{
         ...styles.item,
         zIndex: 2,
         position: "relative",
       }}
-      
-        activeOpacity={1}
-        onPress={() => {
-          setmodalVisible(true);
-        }}
-      >
-        <>
-          {super_liked_profile && (
-            <>
-              <View
-                style={{
-                  position: "absolute",
-                  top: rspH(0.54),
-                  left: 0,
-                  zIndex: 2,
-                }}
-              >
-                <FastImage
-                  source={require("../../../../assets/images/Swiping/Actions/Softspot.png")}
-                  style={{
-                    width: rspW(14.5),
-                    height: rspH(7),
-                  }}
-                />
-              </View>
-
+      activeOpacity={1}
+      onPress={() => {
+        setmodalVisible(true);
+      }}
+    >
+      <>
+        {super_liked_profile && (
+          <>
+            <View
+              style={{
+                position: "absolute",
+                top: rspH(0.54),
+                left: 0,
+                zIndex: 2,
+              }}
+            >
               <FastImage
-                source={require("../../../../assets/images/Swiping/Masked/Exclude_2.png")}
+                source={require("../../../../assets/images/Swiping/Actions/Softspot.png")}
                 style={{
-                  width: rspW(89),
-                  height: rspH(42.2),
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  zIndex: 1,
+                  width: rspW(14.5),
+                  height: rspH(7),
                 }}
-                resizeMode="stretch"
               />
-            </>
-          )}
+            </View>
 
-          <FastImage
-            source={{ uri: imageUri }}
-            style={{
-              backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
-              width: "100%",
-              height: "100%",
-              borderRadius: rspW(5.1),
-            }}
-            resizeMode="cover"
-            onLoad={() => {
-              setimg_load(true);
-            }}
-          />
-        </>
-      </TouchableOpacityB>
+            <FastImage
+              source={require("../../../../assets/images/Swiping/Masked/Exclude_2.png")}
+              style={{
+                width: rspW(89),
+                height: rspH(42.2),
+                position: "absolute",
+                top: 0,
+                left: 0,
+                zIndex: 1,
+              }}
+              resizeMode="stretch"
+            />
+          </>
+        )}
+
+        <FastImage
+          source={{ uri: imageUri }}
+          style={{
+            backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
+            width: "100%",
+            height: "100%",
+            borderRadius: rspW(5.1),
+          }}
+          resizeMode="cover"
+          onLoad={() => {
+            setimg_load(true);
+          }}
+        />
+      </>
+    </TouchableOpacityB>
     // {/* </View> */}
   );
 };
@@ -266,8 +265,6 @@ const SwipeCard = ({
     outputRange: [0, -20],
   });
 
-
-
   const rotate = swipe.x.interpolate({
     inputRange: [-100, 0, 100],
 
@@ -289,8 +286,6 @@ const SwipeCard = ({
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
-
-  
 
   // const rejectOpacity = rightX.interpolate({
   //   inputRange: [-100, -20],
@@ -317,13 +312,13 @@ const SwipeCard = ({
       let resp_data = response.data;
 
       if (resp_data.code == 200) {
-        rightX.setValue(1)
-                        
+        rightX.setValue(1);
+
         Animated.timing(iconTranslateY, {
-            toValue: 1,
-            duration: 500,
-            useNativeDriver: true,
-            }).start();
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }).start();
 
         handleChoiceButtons(0);
         // swipeProfile(false, false);
@@ -581,7 +576,6 @@ const SwipeCard = ({
             {/* Profile Images Carousel */}
             {!bio_enlarge && (
               <View style={styles.imageCont}>
-               
                 <FlatList
                   initialScrollIndex={0}
                   data={card_itm.image}
@@ -602,7 +596,6 @@ const SwipeCard = ({
                   viewabilityConfig={viewConfig}
                   ref={slidesRef}
                 />
-     
 
                 {/* Filter */}
                 <TouchableOpacity
@@ -626,22 +619,19 @@ const SwipeCard = ({
                     {/* Action */}
                     <TouchableOpacity
                       style={styles.actionCont}
-                     
                       onPressIn={() => {
-                        rightX.setValue(1)
-                        
+                        rightX.setValue(1);
+
                         Animated.timing(iconTranslateY, {
                           toValue: 1,
                           duration: 500,
                           useNativeDriver: true,
                         }).start();
                       }}
-
-                      onPress={()=>{
+                      onPress={() => {
                         handleChoiceButtons(0);
                         swipeProfile(false, false);
                         setreport("");
-
                       }}
                       onPressOut={() => {
                         Animated.timing(rightX, {
@@ -654,8 +644,7 @@ const SwipeCard = ({
                           toValue: 0,
                           duration: 500,
                           useNativeDriver: true,
-                        }).start()
-                        
+                        }).start();
                       }}
                     >
                       <FastImage
@@ -670,36 +659,32 @@ const SwipeCard = ({
                     {/* Action */}
                     <TouchableOpacity
                       style={styles.actionCont}
-                      
-
                       onPressIn={() => {
-                        upY.setValue(1)
-                      
+                        upY.setValue(1);
+
                         Animated.timing(iconTranslateY, {
                           toValue: 1,
                           duration: 500,
                           useNativeDriver: true,
                         }).start();
                       }}
-
-                      onPress={()=>{
+                      onPress={() => {
                         handleChoiceButtons(0);
                         swipeProfile(true, true);
                         setreport("");
-
                       }}
                       onPressOut={() => {
                         Animated.timing(upY, {
                           toValue: 0,
                           duration: 500,
                           useNativeDriver: true,
-                        }).start()
+                        }).start();
 
                         Animated.timing(iconTranslateY, {
                           toValue: 0,
                           duration: 500,
                           useNativeDriver: true,
-                        }).start()
+                        }).start();
                       }}
                     >
                       <FastImage
@@ -713,22 +698,19 @@ const SwipeCard = ({
 
                     {/* Action */}
                     <TouchableOpacity
-                      
                       onPressIn={() => {
-                        leftX.setValue(1)
-                    
+                        leftX.setValue(1);
+
                         Animated.timing(iconTranslateY, {
                           toValue: 1,
                           duration: 500,
                           useNativeDriver: true,
                         }).start();
                       }}
-
-                      onPress={()=>{
+                      onPress={() => {
                         handleChoiceButtons(0);
                         swipeProfile(true, false);
                         setreport("");
-
                       }}
                       onPressOut={() => {
                         Animated.timing(leftX, {
@@ -736,12 +718,12 @@ const SwipeCard = ({
                           duration: 500,
                           useNativeDriver: true,
                         }).start();
-                        
+
                         Animated.timing(iconTranslateY, {
                           toValue: 0,
                           duration: 500,
                           useNativeDriver: true,
-                        }).start()
+                        }).start();
                       }}
                       style={styles.actionCont}
                     >

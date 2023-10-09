@@ -33,7 +33,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 import { useDispatch } from "react-redux";
 
-UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true)
+UIManager.setLayoutAnimationEnabledExperimental &&
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 
 const MobileNo = ({ navigation, route }) => {
   // All states
@@ -134,7 +135,6 @@ const MobileNo = ({ navigation, route }) => {
 
   // On Next Button Press
   const onNextPress = async () => {
-
     Keyboard.dismiss();
     if (ph_no.length > 0) {
       setclickBtn(true);
@@ -177,7 +177,6 @@ const MobileNo = ({ navigation, route }) => {
     }
   };
 
-
   const dispatch = useDispatch();
 
   useFocusEffect(
@@ -191,7 +190,7 @@ const MobileNo = ({ navigation, route }) => {
     <>
       {loading && <Loader />}
 
-      <SafeAreaView style={{ height: '100%', backgroundColor: "#fff" }}>
+      <SafeAreaView style={{ height: "100%", backgroundColor: "#fff" }}>
         {/* To Autoscroll Input Field on keyboard appear */}
         <KeyboardAwareScrollView
           enableOnAndroid={true}
@@ -199,8 +198,7 @@ const MobileNo = ({ navigation, route }) => {
           showsVerticalScrollIndicator={false}
           style={{ backgroundColor: "#fff", position: "relative" }}
           extraHeight={Platform.OS == "ios" ? rspH(30) : rspH(75)}
-          extraScrollHeight={Platform.OS == "ios" ? 0 : rspH(-40)} 
-
+          extraScrollHeight={Platform.OS == "ios" ? 0 : rspH(-40)}
           // To show Next Button on Keyboard Appear
           keyboardShouldPersistTaps={"always"}
         >

@@ -13,7 +13,11 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import fontFamily from "../../../styles/fontFamily";
 import FastImage from "react-native-fast-image";
-import { runOnJS, useAnimatedReaction, useDerivedValue } from "react-native-reanimated";
+import {
+  runOnJS,
+  useAnimatedReaction,
+  useDerivedValue,
+} from "react-native-reanimated";
 import { refresh } from "@react-native-community/netinfo";
 
 const Box = ({
@@ -29,8 +33,6 @@ const Box = ({
   up_img_len = 9,
   pos2,
 }) => {
-
-
   return (
     <TouchableOpacity
       activeOpacity={0.9}

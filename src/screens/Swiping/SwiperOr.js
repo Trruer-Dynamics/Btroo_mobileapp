@@ -107,7 +107,6 @@ const SwiperOr = ({}) => {
   );
 
   const [reports_count, setreports_count] = useState(0);
-  const [profile_approved, setprofile_approved] = useState(3);
 
   const [filter_data_get, setfilter_data_get] = useState(false);
 
@@ -227,19 +226,19 @@ const SwiperOr = ({}) => {
       scaleAnimation();
 
       // if (direction == 0) {
-        Animated.timing(swipe.y, {
-          toValue: -scrn_height,
+      Animated.timing(swipe.y, {
+        toValue: -scrn_height,
 
-          duration: 800,
+        duration: 800,
 
-          useNativeDriver: true,
-        }).start(removeCard);
+        useNativeDriver: true,
+      }).start(removeCard);
       // } else {
-        // Animated.timing(swipe.x, {
-        //   toValue: direction * scrn_width * 2,
-        //   duration: 800,
-        //   useNativeDriver: true,
-        // }).start(removeCard);
+      // Animated.timing(swipe.x, {
+      //   toValue: direction * scrn_width * 2,
+      //   duration: 800,
+      //   useNativeDriver: true,
+      // }).start(removeCard);
       // }
     },
 
@@ -321,6 +320,9 @@ const SwiperOr = ({}) => {
         if (reports_count > 10) {
           setwarn_step(3);
           setloading2(true);
+        } else if (!profile_approv) {
+          setwarn_step(5);
+          setloading2(true);
         } else {
           getFilterProfiles();
         }
@@ -336,13 +338,11 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterData = async () => {
-
     setloading(true);
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
-
 
     await axios
       .get(apiUrl + `FilterUpdateGet/${profile_data.user.id}`, { headers })
@@ -356,7 +356,7 @@ const SwiperOr = ({}) => {
           let profile_appr = filter_data.is_profile_approved;
 
           setreports_count(report_count);
-          setprofile_approved(profile_appr);
+          // setprofile_approved(profile_appr);
 
           let distance = filter_data.distance;
           let languages =
@@ -397,19 +397,22 @@ const SwiperOr = ({}) => {
           dispatch(setSelectedInterests(interests));
           dispatch(setSelectedHabits(habits));
 
-          if (profile_call) {
-            if (report_count > 10) {
-              setwarn_step(3);
-              setloading2(true);
-            } else if (profile_appr === 0) {
-              dispatch(setProfileApproved(false));
-            } else {
-              dispatch(setProfileApproved(true));
+          // if (profile_call) {
+          if (report_count > 10) {
+            setwarn_step(3);
+            setloading2(true);
+          } else if (profile_appr === 0) {
+            dispatch(setProfileApproved(false));
+          } else {
+            dispatch(setProfileApproved(true));
+            if (profile_call) {
               getFilterProfiles();
             }
-          } else {
-            setfilter_data_get(true);
           }
+          // }
+          // else {
+          setfilter_data_get(true);
+          // }
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
         }
@@ -518,7 +521,7 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
     await axios
-      .get(apiUrl + "filter_user/" + profile_data.user.id , {
+      .get(apiUrl + "filter_user/" + profile_data.user.id, {
         headers,
       })
       .then((resp) => {
@@ -545,7 +548,6 @@ const SwiperOr = ({}) => {
   };
 
   const getRejectedProfiles = async () => {
-
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -659,7 +661,7 @@ const SwiperOr = ({}) => {
       .then((ip) => {
         setmob_ip(ip);
       })
-      .catch((error) => {
+      .catch((err) => {
         setloading2(true);
       });
   };
@@ -730,7 +732,7 @@ const SwiperOr = ({}) => {
     React.useCallback(() => {
       // Do something when the screen is focused
 
-      if (profile_approv == false) {
+      if (!profile_approv) {
         setwarn_step(5);
         setloading2(true);
       }

@@ -62,7 +62,6 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
   const [picURI, setpicURI] = useState("");
 
   const verifyPhoto = async () => {
-    
     setloading(true);
 
     const url = profile_approved

@@ -16,14 +16,18 @@ import FAIcon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
 
-const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID, prf_img }) => {
+const MatchItem = ({
+  item,
+  visible,
+  setVisible,
+  setextendTimeMatchID,
+  prf_img,
+}) => {
   const navigation = useNavigation();
-  
 
   // To get left hours
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
   let leftHrs = hours;
-
 
   return (
     <TouchableOpacity
@@ -47,26 +51,15 @@ const MatchItem = ({ item, visible, setVisible, setextendTimeMatchID, prf_img })
           alignItems: "center",
         }}
       >
-       {
-       Platform.OS == 'android'?
-        
-      <FastImage
-      useLastImageAsDefaultSource={item.prof_rvl? true : false}
-      source={
-        prf_img
-      }
-      
-      style={styles.profileImage}
-      />
-        :
-        <Image
-      
-          source={
-            prf_img
-          }
-          
-          style={styles.profileImage}
-        />}
+        {Platform.OS == "android" ? (
+          <FastImage
+            useLastImageAsDefaultSource={item.prof_rvl ? true : false}
+            source={prf_img}
+            style={styles.profileImage}
+          />
+        ) : (
+          <Image source={prf_img} style={styles.profileImage} />
+        )}
         <View>
           <Text style={styles.profileName}>
             {item?.userprofile?.name.split(" ")[0].length < 9

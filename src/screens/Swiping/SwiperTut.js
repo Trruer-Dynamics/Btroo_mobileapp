@@ -122,13 +122,9 @@ const DATA2 = [
     image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo8.jpg"),
     image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo8.jpg"),
   },
-  
 ];
 
-
-
 const Item = ({ item, setmodalVisible, masked }) => {
-
   return (
     <View style={{ ...styles.item, position: "relative" }}>
       <TouchableOpacity
@@ -174,17 +170,14 @@ const Item = ({ item, setmodalVisible, masked }) => {
           )}
 
           <FastImage
-
-          // require("../../assets/images/Tutorial/Tut1.png")
-          // require('../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg')
+            // require("../../assets/images/Tutorial/Tut1.png")
+            // require('../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg')
             source={item.image}
-          
             style={{
               width: "99%",
               height: "100%",
               borderRadius: rspW(5.1),
               zIndex: -2,
-              
             }}
             resizeMode="cover"
           />
@@ -214,7 +207,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
   const [loading, setloading] = useState(false);
 
-  const [gender_lis, setgender_lis] = useState([])
+  const [gender_lis, setgender_lis] = useState([]);
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
   const [swipe_tut_l, setswipe_tut_l] = useState(swipe_tut || repeat_tut);
   const [step, setstep] = useState(0);
@@ -233,9 +226,8 @@ const SwiperTut = ({ repeat_tut }) => {
     (state) => state.authentication.profile_data
   );
 
-
   // Preference Type to show Tutorial according to Login user preferance
-  const [pref_type, setpref_type] = useState('')
+  const [pref_type, setpref_type] = useState("");
 
   // Report Control
   const [openReport, setopenReport] = useState(false);
@@ -302,7 +294,6 @@ const SwiperTut = ({ repeat_tut }) => {
   const getGenders = async () => {
     // setloading(true);
 
-
     await axios
       .get(apiUrl + "getactivegender/")
       .then((resp) => {
@@ -315,9 +306,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
           let tmp_lis = sorted_tmp.map((v) => [v.id, v.gender]);
           dispatch(setAllGenders(tmp_lis));
-          setgender_lis(tmp_lis)
-          
-         
+          setgender_lis(tmp_lis);
         }
       })
       .catch((err) => {
@@ -336,31 +325,28 @@ const SwiperTut = ({ repeat_tut }) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      if (gender_lis.length > 0) {
+        let w_gen = gender_lis.find((v) => v[1] == "Woman");
 
-     if (gender_lis.length > 0) {
-      let w_gen = gender_lis.find(v => v[1] == 'Woman')
-        
-         let w_pref = profile_data.userpreferances.filter(v => v == w_gen[0])
-          
+        let w_pref = profile_data.userpreferances.filter((v) => v == w_gen[0]);
+
         if (w_pref.length > 0) {
-          setpref_type("Woman") 
+          setpref_type("Woman");
+        } else {
+          setpref_type("Man");
         }
-        else{
-          setpref_type("Man") 
-        }
-
-     }
+      }
       setswipe_tut_l(swipe_tut || repeat_tut);
       setstep(0);
       return () => {
         // dispatch(setRepeatTut(false))
       };
-    }, [gender_lis,profile_data])
+    }, [gender_lis, profile_data])
   );
 
   useLayoutEffect(() => {
-    getGenders()
-  }, [])
+    getGenders();
+  }, []);
 
   return (
     <>
@@ -393,7 +379,7 @@ const SwiperTut = ({ repeat_tut }) => {
           {/* Profile Images Carousel */}
           <View style={styles.imageCont}>
             <FlatList
-              data={pref_type ? pref_type  == 'Woman' ? DATA: DATA2 : []}
+              data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               horizontal
@@ -468,7 +454,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
               {/* Main Carousel Pagintors / Dots */}
               <Paginator
-                data={pref_type ? pref_type  == 'Woman' ? DATA: DATA2 : []}
+                data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
                 scrollX={scrollX}
                 currentIndex={currentIndex}
               />
@@ -500,7 +486,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
               {/*  FullScreen Carousel */}
               <FlatList
-                data={pref_type ? pref_type  == 'Woman' ? DATA: DATA2 : []}
+                data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
                 renderItem={renderItem2}
                 keyExtractor={(item) => item.id}
                 horizontal
@@ -513,7 +499,6 @@ const SwiperTut = ({ repeat_tut }) => {
                     useNativeDriver: false,
                   }
                 )}
-                
                 scrollEventThrottle={32}
                 onViewableItemsChanged={viewableItemsChanged2}
                 viewabilityConfig={viewConfig2}
@@ -521,7 +506,7 @@ const SwiperTut = ({ repeat_tut }) => {
               />
 
               <Paginator
-                data={pref_type ? pref_type  == 'Woman' ? DATA: DATA2 : []}
+                data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
                 scrollX={scrollX2}
                 currentIndex={currentIndex2}
               />
@@ -633,8 +618,16 @@ const SwiperTut = ({ repeat_tut }) => {
                       The sign of a great first date
                     </Text>
                   </View>
-                  <Text style={styles.promptAnswer} >
-                  A great first date is when you feel like you’ve met your soulmate, and you can’t believe how lucky you are. It’s when you make each other laugh so hard that your stomach hurts, and you tease each other with playful banter. It’s when you open up about your hopes, fears, and secrets, and you feel a deep bond. It’s when you kiss goodnight, and you feel butterflies in your stomach. A great first date is when you text each other right after, and you can’t wait for the next one. 😉
+                  <Text style={styles.promptAnswer}>
+                    A great first date is when you feel like you’ve met your
+                    soulmate, and you can’t believe how lucky you are. It’s when
+                    you make each other laugh so hard that your stomach hurts,
+                    and you tease each other with playful banter. It’s when you
+                    open up about your hopes, fears, and secrets, and you feel a
+                    deep bond. It’s when you kiss goodnight, and you feel
+                    butterflies in your stomach. A great first date is when you
+                    text each other right after, and you can’t wait for the next
+                    one. 😉
                   </Text>
                 </View>
               )}
@@ -711,11 +704,22 @@ const SwiperTut = ({ repeat_tut }) => {
                 <View style={styles.promptContainer}>
                   <View style={styles.promptQuestionContainer}>
                     <Text style={styles.promptQuestion}>
-                      What's your favorite way to spend a rainy weekend at home by yourself
+                      What's your favorite way to spend a rainy weekend at home
+                      by yourself
                     </Text>
                   </View>
                   <Text style={styles.promptAnswer}>
-                  My favorite way to spend a rainy weekend at home by myself is to enjoy some quality me-time. I like to watch TV and catch up on my favorite shows or movies, or maybe discover something new. I also love to read books and immerse myself in different worlds and stories. I find reading very relaxing and stimulating at the same time. And of course, I like to cook something delicious and healthy for myself, or maybe try a new recipe. Cooking is a great way to express my creativity and have fun. A rainy weekend at home by myself is a perfect opportunity to do the things I love and pamper myself. 
+                    My favorite way to spend a rainy weekend at home by myself
+                    is to enjoy some quality me-time. I like to watch TV and
+                    catch up on my favorite shows or movies, or maybe discover
+                    something new. I also love to read books and immerse myself
+                    in different worlds and stories. I find reading very
+                    relaxing and stimulating at the same time. And of course, I
+                    like to cook something delicious and healthy for myself, or
+                    maybe try a new recipe. Cooking is a great way to express my
+                    creativity and have fun. A rainy weekend at home by myself
+                    is a perfect opportunity to do the things I love and pamper
+                    myself.
                   </Text>
                 </View>
               )}
@@ -729,7 +733,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   // marginBottom: rspH(0.6),
                   marginBottom: rspH(3.6),
 
-                  alignSelf:'flex-start',
+                  alignSelf: "flex-start",
                 }}
               >
                 <Text style={styles.profileDetailContHeading}>Pets</Text>
@@ -743,8 +747,6 @@ const SwiperTut = ({ repeat_tut }) => {
                     style={styles.interestImage}
                     resizeMode="cover"
                   />
-                 
-                  
                 </ScrollView>
               </View>
             </View>
@@ -841,14 +843,19 @@ const SwiperTut = ({ repeat_tut }) => {
                     <View style={{ ...styles.carouselHighlightCont }}>
                       <View style={styles.imageCont}>
                         <FlatList
-                          data={pref_type ? pref_type  == 'Woman' ? DATA: DATA2 : []}
+                          data={
+                            pref_type
+                              ? pref_type == "Woman"
+                                ? DATA
+                                : DATA2
+                              : []
+                          }
                           renderItem={renderItem}
                           keyExtractor={(item) => item.id}
                           horizontal
                           showsHorizontalScrollIndicator={false}
                           pagingEnabled
                           bounces={false}
-                          
                           onScroll={Animated.event(
                             [
                               {
@@ -913,7 +920,13 @@ const SwiperTut = ({ repeat_tut }) => {
 
                           {/* Main Carousel Pagintors / Dots */}
                           <Paginator
-                            data={pref_type ? pref_type  == 'Woman' ? DATA: DATA2 : []}
+                            data={
+                              pref_type
+                                ? pref_type == "Woman"
+                                  ? DATA
+                                  : DATA2
+                                : []
+                            }
                             scrollX={scrollX}
                             currentIndex={currentIndex}
                           />
@@ -1126,7 +1139,16 @@ const SwiperTut = ({ repeat_tut }) => {
                             </Text>
                           </View>
                           <Text style={styles.promptAnswer}>
-                          A great first date is when you feel like you’ve met your soulmate, and you can’t believe how lucky you are. It’s when you make each other laugh so hard that your stomach hurts, and you tease each other with playful banter. It’s when you open up about your hopes, fears, and secrets, and you feel a deep bond. It’s when you kiss goodnight, and you feel butterflies in your stomach. A great first date is when you text each other right after, and you can’t wait for the next one. 😉
+                            A great first date is when you feel like you’ve met
+                            your soulmate, and you can’t believe how lucky you
+                            are. It’s when you make each other laugh so hard
+                            that your stomach hurts, and you tease each other
+                            with playful banter. It’s when you open up about
+                            your hopes, fears, and secrets, and you feel a deep
+                            bond. It’s when you kiss goodnight, and you feel
+                            butterflies in your stomach. A great first date is
+                            when you text each other right after, and you can’t
+                            wait for the next one. 😉
                           </Text>
                         </View>
 
@@ -1192,11 +1214,23 @@ const SwiperTut = ({ repeat_tut }) => {
                         <View style={styles.promptContainer}>
                           <View style={styles.promptQuestionContainer}>
                             <Text style={styles.promptQuestion}>
-                            What's your favorite way to spend a rainy weekend at home by yourself
+                              What's your favorite way to spend a rainy weekend
+                              at home by yourself
                             </Text>
                           </View>
                           <Text style={styles.promptAnswer}>
-                          My favorite way to spend a rainy weekend at home by myself is to enjoy some quality me-time. I like to watch TV and catch up on my favorite shows or movies, or maybe discover something new. I also love to read books and immerse myself in different worlds and stories. I find reading very relaxing and stimulating at the same time. And of course, I like to cook something delicious and healthy for myself, or maybe try a new recipe. Cooking is a great way to express my creativity and have fun. A rainy weekend at home by myself is a perfect opportunity to do the things I love and pamper myself. 
+                            My favorite way to spend a rainy weekend at home by
+                            myself is to enjoy some quality me-time. I like to
+                            watch TV and catch up on my favorite shows or
+                            movies, or maybe discover something new. I also love
+                            to read books and immerse myself in different worlds
+                            and stories. I find reading very relaxing and
+                            stimulating at the same time. And of course, I like
+                            to cook something delicious and healthy for myself,
+                            or maybe try a new recipe. Cooking is a great way to
+                            express my creativity and have fun. A rainy weekend
+                            at home by myself is a perfect opportunity to do the
+                            things I love and pamper myself.
                           </Text>
                         </View>
 
@@ -1215,14 +1249,11 @@ const SwiperTut = ({ repeat_tut }) => {
                             horizontal
                             showsHorizontalScrollIndicator={false}
                           >
-                            
-
                             <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
-                            
                           </ScrollView>
                         </View>
                       </View>
@@ -1233,8 +1264,6 @@ const SwiperTut = ({ repeat_tut }) => {
             </SafeAreaView>
           )}
         </>
-
-       
       </SafeAreaView>
     </>
   );
@@ -1266,7 +1295,7 @@ const styles = StyleSheet.create({
   },
 
   imageCont: {
-    zIndex:5,
+    zIndex: 5,
     width: rspW(89),
     // height: rspH(42),
     height: rspH(Platform.OS == "ios" ? 42 : 48.3),
@@ -1276,10 +1305,10 @@ const styles = StyleSheet.create({
   item: {
     // borderRadius: rspW(5.1),
     // width: rspW(89),
-    alignSelf:'center',
+    alignSelf: "center",
     borderRadius: rspW(5.1),
     width: rspW(89),
-    zIndex:5,
+    zIndex: 5,
     // marginRight: rspW(1),
     // marginLeft: rspW(1),
   },
@@ -1477,11 +1506,9 @@ const styles = StyleSheet.create({
     position: "relative",
     backgroundColor: "#fff",
     alignItems: "center",
-    zIndex:3,
+    zIndex: 3,
     justifyContent: "center",
   },
-
-  
 
   // Fetures Styling
   featuresCont: {

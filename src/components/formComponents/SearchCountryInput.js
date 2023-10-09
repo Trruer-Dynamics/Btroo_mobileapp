@@ -17,8 +17,7 @@ const SearchCountryInput = ({
   datalist,
   setfilterdatalist,
 }) => {
-
-  const [placeholder, setplaceholder] = React.useState('Search')
+  const [placeholder, setplaceholder] = React.useState("Search");
 
   return (
     <View
@@ -39,11 +38,11 @@ const SearchCountryInput = ({
           lineHeight: rspF(2.2),
           color: "#000",
         }}
-        onFocus={()=>{
-          setplaceholder("")
+        onFocus={() => {
+          setplaceholder("");
         }}
-        onBlur={()=>{
-          setplaceholder("Search")
+        onBlur={() => {
+          setplaceholder("Search");
         }}
         onChangeText={(text) => {
           setsearch(text);

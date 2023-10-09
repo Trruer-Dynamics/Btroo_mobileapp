@@ -16,7 +16,6 @@ const ChatStack = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-    
       return () => {
         dispatch(setRepeatTut(false));
       };

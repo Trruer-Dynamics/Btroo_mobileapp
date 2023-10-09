@@ -31,7 +31,7 @@ const ProfileRevealed = ({ route }) => {
     (state) => state.authentication.profile_data
   );
 
-  const [rvl_img, setrvl_img] = useState("")
+  const [rvl_img, setrvl_img] = useState("");
 
   const [updated_prof, setupdated_prof] = useState(null);
 
@@ -57,7 +57,7 @@ const ProfileRevealed = ({ route }) => {
         prf_usr.prof_rvl = true;
         prf_usr.publicprompts = resp_data.publicprompts;
         prf_usr.privateprompts = resp_data.privateprompts;
-        prf_usr.prof_img = matches_imgs.filter(v => v[0]== profile.id)[0][1]
+        prf_usr.prof_img = matches_imgs.filter((v) => v[0] == profile.id)[0][1];
         setupdated_prof(prf_usr);
       } else if (response.data.code == 401) {
         dispatch(setSessionExpired(true));
@@ -76,15 +76,14 @@ const ProfileRevealed = ({ route }) => {
     React.useCallback(() => {
       dispatch(setCurrentScreen(route.name));
 
-      let tmplist = [...matches_imgs]
-      let indx =tmplist.findIndex(v => v[0]== profile.id)
-      let cprof_img = [tmplist[indx][0],tmplist[indx][1],true] 
-      tmplist[indx] = cprof_img
-      console.log("cprof_img",tmplist[indx])
-      setrvl_img(tmplist[indx][1])
-      dispatch(setMatchesImgs(tmplist))
-      
-      
+      let tmplist = [...matches_imgs];
+      let indx = tmplist.findIndex((v) => v[0] == profile.id);
+      let cprof_img = [tmplist[indx][0], tmplist[indx][1], true];
+      tmplist[indx] = cprof_img;
+     
+      setrvl_img(tmplist[indx][1]);
+      dispatch(setMatchesImgs(tmplist));
+
       return () => {};
     }, [])
   );
@@ -104,10 +103,7 @@ const ProfileRevealed = ({ route }) => {
           />
 
           <View style={styles.container}>
-            <FastImage
-              source={{ uri: rvl_img }}
-              style={styles.profileImage}
-            />
+            <FastImage source={{ uri: rvl_img }} style={styles.profileImage} />
 
             <View
               style={{

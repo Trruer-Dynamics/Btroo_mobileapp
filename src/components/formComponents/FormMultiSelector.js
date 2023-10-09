@@ -130,7 +130,7 @@ const FormMultiSelector = ({
             height: rspH(5.8),
             width: width,
             borderColor:
-              blr_value && selected_list.length == 0
+              blr_value && selected_list.length == 0 && error
                 ? colors.error
                 : selected_list.length != 0
                 ? colors.blue

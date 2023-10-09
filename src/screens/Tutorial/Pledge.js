@@ -20,15 +20,16 @@ import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const Pledge = ({ navigation, route }) => {
   const onNextPress = () => {
-
-    navigation.dispatch(StackActions.replace("BottomTab", {
-      screen: "Swiper",
-    }))
+    navigation.dispatch(
+      StackActions.replace("BottomTab", {
+        screen: "Swiper",
+      })
+    );
 
     // navigation.navigate("BottomTab", {
     //   screen: "Swiper",
     // });
-    
+
     // navigation.goBack()
   };
 

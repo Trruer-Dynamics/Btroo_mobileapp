@@ -19,7 +19,6 @@ const Swiper = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-
       dispatch(setCurrentScreen("Swiper"));
       return () => {
         // dispatch(setRepeatTut(false))

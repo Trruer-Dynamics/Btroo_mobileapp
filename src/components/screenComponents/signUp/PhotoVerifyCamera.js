@@ -32,7 +32,7 @@ const PhotoVerifyCamera = ({ route }) => {
 
   const [devicec, setdevicec] = useState("");
   const cameraRef = useRef(null);
-  const [cameraActive, setcameraActive] = useState(true)
+  const [cameraActive, setcameraActive] = useState(true);
   const [hasCameraPermission, sethasCameraPermission] = useState(false);
   const [flash, setflash] = useState("off");
 
@@ -90,7 +90,7 @@ const PhotoVerifyCamera = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      setcameraActive(true)
+      setcameraActive(true);
       dispatch(setCurrentScreen(route.name));
       setdevicec("front");
 
@@ -106,11 +106,10 @@ const PhotoVerifyCamera = ({ route }) => {
             backgroundColor: "#fff",
           })
         );
-        setcameraActive(false)
+        setcameraActive(false);
       };
     }, [])
   );
-
 
   return (
     <>

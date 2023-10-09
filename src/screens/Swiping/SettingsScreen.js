@@ -903,7 +903,6 @@ const SettingsScreen = ({ navigation, route }) => {
                 </Text>
               </TouchableOpacity>
 
-
               <TouchableOpacity
                 onPress={() => {
                   Linking.openURL(
