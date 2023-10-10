@@ -8,11 +8,7 @@ import {
   BackHandler,
   AppState,
 } from "react-native";
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Navigation from "./src/navigation";
 import SplashScreen from "react-native-splash-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";

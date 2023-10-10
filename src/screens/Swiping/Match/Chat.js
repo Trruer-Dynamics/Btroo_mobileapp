@@ -136,11 +136,10 @@ const ChatItem = ({
 
   let c_time = "07:00";
 
-  c_time = moment(item[2]).format('HH:mm').padStart(5,"0")
+  c_time = moment(item[2]).format("HH:mm").padStart(5, "0");
 
-// c_time = moment(item[2]).format("LT").padStart(8, "0");
+  // c_time = moment(item[2]).format("LT").padStart(8, "0");
 
-  
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: animation.value }],
@@ -156,8 +155,7 @@ const ChatItem = ({
 
   const animation2 = useSharedValue(1);
   const fadeIn = async () => {
-    animation2.value = 
-    withDelay(
+    animation2.value = withDelay(
       500,
       withTiming(100, {
         duration: 2000,
@@ -240,7 +238,7 @@ const ChatItem = ({
                 setrply_item_indx(rply_itm_indx);
                 let tmp_lis = [...chatlist];
                 setchatlist(tmp_lis);
-                setrply_animation(true)
+                setrply_animation(true);
                 scrollViewRef.current.scrollToIndex({
                   index: rply_itm_indx,
                   animated: true,
@@ -410,7 +408,7 @@ const ChatItem = ({
                 setrply_item_indx(null);
                 let tmp_lis = [...chatlist];
                 setchatlist(tmp_lis);
-                setrply_animation(false)
+                setrply_animation(false);
               }, 1800);
             });
           }}
@@ -418,7 +416,7 @@ const ChatItem = ({
             {
               paddingVertical: rspH(0.4),
               position: "absolute",
-              left : rspW(-3.5),
+              left: rspW(-3.5),
               width: scrn_width * 0.95,
               height: "100%",
               backgroundColor: "#2364aa4e",
@@ -476,13 +474,12 @@ const Chat = ({ profile }) => {
   const dispatch = useDispatch();
 
   const [chatlist, setchatlist] = useState([]);
-  const [scrollable, setscrollable] = useState(true)
+  const [scrollable, setscrollable] = useState(true);
   const chatlist_ref = useRef(null);
   const socket_con = useRef(null);
   const [chatlist_remain, setchatlist_remain] = useState([]);
   const [rply_item_indx, setrply_item_indx] = useState(null);
-  const [rply_animation, setrply_animation] = useState(false)
-
+  const [rply_animation, setrply_animation] = useState(false);
 
   const [rvl_activate, setrvl_activate] = useState(false);
   const [rvl_time, setrvl_time] = useState(false);
@@ -600,10 +597,10 @@ const Chat = ({ profile }) => {
 
       let resp_data = response.data;
 
-      console.log("revealProfileTime resp", resp_data);
+      // console.log("revealProfileTime resp", resp_data);
     } catch (error) {
       setloading(false);
-      console.log("revealProfileTime error", error);
+      // console.log("revealProfileTime error", error);
       return false;
     }
   };
@@ -622,8 +619,6 @@ const Chat = ({ profile }) => {
 
         let resp_data = resp.data.data;
         let code = resp.data.code;
-
-        
 
         if (code == 200) {
           let tmp_lis = [...list];
@@ -668,7 +663,6 @@ const Chat = ({ profile }) => {
 
           let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id);
 
-          
           if (tmps.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
             setchatlist(tmp);
@@ -677,15 +671,13 @@ const Chat = ({ profile }) => {
             setchatlist(tmp_lis);
             chatlist_ref.current = tmp_lis;
           }
-          
+
           if (tmp_lis.length == 0) {
             setloading(false);
           }
-          
 
           setconnectSocketS(true);
         }
-        
       })
       .catch((err) => {
         setloading(false);
@@ -706,7 +698,6 @@ const Chat = ({ profile }) => {
   };
 
   const connectSocket = async () => {
-
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
     ws.current.onopen = (e) => {
       console.log("Open");
@@ -731,7 +722,7 @@ const Chat = ({ profile }) => {
     };
 
     ws.current.onerror = (e) => {
-      console.log("Error",e);
+      console.log("onError", e);
       dispatch(setSocketClose(true));
     };
 
@@ -739,7 +730,6 @@ const Chat = ({ profile }) => {
       const data = JSON.parse(e.data);
 
       if (data.sender != profile_data.user.id) {
-
         try {
           let day_tmp = moment(new Date(data.datetime))
             .calendar()
@@ -781,66 +771,64 @@ const Chat = ({ profile }) => {
     };
   };
 
-  const renderItem = 
-  useCallback( 
+  const renderItem = useCallback(
     ({ item, index }) => {
-    return (
-      <GestureHandlerRootView>
-        {item[6] != "" && (
-          <View
-            style={{
-              paddingHorizontal: rspW(2.5),
-              paddingTop: rspH(1.1),
-              paddingBottom: rspH(0.7),
-              borderRadius: rspW(3.2),
-              justifyContent: "center",
-              alignSelf: "center",
-              backgroundColor: "#CCCCCC",
-              marginBottom: rspH(1.83),
-              // marginBottom: rspH(1.5),
-            }}
-          >
-            <Text
+      return (
+        <GestureHandlerRootView>
+          {item[6] != "" && (
+            <View
               style={{
-                textAlign: "center",
-                lineHeight: rspF(1.31),
-                fontFamily: fontFamily.bold,
-                fontSize: rspF(1.302),
-                color: colors.black,
+                paddingHorizontal: rspW(2.5),
+                paddingTop: rspH(1.1),
+                paddingBottom: rspH(0.7),
+                borderRadius: rspW(3.2),
+                justifyContent: "center",
+                alignSelf: "center",
+                backgroundColor: "#CCCCCC",
+                marginBottom: rspH(1.83),
+                // marginBottom: rspH(1.5),
               }}
             >
-              {item[6]}
-            </Text>
-          </View>
-        )}
-        <ChatItem
-          profile={profile}
-          item={item}
-          index={index}
-          msg={msg}
-          dispatch={dispatch}
-          rply_item_indx={rply_item_indx}
-          setrply_item_indx={setrply_item_indx}
-          setrply_animation={setrply_animation}
-          scrollViewRef={scrollViewRef}
-          replySet={replySet}
-          setreplySet={setreplySet}
-          setactreplyID={setactreplyID}
-          chatlist={chatlist}
-          setchatlist={setchatlist}
-        />
-      </GestureHandlerRootView>
-    )
-            }
-            ,[chatlist])
+              <Text
+                style={{
+                  textAlign: "center",
+                  lineHeight: rspF(1.31),
+                  fontFamily: fontFamily.bold,
+                  fontSize: rspF(1.302),
+                  color: colors.black,
+                }}
+              >
+                {item[6]}
+              </Text>
+            </View>
+          )}
+          <ChatItem
+            profile={profile}
+            item={item}
+            index={index}
+            msg={msg}
+            dispatch={dispatch}
+            rply_item_indx={rply_item_indx}
+            setrply_item_indx={setrply_item_indx}
+            setrply_animation={setrply_animation}
+            scrollViewRef={scrollViewRef}
+            replySet={replySet}
+            setreplySet={setreplySet}
+            setactreplyID={setactreplyID}
+            chatlist={chatlist}
+            setchatlist={setchatlist}
+          />
+        </GestureHandlerRootView>
+      );
+    },
+    [chatlist]
+  );
 
   useEffect(() => {
     if (chatlist.length > 0) {
       dispatch(setChatMsgs(chatlist));
     }
   }, [chatlist]);
-
-  
 
   useEffect(() => {
     if (connectSocketS) {
@@ -922,85 +910,175 @@ const Chat = ({ profile }) => {
     }
   }, [chatlist_remain]);
 
-  useEffect(() => {  
-
-    if (chatlist.length> 0 && !profile.prof_rvl && !rvl_activate) {
+  useEffect(() => {
+    if (chatlist.length > 0 && !profile.prof_rvl && !rvl_activate) {
       let mymsgs = chatlist.filter((v) => v[1] == 1);
+
       let othmsgs = chatlist.filter((v) => v[1] == 0);
+
       let mycount = mymsgs
         .map((v) => v[0])
         .flat()
-        .join().length;
+        .join(" ")
+        .split(" ").length;
+
       let othcount = othmsgs
         .map((v) => v[0])
         .flat()
-        .join().length;
+        .join(" ")
+        .split(" ").length;
 
-        let tmpl = [];
-        let turn = 0;
-        for (let j = 0; j < chatlist.length; j++) {
-          const ele = chatlist[j];
+      let tmpl = [];
+      let turn = 0;
+      for (let j = 0; j < chatlist.length; j++) {
+        const ele = chatlist[j];
 
-          if (ele[1] == turn) {
-            tmpl.push(ele);
-            turn = turn == 0 ? 1 : 0;
+        if (ele[1] == turn) {
+          tmpl.push(ele);
+          turn = turn == 0 ? 1 : 0;
+        } else {
+          continue;
+        }
+      }
+
+      let tlis = [...chatlist];
+
+      let my_msg2 = [];
+      let oth_msg2 = [];
+
+      let tmpp = tlis.map((v) => {
+        let rti = { val: v, category: v[1] };
+        return rti;
+      });
+      // console.log("tmpp", tmpp);
+
+      function groupSimilarItemsSequentially(items) {
+        const groupedItems = [];
+        let currentGroup = [];
+
+        for (let i = 0; i < items.length; i++) {
+          if (i === 0 || items[i].category === items[i - 1].category) {
+            currentGroup.push(items[i]);
           } else {
-            continue;
+            groupedItems.push(currentGroup);
+            currentGroup = [items[i]];
           }
         }
+        if (currentGroup.length > 0) {
+          groupedItems.push(currentGroup);
+        }
 
-        if (tmpl.length  > 0) {
-          let tmpl2 = tmpl[tmpl.length - 1][1] == 0 ? tmpl.slice(0, -1) : tmpl;
-        tmp_11 = tmpl2.map((v) => v[2]);
+        return groupedItems;
+      }
 
-        let tmpl3 = [];
-         
-        l = 0;
-        for (const iter of tmp_11) {
-          if ((l + 1) % 2 !== 0) {
-            let t1 = new Date(tmp_11[l]);
-            let t2 = new Date(tmp_11[l + 1]);
+      // Convert the list of items into sequentially grouped lists
+      const sequentiallyGroupedItems = groupSimilarItemsSequentially(tmpp);
+
+      // console.log(sequentiallyGroupedItems);
+      let tlis1 = [];
+      // console.log("\n")
+      for (const iterator of sequentiallyGroupedItems) {
+        // console.log('iterator',iterator)
+
+        let exval = iterator[0].val;
+        // console.log('exval',exval)
+        // console.log('\n')
+        tlis1.push(exval);
+      }
+
+      let tlis221 = [];
+
+      p = 0;
+      for (const itm of tlis1) {
+        // console.log("\ntlis1 itm",itm)
+
+        if (p > 0) {
+          tlis221.push(tlis1[p - 1], itm);
+        }
+        p += 1;
+      }
+
+      // console.log("tlis221",tlis221)
+
+      if (tlis221 && tlis221?.length > 0) {
+        // let tlis2 = tlis221.flat()
+        // console.log("tlis2",tlis2)
+        let tmp_22 = tlis221?.map((v) => v[2]);
+        let tmp_33 = [];
+
+        // console.log("tmp_22",tmp_22)
+
+        s = 0;
+        for (const iter of tmp_22) {
+          if ((s + 1) % 2 !== 0) {
+            let t1 = new Date(tmp_22[s]);
+            let t2 = new Date(tmp_22[s + 1]);
             let diff = Math.abs(t2 - t1);
-            tmpl3.push(diff);
+            tmp_33.push(diff / 1000 / 60);
           }
 
-          l = l + 1;
+          s = s + 1;
         }
 
-        if (tmpl3.length > 0) {
-      
-          let tot_min = tmpl3.reduce((a, b) => a + b)/1000/60
-          let avg_min = tot_min / tmpl3.length
+        // console.log("tmp_33",tmp_33)
+        if (tmp_33.length > 0) {
+          let tot_min = tmp_33.reduce((a, b) => a + b);
+          let avg_min = tot_min / tmp_33.length;
 
-          let ttact = false 
+          let ttact = false;
 
-          if (avg_min <= 5 && chatlist.length >= 25  && (mycount >= 120 && othcount >= 120)) {
-            ttact = true
+          if (Platform.OS == "ios") {
+            console.log("\nprofile", profile_data.userprofile?.name);
+            console.log("tmp_33", tmp_33);
+            console.log("avg_min", avg_min);
+            console.log("mymsgs len", mymsgs.length);
+            console.log(
+              profile?.userprofile?.name,
+              " msgs len",
+              othmsgs.length
+            );
+            console.log("my word count", mycount);
+            console.log(profile?.userprofile?.name, "word count", othcount);
+            console.log("\n");
           }
-          else if (chatlist.length >= 40  && (mycount >= 130 && othcount >= 130)) {
-            ttact = true
+
+          if (
+            avg_min <= 5 &&
+            mymsgs.length >= 25 &&
+            othmsgs.length >= 25 &&
+            mycount >= 120 &&
+            othcount >= 120
+          ) {
+            ttact = true;
+          } else if (
+            mymsgs.length >= 40 &&
+            othmsgs.length >= 40 &&
+            mycount >= 130 &&
+            othcount >= 130
+          ) {
+            ttact = true;
           }
 
-          if (ttact ) {
-            
+          if (ttact) {
             setrvl_activate(true);
-
+            console.log(
+              "logginred user",
+              profile_data?.userprofile?.name,
+              "**** Profile Activate"
+            );
             if (chat_reveal_tut == true) {
               Keyboard.dismiss();
               setshow_rvl_tut(true);
             }
-          }          
-
+          }
         }
-        }
-        
+      }
     }
   }, [chatlist]);
 
   useEffect(() => {
-    
     if (rvl_activate) {
-      revealProfileTime()
+      revealProfileTime();
     }
   }, [rvl_activate]);
 
@@ -1056,7 +1134,7 @@ const Chat = ({ profile }) => {
 
     if (!is_network_connected && tmp.length > 0) {
       setchatlist(tmp);
-      setloading(false)
+      setloading(false);
     }
 
     if (is_network_connected && drafts_msgs.length > 0) {
@@ -1065,35 +1143,29 @@ const Chat = ({ profile }) => {
   }, [is_network_connected]);
 
   useLayoutEffect(() => {
-    setloading(false)
+    setloading(false);
     if (is_network_connected) {
       getPrevChats(chatlist);
     }
   }, []);
 
-
   useEffect(() => {
-
     if (chatlist.length > 0 && !rply_animation) {
       let lastMsg = chatlist[0];
-    let sender = "";
-    if (lastMsg) {
-      sender = lastMsg[3];
-      let login_user = profile_data.user.id;
-      
-      if (login_user === sender) {
-        scrollViewRef.current.scrollToIndex({
-          index: 0,
-          animated: false,
-        });
+      let sender = "";
+      if (lastMsg) {
+        sender = lastMsg[3];
+        let login_user = profile_data.user.id;
+
+        if (login_user === sender) {
+          scrollViewRef.current.scrollToIndex({
+            index: 0,
+            animated: false,
+          });
+        }
       }
     }
-    }
-
-    
-    
-  }, [chatlist])
-  
+  }, [chatlist]);
 
   return (
     <>
@@ -1185,41 +1257,31 @@ const Chat = ({ profile }) => {
                         </TouchableOpacity>
                       )}
                     </>
-                  ); 
+                  );
                 }}
               />
             )}
           </View>
 
-       
-            <FlashList
-              keyboardDismissMode="interactive"
-
-              estimatedItemSize={100}
-             
-              data={chatlist}
-              contentContainerStyle={{
-                paddingHorizontal: rspW(6.2),
-                flexDirection: "column-reverse",
-              }}
-              
-              
-              ref={scrollViewRef}
-              inverted
-              keyboardShouldPersistTaps={
-                Platform.OS == "android" ? "always" : "never"
-              }
-             
-              
-              renderItem={renderItem}
-              keyExtractor={(_, index) => index}
-              bouncesZoom={false}
-              bounces={false}
-              removeClippedSubviews={true}
-              
-          
-            />
-         
+          <FlashList
+            keyboardDismissMode="interactive"
+            estimatedItemSize={100}
+            data={chatlist}
+            contentContainerStyle={{
+              paddingHorizontal: rspW(6.2),
+              flexDirection: "column-reverse",
+            }}
+            ref={scrollViewRef}
+            inverted
+            keyboardShouldPersistTaps={
+              Platform.OS == "android" ? "always" : "never"
+            }
+            renderItem={renderItem}
+            keyExtractor={(_, index) => index}
+            bouncesZoom={false}
+            bounces={false}
+            removeClippedSubviews={true}
+          />
 
           <View
             style={{
@@ -1513,7 +1575,7 @@ const styles = StyleSheet.create({
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
     lineHeight: rspF(2.1),
-    textAlign:'justify',
+    textAlign: "justify",
     minWidth: rspW(24),
     maxWidth: rspW(80),
     letterSpacing: Platform.OS == "ios" ? 0 : 0.5,
@@ -1531,7 +1593,7 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.8),
     minWidth: rspW(26),
     color: colors.black,
-    textAlign:'justify',
+    textAlign: "justify",
   },
   chatTimeTxt: {
     fontSize: rspF(1.302),

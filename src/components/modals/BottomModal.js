@@ -17,6 +17,9 @@ import {
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useSelector } from "react-redux";
+import { initialWindowMetrics } from "react-native-safe-area-context";
+const insets = initialWindowMetrics.insets;
+
 
 const BottomModal = ({
   modalVisible,
@@ -42,7 +45,7 @@ const BottomModal = ({
       >
         <SafeAreaView
           style={{
-            height: Platform.OS == "ios" ? scrn_height : rspH(99),
+            height: Platform.OS == "ios" ? scrn_height : insets.top + rspH(93.55),
             position: "relative",
           }}
         >

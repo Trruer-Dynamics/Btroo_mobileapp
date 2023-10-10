@@ -90,7 +90,7 @@ const EditProfile = ({ navigation }) => {
 
   const [pos_change, setpos_change] = useState(false);
 
-  const changeImgPosition = async () => {
+  const changeImgPosition = async (pic_lis) => {
     // Set the API endpoint URL
     setloading(true);
     const url = apiUrl + "image_Position/";
@@ -103,35 +103,35 @@ const EditProfile = ({ navigation }) => {
     };
 
     const data = {
-      image_id_1: pic_list[0][4] != "" ? pic_list[0][4] : null,
-      position_1: pic_list[0][4] != "" ? positions.value[0] : null,
+      image_id_1: pic_lis[0][4] != "" ? pic_lis[0][4] : null,
+      position_1: pic_lis[0][4] != "" ? positions.value[0] : null,
 
-      image_id_2: pic_list[1][4] != "" ? pic_list[1][4] : null,
-      position_2: pic_list[1][4] != "" ? positions.value[1] : null,
+      image_id_2: pic_lis[1][4] != "" ? pic_lis[1][4] : null,
+      position_2: pic_lis[1][4] != "" ? positions.value[1] : null,
 
-      image_id_3: pic_list[2][4] != "" ? pic_list[2][4] : null,
-      position_3: pic_list[2][4] != "" ? positions.value[2] : null,
+      image_id_3: pic_lis[2][4] != "" ? pic_lis[2][4] : null,
+      position_3: pic_lis[2][4] != "" ? positions.value[2] : null,
 
-      image_id_4: pic_list[3][4] != "" ? pic_list[3][4] : null,
-      position_4: pic_list[3][4] != "" ? positions.value[3] : null,
+      image_id_4: pic_lis[3][4] != "" ? pic_lis[3][4] : null,
+      position_4: pic_lis[3][4] != "" ? positions.value[3] : null,
 
-      image_id_5: pic_list[4][4] != "" ? pic_list[4][4] : null,
-      position_5: pic_list[4][4] != "" ? positions.value[4] : null,
+      image_id_5: pic_lis[4][4] != "" ? pic_lis[4][4] : null,
+      position_5: pic_lis[4][4] != "" ? positions.value[4] : null,
 
-      image_id_6: pic_list[5][4] != "" ? pic_list[5][4] : null,
-      position_6: pic_list[5][4] != "" ? positions.value[5] : null,
+      image_id_6: pic_lis[5][4] != "" ? pic_lis[5][4] : null,
+      position_6: pic_lis[5][4] != "" ? positions.value[5] : null,
 
-      image_id_7: pic_list[6][4] != "" ? pic_list[6][4] : null,
-      position_7: pic_list[6][4] != "" ? positions.value[6] : null,
+      image_id_7: pic_lis[6][4] != "" ? pic_lis[6][4] : null,
+      position_7: pic_lis[6][4] != "" ? positions.value[6] : null,
 
-      image_id_8: pic_list[7][4] != "" ? pic_list[7][4] : null,
-      position_8: pic_list[7][4] != "" ? positions.value[7] : null,
+      image_id_8: pic_lis[7][4] != "" ? pic_lis[7][4] : null,
+      position_8: pic_lis[7][4] != "" ? positions.value[7] : null,
 
-      image_id_9: pic_list[8][4] != "" ? pic_list[8][4] : null,
-      position_9: pic_list[8][4] != "" ? positions.value[8] : null,
+      image_id_9: pic_lis[8][4] != "" ? pic_lis[8][4] : null,
+      position_9: pic_lis[8][4] != "" ? positions.value[8] : null,
     };
 
-    let up_pos_lis = _.cloneDeep(pic_list);
+    let up_pos_lis = _.cloneDeep(pic_lis);
     for (let t = 0; t < up_pos_lis.length; t++) {
       const ele = up_pos_lis[t];
       ele[3] = positions.value[t];
@@ -145,9 +145,9 @@ const EditProfile = ({ navigation }) => {
 
       let code = resp.data.code;
       let user_data = resp.data.data;
-
+      
       if (code == 200) {
-        await dispatch(setProfileImgs(up_pos_lis));
+        dispatch(setProfileImgs(up_pos_lis));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
@@ -304,7 +304,7 @@ const EditProfile = ({ navigation }) => {
 
   const onNextPress = async () => {
     if (pos_change) {
-      await changeImgPosition();
+      await changeImgPosition(pic_list);
     }
     await saveProfileData();
   };
@@ -339,6 +339,7 @@ const EditProfile = ({ navigation }) => {
 
     dispatch(setProfileImgs(tmp_lis));
     await atLast(tmp_lis);
+    await changeImgPosition(tmp_lis);
   };
 
   const saveProfileImage = async (mnImage, crpImage) => {
@@ -2077,7 +2078,7 @@ const EditProfile = ({ navigation }) => {
         </SafeAreaView>
 
         <BottomModal
-          bottom={Platform.OS == "android" ? 0 : 3}
+
           padding={0}
           height={rspH(16)}
           modalVisible={modalVisible}

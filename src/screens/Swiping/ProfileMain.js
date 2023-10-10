@@ -90,6 +90,7 @@ const ProfileMain = ({ navigation }) => {
   const [active_prf_imgs, setactive_prf_imgs] = useState([]);
   const [modalVisible, setmodalVisible] = useState(false);
   const [currentIndex3, setcurrentIndex3] = useState(0);
+  const [prof_refs, setprof_refs] = useState(false);
 
   const scrollX3 = useRef(new Animated.Value(0)).current;
   const slidesRef3 = useRef(null);
@@ -109,19 +110,15 @@ const ProfileMain = ({ navigation }) => {
     (state) => state.authentication.access_token
   );
 
-
   const getData = async () => {
-
+   
     await axios
       .get(apiUrl + "login/?user_id=" + profile_data.user.id)
       .then((resp) => {
-        
         let user_data = resp.data.data;
         let status_code = resp.data.code;
 
         if (status_code == 200) {
-          
-
           let act_prompts = user_data.userprofile.publicprompts.filter(
             (c) => c.active == true
           );
@@ -182,11 +179,10 @@ const ProfileMain = ({ navigation }) => {
             userprivateprompts: act_promptsm2,
           };
           dispatch(setProfiledata(user_prof_data));
+          setprof_refs(!prof_refs);
         }
       })
-      .catch((err) => {
-        
-      });
+      .catch((err) => {});
   };
 
   useFocusEffect(
@@ -229,7 +225,7 @@ const ProfileMain = ({ navigation }) => {
       return () => {
         // Do something when the screen is unfocused
       };
-    }, [profile_data, profile_imgs])
+    }, [profile_data, profile_imgs, prof_refs])
   );
 
   useFocusEffect(

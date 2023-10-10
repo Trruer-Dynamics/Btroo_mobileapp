@@ -321,7 +321,6 @@ const OtpVerify = ({
           k += 1;
         }
 
-       
         let user_prof_data = {
           user: user_data.user,
           userinterest: user_data.userinterest,

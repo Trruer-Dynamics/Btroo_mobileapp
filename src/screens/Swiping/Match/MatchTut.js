@@ -33,12 +33,12 @@ import {
 } from "../../../store/reducers/authentication/authentication";
 import FormHeader from "../../../components/wrappers/formWrappers/FormHeader";
 import Loader from "../../../components/loader/Loader";
-import { initialWindowMetrics } from "react-native-safe-area-context";
+
 import { useNavigation } from "@react-navigation/native";
 import { FemaleAvatar } from "../../../assets";
 import FastImage from "react-native-fast-image";
 import FAIcon from "react-native-vector-icons/FontAwesome";
-
+import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
 
 const DATA = [
@@ -151,11 +151,13 @@ const MatchTut = ({ repeat_tut }) => {
   };
 
   const renderItem = ({ item }) => {
+    let prf_img = FemaleAvatar;
     return (
       <MatchItem
         item={item}
         visible={extendVisible}
         setVisible={setextendVisible}
+        prf_img={prf_img}
       />
     );
   };
@@ -445,12 +447,13 @@ const styles = StyleSheet.create({
   highCont: {
     position: "absolute",
     backgroundColor: colors.white,
+    // + '34'
     alignItems: "center",
     justifyContent: "center",
   },
   matchitem_cont: {
     // top: Platform.OS == "android" ? rspH(10.2) + insets.top : srn_height / 5.1,
-    top: Platform.OS == "ios" ? rspH(8.25) + insets.top : srn_height / 12,
+    top: Platform.OS == "android" ? rspH(4) + insets.top : srn_height / 7.44,
 
     // right: rspW(9.2),
 

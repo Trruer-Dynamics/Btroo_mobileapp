@@ -80,7 +80,7 @@ const ProfileRevealed = ({ route }) => {
       let indx = tmplist.findIndex((v) => v[0] == profile.id);
       let cprof_img = [tmplist[indx][0], tmplist[indx][1], true];
       tmplist[indx] = cprof_img;
-     
+
       setrvl_img(tmplist[indx][1]);
       dispatch(setMatchesImgs(tmplist));
 

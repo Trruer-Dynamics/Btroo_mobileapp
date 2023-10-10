@@ -93,6 +93,8 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.profile_approved
   );
 
+  const [prf_apprv_refh, setprf_apprv_refh] = useState(false);
+
   const is_promptsfillingstarted = useSelector(
     (state) => state.authentication.is_promptsfillingstarted
   );
@@ -403,8 +405,11 @@ const SwiperOr = ({}) => {
             setloading2(true);
           } else if (profile_appr === 0) {
             dispatch(setProfileApproved(false));
+            setprf_apprv_refh(!prf_apprv_refh);
           } else {
             dispatch(setProfileApproved(true));
+            setprf_apprv_refh(!prf_apprv_refh);
+
             if (profile_call) {
               getFilterProfiles();
             }
@@ -516,6 +521,7 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterProfiles = async () => {
+    
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -741,7 +747,7 @@ const SwiperOr = ({}) => {
         // Do something when the screen is unfocused
         // Useful for cleanup functions
       };
-    }, [profile_approv])
+    }, [prf_apprv_refh])
   );
 
   return (

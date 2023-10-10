@@ -181,7 +181,7 @@ const Match = () => {
             mth.seen = seen_by.includes(lg_id);
             mth.user_id = mth_user.id;
             mth.for_user_id = profile_data.userprofile.id;
-            mth.prof_img = prf_img.cropedimage;
+            mth.prof_img = prf_img?.cropedimage;
             mth.prof_rvl = resp_data[p].user1_profile_reveal;
             mth.publicprompts = mth_user.userprofile.publicprompts;
             mth.privateprompts = mth_user.userprofile.privateprompts;
@@ -191,7 +191,7 @@ const Match = () => {
 
             matchs_imgs.push([
               id,
-              prf_img.cropedimage,
+              prf_img?.cropedimage,
               resp_data[p].user1_profile_reveal,
             ]);
           }
@@ -203,7 +203,9 @@ const Match = () => {
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log("err", error);
+    }
   };
 
   const renderItem = useCallback(
@@ -366,8 +368,9 @@ export default Match;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // height:scrn_height,
-    // width: scrn_width,
+    // backgroundColor:'red',
+    height: scrn_height,
+    width: scrn_width,
     justifyContent: "space-between",
     alignItems: "center",
   },

@@ -645,6 +645,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
+                  bounces={false}
                 >
                   <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
@@ -741,6 +742,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
+                  bounces={false}
                 >
                   <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
@@ -1165,6 +1167,7 @@ const SwiperTut = ({ repeat_tut }) => {
                             style={{ marginTop: rspH(0.8) }}
                             horizontal
                             showsHorizontalScrollIndicator={false}
+                            bounces={false}
                           >
                             <FastImage
                               source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
@@ -1248,6 +1251,7 @@ const SwiperTut = ({ repeat_tut }) => {
                             style={{ marginTop: rspH(0.8) }}
                             horizontal
                             showsHorizontalScrollIndicator={false}
+                            bounces={false}
                           >
                             <FastImage
                               source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
