@@ -61,13 +61,13 @@ const PhotoVerifyCamera = ({ route }) => {
 
   const handleCapturePress = async () => {
     setloading(true);
-
+    
     try {
       if (cameraRef.current) {
         const photo = await cameraRef.current.takePhoto({
           flash: flash,
         });
-
+        
         if (photo.path) {
           finalLoad("file://" + photo.path);
         }
@@ -144,6 +144,7 @@ const PhotoVerifyCamera = ({ route }) => {
                 style={styles.camCont}
                 device={device}
                 isActive={cameraActive}
+                
               />
 
               {/* Demo Pose Pic */}

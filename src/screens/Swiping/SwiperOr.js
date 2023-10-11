@@ -164,7 +164,7 @@ const SwiperOr = ({}) => {
   ]);
 
   const [warn_step, setwarn_step] = useState(0);
-  const [redirect_to_settings, setredirect_to_settings] = useState(false);
+  const [redirect_to_setting, setredirect_to_setting] = useState(false);
   const [promptStep, setpromptStep] = useState(1);
   const [profiles, setprofiles] = useState([]);
   const [empty_profile_call, setempty_profile_call] = useState(false);
@@ -346,6 +346,9 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterData = async () => {
+
+    console.log("getFilterData call")
+
     setloading(true);
 
     const headers = {
@@ -591,9 +594,10 @@ const SwiperOr = ({}) => {
     if (
       appStateVisible == "active" &&
       permission_denied &&
-      redirect_to_settings
+      redirect_to_setting
     ) {
-      setredirect_to_settings(false);
+      console.log("redirect_to_setting",redirect_to_setting)
+      setredirect_to_setting(false);
       getData();
       dispatch(setProfileRefresh(!profile_refresh));
     }
@@ -697,6 +701,7 @@ const SwiperOr = ({}) => {
   }, []);
 
   useLayoutEffect(() => {
+    console.log("profile_refresh",profile_refresh)
     setloading2(true);
     setwarn_step(0);
     getGenders();
@@ -847,6 +852,7 @@ const SwiperOr = ({}) => {
                 <TouchableOpacity
                   style={styles.loadingBtn}
                   onPress={() => {
+                    
                     if (warn_step == 2) {
                       getRejectedProfiles();
                     }
@@ -854,7 +860,8 @@ const SwiperOr = ({}) => {
                       navigation.navigate("PhotoVerification");
                     }
                     if (warn_step == 4) {
-                      setredirect_to_settings(true);
+                      console.log("This Call")
+                      setredirect_to_setting(true);
                       if (Platform.OS == "ios") {
                         Linking.openURL("app-settings:");
                       } else {

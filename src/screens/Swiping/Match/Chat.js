@@ -123,10 +123,10 @@ const ChatItem = ({
     },
 
     onEnd: (event, ctx) => {
-      if (animation.value < 40) {
+      if (animation.value < 38) {
         animation.value = withTiming(0);
       }
-      if (animation.value >= 40) {
+      if (animation.value >= 38) {
         runOnJS(vibtr)();
         animation.value = withTiming(0);
       }
@@ -980,7 +980,10 @@ const Chat = ({ profile }) => {
       for (const iterator of sequentiallyGroupedItems) {
         // console.log('iterator',iterator)
 
-        let exval = iterator[0].val;
+        let exval = iterator[iterator.length - 1].val;
+        // let exval = iterator[0].val;
+
+
         // console.log('exval',exval)
         // console.log('\n')
         tlis1.push(exval);
@@ -990,7 +993,7 @@ const Chat = ({ profile }) => {
 
       p = 0;
       for (const itm of tlis1) {
-        // console.log("\ntlis1 itm",itm)
+        console.log("\ntlis1 itm",itm)
 
         if (p > 0) {
           tlis221.push(tlis1[p - 1], itm);

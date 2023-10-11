@@ -62,7 +62,6 @@ const SettingsScreen = ({ navigation, route }) => {
   const kp_mtch = profile_data?.userprofile?.keepmatchingnotification;
 
   useEffect(() => {
-    // console.log("kp_mtch",kp_mtch)
     setkeep_matching(kp_mtch);
   }, [kp_mtch]);
 
@@ -158,7 +157,7 @@ const SettingsScreen = ({ navigation, route }) => {
       );
 
       let code = resp.data.code;
-console.log("keeping resp.data", resp.data)
+
       if (code == 200) {
         setkeep_matching(!keep_matching);
 
@@ -386,7 +385,6 @@ console.log("keeping resp.data", resp.data)
     React.useCallback(() => {
       dispatch(setCurrentScreen("SettingsScreen"));
       // Do something when the screen is focused
-     
       setphone_number(profile_data?.user?.username);
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
 
@@ -587,7 +585,7 @@ console.log("keeping resp.data", resp.data)
                       <Switch
                         value={keep_matching}
                         onValueChange={() => {
-                          updateKeepMatching();
+                          updateKeepMatching()
                         }}
                         disabled={false}
                         circleSize={18}

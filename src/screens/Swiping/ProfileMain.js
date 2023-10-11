@@ -168,7 +168,31 @@ const ProfileMain = ({ navigation }) => {
 
           dispatch(setProfileImgs(tmp1));
 
-          console.log("keepmatchingnotification",profile_data.userprofile.keepmatchingnotification)
+          console.log("keepmatchingnotification",user_data.userprofile.keepmatchingnotification)
+
+          let usrprf_dt = {
+            ...profile_data.userprofile, 
+            city: user_data.userprofile.city,
+            education: user_data.userprofile.education,
+            occupation: user_data.userprofile.occupation,
+            drinking: user_data.userprofile.drinking,
+            marijuana:user_data.userprofile.marijuana,
+            smoking:user_data.userprofile.smoking,
+            gender:user_data.userprofile.gender,
+            height:user_data.userprofile.height,
+            keepmatchingnotification: user_data.userprofile.keepmatchingnotification,
+            newmatchnotification:user_data.userprofile.newmatchnotification,
+            newmessagenotification:user_data.userprofile.newmessagenotification,
+            othernotification: user_data.userprofile.othernotification,
+            showmyprofilenotification:user_data.userprofile.showmyprofilenotification,
+            profilerevealnotification: user_data.userprofile.profilerevealnotification,
+          }
+
+  
+
+          // console.log("user_data.userprofile",user_data.userprofile)
+
+          
 
           let user_prof_data = {
             ...profile_data,
@@ -176,7 +200,7 @@ const ProfileMain = ({ navigation }) => {
             userinterest: user_data.userprofile.interest,
             userpets: user_data.userprofile.pets,
             userpreferances: profile_data.userpreferances,
-            userprofile: profile_data.userprofile,
+            userprofile: usrprf_dt,
             userpublicprompts: act_promptsm,
             userprivateprompts: act_promptsm2,
           };
