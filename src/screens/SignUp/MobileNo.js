@@ -162,18 +162,19 @@ const MobileNo = ({ navigation, route }) => {
 
       // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       // setconfirm(confirmation);
-      // console.log("\n");
-      // console.log("confirmation", JSON.stringify(confirmation));
-      // console.log("\n");
-
+      
       setOtpShowBox(true);
 
       // hide Loader
       setloading(false);
     } catch (error) {
-      console.log("SignIn", error.message, typeof error.message);
-      Alert.alert("Error", "Please try after sometime.");
       setloading(false);
+      console.log("SignIn", error.message, typeof error.message);
+
+      setTimeout(() => {
+        Alert.alert("Error", "Please try after sometime.");
+      }, 100);
+      
     }
   };
 

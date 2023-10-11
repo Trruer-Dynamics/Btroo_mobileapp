@@ -83,6 +83,7 @@ const Item = ({
     //   }}
     // >
     <TouchableOpacityB
+    key={index}
       style={{
         ...styles.item,
         zIndex: 2,
@@ -95,6 +96,8 @@ const Item = ({
     >
       <>
         {super_liked_profile && (
+        // {true && (
+
           <>
             <View
               style={{
@@ -116,10 +119,12 @@ const Item = ({
             <FastImage
               source={require("../../../../assets/images/Swiping/Masked/Exclude_2.png")}
               style={{
-                width: rspW(89),
+                // width: rspW(89),
+                width: rspW(88),
+
                 height: rspH(42.2),
                 position: "absolute",
-                top: 0,
+                top: -1,
                 left: 0,
                 zIndex: 1,
               }}
@@ -147,11 +152,13 @@ const Item = ({
   );
 };
 
-const Item2 = ({ item }) => {
+const Item2 = ({ item,index }) => {
   let imageUri = String(item.image);
 
   return (
-    <View style={styles.item2}>
+    <View style={styles.item2}
+    key={index}
+    >
       <FastImage
         source={{ uri: imageUri }}
         style={{ width: "100%", height: "98%" }}
@@ -200,7 +207,7 @@ const SwipeCard = ({
 
   // Carousel States and Function
   //Main Carousel
-  const [masked, setmasked] = useState(false);
+  const [super_liked_profile, setsuper_liked_profile] = useState(false);
 
   const [currentIndex, setcurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -226,6 +233,7 @@ const SwipeCard = ({
     return (
       // <Text>Check {item.id}</Text>
       <Item
+      key={index}
         index={index}
         currentIndex={currentIndex}
         item={item}
@@ -472,7 +480,7 @@ const SwipeCard = ({
     }
   }, [modalVisible]);
 
-  const [super_liked_profile, setsuper_liked_profile] = useState(false);
+
 
   useLayoutEffect(() => {
     if (card_itm.profilestatus.profilestatus == 1) {

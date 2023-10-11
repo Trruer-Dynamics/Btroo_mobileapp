@@ -21,4 +21,4 @@ const FullModal = ({
   );
 };
 
-export default FullModal;
+export default React.memo(FullModal);

@@ -35,6 +35,7 @@ import { setSessionExpired } from "../../../store/reducers/authentication/authen
 import truncateStr from "../../../components/functions/truncateStr";
 import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
+import { FemaleAvatar, MaleAvatar } from "../../../assets";
 
 const ChatItem = (item) => {
   return (
@@ -234,6 +235,13 @@ const ChatTut = ({ profile, repeat_tut }) => {
                 navigation.goBack();
               }}
               rightComp={() => {
+                let rvlimage = ''
+                if (profile?.userprofile?.gender == "Man") {
+                  rvlimage = require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage1.png")
+                }
+                else{
+                  rvlimage = require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage1.png")
+                }
                 return (
                   <TouchableOpacity
                     style={{ position: "absolute", right: 0, top: rspH(-1) }}
@@ -244,7 +252,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
                     }}
                   >
                     <FastImage
-                      source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage1.png")}
+                      source={require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage1.png")}
                       style={styles.profilePhoto}
                     />
                   </TouchableOpacity>
@@ -421,7 +429,11 @@ const ChatTut = ({ profile, repeat_tut }) => {
               onPress={() => setmodalVisible(true)}
             >
               <FastImage
-                source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage1.png")}
+                source={profile?.userprofile?.gender == "Male"?
+                 require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage1.png")
+                :
+                require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage1.png")
+                }
                 style={styles.profilePhoto}
               />
             </View>
@@ -433,7 +445,12 @@ const ChatTut = ({ profile, repeat_tut }) => {
               onPress={() => setmodalVisible(true)}
             >
               <FastImage
-                source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")}
+                source={
+                  profile?.userprofile?.gender == "Male"?
+                  require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")
+                :
+                require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage2.png")
+                }
                 style={styles.profilePhoto}
               />
             </View>

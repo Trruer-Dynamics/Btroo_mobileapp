@@ -59,6 +59,8 @@ const FormHeader = ({
               fontSize: rspF(fontSize),
               ...extraHeadingStyle,
             }}
+            numberOfLines={1}
+            adjustsFontSizeToFit={true}
           >
             {title}
           </Text>

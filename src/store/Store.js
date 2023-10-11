@@ -34,6 +34,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
+      immutableCheck: { warnAfter: 2000 },
+      // serializableCheck: { warnAfter: 128 },
     }),
 });
 

@@ -109,6 +109,7 @@ const SwiperOr = ({}) => {
   );
 
   const [reports_count, setreports_count] = useState(0);
+  const [location_added, setlocation_added] = useState(false)
 
   const [filter_data_get, setfilter_data_get] = useState(false);
 
@@ -303,6 +304,9 @@ const SwiperOr = ({}) => {
   };
 
   const addLocation = async () => {
+
+    console.log("addLocation call")
+
     const data = {
       user_id: profile_data.user.id,
       longitude: current_long,
@@ -319,6 +323,7 @@ const SwiperOr = ({}) => {
       setloading(false);
 
       if (resp_data.code == 200) {
+    
         if (reports_count > 10) {
           setwarn_step(3);
           setloading2(true);
@@ -326,9 +331,10 @@ const SwiperOr = ({}) => {
           setwarn_step(5);
           setloading2(true);
         } else {
+          console.log("addLocation")
           getFilterProfiles();
         }
-
+        setlocation_added(true)
         return true;
       } else {
         return false;
@@ -410,7 +416,8 @@ const SwiperOr = ({}) => {
             dispatch(setProfileApproved(true));
             setprf_apprv_refh(!prf_apprv_refh);
 
-            if (profile_call) {
+            if (!profile_call && location_added) {
+              console.log("get Filter Data")
               getFilterProfiles();
             }
           }
@@ -521,7 +528,9 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterProfiles = async () => {
-    
+    console.log("\n")
+    console.log( Platform.OS,"getFilterProfiles call")
+    console.log("\n")
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -710,7 +719,7 @@ const SwiperOr = ({}) => {
       addLocation();
     }
   }, [
-    mob_ip,
+    // mob_ip,
     permission_denied,
     current_lat,
     current_long,
@@ -738,6 +747,7 @@ const SwiperOr = ({}) => {
     React.useCallback(() => {
       // Do something when the screen is focused
 
+      setprofile_call(false)
       if (!profile_approv) {
         setwarn_step(5);
         setloading2(true);
@@ -778,6 +788,7 @@ const SwiperOr = ({}) => {
 
                 return (
                   <SwipeCard
+                  key={index}
                     card_itm={item}
                     iconRotate={iconRotate}
                     iconTranslateX={iconTranslateX}

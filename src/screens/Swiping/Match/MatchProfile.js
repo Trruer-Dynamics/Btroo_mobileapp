@@ -775,7 +775,7 @@ const MatchProfile = ({ route }) => {
                 {profile.matchType == "New Match" && !profile.prof_rvl && (
                   <FormWrapperFooter
                     containerStyle={{
-                      marginTop: rspH(1.5),
+                      marginTop: rspH(2.5),
                     }}
                   >
                     <FooterBtn

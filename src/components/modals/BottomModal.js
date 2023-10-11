@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Platform,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import colors from "../../styles/colors";
 import {
@@ -31,6 +32,9 @@ const BottomModal = ({
   height = scrn_height / 1.875,
 }) => {
   const safe_height = useSelector((state) => state.screen.safe_height);
+
+
+
   return (
     <Modal
       animationType="slide"
@@ -38,14 +42,19 @@ const BottomModal = ({
       visible={modalVisible}
       onRequestClose={() => setModalVisible(false)}
     >
-      <KeyboardAwareScrollView
+      {/* <KeyboardAwareScrollView
         enableOnAndroid={true}
-        style={{ height: safe_height }}
+        style={{ height: scrn_height,position:'relative' }}
         bounces={false}
-      >
+        
+      > */}
         <SafeAreaView
           style={{
-            height: Platform.OS == "ios" ? scrn_height : insets.top + rspH(93.55),
+            // height: Platform.OS == 'ios' ?scrn_height : safe_height,
+            // height: Platform.OS == "ios" ? scrn_height : StatusBar.currentHeight  + rspH(93.55),
+            // height: Platform.OS == "ios" ? scrn_height : StatusBar.currentHeight  + rspH(93.6),
+            flex:1,
+            // height: Platform.OS == "ios" ? scrn_height : insets.bottom + rspH(97.25),
             position: "relative",
           }}
         >
@@ -65,6 +74,7 @@ const BottomModal = ({
               ...styles.modalView,
               ...extContainerStyle,
               bottom: rspH(0),
+
               padding: rspW(padding),
             }}
           >
@@ -81,7 +91,7 @@ const BottomModal = ({
             {children}
           </View>
         </SafeAreaView>
-      </KeyboardAwareScrollView>
+      {/* </KeyboardAwareScrollView> */}
     </Modal>
   );
 };
@@ -94,6 +104,8 @@ const styles = StyleSheet.create({
     width: scrn_width,
     borderTopLeftRadius: rspW(3),
     borderTopRightRadius: rspW(3),
+    borderBottomWidth:1,
+    borderBottomColor: colors.blue,
   },
 
   button: {
@@ -109,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BottomModal;
+export default React.memo(BottomModal);

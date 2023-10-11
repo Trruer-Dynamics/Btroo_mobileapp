@@ -168,6 +168,8 @@ const ProfileMain = ({ navigation }) => {
 
           dispatch(setProfileImgs(tmp1));
 
+          console.log("keepmatchingnotification",profile_data.userprofile.keepmatchingnotification)
+
           let user_prof_data = {
             ...profile_data,
             user: profile_data.user,

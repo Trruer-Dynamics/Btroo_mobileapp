@@ -2078,7 +2078,6 @@ const EditProfile = ({ navigation }) => {
         </SafeAreaView>
 
         <BottomModal
-
           padding={0}
           height={rspH(16)}
           modalVisible={modalVisible}
