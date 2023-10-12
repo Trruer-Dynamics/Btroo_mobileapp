@@ -5,7 +5,7 @@ import SwiperTut from "./SwiperTut";
 import OffflineAlert from "../../components/functions/OfflineAlert";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
-import { setRepeatTut } from "../../store/reducers/tutorial/tutorial";
+
 
 const Swiper = ({ route }) => {
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
@@ -21,7 +21,7 @@ const Swiper = ({ route }) => {
     React.useCallback(() => {
       dispatch(setCurrentScreen("Swiper"));
       return () => {
-        // dispatch(setRepeatTut(false))
+
       };
     }, [])
   );

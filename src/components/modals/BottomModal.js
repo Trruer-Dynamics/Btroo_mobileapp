@@ -31,8 +31,6 @@ const BottomModal = ({
   padding = 5,
   height = scrn_height / 1.875,
 }) => {
-  const safe_height = useSelector((state) => state.screen.safe_height);
-
 
 
   return (
@@ -42,19 +40,10 @@ const BottomModal = ({
       visible={modalVisible}
       onRequestClose={() => setModalVisible(false)}
     >
-      {/* <KeyboardAwareScrollView
-        enableOnAndroid={true}
-        style={{ height: scrn_height,position:'relative' }}
-        bounces={false}
-        
-      > */}
+      
         <SafeAreaView
-          style={{
-            // height: Platform.OS == 'ios' ?scrn_height : safe_height,
-            // height: Platform.OS == "ios" ? scrn_height : StatusBar.currentHeight  + rspH(93.55),
-            // height: Platform.OS == "ios" ? scrn_height : StatusBar.currentHeight  + rspH(93.6),
+          style={{            
             flex:1,
-            // height: Platform.OS == "ios" ? scrn_height : insets.bottom + rspH(97.25),
             position: "relative",
           }}
         >
@@ -91,7 +80,7 @@ const BottomModal = ({
             {children}
           </View>
         </SafeAreaView>
-      {/* </KeyboardAwareScrollView> */}
+
     </Modal>
   );
 };

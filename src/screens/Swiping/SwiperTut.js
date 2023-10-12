@@ -170,13 +170,13 @@ const Item = ({ item, setmodalVisible, masked }) => {
           )}
 
           <FastImage
-            // require("../../assets/images/Tutorial/Tut1.png")
-            // require('../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg')
+         
             source={item.image}
             style={{
-              width: "99%",
+              width:  rspW(88),
               height: "100%",
               borderRadius: rspW(5.1),
+            
               zIndex: -2,
             }}
             resizeMode="cover"
@@ -405,7 +405,11 @@ const SwiperTut = ({ repeat_tut }) => {
                 setshowFilter(!showFilter);
               }}
             >
-              <FAIcon size={30} name="filter" color={"#ffffffcb"} />
+              {/* <FAIcon size={30} name="filter" color={"#ffffffcb"} /> */}
+              <FastImage
+                    source={require("../../assets/images/Swiping/Filter3.png")}
+                    style={{ width: 26, height: 26 }}
+                  />
             </TouchableOpacity>
 
             {/* Features Container */}
@@ -879,7 +883,11 @@ const SwiperTut = ({ repeat_tut }) => {
                           style={styles.filterCont}
                           onPress={() => {}}
                         >
-                          <FAIcon size={30} name="filter" color={"#ffffffcb"} />
+                          {/* <FAIcon size={30} name="filter" color={"#ffffffcb"} /> */}
+                          <FastImage
+                    source={require("../../assets/images/Swiping/Filter3.png")}
+                    style={{ width: 26, height: 26 }}
+                  />
                         </TouchableOpacity>
 
                         {/* Features Container */}
@@ -1311,7 +1319,9 @@ const styles = StyleSheet.create({
     // width: rspW(89),
     alignSelf: "center",
     borderRadius: rspW(5.1),
-    width: rspW(89),
+    width: rspW(88),
+    marginRight: rspW(0.8),
+    marginLeft: rspW(0.2),
     zIndex: 5,
     // marginRight: rspW(1),
     // marginLeft: rspW(1),

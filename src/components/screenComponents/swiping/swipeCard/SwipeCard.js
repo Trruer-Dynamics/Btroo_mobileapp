@@ -37,7 +37,6 @@ import fontFamily from "../../../../styles/fontFamily";
 import { FlatList } from "react-native-gesture-handler";
 import FullModal from "../../../../components/modals/FullModal";
 import ADIcon from "react-native-vector-icons/AntDesign";
-import FAIcon from "react-native-vector-icons/FontAwesome";
 import Paginator from "../../../../components/screenComponents/swiping/Paginator";
 import { useDispatch, useSelector } from "react-redux";
 import PromptIntro from "../Prompts/PromptIntro";
@@ -62,8 +61,8 @@ import {
   setStatusBarArgs,
 } from "../../../../store/reducers/authentication/authentication";
 import FastImage from "react-native-fast-image";
-import { withTiming } from "react-native-reanimated";
 
+// Profile cropped image Carousel item
 const Item = ({
   item,
   setmodalVisible,
@@ -92,12 +91,7 @@ const Item = ({
       
     <TouchableOpacityB
     key={index}
-      // style={{
-      //   ...styles.item,
-      //   zIndex: 2000,
-      //   position: "relative",
-      //   // alignSelf:'center',
-      // }}
+      
       activeOpacity={1}
       onPress={() => {
         setmodalVisible(true);
@@ -232,6 +226,7 @@ const Item = ({
             width: "100%",
             height: "100%",
             borderRadius: rspW(5.1),
+            alignSelf:'center',
           }}
           resizeMode="cover"
           onLoad={() => {
@@ -244,6 +239,7 @@ const Item = ({
   );
 };
 
+// Profile full image Carousel item
 const Item2 = ({ item,index }) => {
   let imageUri = String(item.image);
 
@@ -297,6 +293,10 @@ const SwipeCard = ({
   const [prompts, setprompts] = useState([]);
   const [promptsmodalVisible, setpromptsmodalVisible] = useState(false);
 
+
+  const [pets_list, setpets_list] = useState([]);
+  const [interest_list, setinterest_list] = useState([]);
+
   // Carousel States and Function
   //Main Carousel
   const [super_liked_profile, setsuper_liked_profile] = useState(false);
@@ -304,6 +304,8 @@ const SwipeCard = ({
   const [currentIndex, setcurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
+
+  // To set current Item index to show active carousel item
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setcurrentIndex(viewableItems[0]?.index);
   }).current;
@@ -323,7 +325,6 @@ const SwipeCard = ({
   // Main Carosel Item Render Function
   const renderItem = ({ item, index }) => {
     return (
-      // <Text>Check {item.id}</Text>
       <Item
       key={index}
         index={index}
@@ -353,8 +354,6 @@ const SwipeCard = ({
     );
   };
 
-  const [pets_list, setpets_list] = useState([]);
-  const [interest_list, setinterest_list] = useState([]);
 
   const icRotate = iconRotate.interpolate({
     inputRange: [-1, 0, 1],
@@ -373,7 +372,6 @@ const SwipeCard = ({
 
   const rotate = swipe.x.interpolate({
     inputRange: [-100, 0, 100],
-
     outputRange: ["-4deg", "0deg", "4deg"],
   });
 
@@ -393,14 +391,7 @@ const SwipeCard = ({
     extrapolate: "clamp",
   });
 
-  // const rejectOpacity = rightX.interpolate({
-  //   inputRange: [-100, -20],
-
-  //   outputRange: [1, 0],
-
-  //   extrapolate: "clamp",
-  // });
-
+  
   const reportProfile = async () => {
     const data = {
       user_id: profile_data.user.id,
@@ -418,17 +409,21 @@ const SwipeCard = ({
       let resp_data = response.data;
 
       if (resp_data.code == 200) {
-        rightX.setValue(1);
+        
+        // rightX.setValue(1);
 
-        Animated.timing(iconTranslateY, {
-          toValue: 1,
-          duration: 500,
-          useNativeDriver: true,
-        }).start();
+        // Animated.timing(iconTranslateY, {
+        //   toValue: 1,
+        //   duration: 500,
+        //   useNativeDriver: true,
+        // }).start();
 
-        handleChoiceButtons(0);
+        // handleChoiceButtons(0);
         // swipeProfile(false, false);
-      } else if (resp_data.code == 401) {
+
+      }
+       else 
+       if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
     } catch (error) {
@@ -436,6 +431,7 @@ const SwipeCard = ({
     }
   };
 
+  // To send swipe action in backend
   const swipeProfile = async (action, superlikestatus) => {
     const data = {
       userprofile1: profile_data.userprofile.id,
@@ -491,89 +487,7 @@ const SwipeCard = ({
     setpets_list(usr_pets);
   }, []);
 
-  const renderChoice = useCallback(() => {
-    return (
-      <>
-        <Animated.View
-          style={[
-            { position: "absolute", 
-            alignSelf: "center",
-             top: rspH(16),
-          
-          },
-            { opacity: likeOpacity },
-            {
-              transform: [
-                { rotate: icRotate },
-                { translateX: icTranslateX },
-                { translateY: icTranslateY },
-              ],
-            },
-          ]}
-        >
-          <View style={styles.actionSetCont}>
-            <FastImage
-              source={require("../../../../assets/images/Swiping/Actions/Fancy.png")}
-              style={{
-                width: rspW(16.92),
-                height: rspH(8.6),
-                // aspectRatio:1,
-              }}
-            />
-          </View>
-        </Animated.View>
 
-        <Animated.View
-          style={[
-            { position: "absolute", alignSelf: "center", top: rspH(18) },
-            { opacity: superLikeOpacity },
-            {
-              transform: [{ translateY: icTranslateY }],
-            },
-          ]}
-        >
-          <View style={styles.actionSetCont}>
-            <FastImage
-              source={require("../../../../assets/images/Swiping/Actions/Softspot.png")}
-              style={{
-                width: rspW(16.92),
-                height: rspH(8.6),
-              }}
-            />
-          </View>
-        </Animated.View>
-
-        <Animated.View
-          style={[
-            { position: "absolute", alignSelf: "center", 
-            top: rspH(16) ,
-            top: rspH(16) ,
-
-          
-          },
-            { opacity: rejectOpacity },
-            {
-              transform: [
-                { rotate: icRotate },
-                { translateX: icTranslateX },
-                { translateY: icTranslateY },
-              ],
-            },
-          ]}
-        >
-          <View style={[styles.actionSetCont]}>
-            <FastImage
-              source={require("../../../../assets/images/Swiping/Actions/Pass.png")}
-              style={{
-                width: rspW(16.92),
-                height: rspH(8.6),
-              }}
-            />
-          </View>
-        </Animated.View>
-      </>
-    );
-  }, []);
 
   useEffect(() => {
     if (modalVisible) {
@@ -592,6 +506,7 @@ const SwipeCard = ({
 
 
   useLayoutEffect(() => {
+    // To show blue circular mask if loaded profile already superliked loggined user
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
     }
@@ -630,6 +545,8 @@ const SwipeCard = ({
               paddingBottom: rspH(Platform.OS == "ios" ? 14.2 : 9),
             }}
           >
+
+            {/* Show this area if Bio not enlarge */}
             {/* Report Dots */}
 
             {!bio_enlarge && (
@@ -645,6 +562,7 @@ const SwipeCard = ({
               </TouchableOpacity>
             )}
 
+          {/* Show this area if Bio  enlarge */}
             {bio_enlarge && (
               <View
                 style={{
@@ -689,6 +607,8 @@ const SwipeCard = ({
                 </TouchableOpacity>
               </View>
             )}
+
+                      {/* Show this area if Bio not enlarge */}
 
             {/* Profile Images Carousel */}
             {!bio_enlarge && (
@@ -877,15 +797,11 @@ const SwipeCard = ({
                   style={{
                     position: "absolute",
                     zIndex: 2,
-                    // top: rspH(2.35),
                     top: rspH(3),
                     left: rspW(8),
-                    // backgroundColor: 'red',
-
                     alignSelf: "center",
                     justifyContent: "center",
                     alignItems: "center",
-
                     height: rspW(7.6),
                     width: rspW(7.6),
                     borderRadius: rspW(3.8),
@@ -1018,7 +934,6 @@ const SwipeCard = ({
                       style={{
                         ...styles.profileDetailCont,
                         ...styles.boxShadowCont,
-                        // alignItems:'center',
                         paddingHorizontal: rspW(3.2),
                         justifyContent: "center",
                       }}
@@ -1233,6 +1148,7 @@ const styles = StyleSheet.create({
     borderRadius: rspW(5.1),
     width: rspW(88),
     marginRight: rspW(1),
+    alignSelf:'center',
   },
 
   // Fetures Styling
@@ -1277,7 +1193,6 @@ const styles = StyleSheet.create({
     width: rspW(26),
     height: rspW(26),
     borderRadius: rspW(4),
-    // backgroundColor: colors.blue + "85",
     alignItems: "center",
     justifyContent: "center",
   },

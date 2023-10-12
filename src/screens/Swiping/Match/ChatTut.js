@@ -523,6 +523,7 @@ const styles = StyleSheet.create({
     fontSize: rspF(Platform.OS == "ios" ? 2.02 : 1.9),
     color: colors.blue,
     textAlign: "center",
+    letterSpacing: Platform.OS == "ios" ? 0 : 0.5,
   },
 
   messageInputCont: {

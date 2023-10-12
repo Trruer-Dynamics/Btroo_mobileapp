@@ -17,10 +17,9 @@ const PhotoVerification = ({ navigation, route }) => {
   const dispatch = useDispatch();
 
   const onNextPress = () => {
-    // navigation.navigate("PhotoVerifyCamera");
-    // navigation.navigate('PhotoVerificationFinal');
-    dispatch(setUserLoggined(true));
-    navigation.navigate('Pledge');
+    navigation.navigate("PhotoVerifyCamera");
+    // dispatch(setUserLoggined(true));
+    // navigation.navigate('Pledge');
   };
 
   useFocusEffect(

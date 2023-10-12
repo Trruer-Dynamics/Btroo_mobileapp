@@ -199,6 +199,7 @@ const SwiperOr = ({}) => {
   const iconTranslateX = useRef(new Animated.Value(0)).current;
   const iconTranslateY = useRef(new Animated.Value(0)).current;
 
+  // Scale Swipe Card from 80% to 100% height
   const scaleAnimation = () => {
     Animated.timing(scaleValue, {
       fromValue: 0.9,
@@ -208,6 +209,7 @@ const SwiperOr = ({}) => {
     }).start(() => {});
   };
 
+  // Remove card on action perform
   const removeCard = useCallback(
     () => {
       scaleValue.setValue(0.9);
@@ -220,19 +222,19 @@ const SwiperOr = ({}) => {
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
       swipe.setValue({ x: 0, y: 0 });
 
+      //  If user perform any three or more swipe action allow user to add public and private prompts if user don't have prompts
       if (swippingcount >= 2) {
         setpromptTime(true);
       }
     },
     [swipe, swippingcount]
-    //  []
+    
   );
 
   const handleChoiceButtons = useCallback(
     (direction) => {
       scaleAnimation();
-
-      // if (direction == 0) {
+      // show up animation of swipe card on action tab
       Animated.timing(swipe.y, {
         toValue: -scrn_height,
 
@@ -240,13 +242,7 @@ const SwiperOr = ({}) => {
 
         useNativeDriver: true,
       }).start(removeCard);
-      // } else {
-      // Animated.timing(swipe.x, {
-      //   toValue: direction * scrn_width * 2,
-      //   duration: 800,
-      //   useNativeDriver: true,
-      // }).start(removeCard);
-      // }
+    
     },
 
     [removeCard, swipe.x]
@@ -269,6 +265,7 @@ const SwiperOr = ({}) => {
     };
   };
 
+  // To get address in string using latitude and longitude
   const getReverseGeocodingData = async (lat, lng) => {
     try {
       const response = await axios.get(
@@ -281,6 +278,7 @@ const SwiperOr = ({}) => {
     }
   };
 
+  // Get latitude and longitude
   const getOneTimeLocation = async () => {
     Geolocation.getCurrentPosition(
       //Will give you the current location
@@ -307,6 +305,7 @@ const SwiperOr = ({}) => {
     );
   };
 
+  // Save Current location Data in backend
   const addLocation = async () => {
 
     const data = {
@@ -346,6 +345,7 @@ const SwiperOr = ({}) => {
     }
   };
 
+  // Get User Profiles Filter Data
   const getFilterData = async () => {
 console.log("getFilterData")
     setloading(true);
@@ -407,7 +407,7 @@ console.log("getFilterData")
           dispatch(setSelectedInterests(interests));
           dispatch(setSelectedHabits(habits));
 
-          // if (profile_call) {
+
           if (report_count > 10) {
             setwarn_step(3);
             setloading2(true);
@@ -418,14 +418,14 @@ console.log("getFilterData")
             dispatch(setProfileApproved(true));
             setprf_apprv_refh(!prf_apprv_refh);
 
+            // If location send to backend then only get swiping profiles
             if (location_added) {
               getFilterProfiles();
             }
           }
-          // }
-          // else {
+  
           setfilter_data_get(true);
-          // }
+    
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
         }
@@ -528,6 +528,7 @@ console.log("getFilterData")
       .catch((err) => {});
   };
 
+  // Get Swiping Profiles
   const getFilterProfiles = async () => {
     console.log("getFilterProfiles call")
     console.log("\n")
@@ -562,6 +563,7 @@ console.log("getFilterData")
       .catch((err) => {});
   };
 
+
   const getRejectedProfiles = async () => {
     setprofile_call(true);
     const headers = {
@@ -587,27 +589,6 @@ console.log("getFilterData")
       .catch((err) => {});
   };
 
-  useEffect(() => {
-    if (
-      appStateVisible == "active" &&
-      permission_denied &&
-      redirect_to_setting
-    ) {
-      setredirect_to_setting(false);
-      getData();
-      dispatch(setProfileRefresh(!profile_refresh));
-    }
-  }, [appStateVisible]);
-
-  useEffect(() => {
-    if (profiles.length == 0) {
-      if (!empty_profile_call) {
-        dispatch(setProfileRefresh(!profile_refresh));
-      }
-      setwarn_step(2);
-      setloading2(true);
-    }
-  }, [profiles]);
 
   const startFillingPrompts = async () => {
     setloading(true);
@@ -643,6 +624,32 @@ console.log("getFilterData")
     }
   };
 
+
+  // To Refresh page After changing location or permission from app setting
+  useEffect(() => {
+    if (
+      appStateVisible == "active" &&
+      permission_denied &&
+      redirect_to_setting
+    ) {
+      setredirect_to_setting(false);
+      getData();
+      dispatch(setProfileRefresh(!profile_refresh));
+    }
+  }, [appStateVisible]);
+
+  // recall getFilterProfiles after all profile swipe
+  useEffect(() => {
+    if (profiles.length == 0) {
+      if (!empty_profile_call) {
+        dispatch(setProfileRefresh(!profile_refresh));
+      }
+      setwarn_step(2);
+      setloading2(true);
+    }
+  }, [profiles]);
+
+  
   useEffect(() => {
     let prv_prmt = profile_data?.userprivateprompts;
     if (promptTime && prv_prmt.length == 0) {
@@ -657,6 +664,7 @@ console.log("getFilterData")
     }
   }, [is_promptsfillingstarted]);
 
+  // save location data in frontend
   useLayoutEffect(() => {
     if (current_lat && current_long && current_address) {
       dispatch(
@@ -681,6 +689,7 @@ console.log("getFilterData")
       });
   };
 
+  // Request Permission for Notification
   const requestNotificaionPermission = async () => {
     if (Platform.OS == "ios") {
       const authStatus = await messaging().requestPermission();
@@ -700,13 +709,14 @@ console.log("getFilterData")
 
    setscreen_loaded(true)
 
-
+      // To show loading sentence
       setloading2(true);
       setwarn_step(0);
+      initPer();
       
+      // load all data only after screen load sucessfully
    if (screen_loaded) {
     
-      
       getGenders();
       getInterests();
       getLanguages();
@@ -741,6 +751,7 @@ console.log("getFilterData")
   const initPer = async () => {
     if (!profile_call) {
       setTimeout(() => {
+        // Ask location permission after Notification permission
         requestNotificaionPermission().then(() => {
           getData();
         });
@@ -748,25 +759,18 @@ console.log("getFilterData")
     }
   };
 
-  useEffect(() => {
-    setloading2(true);
-    setwarn_step(0);
-    initPer();
-  }, []);
+
 
   useFocusEffect(
     React.useCallback(() => {
 
       setprofile_call(false)
+      // Show Warning to Reverify Permission
       if (!profile_approv) {
         setwarn_step(5);
         setloading2(true);
       }
 
-      return () => {
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
     }, [prf_apprv_refh])
   );
   

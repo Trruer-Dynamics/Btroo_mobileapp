@@ -1,0 +1,394 @@
+[
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_animalcare.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_animalcare.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo8.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo8.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_bowling.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_bowling.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_pledge.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_pledge.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_setting_bannerimg.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_setting_bannerimg.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_basketball.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_basketball.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_habitsyes_drinkingyes.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_habitsyes_drinkingyes.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_guitar.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_guitar.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_actions_softspot.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_actions_softspot.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_bioicons_height.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_bioicons_height.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_pets_petsblue_dog.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_pets_petsblue_dog.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo7.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo7.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_americanfootball.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_americanfootball.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo1.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo1.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_movies.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_movies.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_habitsno_drinkingno.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_habitsno_drinkingno.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_bottomtab_swiper_active.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_bottomtab_swiper_active.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_message_sendmsgactive.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_message_sendmsgactive.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_setting_goodbye.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_setting_goodbye.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_dancing.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_dancing.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_bottomtab_swiper.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_bottomtab_swiper.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo8.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo8.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_prompts_onlinedatinglllutration.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_prompts_onlinedatinglllutration.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_listening_to_music.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_listening_to_music.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_bottomtab_settings.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_bottomtab_settings.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_actions_pass.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_actions_pass.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_beach.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_beach.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable_rn_edit_text_material.xml.flat",
+        "source": "com.btroo.app-main-50:/drawable/rn_edit_text_material.xml"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo7.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo7.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_habitsyes_marijuanayes.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_habitsyes_marijuanayes.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_message_rightcut.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_message_rightcut.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_bicycling.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_bicycling.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-hdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-hdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/raw_src_assets_videos_whitebtroo.mp4.flat",
+        "source": "com.btroo.app-react-44:/raw/src_assets_videos_whitebtroo.mp4"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_football.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_football.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_photoreveal_malephotorevalstage3.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_photoreveal_malephotorevalstage3.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo2.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo2.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_tut1.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_tut1.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_formimages_phverify.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_formimages_phverify.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_bioicons_occupation.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_bioicons_occupation.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_avatars_femaleavatar.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_avatars_femaleavatar.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_photoreveal_femalephotorevalstage2.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_photoreveal_femalephotorevalstage2.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_gym.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_gym.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_habitsno_smokingno.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_habitsno_smokingno.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_avatars_maleavatar.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_avatars_maleavatar.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_driving.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_driving.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo5.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo5.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_message_icebreaker.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_message_icebreaker.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo2.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo2.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_filter3.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_filter3.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo4.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo4.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_habitsno_marijuanano.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_habitsno_marijuanano.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_masked_exclude_2.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_masked_exclude_2.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_mainlogo_logodarkblue.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_mainlogo_logodarkblue.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_baking.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_baking.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_photoreveal_femalephotorevalstage1.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_photoreveal_femalephotorevalstage1.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_gaming.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_gaming.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_picverifybl.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_picverifybl.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_photoreveal_malephotorevalstage1.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_photoreveal_malephotorevalstage1.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_cooking.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_cooking.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo5.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo5.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_message_leftcut.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_message_leftcut.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo4.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo4.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_node_modules_reactnavigation_elements_src_assets_backiconmask.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/node_modules_reactnavigation_elements_src_assets_backiconmask.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-xxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-xxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_actions_fancy.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_actions_fancy.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_welcomescreen_btroo_logo.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_welcomescreen_btroo_logo.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_photoreveal_femalephotorevalstage3.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_photoreveal_femalephotorevalstage3.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo6.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo6.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_message_sendmsg.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_message_sendmsg.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_bottomtab_profile.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_bottomtab_profile.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo3.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo3.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_bioicons_city.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_bioicons_city.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-xxxhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-xxxhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_enlargedphotos_photo6.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_enlargedphotos_photo6.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-xhdpi_node_modules_reactnavigation_elements_src_assets_backicon.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-xhdpi/node_modules_reactnavigation_elements_src_assets_backicon.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.btroo.app-main-50:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_setting_refimage.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_setting_refimage.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_timeextend_conversationtimer.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_timeextend_conversationtimer.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_habitsyes_smokingyes.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_habitsyes_smokingyes.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_bioicons_education.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_bioicons_education.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_bottomtab_chat.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_bottomtab_chat.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_message_leftcut2.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_message_leftcut2.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_tut2.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_tut2.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_formimages_switch_camera.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_formimages_switch_camera.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_swiping_interests_interestsblue_boating.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_swiping_interests_interestsblue_boating.png"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo3.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo3.jpg"
+    },
+    {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_matching_photoreveal_malephotorevalstage2.png.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_photoreveal_malephotorevalstage2.png"
+    }
+]

@@ -73,6 +73,7 @@ import {
 } from "../../../store/reducers/chats/chats";
 import FastImage from "react-native-fast-image";
 
+// Chat Bubble item
 const ChatItem = ({
   item,
   index,
@@ -89,6 +90,8 @@ const ChatItem = ({
   setrply_animation,
   dispatch,
 }) => {
+
+  // To set reply id 
   const vibtr = async () => {
     // await Vibration.vibrate(50);
     await setactreplyID(item[4]);
@@ -99,6 +102,7 @@ const ChatItem = ({
 
   const canRply = useSharedValue(false);
 
+  // To check message is sent successfully and user able to reply
   const checkCanReply = () => {
     if (item[4] == null) {
       canRply.value = false;
@@ -107,6 +111,7 @@ const ChatItem = ({
     }
   };
 
+  // To handle reply feature animation
   const gestureHandler = useAnimatedGestureHandler({
     onStart: (event, ctx) => {
       runOnJS(checkCanReply)();
@@ -134,18 +139,20 @@ const ChatItem = ({
   });
   const boxRef = useRef();
 
-  let c_time = "07:00";
+  // 24 hour format
+  let c_time = moment(item[2]).format("HH:mm").padStart(5, "0");
 
-  c_time = moment(item[2]).format("HH:mm").padStart(5, "0");
-
+  // 12 hour format
   // c_time = moment(item[2]).format("LT").padStart(8, "0");
 
+  // Bubble Trasnslate styling
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateX: animation.value }],
     };
   });
 
+  // reply icon visibilty styling
   const animatedIconLeft = useAnimatedStyle(() => {
     return {
       opacity: interpolate(animation.value, [0, 50], [0, 1]),
@@ -154,6 +161,8 @@ const ChatItem = ({
   });
 
   const animation2 = useSharedValue(1);
+
+  // Fade Animation on reply item tab message
   const fadeIn = async () => {
     animation2.value = withDelay(
       500,
@@ -177,8 +186,6 @@ const ChatItem = ({
       style={{
         flex: 1,
         position: "relative",
-        // backgroundColor:'red',
-        // marginBottom: rspH(2.35) ,
         marginBottom: rspH(btmMarg),
       }}
     >
@@ -229,6 +236,7 @@ const ChatItem = ({
             animatedStyle,
           ]}
         >
+          {/* If chat item type is reply */}
           {item[5] != null && (
             <TouchableOpacity
               onPress={() => {
@@ -246,39 +254,19 @@ const ChatItem = ({
               }}
               style={{
                 backgroundColor: item[1] == 0 ? "#e6e8eb" : "#4986CA",
-
-                // borderLeftColor: "#000",
-                // borderLeftWidth: 2,
-                // paddingVertical: rspH(1.2),
                 paddingVertical: rspH(1),
-
                 marginTop: rspH(-0.5),
                 marginHorizontal: rspW(-0.8),
-                // paddingHorizontal: rspW(5.8),
-                // paddingHorizontal: rspW(3.8),
-                // paddingHorizontal: rspW(1),
-
-                // marginBottom: rspH(1.2),
                 marginBottom: rspH(0.6),
-
-                // maxWidth: rspW(52),
                 maxWidth: rspW(80),
-
-                // borderRadius: rspW(3),
                 borderRadius: rspW(2),
-                // borderLeftWidth: rspW(0.6),
                 borderLeftWidth: rspW(1),
-
                 flexDirection: "row",
                 justifyContent: "space-between",
               }}
             >
               <View
                 style={{
-                  // borderLeftWidth: rspW(0.6),
-                  // borderLeftWidth: rspW(0.6),
-
-                  // paddingHorizontal: rspF(1.6),
                   paddingHorizontal: rspF(1),
                 }}
               >
@@ -310,7 +298,6 @@ const ChatItem = ({
           <View
             style={{
               flexDirection: "column",
-              // flexDirection: "row",
               zIndex: 2,
             }}
           >
@@ -329,7 +316,6 @@ const ChatItem = ({
                 position: "absolute",
                 zIndex: 3,
                 bottom: 0,
-
                 left: rspW(-4.8),
               }}
             >
@@ -362,19 +348,11 @@ const ChatItem = ({
             </View>
           )}
 
-          {/* {item[5] && ( */}
           <View
             style={{
-              // backgroundColor:'red',
-              // paddingTop: rspH(1),
               paddingTop: rspH(0.3),
-              // marginRight: rspW(-2.7),
               marginRight: rspW(0),
-
-              // marginBottom: rspH(-1.5),
               paddingLeft: rspW(2),
-
-              // justifyContent: "flex-end",
               zIndex: 2,
             }}
           >
@@ -395,7 +373,6 @@ const ChatItem = ({
               </Text>
             </View>
           </View>
-          {/* )} */}
         </Animated.View>
       </PanGestureHandler>
 
@@ -663,6 +640,7 @@ const Chat = ({ profile }) => {
 
           let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id);
 
+          // if new message avalable load chats from backend or from local storage
           if (tmps.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
             setchatlist(tmp);
@@ -675,7 +653,7 @@ const Chat = ({ profile }) => {
           if (tmp_lis.length == 0) {
             setloading(false);
           }
-
+          // Connect socket after chat message get
           setconnectSocketS(true);
         }
       })
@@ -684,6 +662,7 @@ const Chat = ({ profile }) => {
       });
   };
 
+  // To set message seen or not
   const SeenMe = () => {
     let data = {
       message: null,
@@ -728,7 +707,8 @@ const Chat = ({ profile }) => {
 
     ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
-
+      
+      // IF message recived by user 
       if (data.sender != profile_data.user.id) {
         try {
           let day_tmp = moment(new Date(data.datetime))
@@ -766,6 +746,7 @@ const Chat = ({ profile }) => {
           ];
         } catch (error) {}
       } else {
+         // IF message send by user 
         setchatlist_remain([data, ...chatlist_remain]);
       }
     };
@@ -775,6 +756,7 @@ const Chat = ({ profile }) => {
     ({ item, index }) => {
       return (
         <GestureHandlerRootView>
+          {/* To show day */}
           {item[6] != "" && (
             <View
               style={{
@@ -824,6 +806,7 @@ const Chat = ({ profile }) => {
     [chatlist]
   );
 
+  // save chats locally
   useEffect(() => {
     if (chatlist.length > 0) {
       dispatch(setChatMsgs(chatlist));
@@ -859,6 +842,7 @@ const Chat = ({ profile }) => {
     dispatch(setDraftMsgs([]));
   };
 
+  // To set id of sent message by user
   useEffect(() => {
     if (chatlist_remain.length > 0) {
       let draft_msgs_tmp = [...drafts_msgs];
@@ -910,12 +894,20 @@ const Chat = ({ profile }) => {
     }
   }, [chatlist_remain]);
 
+
+
+  // To Calculate Reveal Time
   useEffect(() => {
+
+    // run below code if chats available and profile not reveal and activated
     if (chatlist.length > 0 && !profile.prof_rvl && !rvl_activate) {
+      
+      // first get count of message sent by each user
       let mymsgs = chatlist.filter((v) => v[1] == 1);
 
       let othmsgs = chatlist.filter((v) => v[1] == 0);
 
+      // then get counts of word sent by each user
       let mycount = mymsgs
         .map((v) => v[0])
         .flat()
@@ -928,30 +920,16 @@ const Chat = ({ profile }) => {
         .join(" ")
         .split(" ").length;
 
-      let tmpl = [];
-      let turn = 0;
-      for (let j = 0; j < chatlist.length; j++) {
-        const ele = chatlist[j];
-
-        if (ele[1] == turn) {
-          tmpl.push(ele);
-          turn = turn == 0 ? 1 : 0;
-        } else {
-          continue;
-        }
-      }
-
+  
       let tlis = [...chatlist];
-
-      let my_msg2 = [];
-      let oth_msg2 = [];
-
+      
+      // To set category of message to differentiate ( sent or receive )
       let tmpp = tlis.map((v) => {
         let rti = { val: v, category: v[1] };
         return rti;
       });
      
-
+    // To create sequencial group of message to get oldest message of same user linearly
       function groupSimilarItemsSequentially(items) {
         const groupedItems = [];
         let currentGroup = [];
@@ -975,14 +953,14 @@ const Chat = ({ profile }) => {
       const sequentiallyGroupedItems = groupSimilarItemsSequentially(tmpp);
       let tlis1 = [];
       for (const iterator of sequentiallyGroupedItems) {
-      
+        // to get oldest message of same user linearly
         let exval = iterator[iterator.length - 1].val;
         // let exval = iterator[0].val;
         tlis1.push(exval);
       }
 
       let tlis221 = [];
-
+      //  to create list of list of two message of each user
       p = 0;
       for (const itm of tlis1) {
 
@@ -992,6 +970,7 @@ const Chat = ({ profile }) => {
         p += 1;
       }
 
+      //  to get time difference between sent and recive oldest msg
       if (tlis221 && tlis221?.length > 0) {
         let tmp_22 = tlis221?.map((v) => v[2]);
         let tmp_33 = [];
@@ -1008,12 +987,12 @@ const Chat = ({ profile }) => {
           s = s + 1;
         }
 
+        // to get avg time in conversation
         if (tmp_33.length > 0) {
           let tot_min = tmp_33.reduce((a, b) => a + b);
           let avg_min = tot_min / tmp_33.length;
 
           let ttact = false;
-
           
           if (
             avg_min <= 5 &&
@@ -1032,6 +1011,7 @@ const Chat = ({ profile }) => {
             ttact = true;
           }
 
+          // Activate User for Reveal if above either condition satisfy
           if (ttact) {
             setrvl_activate(true);
             
@@ -1052,12 +1032,13 @@ const Chat = ({ profile }) => {
   }, [rvl_activate]);
 
   useLayoutEffect(() => {
-    // setloading(false);
+    // if user start chatting
     if (profile.matchType == "New Match") {
       setmsg("Hi!");
     }
   }, []);
 
+  // load icebreaker according network status
   useLayoutEffect(() => {
     if (is_network_connected) {
       getIceBreaker();
@@ -1098,6 +1079,7 @@ const Chat = ({ profile }) => {
     };
   }, []);
 
+  // load chat message according to network status
   useEffect(() => {
     let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
 
@@ -1118,6 +1100,7 @@ const Chat = ({ profile }) => {
     }
   }, []);
 
+  // Auto scroll down 
   useEffect(() => {
     if (chatlist.length > 0 && !rply_animation) {
       let lastMsg = chatlist[0];
