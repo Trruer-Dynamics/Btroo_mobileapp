@@ -950,7 +950,7 @@ const Chat = ({ profile }) => {
         let rti = { val: v, category: v[1] };
         return rti;
       });
-      // console.log("tmpp", tmpp);
+     
 
       function groupSimilarItemsSequentially(items) {
         const groupedItems = [];
@@ -973,19 +973,11 @@ const Chat = ({ profile }) => {
 
       // Convert the list of items into sequentially grouped lists
       const sequentiallyGroupedItems = groupSimilarItemsSequentially(tmpp);
-
-      // console.log(sequentiallyGroupedItems);
       let tlis1 = [];
-      // console.log("\n")
       for (const iterator of sequentiallyGroupedItems) {
-        // console.log('iterator',iterator)
-
+      
         let exval = iterator[iterator.length - 1].val;
         // let exval = iterator[0].val;
-
-
-        // console.log('exval',exval)
-        // console.log('\n')
         tlis1.push(exval);
       }
 
@@ -993,7 +985,6 @@ const Chat = ({ profile }) => {
 
       p = 0;
       for (const itm of tlis1) {
-        console.log("\ntlis1 itm",itm)
 
         if (p > 0) {
           tlis221.push(tlis1[p - 1], itm);
@@ -1001,15 +992,9 @@ const Chat = ({ profile }) => {
         p += 1;
       }
 
-      // console.log("tlis221",tlis221)
-
       if (tlis221 && tlis221?.length > 0) {
-        // let tlis2 = tlis221.flat()
-        // console.log("tlis2",tlis2)
         let tmp_22 = tlis221?.map((v) => v[2]);
         let tmp_33 = [];
-
-        // console.log("tmp_22",tmp_22)
 
         s = 0;
         for (const iter of tmp_22) {
@@ -1023,28 +1008,13 @@ const Chat = ({ profile }) => {
           s = s + 1;
         }
 
-        // console.log("tmp_33",tmp_33)
         if (tmp_33.length > 0) {
           let tot_min = tmp_33.reduce((a, b) => a + b);
           let avg_min = tot_min / tmp_33.length;
 
           let ttact = false;
 
-          if (Platform.OS == "ios") {
-            console.log("\nprofile", profile_data.userprofile?.name);
-            console.log("tmp_33", tmp_33);
-            console.log("avg_min", avg_min);
-            console.log("mymsgs len", mymsgs.length);
-            console.log(
-              profile?.userprofile?.name,
-              " msgs len",
-              othmsgs.length
-            );
-            console.log("my word count", mycount);
-            console.log(profile?.userprofile?.name, "word count", othcount);
-            console.log("\n");
-          }
-
+          
           if (
             avg_min <= 5 &&
             mymsgs.length >= 25 &&
@@ -1064,11 +1034,7 @@ const Chat = ({ profile }) => {
 
           if (ttact) {
             setrvl_activate(true);
-            console.log(
-              "logginred user",
-              profile_data?.userprofile?.name,
-              "**** Profile Activate"
-            );
+            
             if (chat_reveal_tut == true) {
               Keyboard.dismiss();
               setshow_rvl_tut(true);

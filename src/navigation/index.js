@@ -40,9 +40,11 @@ const Navigation = () => {
   );
 
   useLayoutEffect(() => {
+    if (current_screen == 'Swiper') {
+      dispatch(setProfileRefresh(!profile_refresh));
+    }
 
-
-    // dispatch(setProfileRefresh(!profile_refresh));
+    
 
     if (!is_network_connected) {
       if (
@@ -62,9 +64,7 @@ const Navigation = () => {
       setoffAlert(false);
     }
 
-    if (current_screen == 'Swiper') {
-      dispatch(setProfileRefresh(!profile_refresh));
-    }
+   
 
     if (current_screen == "Intro" || current_screen == "PhotoVerifyCamera") {
       if (Platform.OS == "android") {

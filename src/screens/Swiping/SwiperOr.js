@@ -93,6 +93,8 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.profile_approved
   );
 
+
+
   const [prf_apprv_refh, setprf_apprv_refh] = useState(false);
 
   const is_promptsfillingstarted = useSelector(
@@ -102,6 +104,7 @@ const SwiperOr = ({}) => {
   const profile_refresh = useSelector(
     (state) => state.authentication.profile_refresh
   );
+  
   const [promptTime, setpromptTime] = useState(false);
 
   const access_token = useSelector(
@@ -110,6 +113,7 @@ const SwiperOr = ({}) => {
 
   const [reports_count, setreports_count] = useState(0);
   const [location_added, setlocation_added] = useState(false)
+  const [screen_loaded, setscreen_loaded] = useState(false)
 
   const [filter_data_get, setfilter_data_get] = useState(false);
 
@@ -305,8 +309,6 @@ const SwiperOr = ({}) => {
 
   const addLocation = async () => {
 
-    console.log("addLocation call")
-
     const data = {
       user_id: profile_data.user.id,
       longitude: current_long,
@@ -331,7 +333,6 @@ const SwiperOr = ({}) => {
           setwarn_step(5);
           setloading2(true);
         } else {
-          console.log("addLocation")
           getFilterProfiles();
         }
         setlocation_added(true)
@@ -346,9 +347,7 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterData = async () => {
-
-    console.log("getFilterData call")
-
+console.log("getFilterData")
     setloading(true);
 
     const headers = {
@@ -419,8 +418,7 @@ const SwiperOr = ({}) => {
             dispatch(setProfileApproved(true));
             setprf_apprv_refh(!prf_apprv_refh);
 
-            if (!profile_call && location_added) {
-              console.log("get Filter Data")
+            if (location_added) {
               getFilterProfiles();
             }
           }
@@ -531,8 +529,7 @@ const SwiperOr = ({}) => {
   };
 
   const getFilterProfiles = async () => {
-    console.log("\n")
-    console.log( Platform.OS,"getFilterProfiles call")
+    console.log("getFilterProfiles call")
     console.log("\n")
     setprofile_call(true);
     const headers = {
@@ -596,7 +593,6 @@ const SwiperOr = ({}) => {
       permission_denied &&
       redirect_to_setting
     ) {
-      console.log("redirect_to_setting",redirect_to_setting)
       setredirect_to_setting(false);
       getData();
       dispatch(setProfileRefresh(!profile_refresh));
@@ -701,14 +697,24 @@ const SwiperOr = ({}) => {
   }, []);
 
   useLayoutEffect(() => {
-    console.log("profile_refresh",profile_refresh)
-    setloading2(true);
-    setwarn_step(0);
-    getGenders();
-    getInterests();
-    getLanguages();
-    getFilterData();
-    getPrompts();
+
+   setscreen_loaded(true)
+
+
+      setloading2(true);
+      setwarn_step(0);
+      
+   if (screen_loaded) {
+    
+      
+      getGenders();
+      getInterests();
+      getLanguages();
+      getFilterData();
+      getPrompts();  
+      
+    }
+    
   }, [profile_refresh]);
 
   useEffect(() => {
@@ -750,7 +756,6 @@ const SwiperOr = ({}) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      // Do something when the screen is focused
 
       setprofile_call(false)
       if (!profile_approv) {
@@ -764,6 +769,7 @@ const SwiperOr = ({}) => {
       };
     }, [prf_apprv_refh])
   );
+  
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -818,7 +824,7 @@ const SwiperOr = ({}) => {
           <View style={{ ...styles.container, alignItems: "center" }}>
             <View style={styles.loadingCont}>
               {/* Filter */}
-              {warn_step != 4 && (
+              {warn_step != 4 && warn_step != 0 && (
                 <TouchableOpacity
                   style={{
                     ...styles.filterCont,
@@ -860,7 +866,7 @@ const SwiperOr = ({}) => {
                       navigation.navigate("PhotoVerification");
                     }
                     if (warn_step == 4) {
-                      console.log("This Call")
+     
                       setredirect_to_setting(true);
                       if (Platform.OS == "ios") {
                         Linking.openURL("app-settings:");

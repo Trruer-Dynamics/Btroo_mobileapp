@@ -168,8 +168,7 @@ const ProfileMain = ({ navigation }) => {
 
           dispatch(setProfileImgs(tmp1));
 
-          console.log("keepmatchingnotification",user_data.userprofile.keepmatchingnotification)
-
+          
           let usrprf_dt = {
             ...profile_data.userprofile, 
             city: user_data.userprofile.city,
@@ -189,10 +188,6 @@ const ProfileMain = ({ navigation }) => {
           }
 
   
-
-          // console.log("user_data.userprofile",user_data.userprofile)
-
-          
 
           let user_prof_data = {
             ...profile_data,

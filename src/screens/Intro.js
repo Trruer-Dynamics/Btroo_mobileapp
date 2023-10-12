@@ -92,7 +92,6 @@ const Intro = ({ route }) => {
             rate={1.0}
             ignoreSilentSwitch={"obey"}
             onError={(err) => {
-              console.log("err", err);
             }}
           />
 

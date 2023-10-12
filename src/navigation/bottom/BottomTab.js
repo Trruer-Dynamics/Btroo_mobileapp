@@ -63,11 +63,13 @@ const BottomTab = () => {
         <BTab.Screen
           name="Swiper"
           component={Swiper}
+          
           options={{
             tabBarActiveTintColor: colors.white,
             tabBarInactiveTintColor: colors.grey,
             tabBarIcon: (tabInfo) => {
               if (tabInfo.focused) {
+                
                 return (
                   <FastImage
                     source={require("../../assets/images/BottomTab/swiper_active.png")}

@@ -9,7 +9,6 @@ import {
   Image,
   StatusBar,
   TouchableWithoutFeedback,
-  Pressable,
 } from "react-native";
 
 import {
@@ -70,122 +69,31 @@ const Item = ({
   super_liked_profile,
   currentIndex,
   index,
-  icRotate,
-  icTranslateX,
-  icTranslateY,
-  likeOpacity,
-  superLikeOpacity,
-  rejectOpacity,
 }) => {
   let imageUri = String(item.cropedimage);
 
   const [img_load, setimg_load] = useState(false);
 
   return (
-    <View
-      style={{
-        ...styles.item,
-        // zIndex: 200,
-        position: "relative",
-      }}
-    >
-      
+    // <View
+    //   style={{
+    //     ...styles.item,
+    //     zIndex: 2,
+    //     position: "relative",
+    //   }}
+    // >
     <TouchableOpacityB
     key={index}
-      // style={{
-      //   ...styles.item,
-      //   zIndex: 2000,
-      //   position: "relative",
-      //   // alignSelf:'center',
-      // }}
+      style={{
+        ...styles.item,
+        zIndex: 2,
+        position: "relative",
+      }}
       activeOpacity={1}
       onPress={() => {
         setmodalVisible(true);
       }}
     >
-
-<>
-        <Animated.View
-          style={[
-            { position: "absolute", 
-            alignSelf: "center",
-             top: rspH(16),
-            zIndex:201,
-          },
-            { opacity: likeOpacity },
-            {
-              transform: [
-                { rotate: icRotate },
-                { translateX: icTranslateX },
-                { translateY: icTranslateY },
-              ],
-            },
-          ]}
-        >
-          <View style={styles.actionSetCont}>
-            <FastImage
-              source={require("../../../../assets/images/Swiping/Actions/Fancy.png")}
-              style={{
-                width: rspW(16.92),
-                height: rspH(8.6),
-                // aspectRatio:1,
-              }}
-            />
-          </View>
-        </Animated.View>
-
-        <Animated.View
-          style={[
-            { position: "absolute", alignSelf: "center", top: rspH(18),
-            zIndex:201,
-          },
-            { opacity: superLikeOpacity },
-            {
-              transform: [{ translateY: icTranslateY }],
-            },
-          ]}
-        >
-          <View style={styles.actionSetCont}>
-            <FastImage
-              source={require("../../../../assets/images/Swiping/Actions/Softspot.png")}
-              style={{
-                width: rspW(16.92),
-                height: rspH(8.6),
-              }}
-            />
-          </View>
-        </Animated.View>
-
-        <Animated.View
-          style={[
-            { position: "absolute", alignSelf: "center", 
-            top: rspH(16) ,
-            zIndex:201,
-
-          
-          },
-            { opacity: rejectOpacity },
-            {
-              transform: [
-                { rotate: icRotate },
-                { translateX: icTranslateX },
-                { translateY: icTranslateY },
-              ],
-            },
-          ]}
-        >
-          <View style={[styles.actionSetCont]}>
-            <FastImage
-              source={require("../../../../assets/images/Swiping/Actions/Pass.png")}
-              style={{
-                width: rspW(16.92),
-                height: rspH(8.6),
-              }}
-            />
-          </View>
-        </Animated.View>
-      </>
-     
       <>
         {super_liked_profile && (
         // {true && (
@@ -240,7 +148,7 @@ const Item = ({
         />
       </>
     </TouchableOpacityB>
-    </View>
+    // {/* </View> */}
   );
 };
 
@@ -331,12 +239,6 @@ const SwipeCard = ({
         item={item}
         setmodalVisible={setmodalVisible}
         super_liked_profile={super_liked_profile}
-        icRotate={icRotate}
-        icTranslateX={icTranslateX}
-        icTranslateY={icTranslateY}
-        likeOpacity={likeOpacity}
-        superLikeOpacity={superLikeOpacity}
-        rejectOpacity={rejectOpacity}
       />
     );
   };
@@ -453,7 +355,6 @@ const SwipeCard = ({
         headers,
       });
       let resp_data = response.data;
-      
       // setloading(false);
       if (resp_data.code == 200) {
         setswippingcount(resp_data.data.swappingcountvalue);
@@ -496,11 +397,7 @@ const SwipeCard = ({
       <>
         <Animated.View
           style={[
-            { position: "absolute", 
-            alignSelf: "center",
-             top: rspH(16),
-          
-          },
+            { position: "absolute", alignSelf: "center", top: rspH(16) },
             { opacity: likeOpacity },
             {
               transform: [
@@ -545,12 +442,7 @@ const SwipeCard = ({
 
         <Animated.View
           style={[
-            { position: "absolute", alignSelf: "center", 
-            top: rspH(16) ,
-            top: rspH(16) ,
-
-          
-          },
+            { position: "absolute", alignSelf: "center", top: rspH(16) },
             { opacity: rejectOpacity },
             {
               transform: [
@@ -1191,7 +1083,7 @@ const SwipeCard = ({
           </FullModal>
         </View>
       </SafeAreaView>
-      {/* {isFirst && renderChoice()} */}
+      {isFirst && renderChoice()}
     </Animated.View>
   );
 };
