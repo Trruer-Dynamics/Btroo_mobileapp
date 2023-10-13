@@ -46,6 +46,7 @@ const FormInput = ({
   const inpt_ref = useRef();
   const [invalid, setinvalid] = useState(false);
 
+  // show red border as validation error
   useEffect(() => {
     if (value_blr && error_cond) {
       setinvalid(true);
@@ -61,6 +62,7 @@ const FormInput = ({
   }, [refresh]);
 
   return (
+    // Use Touchable component to know input focused
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => {
@@ -105,6 +107,7 @@ const FormInput = ({
             returnKeyType="next"
             blurOnSubmit={false}
             onBlur={() => {
+              // If Input is not editable then don't perform blurr
               if (!disabled) {
                 setvalue_blr(true);
 
@@ -118,9 +121,11 @@ const FormInput = ({
             onChangeText={(text) => {
               setvalue_blr(true);
 
+              // Get last character type
               let last = text.charAt(text.length - 1);
               let as_code = last.charCodeAt();
 
+              // Add validation to disallow symbols or character or numbers
               let symbol_con =
                 (as_code > 32 && as_code < 48) ||
                 (as_code > 57 && as_code < 65) ||
@@ -143,6 +148,7 @@ const FormInput = ({
                 setvalue(text);
               }
 
+              // To activate button on change done
               if (setchanges_made != null) {
                 setchanges_made(true);
               }
@@ -159,6 +165,7 @@ const FormInput = ({
             }}
           />
 
+            {/* If Input has any inputs */}
           {value != "" && unit != "" && (
             <View
               style={{

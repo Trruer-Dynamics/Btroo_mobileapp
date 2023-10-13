@@ -160,8 +160,8 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      setconfirm(confirmation);
+      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      // setconfirm(confirmation);
       
       setOtpShowBox(true);
 

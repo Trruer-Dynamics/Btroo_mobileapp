@@ -152,6 +152,7 @@ const UserIntro = ({ navigation, route }) => {
 
   const [loading, setloading] = useState(false);
 
+  // Handle inputs validations of step1
   useEffect(() => {
     if (step == 1 && step1blr) {
       if (
@@ -180,6 +181,7 @@ const UserIntro = ({ navigation, route }) => {
     }
   }, [name, height_cm, dob, city, height_cm, gender, step]);
 
+  // Blur all inputs in step 1 next button click
   useEffect(() => {
     if (step1blr) {
       setname_blr(true);
@@ -190,6 +192,8 @@ const UserIntro = ({ navigation, route }) => {
     }
   }, [step1blr]);
 
+
+// Handle inputs validations of step2
   useEffect(() => {
     let smok = habits_list[0][1] ? true : habits_list[0][2] ? false : null;
     let drik = habits_list[1][1] ? true : habits_list[1][2] ? false : null;
@@ -220,6 +224,7 @@ const UserIntro = ({ navigation, route }) => {
     }
   }, [selected_preference_list, education, occupation, refresh]);
 
+  // Blur Inputs values of step2
   useEffect(() => {
     if (step2blr) {
       setpreference_blr(true);
@@ -228,6 +233,7 @@ const UserIntro = ({ navigation, route }) => {
     }
   }, [step2blr]);
 
+  // Handle inputs validations of step3
   useEffect(() => {
     if (step == 3 && step3blr) {
       if (
@@ -261,9 +267,11 @@ const UserIntro = ({ navigation, route }) => {
     }
   }, [step3blr]);
 
+
   const onNextPress = () => {
     let val = false;
 
+    // Check validation of all inputs in active step
     if (step == 1) {
       setstep1blr(true);
 
@@ -348,6 +356,7 @@ const UserIntro = ({ navigation, route }) => {
     }
   };
 
+  // Save User Profile Data
   const saveProfileData = async () => {
     // Set the API endpoint URL
     setloading(true);
@@ -361,6 +370,7 @@ const UserIntro = ({ navigation, route }) => {
       "Content-Type": "application/json",
     };
 
+    // convert date into YYYY-MM-DD to save data in backend
     let dobd = `${dob.getFullYear()}-${dob.getMonth() + 1}-${dob.getDate()}`;
 
     // Set the data to be sent in the request body
@@ -420,6 +430,7 @@ const UserIntro = ({ navigation, route }) => {
           userprivateprompts: [],
         };
 
+        // Store User Profile data in backend
         dispatch(
           setPromptFillingStart(user_data.userprofile.is_promptsfillingstarted)
         );
@@ -450,6 +461,7 @@ const UserIntro = ({ navigation, route }) => {
     }
   };
 
+  // get Cities Data on Search
   const getLocation = async (page, onpage = false) => {
     setcity_refresh(true);
 
@@ -643,7 +655,7 @@ const UserIntro = ({ navigation, route }) => {
     if (Platform.OS == "android") {
       setdob(new Date(mxdate_f));
     }
-
+    // Call all Required Form Data
     getGenders();
     getEducation();
     getInterests();
@@ -652,6 +664,7 @@ const UserIntro = ({ navigation, route }) => {
     getPoliticalInclinations();
   }, []);
 
+  // Save active Screen locally
   useFocusEffect(
     React.useCallback(() => {
       dispatch(setCurrentScreen(route.name));
@@ -699,7 +712,9 @@ const UserIntro = ({ navigation, route }) => {
                       keyboardType="default"
                       value_blr={name_blr}
                       setvalue_blr={setname_blr}
+                      // Is Symbol allow
                       s_allow={false}
+                      // Is Numbers allow
                       n_allow={false}
                     />
                   </FormInputContainer>
@@ -735,6 +750,7 @@ const UserIntro = ({ navigation, route }) => {
                   </FormInputContainer>
 
                   <FormInputContainer label="City">
+                    {/* Single Data selector */}
                     <FormSelector
                       setSelectedEntry={setcity}
                       selectedId={city_id}
@@ -811,6 +827,7 @@ const UserIntro = ({ navigation, route }) => {
               {step == 2 && (
                 <>
                   <FormInputContainer label="Your Preference">
+                    {/* Multi Data Item Selector */}
                     <FormMultiSelector
                       selected_list={selected_preference_list}
                       setselected_list={setselected_preference_list}

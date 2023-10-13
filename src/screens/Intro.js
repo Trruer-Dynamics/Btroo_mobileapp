@@ -33,36 +33,6 @@ const Intro = ({ route }) => {
   // this custom hook is to check the screen is loaded completly or not
   const isReady = useIsReady();
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     // To Show transparent status bar, only applicable for android device
-  //     if (Platform.OS == "android") {
-  //       dispatch(
-  //         setStatusBarArgs({
-  //           barStyle: "dark-content",
-  //           backgroundColor: "transparent",
-  //         })
-  //       );
-
-  //       StatusBar.setTranslucent(true);
-  //     }
-
-  //     return () => {
-  //       // remove transparency from status bar while navigating to other screen
-  //       dispatch(
-  //         setStatusBarArgs({
-  //           barStyle: "dark-content",
-  //           backgroundColor: "#fff",
-  //         })
-  //       );
-
-  //       if (Platform.OS == "android") {
-  //         StatusBar.setTranslucent(false);
-  //       }
-  //     };
-  //   }, [])
-  // );
-
   useFocusEffect(
     React.useCallback(() => {
       dispatch(setCurrentScreen(route.name));
@@ -77,8 +47,6 @@ const Intro = ({ route }) => {
         <View
           style={{
             flex: 1,
-            // marginTop: StatusBar.currentHeight
-            // height: scrn_height + StatusBar.currentHeight,
           }}
         >
           {/* Background Video */}
@@ -175,7 +143,6 @@ const Intro = ({ route }) => {
                       action: "signup",
                     })
                   );
-                  // navigation.navigate('UserIntro')
                   navigation.navigate("MobileNo", { action: "signup" });
                 }}
               >
@@ -218,7 +185,6 @@ export default Intro;
 const styles = StyleSheet.create({
   backgroundVideo: {
     height: "100%",
-    // height: scrn_height,
     position: "absolute",
     top: 0,
     left: 0,
@@ -240,7 +206,6 @@ const styles = StyleSheet.create({
 
   logo: {
     width: rspW(76),
-    // height: rspH(10),
     aspectRatio: 1,
   },
 

@@ -28,10 +28,11 @@ const Item = ({ item, onPress, selected_lis2, multi }) => (
       width: rspW(75.9),
       backgroundColor:
         selected_lis2.indexOf(item[0]) > -1
-          ? colors.lightBlue + "46" // foor opacity
+          ? colors.lightBlue + "46" // for opacity
           : colors.lightGrey,
     }}
   >
+    {/* If Item have image and text */}
     {multi && (
       <FastImage
         source={{
@@ -45,6 +46,7 @@ const Item = ({ item, onPress, selected_lis2, multi }) => (
         resizeMode="contain"
       />
     )}
+    {/* truncate long sentence in one line */}
     <Text numberOfLines={1} style={[styles.title, { color: colors.black }]}>
       {item[1]}
     </Text>
@@ -72,6 +74,7 @@ const FormMultiSelector = ({
 
   const [names, setnames] = useState("");
 
+  // trucated selected items if more than three items
   useEffect(() => {
     if (selected_list.length > 0) {
       let slist = list
@@ -105,12 +108,16 @@ const FormMultiSelector = ({
         selected_list={selected_list}
         setselected_list={setselected_list}
         onPress={() => {
+          // Handle tempory list until Comfirm btn press
           let indx = selected_lis2.indexOf(item[0]);
+          // remove item from selected list
           if (indx > -1) {
             let tmp = [...selected_lis2];
             tmp.splice(indx, 1);
             setselected_lis2(tmp);
-          } else if (selected_lis2.length < 10) {
+          } 
+          // add item in selected list if selected list have less than 10 item
+          else if (selected_lis2.length < 10) {
             setselected_lis2([...selected_lis2, item[0]]);
           }
           if (setchanges_made != null) {
@@ -138,6 +145,8 @@ const FormMultiSelector = ({
             backgroundColor: selected_list.length != 0 ? "#fff" : "#DCDCDC33",
           },
         ]}
+
+
         onPress={() => {
           setcode_press(true);
           setselected_lis2([]);
@@ -145,6 +154,7 @@ const FormMultiSelector = ({
         }}
       >
         <View style={styles.inp_title_cont}>
+          {/* select item trucated sentence */}
           <Text style={{ ...styles.txt }} numberOfLines={1}>
             {selected_list.length > 0 ? names : placeholder}
           </Text>
@@ -195,6 +205,7 @@ const FormMultiSelector = ({
                   alignSelf: "center",
                 }}
               >
+                {/* show message to inform user to item selection rule */}
                 <Text
                   style={{
                     fontSize: rspF(1.3),
@@ -204,7 +215,7 @@ const FormMultiSelector = ({
                   }}
                 >{`Please select up to 10 ${title.toLowerCase()} from the list above`}</Text>
               </View>
-
+            {/* Confirm Button to confirm selected item  */}
               <FooterBtn
                 title={"Confirm"}
                 disabled={selected_lis2.length == 0}

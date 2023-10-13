@@ -19,6 +19,7 @@ import SearchInput from "./SearchInput";
 import SearchInputBackend from "./SearchInputBackend";
 import _ from "lodash";
 
+// Selector item
 const Item = ({ item, onPress, selectedValue, multiline }) => (
   <TouchableOpacity
     onPress={onPress}
@@ -28,11 +29,12 @@ const Item = ({ item, onPress, selectedValue, multiline }) => (
         paddingVertical: rspH(2),
         backgroundColor:
           item[1] == selectedValue
-            ? colors.lightBlue + "46" // foor opacity
+            ? colors.lightBlue + "46" // for opacity
             : colors.lightGrey,
       },
     ]}
   >
+    {/* Item text */}
     <Text
       style={[styles.title, { color: colors.black }]}
       numberOfLines={multiline ? 10 : 1}
@@ -71,12 +73,13 @@ const FormSelector = ({
   error = true,
   multiline = false,
 }) => {
+
   const [filterdatalist, setfilterdatalist] = useState([]);
   const [search_value, setsearch_value] = useState("");
   const [code_press, setcode_press] = useState(false);
-
   const [end_reach, setend_reach] = useState(true);
 
+  // To set Selected item using id to show different backgroung of that item
   useEffect(() => {
     if (selectedId != 0) {
       let selected_itm = list.find((v) => v[0] == selectedId);
@@ -84,7 +87,9 @@ const FormSelector = ({
     }
   }, [selectedId]);
 
+
   const renderItem = ({ item, indx }) => {
+    // If Item does not have removal feature
     if (!removable) {
       return (
         <Item
@@ -101,6 +106,7 @@ const FormSelector = ({
         />
       );
     } else {
+          // If Item  have removal feature
       if (!rmv_list.includes(item[0]) || selectedId == item[0]) {
         return (
           <Item
@@ -124,23 +130,11 @@ const FormSelector = ({
     }
   };
 
-  // Debounce the showAlert function with a delay of 300 milliseconds
-  const delayBack = _.debounce(
-    (bool) => {
-      onBackendSearch(bool);
-    },
-    500,
-    {
-      leading: false,
-      trailing: true,
-    }
-  );
-
+  // On Backend Search
   useEffect(() => {
     const delay = setTimeout(() => {
       if (backend_search) {
         onBackendSearch(backend_search);
-        // delayBack(backend_search)
       }
     }, 380);
     return () => clearTimeout(delay);
@@ -169,12 +163,14 @@ const FormSelector = ({
         }}
       >
         <View style={styles.inp_title_cont}>
+          {/* Show selected item  */}
           <Text style={{ ...styles.txt }} numberOfLines={1}>
             {selectedValue ? selectedValue : placeholder}
           </Text>
         </View>
       </TouchableOpacity>
 
+{/* Open Selector Page as modal */}
       <Modal animationType="slide" transparent={false} visible={code_press}>
         <SafeAreaView style={{ flex: 1 }}>
           <FormComponentsWrapper>
@@ -186,6 +182,7 @@ const FormSelector = ({
             <View style={{ alignSelf: "center" }}>
               {search ? (
                 <>
+                {/* Use Search Component according to search type */}
                   {backend_search ? (
                     <SearchInputBackend
                       search={backend_search_txt}
@@ -202,6 +199,7 @@ const FormSelector = ({
                   )}
                 </>
               ) : (
+                // Empty conponent to add Empty Space above items
                 <View style={styles.emptysearchContainer} />
               )}
               <View
@@ -209,11 +207,13 @@ const FormSelector = ({
                   height: rspH(Platform.OS == "ios" ? 59.6 : 64),
                 }}
               >
+                {/* To Render Items  */}
                 <FlatList
                   data={search_value ? filterdatalist : list}
                   renderItem={renderItem}
                   keyExtractor={(item) => item[0]}
                   onEndReached={() => {
+                    // Change data page and get data from backend
                     if (pull_refresh) {
                       if (!end_reach) {
                         onRefresh(page + 1);
@@ -268,7 +268,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: rspW(5.1),
     justifyContent: "flex-start",
-
     marginBottom: rspH(1.4),
     backgroundColor: colors.lightGrey,
     borderRadius: rspW(1.3),

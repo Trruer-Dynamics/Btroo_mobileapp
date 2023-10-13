@@ -393,29 +393,9 @@ const OtpVerify = ({
 
   // To verify sent otp
   const verifyOtp = async () => {
-    // if (otp1 == "000000") {
-    //   setotperr(false);
-
-    //   dispatch(
-    //     setActiveUserLocationDetails({
-    //       ...active_user_location_details,
-    //       mobile: "+" + ph_code + "" + ph_no,
-    //     })
-    //   );
-
-    //   if (action == "login") {
-    //     userLogin(); // if action is login call login api
-    //   } else {
-    //     sendActiveUserDetails(); // if action is signup call signup api
-    //   }
-    // } else {
-    //   setotperr(true); // if otp is invalid
-    // }
-
-    try {
-      setloading(true);
-      await confirm.confirm(otp1);
+    if (otp1 == "000000") {
       setotperr(false);
+
       dispatch(
         setActiveUserLocationDetails({
           ...active_user_location_details,
@@ -424,15 +404,35 @@ const OtpVerify = ({
       );
 
       if (action == "login") {
-        userLogin();
+        userLogin(); // if action is login call login api
       } else {
-        sendActiveUserDetails();
+        sendActiveUserDetails(); // if action is signup call signup api
       }
-    } catch (error) {
-      console.log("error", error)
-      setloading(false);
-      setotperr(true);
+    } else {
+      setotperr(true); // if otp is invalid
     }
+
+    // try {
+    //   setloading(true);
+    //   await confirm.confirm(otp1);
+    //   setotperr(false);
+    //   dispatch(
+    //     setActiveUserLocationDetails({
+    //       ...active_user_location_details,
+    //       mobile: "+" + ph_code + "" + ph_no,
+    //     })
+    //   );
+
+    //   if (action == "login") {
+    //     userLogin();
+    //   } else {
+    //     sendActiveUserDetails();
+    //   }
+    // } catch (error) {
+    //   console.log("error", error)
+    //   setloading(false);
+    //   setotperr(true);
+    // }
   };
 
   // To resend OTP after 30 seconds
