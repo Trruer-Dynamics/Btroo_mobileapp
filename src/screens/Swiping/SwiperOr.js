@@ -267,6 +267,7 @@ const SwiperOr = ({}) => {
 
   // To get address in string using latitude and longitude
   const getReverseGeocodingData = async (lat, lng) => {
+    
     try {
       const response = await axios.get(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
@@ -280,6 +281,7 @@ const SwiperOr = ({}) => {
 
   // Get latitude and longitude
   const getOneTimeLocation = async () => {
+
     Geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
@@ -316,6 +318,7 @@ const SwiperOr = ({}) => {
       action: active_user_loc_det.action,
       ip: mob_ip,
     };
+
 
     try {
       const response = await axios.post(apiUrl + "last_location/", data);
@@ -682,6 +685,7 @@ console.log("getFilterData")
     // Ip Function temporary commentet because it takes too long to load
     publicIP()
       .then((ip) => {
+
         setmob_ip(ip);
       })
       .catch((err) => {
@@ -701,8 +705,8 @@ console.log("getFilterData")
   };
 
   const getData = useCallback(() => {
-    getLocation();
     getIp();
+    getLocation();
   }, []);
 
   useLayoutEffect(() => {
@@ -731,7 +735,9 @@ console.log("getFilterData")
     if (permission_denied) {
       setloading2(true);
       setwarn_step(4);
-    } else if (
+    } 
+    /// add Location if all location related data get
+    else if (
       filter_data_get &&
       current_lat &&
       current_long &&

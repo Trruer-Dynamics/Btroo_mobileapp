@@ -915,6 +915,7 @@ const UserIntro = ({ navigation, route }) => {
                         </TouchableOpacity>
                       </View>
                     </View>
+                    {/* Habits List */}
                     {habits_list.map((itm, idx) => {
                       return (
                         <View
@@ -924,13 +925,14 @@ const UserIntro = ({ navigation, route }) => {
                             marginBottom: idx < 2 ? 5 : 0,
                           }}
                         >
-                          {/* Habits */}
+                          {/* Habits Name */}
                           <View>
                             <Text style={styles.radioTxt}>{itm[0]}</Text>
                           </View>
 
                           {/* Chioce */}
                           <View style={styles.radioBtnCont}>
+                            {/* Yes Choice */}
                             <TouchableOpacity
                               onPress={() => {
                                 habits_list[idx][1] =
@@ -957,6 +959,7 @@ const UserIntro = ({ navigation, route }) => {
                               }}
                             ></TouchableOpacity>
 
+                            {/* No Choice */}
                             <TouchableOpacity
                               onPress={() => {
                                 habits_list[idx][2] =

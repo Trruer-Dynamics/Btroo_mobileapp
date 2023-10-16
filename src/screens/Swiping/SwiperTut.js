@@ -125,6 +125,7 @@ const DATA2 = [
 ];
 
 const Item = ({ item, setmodalVisible, masked }) => {
+  const [img_load, setimg_load] = useState(false);
   return (
     <View style={{ ...styles.item, position: "relative" }}>
       <TouchableOpacity
@@ -173,12 +174,14 @@ const Item = ({ item, setmodalVisible, masked }) => {
          
             source={item.image}
             style={{
+               backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
               width:  rspW(88),
               height: "100%",
               borderRadius: rspW(5.1),
             
               zIndex: -2,
             }}
+            onLoad={()=> setimg_load(true)}
             resizeMode="cover"
           />
         </>

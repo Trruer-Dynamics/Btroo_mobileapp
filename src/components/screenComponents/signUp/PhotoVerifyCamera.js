@@ -50,15 +50,18 @@ const PhotoVerifyCamera = ({ route }) => {
     return compr_img;
   };
 
+// Save Image after compress
   const finalLoad = async (img) => {
     let n_img = await compressImg(img);
 
     setloading(false);
+  
     navigation.navigate("PhotoVerificationFinal", {
       imgUri: n_img,
     });
   };
 
+  // Capture Image 
   const handleCapturePress = async () => {
     setloading(true);
     
@@ -79,6 +82,7 @@ const PhotoVerifyCamera = ({ route }) => {
     }
   };
 
+// Check Camera Permission
   const checkCameraPer = async () => {
     const newCameraPermission = await Camera.requestCameraPermission();
     if (newCameraPermission == "authorized") {
@@ -92,9 +96,12 @@ const PhotoVerifyCamera = ({ route }) => {
     React.useCallback(() => {
       setcameraActive(true);
       dispatch(setCurrentScreen(route.name));
-      setdevicec("front");
+
+      // Camera must open with front / selfi camera
+       setdevicec("front");
 
       checkCameraPer();
+      // Change statusBar Color
       dispatch(
         setStatusBarArgs({ barStyle: "light-content", backgroundColor: "#000" })
       );
@@ -106,6 +113,7 @@ const PhotoVerifyCamera = ({ route }) => {
             backgroundColor: "#fff",
           })
         );
+        // close camera after capture image
         setcameraActive(false);
       };
     }, [])

@@ -572,7 +572,7 @@ const ProfileMain = ({ navigation }) => {
                   >
                     {pets_list.map((img, indx) => {
                       return (
-                        <>
+                        <View key={indx}>
                           {Platform.OS == "ios" ? (
                             <Image
                               source={{ uri: img[1] }}
@@ -587,7 +587,7 @@ const ProfileMain = ({ navigation }) => {
                               resizeMode="cover"
                             />
                           )}
-                        </>
+                        </View>
                       );
                     })}
                   </ScrollView>
@@ -622,7 +622,7 @@ const ProfileMain = ({ navigation }) => {
                 >
                   {interest_list.map((img, idx) => {
                     return (
-                      <>
+                      <View key={idx}>
                         {Platform.OS == "ios" ? (
                           <Image
                             source={{ uri: img[1] }}
@@ -637,7 +637,7 @@ const ProfileMain = ({ navigation }) => {
                             resizeMode="cover"
                           />
                         )}
-                      </>
+                      </View>
                     );
                   })}
                 </ScrollView>
@@ -673,6 +673,7 @@ const ProfileMain = ({ navigation }) => {
                   {languages.map((lng, idx) => {
                     return (
                       <View
+                      key={idx}
                         style={{
                           paddingHorizontal: 15,
                           borderRadius: 5,

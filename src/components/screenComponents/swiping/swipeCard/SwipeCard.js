@@ -1006,6 +1006,7 @@ const SwipeCard = ({
                         {interest_list.map((img, idx) => {
                           return (
                             <FastImage
+                            key={idx}
                               source={{ uri: img[1] }}
                               style={styles.interestImage}
                               resizeMode="cover"
@@ -1052,6 +1053,7 @@ const SwipeCard = ({
                         {pets_list.map((img, indx) => {
                           return (
                             <FastImage
+                              key={indx}
                               source={{ uri: img[1] }}
                               style={styles.interestImage}
                               resizeMode="cover"

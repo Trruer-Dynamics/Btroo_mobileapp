@@ -20,8 +20,6 @@ import {
 } from "../../styles/responsiveSize";
 import FooterBtn from "../../components/Buttons/FooterBtn";
 import fontFamily from "../../styles/fontFamily";
-import FullModal from "../../components/modals/FullModal";
-import PhotoVerifyCamera from "../../components/screenComponents/signUp/PhotoVerifyCamera";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { apiUrl } from "../../constants";
@@ -58,12 +56,11 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
     ? route.params?.imgUri
     : "https://images.pexels.com/photos/3099026/pexels-photo-3099026.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load";
 
-  const [openCamera, setopenCamera] = useState(false);
-  const [picURI, setpicURI] = useState("");
 
   const verifyPhoto = async () => {
     setloading(true);
 
+    // url depend upon type of verification -> first verification on last
     const url = profile_approved
       ? apiUrl + "userimageverification/"
       : apiUrl + "profilereverification/";
@@ -193,13 +190,7 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
         </View>
       </FormWrapper>
 
-      {/* Camera with Pose */}
-      <FullModal modalVisible={openCamera} setModalVisible={setopenCamera}>
-        <PhotoVerifyCamera
-          setpicURI={setpicURI}
-          setModalVisible={setopenCamera}
-        />
-      </FullModal>
+      
     </SafeAreaView>
   );
 };

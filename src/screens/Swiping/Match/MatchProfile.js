@@ -592,6 +592,7 @@ const MatchProfile = ({ route }) => {
                         {pets_list.map((img, indx) => {
                           return (
                             <FastImage
+                            key={indx}
                               source={{ uri: img[1] }}
                               style={styles.interestImage}
                               resizeMode="cover"
@@ -632,6 +633,7 @@ const MatchProfile = ({ route }) => {
                     {interest_list.map((img, idx) => {
                       return (
                         <FastImage
+                        key={idx}
                           source={{ uri: img[1] }}
                           style={styles.interestImage}
                           resizeMode="cover"
@@ -734,6 +736,7 @@ const MatchProfile = ({ route }) => {
                     {languages.map((lng, idx) => {
                       return (
                         <View
+                        key={idx}
                           style={{
                             paddingHorizontal: 15,
                             borderRadius: 5,

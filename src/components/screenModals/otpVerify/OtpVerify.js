@@ -597,7 +597,7 @@ const OtpVerify = ({
         <View style={styles.otp_input_container}>
           <TextInput
             autoComplete="sms-otp"
-            textContentType="oneTimeCode"
+            textContentType="oneTimeCode"  // param to capture otp on tap
             style={{
               ...styles.otp_input,
               borderColor:
@@ -608,7 +608,7 @@ const OtpVerify = ({
                   : "#DCDCDC",
               backgroundColor: otp1blr ? "#fff" : "#F8F8F8",
             }}
-            // onBlur={() => setotp1blr(true)}
+          
             returnKeyType="next"
             blurOnSubmit={false}
             maxLength={6}
