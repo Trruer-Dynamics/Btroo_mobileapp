@@ -4,9 +4,7 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Platform,
   SafeAreaView,
-  StatusBar,
 } from "react-native";
 import colors from "../../styles/colors";
 import {
@@ -16,8 +14,6 @@ import {
   scrn_width,
 } from "../../styles/responsiveSize";
 import Ionicon from "react-native-vector-icons/Ionicons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { useSelector } from "react-redux";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
 

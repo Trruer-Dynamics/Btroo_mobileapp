@@ -20,10 +20,11 @@ import truncateStr from "../functions/truncateStr";
 
 const Item = ({ item, onPress, textColor, selectedValue = "" }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item]}>
+    {/* Country Name */}
     <Text style={[styles.itm_title, { color: textColor }]} numberOfLines={1}>
       {item.label.length > 20 ? truncateStr(item.label, 20) : item.label}
     </Text>
-
+  {/* Phone Code */}
     <Text
       style={[styles.itm_title, { color: textColor }]}
     >{`+${item.phone}`}</Text>
@@ -74,6 +75,7 @@ const FormCountrySelector = ({
             width: width,
             backgroundColor: selectedId != "" ? "#fff" : "#DCDCDC33",
             position: "relative",
+            // change border color if item selected
             borderColor: selectedId == "" ? colors.grey : colors.blue,
           },
         ]}

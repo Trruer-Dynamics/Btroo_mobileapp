@@ -6,10 +6,7 @@ import {
   View,
   TouchableOpacity,
   Animated,
-  Image,
-  StatusBar,
   TouchableWithoutFeedback,
-  Pressable,
 } from "react-native";
 
 import {
@@ -22,7 +19,6 @@ import React, {
   useLayoutEffect,
   useRef,
   useState,
-  useCallback,
   memo,
 } from "react";
 import {
@@ -84,7 +80,6 @@ const Item = ({
     <View
       style={{
         ...styles.item,
-        // zIndex: 200,
         position: "relative",
       }}
     >

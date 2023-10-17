@@ -1,5 +1,5 @@
-import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
-import React, { useRef, useLayoutEffect, useEffect, useState } from "react";
+import { Platform,  StyleSheet } from "react-native";
+import React, { useRef, useLayoutEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNav from "./stack/StackNav";
 import UserProvider from "../context/user";

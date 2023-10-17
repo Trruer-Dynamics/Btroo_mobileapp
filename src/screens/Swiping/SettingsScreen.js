@@ -388,10 +388,6 @@ const SettingsScreen = ({ navigation, route }) => {
       setphone_number(profile_data?.user?.username);
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
 
-      return () => {
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
     }, [])
   );
 

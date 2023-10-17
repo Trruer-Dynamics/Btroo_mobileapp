@@ -2,8 +2,6 @@ import {
   Text,
   View,
   StyleSheet,
-  StatusBar,
-  Image,
   TouchableOpacity,
   Platform,
 } from "react-native";
@@ -11,11 +9,10 @@ import React from "react";
 import Video from "react-native-video";
 import fontFamily from "../styles/fontFamily";
 import colors from "../styles/colors";
-import { rspW, rspH, rspF, scrn_height } from "../styles/responsiveSize";
+import { rspW, rspH, rspF } from "../styles/responsiveSize";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setActiveUserLocationDetails,
-  setStatusBarArgs,
 } from "../store/reducers/authentication/authentication";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import useIsReady from "../components/functions/isScreenReady";

@@ -19,12 +19,12 @@ const PromptIntro = ({ setpromptStep }) => {
       <FormWrapper statusBarColor={colors.white} barStyle={"light-content"}>
         <View>
           {/* Top Para */}
-          {/* <View style={{}}> */}
+
           <Text style={{ ...styles.para, fontFamily: fontFamily.bold }}>
             If you want to continue and to {"\n"} meet some other amazing people{" "}
             {"\n"} they will have to know a little more {"\n"} about you.
           </Text>
-          {/* </View> */}
+
 
           <Text style={styles.heading}>Your Place to Shine!</Text>
 

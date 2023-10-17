@@ -9,16 +9,13 @@ import UserIntro from "../../screens/SignUp/UserIntro";
 import PicUpload from "../../screens/SignUp/PicUpload";
 import Pledge from "../../screens/Tutorial/Pledge";
 import BottomTab from "../bottom/BottomTab";
-
 import PhotoVerification from "../../screens/SignUp/PhotoVerification";
 import PhotoVerificationFinal from "../../screens/SignUp/PhotoVerificationFinal";
 import PhotoVerifyCamera from "../../components/screenComponents/signUp/PhotoVerifyCamera";
-import Chat from "../../screens/Swiping/Match/Chat";
 import MatchProfile from "../../screens/Swiping/Match/MatchProfile";
 import ProfileRevealed from "../../screens/Swiping/Match/ProfileRevealed";
 import Splash from "../../screens/Splash";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useSelector } from "react-redux";
 import Info from "../../components/screenComponents/settingScreen/Info";
 import ChatStack from "../../screens/Swiping/Match/ChatStack";
 
@@ -64,7 +61,6 @@ const StackNav = () => {
         <Stack.Screen name="Pledge" component={Pledge} />
 
         {/* Swiping */}
-
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="Chat" component={ChatStack} />
         <Stack.Screen name="MatchProfile" component={MatchProfile} />

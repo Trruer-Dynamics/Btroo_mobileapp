@@ -199,7 +199,7 @@ const FormMultiSelectorFilter = ({
                     target.every((v) => arr.includes(v));
                   let check1 = checker(selected_lis2, selected_list);
                   let check2 = checker(selected_list, selected_lis2);
-
+                  //  if previous list changed or not
                   if (!(check1 && check2)) {
                     setcode_press(false);
                     setselected_list(selected_lis2);

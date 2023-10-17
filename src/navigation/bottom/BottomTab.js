@@ -5,7 +5,6 @@ import SettingsScreen from "../../screens/Swiping/SettingsScreen";
 import Swiper from "../../screens/Swiping/Swiper";
 import colors from "../../styles/colors";
 import React from "react";
-import Match from "../../screens/Swiping/Match/Match";
 import MatchStack from "../../screens/Swiping/Match/MatchStack";
 import FastImage from "react-native-fast-image";
 import { rspF, rspH, rspW } from "../../styles/responsiveSize";
@@ -25,6 +24,7 @@ const BottomTab = () => {
             marginLeft: -2,
             borderTopWidth: 0,
             backgroundColor: colors.blue,
+            // Border And Height of Bottom Tab is manage according to Platform android / ios
             marginTop: Platform.OS == "android" ? rspH(-1) : 0,
             paddingBottom: Platform.OS == "android" ? rspH(1) : rspH(2),
             height: Platform.OS == "android" ? rspH(8) : rspF(9.26),

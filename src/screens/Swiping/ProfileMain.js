@@ -678,7 +678,6 @@ const ProfileMain = ({ navigation }) => {
                           paddingHorizontal: 15,
                           borderRadius: 5,
                           marginRight: 10,
-                          // backgroundColor: colors.lightBlue + "99",
                           backgroundColor: colors.blue,
 
                           alignItems: "center",

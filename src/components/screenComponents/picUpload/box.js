@@ -13,12 +13,6 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import fontFamily from "../../../styles/fontFamily";
 import FastImage from "react-native-fast-image";
-import {
-  runOnJS,
-  useAnimatedReaction,
-  useDerivedValue,
-} from "react-native-reanimated";
-import { refresh } from "@react-native-community/netinfo";
 
 const Box = ({
   item,

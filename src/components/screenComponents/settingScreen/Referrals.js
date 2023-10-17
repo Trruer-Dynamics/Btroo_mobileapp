@@ -27,10 +27,7 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
   const [show_toast, setshow_toast] = useState(false);
 
   useLayoutEffect(() => {
-    let refc =
-      // profile_data.userprofile.name.split(" ")[0] +
-      // "_" +
-      profile_data.userprofile.referral_code;
+    let refc = profile_data.userprofile.referral_code;
 
     setuser_ref_code(refc);
   }, []);

@@ -12,7 +12,6 @@ import FormWrapper from "../../../wrappers/formWrappers/FormWrapper";
 import FormWrapperFooter from "../../../wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../../formComponents/ErrorContainer";
 import FooterBtn from "../../../Buttons/FooterBtn";
-import FormInput from "../../../formComponents/FormInput";
 import FormSelector from "../../../formComponents/FormSelector";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useDispatch, useSelector } from "react-redux";

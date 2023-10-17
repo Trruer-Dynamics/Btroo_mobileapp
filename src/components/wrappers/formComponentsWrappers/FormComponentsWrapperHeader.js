@@ -10,7 +10,6 @@ import { rspW, rspF, rspH } from "../../../styles/responsiveSize";
 import fontFamily from "../../../styles/fontFamily";
 import colors from "../../../styles/colors";
 import ADIcon from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
 
 const FormComponentsWrapperHeader = ({
   title = "",

@@ -1,9 +1,6 @@
 import { StyleSheet, ActivityIndicator, SafeAreaView } from "react-native";
-
 import React from "react";
-
 import colors from "../../styles/colors";
-
 import { scrn_height, scrn_width } from "../../styles/responsiveSize";
 
 const Loader = () => {

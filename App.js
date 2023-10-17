@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   Platform,
   LogBox,
@@ -8,7 +7,7 @@ import {
   BackHandler,
   AppState,
 } from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import Navigation from "./src/navigation";
 import SplashScreen from "react-native-splash-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -117,8 +116,6 @@ const App = () => {
       "hardwareBackPress",
       () => {
         AppState.currentState = "background";
-
-        // BackHandler.exitApp();
         return true;
       }
     );
@@ -151,7 +148,6 @@ const App = () => {
   return (
     <View style={[styles.container]}>
       <Navigation />
-      {/* <Test/> */}
     </View>
   );
 };
@@ -161,6 +157,5 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // height:scrn_height + StatusBar.currentHeight,
   },
 });

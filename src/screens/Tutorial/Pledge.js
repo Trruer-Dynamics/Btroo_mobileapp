@@ -1,7 +1,6 @@
 import { View, SafeAreaView, Platform } from "react-native";
 import React from "react";
 import FormWrapper from "../../components/wrappers/formWrappers/FormWrapper";
-
 import {
   scrn_height,
   scrn_width,
@@ -10,7 +9,6 @@ import {
   rspW,
 } from "../../styles/responsiveSize";
 import FooterBtn from "../../components/Buttons/FooterBtn";
-
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
 import FastImage from "react-native-fast-image";
@@ -26,11 +24,6 @@ const Pledge = ({ navigation, route }) => {
       })
     );
 
-    // navigation.navigate("BottomTab", {
-    //   screen: "Swiper",
-    // });
-
-    // navigation.goBack()
   };
 
   const dispatch = useDispatch();
@@ -60,7 +53,6 @@ const Pledge = ({ navigation, route }) => {
                 style={{
                   alignSelf: "center",
                   height: rspH(Platform.OS == "ios" ? 70 : 78),
-
                   width: scrn_width - rspW(5),
                 }}
                 resizeMode="contain"
@@ -71,7 +63,6 @@ const Pledge = ({ navigation, route }) => {
           <FormWrapperFooter>
             {/* Error Show Here */}
             <ErrorContainer error_msg="" />
-
             {/* Next Btn To Navigate to Next Form Components */}
             <FooterBtn title={"Ok"} disabled={false} onPress={onNextPress} />
           </FormWrapperFooter>

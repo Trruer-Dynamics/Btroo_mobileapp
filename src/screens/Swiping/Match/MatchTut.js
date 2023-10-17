@@ -436,7 +436,6 @@ const styles = StyleSheet.create({
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
-    // top: rspH(45),
     top: Platform.OS == "ios" ? scrn_height / 2.4 : scrn_height / 2.54,
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
@@ -452,15 +451,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   matchitem_cont: {
-    // top: Platform.OS == "android" ? rspH(10.2) + insets.top : srn_height / 5.1,
     top: Platform.OS == "android" ? rspH(4) + insets.top : srn_height / 7.44,
-
-    // right: rspW(9.2),
-
     width: rspW(86),
     height: rspH(11.6),
     alignSelf: "center",
-    // borderRadius: rspH(1.5),
     borderRadius: rspW(2.5),
   },
   timeHighCont: {
@@ -550,10 +544,5 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.31),
     fontFamily: fontFamily.bold,
   },
-  // timeDoneTxt: {
-  //   fontSize: rspF(Platform.OS == "ios" ? 1.302 : 1.1),
-  //   lineHeight: rspF(1.31),
-  //   fontFamily: fontFamily.light,
-  //   textAlign: "center",
-  // },
+  
 });
