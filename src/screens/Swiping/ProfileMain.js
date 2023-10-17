@@ -104,14 +104,11 @@ const ProfileMain = ({ navigation }) => {
   const [age, setage] = useState("");
   const [pets_list, setpets_list] = useState([]);
   const [interest_list, setinterest_list] = useState([]);
-  const [prof_imgr, setprof_imgr] = useState("");
 
-  const access_token = useSelector(
-    (state) => state.authentication.access_token
-  );
+ 
 
   const getData = async () => {
-   
+
     await axios
       .get(apiUrl + "login/?user_id=" + profile_data.user.id)
       .then((resp) => {
@@ -167,8 +164,8 @@ const ProfileMain = ({ navigation }) => {
           }
 
           dispatch(setProfileImgs(tmp1));
-
           
+
           let usrprf_dt = {
             ...profile_data.userprofile, 
             city: user_data.userprofile.city,
@@ -306,32 +303,23 @@ const ProfileMain = ({ navigation }) => {
               }}
             >
               {Platform.OS == "android" ? (
-                //              <>
-                //               <FastImage
-                //               useLastImageAsDefaultSource
-                //               style={{width:0.1,height:0.1,opacity:0}}
-                //                 source={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
-                //                 onLoad={()=>{
-                //                   setprof_imgr(profile_imgs[0][1])
-                //                 }}
-                //               />
+               
 
                 <FastImage
                   useLastImageAsDefaultSource
                   style={styles.profileImage}
                   source={{
-                    uri: profile_imgs.length > 0 ? profile_imgs[0][1] : "",
+                    uri:  profile_imgs[0][1],
                   }}
                 />
               ) : (
-                // </>
+
                 <Image
-                  // useLastImageAsDefaultSource
                   style={styles.profileImage}
                   source={{
-                    uri: profile_imgs.length > 0 ? profile_imgs[0][1] : "",
+                    uri:  profile_imgs[0][1],
                   }}
-                  // defaultSource={{ uri: profile_imgs.length > 0 ?profile_imgs[0][1] :"" }}
+           
                 />
               )}
             </TouchableOpacity>

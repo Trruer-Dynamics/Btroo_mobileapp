@@ -44,7 +44,7 @@ const insets = initialWindowMetrics.insets;
 const DATA = [
   {
     id: "1",
-    userprofile: { name: "bTroo", age: "44", occupation: "Teacher", gender: 'Female' },
+    userprofile: { name: "bTroo", age: "25", occupation: "Teacher", gender: 'Female' },
     profession: "Teacher",
     age: 23,
     lastMessage: "Hello! How are you man?",
@@ -309,7 +309,7 @@ const MatchTut = ({ repeat_tut }) => {
                     <Text style={styles.profileName}>
                       bTroo
                       {", "}
-                      44
+                      25
                     </Text>
 
                     <Text style={styles.profileProfession}>Teacher</Text>

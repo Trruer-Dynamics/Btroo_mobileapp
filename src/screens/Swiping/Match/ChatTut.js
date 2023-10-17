@@ -242,6 +242,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
                 else{
                   rvlimage = require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage1.png")
                 }
+       
                 return (
                   <TouchableOpacity
                     style={{ position: "absolute", right: 0, top: rspH(-1) }}
@@ -252,7 +253,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
                     }}
                   >
                     <FastImage
-                      source={require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage1.png")}
+                      source={rvlimage}
                       style={styles.profilePhoto}
                     />
                   </TouchableOpacity>
@@ -429,7 +430,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
               onPress={() => setmodalVisible(true)}
             >
               <FastImage
-                source={profile?.userprofile?.gender == "Male"?
+                source={profile?.userprofile?.gender == "Man"?
                  require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage1.png")
                 :
                 require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage1.png")
@@ -446,7 +447,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
             >
               <FastImage
                 source={
-                  profile?.userprofile?.gender == "Male"?
+                  profile?.userprofile?.gender == "Man"?
                   require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")
                 :
                 require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage2.png")

@@ -508,26 +508,6 @@ const SwipeCard = ({
   }, []);
 
   return (
-    <>
-     <Animated.View
-      style={[
-        {
-          backgroundColor: colors.error + '84',
-          position: "absolute",
-          width: scrn_width,
-          height:scrn_height,
-          left: 0,
-          top: 0,
-          zIndex: 200 - mainIndex,
-
-          
-        },
-        
-      ]}
-      key={mainIndex}
-    >
-
-    </Animated.View>
     <Animated.View
       style={[
         {
@@ -539,6 +519,11 @@ const SwipeCard = ({
           top: 0,
           zIndex: 100 - mainIndex,
 
+          transform: [
+            {
+              scale: !isFirst ? scaleValue : 1,
+            },
+          ],
         },
         isFirst && {
           transform: [...swipe.getTranslateTransform(), { rotate: rotate }],
@@ -1120,7 +1105,6 @@ const SwipeCard = ({
       </SafeAreaView>
       {/* {isFirst && renderChoice()} */}
     </Animated.View>
-    </>
   );
 };
 

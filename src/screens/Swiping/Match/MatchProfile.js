@@ -419,9 +419,9 @@ const MatchProfile = ({ route }) => {
                         style={styles.profileDetailContNText}
                         numberOfLines={1}
                       >
-                        {profile?.userprofile?.city?.length > 11
-                          ? profile?.userprofile?.city.substring(0, 9) + "..."
-                          : profile?.userprofile?.city}
+                        {profile?.userprofile?.city.split(",")[0]?.length > 11
+                          ? profile?.userprofile?.city.split(",")[0].substring(0, 9) + "..."
+                          : profile?.userprofile?.city.split(",")[0]}
                       </Text>
                     </View>
 
@@ -724,6 +724,7 @@ const MatchProfile = ({ route }) => {
                     ...styles.profileDetailsSubCont2,
                     ...styles.boxShadowCont,
                     paddingBottom: rspH(1.67),
+                    marginBottom: rspH(2),
                   }}
                 >
                   <Text style={styles.profileDetailContHeading}>Languages</Text>
