@@ -134,7 +134,7 @@ const Match = () => {
 
       let code = resp.data.code;
       let resp_data = resp.data.data;
-      
+
       if (code == 200) {
         let match_tmp = [];
         let matchs_imgs = [];
@@ -203,8 +203,7 @@ const Match = () => {
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const renderItem = useCallback(

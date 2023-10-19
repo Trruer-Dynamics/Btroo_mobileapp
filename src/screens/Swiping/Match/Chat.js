@@ -90,8 +90,7 @@ const ChatItem = ({
   setrply_animation,
   dispatch,
 }) => {
-
-  // To set reply id 
+  // To set reply id
   const vibtr = async () => {
     // await Vibration.vibrate(50);
     await setactreplyID(item[4]);
@@ -707,8 +706,8 @@ const Chat = ({ profile }) => {
 
     ws.current.onmessage = (e) => {
       const data = JSON.parse(e.data);
-      
-      // IF message recived by user 
+
+      // IF message recived by user
       if (data.sender != profile_data.user.id) {
         try {
           let day_tmp = moment(new Date(data.datetime))
@@ -746,7 +745,7 @@ const Chat = ({ profile }) => {
           ];
         } catch (error) {}
       } else {
-         // IF message send by user 
+        // IF message send by user
         setchatlist_remain([data, ...chatlist_remain]);
       }
     };
@@ -894,14 +893,10 @@ const Chat = ({ profile }) => {
     }
   }, [chatlist_remain]);
 
-
-
   // To Calculate Reveal Time
   useEffect(() => {
-
     // run below code if chats available and profile not reveal and activated
     if (chatlist.length > 0 && !profile.prof_rvl && !rvl_activate) {
-      
       // first get count of message sent by each user
       let mymsgs = chatlist.filter((v) => v[1] == 1);
 
@@ -920,16 +915,15 @@ const Chat = ({ profile }) => {
         .join(" ")
         .split(" ").length;
 
-  
       let tlis = [...chatlist];
-      
+
       // To set category of message to differentiate ( sent or receive )
       let tmpp = tlis.map((v) => {
         let rti = { val: v, category: v[1] };
         return rti;
       });
-     
-    // To create sequencial group of message to get oldest message of same user linearly
+
+      // To create sequencial group of message to get oldest message of same user linearly
       function groupSimilarItemsSequentially(items) {
         const groupedItems = [];
         let currentGroup = [];
@@ -963,7 +957,6 @@ const Chat = ({ profile }) => {
       //  to create list of list of two message of each user
       p = 0;
       for (const itm of tlis1) {
-
         if (p > 0) {
           tlis221.push(tlis1[p - 1], itm);
         }
@@ -993,7 +986,7 @@ const Chat = ({ profile }) => {
           let avg_min = tot_min / tmp_33.length;
 
           let ttact = false;
-          
+
           if (
             avg_min <= 5 &&
             mymsgs.length >= 25 &&
@@ -1014,7 +1007,7 @@ const Chat = ({ profile }) => {
           // Activate User for Reveal if above either condition satisfy
           if (ttact) {
             setrvl_activate(true);
-            
+
             if (chat_reveal_tut == true) {
               Keyboard.dismiss();
               setshow_rvl_tut(true);
@@ -1100,7 +1093,7 @@ const Chat = ({ profile }) => {
     }
   }, []);
 
-  // Auto scroll down 
+  // Auto scroll down
   useEffect(() => {
     if (chatlist.length > 0 && !rply_animation) {
       let lastMsg = chatlist[0];

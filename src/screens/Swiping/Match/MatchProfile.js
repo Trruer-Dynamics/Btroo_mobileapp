@@ -420,7 +420,9 @@ const MatchProfile = ({ route }) => {
                         numberOfLines={1}
                       >
                         {profile?.userprofile?.city.split(",")[0]?.length > 11
-                          ? profile?.userprofile?.city.split(",")[0].substring(0, 9) + "..."
+                          ? profile?.userprofile?.city
+                              .split(",")[0]
+                              .substring(0, 9) + "..."
                           : profile?.userprofile?.city.split(",")[0]}
                       </Text>
                     </View>
@@ -592,7 +594,7 @@ const MatchProfile = ({ route }) => {
                         {pets_list.map((img, indx) => {
                           return (
                             <FastImage
-                            key={indx}
+                              key={indx}
                               source={{ uri: img[1] }}
                               style={styles.interestImage}
                               resizeMode="cover"
@@ -633,7 +635,7 @@ const MatchProfile = ({ route }) => {
                     {interest_list.map((img, idx) => {
                       return (
                         <FastImage
-                        key={idx}
+                          key={idx}
                           source={{ uri: img[1] }}
                           style={styles.interestImage}
                           resizeMode="cover"
@@ -737,7 +739,7 @@ const MatchProfile = ({ route }) => {
                     {languages.map((lng, idx) => {
                       return (
                         <View
-                        key={idx}
+                          key={idx}
                           style={{
                             paddingHorizontal: 15,
                             borderRadius: 5,

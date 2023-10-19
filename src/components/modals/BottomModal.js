@@ -17,7 +17,6 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
 
-
 const BottomModal = ({
   modalVisible,
   setModalVisible,
@@ -27,8 +26,6 @@ const BottomModal = ({
   padding = 5,
   height = scrn_height / 1.875,
 }) => {
-
-
   return (
     <Modal
       animationType="slide"
@@ -36,47 +33,45 @@ const BottomModal = ({
       visible={modalVisible}
       onRequestClose={() => setModalVisible(false)}
     >
-      
-        <SafeAreaView
-          style={{            
-            flex:1,
-            position: "relative",
+      <SafeAreaView
+        style={{
+          flex: 1,
+          position: "relative",
+        }}
+      >
+        <TouchableOpacity
+          activeOpacity={1}
+          style={{
+            backgroundColor: "#00000087",
+            flexGrow: 1,
+          }}
+          onPress={() => {
+            setModalVisible(false);
+          }}
+        ></TouchableOpacity>
+
+        <View
+          style={{
+            ...styles.modalView,
+            ...extContainerStyle,
+            bottom: rspH(0),
+
+            padding: rspW(padding),
           }}
         >
-          <TouchableOpacity
-            activeOpacity={1}
-            style={{
-              backgroundColor: "#00000087",
-              flexGrow: 1,
-            }}
-            onPress={() => {
-              setModalVisible(false);
-            }}
-          ></TouchableOpacity>
-
-          <View
-            style={{
-              ...styles.modalView,
-              ...extContainerStyle,
-              bottom: rspH(0),
-
-              padding: rspW(padding),
-            }}
-          >
-            {close && (
-              <TouchableOpacity
-                style={{ alignSelf: "flex-end" }}
-                onPress={() => {
-                  setModalVisible(false);
-                }}
-              >
-                <Ionicon name="close-circle" size={34} color={colors.blue} />
-              </TouchableOpacity>
-            )}
-            {children}
-          </View>
-        </SafeAreaView>
-
+          {close && (
+            <TouchableOpacity
+              style={{ alignSelf: "flex-end" }}
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Ionicon name="close-circle" size={34} color={colors.blue} />
+            </TouchableOpacity>
+          )}
+          {children}
+        </View>
+      </SafeAreaView>
     </Modal>
   );
 };
@@ -89,7 +84,7 @@ const styles = StyleSheet.create({
     width: scrn_width,
     borderTopLeftRadius: rspW(3),
     borderTopRightRadius: rspW(3),
-    borderBottomWidth:1,
+    borderBottomWidth: 1,
     borderBottomColor: colors.blue,
   },
 

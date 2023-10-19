@@ -25,7 +25,6 @@ const PromptIntro = ({ setpromptStep }) => {
             {"\n"} they will have to know a little more {"\n"} about you.
           </Text>
 
-
           <Text style={styles.heading}>Your Place to Shine!</Text>
 
           <View style={{}}>

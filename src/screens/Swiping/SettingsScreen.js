@@ -387,7 +387,6 @@ const SettingsScreen = ({ navigation, route }) => {
       // Do something when the screen is focused
       setphone_number(profile_data?.user?.username);
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
-
     }, [])
   );
 
@@ -581,7 +580,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       <Switch
                         value={keep_matching}
                         onValueChange={() => {
-                          updateKeepMatching()
+                          updateKeepMatching();
                         }}
                         disabled={false}
                         circleSize={18}

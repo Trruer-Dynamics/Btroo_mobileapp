@@ -115,7 +115,7 @@ const FormMultiSelector = ({
             let tmp = [...selected_lis2];
             tmp.splice(indx, 1);
             setselected_lis2(tmp);
-          } 
+          }
           // add item in selected list if selected list have less than 10 item
           else if (selected_lis2.length < 10) {
             setselected_lis2([...selected_lis2, item[0]]);
@@ -145,8 +145,6 @@ const FormMultiSelector = ({
             backgroundColor: selected_list.length != 0 ? "#fff" : "#DCDCDC33",
           },
         ]}
-
-
         onPress={() => {
           setcode_press(true);
           setselected_lis2([]);
@@ -215,7 +213,7 @@ const FormMultiSelector = ({
                   }}
                 >{`Please select up to 10 ${title.toLowerCase()} from the list above`}</Text>
               </View>
-            {/* Confirm Button to confirm selected item  */}
+              {/* Confirm Button to confirm selected item  */}
               <FooterBtn
                 title={"Confirm"}
                 disabled={selected_lis2.length == 0}

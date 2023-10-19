@@ -23,7 +23,6 @@ const Pledge = ({ navigation, route }) => {
         screen: "Swiper",
       })
     );
-
   };
 
   const dispatch = useDispatch();

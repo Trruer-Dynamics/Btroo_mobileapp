@@ -73,7 +73,6 @@ const FormSelector = ({
   error = true,
   multiline = false,
 }) => {
-
   const [filterdatalist, setfilterdatalist] = useState([]);
   const [search_value, setsearch_value] = useState("");
   const [code_press, setcode_press] = useState(false);
@@ -86,7 +85,6 @@ const FormSelector = ({
       setSelectedEntry(selected_itm);
     }
   }, [selectedId]);
-
 
   const renderItem = ({ item, indx }) => {
     // If Item does not have removal feature
@@ -106,7 +104,7 @@ const FormSelector = ({
         />
       );
     } else {
-          // If Item  have removal feature
+      // If Item  have removal feature
       if (!rmv_list.includes(item[0]) || selectedId == item[0]) {
         return (
           <Item
@@ -170,7 +168,7 @@ const FormSelector = ({
         </View>
       </TouchableOpacity>
 
-{/* Open Selector Page as modal */}
+      {/* Open Selector Page as modal */}
       <Modal animationType="slide" transparent={false} visible={code_press}>
         <SafeAreaView style={{ flex: 1 }}>
           <FormComponentsWrapper>
@@ -182,7 +180,7 @@ const FormSelector = ({
             <View style={{ alignSelf: "center" }}>
               {search ? (
                 <>
-                {/* Use Search Component according to search type */}
+                  {/* Use Search Component according to search type */}
                   {backend_search ? (
                     <SearchInputBackend
                       search={backend_search_txt}

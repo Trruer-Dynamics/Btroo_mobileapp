@@ -6,7 +6,6 @@ import OffflineAlert from "../../components/functions/OfflineAlert";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
-
 const Swiper = ({ route }) => {
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
   const repeat_tut = useSelector((state) => state.tutorial.repeat_tut);
@@ -20,9 +19,7 @@ const Swiper = ({ route }) => {
   useFocusEffect(
     React.useCallback(() => {
       dispatch(setCurrentScreen("Swiper"));
-      return () => {
-
-      };
+      return () => {};
     }, [])
   );
 

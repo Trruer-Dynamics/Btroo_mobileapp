@@ -44,7 +44,12 @@ const insets = initialWindowMetrics.insets;
 const DATA = [
   {
     id: "1",
-    userprofile: { name: "bTroo", age: "25", occupation: "Teacher", gender: 'Female' },
+    userprofile: {
+      name: "bTroo",
+      age: "25",
+      occupation: "Teacher",
+      gender: "Female",
+    },
     profession: "Teacher",
     age: 23,
     lastMessage: "Hello! How are you man?",
@@ -544,5 +549,4 @@ const styles = StyleSheet.create({
     lineHeight: rspF(1.31),
     fontFamily: fontFamily.bold,
   },
-  
 });

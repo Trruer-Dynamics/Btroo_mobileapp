@@ -192,8 +192,7 @@ const UserIntro = ({ navigation, route }) => {
     }
   }, [step1blr]);
 
-
-// Handle inputs validations of step2
+  // Handle inputs validations of step2
   useEffect(() => {
     let smok = habits_list[0][1] ? true : habits_list[0][2] ? false : null;
     let drik = habits_list[1][1] ? true : habits_list[1][2] ? false : null;
@@ -266,7 +265,6 @@ const UserIntro = ({ navigation, route }) => {
       setlanguages_blr(true);
     }
   }, [step3blr]);
-
 
   const onNextPress = () => {
     let val = false;

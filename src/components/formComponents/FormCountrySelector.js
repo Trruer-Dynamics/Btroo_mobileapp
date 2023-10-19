@@ -24,7 +24,7 @@ const Item = ({ item, onPress, textColor, selectedValue = "" }) => (
     <Text style={[styles.itm_title, { color: textColor }]} numberOfLines={1}>
       {item.label.length > 20 ? truncateStr(item.label, 20) : item.label}
     </Text>
-  {/* Phone Code */}
+    {/* Phone Code */}
     <Text
       style={[styles.itm_title, { color: textColor }]}
     >{`+${item.phone}`}</Text>

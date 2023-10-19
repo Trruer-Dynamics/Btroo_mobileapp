@@ -105,10 +105,7 @@ const ProfileMain = ({ navigation }) => {
   const [pets_list, setpets_list] = useState([]);
   const [interest_list, setinterest_list] = useState([]);
 
- 
-
   const getData = async () => {
-
     await axios
       .get(apiUrl + "login/?user_id=" + profile_data.user.id)
       .then((resp) => {
@@ -164,27 +161,28 @@ const ProfileMain = ({ navigation }) => {
           }
 
           dispatch(setProfileImgs(tmp1));
-          
 
           let usrprf_dt = {
-            ...profile_data.userprofile, 
+            ...profile_data.userprofile,
             city: user_data.userprofile.city,
             education: user_data.userprofile.education,
             occupation: user_data.userprofile.occupation,
             drinking: user_data.userprofile.drinking,
-            marijuana:user_data.userprofile.marijuana,
-            smoking:user_data.userprofile.smoking,
-            gender:user_data.userprofile.gender,
-            height:user_data.userprofile.height,
-            keepmatchingnotification: user_data.userprofile.keepmatchingnotification,
-            newmatchnotification:user_data.userprofile.newmatchnotification,
-            newmessagenotification:user_data.userprofile.newmessagenotification,
+            marijuana: user_data.userprofile.marijuana,
+            smoking: user_data.userprofile.smoking,
+            gender: user_data.userprofile.gender,
+            height: user_data.userprofile.height,
+            keepmatchingnotification:
+              user_data.userprofile.keepmatchingnotification,
+            newmatchnotification: user_data.userprofile.newmatchnotification,
+            newmessagenotification:
+              user_data.userprofile.newmessagenotification,
             othernotification: user_data.userprofile.othernotification,
-            showmyprofilenotification:user_data.userprofile.showmyprofilenotification,
-            profilerevealnotification: user_data.userprofile.profilerevealnotification,
-          }
-
-  
+            showmyprofilenotification:
+              user_data.userprofile.showmyprofilenotification,
+            profilerevealnotification:
+              user_data.userprofile.profilerevealnotification,
+          };
 
           let user_prof_data = {
             ...profile_data,
@@ -303,23 +301,19 @@ const ProfileMain = ({ navigation }) => {
               }}
             >
               {Platform.OS == "android" ? (
-               
-
                 <FastImage
                   useLastImageAsDefaultSource
                   style={styles.profileImage}
                   source={{
-                    uri:  profile_imgs[0][1],
+                    uri: profile_imgs[0][1],
                   }}
                 />
               ) : (
-
                 <Image
                   style={styles.profileImage}
                   source={{
-                    uri:  profile_imgs[0][1],
+                    uri: profile_imgs[0][1],
                   }}
-           
                 />
               )}
             </TouchableOpacity>
@@ -661,7 +655,7 @@ const ProfileMain = ({ navigation }) => {
                   {languages.map((lng, idx) => {
                     return (
                       <View
-                      key={idx}
+                        key={idx}
                         style={{
                           paddingHorizontal: 15,
                           borderRadius: 5,

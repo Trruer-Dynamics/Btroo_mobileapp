@@ -162,7 +162,7 @@ const MobileNo = ({ navigation, route }) => {
 
       // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       // setconfirm(confirmation);
-      
+
       setOtpShowBox(true);
 
       // hide Loader
@@ -174,7 +174,6 @@ const MobileNo = ({ navigation, route }) => {
       setTimeout(() => {
         Alert.alert("Error", "Please try after sometime.");
       }, 100);
-      
     }
   };
 

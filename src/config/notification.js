@@ -25,7 +25,11 @@ const NotificationController = (props) => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (not_data?.type == "Chat" || not_data?.type == "Hidden") {
+    if (
+      not_data?.type == "Chat" ||
+      not_data?.type == "Hidden" ||
+      not_data?.type == "Match"
+    ) {
       setnewMsgRefresh(!newMsgRefresh);
     }
 

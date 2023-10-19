@@ -8,6 +8,7 @@ import {
   PermissionsAndroid,
   Platform,
   Linking,
+  Easing,
 } from "react-native";
 import publicIP from "react-native-public-ip";
 import React, {
@@ -73,7 +74,6 @@ import messaging from "@react-native-firebase/messaging";
 import { setPromptFillingStart } from "../../store/reducers/authentication/authentication";
 import { UserContext } from "../../context/user";
 import FastImage from "react-native-fast-image";
-import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const SwiperOr = ({}) => {
   const navigation = useNavigation();
@@ -93,8 +93,6 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.profile_approved
   );
 
-
-
   const [prf_apprv_refh, setprf_apprv_refh] = useState(false);
 
   const is_promptsfillingstarted = useSelector(
@@ -104,16 +102,20 @@ const SwiperOr = ({}) => {
   const profile_refresh = useSelector(
     (state) => state.authentication.profile_refresh
   );
-  
+
   const [promptTime, setpromptTime] = useState(false);
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
   );
 
+  const viewableItemsChanged = useRef(({ viewableItems }) => {
+    setviewableItemsS(viewableItems);
+  }).current;
+
   const [reports_count, setreports_count] = useState(0);
-  const [location_added, setlocation_added] = useState(false)
-  const [screen_loaded, setscreen_loaded] = useState(false)
+  const [location_added, setlocation_added] = useState(false);
+  const [screen_loaded, setscreen_loaded] = useState(false);
 
   const [filter_data_get, setfilter_data_get] = useState(false);
 
@@ -193,6 +195,13 @@ const SwiperOr = ({}) => {
   const upY = useRef(new Animated.Value(0)).current;
 
   const scaleValue = useRef(new Animated.Value(0)).current;
+  const traYValue = useRef(new Animated.Value(scrn_height)).current;
+
+  const [showAction, setshowAction] = useState(false);
+  const [actionEnd, setactionEnd] = useState(true);
+  const [actionType, setactionType] = useState("");
+
+  const [viewableItemsS, setviewableItemsS] = useState([]);
 
   const iconRotate = useRef(new Animated.Value(0)).current;
 
@@ -200,49 +209,57 @@ const SwiperOr = ({}) => {
   const iconTranslateY = useRef(new Animated.Value(0)).current;
 
   // Scale Swipe Card from 80% to 100% height
-  const scaleAnimation = () => {
-    Animated.timing(scaleValue, {
-      fromValue: 0.9,
-      toValue: 1,
-      duration: 500,
+  const actionAnimation = () => {
+    Animated.timing(traYValue, {
+      fromValue: scrn_height,
+      toValue: 0,
+      duration: 300,
+      easing: Easing.ease,
       useNativeDriver: true,
-    }).start(() => {});
+    }).start(() => {
+      setshowAction(false);
+      removeCard();
+    });
   };
 
   // Remove card on action perform
-  const removeCard = useCallback(
-    () => {
-      scaleValue.setValue(0.9);
-      iconRotate.setValue(0);
-      iconTranslateX.setValue(0);
-      iconTranslateY.setValue(0);
-      leftX.setValue(0);
-      rightX.setValue(0);
-      upY.setValue(0);
-      setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
-      swipe.setValue({ x: 0, y: 0 });
-
-      //  If user perform any three or more swipe action allow user to add public and private prompts if user don't have prompts
-      if (swippingcount >= 2) {
-        setpromptTime(true);
-      }
-    },
-    [swipe, swippingcount]
-    
-  );
+  const removeCard = useCallback(() => {
+    scaleValue.setValue(0.9);
+    iconRotate.setValue(0);
+    iconTranslateX.setValue(0);
+    iconTranslateY.setValue(0);
+    leftX.setValue(0);
+    rightX.setValue(0);
+    upY.setValue(0);
+    setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
+    swipe.setValue({ x: 0, y: 0 });
+    traYValue.setValue(scrn_height);
+    //  If user perform any three or more swipe action allow user to add public and private prompts if user don't have prompts
+    if (swippingcount >= 2) {
+      setpromptTime(true);
+    }
+  }, [swipe, swippingcount]);
 
   const handleChoiceButtons = useCallback(
     (direction) => {
-      scaleAnimation();
+      setshowAction(true);
+      setactionEnd(false);
+
       // show up animation of swipe card on action tab
       Animated.timing(swipe.y, {
         toValue: -scrn_height,
-
-        duration: 800,
-
+        duration: 300,
+        easing: Easing.ease,
         useNativeDriver: true,
-      }).start(removeCard);
-    
+      }).start(() => {
+        setactionEnd(true);
+        actionAnimation();
+      });
+
+      // setTimeout(() => {
+      //   removeCard()
+
+      // }, 800);
     },
 
     [removeCard, swipe.x]
@@ -267,7 +284,6 @@ const SwiperOr = ({}) => {
 
   // To get address in string using latitude and longitude
   const getReverseGeocodingData = async (lat, lng) => {
-    
     try {
       const response = await axios.get(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
@@ -281,7 +297,6 @@ const SwiperOr = ({}) => {
 
   // Get latitude and longitude
   const getOneTimeLocation = async () => {
-
     Geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
@@ -309,7 +324,6 @@ const SwiperOr = ({}) => {
 
   // Save Current location Data in backend
   const addLocation = async () => {
-
     const data = {
       user_id: profile_data.user.id,
       longitude: current_long,
@@ -319,7 +333,6 @@ const SwiperOr = ({}) => {
       ip: mob_ip,
     };
 
-
     try {
       const response = await axios.post(apiUrl + "last_location/", data);
       let resp_data = response.data;
@@ -327,7 +340,6 @@ const SwiperOr = ({}) => {
       setloading(false);
 
       if (resp_data.code == 200) {
-    
         if (reports_count > 10) {
           setwarn_step(3);
           setloading2(true);
@@ -337,7 +349,7 @@ const SwiperOr = ({}) => {
         } else {
           getFilterProfiles();
         }
-        setlocation_added(true)
+        setlocation_added(true);
         return true;
       } else {
         return false;
@@ -350,7 +362,7 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
-console.log("getFilterData")
+    console.log("getFilterData");
     setloading(true);
 
     const headers = {
@@ -410,7 +422,6 @@ console.log("getFilterData")
           dispatch(setSelectedInterests(interests));
           dispatch(setSelectedHabits(habits));
 
-
           if (report_count > 10) {
             setwarn_step(3);
             setloading2(true);
@@ -422,14 +433,13 @@ console.log("getFilterData")
             setprf_apprv_refh(!prf_apprv_refh);
 
             // If location send to backend then only get swiping profiles
-            
+
             if (location_added) {
               getFilterProfiles();
             }
           }
-  
+
           setfilter_data_get(true);
-    
         } else if (resp.data.code == 401) {
           dispatch(setSessionExpired(true));
         }
@@ -535,9 +545,8 @@ console.log("getFilterData")
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
-
-    console.log("getFilterProfiles call",location_added)
-    console.log("\n")
+    console.log("getFilterProfiles call", location_added);
+    console.log("\n");
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -569,8 +578,10 @@ console.log("getFilterData")
       .catch((err) => {});
   };
 
-
   const getRejectedProfiles = async () => {
+    setwarn_step(0);
+    setloading2(true);
+    console.log("getRejectedProfiles");
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -580,21 +591,20 @@ console.log("getFilterData")
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
         let resp_data = resp.data;
-
-        if (resp_data.length == 0) {
-          setwarn_step(2);
-          setloading2(true);
-        } else if (resp_data.length > 0) {
+       
+        if (resp_data.length > 0) {
           setempty_profile_call(false);
           let active_profiles = resp_data.filter((v) => v.active == true);
           setprofiles(active_profiles);
 
           setloading2(false);
+        } else {
+          setwarn_step(2);
+          setloading2(true);
         }
       })
       .catch((err) => {});
   };
-
 
   const startFillingPrompts = async () => {
     setloading(true);
@@ -630,7 +640,6 @@ console.log("getFilterData")
     }
   };
 
-
   // To Refresh page After changing location or permission from app setting
   useEffect(() => {
     if (
@@ -655,7 +664,6 @@ console.log("getFilterData")
     }
   }, [profiles]);
 
-  
   useEffect(() => {
     let prv_prmt = profile_data?.userprivateprompts;
     if (promptTime && prv_prmt.length == 0) {
@@ -688,7 +696,6 @@ console.log("getFilterData")
     // Ip Function temporary commentet because it takes too long to load
     publicIP()
       .then((ip) => {
-
         setmob_ip(ip);
       })
       .catch((err) => {
@@ -713,32 +720,28 @@ console.log("getFilterData")
   }, []);
 
   useLayoutEffect(() => {
+    setscreen_loaded(true);
 
-   setscreen_loaded(true)
+    // To show loading sentence
+    setloading2(true);
+    setwarn_step(0);
+    initPer();
 
-      // To show loading sentence
-      setloading2(true);
-      setwarn_step(0);
-      initPer();
-      
-      // load all data only after screen load sucessfully
-   if (screen_loaded) {
-    
+    // load all data only after screen load sucessfully
+    if (screen_loaded) {
       getGenders();
       getInterests();
       getLanguages();
       getFilterData();
-      getPrompts();  
-      
+      getPrompts();
     }
-    
   }, [profile_refresh]);
 
   useEffect(() => {
     if (permission_denied) {
       setloading2(true);
       setwarn_step(4);
-    } 
+    }
     /// add Location if all location related data get
     else if (
       filter_data_get &&
@@ -768,21 +771,16 @@ console.log("getFilterData")
     }
   };
 
-
-
   useFocusEffect(
     React.useCallback(() => {
-
-      setprofile_call(false)
+      setprofile_call(false);
       // Show Warning to Reverify Permission
       if (!profile_approv) {
         setwarn_step(5);
         setloading2(true);
       }
-
     }, [prf_apprv_refh])
   );
-  
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -799,6 +797,7 @@ console.log("getFilterData")
           >
             <FlatList
               pagingEnabled
+              onViewableItemsChanged={viewableItemsChanged}
               contentContainerStyle={{
                 flexGrow: 1,
                 borderWidth: 1,
@@ -812,7 +811,12 @@ console.log("getFilterData")
 
                 return (
                   <SwipeCard
-                  key={index}
+                    viewableItemsS={viewableItemsS}
+                    key={index}
+                    actionEnd={actionEnd}
+                    actionType={actionType}
+                    setactionType={setactionType}
+                    showAction={showAction}
                     card_itm={item}
                     iconRotate={iconRotate}
                     iconTranslateX={iconTranslateX}
@@ -820,13 +824,12 @@ console.log("getFilterData")
                     handleChoiceButtons={handleChoiceButtons}
                     isFirst={isFirst}
                     swipe={swipe}
-                    scaleValue={scaleValue}
+                    traYValue={traYValue}
                     leftX={leftX}
                     rightX={rightX}
                     upY={upY}
                     mainIndex={index}
                     setswippingcount={setswippingcount}
-                    swippingcount={swippingcount}
                   />
                 );
               }}
@@ -871,7 +874,6 @@ console.log("getFilterData")
                 <TouchableOpacity
                   style={styles.loadingBtn}
                   onPress={() => {
-                    
                     if (warn_step == 2) {
                       getRejectedProfiles();
                     }
@@ -879,7 +881,6 @@ console.log("getFilterData")
                       navigation.navigate("PhotoVerification");
                     }
                     if (warn_step == 4) {
-     
                       setredirect_to_setting(true);
                       if (Platform.OS == "ios") {
                         Linking.openURL("app-settings:");

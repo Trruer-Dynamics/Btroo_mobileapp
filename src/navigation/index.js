@@ -1,4 +1,4 @@
-import { Platform,  StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import React, { useRef, useLayoutEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNav from "./stack/StackNav";
@@ -40,11 +40,9 @@ const Navigation = () => {
   );
 
   useLayoutEffect(() => {
-    if (current_screen == 'Swiper') {
+    if (current_screen == "Swiper") {
       dispatch(setProfileRefresh(!profile_refresh));
     }
-
-    
 
     if (!is_network_connected) {
       if (
@@ -63,8 +61,6 @@ const Navigation = () => {
     } else {
       setoffAlert(false);
     }
-
-   
 
     if (current_screen == "Intro" || current_screen == "PhotoVerifyCamera") {
       if (Platform.OS == "android") {

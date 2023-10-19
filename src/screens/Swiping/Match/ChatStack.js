@@ -24,9 +24,7 @@ const ChatStack = ({ route }) => {
 
   return (
     <View>
-      {
-      chat_tut || repeat_tut
-       ? (
+      {chat_tut || repeat_tut ? (
         <ChatTut profile={profile} repeat_tut={repeat_tut} />
       ) : (
         <Chat profile={profile} reveal={reveal} />

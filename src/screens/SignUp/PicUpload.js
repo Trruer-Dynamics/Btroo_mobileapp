@@ -473,6 +473,9 @@ const PicUpload = ({ navigation, route }) => {
       path: img,
       width: 300,
       height: 300,
+      cropperStatusBarColor: 'black', // don't add 3 digit color code like '#000'
+      cropperActiveWidgetColor: colors.blue,
+      
     }).then((image) => {
       let crp_img = image.path;
       finalLoad(img, crp_img);

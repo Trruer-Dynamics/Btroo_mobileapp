@@ -11,9 +11,7 @@ import fontFamily from "../styles/fontFamily";
 import colors from "../styles/colors";
 import { rspW, rspH, rspF } from "../styles/responsiveSize";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setActiveUserLocationDetails,
-} from "../store/reducers/authentication/authentication";
+import { setActiveUserLocationDetails } from "../store/reducers/authentication/authentication";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import useIsReady from "../components/functions/isScreenReady";
 import { setCurrentScreen } from "../store/reducers/screen/screen";
@@ -56,8 +54,7 @@ const Intro = ({ route }) => {
             resizeMode={"cover"}
             rate={1.0}
             ignoreSilentSwitch={"obey"}
-            onError={(err) => {
-            }}
+            onError={(err) => {}}
           />
 
           {/* Logo Area */}

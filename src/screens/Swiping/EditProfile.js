@@ -46,7 +46,6 @@ import {
 } from "../../store/reducers/authentication/authentication";
 import Loader from "../../components/loader/Loader";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
-
 import { useSharedValue } from "react-native-reanimated";
 import ImageCropPicker from "react-native-image-crop-picker";
 import CentralModal from "../../components/modals/CentralModal";
@@ -145,7 +144,7 @@ const EditProfile = ({ navigation }) => {
 
       let code = resp.data.code;
       let user_data = resp.data.data;
-      
+
       if (code == 200) {
         dispatch(setProfileImgs(up_pos_lis));
       } else if (code == 401) {
@@ -543,6 +542,8 @@ const EditProfile = ({ navigation }) => {
       path: img,
       width: 300,
       height: 300,
+      cropperStatusBarColor: 'black', // don't add 3 digit color code like '#000'
+      cropperActiveWidgetColor: colors.blue,
     }).then((image) => {
       let crp_img = image.path;
       finalLoad(img, crp_img);
@@ -1609,6 +1610,7 @@ const EditProfile = ({ navigation }) => {
                               selectedValue={public_prompt1_q[1]}
                               setchanges_made={setchanges_made}
                               removable={true}
+                              multiline={true}
                               rmv_list={prompts_list_rmv}
                               setrmv_list={setprompts_list_rmv}
                             />
@@ -1674,6 +1676,7 @@ const EditProfile = ({ navigation }) => {
                               selectedValue={public_prompt2_q[1]}
                               setchanges_made={setchanges_made}
                               removable={true}
+                              multiline={true}
                               rmv_list={prompts_list_rmv}
                               setrmv_list={setprompts_list_rmv}
                             />
@@ -1711,9 +1714,6 @@ const EditProfile = ({ navigation }) => {
                                 setpublic_prompt2_blr(true);
                               }}
                               editable={public_prompt2_q != ""}
-                              // disabled={public_prompt2_q == ""}
-                              // placeholderTextColor={'black'}
-
                               maxHeight={rspH(11.5)}
                               minHeight={rspH(11.5)}
                             />
@@ -1767,6 +1767,7 @@ const EditProfile = ({ navigation }) => {
                               selectedValue={private_prompt1_q[1]}
                               setchanges_made={setchanges_made}
                               removable={true}
+                              multiline={true}
                               rmv_list={prompts_list_rmv}
                               setrmv_list={setprompts_list_rmv}
                             />
@@ -1803,7 +1804,6 @@ const EditProfile = ({ navigation }) => {
                                 setprivate_prompt1_blr(true);
                               }}
                               editable={private_prompt1_q != ""}
-                              // disabled={private_prompt1_q == ""}
                               maxHeight={rspH(11.5)}
                               minHeight={rspH(11.5)}
                             />
@@ -1829,6 +1829,7 @@ const EditProfile = ({ navigation }) => {
                               search={false}
                               setchanges_made={setchanges_made}
                               removable={true}
+                              multiline={true}
                               rmv_list={prompts_list_rmv}
                               setrmv_list={setprompts_list_rmv}
                             />

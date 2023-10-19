@@ -56,7 +56,6 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
     ? route.params?.imgUri
     : "https://images.pexels.com/photos/3099026/pexels-photo-3099026.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load";
 
-
   const verifyPhoto = async () => {
     setloading(true);
 
@@ -189,8 +188,6 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
           </View>
         </View>
       </FormWrapper>
-
-      
     </SafeAreaView>
   );
 };

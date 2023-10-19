@@ -165,7 +165,7 @@ const FormInput = ({
             }}
           />
 
-            {/* If Input has any inputs */}
+          {/* If Input has any inputs */}
           {value != "" && unit != "" && (
             <View
               style={{

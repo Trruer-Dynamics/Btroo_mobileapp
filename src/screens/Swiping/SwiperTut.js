@@ -171,17 +171,16 @@ const Item = ({ item, setmodalVisible, masked }) => {
           )}
 
           <FastImage
-         
             source={item.image}
             style={{
-               backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
-              width:  rspW(88),
+              backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
+              width: rspW(88),
               height: "100%",
               borderRadius: rspW(5.1),
-            
+
               zIndex: -2,
             }}
-            onLoad={()=> setimg_load(true)}
+            onLoad={() => setimg_load(true)}
             resizeMode="cover"
           />
         </>
@@ -410,9 +409,9 @@ const SwiperTut = ({ repeat_tut }) => {
             >
               {/* <FAIcon size={30} name="filter" color={"#ffffffcb"} /> */}
               <FastImage
-                    source={require("../../assets/images/Swiping/Filter3.png")}
-                    style={{ width: 26, height: 26 }}
-                  />
+                source={require("../../assets/images/Swiping/Filter3.png")}
+                style={{ width: 26, height: 26 }}
+              />
             </TouchableOpacity>
 
             {/* Features Container */}
@@ -888,9 +887,9 @@ const SwiperTut = ({ repeat_tut }) => {
                         >
                           {/* <FAIcon size={30} name="filter" color={"#ffffffcb"} /> */}
                           <FastImage
-                    source={require("../../assets/images/Swiping/Filter3.png")}
-                    style={{ width: 26, height: 26 }}
-                  />
+                            source={require("../../assets/images/Swiping/Filter3.png")}
+                            style={{ width: 26, height: 26 }}
+                          />
                         </TouchableOpacity>
 
                         {/* Features Container */}

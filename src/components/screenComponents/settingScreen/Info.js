@@ -30,7 +30,7 @@ const Info = ({ navigation, route }) => {
     p: {
       color: "white",
       fontFamily: "arial",
-      textAlign:'justify',
+      textAlign: "justify",
     },
     ol: {
       color: "white",
@@ -43,8 +43,7 @@ const Info = ({ navigation, route }) => {
     li: {
       color: "white",
       fontFamily: "arial",
-      textAlign:'justify',
-
+      textAlign: "justify",
     },
     h2: {
       color: "white",
