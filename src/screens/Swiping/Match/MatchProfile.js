@@ -8,6 +8,7 @@ import {
   Platform,
   Animated,
   FlatList,
+  Image,
 } from "react-native";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import React, { useState, useLayoutEffect, useRef } from "react";
@@ -24,8 +25,10 @@ import {
 } from "../../../styles/responsiveSize";
 import fontFamily from "../../../styles/fontFamily";
 import {
+  Backward,
   DrinkingNo,
   DrinkingYes,
+  FemaleAvatar,
   MarijuanaNo,
   MarijuanaYes,
   SmokingNo,
@@ -46,6 +49,7 @@ import { setSessionExpired } from "../../../store/reducers/authentication/authen
 import Paginator from "../../../components/screenComponents/swiping/Paginator";
 import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
+
 
 const Item2 = ({ item }) => {
   let imageUri = String(item.image);
@@ -868,7 +872,12 @@ const MatchProfile = ({ route }) => {
               setmodalVisible(false);
             }}
           >
-            <ADIcon size={20} name="left" color={"#fff"} />
+
+            <Image
+                  source={Backward}        
+                  style={{width: '80%', height:'70%'}}
+                  resizeMode="contain"
+                          />
           </TouchableOpacity>
 
           {/*  FullScreen Carousel */}

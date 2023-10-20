@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Animated,
   TouchableWithoutFeedback,
+  Image,
 } from "react-native";
 
 import {
@@ -43,6 +44,7 @@ import Report from "../Report/Report";
 import Filters from "../Filters/Filters";
 import { apiUrl } from "../../../../constants";
 import {
+  Backward,
   DrinkingNo,
   DrinkingYes,
   MarijuanaNo,
@@ -286,10 +288,7 @@ const SwipeCard = ({
     outputRange: [0, 1],
   });
 
-  const rotate = swipe.x.interpolate({
-    inputRange: [-100, 0, 100],
-    outputRange: ["-4deg", "0deg", "4deg"],
-  });
+
 
   const rejectOpacity = rightX.interpolate({
     inputRange: [0, 1],
@@ -789,7 +788,12 @@ const SwipeCard = ({
                       setmodalVisible(false);
                     }}
                   >
-                    <ADIcon size={20} name="left" color={"#fff"} />
+                    {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
+                    <Image
+                  source={Backward}        
+                  style={{width: '80%', height:'70%'}}
+                  resizeMode="contain"
+                          />
                   </TouchableOpacity>
 
                   {/*  FullScreen Carousel */}

@@ -23,6 +23,7 @@ import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Backward,
   DrinkingNo,
   DrinkingYes,
   MarijuanaNo,
@@ -718,12 +719,18 @@ const ProfileMain = ({ navigation }) => {
               height: rspW(7.6),
               width: rspW(7.6),
               borderRadius: rspW(3.8),
+              // backgroundColor:'green'
             }}
             onPress={() => {
               setmodalVisible(false);
             }}
           >
-            <ADIcon size={20} name="left" color={"#fff"} />
+            {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
+            <Image
+                  source={Backward}        
+                  style={{width: '80%', height:'70%'}}
+                  resizeMode="contain"
+                          />
           </TouchableOpacity>
 
           <FlatList

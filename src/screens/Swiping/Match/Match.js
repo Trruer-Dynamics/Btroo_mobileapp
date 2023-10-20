@@ -187,7 +187,10 @@ const Match = () => {
             mth.privateprompts = mth_user.userprofile.privateprompts;
             mth.tut = false;
             match_tmp.push(mth);
-            mth.all_images = mth_user.userprofile.image;
+            mth.all_images = mth_user.userprofile.image.sort((a,b)=>{
+return a.position - b.position
+            })
+            
 
             matchs_imgs.push([
               id,
