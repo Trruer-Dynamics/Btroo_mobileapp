@@ -185,6 +185,7 @@ const ProfileMain = ({ navigation }) => {
               user_data.userprofile.profilerevealnotification,
           };
 
+
           let user_prof_data = {
             ...profile_data,
             user: profile_data.user,
@@ -196,7 +197,7 @@ const ProfileMain = ({ navigation }) => {
             userprivateprompts: act_promptsm2,
           };
           dispatch(setProfiledata(user_prof_data));
-          setprof_refs(!prof_refs);
+
         }
       })
       .catch((err) => {});
@@ -239,21 +240,26 @@ const ProfileMain = ({ navigation }) => {
       let actv = profile_imgs.filter((v) => v[0] != "");
       setactive_prf_imgs(actv);
 
+      setprof_refs(true)
+
       return () => {
+        setprof_refs(false)
         // Do something when the screen is unfocused
       };
-    }, [profile_data, profile_imgs, prof_refs])
+    }, [profile_data])
   );
 
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-      getData();
-
+      if (prof_refs) {
+        getData();  
+      }
+      
       return () => {
         // Do something when the screen is unfocused
       };
-    }, [])
+    }, [prof_refs])
   );
 
   // Full Screen Carosel Item Render Function
@@ -374,7 +380,7 @@ const ProfileMain = ({ navigation }) => {
                       numberOfLines={1}
                     >
                       {profile_data?.userprofile?.city?.length > 11
-                        ? profile_data?.userprofile?.city.substring(0, 9) +
+                        ? profile_data?.userprofile?.city.substring(0, 8) +
                           "..."
                         : profile_data?.userprofile?.city}
                     </Text>

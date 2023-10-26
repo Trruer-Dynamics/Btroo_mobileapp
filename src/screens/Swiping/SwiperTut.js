@@ -27,57 +27,64 @@ import FAIcon from "react-native-vector-icons/FontAwesome";
 import Paginator from "../../components/screenComponents/swiping/Paginator";
 import fontFamily from "../../styles/fontFamily";
 import { useDispatch, useSelector } from "react-redux";
-import { DrinkingNo, MarijuanaNo, SmokingNo } from "../../assets";
+import { Backward, DrinkingNo, MarijuanaNo, SmokingNo, SmokingYes } from "../../assets";
 import { setSwipeTut } from "../../store/reducers/tutorial/tutorial";
 import { apiUrl } from "../../constants";
 import axios from "axios";
 import Loader from "../../components/loader/Loader";
-import { setSessionExpired } from "../../store/reducers/authentication/authentication";
+
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
 import { setAllGenders } from "../../store/reducers/allData/allData";
+import { setSessionExpired } from "../../store/reducers/authentication/authentication";
 
 const DATA = [
   {
     id: 1,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/1.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/1.jpeg"),
   },
   {
     id: 2,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/2.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/2.jpeg"),
   },
   {
     id: 3,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/3.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/3.jpeg"),
   },
   {
     id: 4,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/4.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/4.jpeg"),
   },
   {
     id: 5,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/5.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/5.jpeg"),
   },
   {
     id: 6,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/6.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/6.jpeg"),
   },
   {
     id: 7,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/7.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/7.jpeg"),
   },
   {
     id: 8,
-    image: require("../../assets/images/Tutorial/Tut1.png"),
-    image2: require("../../assets/images/Tutorial/Tut2.png"),
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/8.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/8.jpeg"),
   },
+  {
+    id: 9,
+    image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/9.jpeg"),
+    image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/9.jpeg"),
+  },
+
 ];
 
 const DATA2 = [
@@ -478,16 +485,28 @@ const SwiperTut = ({ repeat_tut }) => {
 
               <TouchableOpacity
                 style={{
+
                   position: "absolute",
-                  zIndex: 2,
-                  top: rspH(2.35),
-                  left: rspW(10),
+                      zIndex: 2,
+                      top: rspH(3),
+                      left: rspW(8),
+                      alignSelf: "center",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: rspW(7.6),
+                      width: rspW(7.6),
+                      borderRadius: rspW(3.8),
                 }}
                 onPress={() => {
                   setmodalVisible(false);
                 }}
               >
-                <ADIcon size={20} name="left" color={"#fff"} />
+                {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
+                <Image
+                  source={Backward}        
+                  style={{width: '80%', height:'70%'}}
+                  resizeMode="contain"
+                          />
               </TouchableOpacity>
 
               {/*  FullScreen Carousel */}

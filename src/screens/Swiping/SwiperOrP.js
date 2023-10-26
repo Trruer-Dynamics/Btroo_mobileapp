@@ -338,7 +338,6 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
-    console.log("getFilterData");
     setloading(true);
 
     const headers = {
@@ -521,8 +520,7 @@ const SwiperOr = ({}) => {
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
-    console.log("getFilterProfiles call", location_added);
-    console.log("\n");
+    
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -557,7 +555,6 @@ const SwiperOr = ({}) => {
   const getRejectedProfiles = async () => {
     setwarn_step(0);
     setloading2(true);
-    console.log("getRejectedProfiles");
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,

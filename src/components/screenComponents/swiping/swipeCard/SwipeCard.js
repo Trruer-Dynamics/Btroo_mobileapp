@@ -117,7 +117,26 @@ const Item = ({ item, setmodalVisible, super_liked_profile, index }) => {
             </>
           )}
 
-          <FastImage
+
+          { Platform.OS == 'ios' ?
+
+            <Image
+            source={{ uri: imageUri }}
+            style={{
+              backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
+              width: "100%",
+              height: "100%",
+              borderRadius: rspW(5.1),
+              alignSelf: "center",
+            }}
+            resizeMode="cover"
+            onLoad={() => {
+              setimg_load(true);
+            }}           
+            />
+:
+            <FastImage
+          useLastImageAsDefaultSource
             source={{ uri: imageUri }}
             style={{
               backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
@@ -130,7 +149,7 @@ const Item = ({ item, setmodalVisible, super_liked_profile, index }) => {
             onLoad={() => {
               setimg_load(true);
             }}
-          />
+          />}
         </>
       </TouchableOpacityB>
     </View>
@@ -788,6 +807,7 @@ const SwipeCard = ({
                       setmodalVisible(false);
                     }}
                   >
+                    
                     {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
                     <Image
                   source={Backward}        
@@ -882,10 +902,12 @@ const SwipeCard = ({
                             style={styles.profileDetailContNText}
                             numberOfLines={1}
                           >
-                            {card_itm?.city?.split(",")[0]?.length > 11
+                            {card_itm?.city
+                            ?.split(",")[0]?.length > 11
                               ? card_itm?.city.split(",")[0]?.substring(0, 9) +
                                 "..."
-                              : card_itm?.city.split(",")[0]}
+                              : card_itm?.city.split(",")[0]
+                              }
                           </Text>
                         </View>
 

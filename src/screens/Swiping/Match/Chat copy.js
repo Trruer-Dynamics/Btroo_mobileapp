@@ -570,13 +570,9 @@ const Chat = ({ profile }) => {
         headers,
       });
       setloading(false);
-
       let resp_data = response.data;
-
-      // console.log("revealProfileTime resp", resp_data);
     } catch (error) {
       setloading(false);
-      // console.log("revealProfileTime error", error);
       return false;
     }
   };
@@ -986,12 +982,6 @@ const Chat = ({ profile }) => {
           let avg_min = tot_min / tmp_33.length;
 
           let ttact = false;
-
-          console.log("avg_min",avg_min)
-          console.log("mymsgs.length",mymsgs.length)
-          console.log("othmsgs.length",othmsgs.length)
-          console.log("mycount",mycount)
-          console.log("othcount",othcount)
 
           if (
             avg_min <= 5 &&

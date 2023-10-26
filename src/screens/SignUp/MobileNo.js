@@ -190,22 +190,24 @@ const MobileNo = ({ navigation, route }) => {
     <>
       {loading && <Loader />}
 
-      <SafeAreaView style={{ height: "100%", backgroundColor: "#fff" }}>
+      <SafeAreaView style={{ height: "100%",
+      
+      backgroundColor: "#fff" }}>
         {/* To Autoscroll Input Field on keyboard appear */}
         <KeyboardAwareScrollView
           enableOnAndroid={true}
           bounces={false}
           showsVerticalScrollIndicator={false}
-          style={{ backgroundColor: "#fff", position: "relative" }}
+          style={{ backgroundColor: "#fff", position: "relative", flex: 1 }}
           extraHeight={Platform.OS == "ios" ? rspH(30) : rspH(75)}
           extraScrollHeight={Platform.OS == "ios" ? 0 : rspH(-40)}
           // To show Next Button on Keyboard Appear
           keyboardShouldPersistTaps={"always"}
         >
           {/* To Wrap all Form for constant paddings , bg color , margins etc */}
-          <FormWrapper>
+          <FormWrapper >
             {/* Main Form UI */}
-            <View>
+            <View >
               <FormHeader
                 title="Phone Number"
                 left_icon={true}

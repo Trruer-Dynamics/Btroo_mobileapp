@@ -5,10 +5,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   StatusBar,
+  Platform,
 } from "react-native";
 import React, { memo } from "react";
 import colors from "../../../styles/colors";
-import { rspH, rspW } from "../../../styles/responsiveSize";
+import { rspH, rspW, scrn_height } from "../../../styles/responsiveSize";
 import { useSelector } from "react-redux";
 
 const FormWrapper = ({ children, containerStyle = {} }) => {
@@ -22,8 +23,8 @@ const FormWrapper = ({ children, containerStyle = {} }) => {
       <View
         style={{
           ...styles.container,
+          height: Platform.OS == 'android' ? scrn_height *0.992 : safe_height,
           ...containerStyle,
-          height: safe_height,
         }}
       >
         <>{children}</>

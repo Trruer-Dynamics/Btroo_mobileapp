@@ -9,6 +9,7 @@ import {
   Platform,
   Linking,
   Easing,
+  Alert,
 } from "react-native";
 import publicIP from "react-native-public-ip";
 import React, {
@@ -173,6 +174,7 @@ const SwiperOr = ({}) => {
   const [redirect_to_setting, setredirect_to_setting] = useState(false);
   const [promptStep, setpromptStep] = useState(1);
   const [profiles, setprofiles] = useState([]);
+  const [profile_remove_refh, setprofile_remove_refh] = useState(false)
   const [empty_profile_call, setempty_profile_call] = useState(false);
 
   //Filter
@@ -210,6 +212,7 @@ const SwiperOr = ({}) => {
 
   // Scale Swipe Card from 80% to 100% height
   const actionAnimation = () => {
+
     Animated.timing(traYValue, {
       fromValue: scrn_height,
       toValue: 0,
@@ -224,6 +227,7 @@ const SwiperOr = ({}) => {
 
   // Remove card on action perform
   const removeCard = useCallback(() => {
+    removeItemfromList()
     scaleValue.setValue(0.9);
     iconRotate.setValue(0);
     iconTranslateX.setValue(0);
@@ -231,14 +235,19 @@ const SwiperOr = ({}) => {
     leftX.setValue(0);
     rightX.setValue(0);
     upY.setValue(0);
-    setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
+
+   
     swipe.setValue({ x: 0, y: 0 });
     traYValue.setValue(scrn_height);
+
     //  If user perform any three or more swipe action allow user to add public and private prompts if user don't have prompts
     if (swippingcount >= 2) {
       setpromptTime(true);
     }
-  }, [swipe, swippingcount]);
+  }, [swipe, swippingcount, profiles]);
+
+
+
 
   const handleChoiceButtons = useCallback(
     (direction) => {
@@ -256,10 +265,6 @@ const SwiperOr = ({}) => {
         actionAnimation();
       });
 
-      // setTimeout(() => {
-      //   removeCard()
-
-      // }, 800);
     },
 
     [removeCard, swipe.x]
@@ -362,7 +367,6 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
-    console.log("getFilterData");
     setloading(true);
 
     const headers = {
@@ -545,8 +549,7 @@ const SwiperOr = ({}) => {
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
-    console.log("getFilterProfiles call", location_added);
-    console.log("\n");
+    
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -559,15 +562,23 @@ const SwiperOr = ({}) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
      
+        let tmp =[...profiles]
+
         if (resp_code == 204) {
           setwarn_step(2);
           setloading2(true);
           setempty_profile_call(true);
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
-          setprofiles(active_profiles);
+          let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
+      
+          if (new_profiles.length > 0) {
+            setempty_profile_call(false);
+            setprofiles((prevState) => [...new_profiles,...prevState]);
+          }
+        
           setloading2(false);
-          setempty_profile_call(false);
+          
         } else if (resp_code == 401) {
           dispatch(setSessionExpired(true));
         } else {
@@ -581,7 +592,6 @@ const SwiperOr = ({}) => {
   const getRejectedProfiles = async () => {
     setwarn_step(0);
     setloading2(true);
-    console.log("getRejectedProfiles");
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -640,6 +650,19 @@ const SwiperOr = ({}) => {
     }
   };
 
+  const removeItemfromList = () =>{
+    
+    if (profiles.length > 0) {
+      let tmp = [...profiles]
+      tmp.splice(tmp.length - 1,1)
+      setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
+   
+      if (tmp.length < 3 && !empty_profile_call) { 
+        getFilterProfiles()
+      }
+    }
+  }
+
   // To Refresh page After changing location or permission from app setting
   useEffect(() => {
     if (
@@ -655,6 +678,7 @@ const SwiperOr = ({}) => {
 
   // recall getFilterProfiles after all profile swipe
   useEffect(() => {
+
     if (profiles.length == 0) {
       if (!empty_profile_call) {
         dispatch(setProfileRefresh(!profile_refresh));
@@ -662,7 +686,9 @@ const SwiperOr = ({}) => {
       setwarn_step(2);
       setloading2(true);
     }
+   
   }, [profiles]);
+  
 
   useEffect(() => {
     let prv_prmt = profile_data?.userprivateprompts;

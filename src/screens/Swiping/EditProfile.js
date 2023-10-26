@@ -834,6 +834,8 @@ const EditProfile = ({ navigation }) => {
       "Content-Type": "application/json",
     };
 
+    
+
     const data = {
       user_id: profile_data.user.id, //data should be in integer
 
@@ -868,6 +870,7 @@ const EditProfile = ({ navigation }) => {
       pets: selected_pets_list,
     };
 
+
     try {
       const resp = await axios.post(url, data, { headers });
       setchanges_made(false);
@@ -885,6 +888,8 @@ const EditProfile = ({ navigation }) => {
         userprivateprompts: [],
         userpublicprompts: [],
       };
+
+
 
       if (code == 200) {
         if (profile_data?.userprivateprompts.length > 0) {

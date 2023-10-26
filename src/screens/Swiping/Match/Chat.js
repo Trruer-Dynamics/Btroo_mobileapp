@@ -580,13 +580,9 @@ const Chat = ({ profile }) => {
         headers,
       });
       setloading(false);
-
       let resp_data = response.data;
-
-      // console.log("revealProfileTime resp", resp_data);
     } catch (error) {
       setloading(false);
-      // console.log("revealProfileTime error", error);
       return false;
     }
   };
@@ -1536,7 +1532,8 @@ const styles = StyleSheet.create({
   chatMsgTxt: {
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
-    lineHeight: rspF(2.1),
+    // lineHeight: rspF(2.1),
+    lineHeight: rspF(Platform.OS  == 'android' ? 2.12 : 2.33),
     textAlign: "justify",
     minWidth: rspW(24),
     maxWidth: rspW(80),
