@@ -90,8 +90,7 @@ const DATA = [
 const DATA2 = [
   {
     id: 1,
-    // image: require("../../assets/images/Tutorial/Tut1.png"),
-    image: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg"),
+    image: require("../../assets/images/Tutorial/ManPhotos/Smallphotos/Photo1.jpg"),
     image2: require("../../assets/images/Tutorial/ManPhotos/Enlargedphotos/Photo1.jpg"),
   },
   {

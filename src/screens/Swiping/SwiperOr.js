@@ -110,10 +110,7 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.access_token
   );
 
-  const viewableItemsChanged = useRef(({ viewableItems }) => {
-    setviewableItemsS(viewableItems);
-  }).current;
-
+ 
   const [reports_count, setreports_count] = useState(0);
   const [location_added, setlocation_added] = useState(false);
   const [screen_loaded, setscreen_loaded] = useState(false);
@@ -549,7 +546,7 @@ const SwiperOr = ({}) => {
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
-    
+    console.log("Swiping Profile Api Call")
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -572,7 +569,14 @@ const SwiperOr = ({}) => {
           let active_profiles = resp_data.filter((v) => v.active == true);
           let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
       
+          console.log("new_profiles length",new_profiles.length)
           if (new_profiles.length > 0) {
+            let tmp2 = [...new_profiles, ...profiles]
+            for (let i = 0; i < tmp2.length; i++) {
+              const prf = tmp2[i];
+              console.log("profile name",i+1, prf?.name)
+            }
+
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
           }
@@ -654,9 +658,11 @@ const SwiperOr = ({}) => {
     
     if (profiles.length > 0) {
       let tmp = [...profiles]
+      console.log("A Profile Remove", tmp[tmp.length - 1]['name'])
       tmp.splice(tmp.length - 1,1)
+
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
-   
+      
       if (tmp.length < 3 && !empty_profile_call) { 
         getFilterProfiles()
       }
@@ -808,6 +814,42 @@ const SwiperOr = ({}) => {
     }, [prf_apprv_refh])
   );
 
+
+  useEffect(() => {
+    console.log("profiles.length",profiles.length)
+  }, [profiles])
+  
+const renderItem = ({ item, index })=>{
+  const isFirst = index == profiles.length - 1;
+
+    return (
+      <SwipeCard
+
+        key={index}
+        actionEnd={actionEnd}
+        actionType={actionType}
+        setactionType={setactionType}
+        showAction={showAction}
+        card_itm={item}
+        iconRotate={iconRotate}
+        iconTranslateX={iconTranslateX}
+        iconTranslateY={iconTranslateY}
+        handleChoiceButtons={handleChoiceButtons}
+        isFirst={isFirst}
+        swipe={swipe}
+        traYValue={traYValue}
+        leftX={leftX}
+        rightX={rightX}
+        upY={upY}
+        mainIndex={index}
+        setswippingcount={setswippingcount}
+      />
+    );
+}
+
+const keyExtractor = (itm, index) => itm.created_on + index
+
+
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <SafeAreaView
@@ -823,7 +865,7 @@ const SwiperOr = ({}) => {
           >
             <FlatList
               pagingEnabled
-              onViewableItemsChanged={viewableItemsChanged}
+              
               contentContainerStyle={{
                 flexGrow: 1,
                 borderWidth: 1,
@@ -831,34 +873,8 @@ const SwiperOr = ({}) => {
               }}
               bounces={false}
               data={profiles}
-              keyExtractor={(itm) => itm.created_on}
-              renderItem={({ item, index }) => {
-                const isFirst = index == profiles.length - 1;
-
-                return (
-                  <SwipeCard
-                    viewableItemsS={viewableItemsS}
-                    key={index}
-                    actionEnd={actionEnd}
-                    actionType={actionType}
-                    setactionType={setactionType}
-                    showAction={showAction}
-                    card_itm={item}
-                    iconRotate={iconRotate}
-                    iconTranslateX={iconTranslateX}
-                    iconTranslateY={iconTranslateY}
-                    handleChoiceButtons={handleChoiceButtons}
-                    isFirst={isFirst}
-                    swipe={swipe}
-                    traYValue={traYValue}
-                    leftX={leftX}
-                    rightX={rightX}
-                    upY={upY}
-                    mainIndex={index}
-                    setswippingcount={setswippingcount}
-                  />
-                );
-              }}
+              keyExtractor={keyExtractor}
+              renderItem={renderItem}
             />
           </SafeAreaView>
         ) : (

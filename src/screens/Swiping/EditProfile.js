@@ -38,6 +38,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { apiUrl } from "../../constants";
 import axios from "axios";
 import {
+  setLocations,
   setProfileImgs,
   setProfileRefresh,
   setProfiledata,
@@ -55,6 +56,7 @@ import { Image as CompImage } from "react-native-compressor";
 import Draggable from "../../components/screenComponents/picUpload/draggable";
 import Box from "../../components/screenComponents/picUpload/box";
 import _ from "lodash";
+import FormSelectorLS from "../../components/formComponents/FormSelectorLS";
 
 const EditProfile = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -68,6 +70,11 @@ const EditProfile = ({ navigation }) => {
   const profile_imgs = useSelector(
     (state) => state.authentication.profile_imgs
   );
+
+  const lcl_locations = useSelector(
+    (state) => state.authentication.locations
+  );
+
 
   const { appStateVisible } = useContext(UserContext);
 
@@ -586,6 +593,7 @@ const EditProfile = ({ navigation }) => {
       });
   };
 
+
   const getLocation = async (page, onpage = false) => {
     setcity_refresh(true);
 
@@ -595,20 +603,20 @@ const EditProfile = ({ navigation }) => {
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
-
       "Content-Type": "application/json",
     };
 
     await axios
       .post(apiUrl + `GetLocation/?page=${page}`, data, { headers })
       .then((resp) => {
+        // console.log("getLocation resp", resp.data)
         if (resp.data.code == 200) {
           setcity_refresh(false);
 
           let f_list = [];
-          if (onpage) {
-            f_list = [...city_list];
-          }
+          // if (onpage) {
+          //   f_list = [...city_list];
+          // }
           let tmp_cities = [];
 
           if (resp.data.data.city.length > 0) {
@@ -623,8 +631,9 @@ const EditProfile = ({ navigation }) => {
           }
 
           f_list.push(...tmp_cities);
-
-          setcity_list(f_list);
+          console.log("city list len",f_list.length)
+          dispatch(setLocations(f_list))
+          // setcity_list(f_list);
         } else {
           setcity_refresh(false);
         }
@@ -1067,6 +1076,7 @@ const EditProfile = ({ navigation }) => {
   };
 
   useLayoutEffect(() => {
+    
     loadData();
   }, []);
 
@@ -1159,6 +1169,12 @@ const EditProfile = ({ navigation }) => {
       setper_modal(false);
     }
   }, [galler_per, camera_per, appStateVisible]);
+
+
+  useLayoutEffect(() => {
+    console.log("lcl_locations",lcl_locations)
+    getLocation(1)
+  }, [])
 
   return (
     <>
@@ -1271,8 +1287,8 @@ const EditProfile = ({ navigation }) => {
                     marginTop: rspH(1.2),
                   }}
                 >
-                  <FormInputContainer label="City">
-                    <FormSelector
+                  {/* <FormInputContainer label="City"> */}
+                    {/* <FormSelector
                       setSelectedEntry={setcity}
                       selectedId={city_id}
                       setSelectedId={setcity_id}
@@ -1302,6 +1318,24 @@ const EditProfile = ({ navigation }) => {
                           setcity_list([]);
                         }
                       }}
+                      setchanges_made={setchanges_made}
+                    /> */}
+                  {/* </FormInputContainer> */}
+
+                  <FormInputContainer label="City">
+                    <FormSelectorLS
+                      setSelectedEntry={setcity}
+                      selectedId={city_id}
+                      setSelectedId={setcity_id}
+                      blr_value={city_blr}
+                      setblr_value={setcity_blr}
+                      title="City"
+                      placeholder={"Select"}
+                      width={"100%"}
+                      list={lcl_locations}
+                      selectedValue={city[1]}
+                      // refreshing={city_refresh}
+                      // reshing={setcity_refresh}
                       setchanges_made={setchanges_made}
                     />
                   </FormInputContainer>

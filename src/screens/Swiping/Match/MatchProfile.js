@@ -428,6 +428,8 @@ const MatchProfile = ({ route }) => {
                               .split(",")[0]
                               .substring(0, 9) + "..."
                           : profile?.userprofile?.city.split(",")[0]}
+
+                          
                       </Text>
                     </View>
 

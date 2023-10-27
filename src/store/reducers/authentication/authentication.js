@@ -48,6 +48,7 @@ const initialState = {
   profile_imgs_pos: { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8 },
 
   csignup_screen: "MobileNo",
+  locations: [],
 };
 
 export const authenticationSlice = createSlice({
@@ -106,6 +107,10 @@ export const authenticationSlice = createSlice({
     setNetworkConnect: (state, action) => {
       state.is_network_connected = action.payload;
     },
+
+    setLocations: (state, action) => {
+      state.locations = action.payload;
+    },
   },
 });
 
@@ -125,6 +130,7 @@ export const {
   setPromptFillingStart,
   setPromptFillingComplete,
   setNetworkConnect,
+  setLocations,
 } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

@@ -172,7 +172,6 @@ const Item2 = ({ item, index }) => {
 };
 
 const SwipeCard = ({
-  viewableItemsS,
   card_itm,
   isFirst,
   swipe,
@@ -701,6 +700,7 @@ const SwipeCard = ({
                           }).start();
                         }}
                         onPress={() => {
+                          console.log("\nPass Pressed")
                           handleChoiceButtons(0);
                           swipeProfile(false, false);
                           setreport("");
@@ -729,6 +729,7 @@ const SwipeCard = ({
                           }).start();
                         }}
                         onPress={() => {
+                          console.log("\nSoftspot Pressed")
                           handleChoiceButtons(0);
                           swipeProfile(true, true);
                           setreport("");
@@ -755,6 +756,7 @@ const SwipeCard = ({
                           }).start();
                         }}
                         onPress={() => {
+                          console.log("\nFancy Pressed")
                           handleChoiceButtons(0);
                           swipeProfile(true, false);
                           setreport("");

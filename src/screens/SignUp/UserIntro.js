@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { apiUrl } from "../../constants";
 import {
+  setLocations,
   setProfiledata,
   setPromptFillingComplete,
   setPromptFillingStart,
@@ -46,6 +47,7 @@ import {
 } from "../../store/reducers/tutorial/tutorial";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
+import FormSelectorLS from "../../components/formComponents/FormSelectorLS";
 
 const UserIntro = ({ navigation, route }) => {
   const [step, setstep] = useState(1);
@@ -56,6 +58,11 @@ const UserIntro = ({ navigation, route }) => {
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
+
+  const lcl_locations = useSelector(
+    (state) => state.authentication.locations
+  );
+
 
   const dispatch = useDispatch();
 
@@ -478,9 +485,9 @@ const UserIntro = ({ navigation, route }) => {
           setcity_refresh(false);
 
           let f_list = [];
-          if (onpage) {
-            f_list = [...city_list];
-          }
+          // if (onpage) {
+          //   f_list = [...city_list];
+          // }
           let tmp_cities = [];
 
           if (resp.data.data.city.length > 0) {
@@ -495,7 +502,8 @@ const UserIntro = ({ navigation, route }) => {
 
           f_list.push(...tmp_cities);
 
-          setcity_list(f_list);
+          // setcity_list(f_list);
+          dispatch(setLocations(f_list))
         } else {
           setcity_refresh(false);
           console.warn("Error occur while getting Location");
@@ -654,6 +662,7 @@ const UserIntro = ({ navigation, route }) => {
       setdob(new Date(mxdate_f));
     }
     // Call all Required Form Data
+    getLocation(1)
     getGenders();
     getEducation();
     getInterests();
@@ -749,7 +758,7 @@ const UserIntro = ({ navigation, route }) => {
 
                   <FormInputContainer label="City">
                     {/* Single Data selector */}
-                    <FormSelector
+                    {/* <FormSelector
                       setSelectedEntry={setcity}
                       selectedId={city_id}
                       setSelectedId={setcity_id}
@@ -779,7 +788,21 @@ const UserIntro = ({ navigation, route }) => {
                           setcity_list([]);
                         }
                       }}
+                    /> */}
+
+                    <FormSelectorLS
+                      setSelectedEntry={setcity}
+                      selectedId={city_id}
+                      setSelectedId={setcity_id}
+                      blr_value={city_blr}
+                      setblr_value={setcity_blr}
+                      title="City"
+                      placeholder={"Select"}
+                      width={"100%"}
+                      list={lcl_locations}
+                      selectedValue={city[1]}           
                     />
+
                   </FormInputContainer>
 
                   <View style={styles.multiInputContainer}>

@@ -289,7 +289,7 @@ const MatchTut = ({ repeat_tut }) => {
                   }}
                 >
                   <Text style={styles.centralModalTextNext}>
-                    {match_tut_step == 0 ? "NEXT" : "OK"}
+                    {match_tut_step == 0 ? "Next" : "Ok"}
                   </Text>
                 </TouchableOpacity>
               </View>
