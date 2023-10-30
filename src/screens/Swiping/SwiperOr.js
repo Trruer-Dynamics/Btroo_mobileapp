@@ -10,6 +10,7 @@ import {
   Linking,
   Easing,
   Alert,
+  NativeModules,
 } from "react-native";
 import publicIP from "react-native-public-ip";
 import React, {
@@ -75,6 +76,7 @@ import messaging from "@react-native-firebase/messaging";
 import { setPromptFillingStart } from "../../store/reducers/authentication/authentication";
 import { UserContext } from "../../context/user";
 import FastImage from "react-native-fast-image";
+
 
 const SwiperOr = ({}) => {
   const navigation = useNavigation();
@@ -330,6 +332,9 @@ const SwiperOr = ({}) => {
 
   // Save Current location Data in backend
   const addLocation = async () => {
+
+    console.log("addLocation")
+
     const data = {
       user_id: profile_data.user.id,
       longitude: current_long,
@@ -368,6 +373,7 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
+    console.log("getFilterData call")
     setloading(true);
 
     const headers = {
@@ -438,9 +444,13 @@ const SwiperOr = ({}) => {
             setprf_apprv_refh(!prf_apprv_refh);
 
             // If location send to backend then only get swiping profiles
-
+            console.log("Heretill")
             if (location_added && profiles.length < 3) {
+              console.log("inside getdata getfilterprofiles")
               getFilterProfiles();
+            }
+            else{
+              setloading2(false)
             }
           }
 
@@ -459,6 +469,7 @@ const SwiperOr = ({}) => {
   };
 
   const getGenders = async () => {
+    console.log("getGenders")
     setloading(true);
 
     await axios
@@ -481,6 +492,7 @@ const SwiperOr = ({}) => {
   };
 
   const getInterests = async () => {
+    console.log("getInterests")
     setloading(true);
 
     await axios
@@ -510,6 +522,7 @@ const SwiperOr = ({}) => {
   };
 
   const getLanguages = async () => {
+    console.log("getLanguages")
     setloading(true);
 
     await axios
@@ -532,11 +545,13 @@ const SwiperOr = ({}) => {
   };
 
   const getPrompts = async () => {
+    console.log("getPrompts")
     setloading(true);
     await axios
       .get(apiUrl + "getactiveprompts/")
       .then((resp) => {
-        setloading(true);
+        
+        setloading(false);
         let resp_data = resp.data;
 
         if (resp.data.code == 200) {
@@ -565,6 +580,8 @@ const SwiperOr = ({}) => {
       .then((resp) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
+
+        console.log("resp_data",resp_data,resp_code)
      
         let tmp =[...profiles]
 
@@ -573,6 +590,10 @@ const SwiperOr = ({}) => {
           if (profiles.length == 0) {
             setwarn_step(2);
             setloading2(true);
+          }
+          else{
+            console.log("filter user ")
+            setloading2(false)
           }
           
         } else if (resp_code == 200) {
@@ -590,6 +611,7 @@ const SwiperOr = ({}) => {
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
           }
+
         
           setloading2(false);
           
@@ -604,6 +626,7 @@ const SwiperOr = ({}) => {
   };
 
   const getRejectedProfiles = async () => {
+    console.log("getRejectedProfiles")
     setwarn_step(0);
     setloading2(true);
     setprofile_call(true);
@@ -615,12 +638,12 @@ const SwiperOr = ({}) => {
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
         let resp_data = resp.data;
-       
+        console.log("resp_data",resp_data)
         if (resp_data.length > 0) {
           setempty_profile_call(false);
           let active_profiles = resp_data.filter((v) => v.active == true);
           setprofiles(active_profiles);
-
+          console.log("jere")
           setloading2(false);
         } else {
           setwarn_step(2);
@@ -631,6 +654,7 @@ const SwiperOr = ({}) => {
   };
 
   const startFillingPrompts = async () => {
+    console.log("startFillingPrompts")
     setloading(true);
     const data = {
       user_id: profile_data.user.id,
@@ -722,6 +746,13 @@ const SwiperOr = ({}) => {
 
   // save location data in frontend
   useLayoutEffect(() => {
+
+    if (Platform.OS == 'ios') {
+      const locale = NativeModules.SettingsManager.settings
+      console.log("ios locale",locale)
+    }
+  
+    
     if (current_lat && current_long && current_address) {
       dispatch(
         setActiveUserLocationDetails({
@@ -827,7 +858,12 @@ const SwiperOr = ({}) => {
 
   useEffect(() => {
     console.log("profiles.length",profiles.length)
-  }, [profiles])
+    // loading && !loading2 && !promptsmodalVisible
+
+    console.log("loading2",loading2,loading,promptsmodalVisible)
+
+
+  }, [profiles,loading2,loading])
   
 const renderItem = ({ item, index })=>{
   const isFirst = index == profiles.length - 1;
@@ -875,7 +911,17 @@ const keyExtractor = (itm, index) => itm.created_on + index
           >
             <FlatList
               pagingEnabled
-              
+              // getItemLayout={(data, index) => (
+              //   {
+              //     length: scrn_width, 
+              //     offset: scrn_width * index,
+              //     index
+              //   }
+              // )}
+
+              onLayout={()=>{
+                console.log("onLayout")
+              }}
               contentContainerStyle={{
                 flexGrow: 1,
                 borderWidth: 1,

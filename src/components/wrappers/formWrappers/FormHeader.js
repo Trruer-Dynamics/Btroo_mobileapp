@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: fontFamily.bold,
     color: colors.black,
-    lineHeight: rspF(Platform.OS == "ios" ? 4 : 3.2),
+    lineHeight: rspF(Platform.OS == "ios" ? 4 : 3.6),
     alignSelf: "center",
   },
   headerPara: {
