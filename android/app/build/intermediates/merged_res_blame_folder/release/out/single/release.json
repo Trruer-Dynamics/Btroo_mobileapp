@@ -92,6 +92,10 @@
         "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_matching_message_sendmsgactive.png"
     },
     {
+        "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_tutorial_manphotos_smallphotos_photo1.jpg.flat",
+        "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_tutorial_manphotos_smallphotos_photo1.jpg"
+    },
+    {
         "merged": "com.btroo.app-merged_res-49:/drawable-mdpi_src_assets_images_setting_goodbye.png.flat",
         "source": "com.btroo.app-react-44:/drawable-mdpi/src_assets_images_setting_goodbye.png"
     },

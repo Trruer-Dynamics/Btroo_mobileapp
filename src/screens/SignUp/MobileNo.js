@@ -172,7 +172,7 @@ const MobileNo = ({ navigation, route }) => {
       console.log("SignIn", error.message, typeof error.message);
 
       setTimeout(() => {
-        Alert.alert("Error", "Please try after sometime.");
+        Alert.alert("Error", "Yor otp attempts limit reached, Please try after a hours.");
       }, 100);
     }
   };

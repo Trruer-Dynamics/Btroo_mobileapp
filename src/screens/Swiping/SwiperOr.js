@@ -86,6 +86,10 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.active_user_location_details
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
@@ -435,7 +439,7 @@ const SwiperOr = ({}) => {
 
             // If location send to backend then only get swiping profiles
 
-            if (location_added) {
+            if (location_added && profiles.length < 3) {
               getFilterProfiles();
             }
           }
@@ -446,8 +450,11 @@ const SwiperOr = ({}) => {
         }
       })
       .catch((err) => {
+        if (is_network_connected) {
+          dispatch(setSessionExpired(true));  
+        }
         setloading(false);
-        dispatch(setSessionExpired(true));
+        
       });
   };
 
@@ -562,9 +569,12 @@ const SwiperOr = ({}) => {
         let tmp =[...profiles]
 
         if (resp_code == 204) {
-          setwarn_step(2);
-          setloading2(true);
-          setempty_profile_call(true);
+          setempty_profile_call(true);  
+          if (profiles.length == 0) {
+            setwarn_step(2);
+            setloading2(true);
+          }
+          
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
           let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
