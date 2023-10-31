@@ -469,6 +469,7 @@ const UserIntro = ({ navigation, route }) => {
   // get Cities Data on Search
   const getLocation = async (page, onpage = false) => {
     setcity_refresh(true);
+    let url = `GetLocation/`
 
     let data = {
       location: city_search,
@@ -479,7 +480,7 @@ const UserIntro = ({ navigation, route }) => {
       "Content-Type": "application/json",
     };
     await axios
-      .post(apiUrl + `GetLocation/?page=${page}`, data, { headers })
+      .post(apiUrl + url, data, { headers })
       .then((resp) => {
         if (resp.data.code == 200) {
           setcity_refresh(false);
