@@ -624,7 +624,9 @@ const styles = StyleSheet.create({
     top: rspH(Platform.OS == "ios" ? 7.7 : 2.4),
     left: rspW(32),
     width: rspW(36),
-    height: rspH(3.8),
+    // height: rspH(3.8),
+    height: rspH(4),
+    paddingTop: rspH(0.6),
     alignItems: "center",
     borderRadius: rspW(4),
   },
@@ -633,6 +635,7 @@ const styles = StyleSheet.create({
     fontSize: rspF(2.7),
     color: colors.black,
     lineHeight: rspF(2.65),
+    textAlign:'center',
   },
 
   iceBreakerHighCont: {

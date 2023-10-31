@@ -138,6 +138,7 @@ const NotificationController = (props) => {
 
   useLayoutEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      console.log("remoteMessage",remoteMessage)
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
 

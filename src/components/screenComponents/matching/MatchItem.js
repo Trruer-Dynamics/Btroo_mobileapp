@@ -29,6 +29,8 @@ const MatchItem = ({
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
   let leftHrs = hours;
 
+  console.log("item.prof_rvl c",item.prof_rvl)
+
   return (
     <TouchableOpacity
       style={styles.item}

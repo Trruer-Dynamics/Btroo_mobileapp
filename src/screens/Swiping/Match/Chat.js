@@ -562,6 +562,7 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfileTime = async () => {
+    console.log("\nrevealProfileTime")
     setloading(true);
 
     const api = apiUrl + "sendnotificationforprofilereveal/";
@@ -581,6 +582,7 @@ const Chat = ({ profile }) => {
       });
       setloading(false);
       let resp_data = response.data;
+      console.log("resp_data",resp_data)
     } catch (error) {
       setloading(false);
       return false;

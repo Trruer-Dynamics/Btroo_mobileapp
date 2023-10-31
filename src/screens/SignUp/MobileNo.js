@@ -160,8 +160,8 @@ const MobileNo = ({ navigation, route }) => {
       // show Loader
       setloading(true);
 
-      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      // setconfirm(confirmation);
+      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      setconfirm(confirmation);
 
       setOtpShowBox(true);
 
@@ -172,7 +172,7 @@ const MobileNo = ({ navigation, route }) => {
       console.log("SignIn", error.message, typeof error.message);
 
       setTimeout(() => {
-        Alert.alert("Error", "Yor otp attempts limit reached, Please try after a hours.");
+        Alert.alert("Error", "Your otp attempts limit reached, Please try after few hours.");
       }, 100);
     }
   };
