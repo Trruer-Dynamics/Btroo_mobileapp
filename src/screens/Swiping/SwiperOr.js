@@ -333,8 +333,6 @@ const SwiperOr = ({}) => {
   // Save Current location Data in backend
   const addLocation = async () => {
 
-    console.log("addLocation")
-
     const data = {
       user_id: profile_data.user.id,
       longitude: current_long,
@@ -373,7 +371,6 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
-    console.log("getFilterData call")
     setloading(true);
 
     const headers = {
@@ -444,9 +441,8 @@ const SwiperOr = ({}) => {
             setprf_apprv_refh(!prf_apprv_refh);
 
             // If location send to backend then only get swiping profiles
-            console.log("Heretill")
+
             if (location_added && profiles.length < 3) {
-              console.log("inside getdata getfilterprofiles")
               getFilterProfiles();
             }
             else{
@@ -469,7 +465,7 @@ const SwiperOr = ({}) => {
   };
 
   const getGenders = async () => {
-    console.log("getGenders")
+
     setloading(true);
 
     await axios
@@ -492,7 +488,7 @@ const SwiperOr = ({}) => {
   };
 
   const getInterests = async () => {
-    console.log("getInterests")
+
     setloading(true);
 
     await axios
@@ -522,7 +518,7 @@ const SwiperOr = ({}) => {
   };
 
   const getLanguages = async () => {
-    console.log("getLanguages")
+
     setloading(true);
 
     await axios
@@ -545,7 +541,7 @@ const SwiperOr = ({}) => {
   };
 
   const getPrompts = async () => {
-    console.log("getPrompts")
+
     setloading(true);
     await axios
       .get(apiUrl + "getactiveprompts/")
@@ -568,7 +564,7 @@ const SwiperOr = ({}) => {
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
-    console.log("Swiping Profile Api Call")
+
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -581,8 +577,6 @@ const SwiperOr = ({}) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
 
-        console.log("resp_data",resp_data,resp_code)
-     
         let tmp =[...profiles]
 
         if (resp_code == 204) {
@@ -592,20 +586,17 @@ const SwiperOr = ({}) => {
             setloading2(true);
           }
           else{
-            console.log("filter user ")
             setloading2(false)
           }
           
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
           let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
-      
-          console.log("new_profiles length",new_profiles.length)
+    
           if (new_profiles.length > 0) {
             let tmp2 = [...new_profiles, ...profiles]
             for (let i = 0; i < tmp2.length; i++) {
               const prf = tmp2[i];
-              console.log("profile name",i+1, prf?.name)
             }
 
             setempty_profile_call(false);
@@ -626,7 +617,6 @@ const SwiperOr = ({}) => {
   };
 
   const getRejectedProfiles = async () => {
-    console.log("getRejectedProfiles")
     setwarn_step(0);
     setloading2(true);
     setprofile_call(true);
@@ -638,12 +628,10 @@ const SwiperOr = ({}) => {
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
         let resp_data = resp.data;
-        console.log("resp_data",resp_data)
         if (resp_data.length > 0) {
           setempty_profile_call(false);
           let active_profiles = resp_data.filter((v) => v.active == true);
           setprofiles(active_profiles);
-          console.log("jere")
           setloading2(false);
         } else {
           setwarn_step(2);
@@ -654,7 +642,7 @@ const SwiperOr = ({}) => {
   };
 
   const startFillingPrompts = async () => {
-    console.log("startFillingPrompts")
+
     setloading(true);
     const data = {
       user_id: profile_data.user.id,
@@ -692,11 +680,8 @@ const SwiperOr = ({}) => {
     
     if (profiles.length > 0) {
       let tmp = [...profiles]
-      console.log("A Profile Remove", tmp[tmp.length - 1]['name'])
       tmp.splice(tmp.length - 1,1)
-
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
-      
       if (tmp.length < 3 && !empty_profile_call) { 
         getFilterProfiles()
       }
@@ -749,7 +734,6 @@ const SwiperOr = ({}) => {
 
     if (Platform.OS == 'ios') {
       const locale = NativeModules.SettingsManager.settings
-      console.log("ios locale",locale)
     }
   
     
@@ -856,14 +840,6 @@ const SwiperOr = ({}) => {
   );
 
 
-  useEffect(() => {
-    console.log("profiles.length",profiles.length)
-    // loading && !loading2 && !promptsmodalVisible
-
-    console.log("loading2",loading2,loading,promptsmodalVisible)
-
-
-  }, [profiles,loading2,loading])
   
 const renderItem = ({ item, index })=>{
   const isFirst = index == profiles.length - 1;

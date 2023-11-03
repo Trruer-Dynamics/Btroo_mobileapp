@@ -10,6 +10,7 @@ import {
   BackHandler,
   AppState,
   FlatList,
+  LayoutAnimation,
 } from "react-native";
 import React, {
   useState,
@@ -56,12 +57,16 @@ import {
 } from "../../../store/reducers/authentication/authentication";
 import FormHeaderChatN from "../../../components/wrappers/formWrappers/FormHeaderChatN";
 import Animated, {
+  Easing,
+  Layout,
+  SlideInDown,
   interpolate,
   runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
+  withSpring,
   withTiming,
 } from "react-native-reanimated";
 import { FlashList } from "@shopify/flash-list";
@@ -132,7 +137,9 @@ const ChatItem = ({
       }
       if (animation.value >= 38) {
         runOnJS(vibtr)();
-        animation.value = withTiming(0);
+        animation.value = withTiming(0,{
+          easing: Easing.linear
+        });
       }
     },
   });
@@ -181,10 +188,15 @@ const ChatItem = ({
     index == 0 ? 1.6 : chatlist[index - 1][1] == chatlist[index][1] ? 0.5 : 1.6;
 
   return (
-    <View
+    <PanGestureHandler
+        onGestureEvent={gestureHandler}
+        activeOffsetX={[-5, 5]}
+      >
+    <Animated.View
       style={{
         flex: 1,
         position: "relative",
+        // backgroundColor:'red',
         marginBottom: rspH(btmMarg),
       }}
     >
@@ -217,10 +229,7 @@ const ChatItem = ({
         </View>
       </Animated.View>
 
-      <PanGestureHandler
-        onGestureEvent={gestureHandler}
-        activeOffsetX={[-5, 5]}
-      >
+      
         <Animated.View
           ref={boxRef}
           style={[
@@ -313,7 +322,7 @@ const ChatItem = ({
             <View
               style={{
                 position: "absolute",
-                zIndex: 3,
+                zIndex: -1,
                 bottom: 0,
                 left: rspW(-4.8),
               }}
@@ -331,7 +340,7 @@ const ChatItem = ({
             <View
               style={{
                 position: "absolute",
-                zIndex: 1,
+                zIndex: -1,
                 bottom: 0,
                 right: rspW(-4.8),
               }}
@@ -373,7 +382,7 @@ const ChatItem = ({
             </View>
           </View>
         </Animated.View>
-      </PanGestureHandler>
+
 
       {index === rply_item_indx && (
         <Animated.View
@@ -401,7 +410,8 @@ const ChatItem = ({
           ]}
         />
       )}
-    </View>
+    </Animated.View>
+    </PanGestureHandler>
   );
 };
 
@@ -552,6 +562,7 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfileTime = async () => {
+    console.log("\nrevealProfileTime")
     setloading(true);
 
     const api = apiUrl + "sendnotificationforprofilereveal/";
@@ -571,6 +582,7 @@ const Chat = ({ profile }) => {
       });
       setloading(false);
       let resp_data = response.data;
+      console.log("resp_data",resp_data)
     } catch (error) {
       setloading(false);
       return false;
@@ -1020,12 +1032,12 @@ const Chat = ({ profile }) => {
     }
   }, [rvl_activate]);
 
-  useLayoutEffect(() => {
-    // if user start chatting
-    if (profile.matchType == "New Match") {
-      setmsg("Hi!");
-    }
-  }, []);
+  // useLayoutEffect(() => {
+  //   // if user start chatting
+  //   if (profile?.matchType == "New Match") {
+  //     setmsg("Hi!");
+  //   }
+  // }, []);
 
   // load icebreaker according network status
   useLayoutEffect(() => {
@@ -1231,6 +1243,7 @@ const Chat = ({ profile }) => {
               alignItems: "center",
             }}
           >
+           
             <View style={styles.messageInputArea}>
               {/* Icebraker Container */}
               <TouchableOpacity
@@ -1246,7 +1259,8 @@ const Chat = ({ profile }) => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <View
+            <Animated.View
+           
               style={{
                 borderColor: colors.grey,
                 borderRadius: rspW(3.2),
@@ -1254,31 +1268,35 @@ const Chat = ({ profile }) => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                position:'relative',
               }}
             >
               {replySet && actreplyID && (
-                <View
+                
+                <Animated.View
+      
                   style={{
+                    
                     backgroundColor:
                       chatlist.find((v) => v[4] == actreplyID)[1] == 0
                         ? "#e6e8eb"
                         : "#4986CA",
                     borderLeftWidth: rspW(1),
                     borderLeftColor: "#000",
+           
                     // paddingVertical: rspH(1.2),
                     paddingVertical: rspH(0.8),
-
                     // paddingHorizontal: rspW(5.8),
                     paddingLeft: rspW(1.8),
                     paddingRight: rspW(2.4),
-
                     // marginTop: 10,
                     marginTop: rspH(0.7),
-
                     width: rspW(90),
+           
                     borderRadius: rspW(2),
                     flexDirection: "row",
                     justifyContent: "space-between",
+                  
                   }}
                 >
                   <View style={{ width: "96%" }}>
@@ -1331,7 +1349,8 @@ const Chat = ({ profile }) => {
                       }
                     />
                   </TouchableOpacity>
-                </View>
+                </Animated.View>
+
               )}
 
               <View
@@ -1347,6 +1366,7 @@ const Chat = ({ profile }) => {
                   style={styles.messageInput}
                   value={msg}
                   onChangeText={(val) => {
+                    
                     setmsg(val);
                   }}
                   maxHeight={rspH(12.5)}
@@ -1375,8 +1395,15 @@ const Chat = ({ profile }) => {
                           .includes(day_tmp);
 
                         let tmp_lis = [...chatlist];
+                        
+
+                      
+
+
                         let nitm = [
-                          msg.replace(/\s+/g, " ").trim(),
+                    
+                          msg.replace(/^\s+|\s+$/g,'').trim(),
+                          // .replace(/\s+/g, " ").trim(),
                           1,
                           new Date(),
                           profile_data.user.id,
@@ -1392,7 +1419,9 @@ const Chat = ({ profile }) => {
                         setreplySet(false);
 
                         let data = {
-                          message: msg.replace(/\s+/g, " ").trim(),
+                          message:
+                          msg.replace(/^\s+|\s+$/g,'').trim(),
+                          // .replace(/\s+/g, " ").trim(),
                           sender: profile_data.user.id,
                           datetime: new Date(),
                           chat_id: profile.chat_id,
@@ -1404,6 +1433,8 @@ const Chat = ({ profile }) => {
                         let all_drafts_msgs = [...drafts_msgs];
 
                         all_drafts_msgs.push(data);
+
+                        console.log("chatMsgTxt",data)
 
                         dispatch(setDraftMsgs(all_drafts_msgs));
                         if (SocketOpen) {
@@ -1423,7 +1454,7 @@ const Chat = ({ profile }) => {
                   </TouchableOpacity>
                 )}
               </View>
-            </View>
+            </Animated.View>
           </View>
 
           <FullModal
@@ -1515,7 +1546,8 @@ const styles = StyleSheet.create({
   chatMsgTxt: {
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
-    lineHeight: rspF(2.1),
+    // lineHeight: rspF(2.1),
+    lineHeight: rspF(Platform.OS  == 'android' ? 2.12 : 2.33),
     textAlign: "justify",
     minWidth: rspW(24),
     maxWidth: rspW(80),

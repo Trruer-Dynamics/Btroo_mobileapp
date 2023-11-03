@@ -28,7 +28,7 @@ const BottomTab = () => {
   const current_screen = useSelector((state) => state.screen.current_screen);
 
   useEffect(() => {
-    // console.log("current_screen",current_screen)
+   
     if (swipe_tut || repeat_tut || match_tut ) {
       let dsb = false
       if (repeat_tut) {
@@ -42,7 +42,7 @@ const BottomTab = () => {
       if (current_screen == 'MatchScreen' && (match_tut)) {
         dsb=true
       }
-      // console.log("dsb",dsb)
+
       setbtn_disable(dsb) 
     }
     else{
@@ -79,16 +79,8 @@ const BottomTab = () => {
           listeners={{
             tabPress: e =>{
               if (btn_disable) {
-                // console.log("Here1")
                 e.preventDefault()
-              }
-              else{
-                // console.log("SettingsPress")
-              }
-
-              
-              
-            }
+              }}
           }}
           options={{
             tabBarActiveTintColor: colors.white,
@@ -121,15 +113,8 @@ const BottomTab = () => {
             
             tabPress: e =>{
               if (btn_disable) {
-                // console.log("Here2")
                 e.preventDefault()
-              }
-              else{
-                // console.log("SwiperPress") 
-              }
-       
-              
-            }
+              }}
           }}
           options={{
             tabBarActiveTintColor: colors.white,
@@ -161,15 +146,8 @@ const BottomTab = () => {
           listeners={{
             tabPress: e =>{
               if (btn_disable) {
-                // console.log("Here3")
                 e.preventDefault()
-              }
-              else{
-                // console.log("MatchPress")
-              }
-   
-              
-            }
+              }}
           }}
           options={{
             tabBarActiveTintColor: colors.white,
@@ -203,13 +181,9 @@ const BottomTab = () => {
           listeners={{
             tabPress: e =>{
               if (btn_disable) {
-                // console.log("Here4")
                 e.preventDefault()
               }
-              else{
-              // console.log("ProfilePress")
-            }
-            }
+             }
           }}
           options={{
             tabBarActiveTintColor: colors.white,

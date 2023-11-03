@@ -51,7 +51,7 @@ const insets = initialWindowMetrics.insets;
 const Match = () => {
   const dispatch = useDispatch();
 
-  const { newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);
+  const { newMsgRefresh, setnewMsgRefresh ,appStateVisible} = useContext(UserContext);
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -119,6 +119,7 @@ const Match = () => {
   };
 
   const getMatches = async () => {
+
     const url = apiUrl + `activechatroomlist/`;
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -128,6 +129,7 @@ const Match = () => {
       userprofileid: profile_data.userprofile.id,
     };
 
+
     try {
       const resp = await axios.post(url, data, { headers });
       // setloading(false);
@@ -135,11 +137,15 @@ const Match = () => {
       let code = resp.data.code;
       let resp_data = resp.data.data;
 
+
       if (code == 200) {
         let match_tmp = [];
         let matchs_imgs = [];
         if (resp_data.length > 0) {
+
           for (let p = 0; p < resp_data.length; p++) {
+
+            
             let mth = {};
             let id = resp_data[p].id;
             let lastMessage = resp_data[p].last_message?.content
@@ -156,6 +162,8 @@ const Match = () => {
               user_1.userprofile.id == profile_data.userprofile.id
                 ? user_2
                 : user_1;
+
+            let prof_rev =  resp_data[p].user1_profile_reveal && resp_data.user2_profile_reveal
 
             let seen_by =
               resp_data[p].last_message != null
@@ -182,7 +190,7 @@ const Match = () => {
             mth.user_id = mth_user.id;
             mth.for_user_id = profile_data.userprofile.id;
             mth.prof_img = prf_img?.cropedimage;
-            mth.prof_rvl = resp_data[p].user1_profile_reveal;
+            mth.prof_rvl = prof_rev;
             mth.publicprompts = mth_user.userprofile.publicprompts;
             mth.privateprompts = mth_user.userprofile.privateprompts;
             mth.tut = false;
@@ -200,6 +208,8 @@ return a.position - b.position
           }
         }
 
+
+
         setmatch_list(match_tmp);
         dispatch(setMatches(match_tmp));
         dispatch(setMatchesImgs(matchs_imgs));
@@ -216,6 +226,7 @@ return a.position - b.position
         : item.userprofile.gender == "Man"
         ? MaleAvatar
         : FemaleAvatar;
+
 
       return (
         <MatchItem
@@ -282,7 +293,7 @@ return a.position - b.position
           setmatch_list(c_user_matches);
         }
       }
-    }, [newMsgRefresh, is_network_connected])
+    }, [newMsgRefresh, is_network_connected,appStateVisible])
   );
 
   return (

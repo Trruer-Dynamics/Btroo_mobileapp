@@ -196,7 +196,7 @@ const ChatItem = ({
       style={{
         flex: 1,
         position: "relative",
-        // backgroundColor:'red',
+        backgroundColor:'red',
         marginBottom: rspH(btmMarg),
       }}
     >
@@ -237,9 +237,10 @@ const ChatItem = ({
               ...styles.chatCont,
               flexDirection: "column",
               zIndex: 1,
+            
               backgroundColor: item[1] == 1 ? colors.blue : "#F5F5F5",
               alignSelf: item[1] == 0 ? "flex-start" : "flex-end",
-              position: "relative",
+              // position: "relative",
             },
             animatedStyle,
           ]}
@@ -322,7 +323,7 @@ const ChatItem = ({
             <View
               style={{
                 position: "absolute",
-                zIndex: 3,
+                zIndex: -1,
                 bottom: 0,
                 left: rspW(-4.8),
               }}
@@ -340,7 +341,7 @@ const ChatItem = ({
             <View
               style={{
                 position: "absolute",
-                zIndex: 1,
+                zIndex: -1,
                 bottom: 0,
                 right: rspW(-4.8),
               }}
@@ -1032,12 +1033,12 @@ const Chat = ({ profile }) => {
     }
   }, [rvl_activate]);
 
-  useLayoutEffect(() => {
-    // if user start chatting
-    if (profile?.matchType == "New Match") {
-      setmsg("Hi!");
-    }
-  }, []);
+  // useLayoutEffect(() => {
+  //   // if user start chatting
+  //   if (profile?.matchType == "New Match") {
+  //     setmsg("Hi!");
+  //   }
+  // }, []);
 
   // load icebreaker according network status
   useLayoutEffect(() => {
@@ -1366,6 +1367,7 @@ const Chat = ({ profile }) => {
                   style={styles.messageInput}
                   value={msg}
                   onChangeText={(val) => {
+                    
                     setmsg(val);
                   }}
                   maxHeight={rspH(12.5)}
@@ -1394,8 +1396,15 @@ const Chat = ({ profile }) => {
                           .includes(day_tmp);
 
                         let tmp_lis = [...chatlist];
+                        
+
+                      
+
+
                         let nitm = [
-                          msg.replace(/\s+/g, " ").trim(),
+                    
+                          msg.replace(/^\s+|\s+$/g,'').trim(),
+                          // .replace(/\s+/g, " ").trim(),
                           1,
                           new Date(),
                           profile_data.user.id,
@@ -1411,7 +1420,9 @@ const Chat = ({ profile }) => {
                         setreplySet(false);
 
                         let data = {
-                          message: msg.replace(/\s+/g, " ").trim(),
+                          message:
+                          msg.replace(/^\s+|\s+$/g,'').trim(),
+                          // .replace(/\s+/g, " ").trim(),
                           sender: profile_data.user.id,
                           datetime: new Date(),
                           chat_id: profile.chat_id,
@@ -1423,6 +1434,8 @@ const Chat = ({ profile }) => {
                         let all_drafts_msgs = [...drafts_msgs];
 
                         all_drafts_msgs.push(data);
+
+                        console.log("chatMsgTxt",data)
 
                         dispatch(setDraftMsgs(all_drafts_msgs));
                         if (SocketOpen) {

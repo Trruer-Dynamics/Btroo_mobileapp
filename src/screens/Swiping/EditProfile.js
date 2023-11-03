@@ -595,11 +595,8 @@ const EditProfile = ({ navigation }) => {
 
 
   const getLocation = async (page, onpage = false) => {
-    console.log("getLocation")
     setcity_refresh(true);
-
     let url = `GetLocation/`
-
     let data = {
       location: city_search,
     };
@@ -612,7 +609,6 @@ const EditProfile = ({ navigation }) => {
     await axios
       .post(apiUrl + url, data, { headers })
       .then((resp) => {
-        console.log("getLocation resp",resp?.data?.data?.city.length)
         if (resp.data.code == 200) {
           setcity_refresh(false);
 
@@ -634,9 +630,8 @@ const EditProfile = ({ navigation }) => {
           }
 
           f_list.push(...tmp_cities);
-          // console.log("city list len",f_list.length)
           dispatch(setLocations(f_list))
-          // setcity_list(f_list);
+
         } else {
           setcity_refresh(false);
         }
@@ -1175,7 +1170,6 @@ const EditProfile = ({ navigation }) => {
 
 
   useLayoutEffect(() => {
-    // console.log("lcl_locations",lcl_locations)
     getLocation(1)
   }, [])
 

@@ -634,7 +634,7 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.bold,
     fontSize: rspF(2.7),
     color: colors.black,
-    lineHeight: rspF(2.65),
+    lineHeight: rspF(2.8),
     textAlign:'center',
   },
 
