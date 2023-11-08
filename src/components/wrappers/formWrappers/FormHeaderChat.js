@@ -23,6 +23,7 @@ const FormHeaderChat = ({
         alignItems: "center",
         height: srn_height * 0.06,
         marginBottom: rspH(1.4),
+        backgroundColor:'red',
         width: "100%",
       }}
     >

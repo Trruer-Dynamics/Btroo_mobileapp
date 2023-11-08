@@ -59,6 +59,11 @@ const UserIntro = ({ navigation, route }) => {
     (state) => state.authentication.profile_data
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
+
   const lcl_locations = useSelector(
     (state) => state.authentication.locations
   );
@@ -190,6 +195,7 @@ const UserIntro = ({ navigation, route }) => {
 
   // Blur all inputs in step 1 next button click
   useEffect(() => {
+    console.log("step1blr",city_blr)
     if (step1blr) {
       setname_blr(true);
       setdob_blr(true);
@@ -275,6 +281,7 @@ const UserIntro = ({ navigation, route }) => {
 
   const onNextPress = () => {
     let val = false;
+
 
     // Check validation of all inputs in active step
     if (step == 1) {
@@ -759,44 +766,14 @@ const UserIntro = ({ navigation, route }) => {
 
                   <FormInputContainer label="City">
                     {/* Single Data selector */}
-                    {/* <FormSelector
-                      setSelectedEntry={setcity}
-                      selectedId={city_id}
-                      setSelectedId={setcity_id}
-                      blr_value={city_blr && step1blr}
-                      setblr_value={setcity_blr}
-                      title="City"
-                      placeholder={"Select"}
-                      width={"100%"}
-                      list={city_list}
-                      selectedValue={city[1]}
-                      pull_refresh={true}
-                      refreshing={city_refresh}
-                      setrefreshing={setcity_refresh}
-                      onRefresh={(rpage) => {
-                        getLocation(rpage, true);
-                      }}
-                      page={city_page}
-                      setpage={setcity_page}
-                      backend_search={true}
-                      backend_search_txt={city_search}
-                      setbackend_search_txt={setcity_search}
-                      onBackendSearch={() => {
-                        setcity_page(1);
-                        if (city_search != "") {
-                          getLocation(1);
-                        } else {
-                          setcity_list([]);
-                        }
-                      }}
-                    /> */}
-
+                    
                     <FormSelectorLS
                       setSelectedEntry={setcity}
                       selectedId={city_id}
                       setSelectedId={setcity_id}
                       blr_value={city_blr}
                       setblr_value={setcity_blr}
+                      firstBlr={step1blr}
                       title="City"
                       placeholder={"Select"}
                       width={"100%"}
@@ -1110,11 +1087,16 @@ const UserIntro = ({ navigation, route }) => {
               <FooterBtn
                 title={"Next"}
                 disabled={
+                  !is_network_connected ||
                   (step == 1 && !step1_all_fill) ||
                   (step == 2 && !step2_all_fill) ||
                   (step == 3 && !step3_all_fill)
                 }
-                onPress={onNextPress}
+                onPress={()=>{
+                  if (is_network_connected) {
+                    onNextPress()
+                  }
+                }}
               />
             </FormWrapperFooter>
           </FormWrapper>

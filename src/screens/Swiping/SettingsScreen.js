@@ -34,12 +34,13 @@ import {
   setSwipeTut,
 } from "../../store/reducers/tutorial/tutorial";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
-import { initialWindowMetrics } from "react-native-safe-area-context";
+
 import { UserContext } from "../../context/user";
 import Loader from "../../components/loader/Loader";
 import FastImage from "react-native-fast-image";
 import OffflineAlert from "../../components/functions/OfflineAlert";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
+import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
 
 const SettingsScreen = ({ navigation, route }) => {

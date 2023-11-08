@@ -12,11 +12,16 @@ import FooterBtn from "../../components/Buttons/FooterBtn";
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
 import FastImage from "react-native-fast-image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StackActions, useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const Pledge = ({ navigation, route }) => {
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   const onNextPress = () => {
     navigation.dispatch(
       StackActions.replace("BottomTab", {
@@ -63,7 +68,12 @@ const Pledge = ({ navigation, route }) => {
             {/* Error Show Here */}
             <ErrorContainer error_msg="" />
             {/* Next Btn To Navigate to Next Form Components */}
-            <FooterBtn title={"Ok"} disabled={false} onPress={onNextPress} />
+            <FooterBtn title={"Ok"} disabled={!is_network_connected} onPress={() => {
+              if (is_network_connected) {
+                onNextPress()  
+              }
+              
+            }} />
           </FormWrapperFooter>
         </FormWrapper>
       </SafeAreaView>

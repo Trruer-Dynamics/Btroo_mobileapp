@@ -52,6 +52,7 @@ const FormSelectorLS = ({
   blr_value = null,
   setblr_value = null,
   placeholder,
+  firstBlr=true,
   list,
   selectedId,
   setSelectedId,
@@ -149,7 +150,10 @@ const FormSelectorLS = ({
         ]}
         onPress={() => {
           setcode_press(!code_press);
-          setblr_value(true);
+          if (firstBlr) {
+            setblr_value(true);
+          }
+
         }}
       >
         <View style={styles.inp_title_cont}>

@@ -77,6 +77,9 @@ const OtpVerify = ({
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
 
   const [loading, setloading] = useState(false);
 
@@ -139,7 +142,7 @@ const OtpVerify = ({
           );
         }, 100);
       } else if (user_code == 200) {
-        await dispatch(setSessionExpired(false));
+        dispatch(setSessionExpired(false));
 
         await sendDeviceToken(
           user_data.userprofile.id,
@@ -197,7 +200,7 @@ const OtpVerify = ({
     }
 
     const token = await messaging().getToken();
-    console.log("\ntoken",token)
+
     setDeviceToken(token);
 
     return token;
@@ -394,6 +397,7 @@ const OtpVerify = ({
 
   // To verify sent otp
   const verifyOtp = async () => {
+
     if (otp1 == "000000") {
       setotperr(false);
 
@@ -434,6 +438,7 @@ const OtpVerify = ({
     //   setloading(false);
     //   setotperr(true);
     // }
+    
   };
 
   // To resend OTP after 30 seconds
@@ -671,15 +676,14 @@ const OtpVerify = ({
           <FooterBtn
             title={"Validate"}
             disabled={
+              !is_network_connected
+              ||
               otp1.length < 6 ||
-              // !(otp1
-              // && otp2 && otp3 && otp4 && otp5 && otp6
-              // )
               otperr
             }
             onPress={() => {
               if (
-                otp1.length == 6
+                otp1.length == 6 && is_network_connected
                 //  && otp2 && otp3 && otp4 && otp5 && otp6
               ) {
                 verifyOtp();

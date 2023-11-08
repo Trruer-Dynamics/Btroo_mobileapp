@@ -9,7 +9,7 @@ import {
   Platform,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   rspH,
   rspW,
@@ -36,6 +36,10 @@ import truncateStr from "../../../components/functions/truncateStr";
 import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 import { FemaleAvatar, MaleAvatar } from "../../../assets";
+
+import { initialWindowMetrics } from "react-native-safe-area-context";
+import OffflineAlert from "../../../components/functions/OfflineAlert";
+const insets = initialWindowMetrics.insets;
 
 const ChatItem = (item) => {
   return (
@@ -142,9 +146,16 @@ const ChatTut = ({ profile, repeat_tut }) => {
     (state) => state.authentication.profile_data
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
+  const [hide_tut, sethide_tut] = useState(false)
+
   const [loading, setloading] = useState(false);
 
   const chatTutDone = async () => {
+    console.log("chatTutDone")
     setloading(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -165,6 +176,8 @@ const ChatTut = ({ profile, repeat_tut }) => {
       setloading(false);
 
       let resp_data = response.data;
+
+      console.log("resp_data",resp_data)
 
       if (resp_data.code == 200) {
         dispatch(setChatTut(false));
@@ -218,9 +231,22 @@ const ChatTut = ({ profile, repeat_tut }) => {
     }, [])
   );
 
+
+  useEffect(() => {
+    console.log("hide_tut",hide_tut)
+    if (is_network_connected && hide_tut) {
+      sethide_tut(false)
+    }
+    
+ 
+  }, [is_network_connected])
+
   return (
     <>
       {loading && <Loader />}
+      {
+        hide_tut  && <OffflineAlert/>
+      }
       <SafeAreaView style={{ height: scrn_height, backgroundColor: "#FFF" }}>
         <SafeAreaView
           style={{
@@ -343,7 +369,9 @@ const ChatTut = ({ profile, repeat_tut }) => {
           />
         </FullModal>
 
-        <>
+        {
+          !hide_tut &&
+          <>
           <View style={styles.mainTutCont}>
             <View style={styles.centralModalContMatch}>
               <View style={styles.centralModalTextCont}>
@@ -368,7 +396,14 @@ const ChatTut = ({ profile, repeat_tut }) => {
                         dispatch(setRepeatTut(false));
                         navigation.navigate("SettingsScreen");
                       } else {
-                        chatTutDone();
+                        console.log("resss")
+                        if (is_network_connected) {
+                          chatTutDone();
+                        }
+                        else{
+                          sethide_tut(true)
+                        }
+                        
                       }
                     }
                   }}
@@ -462,7 +497,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
               />
             </View>
           )}
-        </>
+        </>}
       </SafeAreaView>
     </>
   );
@@ -565,7 +600,7 @@ const styles = StyleSheet.create({
   },
   centralModalText: {
     fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
-    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 2.98),
+    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 3.5),
     fontFamily: fontFamily.bold,
     color: colors.black,
   },
@@ -591,7 +626,7 @@ const styles = StyleSheet.create({
   // Match Chat Tut
   centralModalContMatch: {
     position: "absolute",
-    height: rspH(36),
+    height: Platform.OS == 'ios'? rspH(36): rspH(36) + insets.bottom,
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,

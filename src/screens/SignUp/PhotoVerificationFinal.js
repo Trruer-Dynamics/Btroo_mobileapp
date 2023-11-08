@@ -48,6 +48,10 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
     (state) => state.authentication.profile_approved
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   const dispatch = useDispatch();
 
   const [loading, setloading] = useState(false);
@@ -174,7 +178,10 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
           >
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("PhotoVerifyCamera");
+                if (is_network_connected) {
+                  navigation.navigate("PhotoVerifyCamera"); 
+                }
+             
               }}
               style={{ ...styles.btn }}
             >
@@ -182,8 +189,12 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
             </TouchableOpacity>
             <FooterBtn
               title={"Finish"}
-              disabled={false}
-              onPress={verifyPhoto}
+              disabled={!is_network_connected}
+              onPress={()=>{
+                if (is_network_connected) {
+                  verifyPhoto()
+                }
+              }}
             />
           </View>
         </View>

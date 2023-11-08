@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   rspH,
   rspW,
@@ -18,7 +18,7 @@ import colors from "../../../styles/colors";
 import IoIcon from "react-native-vector-icons/Ionicons";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import ADIcon from "react-native-vector-icons/AntDesign";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStatusBarArgs } from "../../../store/reducers/authentication/authentication";
 import Loader from "../../loader/Loader";
 import { Image as CompImage } from "react-native-compressor";
@@ -29,6 +29,11 @@ const PhotoVerifyCamera = ({ route }) => {
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+  const current_screen = useSelector((state) => state.screen.current_screen);
 
   const [devicec, setdevicec] = useState("");
   const cameraRef = useRef(null);
@@ -91,6 +96,16 @@ const PhotoVerifyCamera = ({ route }) => {
       sethasCameraPermission(false);
     }
   };
+
+  useEffect(() => {
+    if (!is_network_connected
+       && current_screen == 'PhotoVerifyCamera'
+       ) {
+    
+      navigation.goBack()
+    }
+  }, [is_network_connected])
+  
 
   useFocusEffect(
     React.useCallback(() => {

@@ -1,5 +1,5 @@
-import { Platform, StyleSheet } from "react-native";
-import React, { useRef, useLayoutEffect, useState } from "react";
+import { Platform, StyleSheet, View } from "react-native";
+import React, { useRef, useLayoutEffect, useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import StackNav from "./stack/StackNav";
 import UserProvider from "../context/user";
@@ -13,6 +13,7 @@ import {
   setProfileRefresh,
   setStatusBarArgs,
 } from "../store/reducers/authentication/authentication";
+import { Text } from "react-native-render-html";
 
 const insets = initialWindowMetrics.insets;
 
@@ -44,10 +45,14 @@ const Navigation = () => {
       dispatch(setProfileRefresh(!profile_refresh));
     }
 
+    console.log(Platform.OS,"is_network_connected",is_network_connected)
+    console.log("current_screen",Platform.OS,current_screen)
     if (!is_network_connected) {
       if (
-        current_screen != "Match" &&
-        current_screen != "Chat" &&
+        current_screen != "MatchScreen" 
+        &&
+        current_screen != "Chat" 
+        &&
         current_screen != "Intro" &&
         current_screen != "Swiper" &&
         current_screen != "SettingsScreen" &&
@@ -56,9 +61,15 @@ const Navigation = () => {
         current_screen != "MatchProfile" &&
         current_screen != ""
       ) {
+        console.log("here")
         setoffAlert(true);
       }
-    } else {
+      else{
+        setoffAlert(false);
+      }
+     
+    } 
+    else {
       setoffAlert(false);
     }
 
@@ -71,7 +82,8 @@ const Navigation = () => {
           })
         );
       }
-    } else {
+    } 
+    else {
       dispatch(
         setStatusBarArgs({
           barStyle: "dark-content",
@@ -79,12 +91,23 @@ const Navigation = () => {
         })
       );
     }
+
+    return()=>{
+      console.log("Return Call")
+    }
+
   }, [is_network_connected, current_screen]);
+
+  useEffect(() => {
+    console.log("offAlert",offAlert)
+  }, [offAlert])
+  
 
   return (
     <NavigationContainer ref={navigationRef}>
       <UserProvider navigationRef={navigationRef}>
-        {offAlert && <OffflineAlert />}
+        { offAlert && <OffflineAlert />}
+
         <NotificationController />
         <StackNav />
       </UserProvider>

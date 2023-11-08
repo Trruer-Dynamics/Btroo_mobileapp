@@ -92,6 +92,8 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.is_network_connected
   );
 
+  const [net_conn, setnet_conn] = useState(true)
+
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
@@ -171,6 +173,10 @@ const SwiperOr = ({}) => {
       "It seems there was a problem in\nyour photo verification. Please\n verify yourself again.",
       "Verify yourself!",
     ],
+    [
+      "You are offline",
+      " Please check your internet \nconnection and try again."
+    ]
   ]);
 
   const [warn_step, setwarn_step] = useState(0);
@@ -371,6 +377,7 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
+    console.log("getFilterData")
     setloading(true);
 
     const headers = {
@@ -383,7 +390,7 @@ const SwiperOr = ({}) => {
         setloading(false);
 
         let filter_data = resp.data.data;
-
+        console.log("fd resp.data.code",resp.data.code)
         if (resp.data.code == 200) {
           let report_count = filter_data.userreportcount;
           let profile_appr = filter_data.is_profile_approved;
@@ -446,6 +453,7 @@ const SwiperOr = ({}) => {
               getFilterProfiles();
             }
             else{
+              console.log("here1")
               setloading2(false)
             }
           }
@@ -456,9 +464,9 @@ const SwiperOr = ({}) => {
         }
       })
       .catch((err) => {
-        if (is_network_connected) {
-          dispatch(setSessionExpired(true));  
-        }
+        // if (is_network_connected) {
+        //   dispatch(setSessionExpired(true));  
+        // }
         setloading(false);
         
       });
@@ -564,7 +572,7 @@ const SwiperOr = ({}) => {
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
-
+    console.log("getFilterProfiles", empty_profile_call)
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -576,36 +584,43 @@ const SwiperOr = ({}) => {
       .then((resp) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
-
+        console.log("resp_code",resp_code)
         let tmp =[...profiles]
 
         if (resp_code == 204) {
           setempty_profile_call(true);  
-          if (profiles.length == 0) {
+          if (profiles.length === 0) {
+            console.log("here40")
             setwarn_step(2);
             setloading2(true);
           }
+          else if (profiles.length === 0 && warn_step !== 2) {
+            console.log("here4")
+            setloading2(false)
+          }
           else{
+            console.log("here42")
             setloading2(false)
           }
           
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
           let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
-    
+          
           if (new_profiles.length > 0) {
             let tmp2 = [...new_profiles, ...profiles]
             for (let i = 0; i < tmp2.length; i++) {
               const prf = tmp2[i];
             }
-
+            setloading2(false);
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
           }
-
-        
-          setloading2(false);
-          
+          else if (profiles.length > 0) {
+            console.log("here3")
+            setloading2(false);
+          }
+         
         } else if (resp_code == 401) {
           dispatch(setSessionExpired(true));
         } else {
@@ -624,6 +639,8 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
 
+    console.log("getRejectedProfiles")
+
     await axios
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
@@ -632,6 +649,7 @@ const SwiperOr = ({}) => {
           setempty_profile_call(false);
           let active_profiles = resp_data.filter((v) => v.active == true);
           setprofiles(active_profiles);
+          console.log("here2")
           setloading2(false);
         } else {
           setwarn_step(2);
@@ -690,29 +708,57 @@ const SwiperOr = ({}) => {
 
   // To Refresh page After changing location or permission from app setting
   useEffect(() => {
+    
     if (
       appStateVisible == "active" &&
       permission_denied &&
       redirect_to_setting
     ) {
+      console.log("first")
       setredirect_to_setting(false);
       getData();
       dispatch(setProfileRefresh(!profile_refresh));
     }
+
   }, [appStateVisible]);
+
+  useEffect(() => {
+    console.log("\nis_network_connected",is_network_connected)
+    if (!is_network_connected) {
+      setnet_conn(false)
+      setshowFilter(false)
+      setpromptsmodalVisible(false)
+    }
+    else if (!net_conn) {
+      setnet_conn(true)
+      console.log("third")
+      dispatch(setProfileRefresh(!profile_refresh));
+    }
+  }, [is_network_connected])
 
   // recall getFilterProfiles after all profile swipe
   useEffect(() => {
-
+    
     if (profiles.length == 0) {
       if (!empty_profile_call) {
+        console.log("second")
         dispatch(setProfileRefresh(!profile_refresh));
       }
-      setwarn_step(2);
-      setloading2(true);
+      else{
+        setwarn_step(2);
+        setloading2(true);
+      }
+     
     }
    
   }, [profiles]);
+
+  useEffect(() => {
+    console.log('profiles.length',profiles.length)
+    console.log("warn_step",warn_step)
+    console.log("loading2",loading2)
+  }, [loading2,warn_step])
+  
   
 
   useEffect(() => {
@@ -781,16 +827,22 @@ const SwiperOr = ({}) => {
 
     // To show loading sentence
     setloading2(true);
+    console.log("this woeks",profile_refresh)
     setwarn_step(0);
     initPer();
 
     // load all data only after screen load sucessfully
-    if (screen_loaded) {
+    if (screen_loaded && is_network_connected) {
+      console.log("here mes")
       getGenders();
       getInterests();
       getLanguages();
       getFilterData();
       getPrompts();
+    }
+    else if (!is_network_connected) {
+      setwarn_step(6)
+      setloading2(true)
     }
   }, [profile_refresh]);
 
@@ -914,13 +966,14 @@ const keyExtractor = (itm, index) => itm.created_on + index
           <View style={{ ...styles.container, alignItems: "center" }}>
             <View style={styles.loadingCont}>
               {/* Filter */}
-              {warn_step != 4 && warn_step != 0 && (
+              {warn_step !=  6 && warn_step != 4 && warn_step != 0 && (
                 <TouchableOpacity
                   style={{
                     ...styles.filterCont,
                   }}
                   onPress={() => {
-                    setshowFilter(!showFilter);
+                setshowFilter(!showFilter);
+                  
                   }}
                 >
                   <FastImage

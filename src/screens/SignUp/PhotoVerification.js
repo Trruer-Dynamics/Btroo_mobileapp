@@ -7,7 +7,7 @@ import FooterBtn from "../../components/Buttons/FooterBtn";
 import FormWrapperFooter from "../../components/wrappers/formWrappers/FormWrapperFooter";
 import ErrorContainer from "../../components/formComponents/ErrorContainer";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserLoggined } from "../../store/reducers/authentication/authentication";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
@@ -15,6 +15,10 @@ import FastImage from "react-native-fast-image";
 
 const PhotoVerification = ({ navigation, route }) => {
   const dispatch = useDispatch();
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
 
   const onNextPress = () => {
     navigation.navigate("PhotoVerifyCamera");
@@ -62,7 +66,12 @@ const PhotoVerification = ({ navigation, route }) => {
           <ErrorContainer error_msg="" />
 
           {/* Next Btn To Navigate to Next Form Components */}
-          <FooterBtn title={"Next"} disabled={false} onPress={onNextPress} />
+          <FooterBtn title={"Next"} disabled={is_network_connected ? false : true} onPress={()=>{
+            if (is_network_connected) {
+              onNextPress()  
+            }
+            
+            }} />
         </FormWrapperFooter>
       </FormWrapper>
     </SafeAreaView>

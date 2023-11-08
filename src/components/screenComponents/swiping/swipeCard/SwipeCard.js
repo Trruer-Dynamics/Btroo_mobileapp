@@ -8,6 +8,7 @@ import {
   Animated,
   TouchableWithoutFeedback,
   Image,
+  Modal,
 } from "react-native";
 
 import {
@@ -200,6 +201,10 @@ const SwipeCard = ({
     (state) => state.authentication.access_token
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   const dispatch = useDispatch();
   //Filter
   const [showFilter, setshowFilter] = useState(false);
@@ -222,6 +227,26 @@ const SwipeCard = ({
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
 
+
+  const scrollTo = async (large = false) =>{
+    // slidesRef2
+    console.log("current Ind", currentIndex,currentIndex2,card_itm.image.length)
+    if (large) {
+    if (currentIndex <  card_itm.image.length ) {
+      slidesRef2.current.scrollToIndex({ index : currentIndex })
+    }
+    }
+    else{
+      console.log("else")
+        if (currentIndex2 <  card_itm.image.length ) {
+      setcurrentIndex(currentIndex2)
+      slidesRef.current.scrollToIndex({ index : currentIndex2 })
+    }}
+    
+  }
+
+
+
   // To set current Item index to show active carousel item
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setcurrentIndex(viewableItems[0]?.index);
@@ -234,9 +259,13 @@ const SwipeCard = ({
   const [currentIndex2, setcurrentIndex2] = useState(0);
   const scrollX2 = useRef(new Animated.Value(0)).current;
   const slidesRef2 = useRef(null);
+
   const viewableItemsChanged2 = useRef(({ viewableItems }) => {
+    console.log("viewableItemsChanged2")
     setcurrentIndex2(viewableItems[0]?.index);
+    
   }).current;
+
   const viewConfig2 = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
   // Main Carosel Item Render Function
@@ -305,8 +334,6 @@ const SwipeCard = ({
     inputRange: [-50, 0],
     outputRange: [0, 1],
   });
-
-
 
   const rejectOpacity = rightX.interpolate({
     inputRange: [0, 1],
@@ -385,6 +412,15 @@ const SwipeCard = ({
     }
   }, [report]);
 
+
+  useEffect(() => {
+    console.log("is_network_connected",is_network_connected)
+    if (!is_network_connected) {
+      setshowFilter(false)
+    }
+  }, [is_network_connected])
+  
+
   useLayoutEffect(() => {
     setprompts(card_itm.publicprompts);
 
@@ -416,6 +452,16 @@ const SwipeCard = ({
       );
     }
   }, [modalVisible]);
+
+  useEffect(() => {
+    console.log("\ncurrentIndx", currentIndex)
+    console.log("currentIndex2", currentIndex2)
+
+    if (currentIndex !== currentIndex2 && modalVisible) {
+      scrollTo()
+    }
+  }, [currentIndex,currentIndex2])
+  
 
   useLayoutEffect(() => {
     // To show blue circular mask if loaded profile already superliked loggined user
@@ -783,11 +829,15 @@ const SwipeCard = ({
               )}
 
               {/* FullScreen Image Carousel */}
-              <FullModal
-                backgroundColor={"#000"}
-                modalVisible={modalVisible}
-                setModalVisible={setmodalVisible}
-              >
+              
+
+<Modal animationType="slide" transparent={true} visible={modalVisible}>
+        {
+          modalVisible &&
+          <View style={{ flex: 1, backgroundColor: "#000" }}>
+          <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
+            {/* {children} */}
+         
                 <View style={styles.imageCont2}>
                   {/* Back Btn Modal Closed */}
 
@@ -820,7 +870,19 @@ const SwipeCard = ({
                   {/*  FullScreen Carousel */}
 
                   <FlatList
-                    initialScrollIndex={0}
+                    initialScrollIndex={currentIndex}
+                    onLayout={()=>{
+                      console.log("Enlarge Carousel Load")
+                      setcurrentIndex2(currentIndex)
+                      scrollTo(true)
+                    }}
+
+
+getItemLayout={(data, index) => ({
+          length: scrn_width,
+          offset: scrn_width * index ,
+          index,
+        })}
                     data={card_itm.image}
                     renderItem={renderItem2}
                     keyExtractor={(item) => item.id}
@@ -846,7 +908,10 @@ const SwipeCard = ({
                     currentIndex={currentIndex2}
                   />
                 </View>
-              </FullModal>
+                </SafeAreaView>
+        </View>}
+      </Modal>
+              {/* </FullModal> */}
 
               {/* Profile Details Area */}
 

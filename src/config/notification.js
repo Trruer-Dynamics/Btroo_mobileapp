@@ -36,7 +36,9 @@ const NotificationController = (props) => {
     if (not_data?.type == "Reveal" && user_loggined) {
       setuser_interact(false);
 
-      let dt = JSON.parse(not_data.data);
+      let dt = not_data;
+
+      console.log("dt",dt)
       let expiry_date = dt.expiry_datetime;
 
       let mth = {};
@@ -65,7 +67,8 @@ const NotificationController = (props) => {
         navigation.navigate("Match");
       } else if (not_data?.type == "Chat") {
         setuser_interact(false);
-        let dt = JSON.parse(not_data.data);
+        let dt = not_data;
+        console.log("dt2",dt)
         let cht_id = dt.chatroom_id;
 
         if (matches.length > 0) {
@@ -138,10 +141,10 @@ const NotificationController = (props) => {
 
   useLayoutEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log("remoteMessage",remoteMessage)
+      console.log("remoteMessage",remoteMessage.data)
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
-
+      console.log("data",data)
       setnot_data(data);
 
       setrefresh(!refresh);

@@ -126,12 +126,15 @@ const PrivatePrompts = ({
                     style={{
                       ...styles.promptsInput,
                       backgroundColor:
-                        private_prompt1_a.length > 2 ? colors.white : "#F8F8F8",
+                        private_prompt1_a !== "" ? colors.white : "#F8F8F8",
                       borderColor:
-                        private_prompt1_a.length > 2
+                      private_prompt1_blr ?
+                      private_prompt1_a.length < 2 ?
+                      colors.error:
+                      colors.blue
+                      :
+                        private_prompt1_a !== ""
                           ? colors.blue
-                          : private_prompt1_blr
-                          ? colors.error
                           : colors.grey,
                       textAlignVertical: "top",
                     }}
@@ -175,12 +178,16 @@ const PrivatePrompts = ({
                     style={{
                       ...styles.promptsInput,
                       backgroundColor:
-                        private_prompt2_a.length > 2 ? colors.white : "#F8F8F8",
+                        private_prompt2_a !== "" ? colors.white : "#F8F8F8",
                       borderColor:
-                        private_prompt2_a.length > 2
+                      private_prompt2_blr ?
+                      private_prompt2_a.length < 2 ?
+                      colors.error:
+                      colors.blue
+                      :
+
+                      private_prompt2_a !== "" 
                           ? colors.blue
-                          : private_prompt2_blr
-                          ? colors.error
                           : colors.grey,
                       textAlignVertical: "top",
                     }}

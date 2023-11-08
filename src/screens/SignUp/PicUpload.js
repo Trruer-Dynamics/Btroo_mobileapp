@@ -56,6 +56,10 @@ const PicUpload = ({ navigation, route }) => {
     (state) => state.authentication.profile_imgs
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   const [galler_per, setgaller_per] = useState(true);
   const [camera_per, setcamera_per] = useState(true);
 
@@ -522,6 +526,15 @@ const PicUpload = ({ navigation, route }) => {
     }
   }, []);
 
+
+
+
+  useEffect(() => {
+    if (!is_network_connected) {
+     setmodalVisible(false)
+    }
+   }, [is_network_connected])
+
   useEffect(() => {
     if (!galler_per) {
       setmodalVisible(false);
@@ -643,11 +656,12 @@ const PicUpload = ({ navigation, route }) => {
             <FooterBtn
               title={"Next"}
               disabled={
+                !is_network_connected ||
                 !(pic_list.filter((v) => v[0] != "").length >= 3 && !loading)
               }
               onPress={() => {
                 setpic_blr(true);
-                if (pic_list.filter((v) => v[0] != "").length >= 3) {
+                if (pic_list.filter((v) => v[0] != "").length >= 3 && is_network_connected) {
                   onNextPress();
                 }
               }}

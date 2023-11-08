@@ -31,7 +31,7 @@ import FormInputPhoneNumber from "../../components/formComponents/FormInputPhone
 import FastImage from "react-native-fast-image";
 import { useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -57,6 +57,10 @@ const MobileNo = ({ navigation, route }) => {
 
   const [confirm, setconfirm] = useState(null);
   const [loading, setloading] = useState(false);
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
 
   const checkUserAvailable = async () => {
     setloading(true);
@@ -84,6 +88,14 @@ const MobileNo = ({ navigation, route }) => {
       setloading(false);
     }
   };
+
+
+  useEffect(() => {
+   if (!is_network_connected) {
+    setOtpShowBox(false)
+   }
+  }, [is_network_connected])
+  
 
   useEffect(() => {
     // Phone Number Validations
@@ -136,7 +148,7 @@ const MobileNo = ({ navigation, route }) => {
   // On Next Button Press
   const onNextPress = async () => {
     Keyboard.dismiss();
-    if (ph_no.length > 0) {
+    if (ph_no.length > 0 && is_network_connected) {
       setclickBtn(true);
 
       // Open Otp Modal
@@ -300,7 +312,9 @@ const MobileNo = ({ navigation, route }) => {
               <FooterBtn
                 title={"Next"}
                 disabled={
-                  clickBtn
+                  !is_network_connected ||
+
+                  (clickBtn
                     ? selected_ph_code_id == "IL" && ph_no.startsWith("0")
                       ? !(
                           ph_no.length <= max_ph_no + 1 &&
@@ -309,7 +323,7 @@ const MobileNo = ({ navigation, route }) => {
                       : !(
                           ph_no.length <= max_ph_no && ph_no.length >= min_ph_no
                         )
-                    : !ph_no.length > 0
+                    : !ph_no.length > 0)
                 }
                 onPress={onNextPress}
               />

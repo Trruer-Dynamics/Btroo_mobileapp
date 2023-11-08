@@ -90,6 +90,10 @@ const EditProfile = ({ navigation }) => {
     Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx })))
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   const [pos2, setpos2] = useState(
     Object.assign({}, ...profile_imgs.map((item, indx) => ({ [indx]: indx })))
   );
@@ -1168,6 +1172,11 @@ const EditProfile = ({ navigation }) => {
     }
   }, [galler_per, camera_per, appStateVisible]);
 
+  useEffect(() => {
+    if (!is_network_connected) {
+     setmodalVisible(false)
+    }
+   }, [is_network_connected])
 
   useLayoutEffect(() => {
     getLocation(1)
@@ -1929,6 +1938,8 @@ const EditProfile = ({ navigation }) => {
                 <FooterBtn
                   title={"Save"}
                   disabled={
+                    !is_network_connected 
+                    ||
                     !changes_made ||
                     height_cm < 60 ||
                     height_cm > 270 ||
@@ -1980,7 +1991,10 @@ const EditProfile = ({ navigation }) => {
                       private_prompt2_q_id != 0 &&
                       private_prompt2_a != ""
                     ) {
-                      onNextPress();
+                      if (is_network_connected) {
+                        onNextPress();
+                      }
+         
                     } else {
                       // if (profile_data?.userprivateprompts?.length > 0) {
                       if (public_prompt1_q_id == 0) {

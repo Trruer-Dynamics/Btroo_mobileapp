@@ -8,9 +8,10 @@ import {
   ScrollView,
   SafeAreaView,
   Platform,
+  StatusBar,
 } from "react-native";
 
-import React, { useRef, useState, useLayoutEffect } from "react";
+import React, { useRef, useState, useLayoutEffect,useEffect } from "react";
 import colors from "../../styles/colors";
 import {
   rspF,
@@ -37,6 +38,9 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
 import { setAllGenders } from "../../store/reducers/allData/allData";
 import { setSessionExpired } from "../../store/reducers/authentication/authentication";
+import { initialWindowMetrics } from "react-native-safe-area-context";
+const insets = initialWindowMetrics.insets;
+
 
 const DATA = [
   {
@@ -136,6 +140,9 @@ const Item = ({ item, setmodalVisible, masked }) => {
     <View style={{ ...styles.item, position: "relative" }}>
       <TouchableOpacity
         activeOpacity={1}
+style={{
+  // height: Platform.OS == 'ios' ? rspH(42) : '100%',
+}}
         onPress={() => {
           setmodalVisible(true);
         }}
@@ -175,20 +182,27 @@ const Item = ({ item, setmodalVisible, masked }) => {
               />
             </>
           )}
-
+          {/* <View
+          style={{
+            backgroundColor:'red',
+            height:'100%',
+          }}
+          > */}
           <FastImage
             source={item.image}
             style={{
               backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
               width: rspW(88),
+              // height: rspH(Platform.OS == 'ios' ?42 : 48),
               height: "100%",
               borderRadius: rspW(5.1),
 
               zIndex: -2,
             }}
             onLoad={() => setimg_load(true)}
-            resizeMode="cover"
+            resizeMode="stretch"
           />
+          {/* </View> */}
         </>
       </TouchableOpacity>
     </View>
@@ -257,6 +271,9 @@ const SwiperTut = ({ repeat_tut }) => {
   }).current;
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
+
+  
+
   //Full Page Carousel
   const [modalVisible, setmodalVisible] = useState(false);
   const [currentIndex2, setcurrentIndex2] = useState(0);
@@ -266,6 +283,26 @@ const SwiperTut = ({ repeat_tut }) => {
     setcurrentIndex2(viewableItems[0]?.index);
   }).current;
   const viewConfig2 = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
+
+  const scrollTo = async (large = false) =>{
+
+    let prof_data = pref_type == "Woman" ? DATA : DATA2
+    // slidesRef2
+    console.log("current Ind", currentIndex,currentIndex2,prof_data.length)
+    if (large) {
+    if (currentIndex <  prof_data.length ) {
+      slidesRef2.current.scrollToIndex({ index : currentIndex })
+    }
+    }
+    else{
+      console.log("else")
+        if (currentIndex2 <  prof_data.length ) {
+      setcurrentIndex(currentIndex2)
+      slidesRef.current.scrollToIndex({ index : currentIndex2 })
+    }}
+    
+  }
 
   const swipeTutDone = async () => {
     setloading(true);
@@ -355,6 +392,16 @@ const SwiperTut = ({ repeat_tut }) => {
   useLayoutEffect(() => {
     getGenders();
   }, []);
+
+  useEffect(() => {
+    console.log("\ncurrentIndx", currentIndex)
+    console.log("currentIndex2", currentIndex2)
+
+    if (currentIndex !== currentIndex2 && modalVisible) {
+      scrollTo()
+    }
+  }, [currentIndex,currentIndex2])
+  
 
   return (
     <>
@@ -510,13 +557,24 @@ const SwiperTut = ({ repeat_tut }) => {
 
               {/*  FullScreen Carousel */}
               <FlatList
+              initialScrollIndex={currentIndex}
                 data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
+                onLayout={()=>{
+                  console.log("Enlarge Carousel Load Tut")
+                  setcurrentIndex2(currentIndex)
+                  scrollTo(true)
+                }}
                 renderItem={renderItem2}
                 keyExtractor={(item) => item.id}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled
                 bounces={false}
+                getItemLayout={(data, index) => ({
+                  length: scrn_width,
+                  offset: scrn_width * index ,
+                  index,
+                })}
                 onScroll={Animated.event(
                   [{ nativeEvent: { contentOffset: { x: scrollX2 } } }],
                   {
@@ -527,6 +585,7 @@ const SwiperTut = ({ repeat_tut }) => {
                 onViewableItemsChanged={viewableItemsChanged2}
                 viewabilityConfig={viewConfig2}
                 ref={slidesRef2}
+
               />
 
               <Paginator
@@ -792,8 +851,10 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{
                       position: "absolute",
-                      top: rspH(41),
-                      left: rspW(66.3),
+                      top: 
+                      Platform.OS == 'ios' ? rspH(41) :
+                      rspH(35.5) + insets.bottom,
+                      left: rspW(66.8),
                     }}
                   >
                     <View style={{ ...styles.actionHighlightCont }}>
@@ -814,7 +875,10 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{
                       position: "absolute",
-                      top: rspH(41),
+                      top: 
+                      Platform.OS == 'ios' ? rspH(41) :
+                      rspH(35.5) + insets.bottom,
+                      
                       left: rspW(42.1),
                     }}
                   >
@@ -836,7 +900,9 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{
                       position: "absolute",
-                      top: rspH(41),
+                      top: 
+                      Platform.OS == 'ios' ? rspH(41) :
+                      rspH(35.5) + insets.bottom,
                       left: rspW(18),
                     }}
                   >
@@ -876,6 +942,7 @@ const SwiperTut = ({ repeat_tut }) => {
                                 : DATA2
                               : []
                           }
+                          
                           renderItem={renderItem}
                           keyExtractor={(item) => item.id}
                           horizontal
@@ -903,7 +970,7 @@ const SwiperTut = ({ repeat_tut }) => {
                           style={styles.filterCont}
                           onPress={() => {}}
                         >
-                          {/* <FAIcon size={30} name="filter" color={"#ffffffcb"} /> */}
+                          
                           <FastImage
                             source={require("../../assets/images/Swiping/Filter3.png")}
                             style={{ width: 26, height: 26 }}
@@ -1005,7 +1072,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{
                       ...styles.centralModalCont,
-                      top: rspH(19.76),
+                      top: Platform.OS == 'ios' ? rspH(19.5) : rspH(14)+ insets.bottom,
                     }}
                   >
                     {/* Tut Text */}
@@ -1053,7 +1120,9 @@ const SwiperTut = ({ repeat_tut }) => {
                 {step == 4 && (
                   <View
                     style={{
-                      marginTop: rspH(52),
+                      marginTop:  Platform.OS == 'ios'? rspH(52) : rspH(48) + insets.bottom,
+                      // marginTop: rspH(52),
+
                       alignSelf: "center",
                       ...styles.scrollModalCont,
                     }}
@@ -1330,19 +1399,23 @@ const styles = StyleSheet.create({
     zIndex: 5,
     width: rspW(89),
     // height: rspH(42),
-    height: rspH(Platform.OS == "ios" ? 42 : 48.3),
+    height: Platform.OS == 'ios' ?  rspH(42): rspH(42) + insets.bottom,
     borderRadius: rspW(5.3),
+    // backgroundColor:'red',
   },
 
   item: {
     // borderRadius: rspW(5.1),
     // width: rspW(89),
+    
     alignSelf: "center",
     borderRadius: rspW(5.1),
     width: rspW(88),
+
     marginRight: rspW(0.8),
     marginLeft: rspW(0.2),
     zIndex: 5,
+
     // marginRight: rspW(1),
     // marginLeft: rspW(1),
   },
@@ -1488,11 +1561,15 @@ const styles = StyleSheet.create({
   centralModalCont: {
     alignSelf: "center",
     position: "absolute",
-    height: rspH(28.85),
+    height: Platform.OS == 'ios' ? rspH(28.85) :  rspH(28.85) ,
+    // height: Platform.OS =='ios'? rspH(28.85) : rspH(20) + insets,
+
     width: rspW(86),
     borderRadius: rspW(3),
     backgroundColor: colors.white,
-    top: rspH(Platform.OS == "ios" ? 53.6 : 55),
+    // top: rspH(Platform.OS == "ios" ? 53.6 : 55),
+    top: Platform.OS == 'ios' ? rspH(53.6) : rspH(48.4) + insets.bottom,
+
     paddingHorizontal: rspW(4.6),
     justifyContent: "space-between",
   },
@@ -1527,7 +1604,8 @@ const styles = StyleSheet.create({
 
   //Tutorial Scroll Modal
   scrollModalCont: {
-    height: rspH(38.74),
+    // height: rspH(38.74),
+    height: Platform.OS == 'ios'? rspH(39.2): rspH(43.1) - insets.bottom ,
     width: rspW(91.8),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -1535,7 +1613,8 @@ const styles = StyleSheet.create({
 
   carouselHighlightCont: {
     width: rspW(92.4),
-    height: rspH(Platform.OS == "ios" ? 43.6 : 50),
+    // height: rspH(Platform.OS == "ios" ? 43.6 : 50),
+    height: Platform.OS == 'ios' ? rspH(44) : rspH(44) + insets.bottom,
     borderRadius: rspW(6.4),
     position: "relative",
     backgroundColor: "#fff",

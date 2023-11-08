@@ -78,6 +78,8 @@ import {
 } from "../../../store/reducers/chats/chats";
 import FastImage from "react-native-fast-image";
 
+
+
 // Chat Bubble item
 const ChatItem = ({
   item,
@@ -187,6 +189,12 @@ const ChatItem = ({
   let btmMarg =
     index == 0 ? 1.6 : chatlist[index - 1][1] == chatlist[index][1] ? 0.5 : 1.6;
 
+  let show_tailc = index < chatlist.length - 1 ? chatlist[index + 1][1] == chatlist[index][1] ? false : true : false;
+  console.log("show_tailc",show_tailc)
+
+  let show_tail = show_tailc
+
+
   return (
     <PanGestureHandler
         onGestureEvent={gestureHandler}
@@ -195,8 +203,9 @@ const ChatItem = ({
     <Animated.View
       style={{
         flex: 1,
-        position: "relative",
-        backgroundColor:'red',
+        // position: "relative",
+        // backgroundColor:'red',
+        // paddingVertical: rspH(0.1),
         marginBottom: rspH(btmMarg),
       }}
     >
@@ -229,7 +238,6 @@ const ChatItem = ({
         </View>
       </Animated.View>
 
-      
         <Animated.View
           ref={boxRef}
           style={[
@@ -237,9 +245,10 @@ const ChatItem = ({
               ...styles.chatCont,
               flexDirection: "column",
               zIndex: 1,
-            
+              
               backgroundColor: item[1] == 1 ? colors.blue : "#F5F5F5",
               alignSelf: item[1] == 0 ? "flex-start" : "flex-end",
+
               // position: "relative",
             },
             animatedStyle,
@@ -298,7 +307,7 @@ const ChatItem = ({
                     color: item[1] == 0 ? colors.black : colors.white,
                   }}
                 >
-                  {chatlist.find((v) => v[4] == item[5])[0]}
+                  {chatlist.find((v) => v[4] == item[5])[0].split('\n')[0]}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -319,43 +328,9 @@ const ChatItem = ({
               {item[0]}
             </Text>
           </View>
-          {item[1] == 0 ? (
-            <View
-              style={{
-                position: "absolute",
-                zIndex: -1,
-                bottom: 0,
-                left: rspW(-4.8),
-              }}
-            >
-              <FastImage
-                source={require("../../../assets/images/Matching/Message/LeftCut2.png")}
-                style={{
-                  width: rspW(10.24),
-                  height: rspH(3.7),
-                  zIndex: 1,
-                }}
-              />
-            </View>
-          ) : (
-            <View
-              style={{
-                position: "absolute",
-                zIndex: -1,
-                bottom: 0,
-                right: rspW(-4.8),
-              }}
-            >
-              <FastImage
-                source={require("../../../assets/images/Matching/Message/RightCut.png")}
-                style={{
-                  width: rspW(10.3),
-                  height: rspH(3.6),
-                  zIndex: 2,
-                }}
-              />
-            </View>
-          )}
+          
+        
+
 
           <View
             style={{
@@ -383,6 +358,49 @@ const ChatItem = ({
             </View>
           </View>
         </Animated.View>
+{ show_tail &&
+  <>
+        {item[1] == 0 ? (
+           
+           <FastImage
+             source={require("../../../assets/images/Matching/Message/LeftCut2.png")}
+             style={{
+                position: "absolute",
+             zIndex: -1,
+             transform:[{
+              scaleY: -1
+            }],
+            //  top: 0,
+             left: rspW(-4.8),
+               width: rspW(10.24),
+               height: rspH(3.7),
+
+             }}
+           />
+
+       ) : (
+         
+         <FastImage
+
+         source={require("../../../assets/images/Matching/Message/RightCut2.png")}
+         style={{
+            position: "absolute",
+         zIndex: -1,
+        //  top: -10,
+        transform:[{
+          scaleY: -1
+        }],
+         right: rspW(-4.8),
+           width: rspW(10.24),
+           height: rspH(3.7),
+
+         }}
+       />
+       
+        
+       )}
+</>}
+       
 
 
       {index === rply_item_indx && (
@@ -411,6 +429,7 @@ const ChatItem = ({
           ]}
         />
       )}
+
     </Animated.View>
     </PanGestureHandler>
   );
@@ -816,9 +835,20 @@ const Chat = ({ profile }) => {
 
   // save chats locally
   useEffect(() => {
-    if (chatlist.length > 0) {
-      dispatch(setChatMsgs(chatlist));
+
+    // console.log("chats_msgs",chats_msgs.length)
+    // console.log("chatlist",chatlist.length)
+    let onlY_id= chats_msgs.map(k => k[4])
+    // console.log("onlY_id",onlY_id.length)
+    let newmsgs = chatlist.filter(v => !onlY_id.includes(v[4]))
+
+    console.log("newmsgs",newmsgs.length)
+    if (newmsgs.length > 0) {
+      let all_lmsgs = [ ...newmsgs,...chats_msgs]
+      // console.log("all_lmsgs",all_lmsgs.length)
+      dispatch(setChatMsgs(all_lmsgs));
     }
+
   }, [chatlist]);
 
   useEffect(() => {
@@ -1086,6 +1116,7 @@ const Chat = ({ profile }) => {
     let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
 
     if (!is_network_connected && tmp.length > 0) {
+      
       setchatlist(tmp);
       setloading(false);
     }
@@ -1155,7 +1186,7 @@ const Chat = ({ profile }) => {
                   });
                 }}
               />
-            ) : (
+             ) : (
               <FormHeaderChatN
                 title={truncateStr(
                   profile?.userprofile?.name.split(" ")[0],
@@ -1214,7 +1245,7 @@ const Chat = ({ profile }) => {
                   );
                 }}
               />
-            )}
+            )} 
           </View>
 
           <FlashList
@@ -1269,7 +1300,7 @@ const Chat = ({ profile }) => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                position:'relative',
+                // position:'relative',
               }}
             >
               {replySet && actreplyID && (
@@ -1372,7 +1403,7 @@ const Chat = ({ profile }) => {
                   }}
                   maxHeight={rspH(12.5)}
                 />
-                {msg == "" ? (
+                {msg == "" || !is_network_connected? (
                   <FastImage
                     source={require("../../../assets/images/Matching/Message/sendMsg.png")}
                     style={styles.sendBtn}
@@ -1538,11 +1569,11 @@ const styles = StyleSheet.create({
     paddingTop: rspH(1),
     paddingBottom: rspH(1.4),
     // paddingHorizontal: rspW(4),
-    paddingHorizontal: rspW(2),
+    paddingHorizontal: rspW(2), 
     borderRadius: rspW(5.1),
     borderRadius: rspW(2),
     // marginHorizontal: rspW(4),
-    marginHorizontal: rspW(1),
+    // marginHorizontal: rspW(1),
   },
   chatMsgTxt: {
     fontSize: rspF(1.8),

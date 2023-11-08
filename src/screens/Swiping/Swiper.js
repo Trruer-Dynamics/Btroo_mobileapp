@@ -25,8 +25,8 @@ const Swiper = ({ route }) => {
 
   return (
     <>
-      {!is_network_connected && <OffflineAlert />}
-      {swipe_tut || repeat_tut ? (
+      {
+      swipe_tut || repeat_tut ? (
         <SwiperTut repeat_tut={repeat_tut} />
       ) : (
         <SwiperOr />

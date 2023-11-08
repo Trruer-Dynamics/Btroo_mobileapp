@@ -88,6 +88,11 @@ const ProfileMain = ({ navigation }) => {
     (state) => state.authentication.profile_imgs
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
+
   const [active_prf_imgs, setactive_prf_imgs] = useState([]);
   const [modalVisible, setmodalVisible] = useState(false);
   const [currentIndex3, setcurrentIndex3] = useState(0);
@@ -259,7 +264,7 @@ const ProfileMain = ({ navigation }) => {
       return () => {
         // Do something when the screen is unfocused
       };
-    }, [prof_refs])
+    }, [prof_refs,is_network_connected])
   );
 
   // Full Screen Carosel Item Render Function

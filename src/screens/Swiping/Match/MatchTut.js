@@ -7,7 +7,7 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormWrapper from "../../../components/wrappers/formWrappers/FormWrapper";
 import MatchItem from "../../../components/screenComponents/matching/MatchItem";
 import colors from "../../../styles/colors";
@@ -39,6 +39,7 @@ import { FemaleAvatar } from "../../../assets";
 import FastImage from "react-native-fast-image";
 import FAIcon from "react-native-vector-icons/FontAwesome";
 import { initialWindowMetrics } from "react-native-safe-area-context";
+import OffflineAlert from "../../../components/functions/OfflineAlert";
 const insets = initialWindowMetrics.insets;
 
 const DATA = [
@@ -71,11 +72,20 @@ const MatchTut = ({ repeat_tut }) => {
     (state) => state.authentication.profile_data
   );
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
+  
+
+
   const [loading, setloading] = useState(false);
 
   const [keep_matching, setkeep_matching] = useState(true);
 
   const [extendVisible, setextendVisible] = useState(false);
+
+  const [hide_tut, sethide_tut] = useState(false)
 
   const [match_tut_para, setmatch_tut_para] = useState([
     `Matches are created each \nmorning if someone you \nfancy has also fancied you \nback. You can talk to up to \nthree matches at any \ngiven time. Don’t worry, \nyou won’t lose any of the \nother matches.`,
@@ -167,8 +177,17 @@ const MatchTut = ({ repeat_tut }) => {
     );
   };
 
+  useEffect(() => {
+    if (is_network_connected && hide_tut) {
+      sethide_tut(false)
+    }
+   
+  }, [is_network_connected])
+  
+
   return (
     <>
+    {hide_tut && <OffflineAlert/>}
       {loading && <Loader />}
       <SafeAreaView
         style={{ flex: 1, backgroundColor: "#fff" }}
@@ -241,15 +260,16 @@ const MatchTut = ({ repeat_tut }) => {
         </CentralModal>
 
         {/* Match Chat Tutorial */}
-        <>
+        {!hide_tut &&
+          <>
           <View style={styles.mainTutCont}>
             <View
               style={{
                 ...styles.centralModalContMatch,
                 height:
                   match_tut_step == 0
-                    ? rspH(Platform.OS == "ios" ? 40 : 41)
-                    : rspH(36),
+                    ? Platform.OS == "ios"  ? rspH(41) : rspH(40) + insets.bottom
+                    : Platform.OS == 'ios' ? rspH(36) : rspH(36) + insets.bottom,
               }}
             >
               <View style={{ ...styles.centralModalTextCont }}>
@@ -279,7 +299,13 @@ const MatchTut = ({ repeat_tut }) => {
                           },
                         });
                       } else {
-                        matchTutDone();
+                        if (is_network_connected) {
+                          matchTutDone();  
+                        }
+                        else{
+                          sethide_tut(true)
+                        }
+                        
                       }
                     }
                   }}
@@ -371,7 +397,7 @@ const MatchTut = ({ repeat_tut }) => {
               </Text>
             </View>
           )}
-        </>
+        </>}
       </SafeAreaView>
     </>
   );
@@ -412,7 +438,7 @@ const styles = StyleSheet.create({
   },
   centralModalText: {
     fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
-    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 3),
+    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 3.5),
     fontFamily: fontFamily.bold,
     color: colors.black,
   },
@@ -422,7 +448,7 @@ const styles = StyleSheet.create({
     marginHorizontal: rspW(3.1),
     paddingHorizontal: 13.2,
     marginVertical: rspH(1.4),
-    height: rspH(4.6),
+    height:  rspH(4.6),
     width: rspW(69.6),
     letterSpacing: 1,
   },
@@ -441,7 +467,7 @@ const styles = StyleSheet.create({
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
-    top: Platform.OS == "ios" ? scrn_height / 2.4 : scrn_height / 2.54,
+    top: Platform.OS == "ios" ? scrn_height / 2.4 : rspH(40) - insets.bottom,
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
@@ -463,7 +489,7 @@ const styles = StyleSheet.create({
     borderRadius: rspW(2.5),
   },
   timeHighCont: {
-    top: Platform.OS == "android" ? rspH(10.2) + insets.top : srn_height / 5.1,
+    top: Platform.OS == "android" ? rspH(11) + insets.top : srn_height / 5.1,
     right: rspW(12),
     width: rspW(22.2),
     height: rspH(2.75),
