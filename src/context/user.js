@@ -85,7 +85,7 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const removeToken = async () => {
-    console.log("removeToken")
+
     const url = apiUrl + "token_remove/";
 
     const headers = {
@@ -98,12 +98,11 @@ const UserProvider = ({ children, navigationRef }) => {
       token: DeviceToken,
     };
 
-    console.log("remove data",data)
 
     try {
       const resp = await axios.post(url, data, { headers });
       let user_data = resp.data.data;
-      console.log("remove user_data",user_data)
+
       dispatch(setDeviceToken(""));
     } catch (error) {}
   };

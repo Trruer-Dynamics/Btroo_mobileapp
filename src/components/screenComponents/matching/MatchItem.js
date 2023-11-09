@@ -15,6 +15,7 @@ import fontFamily from "../../../styles/fontFamily";
 import FAIcon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
 import FastImage from "react-native-fast-image";
+import { useSelector } from "react-redux";
 
 const MatchItem = ({
   item,
@@ -24,12 +25,12 @@ const MatchItem = ({
   prf_img,
 }) => {
   const navigation = useNavigation();
+  const match_tut = useSelector((state) => state.tutorial.match_tut);
+
 
   // To get left hours
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
-  let leftHrs = hours;
-
-  console.log("item.prof_rvl c",item.prof_rvl)
+  let leftHrs = match_tut ? 72 : hours;
 
   return (
     <TouchableOpacity

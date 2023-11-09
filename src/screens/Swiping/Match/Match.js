@@ -276,6 +276,59 @@ return a.position - b.position
     setkeep_matching(kp_mtch);
   }, [kp_mtch]);
 
+  const userExist = async () =>{
+    console.log("userExist call")
+
+    let url_path = 'isacountavialable/'
+
+    // setloading(true);
+    const data = {
+      user_id: profile_data.user.id,
+    };
+
+    const headers = {
+      // Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const response = await axios.post(
+        apiUrl + url_path,
+        data,
+        {
+          headers,
+        }
+      );
+      let resp_data = response.data;
+
+      // setloading(false);
+      
+      console.log("userExist resp_data",resp_data)
+
+      if (resp_data.code == 400) {
+
+           Alert.alert("Your account deleted!", "Please contact to admin.", [
+            
+            {
+              text: "OK",
+              onPress: () => {
+                dispatch(setSessionExpired(true))
+              },
+            },
+          ]);
+        
+      }
+      
+    } catch (error) {
+      console.log("userExist err",error)
+      setloading(false);
+      return false;
+
+    }
+
+  }
+
+
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
@@ -295,6 +348,16 @@ return a.position - b.position
       }
     }, [newMsgRefresh, is_network_connected,appStateVisible])
   );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (appStateVisible == 'active') {
+        userExist()
+      }
+    }, [appStateVisible])
+  );
+
+
 
   return (
     <>

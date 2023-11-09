@@ -377,7 +377,7 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
-    console.log("getFilterData")
+
     setloading(true);
 
     const headers = {
@@ -390,7 +390,7 @@ const SwiperOr = ({}) => {
         setloading(false);
 
         let filter_data = resp.data.data;
-        console.log("fd resp.data.code",resp.data.code)
+
         if (resp.data.code == 200) {
           let report_count = filter_data.userreportcount;
           let profile_appr = filter_data.is_profile_approved;
@@ -452,10 +452,11 @@ const SwiperOr = ({}) => {
             if (location_added && profiles.length < 3) {
               getFilterProfiles();
             }
-            else{
-              console.log("here1")
+            else
+            if (profiles.length > 0) {
               setloading2(false)
             }
+            
           }
 
           setfilter_data_get(true);
@@ -572,7 +573,7 @@ const SwiperOr = ({}) => {
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
-    console.log("getFilterProfiles", empty_profile_call)
+ 
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -584,22 +585,21 @@ const SwiperOr = ({}) => {
       .then((resp) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
-        console.log("resp_code",resp_code)
+
         let tmp =[...profiles]
+
+        
 
         if (resp_code == 204) {
           setempty_profile_call(true);  
           if (profiles.length === 0) {
-            console.log("here40")
             setwarn_step(2);
             setloading2(true);
           }
           else if (profiles.length === 0 && warn_step !== 2) {
-            console.log("here4")
             setloading2(false)
           }
           else{
-            console.log("here42")
             setloading2(false)
           }
           
@@ -608,16 +608,12 @@ const SwiperOr = ({}) => {
           let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
           
           if (new_profiles.length > 0) {
-            let tmp2 = [...new_profiles, ...profiles]
-            for (let i = 0; i < tmp2.length; i++) {
-              const prf = tmp2[i];
-            }
+         
             setloading2(false);
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
           }
           else if (profiles.length > 0) {
-            console.log("here3")
             setloading2(false);
           }
          
@@ -639,8 +635,6 @@ const SwiperOr = ({}) => {
       Authorization: `Bearer ${access_token}`,
     };
 
-    console.log("getRejectedProfiles")
-
     await axios
       .get(apiUrl + "swap_again/" + profile_data.user.id, { headers })
       .then((resp) => {
@@ -649,7 +643,6 @@ const SwiperOr = ({}) => {
           setempty_profile_call(false);
           let active_profiles = resp_data.filter((v) => v.active == true);
           setprofiles(active_profiles);
-          console.log("here2")
           setloading2(false);
         } else {
           setwarn_step(2);
@@ -714,7 +707,6 @@ const SwiperOr = ({}) => {
       permission_denied &&
       redirect_to_setting
     ) {
-      console.log("first")
       setredirect_to_setting(false);
       getData();
       dispatch(setProfileRefresh(!profile_refresh));
@@ -723,7 +715,7 @@ const SwiperOr = ({}) => {
   }, [appStateVisible]);
 
   useEffect(() => {
-    console.log("\nis_network_connected",is_network_connected)
+
     if (!is_network_connected) {
       setnet_conn(false)
       setshowFilter(false)
@@ -731,7 +723,6 @@ const SwiperOr = ({}) => {
     }
     else if (!net_conn) {
       setnet_conn(true)
-      console.log("third")
       dispatch(setProfileRefresh(!profile_refresh));
     }
   }, [is_network_connected])
@@ -741,7 +732,6 @@ const SwiperOr = ({}) => {
     
     if (profiles.length == 0) {
       if (!empty_profile_call) {
-        console.log("second")
         dispatch(setProfileRefresh(!profile_refresh));
       }
       else{
@@ -753,13 +743,7 @@ const SwiperOr = ({}) => {
    
   }, [profiles]);
 
-  useEffect(() => {
-    console.log('profiles.length',profiles.length)
-    console.log("warn_step",warn_step)
-    console.log("loading2",loading2)
-  }, [loading2,warn_step])
-  
-  
+
 
   useEffect(() => {
     let prv_prmt = profile_data?.userprivateprompts;
@@ -769,11 +753,30 @@ const SwiperOr = ({}) => {
   }, [promptTime]);
 
   useEffect(() => {
+
+
+            
+            
     let prv_prmt = profile_data?.userprivateprompts;
     if (is_promptsfillingstarted && prv_prmt.length == 0) {
       setpromptsmodalVisible(true);
     }
   }, [is_promptsfillingstarted]);
+
+
+  useEffect(() => {
+    console.log("\n")
+    if (!loading2) {
+      for (let i = 0; i < profiles.length; i++) {
+        const prf = profiles[i];
+        console.log("prf",prf.id,prf.name,"status",prf.profilestatus.profilestatus)
+      }  
+    }
+    
+  
+    
+  }, [loading2])
+  
 
   // save location data in frontend
   useLayoutEffect(() => {
@@ -827,13 +830,12 @@ const SwiperOr = ({}) => {
 
     // To show loading sentence
     setloading2(true);
-    console.log("this woeks",profile_refresh)
     setwarn_step(0);
     initPer();
 
     // load all data only after screen load sucessfully
     if (screen_loaded && is_network_connected) {
-      console.log("here mes")
+
       getGenders();
       getInterests();
       getLanguages();
@@ -880,6 +882,58 @@ const SwiperOr = ({}) => {
     }
   };
 
+  const userExist = async () =>{
+    console.log("userExist call")
+
+    let url_path = 'isacountavialable/'
+
+    // setloading(true);
+    const data = {
+      user_id: profile_data.user.id,
+    };
+
+    const headers = {
+      // Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const response = await axios.post(
+        apiUrl + url_path,
+        data,
+        {
+          headers,
+        }
+      );
+      let resp_data = response.data;
+
+      // setloading(false);
+      
+      console.log("userExist resp_data",resp_data.code)
+
+      if (resp_data.code == 400) {
+
+           Alert.alert("Your account deleted!", "Please contact to admin.", [
+            
+            {
+              text: "OK",
+              onPress: () => {
+                dispatch(setSessionExpired(true))
+              },
+            },
+          ]);
+        
+      }
+      
+    } catch (error) {
+      console.log("userExist err",error)
+      // setloading(false);
+      return false;
+
+    }
+
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       setprofile_call(false);
@@ -890,6 +944,16 @@ const SwiperOr = ({}) => {
       }
     }, [prf_apprv_refh])
   );
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (appStateVisible == 'active') {
+        userExist()
+      }
+    }, [appStateVisible])
+  );
+
 
 
   

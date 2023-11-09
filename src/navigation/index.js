@@ -45,8 +45,7 @@ const Navigation = () => {
       dispatch(setProfileRefresh(!profile_refresh));
     }
 
-    console.log(Platform.OS,"is_network_connected",is_network_connected)
-    console.log("current_screen",Platform.OS,current_screen)
+    
     if (!is_network_connected) {
       if (
         current_screen != "MatchScreen" 
@@ -61,7 +60,7 @@ const Navigation = () => {
         current_screen != "MatchProfile" &&
         current_screen != ""
       ) {
-        console.log("here")
+
         setoffAlert(true);
       }
       else{
@@ -92,21 +91,14 @@ const Navigation = () => {
       );
     }
 
-    return()=>{
-      console.log("Return Call")
-    }
-
   }, [is_network_connected, current_screen]);
 
-  useEffect(() => {
-    console.log("offAlert",offAlert)
-  }, [offAlert])
-  
+
 
   return (
     <NavigationContainer ref={navigationRef}>
       <UserProvider navigationRef={navigationRef}>
-        { offAlert && <OffflineAlert />}
+        <OffflineAlert offAlert={offAlert} />
 
         <NotificationController />
         <StackNav />

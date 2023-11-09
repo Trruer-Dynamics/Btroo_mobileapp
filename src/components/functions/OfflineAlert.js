@@ -1,20 +1,38 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { rspF, rspH, rspW, scrn_width } from "../../styles/responsiveSize";
+import { rspF, rspH, rspW, scrn_height, scrn_width } from "../../styles/responsiveSize";
 import fontFamily from "../../styles/fontFamily";
 import colors from "../../styles/colors";
-import Animated, {  FadeInUp } from "react-native-reanimated";
+
  
-const OffflineAlert = () => {
+const OffflineAlert = ({offAlert=false}) => {
+
+  
   return (
+   
+    <SafeAreaView
+    style={{position:'absolute', 
+    zIndex: 1000}}
+    >
+   
+   {
+    offAlert &&
     <SafeAreaView style={styles.mainContainer}>
-      <Animated.View style={styles.messageBox}
-      entering={FadeInUp}
+ 
+      <View style={styles.messageBox}
+      // entering={FadeInUp}
       >
        <Text style={styles.messageBoxHeader}>No connection</Text>
        
-      </Animated.View>
+      </View>
     </SafeAreaView>
+  }
+    </SafeAreaView>
+  
+
+
+
+
   );
 };
  
@@ -22,10 +40,9 @@ export default OffflineAlert;
  
 const styles = StyleSheet.create({
   mainContainer: {
-    height: "100%",
-    width: "100%",
-    zIndex: 1000,
-    position: "absolute",
+    height: scrn_height,
+    width: scrn_width,
+    
     backgroundColor: "#00000000",
     // justifyContent: "center",
     // alignItems: "center",

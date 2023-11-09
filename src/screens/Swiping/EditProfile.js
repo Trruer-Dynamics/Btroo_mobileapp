@@ -57,6 +57,7 @@ import Draggable from "../../components/screenComponents/picUpload/draggable";
 import Box from "../../components/screenComponents/picUpload/box";
 import _ from "lodash";
 import FormSelectorLS from "../../components/formComponents/FormSelectorLS";
+import { useFocusEffect } from "@react-navigation/native";
 
 const EditProfile = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -699,6 +700,58 @@ const EditProfile = ({ navigation }) => {
     trailing: false,
   });
 
+  const userExist = async () =>{
+    console.log("userExist call")
+
+    let url_path = 'isacountavialable/'
+
+    // setloading(true);
+    const data = {
+      user_id: profile_data.user.id,
+    };
+
+    const headers = {
+      // Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const response = await axios.post(
+        apiUrl + url_path,
+        data,
+        {
+          headers,
+        }
+      );
+      let resp_data = response.data;
+
+      // setloading(false);
+      
+      console.log("userExist resp_data",resp_data)
+
+      if (resp_data.code == 400) {
+
+           Alert.alert("Your account deleted!", "Please contact to admin.", [
+            
+            {
+              text: "OK",
+              onPress: () => {
+                dispatch(setSessionExpired(true))
+              },
+            },
+          ]);
+        
+      }
+      
+    } catch (error) {
+      console.log("userExist err",error)
+      // setloading(false);
+      return false;
+
+    }
+
+  }
+
   const getGenders = async () => {
     await axios
       .get(apiUrl + "getactivegender/")
@@ -1181,6 +1234,15 @@ const EditProfile = ({ navigation }) => {
   useLayoutEffect(() => {
     getLocation(1)
   }, [])
+
+  useFocusEffect(
+    React.useCallback(() => {
+    if (appStateVisible == 'active') {
+      userExist()
+    }
+
+    }, [appStateVisible])
+  );
 
   return (
     <>

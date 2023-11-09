@@ -190,7 +190,6 @@ const ChatItem = ({
     index == 0 ? 1.6 : chatlist[index - 1][1] == chatlist[index][1] ? 0.5 : 1.6;
 
   let show_tailc = index < chatlist.length - 1 ? chatlist[index + 1][1] == chatlist[index][1] ? false : true : false;
-  console.log("show_tailc",show_tailc)
 
   let show_tail = show_tailc
 
@@ -582,7 +581,7 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfileTime = async () => {
-    console.log("\nrevealProfileTime")
+
     setloading(true);
 
     const api = apiUrl + "sendnotificationforprofilereveal/";
@@ -602,7 +601,7 @@ const Chat = ({ profile }) => {
       });
       setloading(false);
       let resp_data = response.data;
-      console.log("resp_data",resp_data)
+
     } catch (error) {
       setloading(false);
       return false;
@@ -836,16 +835,13 @@ const Chat = ({ profile }) => {
   // save chats locally
   useEffect(() => {
 
-    // console.log("chats_msgs",chats_msgs.length)
-    // console.log("chatlist",chatlist.length)
     let onlY_id= chats_msgs.map(k => k[4])
-    // console.log("onlY_id",onlY_id.length)
+
     let newmsgs = chatlist.filter(v => !onlY_id.includes(v[4]))
 
-    console.log("newmsgs",newmsgs.length)
     if (newmsgs.length > 0) {
       let all_lmsgs = [ ...newmsgs,...chats_msgs]
-      // console.log("all_lmsgs",all_lmsgs.length)
+
       dispatch(setChatMsgs(all_lmsgs));
     }
 
@@ -1466,7 +1462,6 @@ const Chat = ({ profile }) => {
 
                         all_drafts_msgs.push(data);
 
-                        console.log("chatMsgTxt",data)
 
                         dispatch(setDraftMsgs(all_drafts_msgs));
                         if (SocketOpen) {

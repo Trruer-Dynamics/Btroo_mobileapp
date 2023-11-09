@@ -233,6 +233,13 @@ const SwiperTut = ({ repeat_tut }) => {
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
   const [swipe_tut_l, setswipe_tut_l] = useState(swipe_tut || repeat_tut);
   const [step, setstep] = useState(0);
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
+  const [hide_tut, sethide_tut] = useState(false)
+
   const [instruction_list, setinstruction_list] = useState([
     "Fancy someone you think \nyou can click with. If they \nlike you back you could \nspeak later on. ",
     "Let people know you fancy \nthem by sending them a \nsoft spot.",
@@ -289,14 +296,14 @@ const SwiperTut = ({ repeat_tut }) => {
 
     let prof_data = pref_type == "Woman" ? DATA : DATA2
     // slidesRef2
-    console.log("current Ind", currentIndex,currentIndex2,prof_data.length)
+   
     if (large) {
     if (currentIndex <  prof_data.length ) {
       slidesRef2.current.scrollToIndex({ index : currentIndex })
     }
     }
     else{
-      console.log("else")
+
         if (currentIndex2 <  prof_data.length ) {
       setcurrentIndex(currentIndex2)
       slidesRef.current.scrollToIndex({ index : currentIndex2 })
@@ -394,13 +401,19 @@ const SwiperTut = ({ repeat_tut }) => {
   }, []);
 
   useEffect(() => {
-    console.log("\ncurrentIndx", currentIndex)
-    console.log("currentIndex2", currentIndex2)
-
     if (currentIndex !== currentIndex2 && modalVisible) {
       scrollTo()
     }
   }, [currentIndex,currentIndex2])
+
+
+  useEffect(() => {
+    if (is_network_connected && hide_tut) {
+      sethide_tut(false)
+    }
+   
+  }, [is_network_connected])
+
   
 
   return (
@@ -560,7 +573,7 @@ const SwiperTut = ({ repeat_tut }) => {
               initialScrollIndex={currentIndex}
                 data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
                 onLayout={()=>{
-                  console.log("Enlarge Carousel Load Tut")
+
                   setcurrentIndex2(currentIndex)
                   scrollTo(true)
                 }}
@@ -838,6 +851,8 @@ const SwiperTut = ({ repeat_tut }) => {
           </ScrollView>
         </View>
 
+       {
+        !hide_tut &&
         <>
           {swipe_tut_l && (
             <SafeAreaView style={styles.mainTutCont}>
@@ -1103,7 +1118,12 @@ const SwiperTut = ({ repeat_tut }) => {
                           if (repeat_tut) {
                             navigation.navigate("Match");
                           } else {
-                            swipeTutDone();
+                            if (is_network_connected) {
+                              swipeTutDone();  
+                            }
+                            else{
+                              sethide_tut(true)
+                            }
                           }
                         }}
                         style={styles.centralModalTextNextCont}
@@ -1364,7 +1384,7 @@ const SwiperTut = ({ repeat_tut }) => {
               </View>
             </SafeAreaView>
           )}
-        </>
+        </>}
       </SafeAreaView>
     </>
   );

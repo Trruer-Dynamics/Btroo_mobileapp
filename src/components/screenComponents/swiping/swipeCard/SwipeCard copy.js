@@ -389,7 +389,7 @@ const SwipeCard = ({
 
 
   useEffect(() => {
-    console.log("is_network_connected",is_network_connected)
+ 
     if (!is_network_connected) {
       setshowFilter(false)
     }

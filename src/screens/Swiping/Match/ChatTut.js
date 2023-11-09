@@ -150,12 +150,11 @@ const ChatTut = ({ profile, repeat_tut }) => {
     (state) => state.authentication.is_network_connected
   );
 
-  const [hide_tut, sethide_tut] = useState(false)
+const [show_alert, setshow_alert] = useState(false)
 
   const [loading, setloading] = useState(false);
 
   const chatTutDone = async () => {
-    console.log("chatTutDone")
     setloading(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -176,8 +175,6 @@ const ChatTut = ({ profile, repeat_tut }) => {
       setloading(false);
 
       let resp_data = response.data;
-
-      console.log("resp_data",resp_data)
 
       if (resp_data.code == 200) {
         dispatch(setChatTut(false));
@@ -231,22 +228,18 @@ const ChatTut = ({ profile, repeat_tut }) => {
     }, [])
   );
 
-
   useEffect(() => {
-    console.log("hide_tut",hide_tut)
-    if (is_network_connected && hide_tut) {
-      sethide_tut(false)
+    if (is_network_connected) {
+      setshow_alert(false)
     }
-    
- 
   }, [is_network_connected])
+  
+
 
   return (
     <>
       {loading && <Loader />}
-      {
-        hide_tut  && <OffflineAlert/>
-      }
+         <OffflineAlert offAlert={show_alert} />
       <SafeAreaView style={{ height: scrn_height, backgroundColor: "#FFF" }}>
         <SafeAreaView
           style={{
@@ -368,9 +361,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
             setModalVisible={setmodalVisible}
           />
         </FullModal>
-
-        {
-          !hide_tut &&
+       
           <>
           <View style={styles.mainTutCont}>
             <View style={styles.centralModalContMatch}>
@@ -396,13 +387,14 @@ const ChatTut = ({ profile, repeat_tut }) => {
                         dispatch(setRepeatTut(false));
                         navigation.navigate("SettingsScreen");
                       } else {
-                        console.log("resss")
+                        
                         if (is_network_connected) {
                           chatTutDone();
                         }
                         else{
-                          sethide_tut(true)
+                          setshow_alert(true)
                         }
+                        
                         
                       }
                     }
@@ -497,7 +489,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
               />
             </View>
           )}
-        </>}
+        </>
       </SafeAreaView>
     </>
   );

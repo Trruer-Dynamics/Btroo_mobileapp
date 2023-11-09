@@ -195,7 +195,7 @@ const UserIntro = ({ navigation, route }) => {
 
   // Blur all inputs in step 1 next button click
   useEffect(() => {
-    console.log("step1blr",city_blr)
+
     if (step1blr) {
       setname_blr(true);
       setdob_blr(true);

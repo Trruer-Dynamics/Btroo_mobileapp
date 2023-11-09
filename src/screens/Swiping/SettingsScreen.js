@@ -9,7 +9,7 @@ import {
   Linking,
   Platform,
 } from "react-native";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { rspF, rspH, rspW, scrn_height } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
@@ -58,6 +58,7 @@ const SettingsScreen = ({ navigation, route }) => {
   );
 
   const [loading, setloading] = useState(false);
+  const { appStateVisible } = useContext(UserContext);
 
   let usr_profile = profile_data?.userprofile;
   const kp_mtch = profile_data?.userprofile?.keepmatchingnotification;
@@ -378,12 +379,66 @@ const SettingsScreen = ({ navigation, route }) => {
       .catch((err) => {});
   };
 
+  const userExist = async () =>{
+    console.log("userExist call")
+
+    let url_path = 'isacountavialable/'
+
+    // setloading(true);
+    const data = {
+      user_id: profile_data.user.id,
+    };
+
+    const headers = {
+      // Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const response = await axios.post(
+        apiUrl + url_path,
+        data,
+        {
+          headers,
+        }
+      );
+      let resp_data = response.data;
+
+      // setloading(false);
+      
+      console.log("userExist resp_data",resp_data)
+
+      if (resp_data.code == 400) {
+
+           Alert.alert("Your account deleted!", "Please contact to admin.", [
+            
+            {
+              text: "OK",
+              onPress: () => {
+                dispatch(setSessionExpired(true))
+              },
+            },
+          ]);
+        
+      }
+      
+    } catch (error) {
+      console.log("userExist err",error)
+      // setloading(false);
+      return false;
+
+    }
+
+  }
+
+
   useLayoutEffect(() => {
     getContact();
   }, []);
 
   useFocusEffect(
     React.useCallback(() => {
+   
       dispatch(setCurrentScreen("SettingsScreen"));
       // Do something when the screen is focused
       setphone_number(profile_data?.user?.username);
@@ -391,9 +446,22 @@ const SettingsScreen = ({ navigation, route }) => {
     }, [])
   );
 
+  useFocusEffect(
+    React.useCallback(
+      () => {
+        if (appStateVisible == 'active') {
+          userExist()
+        }
+      },
+      [appStateVisible],
+    )
+    
+  )
+
+  
   return (
     <>
-      {!is_network_connected && <OffflineAlert />}
+   <OffflineAlert offAlert={!is_network_connected} />
       {loading && <Loader />}
       <SafeAreaView
         style={{

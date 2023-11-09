@@ -10,7 +10,7 @@ import {
   Animated,
   Image,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import {
   rspF,
@@ -52,6 +52,7 @@ import {
   setMatchTut,
   setSwipeTut,
 } from "../../store/reducers/tutorial/tutorial";
+import { UserContext } from "../../context/user";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item[0]);
@@ -80,6 +81,9 @@ const ProfileMain = ({ navigation }) => {
   ]);
 
   const dispatch = useDispatch();
+
+  const { appStateVisible } = useContext(UserContext);
+
 
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
@@ -208,6 +212,59 @@ const ProfileMain = ({ navigation }) => {
       .catch((err) => {});
   };
 
+
+  const userExist = async () =>{
+    console.log("userExist call")
+
+    let url_path = 'isacountavialable/'
+
+    // setloading(true);
+    const data = {
+      user_id: profile_data.user.id,
+    };
+
+    const headers = {
+      // Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const response = await axios.post(
+        apiUrl + url_path,
+        data,
+        {
+          headers,
+        }
+      );
+      let resp_data = response.data;
+
+      // setloading(false);
+      
+      console.log("userExist resp_data",resp_data)
+
+      if (resp_data.code == 400) {
+
+           Alert.alert("Your account deleted!", "Please contact to admin.", [
+            
+            {
+              text: "OK",
+              onPress: () => {
+                dispatch(setSessionExpired(true))
+              },
+            },
+          ]);
+        
+      }
+      
+    } catch (error) {
+      console.log("userExist err",error)
+      // setloading(false);
+      return false;
+
+    }
+
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
@@ -271,6 +328,14 @@ const ProfileMain = ({ navigation }) => {
   const renderItem2 = ({ item, index }) => {
     return <Item2 item={item} />;
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (appStateVisible == 'active') {
+        userExist()
+      }
+    }, [appStateVisible])
+  );
 
   return (
     <View style={{ height: scrn_height, backgroundColor: "#fff" }}>

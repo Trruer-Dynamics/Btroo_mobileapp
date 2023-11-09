@@ -78,15 +78,14 @@ const MatchTut = ({ repeat_tut }) => {
 
   
 
-
   const [loading, setloading] = useState(false);
 
   const [keep_matching, setkeep_matching] = useState(true);
 
   const [extendVisible, setextendVisible] = useState(false);
 
-  const [hide_tut, sethide_tut] = useState(false)
-
+  const [show_alert, setshow_alert] = useState(false)
+  
   const [match_tut_para, setmatch_tut_para] = useState([
     `Matches are created each \nmorning if someone you \nfancy has also fancied you \nback. You can talk to up to \nthree matches at any \ngiven time. Don’t worry, \nyou won’t lose any of the \nother matches.`,
     `Any conversation lasts 72 \nhours. However, you can \nalways extend it by \nclicking here if you feel \nthat you and your match \nneed some more time.`,
@@ -178,16 +177,16 @@ const MatchTut = ({ repeat_tut }) => {
   };
 
   useEffect(() => {
-    if (is_network_connected && hide_tut) {
-      sethide_tut(false)
+    if (is_network_connected) {
+      setshow_alert(false)
     }
-   
   }, [is_network_connected])
+  
   
 
   return (
     <>
-    {hide_tut && <OffflineAlert/>}
+   <OffflineAlert offAlert={show_alert} />
       {loading && <Loader />}
       <SafeAreaView
         style={{ flex: 1, backgroundColor: "#fff" }}
@@ -260,7 +259,7 @@ const MatchTut = ({ repeat_tut }) => {
         </CentralModal>
 
         {/* Match Chat Tutorial */}
-        {!hide_tut &&
+
           <>
           <View style={styles.mainTutCont}>
             <View
@@ -302,9 +301,9 @@ const MatchTut = ({ repeat_tut }) => {
                         if (is_network_connected) {
                           matchTutDone();  
                         }
-                        else{
-                          sethide_tut(true)
-                        }
+                       else{
+                        setshow_alert(true)
+                       }
                         
                       }
                     }
@@ -397,7 +396,7 @@ const MatchTut = ({ repeat_tut }) => {
               </Text>
             </View>
           )}
-        </>}
+        </>
       </SafeAreaView>
     </>
   );

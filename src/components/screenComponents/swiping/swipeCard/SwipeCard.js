@@ -230,14 +230,14 @@ const SwipeCard = ({
 
   const scrollTo = async (large = false) =>{
     // slidesRef2
-    console.log("current Ind", currentIndex,currentIndex2,card_itm.image.length)
+    
     if (large) {
     if (currentIndex <  card_itm.image.length ) {
       slidesRef2.current.scrollToIndex({ index : currentIndex })
     }
     }
     else{
-      console.log("else")
+
         if (currentIndex2 <  card_itm.image.length ) {
       setcurrentIndex(currentIndex2)
       slidesRef.current.scrollToIndex({ index : currentIndex2 })
@@ -261,7 +261,7 @@ const SwipeCard = ({
   const slidesRef2 = useRef(null);
 
   const viewableItemsChanged2 = useRef(({ viewableItems }) => {
-    console.log("viewableItemsChanged2")
+
     setcurrentIndex2(viewableItems[0]?.index);
     
   }).current;
@@ -394,6 +394,8 @@ const SwipeCard = ({
       });
       let resp_data = response.data;
 
+      console.log("\nswappinguser resp_data",resp_data)
+
       // setloading(false);
       if (resp_data.code == 200) {
         setswippingcount(resp_data.data.swappingcountvalue);
@@ -401,7 +403,11 @@ const SwipeCard = ({
         dispatch(setSessionExpired(true));
       }
     } catch (error) {
+      console.log("nswappinguser error",error)
       // setloading(false);
+      if (is_network_connected) {
+        dispatch(setSessionExpired(true));
+      }
       return false;
     }
   };
@@ -414,7 +420,7 @@ const SwipeCard = ({
 
 
   useEffect(() => {
-    console.log("is_network_connected",is_network_connected)
+    
     if (!is_network_connected) {
       setshowFilter(false)
     }
@@ -454,8 +460,6 @@ const SwipeCard = ({
   }, [modalVisible]);
 
   useEffect(() => {
-    console.log("\ncurrentIndx", currentIndex)
-    console.log("currentIndex2", currentIndex2)
 
     if (currentIndex !== currentIndex2 && modalVisible) {
       scrollTo()
@@ -872,7 +876,7 @@ const SwipeCard = ({
                   <FlatList
                     initialScrollIndex={currentIndex}
                     onLayout={()=>{
-                      console.log("Enlarge Carousel Load")
+                   
                       setcurrentIndex2(currentIndex)
                       scrollTo(true)
                     }}
