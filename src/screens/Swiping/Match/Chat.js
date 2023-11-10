@@ -1168,6 +1168,13 @@ console.log("othcount",othcount)
     }
   }, [chatlist]);
 
+  useLayoutEffect(() => {
+    console.log("profile.userprv_rvl",profile.user_prof_rvl)
+    if (profile.user_prof_rvl) {
+      setrvl_click(true)
+    }
+  }, [])
+
   return (
     <>
       {loading && <Loader />}

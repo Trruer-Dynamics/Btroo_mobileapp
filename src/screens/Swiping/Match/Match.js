@@ -163,6 +163,11 @@ const Match = () => {
                 ? user_2
                 : user_1;
 
+              let userprv_rvl =
+               user_1.userprofile.id == profile_data.userprofile.id ? resp_data[p].user1_profile_reveal  : resp_data[p].user2_profile_reveal
+
+               console.log("userprv_rvl",userprv_rvl)
+
               
             let prof_rev =  resp_data[p].user1_profile_reveal && resp_data[p].user2_profile_reveal
             console.log("resp_data[p].user1_profile_reveal",resp_data[p].user1_profile_reveal)
@@ -194,6 +199,8 @@ const Match = () => {
             mth.for_user_id = profile_data.userprofile.id;
             mth.prof_img = prf_img?.cropedimage;
             mth.prof_rvl = prof_rev;
+            mth.user_prof_rvl = userprv_rvl
+          
             mth.publicprompts = mth_user.userprofile.publicprompts;
             mth.privateprompts = mth_user.userprofile.privateprompts;
             mth.tut = false;

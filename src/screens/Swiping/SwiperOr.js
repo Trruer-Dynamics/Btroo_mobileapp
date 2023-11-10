@@ -454,6 +454,7 @@ const SwiperOr = ({}) => {
             }
             else
             if (profiles.length > 0) {
+              console.log("load1")
               setloading2(false)
             }
             
@@ -598,10 +599,12 @@ const SwiperOr = ({}) => {
           }
           else if (profiles.length === 0 && warn_step !== 2) {
             setloading2(false)
+            console.log("load5")
           }
-          else{
-            setloading2(false)
-          }
+          // else{
+          //   setloading2(false)
+          //   console.log("load6")
+          // }
           
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
@@ -610,11 +613,13 @@ const SwiperOr = ({}) => {
           if (new_profiles.length > 0) {
          
             setloading2(false);
+            console.log("load4")
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
           }
           else if (profiles.length > 0) {
             setloading2(false);
+            console.log("load3")
           }
          
         } else if (resp_code == 401) {
@@ -644,6 +649,7 @@ const SwiperOr = ({}) => {
           let active_profiles = resp_data.filter((v) => v.active == true);
           setprofiles(active_profiles);
           setloading2(false);
+          console.log("load2")
         } else {
           setwarn_step(2);
           setloading2(true);
@@ -765,11 +771,11 @@ const SwiperOr = ({}) => {
 
 
   useEffect(() => {
-    console.log("\n")
+    console.log("\n prof", profiles.length)
     if (!loading2) {
       for (let i = 0; i < profiles.length; i++) {
         const prf = profiles[i];
-        console.log("prf",prf.id,prf.name,"status",prf.profilestatus.profilestatus)
+        // console.log("prf",prf.id,prf.name,"status",prf.profilestatus.profilestatus)
       }  
     }
     

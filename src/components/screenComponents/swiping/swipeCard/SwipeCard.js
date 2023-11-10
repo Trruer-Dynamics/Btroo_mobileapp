@@ -384,11 +384,11 @@ const SwipeCard = ({
   const PassPressIn = () =>{
     rightX.setValue(1);
     setactionType("Pass");
-    Animated.timing(iconTranslateY, {
-      toValue: 1,
-      duration: 800,
-                            useNativeDriver: true,
-                          }).start();
+    // Animated.timing(iconTranslateY, {
+    //   toValue: 1,
+    //   duration: 800,
+    //                         useNativeDriver: true,
+    //                       }).start();
   }
   const PassPress = () =>{
     console.log("Pass Pressed")
@@ -398,12 +398,12 @@ const SwipeCard = ({
   }
 
   const debouncePassPressIn = _.debounce(PassPressIn, 200, {
-    leading: false,
+   leading: false,
     trailing: true,
   });
 
   const debouncePassPress = _.debounce(PassPress, 200, {
-    leading: false,
+   leading: false,
     trailing: true,
   });
 
@@ -413,11 +413,11 @@ const SwipeCard = ({
                           upY.setValue(1);
                           setactionType("Softspot");
 
-                          Animated.timing(iconTranslateY, {
-                            toValue: 1,
-                            duration: 500,
-                            useNativeDriver: true,
-                          }).start();
+                          // Animated.timing(iconTranslateY, {
+                          //   toValue: 1,
+                          //   duration: 500,
+                          //   useNativeDriver: true,
+                          // }).start();
   }
   const SoftPress = () =>{
     console.log("Softspot Pressed")
@@ -427,12 +427,12 @@ const SwipeCard = ({
   }
 
   const debounceSoftPressIn = _.debounce(SoftPressIn, 200, {
-    leading: false,
+   leading: false,
     trailing: true,
   });
 
   const debounceSoftPress = _.debounce(SoftPress, 200, {
-    leading: false,
+   leading: false,
     trailing: true,
   });
 
@@ -440,11 +440,11 @@ const SwipeCard = ({
   const FancyPressIn = () =>{
                           leftX.setValue(1);
                           setactionType("Fancy");
-                          Animated.timing(iconTranslateY, {
-                            toValue: 1,
-                            duration: 500,
-                            useNativeDriver: true,
-                          }).start();
+                          // Animated.timing(iconTranslateY, {
+                          //   toValue: 1,
+                          //   duration: 500,
+                          //   useNativeDriver: true,
+                          // }).start();
   }
   const FancyPress = () =>{
     console.log("FancyPress")
@@ -454,12 +454,12 @@ const SwipeCard = ({
   }
 
   const debounceFancyPressIn = _.debounce(FancyPressIn, 200, {
-    leading: false,
+   leading: false,
     trailing: true,
   });
 
   const debounceFancyPress = _.debounce(FancyPress, 200, {
-    leading: false,
+   leading: false,
     trailing: true,
   });
 
@@ -844,7 +844,9 @@ const SwipeCard = ({
                           //   duration: 800,
                           //   useNativeDriver: true,
                           // }).start();
+
                           debouncePassPressIn()
+                          // PassPressIn()
                         
 
                         }}
@@ -855,6 +857,7 @@ const SwipeCard = ({
                           // swipeProfile(false, false);
                           // setreport("");
                           debouncePassPress()
+                          // PassPress()
                           
                         }}
                       >

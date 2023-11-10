@@ -174,7 +174,7 @@ const MobileNo = ({ navigation, route }) => {
 
       // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       // setconfirm(confirmation);
-
+// 
       setOtpShowBox(true);
 
       // hide Loader
