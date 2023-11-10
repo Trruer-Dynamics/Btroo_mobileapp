@@ -66,7 +66,7 @@ const BottomTab = () => {
             // Border And Height of Bottom Tab is manage according to Platform android / ios
             marginTop: Platform.OS == "android" ? rspH(-1) : 0,
             paddingBottom: Platform.OS == "android" ? rspH(1) : rspH(2),
-            height: Platform.OS == "android" ? rspH(8) : rspF(9.26),
+            height: Platform.OS == "android" ? rspH(9) : rspF(9.26),
             borderTopLeftRadius: Platform.OS == "ios" ? 0 : rspW(3.6),
             borderTopRightRadius: Platform.OS == "ios" ? 0 : rspW(3.6),
           },

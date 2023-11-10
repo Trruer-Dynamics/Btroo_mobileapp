@@ -22,8 +22,8 @@ const FormHeaderChat = ({
         justifyContent: "space-between",
         alignItems: "center",
         height: srn_height * 0.06,
-        marginBottom: rspH(1.4),
-        backgroundColor:'red',
+        // marginBottom: rspH(1.4),
+        backgroundColor:'#fff',
         width: "100%",
       }}
     >

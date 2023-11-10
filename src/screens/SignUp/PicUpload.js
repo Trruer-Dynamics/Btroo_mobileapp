@@ -629,9 +629,11 @@ const PicUpload = ({ navigation, route }) => {
               <Text
                 style={{ textDecorationLine: "underline" }}
                 onPress={() => {
+                  if (is_network_connected) {
                   Linking.openURL(
                     "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
                   );
+                }
                 }}
               >
                 {" "}

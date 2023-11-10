@@ -1,26 +1,38 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { rspF, rspH, rspW } from "../../styles/responsiveSize";
+import { rspF, rspH, rspW, scrn_height, scrn_width } from "../../styles/responsiveSize";
 import fontFamily from "../../styles/fontFamily";
 import colors from "../../styles/colors";
+
  
-const OffflineAlert = () => {
+const OffflineAlert = ({offAlert=false}) => {
+
+  
   return (
+   
+    <SafeAreaView
+    style={{position:'absolute', 
+    zIndex: 1000}}
+    >
+   
+   {
+    offAlert &&
     <SafeAreaView style={styles.mainContainer}>
-      <View style={styles.messageBox}>
-        {/* Heading */}
-        <View style={styles.messageBoxHeaderCont}>
-          <Text style={styles.messageBoxHeader}>You are offline</Text>
-        </View>
  
-        {/* Para */}
-        <View>
-          <Text style={styles.messageBoxPara}>
-            Please check your internet {"\n"}connection and try again.
-          </Text>
-        </View>
+      <View style={styles.messageBox}
+      // entering={FadeInUp}
+      >
+       <Text style={styles.messageBoxHeader}>No connection</Text>
+       
       </View>
     </SafeAreaView>
+  }
+    </SafeAreaView>
+  
+
+
+
+
   );
 };
  
@@ -28,20 +40,21 @@ export default OffflineAlert;
  
 const styles = StyleSheet.create({
   mainContainer: {
-    height: "100%",
-    width: "100%",
-    zIndex: 1000,
-    position: "absolute",
-    backgroundColor: "#00000087",
-    justifyContent: "center",
-    alignItems: "center",
+    height: scrn_height,
+    width: scrn_width,
+    
+    backgroundColor: "#00000000",
+    // justifyContent: "center",
+    // alignItems: "center",
   },
   messageBox: {
-    width: rspW(76.5),
-    height: rspH(31.16),
-    backgroundColor: colors.white,
-    borderRadius: rspW(5.1),
-    paddingHorizontal: rspW(4),
+    // width: rspW(76.5),
+    width: scrn_width,
+    // height: rspH(31.16),
+    height: rspH(2.2),
+    backgroundColor: '#e54b4b',
+    // borderRadius: rspW(5.1),
+    // paddingHorizontal: rspW(4),
     alignItems: "center",
     justifyContent: "center",
     // marginTop: rspH(17),
@@ -51,9 +64,11 @@ const styles = StyleSheet.create({
   },
   messageBoxHeader: {
     fontFamily: fontFamily.bold,
-    fontSize: rspF(3),
-    color: colors.blue,
-    lineHeight: rspH(3.1),
+    // fontSize: rspF(3),
+    fontSize: rspF(1.4),
+    color: colors.white,
+    // lineHeight: rspH(3.1),
+    lineHeight: rspH(2.1),
     textAlign: "center",
   },
   messageBoxPara: {

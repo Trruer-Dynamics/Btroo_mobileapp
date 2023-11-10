@@ -694,6 +694,9 @@ const EditProfile = ({ navigation }) => {
     ]);
   };
 
+
+  
+
   //Debounce the showAlert function with a delay of 300 milliseconds
   const debounceShowConfirmDialog = _.debounce(showConfirmDialog, 200, {
     leading: true,
@@ -1114,6 +1117,7 @@ const EditProfile = ({ navigation }) => {
   }, [pos_change]);
 
   const loadData = async () => {
+
     let usr_profile = profile_data.userprofile;
     setheight_cm(usr_profile.height.toString());
     setoccupation(usr_profile.occupation);
@@ -1131,8 +1135,11 @@ const EditProfile = ({ navigation }) => {
   };
 
   useLayoutEffect(() => {
-    
-    loadData();
+    console.log("is_network_connected",is_network_connected)
+    if (is_network_connected) {
+      loadData();
+    }
+
   }, []);
 
   let usr_profile = profile_data.userprofile;

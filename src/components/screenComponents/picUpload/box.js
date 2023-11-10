@@ -13,6 +13,7 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import ADIcon from "react-native-vector-icons/AntDesign";
 import fontFamily from "../../../styles/fontFamily";
 import FastImage from "react-native-fast-image";
+import { useSelector } from "react-redux";
 
 const Box = ({
   item,
@@ -27,12 +28,17 @@ const Box = ({
   up_img_len = 9,
   pos2,
 }) => {
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   return (
     <TouchableOpacity
       activeOpacity={0.9}
       onPress={() => {
         // open image upload modal if active
-        if (item[2]) {
+        if (item[2] && is_network_connected) {
           setmodalVisible(true);
           setactiveIndx(index);
         }
@@ -78,7 +84,10 @@ const Box = ({
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => {
-                deleteProfileImage(index);
+                if (is_network_connected) {
+                  deleteProfileImage(index);  
+                }
+                
               }}
               style={{
                 position: "absolute",
@@ -112,7 +121,7 @@ const Box = ({
           }}
           name="md-add-circle-sharp"
           size={30}
-          color={item[2] ? colors.blue : "#cccccc"}
+          color={item[2] && is_network_connected ? colors.blue : "#cccccc"}
         />
       )}
     </TouchableOpacity>

@@ -60,6 +60,7 @@ import {
   setStatusBarArgs,
 } from "../../../../store/reducers/authentication/authentication";
 import FastImage from "react-native-fast-image";
+import _ from "lodash";
 
 // Profile cropped image Carousel item
 const Item = ({ item, setmodalVisible, super_liked_profile, index }) => {
@@ -205,6 +206,7 @@ const SwipeCard = ({
     (state) => state.authentication.is_network_connected
   );
 
+  const [enable_swipe, setenable_swipe] = useState(true)
   const dispatch = useDispatch();
   //Filter
   const [showFilter, setshowFilter] = useState(false);
@@ -371,18 +373,107 @@ const SwipeCard = ({
         dispatch(setSessionExpired(true));
       }
     } catch (error) {
+      if (is_network_connected) {
+        dispatch(setSessionExpired(true));
+      }
       return false;
     }
   };
 
+  
+  const PassPressIn = () =>{
+    rightX.setValue(1);
+    setactionType("Pass");
+    Animated.timing(iconTranslateY, {
+      toValue: 1,
+      duration: 800,
+                            useNativeDriver: true,
+                          }).start();
+  }
+  const PassPress = () =>{
+    console.log("Pass Pressed")
+    handleChoiceButtons(0);
+    swipeProfile(false, false);
+    setreport("");
+  }
+
+  const debouncePassPressIn = _.debounce(PassPressIn, 200, {
+    leading: false,
+    trailing: true,
+  });
+
+  const debouncePassPress = _.debounce(PassPress, 200, {
+    leading: false,
+    trailing: true,
+  });
+
+  const SoftPressIn = () =>{
+
+                          
+                          upY.setValue(1);
+                          setactionType("Softspot");
+
+                          Animated.timing(iconTranslateY, {
+                            toValue: 1,
+                            duration: 500,
+                            useNativeDriver: true,
+                          }).start();
+  }
+  const SoftPress = () =>{
+    console.log("Softspot Pressed")
+    handleChoiceButtons(0);
+                          swipeProfile(true, true);
+                          setreport("");
+  }
+
+  const debounceSoftPressIn = _.debounce(SoftPressIn, 200, {
+    leading: false,
+    trailing: true,
+  });
+
+  const debounceSoftPress = _.debounce(SoftPress, 200, {
+    leading: false,
+    trailing: true,
+  });
+
+
+  const FancyPressIn = () =>{
+                          leftX.setValue(1);
+                          setactionType("Fancy");
+                          Animated.timing(iconTranslateY, {
+                            toValue: 1,
+                            duration: 500,
+                            useNativeDriver: true,
+                          }).start();
+  }
+  const FancyPress = () =>{
+    console.log("FancyPress")
+    handleChoiceButtons(0);
+                          swipeProfile(true, false);
+                          setreport("");
+  }
+
+  const debounceFancyPressIn = _.debounce(FancyPressIn, 200, {
+    leading: false,
+    trailing: true,
+  });
+
+  const debounceFancyPress = _.debounce(FancyPress, 200, {
+    leading: false,
+    trailing: true,
+  });
+
   // To send swipe action in backend
   const swipeProfile = async (action, superlikestatus) => {
+
     const data = {
       userprofile1: profile_data.userprofile.id,
       userprofile2: card_itm.id,
       action: action,
       superlikestatus: superlikestatus,
     };
+
+    console.log("data",data)
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -402,6 +493,7 @@ const SwipeCard = ({
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
+
     } catch (error) {
       console.log("nswappinguser error",error)
       // setloading(false);
@@ -417,6 +509,9 @@ const SwipeCard = ({
       reportProfile();
     }
   }, [report]);
+
+
+  
 
 
   useEffect(() => {
@@ -741,19 +836,26 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
-                          rightX.setValue(1);
-                          setactionType("Pass");
-                          Animated.timing(iconTranslateY, {
-                            toValue: 1,
-                            duration: 800,
-                            useNativeDriver: true,
-                          }).start();
+               
+                          // rightX.setValue(1);
+                          // setactionType("Pass");
+                          // Animated.timing(iconTranslateY, {
+                          //   toValue: 1,
+                          //   duration: 800,
+                          //   useNativeDriver: true,
+                          // }).start();
+                          debouncePassPressIn()
+                        
+
                         }}
                         onPress={() => {
+
+                          //   console.log("Pass Pressed")
+                          // handleChoiceButtons(0);
+                          // swipeProfile(false, false);
+                          // setreport("");
+                          debouncePassPress()
                           
-                          handleChoiceButtons(0);
-                          swipeProfile(false, false);
-                          setreport("");
                         }}
                       >
                         <FastImage
@@ -769,20 +871,26 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
-                          upY.setValue(1);
-                          setactionType("Softspot");
 
-                          Animated.timing(iconTranslateY, {
-                            toValue: 1,
-                            duration: 500,
-                            useNativeDriver: true,
-                          }).start();
+                          //   console.log("Softspot Pressed")
+                          // upY.setValue(1);
+                          // setactionType("Softspot");
+
+                          // Animated.timing(iconTranslateY, {
+                          //   toValue: 1,
+                          //   duration: 500,
+                          //   useNativeDriver: true,
+                          // }).start();
+                          debounceSoftPressIn()
+                        
                         }}
                         onPress={() => {
-           
-                          handleChoiceButtons(0);
-                          swipeProfile(true, true);
-                          setreport("");
+
+                          // handleChoiceButtons(0);
+                          // swipeProfile(true, true);
+                          // setreport("");
+                          debounceSoftPress()
+                          
                         }}
                       >
                         <FastImage
@@ -797,18 +905,25 @@ const SwipeCard = ({
                       {/* Action */}
                       <TouchableOpacity
                         onPressIn={() => {
-                          leftX.setValue(1);
-                          setactionType("Fancy");
-                          Animated.timing(iconTranslateY, {
-                            toValue: 1,
-                            duration: 500,
-                            useNativeDriver: true,
-                          }).start();
+   
+                          //   console.log("Fancy Pressed")
+                          // leftX.setValue(1);
+                          // setactionType("Fancy");
+                          // Animated.timing(iconTranslateY, {
+                          //   toValue: 1,
+                          //   duration: 500,
+                          //   useNativeDriver: true,
+                          // }).start();
+                          debounceFancyPressIn()
+                        
                         }}
                         onPress={() => {
-                          handleChoiceButtons(0);
-                          swipeProfile(true, false);
-                          setreport("");
+
+                          // handleChoiceButtons(0);
+                          // swipeProfile(true, false);
+                          // setreport("");
+                          debounceFancyPress()
+                          
                         }}
                         style={styles.actionCont}
                       >

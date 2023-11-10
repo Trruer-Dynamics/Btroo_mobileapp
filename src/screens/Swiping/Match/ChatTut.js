@@ -229,10 +229,17 @@ const [show_alert, setshow_alert] = useState(false)
   );
 
   useEffect(() => {
+    
+    console.log("is_network_connected",is_network_connected)
     if (is_network_connected) {
       setshow_alert(false)
     }
   }, [is_network_connected])
+
+  useEffect(() => {
+    console.log("chat_step",chat_step)
+  }, [chat_step])
+  
   
 
 
@@ -543,7 +550,7 @@ const styles = StyleSheet.create({
   iceBreakerTxt: {
     fontFamily: fontFamily.bold,
     lineHeight: rspF(2.18),
-    fontSize: rspF(Platform.OS == "ios" ? 2.02 : 1.9),
+    fontSize: Platform.OS == "ios" ? rspF(2.02) : scrn_height * 0.02,
     color: colors.blue,
     textAlign: "center",
     letterSpacing: Platform.OS == "ios" ? 0 : 0.5,
@@ -618,7 +625,7 @@ const styles = StyleSheet.create({
   // Match Chat Tut
   centralModalContMatch: {
     position: "absolute",
-    height: Platform.OS == 'ios'? rspH(36): rspH(36) + insets.bottom,
+    height: Platform.OS == 'ios'? rspH(31) + insets.top: rspH(36) + insets.bottom,
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -631,24 +638,15 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white,
+    backgroundColor: colors.white ,
     alignItems: "center",
     justifyContent: "center",
   },
-  timeHighCont: {
-    top: rspH(19.4),
-    right: rspW(12),
-    width: rspW(22.2),
-    height: rspH(2.75),
-    borderRadius: 11,
-  },
-  timeDoneTxt: {
-    fontSize: rspF(1.3),
-    lineHeight: rspF(1.31),
-    fontFamily: fontFamily.light,
-  },
+  
   nameHighCont: {
-    top: rspH(Platform.OS == "ios" ? 7.7 : 2.4),
+    // top: rspH(Platform.OS == "ios" ? 7.7 : 2.4),
+    top: Platform.OS == 'ios' ? rspH(1.8) + insets.top :  scrn_height * 0.018,
+
     left: rspW(32),
     width: rspW(36),
     // height: rspH(3.8),
@@ -674,7 +672,7 @@ const styles = StyleSheet.create({
   },
 
   profilePhotoHighCont: {
-    top: rspH(Platform.OS == "ios" ? 5.6 : 0.3),
+    top: Platform.OS == "ios" ? rspH(0.2) + insets.top : rspH(0.3),
     right: rspW(3),
     width: rspW(16),
     height: rspW(16),

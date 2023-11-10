@@ -9,7 +9,7 @@ import React from "react";
 import Video from "react-native-video";
 import fontFamily from "../styles/fontFamily";
 import colors from "../styles/colors";
-import { rspW, rspH, rspF } from "../styles/responsiveSize";
+import { rspW, rspH, rspF, scrn_height } from "../styles/responsiveSize";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveUserLocationDetails } from "../store/reducers/authentication/authentication";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -23,6 +23,10 @@ const Intro = ({ route }) => {
 
   const active_user_loc_det = useSelector(
     (state) => state.authentication.active_user_location_details
+  );
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
   );
 
   // this custom hook is to check the screen is loaded completly or not
@@ -78,9 +82,12 @@ const Intro = ({ route }) => {
                     { textDecorationLine: "underline" },
                   ]}
                   onPress={() => {
-                    navigation.navigate("Info", {
-                      heading: "Terms of Service",
-                    });
+                    if (is_network_connected) {
+                      navigation.navigate("Info", {
+                        heading: "Terms of Service",
+                      });  
+                    }
+                    
                   }}
                 >
                   Terms of service.
@@ -92,9 +99,12 @@ const Intro = ({ route }) => {
                     { textDecorationLine: "underline" },
                   ]}
                   onPress={() => {
-                    navigation.navigate("Info", {
-                      heading: "Privacy Policy",
-                    });
+                    if (is_network_connected) {
+                      navigation.navigate("Info", {
+                        heading: "Privacy Policy",
+                      });  
+                    }
+                    
                   }}
                 >
                   Privacy {`\n`}Policy
@@ -106,9 +116,12 @@ const Intro = ({ route }) => {
                     { textDecorationLine: "underline" },
                   ]}
                   onPress={() => {
-                    navigation.navigate("Info", {
-                      heading: "Cookies Policy",
-                    });
+                    if (is_network_connected) {
+                      navigation.navigate("Info", {
+                        heading: "Cookies Policy",
+                      });  
+                    }
+                    
                   }}
                 >
                   {" "}
@@ -178,7 +191,7 @@ export default Intro;
 
 const styles = StyleSheet.create({
   backgroundVideo: {
-    height: "100%",
+    height: '100%',
     position: "absolute",
     top: 0,
     left: 0,

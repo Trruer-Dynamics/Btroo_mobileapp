@@ -29,8 +29,12 @@ const MatchItem = ({
 
 
   // To get left hours
+  let rhr =(item.expiry_date - new Date()) / 36e5
+
+  
   let hours = Math.round((item.expiry_date - new Date()) / 36e5);
-  let leftHrs = match_tut ? 72 : hours;
+
+  let leftHrs =  hours;
 
   return (
     <TouchableOpacity
@@ -73,7 +77,7 @@ const MatchItem = ({
           </Text>
 
           <Text style={styles.profileProfession}>
-            {item?.userprofile?.occupation}
+            {item?.userprofile?.occupation.length < 14 ? item?.userprofile?.occupation : truncateStr(item?.userprofile?.occupation, 13)}
           </Text>
 
           <Text style={styles.profileMessage}>
@@ -133,7 +137,8 @@ const MatchItem = ({
               color: leftHrs > 24 ? colors.black : colors.error,
             }}
           >
-            {leftHrs} Hours Left
+
+          {leftHrs ? `${leftHrs} Hours Left` : ''}
           </Text>
         </TouchableOpacity>
       </View>

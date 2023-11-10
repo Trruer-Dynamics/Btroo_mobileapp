@@ -775,7 +775,7 @@ const SwiperOr = ({}) => {
     
   
     
-  }, [loading2])
+  }, [loading2,profiles])
   
 
   // save location data in frontend

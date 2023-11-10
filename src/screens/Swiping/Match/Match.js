@@ -163,8 +163,11 @@ const Match = () => {
                 ? user_2
                 : user_1;
 
-            let prof_rev =  resp_data[p].user1_profile_reveal && resp_data.user2_profile_reveal
-
+              
+            let prof_rev =  resp_data[p].user1_profile_reveal && resp_data[p].user2_profile_reveal
+            console.log("resp_data[p].user1_profile_reveal",resp_data[p].user1_profile_reveal)
+            console.log("resp_data.user2_profile_reveal",resp_data[p].user2_profile_reveal)
+            console.log("prof_rev",prof_rev)
             let seen_by =
               resp_data[p].last_message != null
                 ? resp_data[p].last_message.seen_by
@@ -386,7 +389,8 @@ return a.position - b.position
               style={{
                 ...styles.bottomCont,
                 position: "absolute",
-                top: rspH(Platform.OS == "ios" ? 66 : 69) + insets.top,
+                // top: rspH(Platform.OS == "ios" ? 66 : 69) + insets.top,
+                top:Platform.OS == "ios"? rspH(77) - insets.top: rspH(78)  - insets.top,
                 alignSelf: "center",
               }}
             >

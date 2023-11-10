@@ -141,7 +141,7 @@ const PublicPrompts = ({
                         public_prompt1_a !== "" 
                           ? 
                           colors.blue
-                          : colors.error
+                          : colors.grey
                       ,
                       textAlignVertical: "top",
                     }}

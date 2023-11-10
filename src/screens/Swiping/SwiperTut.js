@@ -500,9 +500,8 @@ const SwiperTut = ({ repeat_tut }) => {
                   <FastImage
                     source={require("../../assets/images/Swiping/Actions/Softspot.png")}
                     style={{
-                      width: rspW(9.8),
-
-                      height: rspH(4.8),
+                      width: rspW(8.9),
+                      height: rspH(4.4),
                     }}
                   />
                 </TouchableOpacity>
@@ -518,7 +517,7 @@ const SwiperTut = ({ repeat_tut }) => {
                     source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                     style={{
                       width: rspW(8.46),
-                      height: rspH(4.3),
+                      height: rspH(4.4),
                     }}
                   />
                 </TouchableOpacity>
@@ -867,8 +866,8 @@ const SwiperTut = ({ repeat_tut }) => {
                     style={{
                       position: "absolute",
                       top: 
-                      Platform.OS == 'ios' ? rspH(41) :
-                      rspH(35.5) + insets.bottom,
+                      Platform.OS == 'ios' ? rspH(35.5) + insets.top :
+                      rspH(35.34) + insets.bottom,
                       left: rspW(66.8),
                     }}
                   >
@@ -877,7 +876,7 @@ const SwiperTut = ({ repeat_tut }) => {
                         <FastImage
                           source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                           style={{
-                            width: rspW(8.9),
+                            width: rspW(8.46),
                             height: rspH(4.4),
                           }}
                         />
@@ -891,9 +890,8 @@ const SwiperTut = ({ repeat_tut }) => {
                     style={{
                       position: "absolute",
                       top: 
-                      Platform.OS == 'ios' ? rspH(41) :
-                      rspH(35.5) + insets.bottom,
-                      
+                      Platform.OS == 'ios' ? rspH(35.5) + insets.top :
+                      rspH(35.34) + insets.bottom,
                       left: rspW(42.1),
                     }}
                   >
@@ -916,8 +914,8 @@ const SwiperTut = ({ repeat_tut }) => {
                     style={{
                       position: "absolute",
                       top: 
-                      Platform.OS == 'ios' ? rspH(41) :
-                      rspH(35.5) + insets.bottom,
+                      Platform.OS == 'ios' ? rspH(35.5) + insets.top :
+                      rspH(35.34) + insets.bottom,
                       left: rspW(18),
                     }}
                   >
@@ -928,8 +926,8 @@ const SwiperTut = ({ repeat_tut }) => {
                           style={{
                             // width: rspW(8.46),
                             // height: rspH(4.3),
-                            width: rspW(8.9),
-                            height: rspH(4.4),
+                            width: rspW(8.695),
+                            height: rspH(4),
                           }}
                         />
                       </View>
@@ -942,7 +940,9 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{
                       position: "absolute",
-                      top: rspH(Platform.OS == "ios" ? 7.4 : 2),
+                      top: Platform.OS == 'ios' ? rspH(1.7) + insets.top : rspH(2),
+                      
+                      // rspH(Platform.OS == "ios" ? 7.4 : 2),
                       left: rspW(3.8),
                       zIndex: 5,
                     }}
@@ -1012,8 +1012,8 @@ const SwiperTut = ({ repeat_tut }) => {
                               <FastImage
                                 source={require("../../assets/images/Swiping/Actions/Softspot.png")}
                                 style={{
-                                  width: rspW(9.8),
-                                  height: rspH(4.8),
+                                  width: rspW(8.9),
+                                  height: rspH(4.4),
                                 }}
                               />
                             </TouchableOpacity>
@@ -1024,7 +1024,7 @@ const SwiperTut = ({ repeat_tut }) => {
                                 source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                                 style={{
                                   width: rspW(8.46),
-                                  height: rspH(4.3),
+                                  height: rspH(4.4),
                                 }}
                               />
                             </TouchableOpacity>
@@ -1087,7 +1087,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{
                       ...styles.centralModalCont,
-                      top: Platform.OS == 'ios' ? rspH(19.5) : rspH(14)+ insets.bottom,
+                      top: Platform.OS == 'ios' ? rspH(14) + insets.top : rspH(14)+ insets.bottom,
                     }}
                   >
                     {/* Tut Text */}
@@ -1140,7 +1140,7 @@ const SwiperTut = ({ repeat_tut }) => {
                 {step == 4 && (
                   <View
                     style={{
-                      marginTop:  Platform.OS == 'ios'? rspH(52) : rspH(48) + insets.bottom,
+                      marginTop:  Platform.OS == 'ios'? rspH(47.1) + insets.top: rspH(48) + insets.bottom,
                       // marginTop: rspH(52),
 
                       alignSelf: "center",
@@ -1588,7 +1588,7 @@ const styles = StyleSheet.create({
     borderRadius: rspW(3),
     backgroundColor: colors.white,
     // top: rspH(Platform.OS == "ios" ? 53.6 : 55),
-    top: Platform.OS == 'ios' ? rspH(53.6) : rspH(48.4) + insets.bottom,
+    top: Platform.OS == 'ios' ? rspH(48) + insets.top : rspH(48.4) + insets.bottom,
 
     paddingHorizontal: rspW(4.6),
     justifyContent: "space-between",
@@ -1625,7 +1625,7 @@ const styles = StyleSheet.create({
   //Tutorial Scroll Modal
   scrollModalCont: {
     // height: rspH(38.74),
-    height: Platform.OS == 'ios'? rspH(39.2): rspH(43.1) - insets.bottom ,
+    height: Platform.OS == 'ios'? rspH(42.6) - insets.bottom: rspH(43.1) - insets.bottom ,
     width: rspW(91.8),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -1637,7 +1637,7 @@ const styles = StyleSheet.create({
     height: Platform.OS == 'ios' ? rspH(44) : rspH(44) + insets.bottom,
     borderRadius: rspW(6.4),
     position: "relative",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     alignItems: "center",
     zIndex: 3,
     justifyContent: "center",

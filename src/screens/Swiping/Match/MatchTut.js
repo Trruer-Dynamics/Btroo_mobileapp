@@ -210,11 +210,11 @@ const MatchTut = ({ repeat_tut }) => {
             />
           </SafeAreaView>
 
-          <View
+          <SafeAreaView
             style={{
               ...styles.bottomCont,
               position: "absolute",
-              top: rspH(Platform.OS == "ios" ? 76 : 80) + insets.top,
+              top:Platform.OS == "ios"? rspH(86) - insets.top: rspH(80) + insets.top,
               alignSelf: "center",
             }}
           >
@@ -248,7 +248,7 @@ const MatchTut = ({ repeat_tut }) => {
               switchWidthMultiplier={2.5}
               switchBorderRadius={12}
             />
-          </View>
+          </SafeAreaView>
         </FormWrapper>
         {/* Extend Time Modal */}
         <CentralModal
@@ -466,7 +466,7 @@ const styles = StyleSheet.create({
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
-    top: Platform.OS == "ios" ? scrn_height / 2.4 : rspH(40) - insets.bottom,
+    top: Platform.OS == "ios" ? rspH(36) + insets.top : rspH(40) - insets.bottom,
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
@@ -475,20 +475,21 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white,
-    // + '34'
+    backgroundColor: colors.white 
+    + 'ff',
     alignItems: "center",
     justifyContent: "center",
   },
   matchitem_cont: {
-    top: Platform.OS == "android" ? rspH(4) + insets.top : srn_height / 7.44,
+    top: Platform.OS == "android" ? rspH(4.6) + insets.top : rspH(8.2) + insets.top,
     width: rspW(86),
     height: rspH(11.6),
     alignSelf: "center",
     borderRadius: rspW(2.5),
   },
   timeHighCont: {
-    top: Platform.OS == "android" ? rspH(11) + insets.top : srn_height / 5.1,
+    // top: Platform.OS == "android" ? rspH(11) + insets.top : srn_height / 5.1,
+    top: Platform.OS == "android" ? rspH(11.2) + insets.top : rspH(14.6) + insets.top,
     right: rspW(12),
     width: rspW(22.2),
     height: rspH(2.75),

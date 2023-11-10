@@ -77,6 +77,7 @@ import {
   setIceBreakers,
 } from "../../../store/reducers/chats/chats";
 import FastImage from "react-native-fast-image";
+import OffflineAlert from "../../../components/functions/OfflineAlert";
 
 
 
@@ -496,6 +497,7 @@ const Chat = ({ profile }) => {
   const [icebreaker_list, seticebreaker_list] = useState([]);
 
   const getIceBreaker = async () => {
+
     await axios
       .get(apiUrl + "getactiveicebreaker/")
       .then((resp) => {
@@ -518,6 +520,7 @@ const Chat = ({ profile }) => {
   };
 
   const chatRvlTutDone = async () => {
+    console.log("chatRvlTutDone")
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -550,6 +553,7 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfile = async () => {
+    console.log("revealProfile")
     setloading(true);
 
     const headers = {
@@ -568,7 +572,7 @@ const Chat = ({ profile }) => {
       setloading(false);
 
       let resp_data = response.data;
-
+console.log("revealProfile resp_data",resp_data)
       if (resp_data.code == 200) {
         setrvl_click(true);
       } else if (resp_data.code == 401) {
@@ -581,7 +585,7 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfileTime = async () => {
-
+    console.log("revealProfileTime")
     setloading(true);
 
     const api = apiUrl + "sendnotificationforprofilereveal/";
@@ -601,7 +605,7 @@ const Chat = ({ profile }) => {
       });
       setloading(false);
       let resp_data = response.data;
-
+console.log("revealProfileTime",resp_data)
     } catch (error) {
       setloading(false);
       return false;
@@ -664,14 +668,16 @@ const Chat = ({ profile }) => {
             k += 1;
           }
 
-          let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id);
+          let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
 
           // if new message avalable load chats from backend or from local storage
           if (tmps.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
+            console.log("here",tmp.map(v => v[4]))
             setchatlist(tmp);
             chatlist_ref.current = tmp;
           } else {
+            console.log("here2",tmp_lis.map(v => v[4]))
             setchatlist(tmp_lis);
             chatlist_ref.current = tmp_lis;
           }
@@ -835,15 +841,22 @@ const Chat = ({ profile }) => {
   // save chats locally
   useEffect(() => {
 
+    console.log("\n")
+
+    for (let m = 0; m < chatlist.length; m++) {
+      const ele = chatlist[m];
+      // console.log("chat",m,ele[0],ele[1], ele[2],ele[3],ele[4])
+    }
+
     let onlY_id= chats_msgs.map(k => k[4])
 
-    let newmsgs = chatlist.filter(v => !onlY_id.includes(v[4]))
+    let newmsgs = chatlist.filter(v => !onlY_id.includes(v[4]))    
 
     if (newmsgs.length > 0) {
       let all_lmsgs = [ ...newmsgs,...chats_msgs]
-
       dispatch(setChatMsgs(all_lmsgs));
     }
+    // dispatch(setChatMsgs([]));
 
   }, [chatlist]);
 
@@ -921,7 +934,7 @@ const Chat = ({ profile }) => {
         tmpR[indx][4] = itm[4];
       }
       let tmp3 = tmpR.reverse();
-
+      console.log("here4")
       setchatlist(tmp3);
 
       chatlist_ref.current = tmp;
@@ -1022,6 +1035,13 @@ const Chat = ({ profile }) => {
 
           let ttact = false;
 
+console.log("avg_min",avg_min)
+console.log("mymsgs.length",mymsgs.length)
+console.log("othmsgs.length",othmsgs.length)
+console.log("mycount",mycount)
+console.log("othcount",othcount)
+
+
           if (
             avg_min <= 5 &&
             mymsgs.length >= 25 &&
@@ -1112,7 +1132,7 @@ const Chat = ({ profile }) => {
     let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
 
     if (!is_network_connected && tmp.length > 0) {
-      
+      console.log("here3",tmp)
       setchatlist(tmp);
       setloading(false);
     }
@@ -1151,6 +1171,7 @@ const Chat = ({ profile }) => {
   return (
     <>
       {loading && <Loader />}
+      <OffflineAlert offAlert={!is_network_connected}/>
       <SafeAreaView style={{ height: scrn_height, backgroundColor: "#fff" }}>
         <KeyboardAvoidingView
           style={{
@@ -1618,7 +1639,7 @@ const styles = StyleSheet.create({
   iceBreakerTxt: {
     fontFamily: fontFamily.bold,
     lineHeight: rspF(2.18),
-    fontSize: rspF(Platform.OS == "ios" ? 2.02 : 1.9),
+    fontSize: Platform.OS == "ios" ? rspF(2.02) : scrn_height * 0.02,
     color: colors.blue,
     textAlign: "center",
     letterSpacing: Platform.OS == "ios" ? 0 : 1,

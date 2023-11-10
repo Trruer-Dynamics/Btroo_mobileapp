@@ -40,10 +40,10 @@ export default OffflineAlert;
  
 const styles = StyleSheet.create({
   mainContainer: {
-    height: scrn_height,
     width: scrn_width,
-    
-    backgroundColor: "#00000000",
+    // height: rspH(31.16),
+    height: rspH(2.2),
+    backgroundColor: "#0000008a",
     // justifyContent: "center",
     // alignItems: "center",
   },
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
     // width: rspW(76.5),
     width: scrn_width,
     // height: rspH(31.16),
-    height: rspH(4),
-    backgroundColor: 'red',
+    height: rspH(2.2),
+    backgroundColor: '#e54b4b',
     // borderRadius: rspW(5.1),
     // paddingHorizontal: rspW(4),
     alignItems: "center",
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   messageBoxHeader: {
     fontFamily: fontFamily.bold,
     // fontSize: rspF(3),
-    fontSize: rspF(2),
+    fontSize: rspF(1.4),
     color: colors.white,
     // lineHeight: rspH(3.1),
     lineHeight: rspH(2.1),

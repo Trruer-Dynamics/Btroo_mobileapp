@@ -36,9 +36,9 @@ const NotificationController = (props) => {
     if (not_data?.type == "Reveal" && user_loggined) {
       setuser_interact(false);
 
-      let dt = not_data;
+      let dt = JSON.parse(not_data.data);
 
-      console.log("dt",dt)
+      console.log("dt", dt)
       let expiry_date = dt.expiry_datetime;
 
       let mth = {};
@@ -56,6 +56,7 @@ const NotificationController = (props) => {
       mth.prof_img = dt.image.cropedimage;
       mth.prof_rvl = true;
       mth.all_images = [];
+      console.log("Till Here")
       navigation.navigate("ProfileRevealed", {
         profile: mth,
       });
@@ -68,7 +69,7 @@ const NotificationController = (props) => {
       } else if (not_data?.type == "Chat") {
         setuser_interact(false);
         let dt = not_data;
-        console.log("dt2",dt)
+        console.log("dt2", dt)
         let cht_id = dt.chatroom_id;
 
         if (matches.length > 0) {
@@ -141,10 +142,11 @@ const NotificationController = (props) => {
 
   useLayoutEffect(() => {
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log("remoteMessage",remoteMessage.data)
+      // console.log("remoteMessage",remoteMessage.data)
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
-      console.log("data",data)
+      // console.log("ndata",data)
+     
       setnot_data(data);
 
       setrefresh(!refresh);

@@ -397,9 +397,12 @@ const ProfileMain = ({ navigation }) => {
 
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate("EditProfile");
+                if (is_network_connected) {
+                  navigation.navigate("EditProfile");  
+                }
+                
               }}
-              style={styles.editBtn}
+              style={{...styles.editBtn, opacity: is_network_connected? 1 : 0.4}}
             >
               <Text style={styles.editBtnTxt}>Edit My Profile</Text>
             </TouchableOpacity>

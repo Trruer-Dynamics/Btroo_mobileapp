@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { rspF, rspH, rspW, scrn_height } from "../../styles/responsiveSize";
+import { rspF, rspH, rspW, scrn_height, scrn_width } from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import FormInputContainer from "../../components/formComponents/FormInputContainer";
@@ -66,6 +66,13 @@ const SettingsScreen = ({ navigation, route }) => {
   useEffect(() => {
     setkeep_matching(kp_mtch);
   }, [kp_mtch]);
+
+  useEffect(() => {
+    if (is_network_connected && referral) {
+      setreferral(false)
+    }
+  }, [is_network_connected])
+  
 
   const dispatch = useDispatch();
 
@@ -462,7 +469,7 @@ const SettingsScreen = ({ navigation, route }) => {
   return (
     <>
    <OffflineAlert offAlert={!is_network_connected} />
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       <SafeAreaView
         style={{
           height: scrn_height,
@@ -472,16 +479,17 @@ const SettingsScreen = ({ navigation, route }) => {
       >
         <View
           style={{
-            paddingTop: rspH(2),
-            paddingBottom: rspH(9),
+            paddingTop: rspH(7) - insets.top,
+            paddingBottom: rspH(9) - insets.top,
             flex: 1,
           }}
         >
           <FormHeader title={"Settings"} para="" />
 
-          <View
+          <SafeAreaView
             style={{
-              height: rspH(Platform.OS == "ios" ? 72 : 76) + insets.top,
+              height: Platform.OS == 'ios'? rspH(74) + insets.bottom : rspH(80) ,
+              // paddingBottom: rspH(10) + insets.bottom,
               paddingHorizontal: rspW(10),
               alignItems: "center",
               backgroundColor: colors.white,
@@ -492,7 +500,7 @@ const SettingsScreen = ({ navigation, route }) => {
               showsVerticalScrollIndicator={false}
               style={{
                 width: "100%",
-                paddingBottom: rspH(Platform.OS == "ios" ? 10 : 15),
+                
               }}
               bounces={false}
             >
@@ -504,28 +512,31 @@ const SettingsScreen = ({ navigation, route }) => {
                     ...styles.bannerCont,
                     elevation: 3,
                     zIndex: 3,
-
-                    position: "relative",
                     flexDirection: "row",
                     justifyContent: "space-between",
                   }}
                   onPress={() => {
-                    setreferral(true);
+                    if (is_network_connected) {
+                      setreferral(true);
+                    }
+           
                   }}
                 >
                   <View
                     style={{
                       position: "absolute",
-                      bottom: rspH(Platform.OS == "ios" ? -1.3 : -2),
-                      right: 0,
+                      bottom:  0,
+                      right: -rspW(2),
                     }}
                   >
                     <FastImage
                       source={require("../../assets/images/Setting/BannerImg.png")}
                       resizeMode="contain"
                       style={{
-                        width: rspW(32),
-                        height: rspW(29),
+                        width: scrn_width * 0.32,
+                        height: 
+                        rspW(22),
+                        
                       }}
                     />
                   </View>
@@ -538,7 +549,6 @@ const SettingsScreen = ({ navigation, route }) => {
                     <View
                       style={{
                         width: rspW(40.8),
-
                         marginTop: rspH(0.85),
                       }}
                     >
@@ -607,7 +617,7 @@ const SettingsScreen = ({ navigation, route }) => {
                         onValueChange={() => {
                           updateShowProfile();
                         }}
-                        disabled={false}
+                        disabled={!is_network_connected}
                         circleSize={18}
                         barHeight={24}
                         circleBorderWidth={0}
@@ -651,7 +661,7 @@ const SettingsScreen = ({ navigation, route }) => {
                         onValueChange={() => {
                           updateKeepMatching();
                         }}
-                        disabled={false}
+                        disabled={!is_network_connected}
                         circleSize={18}
                         barHeight={24}
                         circleBorderWidth={0}
@@ -719,7 +729,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       onValueChange={() => {
                         updateNewMessage();
                       }}
-                      disabled={false}
+                      disabled={!is_network_connected}
                       circleSize={18}
                       barHeight={24}
                       circleBorderWidth={0}
@@ -756,7 +766,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       onValueChange={() => {
                         updateNewMatch();
                       }}
-                      disabled={false}
+                      disabled={!is_network_connected}
                       circleSize={18}
                       barHeight={24}
                       circleBorderWidth={0}
@@ -793,7 +803,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       onValueChange={() => {
                         updateProfileReveal();
                       }}
-                      disabled={false}
+                      disabled={!is_network_connected}
                       circleSize={18}
                       barHeight={24}
                       circleBorderWidth={0}
@@ -830,7 +840,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       onValueChange={() => {
                         updateOthers();
                       }}
-                      disabled={false}
+                      disabled={!is_network_connected}
                       circleSize={18}
                       barHeight={24}
                       circleBorderWidth={0}
@@ -870,9 +880,12 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  Linking.openURL(
-                    "https://btroo.midnightpoha.com/index.php/faqs/"
-                  );
+                  if (is_network_connected) {
+                    Linking.openURL(
+                      "https://btroo.midnightpoha.com/index.php/faqs/"
+                    );  
+                  }
+                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -885,9 +898,11 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  // dispatch(setSwipeTut(true));
-                  dispatch(setRepeatTut(true));
-                  navigation.navigate("Swiper");
+                  
+                    dispatch(setRepeatTut(true));
+                    navigation.navigate("Swiper");
+                  
+                 
                 }}
                 style={{
                   flexDirection: "row",
@@ -906,7 +921,10 @@ const SettingsScreen = ({ navigation, route }) => {
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
-                    Linking.openURL(`mailto:${contact}`);
+                    if (is_network_connected) {
+                      Linking.openURL(`mailto:${contact}`);
+                    }
+    
                   }}
                   style={{
                     flexDirection: "row",
@@ -935,9 +953,12 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Info", {
-                    heading: "Terms of Service",
-                  });
+                  if (is_network_connected) {
+                    navigation.navigate("Info", {
+                      heading: "Terms of Service",
+                    });  
+                  }
+                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -952,9 +973,12 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Info", {
-                    heading: "Privacy Policy",
-                  });
+                  if (is_network_connected) {
+                    navigation.navigate("Info", {
+                      heading: "Privacy Policy",
+                    });  
+                  }
+                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -969,9 +993,12 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  Linking.openURL(
-                    "https://btroo.midnightpoha.com/index.php/community-guidelines/"
-                  );
+                  if (is_network_connected) {
+                    Linking.openURL(
+                      "https://btroo.midnightpoha.com/index.php/community-guidelines/"
+                    );  
+                  }
+                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -986,9 +1013,12 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  Linking.openURL(
-                    "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
-                  );
+                  if (is_network_connected) {
+                    Linking.openURL(
+                      "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
+                    );  
+                  }
+                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -1012,7 +1042,9 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  showConfirmDialog();
+                  if (is_network_connected) {
+                    showConfirmDialog();
+                  }
                 }}
                 style={{
                   flexDirection: "row",
@@ -1026,7 +1058,14 @@ const SettingsScreen = ({ navigation, route }) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => setcmodal(true)}
+                onPress={() => 
+                  {
+                    if (is_network_connected) {
+                      setcmodal(true) 
+                    }
+
+                }
+                }
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -1149,7 +1188,7 @@ const SettingsScreen = ({ navigation, route }) => {
                 setModalVisible={setreferral}
               />
             </FullModal>
-          </View>
+          </SafeAreaView>
         </View>
       </SafeAreaView>
     </>
@@ -1165,24 +1204,28 @@ const styles = StyleSheet.create({
 
   bannerCont: {
     width: rspW(78),
-    height: rspH(Platform.OS == "ios" ? 15 : 16),
+    // height: rspH(Platform.OS == "ios" ? 15 : 16),
+    height: Platform.OS == "ios" ? rspH(14)  : rspH(10) + insets.top,
     borderRadius: rspW(10),
     backgroundColor: "#6B9DFF",
     paddingLeft: rspW(5),
     paddingVertical: rspH(2.4),
     alignSelf: "center",
+    position:'relative',
   },
   bannerTxt: {
     fontFamily: fontFamily.bold,
-    fontSize: rspF(Platform.OS == "ios" ? 2.5 : 2.5),
+    // fontSize: rspF(Platform.OS == "ios" ? 2.5 : 2.5),
+    fontSize: Platform.OS == "ios" ? rspF(2.5) : scrn_height * 0.027,
+
     lineHeight: rspF(2.7),
     color: colors.white,
     letterSpacing: 1,
   },
   bannerSubTxt: {
     fontFamily: fontFamily.bold,
-    fontSize: rspF(1.86),
-    lineHeight: rspF(Platform.OS == "ios" ? 1.84 : 1.9),
+    fontSize: Platform.OS =='ios'?rspF(1.9) : scrn_height * 0.021,
+    lineHeight: Platform.OS == "ios" ? rspF(1.84) : rspH(2),
     color: colors.white,
     letterSpacing: 0,
   },
