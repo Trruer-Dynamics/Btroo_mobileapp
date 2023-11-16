@@ -230,16 +230,11 @@ const [show_alert, setshow_alert] = useState(false)
 
   useEffect(() => {
     
-    console.log("is_network_connected",is_network_connected)
     if (is_network_connected) {
       setshow_alert(false)
     }
   }, [is_network_connected])
 
-  useEffect(() => {
-    console.log("chat_step",chat_step)
-  }, [chat_step])
-  
   
 
 
@@ -297,7 +292,7 @@ const [show_alert, setshow_alert] = useState(false)
         <View
           style={{
             position: "absolute",
-            top: rspH(85.8),
+            top: Platform.OS == 'ios' ? rspH(85.8) : rspH(80) + insets.top,
             alignSelf: "center",
           }}
         >
@@ -307,6 +302,7 @@ const [show_alert, setshow_alert] = useState(false)
               paddingBottom: rspH(1),
               justifyContent: "center",
               alignItems: "center",
+              // backgroundColor:'red',
             }}
           >
             {/* Messsage Input Area */}
@@ -638,7 +634,7 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white ,
+    backgroundColor: colors.white  + 'ff',
     alignItems: "center",
     justifyContent: "center",
   },
@@ -664,7 +660,7 @@ const styles = StyleSheet.create({
   },
 
   iceBreakerHighCont: {
-    top: rspH(87),
+    top: Platform.OS == 'ios'? rspH(87) : rspH(81.2) + insets.top,
     alignSelf: "center",
     width: rspW(94),
     height: rspH(3.6),

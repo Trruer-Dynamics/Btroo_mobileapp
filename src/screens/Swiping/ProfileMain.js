@@ -214,7 +214,6 @@ const ProfileMain = ({ navigation }) => {
 
 
   const userExist = async () =>{
-    console.log("userExist call")
 
     let url_path = 'isacountavialable/'
 
@@ -240,11 +239,9 @@ const ProfileMain = ({ navigation }) => {
 
       // setloading(false);
       
-      console.log("userExist resp_data",resp_data)
-
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please contact to admin.", [
+           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",
@@ -257,8 +254,6 @@ const ProfileMain = ({ navigation }) => {
       }
       
     } catch (error) {
-      console.log("userExist err",error)
-      // setloading(false);
       return false;
 
     }
@@ -944,7 +939,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.1),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -952,7 +947,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
 
   habitsImage: {

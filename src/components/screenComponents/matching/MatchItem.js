@@ -40,7 +40,7 @@ const MatchItem = ({
     <TouchableOpacity
       style={styles.item}
       onPress={() => {
-        if (item.lastMessage == "") {
+        if (!item.first_visit_done) {
           navigation.navigate("MatchProfile", {
             profile: item,
           });

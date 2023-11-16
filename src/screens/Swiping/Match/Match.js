@@ -136,7 +136,7 @@ const Match = () => {
 
       let code = resp.data.code;
       let resp_data = resp.data.data;
-
+      
 
       if (code == 200) {
         let match_tmp = [];
@@ -166,13 +166,13 @@ const Match = () => {
               let userprv_rvl =
                user_1.userprofile.id == profile_data.userprofile.id ? resp_data[p].user1_profile_reveal  : resp_data[p].user2_profile_reveal
 
-               console.log("userprv_rvl",userprv_rvl)
-
-              
             let prof_rev =  resp_data[p].user1_profile_reveal && resp_data[p].user2_profile_reveal
-            console.log("resp_data[p].user1_profile_reveal",resp_data[p].user1_profile_reveal)
-            console.log("resp_data.user2_profile_reveal",resp_data[p].user2_profile_reveal)
-            console.log("prof_rev",prof_rev)
+            
+            let first_visit_user = user_1.userprofile.id == profile_data.userprofile.id
+            ? resp_data[p].user1_SayHii_status
+            : resp_data[p].user2_SayHii_status;
+
+            console.log("first_visit_user",first_visit_user)
             let seen_by =
               resp_data[p].last_message != null
                 ? resp_data[p].last_message.seen_by
@@ -204,6 +204,8 @@ const Match = () => {
             mth.publicprompts = mth_user.userprofile.publicprompts;
             mth.privateprompts = mth_user.userprofile.privateprompts;
             mth.tut = false;
+
+            mth.first_visit_done = first_visit_user
             match_tmp.push(mth);
             mth.all_images = mth_user.userprofile.image.sort((a,b)=>{
 return a.position - b.position
@@ -287,8 +289,6 @@ return a.position - b.position
   }, [kp_mtch]);
 
   const userExist = async () =>{
-    console.log("userExist call")
-
     let url_path = 'isacountavialable/'
 
     // setloading(true);
@@ -311,13 +311,9 @@ return a.position - b.position
       );
       let resp_data = response.data;
 
-      // setloading(false);
-      
-      console.log("userExist resp_data",resp_data)
-
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please contact to admin.", [
+           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",
@@ -330,7 +326,6 @@ return a.position - b.position
       }
       
     } catch (error) {
-      console.log("userExist err",error)
       setloading(false);
       return false;
 

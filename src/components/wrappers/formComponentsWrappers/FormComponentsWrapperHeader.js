@@ -11,6 +11,7 @@ import fontFamily from "../../../styles/fontFamily";
 import colors from "../../../styles/colors";
 import ADIcon from "react-native-vector-icons/AntDesign";
 
+
 const FormComponentsWrapperHeader = ({
   title = "",
   left_icon = true,
@@ -26,6 +27,7 @@ const FormComponentsWrapperHeader = ({
           flexDirection: "row",
           alignItems: "center",
           height: rspH(3.8),
+          // backgroundColor:'green',
           justifyContent: left_icon ? "space-between" : "center",
         }}
       >
@@ -34,10 +36,18 @@ const FormComponentsWrapperHeader = ({
             <TouchableOpacity
               style={{
                 justifyContent: "center",
+                // backgroundColor:"red",
                 alignItems: "center",
-                height: rspW(7.64),
-                width: rspW(7.64),
-                borderRadius: rspW(4),
+                // height: rspW(7.64),
+                // width: rspW(7.64),
+                top: -rspW(0.2),
+                // borderRadius: rspW(4),
+
+
+                height: rspW(9.6),
+                width: rspW(9.6),
+                // borderRadius: rspW(3.8),
+                borderRadius: rspW(5.3),
               }}
               onPress={() => {
                 setvisible(false);
@@ -54,7 +64,9 @@ const FormComponentsWrapperHeader = ({
   );
 };
 
+
 export default FormComponentsWrapperHeader;
+
 
 const styles = StyleSheet.create({
   headerTitle: {

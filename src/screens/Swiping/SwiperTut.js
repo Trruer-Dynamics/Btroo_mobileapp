@@ -866,8 +866,10 @@ const SwiperTut = ({ repeat_tut }) => {
                     style={{
                       position: "absolute",
                       top: 
-                      Platform.OS == 'ios' ? rspH(35.5) + insets.top :
-                      rspH(35.34) + insets.bottom,
+                      Platform.OS == 'ios' ? 
+                      rspH(35.5) + insets.top 
+                      :
+                      rspH(35.5) + insets.bottom/1.2,
                       left: rspW(66.8),
                     }}
                   >
@@ -891,7 +893,7 @@ const SwiperTut = ({ repeat_tut }) => {
                       position: "absolute",
                       top: 
                       Platform.OS == 'ios' ? rspH(35.5) + insets.top :
-                      rspH(35.34) + insets.bottom,
+                      rspH(35.5) + insets.bottom/1.2,
                       left: rspW(42.1),
                     }}
                   >
@@ -915,7 +917,7 @@ const SwiperTut = ({ repeat_tut }) => {
                       position: "absolute",
                       top: 
                       Platform.OS == 'ios' ? rspH(35.5) + insets.top :
-                      rspH(35.34) + insets.bottom,
+                      rspH(35.5) + insets.bottom/1.2,
                       left: rspW(18),
                     }}
                   >
@@ -1539,7 +1541,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1547,7 +1549,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
 
   mainTutCont: {
@@ -1565,6 +1567,8 @@ const styles = StyleSheet.create({
     height: rspW(15.2),
     borderRadius: rspW(7.52),
     backgroundColor: "#ffffffa3",
+    // backgroundColor: "#ffffff7d",
+
     alignItems: "center",
     justifyContent: "center",
   },

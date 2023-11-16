@@ -709,6 +709,7 @@ console.log("revealProfileTime",resp_data)
   };
 
   const connectSocket = async () => {
+    console.log("connectSocket")
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
     ws.current.onopen = (e) => {
       console.log("Open");
@@ -784,6 +785,48 @@ console.log("revealProfileTime",resp_data)
     };
   };
 
+
+  const sentDraftMesg = () => {
+    for (let l = 0; l < drafts_msgs.length; l++) {
+      const et = drafts_msgs[l];
+      ws.current.send(JSON.stringify(et));
+    }
+
+    dispatch(setDraftMsgs([]));
+  };
+
+  const updateHiStatus = async () => {
+    console.log("updateHiStatus")
+    setloading(true);
+    const mainUrl = apiUrl + 'sayhistatusupdate/'
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+    };
+
+    const data = {
+      chat_room_id : profile?.id,
+      user_id: profile_data?.user?.id,
+    };
+
+    try {
+      const response = await axios.post(
+        mainUrl,
+        data,
+        {
+          headers,
+        }
+      );
+      setloading(false);
+      let resp_data = response.data;
+      console.log("resp_data",resp_data)
+      
+    } catch (error) {
+      console.log("upsterr", error)
+      setloading(false);
+      return false;
+    } 
+  }
+
   const renderItem = useCallback(
     ({ item, index }) => {
       return (
@@ -838,6 +881,7 @@ console.log("revealProfileTime",resp_data)
     [chatlist]
   );
 
+
   // save chats locally
   useEffect(() => {
 
@@ -880,14 +924,7 @@ console.log("revealProfileTime",resp_data)
     }
   }, [socket_con.current]);
 
-  const sentDraftMesg = () => {
-    for (let l = 0; l < drafts_msgs.length; l++) {
-      const et = drafts_msgs[l];
-      ws.current.send(JSON.stringify(et));
-    }
-
-    dispatch(setDraftMsgs([]));
-  };
+  
 
   // To set id of sent message by user
   useEffect(() => {
@@ -1137,7 +1174,9 @@ console.log("othcount",othcount)
       setloading(false);
     }
 
-    if (is_network_connected && drafts_msgs.length > 0) {
+    if (is_network_connected 
+      // && drafts_msgs.length > 0
+      ) {
       connectSocket();
     }
   }, [is_network_connected]);
@@ -1170,6 +1209,10 @@ console.log("othcount",othcount)
 
   useLayoutEffect(() => {
     console.log("profile.userprv_rvl",profile.user_prof_rvl)
+    if (!profile.first_visit_done) {
+      updateHiStatus()
+    }
+    
     if (profile.user_prof_rvl) {
       setrvl_click(true)
     }
@@ -1427,86 +1470,84 @@ console.log("othcount",othcount)
                   }}
                   maxHeight={rspH(12.5)}
                 />
-                {msg == "" || !is_network_connected? (
-                  <FastImage
-                    source={require("../../../assets/images/Matching/Message/sendMsg.png")}
-                    style={styles.sendBtn}
-                    resizeMode="contain"
-                  />
+                {SocketOpen  && msg != "" ? (
+
+<TouchableOpacity
+onPress={() => {
+  if (msg.length > 0) {
+    seticebreaker("");
+
+    let ung_id = Math.random().toString(36).slice(2);
+
+    let day_tmp = moment(new Date())
+      .calendar()
+      .split(" at")[0]
+      .trim();
+
+    let day_t = !chatlist
+      .map((v) => v[6])
+      .includes(day_tmp);
+
+    let tmp_lis = [...chatlist];
+
+    let nitm = [
+
+      msg.replace(/^\s+|\s+$/g,'').trim(),
+      // .replace(/\s+/g, " ").trim(),
+      1,
+      new Date(),
+      profile_data.user.id,
+      null,
+      actreplyID != null ? actreplyID : null,
+      day_t ? day_tmp : "",
+      ung_id,
+      profile.chat_id,
+    ];
+    tmp_lis.unshift(nitm);
+    setchatlist(tmp_lis);
+    chatlist_ref.current = tmp_lis;
+    setreplySet(false);
+
+    let data = {
+      message:
+      msg.replace(/^\s+|\s+$/g,'').trim(),
+      // .replace(/\s+/g, " ").trim(),
+      sender: profile_data.user.id,
+      datetime: new Date(),
+      chat_id: profile.chat_id,
+      seen_by_user_id: null,
+      reply_msg_id: actreplyID != null ? actreplyID : null,
+      unique_id: ung_id,
+    };
+
+    let all_drafts_msgs = [...drafts_msgs];
+
+    all_drafts_msgs.push(data);
+
+
+    dispatch(setDraftMsgs(all_drafts_msgs));
+    if (SocketOpen) {
+      ws.current.send(JSON.stringify(data));
+    }
+
+    setmsg("");
+    setactreplyID(null);
+  }
+}}
+>
+<FastImage
+  source={require("../../../assets/images/Matching/Message/sendMsgActive.png")}
+  style={styles.sendBtn}
+  resizeMode="contain"
+/>
+</TouchableOpacity>
+
                 ) : (
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (msg.length > 0) {
-                        seticebreaker("");
-
-                        let ung_id = Math.random().toString(36).slice(2);
-
-                        let day_tmp = moment(new Date())
-                          .calendar()
-                          .split(" at")[0]
-                          .trim();
-
-                        let day_t = !chatlist
-                          .map((v) => v[6])
-                          .includes(day_tmp);
-
-                        let tmp_lis = [...chatlist];
-                        
-
-                      
-
-
-                        let nitm = [
-                    
-                          msg.replace(/^\s+|\s+$/g,'').trim(),
-                          // .replace(/\s+/g, " ").trim(),
-                          1,
-                          new Date(),
-                          profile_data.user.id,
-                          null,
-                          actreplyID != null ? actreplyID : null,
-                          day_t ? day_tmp : "",
-                          ung_id,
-                          profile.chat_id,
-                        ];
-                        tmp_lis.unshift(nitm);
-                        setchatlist(tmp_lis);
-                        chatlist_ref.current = tmp_lis;
-                        setreplySet(false);
-
-                        let data = {
-                          message:
-                          msg.replace(/^\s+|\s+$/g,'').trim(),
-                          // .replace(/\s+/g, " ").trim(),
-                          sender: profile_data.user.id,
-                          datetime: new Date(),
-                          chat_id: profile.chat_id,
-                          seen_by_user_id: null,
-                          reply_msg_id: actreplyID != null ? actreplyID : null,
-                          unique_id: ung_id,
-                        };
-
-                        let all_drafts_msgs = [...drafts_msgs];
-
-                        all_drafts_msgs.push(data);
-
-
-                        dispatch(setDraftMsgs(all_drafts_msgs));
-                        if (SocketOpen) {
-                          ws.current.send(JSON.stringify(data));
-                        }
-
-                        setmsg("");
-                        setactreplyID(null);
-                      }
-                    }}
-                  >
-                    <FastImage
-                      source={require("../../../assets/images/Matching/Message/sendMsgActive.png")}
-                      style={styles.sendBtn}
-                      resizeMode="contain"
-                    />
-                  </TouchableOpacity>
+                  <FastImage
+                  source={require("../../../assets/images/Matching/Message/sendMsg.png")}
+                  style={styles.sendBtn}
+                  resizeMode="contain"
+                />
                 )}
               </View>
             </Animated.View>

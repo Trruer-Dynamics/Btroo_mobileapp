@@ -59,6 +59,7 @@ import _ from "lodash";
 import FormSelectorLS from "../../components/formComponents/FormSelectorLS";
 import { useFocusEffect } from "@react-navigation/native";
 
+
 const EditProfile = ({ navigation }) => {
   const dispatch = useDispatch();
 
@@ -704,8 +705,7 @@ const EditProfile = ({ navigation }) => {
   });
 
   const userExist = async () =>{
-    console.log("userExist call")
-
+  
     let url_path = 'isacountavialable/'
 
     // setloading(true);
@@ -729,12 +729,10 @@ const EditProfile = ({ navigation }) => {
       let resp_data = response.data;
 
       // setloading(false);
-      
-      console.log("userExist resp_data",resp_data)
 
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please contact to admin.", [
+           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",
@@ -747,7 +745,6 @@ const EditProfile = ({ navigation }) => {
       }
       
     } catch (error) {
-      console.log("userExist err",error)
       // setloading(false);
       return false;
 
@@ -1135,7 +1132,6 @@ const EditProfile = ({ navigation }) => {
   };
 
   useLayoutEffect(() => {
-    console.log("is_network_connected",is_network_connected)
     if (is_network_connected) {
       loadData();
     }
@@ -1275,7 +1271,6 @@ const EditProfile = ({ navigation }) => {
                   debounceShowConfirmDialog();
                   return;
                 }
-
                 navigation.navigate("ProfileMain");
               }}
             />
@@ -1362,40 +1357,7 @@ const EditProfile = ({ navigation }) => {
                     marginTop: rspH(1.2),
                   }}
                 >
-                  {/* <FormInputContainer label="City"> */}
-                    {/* <FormSelector
-                      setSelectedEntry={setcity}
-                      selectedId={city_id}
-                      setSelectedId={setcity_id}
-                      blr_value={city_blr}
-                      setblr_value={setcity_blr}
-                      title="City"
-                      placeholder={"Select"}
-                      width={"100%"}
-                      list={city_list}
-                      selectedValue={city[1]}
-                      pull_refresh={true}
-                      refreshing={city_refresh}
-                      reshing={setcity_refresh}
-                      onRefresh={(rpage) => {
-                        getLocation(rpage, true);
-                      }}
-                      page={city_page}
-                      setpage={setcity_page}
-                      backend_search={true}
-                      backend_search_txt={city_search}
-                      setbackend_search_txt={setcity_search}
-                      onBackendSearch={() => {
-                        setcity_page(1);
-                        if (city_search != "") {
-                          getLocation(1);
-                        } else {
-                          setcity_list([]);
-                        }
-                      }}
-                      setchanges_made={setchanges_made}
-                    /> */}
-                  {/* </FormInputContainer> */}
+                  
 
                   <FormInputContainer label="City">
                     <FormSelectorLS
@@ -1718,6 +1680,7 @@ const EditProfile = ({ navigation }) => {
                               setblr_value={setpublic_prompt1_q_blr}
                               title="Prompts"
                               search={false}
+                              error={profile_data?.userpublicprompts?.length > 0 ? true : false}
                               placeholder={"Public Prompt Question 1"}
                               width={"100%"}
                               list={prompts_list}
@@ -1746,6 +1709,8 @@ const EditProfile = ({ navigation }) => {
                                   public_prompt1_a.length > 2
                                     ? colors.blue
                                     : public_prompt1_blr
+                                    &&
+                                    profile_data?.userpublicprompts?.length > 0
                                     ? colors.error
                                     : colors.grey,
                                 textAlignVertical: "top",
@@ -1785,6 +1750,7 @@ const EditProfile = ({ navigation }) => {
                               title="Prompts"
                               placeholder={"Public Prompt Question 2"}
                               width={"100%"}
+                              error={profile_data?.userpublicprompts?.length > 0 ? true : false}
                               list={prompts_list}
                               search={false}
                               selectedValue={public_prompt2_q[1]}
@@ -1811,6 +1777,8 @@ const EditProfile = ({ navigation }) => {
                                   public_prompt2_a.length > 2
                                     ? colors.blue
                                     : public_prompt2_blr
+                                    &&
+                                    profile_data?.userpublicprompts?.length > 0
                                     ? colors.error
                                     : colors.grey,
 
@@ -1875,6 +1843,7 @@ const EditProfile = ({ navigation }) => {
                               setblr_value={setprivate_prompt1_q_blr}
                               title="Prompts"
                               search={false}
+                              error={profile_data?.userprivateprompts?.length > 0 ? true : false}
                               placeholder={"Private Prompt Question 1"}
                               width={"100%"}
                               list={prompts_list}
@@ -1902,6 +1871,8 @@ const EditProfile = ({ navigation }) => {
                                   private_prompt1_a.length > 2
                                     ? colors.blue
                                     : private_prompt1_blr
+                                    &&
+                                    profile_data?.userprivateprompts?.length > 0
                                     ? colors.error
                                     : colors.grey,
                                 textAlignVertical: "top",
@@ -1936,6 +1907,7 @@ const EditProfile = ({ navigation }) => {
                               blr_value={private_prompt2_q_blr}
                               setblr_value={setprivate_prompt2_q_blr}
                               title="Prompts"
+                              error={profile_data?.userprivateprompts?.length > 0 ? true : false}
                               placeholder={"Private Prompt Question 2"}
                               width={"100%"}
                               list={prompts_list}
@@ -1964,6 +1936,8 @@ const EditProfile = ({ navigation }) => {
                                   private_prompt2_a.length > 2
                                     ? colors.blue
                                     : private_prompt2_blr
+                                    &&
+                                    profile_data?.userprivateprompts?.length > 0
                                     ? colors.error
                                     : colors.grey,
                                 textAlignVertical: "top",
@@ -1980,7 +1954,7 @@ const EditProfile = ({ navigation }) => {
                                 setprivate_prompt2_blr(true);
                               }}
                               editable={private_prompt2_q != ""}
-                              // disabled={private_prompt2_q == ""}
+                              
                               maxHeight={rspH(11.5)}
                               minHeight={rspH(11.5)}
                             />
@@ -2017,13 +1991,13 @@ const EditProfile = ({ navigation }) => {
                     (!habits_list[1][1] && !habits_list[1][2]) ||
                     (!habits_list[2][1] && !habits_list[2][2]) ||
                     public_prompt1_q_id == 0 ||
-                    public_prompt1_a == "" ||
+                    public_prompt1_a.length < 3 ||
                     public_prompt2_q_id == 0 ||
-                    public_prompt2_a == "" ||
+                    public_prompt2_a.length < 3 ||
                     private_prompt1_q_id == 0 ||
-                    private_prompt1_a == "" ||
+                    private_prompt1_a.length < 3 ||
                     private_prompt2_q_id == 0 ||
-                    private_prompt2_a == ""
+                    private_prompt2_a.length < 3
                     // )
                   }
                   onPress={() => {
@@ -2052,19 +2026,20 @@ const EditProfile = ({ navigation }) => {
                       drik != null &&
                       marij != null &&
                       public_prompt1_q_id != 0 &&
-                      public_prompt1_a != "" &&
+                      public_prompt1_a.length > 2 &&
                       public_prompt2_q_id != 0 &&
-                      public_prompt2_a != "" &&
+                      public_prompt2_a.length > 2 &&
                       private_prompt1_q_id != 0 &&
-                      private_prompt1_a != "" &&
+                      private_prompt1_a.length > 2 &&
                       private_prompt2_q_id != 0 &&
-                      private_prompt2_a != ""
+                      private_prompt2_a.length > 2
                     ) {
                       if (is_network_connected) {
                         onNextPress();
                       }
          
-                    } else {
+                    } 
+                    else {
                       // if (profile_data?.userprivateprompts?.length > 0) {
                       if (public_prompt1_q_id == 0) {
                         pup_q1_ref.current.measure(
@@ -2077,14 +2052,16 @@ const EditProfile = ({ navigation }) => {
                             );
                           }
                         );
-                      } else if (public_prompt1_a == "") {
+                      } else if (public_prompt1_a.length < 3) {
+                        console.log("public_prompt1_a",public_prompt1_a)
                         pup_a1_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
                             pageY = pageY + current_pos;
 
                             scrollViewRef.current.scrollToPosition(
                               0,
-                              pageY - rspH(16),
+                              pageY
+                               - rspH(16),
                               true
                             );
                           }
@@ -2101,7 +2078,8 @@ const EditProfile = ({ navigation }) => {
                             );
                           }
                         );
-                      } else if (public_prompt2_a == "") {
+                      } else if (public_prompt2_a.length < 3) {
+                        console.log("public_prompt1_a",public_prompt2_a)
                         pup_a2_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
                             pageY = pageY + current_pos;
@@ -2125,7 +2103,9 @@ const EditProfile = ({ navigation }) => {
                             );
                           }
                         );
-                      } else if (private_prompt1_a == "") {
+                      } else if (private_prompt1_a.length < 3) {
+                        console.log("private_prompt1_a",private_prompt1_a)
+
                         prp_a1_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
                             pageY = pageY + current_pos;
@@ -2149,7 +2129,8 @@ const EditProfile = ({ navigation }) => {
                             );
                           }
                         );
-                      } else if (private_prompt2_a == "") {
+                      } else if (private_prompt2_a.length < 3) {
+                        console.log("private_prompt2_a",private_prompt2_a)
                         prp_a2_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
                             pageY = pageY + current_pos;
@@ -2166,30 +2147,30 @@ const EditProfile = ({ navigation }) => {
                       if (public_prompt1_q_id == 0) {
                         setpublic_prompt1_q_blr(true);
                       }
-                      if (public_prompt1_a == "") {
+                      if (public_prompt1_a.length < 3) {
                         setpublic_prompt1_blr(true);
                       }
                       if (public_prompt2_q_id == 0) {
                         setpublic_prompt2_q_blr(true);
                       }
-                      if (public_prompt2_a == "") {
+                      if (public_prompt2_a.length < 3) {
                         setpublic_prompt2_blr(true);
                       }
                       if (private_prompt1_q_id == 0) {
                         setprivate_prompt1_q_blr(true);
                       }
-                      if (private_prompt1_a == "") {
+                      if (private_prompt1_a.length < 3) {
                         setprivate_prompt1_blr(true);
                       }
                       if (private_prompt2_q_id == 0) {
                         setprivate_prompt2_q_blr(true);
                       }
-                      if (private_prompt2_a == "") {
+                      if (private_prompt2_a.length < 3) {
                         setprivate_prompt2_blr(true);
                       }
                       // }
-                    }
                     // }
+                    }
                   }}
                 />
               </FormWrapperFooter>

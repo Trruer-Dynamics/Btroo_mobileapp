@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   matchitem_cont: {
-    top: Platform.OS == "android" ? rspH(4.6) + insets.top : rspH(8.2) + insets.top,
+    top: Platform.OS == "android" ? rspH(8.3) + insets.bottom/3  : rspH(8.2) + insets.top,
     width: rspW(86),
     height: rspH(11.6),
     alignSelf: "center",
@@ -489,7 +489,9 @@ const styles = StyleSheet.create({
   },
   timeHighCont: {
     // top: Platform.OS == "android" ? rspH(11) + insets.top : srn_height / 5.1,
-    top: Platform.OS == "android" ? rspH(11.2) + insets.top : rspH(14.6) + insets.top,
+    top: Platform.OS == "android" ?
+     rspH(14.7) + insets.bottom /3 
+     : rspH(14.6) + insets.top,
     right: rspW(12),
     width: rspW(22.2),
     height: rspH(2.75),

@@ -1462,7 +1462,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1470,7 +1470,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
 
   mainTutCont: {

@@ -382,6 +382,7 @@ const SwipeCard = ({
 
   
   const PassPressIn = () =>{
+    setmodalVisible(false)
     rightX.setValue(1);
     setactionType("Pass");
     // Animated.timing(iconTranslateY, {
@@ -392,6 +393,7 @@ const SwipeCard = ({
   }
   const PassPress = () =>{
     console.log("Pass Pressed")
+    setmodalVisible(false)
     handleChoiceButtons(0);
     swipeProfile(false, false);
     setreport("");
@@ -408,7 +410,7 @@ const SwipeCard = ({
   });
 
   const SoftPressIn = () =>{
-
+    setmodalVisible(false)
                           
                           upY.setValue(1);
                           setactionType("Softspot");
@@ -421,6 +423,7 @@ const SwipeCard = ({
   }
   const SoftPress = () =>{
     console.log("Softspot Pressed")
+    setmodalVisible(false)
     handleChoiceButtons(0);
                           swipeProfile(true, true);
                           setreport("");
@@ -438,6 +441,7 @@ const SwipeCard = ({
 
 
   const FancyPressIn = () =>{
+    setmodalVisible(false)
                           leftX.setValue(1);
                           setactionType("Fancy");
                           // Animated.timing(iconTranslateY, {
@@ -448,6 +452,7 @@ const SwipeCard = ({
   }
   const FancyPress = () =>{
     console.log("FancyPress")
+    setmodalVisible(false)
     handleChoiceButtons(0);
                           swipeProfile(true, false);
                           setreport("");
@@ -472,8 +477,6 @@ const SwipeCard = ({
       action: action,
       superlikestatus: superlikestatus,
     };
-
-    console.log("data",data)
 
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -836,7 +839,7 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
-               
+                       
                           // rightX.setValue(1);
                           // setactionType("Pass");
                           // Animated.timing(iconTranslateY, {
@@ -874,6 +877,7 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
+                      
 
                           //   console.log("Softspot Pressed")
                           // upY.setValue(1);
@@ -908,6 +912,7 @@ const SwipeCard = ({
                       {/* Action */}
                       <TouchableOpacity
                         onPressIn={() => {
+                          
    
                           //   console.log("Fancy Pressed")
                           // leftX.setValue(1);
@@ -1493,7 +1498,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1501,7 +1506,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    textAlign: "justify",
+    // textAlign: "justify",
   },
   habitsImage: {
     width: rspW(10.1),

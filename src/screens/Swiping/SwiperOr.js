@@ -454,7 +454,6 @@ const SwiperOr = ({}) => {
             }
             else
             if (profiles.length > 0) {
-              console.log("load1")
               setloading2(false)
             }
             
@@ -586,9 +585,9 @@ const SwiperOr = ({}) => {
       .then((resp) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
-
+        
         let tmp =[...profiles]
-
+console.log("getFilterProfiles resp code", resp_code)
         
 
         if (resp_code == 204) {
@@ -599,7 +598,6 @@ const SwiperOr = ({}) => {
           }
           else if (profiles.length === 0 && warn_step !== 2) {
             setloading2(false)
-            console.log("load5")
           }
           // else{
           //   setloading2(false)
@@ -611,15 +609,13 @@ const SwiperOr = ({}) => {
           let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
           
           if (new_profiles.length > 0) {
-         
+            console.log("getFilterProfiles new profiles", new_profiles.length)
             setloading2(false);
-            console.log("load4")
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
           }
           else if (profiles.length > 0) {
             setloading2(false);
-            console.log("load3")
           }
          
         } else if (resp_code == 401) {
@@ -649,7 +645,6 @@ const SwiperOr = ({}) => {
           let active_profiles = resp_data.filter((v) => v.active == true);
           setprofiles(active_profiles);
           setloading2(false);
-          console.log("load2")
         } else {
           setwarn_step(2);
           setloading2(true);
@@ -697,6 +692,9 @@ const SwiperOr = ({}) => {
     
     if (profiles.length > 0) {
       let tmp = [...profiles]
+      let rmv_prof = tmp[tmp.length - 1]
+      // console.log("Profile remove", rmv_prof)
+      console.log("Profile remove ","prf_id :",rmv_prof.id,"|| prf name : ",rmv_prof.name," || status",rmv_prof.profilestatus.profilestatus)
       tmp.splice(tmp.length - 1,1)
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
       if (tmp.length < 3 && !empty_profile_call) { 
@@ -771,17 +769,25 @@ const SwiperOr = ({}) => {
 
 
   useEffect(() => {
-    console.log("\n prof", profiles.length)
+    console.log(Platform.OS,"\n prof length", profiles.length)
     if (!loading2) {
       for (let i = 0; i < profiles.length; i++) {
         const prf = profiles[i];
-        // console.log("prf",prf.id,prf.name,"status",prf.profilestatus.profilestatus)
+        let a_st = prf.profilestatus.profilestatus
+        let prf_status = 
+        a_st == 1 ? 'superliked' :
+        a_st == 2 ? 'new' :
+        a_st == 3 ? 'indemand' :
+        a_st == 4 ? 'liked' : 'Others'
+         
+
+        console.log("prf_id :",prf.id,"|| prf name : ",prf.name," || status",prf.profilestatus.profilestatus," - ",prf_status)
       }  
     }
     
   
     
-  }, [loading2,profiles])
+  }, [profiles])
   
 
   // save location data in frontend
@@ -889,7 +895,6 @@ const SwiperOr = ({}) => {
   };
 
   const userExist = async () =>{
-    console.log("userExist call")
 
     let url_path = 'isacountavialable/'
 
@@ -913,13 +918,9 @@ const SwiperOr = ({}) => {
       );
       let resp_data = response.data;
 
-      // setloading(false);
-      
-      console.log("userExist resp_data",resp_data.code)
-
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please contact to admin.", [
+           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",
@@ -932,8 +933,6 @@ const SwiperOr = ({}) => {
       }
       
     } catch (error) {
-      console.log("userExist err",error)
-      // setloading(false);
       return false;
 
     }

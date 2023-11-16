@@ -387,7 +387,6 @@ const SettingsScreen = ({ navigation, route }) => {
   };
 
   const userExist = async () =>{
-    console.log("userExist call")
 
     let url_path = 'isacountavialable/'
 
@@ -411,13 +410,9 @@ const SettingsScreen = ({ navigation, route }) => {
       );
       let resp_data = response.data;
 
-      // setloading(false);
-      
-      console.log("userExist resp_data",resp_data)
-
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please contact to admin.", [
+           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",
@@ -430,8 +425,6 @@ const SettingsScreen = ({ navigation, route }) => {
       }
       
     } catch (error) {
-      console.log("userExist err",error)
-      // setloading(false);
       return false;
 
     }
