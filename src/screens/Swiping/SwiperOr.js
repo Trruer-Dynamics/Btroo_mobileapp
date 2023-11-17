@@ -92,6 +92,8 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.is_network_connected
   );
 
+  const current_screen = useSelector((state) => state.screen.current_screen);
+
   const [net_conn, setnet_conn] = useState(true)
 
   const profile_data = useSelector(
@@ -725,7 +727,7 @@ console.log("getFilterProfiles resp code", resp_code)
       setshowFilter(false)
       setpromptsmodalVisible(false)
     }
-    else if (!net_conn) {
+    else if (!net_conn && current_screen == 'Swiper') {
       setnet_conn(true)
       dispatch(setProfileRefresh(!profile_refresh));
     }

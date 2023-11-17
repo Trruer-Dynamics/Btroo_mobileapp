@@ -78,7 +78,9 @@ import {
 } from "../../../store/reducers/chats/chats";
 import FastImage from "react-native-fast-image";
 import OffflineAlert from "../../../components/functions/OfflineAlert";
-
+import { setCurrentScreen } from "../../../store/reducers/screen/screen";
+import { initialWindowMetrics } from "react-native-safe-area-context";
+const insets = initialWindowMetrics.insets;
 
 
 // Chat Bubble item
@@ -190,7 +192,8 @@ const ChatItem = ({
   let btmMarg =
     index == 0 ? 1.6 : chatlist[index - 1][1] == chatlist[index][1] ? 0.5 : 1.6;
 
-  let show_tailc = index < chatlist.length - 1 ? chatlist[index + 1][1] == chatlist[index][1] ? false : true : false;
+  let show_tailc = index < chatlist.length - 1 
+  ? chatlist[index + 1][1] == chatlist[index][1] ? false : true : true;
 
   let show_tail = show_tailc
 
@@ -263,6 +266,7 @@ const ChatItem = ({
                 let rply_itm_indx = chatlist.indexOf(rply_itm);
                 setrply_item_indx(rply_itm_indx);
                 let tmp_lis = [...chatlist];
+                console.log("here5")
                 setchatlist(tmp_lis);
                 setrply_animation(true);
                 scrollViewRef.current.scrollToIndex({
@@ -357,8 +361,8 @@ const ChatItem = ({
               </Text>
             </View>
           </View>
-        </Animated.View>
-{ show_tail &&
+
+          { show_tail &&
   <>
         {item[1] == 0 ? (
            
@@ -400,6 +404,8 @@ const ChatItem = ({
         
        )}
 </>}
+        </Animated.View>
+
        
 
 
@@ -411,6 +417,7 @@ const ChatItem = ({
                 animation2.value = 0;
                 setrply_item_indx(null);
                 let tmp_lis = [...chatlist];
+                console.log("here8")
                 setchatlist(tmp_lis);
                 setrply_animation(false);
               }, 1800);
@@ -439,7 +446,7 @@ const Chat = ({ profile }) => {
   const chat_reveal_tut = useSelector(
     (state) => state.tutorial.chat_reveal_tut
   );
-  const { sckop } = useContext(UserContext);
+  const { sckop,c_scrn } = useContext(UserContext);
 
   const [replySet, setreplySet] = useState(false);
   const [actreplyID, setactreplyID] = useState(null);
@@ -520,7 +527,7 @@ const Chat = ({ profile }) => {
   };
 
   const chatRvlTutDone = async () => {
-    console.log("chatRvlTutDone")
+
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -553,7 +560,7 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfile = async () => {
-    console.log("revealProfile")
+   
     setloading(true);
 
     const headers = {
@@ -572,7 +579,7 @@ const Chat = ({ profile }) => {
       setloading(false);
 
       let resp_data = response.data;
-console.log("revealProfile resp_data",resp_data)
+
       if (resp_data.code == 200) {
         setrvl_click(true);
       } else if (resp_data.code == 401) {
@@ -585,7 +592,7 @@ console.log("revealProfile resp_data",resp_data)
   };
 
   const revealProfileTime = async () => {
-    console.log("revealProfileTime")
+
     setloading(true);
 
     const api = apiUrl + "sendnotificationforprofilereveal/";
@@ -605,7 +612,7 @@ console.log("revealProfile resp_data",resp_data)
       });
       setloading(false);
       let resp_data = response.data;
-console.log("revealProfileTime",resp_data)
+
     } catch (error) {
       setloading(false);
       return false;
@@ -614,7 +621,7 @@ console.log("revealProfileTime",resp_data)
 
   const getPrevChats = async (list = []) => {
     // setloading(true);
-
+console.log("getPrevChats")
     let url = apiUrl + "chat_history/" + profile.chat_id + "/";
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -668,16 +675,22 @@ console.log("revealProfileTime",resp_data)
             k += 1;
           }
 
+          // remove messages with  null id
           let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
+
+          // for (let i = 0; i < tmp_lis.length; i++) {
+          //   const ele = tmp_lis[i];
+          //   console.log("ele",ele)
+          // }
 
           // if new message avalable load chats from backend or from local storage
           if (tmps.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
-            console.log("here",tmp.map(v => v[4]))
+         console.log("here4")
             setchatlist(tmp);
             chatlist_ref.current = tmp;
           } else {
-            console.log("here2",tmp_lis.map(v => v[4]))
+            console.log("here3")
             setchatlist(tmp_lis);
             chatlist_ref.current = tmp_lis;
           }
@@ -709,7 +722,7 @@ console.log("revealProfileTime",resp_data)
   };
 
   const connectSocket = async () => {
-    console.log("connectSocket")
+    console.log("connectSocket", Platform.OS)
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
     ws.current.onopen = (e) => {
       console.log("Open");
@@ -727,9 +740,11 @@ console.log("revealProfileTime",resp_data)
 
     ws.current.onclose = (e) => {
       console.log(Platform.OS, "Close");
+      c_scrn.current = ''
       sckop.current = false;
       socket_con.current = false;
       setSocketOpen(false);
+      setconnectSocketS(false)
       dispatch(setSocketClose(true));
     };
 
@@ -750,6 +765,7 @@ console.log("revealProfileTime",resp_data)
             .trim();
 
           let day_t = !chatlist_ref.current.map((v) => v[6]).includes(day_tmp);
+          console.log("here2")
           setchatlist((prv) => [
             [
               data.message,
@@ -796,7 +812,7 @@ console.log("revealProfileTime",resp_data)
   };
 
   const updateHiStatus = async () => {
-    console.log("updateHiStatus")
+
     setloading(true);
     const mainUrl = apiUrl + 'sayhistatusupdate/'
     const headers = {
@@ -818,10 +834,8 @@ console.log("revealProfileTime",resp_data)
       );
       setloading(false);
       let resp_data = response.data;
-      console.log("resp_data",resp_data)
       
     } catch (error) {
-      console.log("upsterr", error)
       setloading(false);
       return false;
     } 
@@ -885,12 +899,6 @@ console.log("revealProfileTime",resp_data)
   // save chats locally
   useEffect(() => {
 
-    console.log("\n")
-
-    for (let m = 0; m < chatlist.length; m++) {
-      const ele = chatlist[m];
-      // console.log("chat",m,ele[0],ele[1], ele[2],ele[3],ele[4])
-    }
 
     let onlY_id= chats_msgs.map(k => k[4])
 
@@ -905,6 +913,8 @@ console.log("revealProfileTime",resp_data)
   }, [chatlist]);
 
   useEffect(() => {
+    console.log("connectSocketS",connectSocketS)
+
     if (connectSocketS) {
       connectSocket();
     }
@@ -918,11 +928,11 @@ console.log("revealProfileTime",resp_data)
     };
   }, [connectSocketS]);
 
-  useEffect(() => {
-    if (socket_con.current == false) {
-      connectSocket();
-    }
-  }, [socket_con.current]);
+  // useEffect(() => {
+  //   if (socket_con.current == false) {
+  //     connectSocket();
+  //   }
+  // }, [socket_con.current]);
 
   
 
@@ -971,7 +981,7 @@ console.log("revealProfileTime",resp_data)
         tmpR[indx][4] = itm[4];
       }
       let tmp3 = tmpR.reverse();
-      console.log("here4")
+      console.log("here")
       setchatlist(tmp3);
 
       chatlist_ref.current = tmp;
@@ -1072,12 +1082,11 @@ console.log("revealProfileTime",resp_data)
 
           let ttact = false;
 
-console.log("avg_min",avg_min)
-console.log("mymsgs.length",mymsgs.length)
-console.log("othmsgs.length",othmsgs.length)
-console.log("mycount",mycount)
-console.log("othcount",othcount)
-
+          console.log("\navg_min",avg_min)
+          console.log("mymsgs",mymsgs.length)
+          console.log("othmsgs",othmsgs.length)
+          console.log("mycount",mycount)
+          console.log("othcount",othcount)
 
           if (
             avg_min <= 5 &&
@@ -1166,19 +1175,29 @@ console.log("othcount",othcount)
 
   // load chat message according to network status
   useEffect(() => {
-    let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
-
+    dispatch(setCurrentScreen("Chat"));
+    c_scrn.current = 'Chat'
+    let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
+    console.log("tmp",tmp.length)
+    // for (const itm of tmp) {
+    //   console.log("itm",itm)
+    // }
     if (!is_network_connected && tmp.length > 0) {
-      console.log("here3",tmp)
+      console.log("here7")
       setchatlist(tmp);
       setloading(false);
     }
 
-    if (is_network_connected 
+    if (is_network_connected &&
+      socket_con.current == false
       // && drafts_msgs.length > 0
       ) {
-      connectSocket();
+      getPrevChats()
     }
+
+    console.log("socket_con.current",socket_con.current)
+    
+
   }, [is_network_connected]);
 
   useLayoutEffect(() => {
@@ -1208,7 +1227,7 @@ console.log("othcount",othcount)
   }, [chatlist]);
 
   useLayoutEffect(() => {
-    console.log("profile.userprv_rvl",profile.user_prof_rvl)
+    
     if (!profile.first_visit_done) {
       updateHiStatus()
     }
@@ -1232,7 +1251,9 @@ console.log("othcount",othcount)
           behavior="padding"
         >
           <View style={{ paddingHorizontal: rspW(5), paddingTop: rspH(2) }}>
+            {/* {false ? ( */}
             {profile.prof_rvl ? (
+
               <FormHeaderChat
                 title={truncateStr(
                   profile?.userprofile?.name.split(" ")[0],
@@ -1504,6 +1525,7 @@ onPress={() => {
       profile.chat_id,
     ];
     tmp_lis.unshift(nitm);
+    console.log("here6")
     setchatlist(tmp_lis);
     chatlist_ref.current = tmp_lis;
     setreplySet(false);
@@ -1570,6 +1592,8 @@ onPress={() => {
       </SafeAreaView>
 
       {show_rvl_tut && (
+      // {true && (
+
         <>
           <View style={styles.mainTutCont}>
             <View style={styles.centralModalContMatch}>
@@ -1607,7 +1631,12 @@ onPress={() => {
             onPress={() => setmodalVisible(true)}
           >
             <FastImage
-              source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")}
+              source={
+                profile?.userprofile?.gender == "Man" ?
+                require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")
+              :
+              require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage2.png")
+              }
               style={styles.profilePhoto}
             />
           </View>
@@ -1721,7 +1750,6 @@ const styles = StyleSheet.create({
   // Match Chat Tut
   centralModalContMatch: {
     position: "absolute",
-    height: rspH(36),
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -1729,6 +1757,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
+    height: rspH(36),
+
+    // height: Platform.OS == 'ios'? rspH(31) + insets.top: rspH(36) + insets.bottom,
+    
   },
 
   // Tutorial Main Container
@@ -1744,8 +1776,10 @@ const styles = StyleSheet.create({
     marginTop: rspH(3),
   },
   centralModalText: {
+    // fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
+    // lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 2.98),
     fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
-    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 2.98),
+    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 3.5),
     fontFamily: fontFamily.bold,
     color: colors.black,
   },
@@ -1771,13 +1805,14 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white,
+    backgroundColor: colors.white + "ff",
     alignItems: "center",
     justifyContent: "center",
   },
 
   profilePhotoHighCont: {
-    top: rspH(Platform.OS == "ios" ? 5.6 : 0.3),
+    // top: rspH(Platform.OS == "ios" ? 5.6 : 0.3),
+    top: Platform.OS == "ios" ? rspH(0.2) + insets.top : rspH(0.3),
     right: rspW(3),
     width: rspW(16),
     height: rspW(16),

@@ -144,6 +144,7 @@ const PublicPrompts = ({
                           : colors.grey
                       ,
                       textAlignVertical: "top",
+                      paddingTop: rspH(1.4),  
                     }}
                     value={public_prompt1_a}
                     onChangeText={(val) => {
@@ -197,6 +198,7 @@ const PublicPrompts = ({
                           ? colors.blue
                           : colors.grey,
                       textAlignVertical: "top",
+                      paddingTop: rspH(1.4),  
                     }}
                     value={public_prompt2_a}
                     onChangeText={(val) => {

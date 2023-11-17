@@ -31,6 +31,8 @@ const UserProvider = ({ children, navigationRef }) => {
   const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
   const sckop = useRef(false);
+  const c_scrn = useRef(false);
+
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -143,6 +145,7 @@ const UserProvider = ({ children, navigationRef }) => {
         setToNavigate,
         appStateVisible,
         sckop,
+        c_scrn,
       }}
     >
       {children}

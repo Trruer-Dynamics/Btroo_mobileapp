@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
  
 const NotificationController = (props) => {
-  const { sckop, newMsgRefresh, setnewMsgRefresh } = useContext(UserContext);
+  const { sckop, newMsgRefresh, setnewMsgRefresh, c_scrn } = useContext(UserContext);
   const user_loggined = useSelector(
     (state) => state.authentication.user_loggined
   );
@@ -41,8 +41,6 @@ const NotificationController = (props) => {
       setuser_interact(false);
  
       let dt = JSON.parse(not_data.data);
- 
-      console.log("dt", dt)
       let expiry_date = dt.expiry_datetime;
  
       let mth = {};
@@ -53,14 +51,9 @@ const NotificationController = (props) => {
       mth.userprofile = { name: dt.Name, id: dt.profile_id };
       mth.expiry_date = new Date(expiry_date);
       mth.user_id = dt.image.user;
-      // let prf_img = dt.userprofile.image.find(
-      //   (c) => c.position == 0
-      // );
- 
       mth.prof_img = dt.image.cropedimage;
       mth.prof_rvl = true;
       mth.all_images = [];
-      console.log("Till Here")
       navigation.navigate("ProfileRevealed", {
         profile: mth,
       });
@@ -73,7 +66,7 @@ const NotificationController = (props) => {
       } else if (not_data?.type == "Chat") {
         setuser_interact(false);
         let dt = not_data;
-        console.log("dt2", dt)
+  
         let cht_id = dt.chatroom_id;
  
         if (matches.length > 0) {
@@ -145,12 +138,12 @@ const NotificationController = (props) => {
   }, []);
  
   useLayoutEffect(() => {
+    console.log("current_screen ot",current_screen)
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      // console.log("remoteMessage",remoteMessage.data)
+
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
-      // console.log("ndata",data)
-     
+     console.log("not data",data)
       setnot_data(data);
  
       setrefresh(!refresh);
@@ -172,9 +165,16 @@ const NotificationController = (props) => {
           //   smallIcon: 'ic_notification',
           color: "#1c2143",
         };
+
+
       }
- 
-      if (user_loggined && !sckop.current && data?.type != "Hidden" && current_screen != 'current_screen') {
+      console.log("current_screen it",current_screen)
+      console.log("c_scrn",c_scrn.current)
+      if (data?.type == 'Reveal') {
+        PushNotification.localNotification(notifObj); 
+      }
+else
+      if (user_loggined && !sckop.current && data?.type != "Hidden" && c_scrn.current != 'Chat') {
         PushNotification.localNotification(notifObj);
       }
     });

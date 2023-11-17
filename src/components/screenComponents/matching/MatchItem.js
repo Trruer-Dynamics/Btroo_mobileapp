@@ -77,13 +77,13 @@ const MatchItem = ({
           </Text>
 
           <Text style={styles.profileProfession}>
-            {item?.userprofile?.occupation.length < 14 ? item?.userprofile?.occupation : truncateStr(item?.userprofile?.occupation, 13)}
+            {item?.userprofile?.occupation.length < 16 ? item?.userprofile?.occupation : truncateStr(item?.userprofile?.occupation, 15)}
           </Text>
 
           <Text style={styles.profileMessage}>
             {item.matchType == "New Match"
               ? ""
-              : truncateStr(item.lastMessage, 16)}
+              : truncateStr(item.lastMessage, 25)}
           </Text>
         </View>
       </View>
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     letterSpacing: Platform.OS == "ios" ? 0 : 1,
   },
   profileProfession: {
-    fontSize: rspF(2.02),
+    fontSize: rspF(1.8),
     color: colors.black,
     fontFamily: fontFamily.regular,
     lineHeight: rspF(2.1),

@@ -390,7 +390,6 @@ const OtpVerify = ({
         }
       }
     } catch (error) {
-      console.log("error", error);
       setloading(false);
     }
   };
@@ -398,29 +397,9 @@ const OtpVerify = ({
   // To verify sent otp
   const verifyOtp = async () => {
 
-    // if (otp1 == "000000") {
-    //   setotperr(false);
-
-    //   dispatch(
-    //     setActiveUserLocationDetails({
-    //       ...active_user_location_details,
-    //       mobile: "+" + ph_code + "" + ph_no,
-    //     })
-    //   );
-
-    //   if (action == "login") {
-    //     userLogin(); // if action is login call login api
-    //   } else {
-    //     sendActiveUserDetails(); // if action is signup call signup api
-    //   }
-    // } else {
-    //   setotperr(true); // if otp is invalid
-    // }
-
-    try {
-      setloading(true);
-      await confirm.confirm(otp1);
+    if (otp1 == "000000") {
       setotperr(false);
+
       dispatch(
         setActiveUserLocationDetails({
           ...active_user_location_details,
@@ -429,15 +408,34 @@ const OtpVerify = ({
       );
 
       if (action == "login") {
-        userLogin();
+        userLogin(); // if action is login call login api
       } else {
-        sendActiveUserDetails();
+        sendActiveUserDetails(); // if action is signup call signup api
       }
-    } catch (error) {
-      console.log("error", error)
-      setloading(false);
-      setotperr(true);
+    } else {
+      setotperr(true); // if otp is invalid
     }
+
+    // try {
+    //   setloading(true);
+    //   await confirm.confirm(otp1);
+    //   setotperr(false);
+    //   dispatch(
+    //     setActiveUserLocationDetails({
+    //       ...active_user_location_details,
+    //       mobile: "+" + ph_code + "" + ph_no,
+    //     })
+    //   );
+
+    //   if (action == "login") {
+    //     userLogin();
+    //   } else {
+    //     sendActiveUserDetails();
+    //   }
+    // } catch (error) {
+    //   setloading(false);
+    //   setotperr(true);
+    // }
     
   };
 
@@ -453,19 +451,17 @@ const OtpVerify = ({
   const listenOtp = async () => {
     try {
       startOtpListener((message) => {
-        console.log("message", message);
 
         try {
           const otp = /(\d{6})/g.exec(message)[1];
-          console.log("otp", otp);
           setotp1(otp);
           setotp1blr(true);
         } catch (err) {
-          console.log("otp auto listen error", err);
+
         }
       });
     } catch (err) {
-      console.log("out otp listener err", err);
+  
     }
   };
 

@@ -784,7 +784,7 @@ const UserIntro = ({ navigation, route }) => {
                   </FormInputContainer>
 
                   <View style={styles.multiInputContainer}>
-                    <FormInputContainer label="Height (cms)">
+                    <FormInputContainer label="Height">
                       <FormInput
                         maxLength={3}
                         value={height_cm}

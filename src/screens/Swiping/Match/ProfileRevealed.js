@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { rspF, rspH, rspW, scrn_height } from "../../../styles/responsiveSize";
 import colors from "../../../styles/colors";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -17,6 +17,7 @@ import { setSessionExpired } from "../../../store/reducers/authentication/authen
 import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 import { setMatchesImgs } from "../../../store/reducers/chats/chats";
+import { UserContext } from "../../../context/user";
 
 const ProfileRevealed = ({ route }) => {
   const navigation = useNavigation();
@@ -34,6 +35,8 @@ const ProfileRevealed = ({ route }) => {
   const [rvl_img, setrvl_img] = useState("");
 
   const [updated_prof, setupdated_prof] = useState(null);
+  const { sckop,c_scrn } = useContext(UserContext);
+
 
   const getRvlProfData = async () => {
     const data = {
@@ -74,6 +77,8 @@ const ProfileRevealed = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
+
+      c_scrn.current = 'ProfileRevealed'
       dispatch(setCurrentScreen(route.name));
 
       let tmplist = [...matches_imgs];

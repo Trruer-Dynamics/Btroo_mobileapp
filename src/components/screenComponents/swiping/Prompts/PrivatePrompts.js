@@ -137,6 +137,7 @@ const PrivatePrompts = ({
                           ? colors.blue
                           : colors.grey,
                       textAlignVertical: "top",
+                      paddingTop: rspH(1.4),  
                     }}
                     value={private_prompt1_a}
                     onChangeText={(val) => {
@@ -190,6 +191,7 @@ const PrivatePrompts = ({
                           ? colors.blue
                           : colors.grey,
                       textAlignVertical: "top",
+                      paddingTop: rspH(1.4),  
                     }}
                     value={private_prompt2_a}
                     onChangeText={(val) => {

@@ -172,7 +172,6 @@ const Match = () => {
             ? resp_data[p].user1_SayHii_status
             : resp_data[p].user2_SayHii_status;
 
-            console.log("first_visit_user",first_visit_user)
             let seen_by =
               resp_data[p].last_message != null
                 ? resp_data[p].last_message.seen_by

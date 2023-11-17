@@ -447,10 +447,16 @@ const ProfileMain = ({ navigation }) => {
                       style={styles.profileDetailContNText}
                       numberOfLines={1}
                     >
-                      {profile_data?.userprofile?.city?.length > 11
+                      {/* {profile_data?.userprofile?.city?.length > 11
                         ? profile_data?.userprofile?.city.substring(0, 8) +
                           "..."
-                        : profile_data?.userprofile?.city}
+                        : profile_data?.userprofile?.city} */}
+
+{profile_data?.userprofile?.city.split(",")[0]?.length > 11
+                          ? profile_data?.userprofile?.city
+                              .split(",")[0]
+                              .substring(0, 9) + "..."
+                          : profile_data?.userprofile?.city.split(",")[0]}
                     </Text>
                   </View>
 

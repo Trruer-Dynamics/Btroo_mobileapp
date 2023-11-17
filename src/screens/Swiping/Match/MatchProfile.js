@@ -11,7 +11,7 @@ import {
   Image,
 } from "react-native";
 import ADIcon from "react-native-vector-icons/AntDesign";
-import React, { useState, useLayoutEffect, useRef } from "react";
+import React, { useState, useLayoutEffect, useRef, useContext } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
@@ -49,6 +49,8 @@ import { setSessionExpired } from "../../../store/reducers/authentication/authen
 import Paginator from "../../../components/screenComponents/swiping/Paginator";
 import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
+import { UserContext } from "../../../context/user";
+import OffflineAlert from "../../../components/functions/OfflineAlert";
 
 
 const Item2 = ({ item }) => {
@@ -69,6 +71,9 @@ const MatchProfile = ({ route }) => {
   const navigation = useNavigation();
   const { profile } = route.params;
   const [loading, setloading] = useState(false);
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
 
   // Report Control
   const [openReport, setopenReport] = useState(false);
@@ -146,6 +151,8 @@ const MatchProfile = ({ route }) => {
       })
       .catch((err) => {});
   };
+
+  const { sckop,c_scrn } = useContext(UserContext);
 
   const unmatchProfile = async () => {
     const headers = {
@@ -258,6 +265,7 @@ const MatchProfile = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
+      c_scrn.current = 'MatchProfile'
       dispatch(setCurrentScreen(route.name));
       return () => {};
     }, [])
@@ -266,6 +274,7 @@ const MatchProfile = ({ route }) => {
   return (
     <>
       {loading && <Loader />}
+      <OffflineAlert  offAlert={!is_network_connected}/>
       <View style={{ height: scrn_height, backgroundColor: "#fff" }}>
         <SafeAreaView style={{ flex: 1 }}>
           <View

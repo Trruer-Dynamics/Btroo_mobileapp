@@ -1378,7 +1378,7 @@ const EditProfile = ({ navigation }) => {
                   </FormInputContainer>
 
                   <View style={styles.multiInputContainer}>
-                    <FormInputContainer label="Height (cms)">
+                    <FormInputContainer label="Height">
                       <FormInput
                         maxLength={3}
                         value={height_cm}
@@ -1714,6 +1714,7 @@ const EditProfile = ({ navigation }) => {
                                     ? colors.error
                                     : colors.grey,
                                 textAlignVertical: "top",
+                                paddingTop: rspH(1.4),  
                               }}
                               value={public_prompt1_a}
                               onFocus={() => {
@@ -1783,6 +1784,7 @@ const EditProfile = ({ navigation }) => {
                                     : colors.grey,
 
                                 textAlignVertical: "top",
+                                paddingTop: rspH(1.4),  
                               }}
                               onFocus={() => setpublic_prompt2_blr(true)}
                               value={public_prompt2_a}
@@ -1876,6 +1878,7 @@ const EditProfile = ({ navigation }) => {
                                     ? colors.error
                                     : colors.grey,
                                 textAlignVertical: "top",
+                                paddingTop: rspH(1.4),  
                               }}
                               value={private_prompt1_a}
                               onFocus={() => setprivate_prompt1_blr(true)}
@@ -1941,6 +1944,7 @@ const EditProfile = ({ navigation }) => {
                                     ? colors.error
                                     : colors.grey,
                                 textAlignVertical: "top",
+                                paddingTop: rspH(1.4),  
                               }}
                               value={private_prompt2_a}
                               onFocus={() => setprivate_prompt2_blr(true)}
@@ -2053,7 +2057,7 @@ const EditProfile = ({ navigation }) => {
                           }
                         );
                       } else if (public_prompt1_a.length < 3) {
-                        console.log("public_prompt1_a",public_prompt1_a)
+       
                         pup_a1_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
                             pageY = pageY + current_pos;
@@ -2079,7 +2083,7 @@ const EditProfile = ({ navigation }) => {
                           }
                         );
                       } else if (public_prompt2_a.length < 3) {
-                        console.log("public_prompt1_a",public_prompt2_a)
+              
                         pup_a2_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
                             pageY = pageY + current_pos;
@@ -2104,7 +2108,6 @@ const EditProfile = ({ navigation }) => {
                           }
                         );
                       } else if (private_prompt1_a.length < 3) {
-                        console.log("private_prompt1_a",private_prompt1_a)
 
                         prp_a1_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
@@ -2130,7 +2133,7 @@ const EditProfile = ({ navigation }) => {
                           }
                         );
                       } else if (private_prompt2_a.length < 3) {
-                        console.log("private_prompt2_a",private_prompt2_a)
+  
                         prp_a2_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
                             pageY = pageY + current_pos;
