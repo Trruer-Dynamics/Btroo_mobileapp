@@ -127,19 +127,6 @@ const SwiperOr = ({}) => {
 
   const [filter_data_get, setfilter_data_get] = useState(false);
 
-  const prompts_list_all = useSelector((state) => state.allData.all_prompts);
-
-  const [prompts_list_rmv, setprompts_list_rmv] = useState([]);
-
-  const [public_prompt1_a, setpublic_prompt1_a] = useState("");
-  const [public_prompt1_q, setpublic_prompt1_q] = useState("");
-  const [public_prompt2_a, setpublic_prompt2_a] = useState("");
-  const [public_prompt2_q, setpublic_prompt2_q] = useState("");
-
-  const [private_prompt1_a, setprivate_prompt1_a] = useState("");
-  const [private_prompt1_q, setprivate_prompt1_q] = useState("");
-  const [private_prompt2_a, setprivate_prompt2_a] = useState("");
-  const [private_prompt2_q, setprivate_prompt2_q] = useState("");
 
   const [loading, setloading] = useState(true);
   const [loading2, setloading2] = useState(true);
@@ -191,8 +178,6 @@ const SwiperOr = ({}) => {
   //Filter
   const [showFilter, setshowFilter] = useState(false);
 
-  // Public Prompts State
-  const [promptsmodalVisible, setpromptsmodalVisible] = useState(false);
 
   const [swippingcount, setswippingcount] = useState(0);
 
@@ -725,7 +710,7 @@ console.log("getFilterProfiles resp code", resp_code)
     if (!is_network_connected) {
       setnet_conn(false)
       setshowFilter(false)
-      setpromptsmodalVisible(false)
+
     }
     else if (!net_conn && current_screen == 'Swiper') {
       setnet_conn(true)
@@ -751,23 +736,7 @@ console.log("getFilterProfiles resp code", resp_code)
 
 
 
-  useEffect(() => {
-    let prv_prmt = profile_data?.userprivateprompts;
-    if (promptTime && prv_prmt.length == 0) {
-      startFillingPrompts();
-    }
-  }, [promptTime]);
-
-  useEffect(() => {
-
-
-            
-            
-    let prv_prmt = profile_data?.userprivateprompts;
-    if (is_promptsfillingstarted && prv_prmt.length == 0) {
-      setpromptsmodalVisible(true);
-    }
-  }, [is_promptsfillingstarted]);
+ 
 
 
   useEffect(() => {
@@ -1002,7 +971,7 @@ const keyExtractor = (itm, index) => itm.created_on + index
           height: scrn_height,
         }}
       >
-        {!loading && !loading2 && !promptsmodalVisible ? (
+        {!loading && !loading2  ? (
           <SafeAreaView
             style={{
               flex: 1,
@@ -1098,65 +1067,7 @@ const keyExtractor = (itm, index) => itm.created_on + index
           </View>
         )}
 
-        {/* Prompts Modal */}
-        <FullModal
-          modalVisible={promptsmodalVisible}
-          setModalVisible={setpromptsmodalVisible}
-        >
-          {promptStep == 1 ? (
-            <PromptIntro setpromptStep={setpromptStep} />
-          ) : promptStep == 2 ? (
-            <PublicPrompts
-              public_prompt1_q={public_prompt1_q}
-              setpublic_prompt1_q={setpublic_prompt1_q}
-              public_prompt1_a={public_prompt1_a}
-              setpublic_prompt1_a={setpublic_prompt1_a}
-              public_prompt2_q={public_prompt2_q}
-              setpublic_prompt2_q={setpublic_prompt2_q}
-              public_prompt2_a={public_prompt2_a}
-              setpublic_prompt2_a={setpublic_prompt2_a}
-              prompts_list_rmv={prompts_list_rmv}
-              setprompts_list_rmv={setprompts_list_rmv}
-              prompts_list={prompts_list_all}
-              setpromptStep={setpromptStep}
-            />
-          ) : promptStep == 3 ? (
-            <PrivatePrompts
-              private_prompt1_q={private_prompt1_q}
-              setprivate_prompt1_q={setprivate_prompt1_q}
-              private_prompt1_a={private_prompt1_a}
-              setprivate_prompt1_a={setprivate_prompt1_a}
-              private_prompt2_q={private_prompt2_q}
-              setprivate_prompt2_q={setprivate_prompt2_q}
-              private_prompt2_a={private_prompt2_a}
-              setprivate_prompt2_a={setprivate_prompt2_a}
-              prompts_list_rmv={prompts_list_rmv}
-              setprompts_list_rmv={setprompts_list_rmv}
-              prompts_list={prompts_list_all}
-              setpromptStep={setpromptStep}
-            />
-          ) : (
-            <ReferralCode
-              public_prompt1_q={public_prompt1_q}
-              setpublic_prompt1_q={setpublic_prompt1_q}
-              public_prompt1_a={public_prompt1_a}
-              setpublic_prompt1_a={setpublic_prompt1_a}
-              public_prompt2_q={public_prompt2_q}
-              setpublic_prompt2_q={setpublic_prompt2_q}
-              public_prompt2_a={public_prompt2_a}
-              setpublic_prompt2_a={setpublic_prompt2_a}
-              private_prompt1_q={private_prompt1_q}
-              setprivate_prompt1_q={setprivate_prompt1_q}
-              private_prompt1_a={private_prompt1_a}
-              setprivate_prompt1_a={setprivate_prompt1_a}
-              private_prompt2_q={private_prompt2_q}
-              setprivate_prompt2_q={setprivate_prompt2_q}
-              private_prompt2_a={private_prompt2_a}
-              setprivate_prompt2_a={setprivate_prompt2_a}
-              setModalVisible={setpromptsmodalVisible}
-            />
-          )}
-        </FullModal>
+        
 
         {/* Filter Modal */}
         <FullModal modalVisible={showFilter} setModalVisible={setshowFilter}>

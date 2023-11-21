@@ -15,12 +15,14 @@ import {
   setProfileRefresh,
   setProfiledata,
   setPromptFillingComplete,
+  setPromptFillingStart,
   setSessionExpired,
+  setUserLoggined,
 } from "../../../../store/reducers/authentication/authentication";
 import axios from "axios";
+import { useNavigation } from "@react-navigation/core";
 
 const ReferralCode = ({
-  setModalVisible,
   public_prompt1_q,
   public_prompt1_a,
   public_prompt2_q,
@@ -29,7 +31,10 @@ const ReferralCode = ({
   private_prompt1_a,
   private_prompt2_q,
   private_prompt2_a,
+  setpromptStep,
 }) => {
+
+  const navigation = useNavigation()
   const [referral_code, setreferral_code] = useState("");
   const [referral_code_blr, setreferral_code_blr] = useState(false);
   const profile_data = useSelector(
@@ -39,13 +44,15 @@ const ReferralCode = ({
     (state) => state.authentication.access_token
   );
 
-  const profile_refresh = useSelector(
-    (state) => state.authentication.profile_refresh
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
   );
 
   const [loading, setloading] = useState(false);
 
   const dispatch = useDispatch();
+
+ 
 
   const savePrompts = async () => {
     setloading(true);
@@ -104,8 +111,9 @@ const ReferralCode = ({
         };
         dispatch(setPromptFillingComplete(true));
         dispatch(setProfiledata(user_prof_datap));
-        dispatch(setProfileRefresh(!profile_refresh));
-        setModalVisible(false);
+        dispatch(setUserLoggined(true))
+        navigation.navigate('Pledge')
+
       } else if (status == 401) {
         dispatch(setSessionExpired(true));
       }
@@ -115,7 +123,10 @@ const ReferralCode = ({
   };
 
   const onNextPress = () => {
-    savePrompts();
+    if (is_network_connected) {
+      savePrompts();      
+    }
+
   };
 
   return (
@@ -134,9 +145,12 @@ const ReferralCode = ({
               {/*Form  Header */}
 
               <FormHeader
+              left_icon={true}
+              onPress={()=> setpromptStep(3)}
                 title="Tell us know how you got here"
                 para={`Let us know if someone referred you \n to us. We would like to reward you \n both with some cool premium \n features.`}
-                fontSize={2.53}
+                fontSize={2.1}
+                
               />
 
               {/* Inputs Container*/}
@@ -165,7 +179,7 @@ const ReferralCode = ({
               {/* Next Btn To Navigate to Next Form Components */}
               <FooterBtn
                 title={"Finish"}
-                disabled={false}
+                disabled={!is_network_connected}
                 onPress={onNextPress}
               />
             </FormWrapperFooter>

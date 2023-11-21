@@ -8,11 +8,20 @@ import FooterBtn from "../../../Buttons/FooterBtn";
 import fontFamily from "../../../../styles/fontFamily";
 import FormWrapper from "../../../wrappers/formWrappers/FormWrapper";
 import FastImage from "react-native-fast-image";
+import { useSelector } from "react-redux";
 
 const PromptIntro = ({ setpromptStep }) => {
+
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+  
   const onNextPress = () => {
-    setpromptStep(2);
+    if (is_network_connected) {
+      setpromptStep(2);      
+    }
   };
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -59,7 +68,7 @@ const PromptIntro = ({ setpromptStep }) => {
           <ErrorContainer error_msg="" />
 
           {/* Next Btn To Navigate to Next Form Components */}
-          <FooterBtn title={"Next"} disabled={false} onPress={onNextPress} />
+          <FooterBtn title={"Next"} disabled={!is_network_connected} onPress={onNextPress} />
         </FormWrapperFooter>
       </FormWrapper>
     </SafeAreaView>

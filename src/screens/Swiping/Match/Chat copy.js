@@ -79,7 +79,8 @@ import {
 import FastImage from "react-native-fast-image";
 import OffflineAlert from "../../../components/functions/OfflineAlert";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
-
+import { initialWindowMetrics } from "react-native-safe-area-context";
+const insets = initialWindowMetrics.insets;
 
 
 // Chat Bubble item
@@ -360,8 +361,8 @@ const ChatItem = ({
               </Text>
             </View>
           </View>
-        </Animated.View>
-{ show_tail &&
+
+          { show_tail &&
   <>
         {item[1] == 0 ? (
            
@@ -403,6 +404,8 @@ const ChatItem = ({
         
        )}
 </>}
+        </Animated.View>
+
        
 
 
@@ -741,6 +744,7 @@ console.log("getPrevChats")
       sckop.current = false;
       socket_con.current = false;
       setSocketOpen(false);
+      setconnectSocketS(false)
       dispatch(setSocketClose(true));
     };
 
@@ -909,6 +913,8 @@ console.log("getPrevChats")
   }, [chatlist]);
 
   useEffect(() => {
+    console.log("connectSocketS",connectSocketS)
+
     if (connectSocketS) {
       connectSocket();
     }
@@ -1076,7 +1082,11 @@ console.log("getPrevChats")
 
           let ttact = false;
 
-
+          console.log("\navg_min",avg_min)
+          console.log("mymsgs",mymsgs.length)
+          console.log("othmsgs",othmsgs.length)
+          console.log("mycount",mycount)
+          console.log("othcount",othcount)
 
           if (
             avg_min <= 5 &&
@@ -1186,6 +1196,7 @@ console.log("getPrevChats")
     }
 
     console.log("socket_con.current",socket_con.current)
+    
 
   }, [is_network_connected]);
 
@@ -1240,7 +1251,9 @@ console.log("getPrevChats")
           behavior="padding"
         >
           <View style={{ paddingHorizontal: rspW(5), paddingTop: rspH(2) }}>
+            {/* {false ? ( */}
             {profile.prof_rvl ? (
+
               <FormHeaderChat
                 title={truncateStr(
                   profile?.userprofile?.name.split(" ")[0],
@@ -1324,6 +1337,7 @@ console.log("getPrevChats")
           </View>
 
           <FlashList
+          decelerationRate={0.9}
             keyboardDismissMode="interactive"
             estimatedItemSize={100}
             data={chatlist}
@@ -1579,6 +1593,8 @@ onPress={() => {
       </SafeAreaView>
 
       {show_rvl_tut && (
+      // {true && (
+
         <>
           <View style={styles.mainTutCont}>
             <View style={styles.centralModalContMatch}>
@@ -1616,7 +1632,12 @@ onPress={() => {
             onPress={() => setmodalVisible(true)}
           >
             <FastImage
-              source={require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")}
+              source={
+                profile?.userprofile?.gender == "Man" ?
+                require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")
+              :
+              require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage2.png")
+              }
               style={styles.profilePhoto}
             />
           </View>
@@ -1730,7 +1751,6 @@ const styles = StyleSheet.create({
   // Match Chat Tut
   centralModalContMatch: {
     position: "absolute",
-    height: rspH(36),
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -1738,6 +1758,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
+    height: rspH(36),
+
+    // height: Platform.OS == 'ios'? rspH(31) + insets.top: rspH(36) + insets.bottom,
+    
   },
 
   // Tutorial Main Container
@@ -1753,8 +1777,10 @@ const styles = StyleSheet.create({
     marginTop: rspH(3),
   },
   centralModalText: {
+    // fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
+    // lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 2.98),
     fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
-    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 2.98),
+    lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 3.5),
     fontFamily: fontFamily.bold,
     color: colors.black,
   },
@@ -1780,13 +1806,14 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white,
+    backgroundColor: colors.white + "ff",
     alignItems: "center",
     justifyContent: "center",
   },
 
   profilePhotoHighCont: {
-    top: rspH(Platform.OS == "ios" ? 5.6 : 0.3),
+    // top: rspH(Platform.OS == "ios" ? 5.6 : 0.3),
+    top: Platform.OS == "ios" ? rspH(0.2) + insets.top : rspH(0.3),
     right: rspW(3),
     width: rspW(16),
     height: rspW(16),

@@ -33,6 +33,9 @@ const PublicPrompts = ({
   setpublic_prompt2_a,
 }) => {
   const prompts_list = useSelector((state) => state.allData.all_prompts);
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
 
   const [error, seterror] = useState("");
 
@@ -222,12 +225,18 @@ const PublicPrompts = ({
             <FooterBtn
               title={"Next"}
               disabled={
+                !is_network_connected ||
                 public_prompt1_q == "" ||
                 public_prompt1_a.length < 3 ||
                 public_prompt2_q == "" ||
                 public_prompt2_a.length < 3
               }
-              onPress={onNextPress}
+              onPress={() => {
+                if (is_network_connected) {
+                  onNextPress()  
+                }
+                
+              }}
             />
           </FormWrapperFooter>
         </FormWrapper>

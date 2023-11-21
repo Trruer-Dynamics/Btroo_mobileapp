@@ -76,7 +76,7 @@ const FormInputPhoneNumber = ({
       <View
         style={{
           position: "absolute",
-          top:Platform.OS == 'ios' ?  rspH(0.6) : rspH(0.6) ,
+          top:Platform.OS == 'ios' ?  rspH(0.7) : rspH(0.7) ,
           // backgroundColor:'yellow',
           paddingHorizontal: rspW(4),
         }}
@@ -91,8 +91,8 @@ const FormInputPhoneNumber = ({
           // backgroundColor:'yellow',
           flexDirection: "row",
           alignItems: "center",
-          paddingTop: value.length > 0 ? rspH(Platform.OS == "ios" ? 0.6 : 0.4) : 0,
-          // paddingTop: value.length > 0 ? rspH(Platform.OS == "ios" ? 0.6 : 0.4) - insets.top * 0.01 : 0,
+          // paddingTop: value.length > 0 ? rspH(Platform.OS == "ios" ? 0.6 : 0.4) : 0,
+          paddingTop: value.length > 0 ? rspH(1.56) : 0,
           width: "100%",
         }}
       >
@@ -102,7 +102,7 @@ const FormInputPhoneNumber = ({
             width: inputwidth,
             textAlign: textAlign,
             ...styles.input,
-            marginTop: value.length > 0 ? 10 : 0,
+            // marginTop: value.length > 0 ? rspH(1.2) : 0,
             paddingHorizontal: 0,
           }}
           maxLength={maxLength}

@@ -388,6 +388,7 @@ const MatchProfile = ({ route }) => {
             </View>
 
             <ScrollView
+            decelerationRate={0.9}
               showsVerticalScrollIndicator={false}
               bounces={false}
               style={{
@@ -601,6 +602,7 @@ const MatchProfile = ({ route }) => {
                     >
                       <Text style={styles.profileDetailContHeading}>Pets</Text>
                       <ScrollView
+                      decelerationRate={0.9}
                         bounces={false}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
@@ -642,6 +644,7 @@ const MatchProfile = ({ route }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Interests</Text>
                   <ScrollView
+                  decelerationRate={0.9}
                     bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
@@ -746,6 +749,7 @@ const MatchProfile = ({ route }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Languages</Text>
                   <ScrollView
+                  decelerationRate={0.9}
                     bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
@@ -792,8 +796,10 @@ const MatchProfile = ({ route }) => {
                     </Text>
                   </View>
                 )}
+       
+                {/* {profile.matchType == "New Match" && !profile.prof_rvl && ( */}
+                {!route.params?.fromchat  && (
 
-                {profile.matchType == "New Match" && !profile.prof_rvl && (
                   <FormWrapperFooter
                     containerStyle={{
                       marginTop: rspH(2.5),

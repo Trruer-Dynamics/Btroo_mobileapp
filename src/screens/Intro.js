@@ -45,7 +45,8 @@ const Intro = ({ route }) => {
       {isReady && (
         <View
           style={{
-            flex: 1,
+            // flex: 1,
+            height: scrn_height,
           }}
         >
           {/* Background Video */}
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
   backgroundVideo: {
     height: '100%',
     position: "absolute",
-    top: 0,
+    top:0,
     left: 0,
     alignItems: "stretch",
     bottom: 0,

@@ -29,6 +29,8 @@ import {
   setSelectedInterests,
   setSelectedLanguages,
 } from "../../../../store/reducers/filter/filter";
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import MultiSliderC from "../../../formComponents/MultiSliderC";
 
 const Filters = ({
   filterRefresh = false,
@@ -54,6 +56,13 @@ const Filters = ({
   const access_token = useSelector(
     (state) => state.authentication.access_token
   );
+
+  const [sliderValues, setSliderValues] = useState([18,  71]);
+
+  const handleValuesChange = (values) => {
+    // You can perform any logic here with the updated slider values
+    setSliderValues(values);
+  };
 
   const preferences_list = useSelector((state) => state.allData.all_genders);
   const languages_list = useSelector((state) => state.allData.all_languages);
@@ -84,7 +93,7 @@ const Filters = ({
   // Distance
   const [distance, setdistance] = useState(distance_l);
   const [distance_max, setdistance_max] = useState(200);
-  const [distance_min, setdistance_min] = useState(1);
+  const [distance_min, setdistance_min] = useState(20);
 
   //Languages
   const [languages, setlanguages] = useState("");
@@ -210,7 +219,10 @@ const Filters = ({
     if (screen_loaded && changes_made == false) {
       setchanges_made(true);
     }
+
   }, [distance, minage, maxage, minheight, maxheight]);
+
+
 
   return (
     <>
@@ -296,18 +308,19 @@ const Filters = ({
               {/* hr */}
               <View style={styles.hr} />
 
-              <SliderC
-                label={"Age"}
-                value={minage}
-                setvalue={setminage}
-                value2={maxage}
-                setvalue2={setmaxage}
-                multi={true}
-                unit={""}
-                min={18}
-                max={71}
-                rightUnit={"+"}
-              />
+      <MultiSliderC
+      label={"Age"}
+      value={minage}
+      setvalue={setminage}
+      value2={maxage}
+      setvalue2={setmaxage}
+      multi={true}
+      unit={""}
+      min={18}
+      max={71}
+      rightUnit={"+"}
+      
+      />
 
               {/* hr */}
               <View style={styles.hr} />

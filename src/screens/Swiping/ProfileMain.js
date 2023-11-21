@@ -404,6 +404,7 @@ const ProfileMain = ({ navigation }) => {
           </View>
 
           <ScrollView
+          decelerationRate={0.9}
             showsVerticalScrollIndicator={false}
             bounces={false}
             style={{
@@ -628,6 +629,7 @@ const ProfileMain = ({ navigation }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Pets</Text>
                   <ScrollView
+                  decelerationRate={0.9}
                     bounces={false}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
@@ -678,6 +680,7 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Interests</Text>
                 <ScrollView
+                decelerationRate={0.9}
                   bounces={false}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
@@ -728,6 +731,7 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Languages</Text>
                 <ScrollView
+                decelerationRate={0.9}
                   bounces={false}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal

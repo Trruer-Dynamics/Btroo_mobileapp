@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NetInfo from "@react-native-community/netinfo";
 import _ from "lodash";
 import { setNetworkConnect } from "./src/store/reducers/authentication/authentication";
+import Test from "./Test";
 
 AntDesign.loadFont()
   .then()
@@ -148,6 +149,7 @@ const App = () => {
   return (
     <View style={[styles.container]}>
       <Navigation />
+      {/* <Test/> */}
     </View>
   );
 };

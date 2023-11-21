@@ -85,6 +85,7 @@ const MobileNo = ({ navigation, route }) => {
         setshow_alert(true);
       }
     } catch (error) {
+      console.log("err",error)
       setloading(false);
     }
   };
@@ -124,6 +125,7 @@ const MobileNo = ({ navigation, route }) => {
 
   // To confirm to verify phone number
   const showConfirmDialog = async () => {
+
     return Alert.alert(
       "Verify Phone Number?",
       `+${selected_ph_code?.phone}  ${
@@ -150,7 +152,7 @@ const MobileNo = ({ navigation, route }) => {
     Keyboard.dismiss();
     if (ph_no.length > 0 && is_network_connected) {
       setclickBtn(true);
-
+console.log("Here3")
       // Open Otp Modal
       if (
         selected_ph_code_id == "IL" && ph_no.startsWith("0")
@@ -158,8 +160,10 @@ const MobileNo = ({ navigation, route }) => {
           : ph_no.length <= max_ph_no && ph_no.length >= min_ph_no
       ) {
         if (route.params.action != "signup") {
+          console.log("Here4")
           await checkUserAvailable();
         } else {
+   
           await showConfirmDialog();
         }
       }

@@ -99,8 +99,8 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
             screen: "Swiper",
           });
         } else {
-          dispatch(setUserLoggined(true));
-          navigation.navigate("Pledge");
+          // dispatch(setUserLoggined(true));
+          navigation.navigate("Prompts");
         }
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
@@ -188,7 +188,7 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
               <Text style={styles.btn_txt}>Retake</Text>
             </TouchableOpacity>
             <FooterBtn
-              title={"Finish"}
+              title={"Confirm"}
               disabled={!is_network_connected}
               onPress={()=>{
                 if (is_network_connected) {

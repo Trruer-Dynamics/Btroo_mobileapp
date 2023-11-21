@@ -1263,6 +1263,7 @@ console.log("getPrevChats")
                 onImgPress={() => {
                   navigation.navigate("MatchProfile", {
                     profile: profile,
+                    fromchat: true,
                   });
                 }}
                 onPress={() => {
@@ -1271,6 +1272,7 @@ console.log("getPrevChats")
                 onHeaderPress={() => {
                   navigation.navigate("MatchProfile", {
                     profile: profile,
+                    fromchat: true,
                   });
                 }}
               />
@@ -1287,6 +1289,7 @@ console.log("getPrevChats")
                 onHeadPress={() => {
                   navigation.navigate("MatchProfile", {
                     profile: profile,
+                    fromchat: true,
                   });
                 }}
                 rightComp={() => {
@@ -1337,7 +1340,8 @@ console.log("getPrevChats")
           </View>
 
           <FlashList
-            keyboardDismissMode="interactive"
+          decelerationRate={0.9}
+            keyboardDismissMode='none'
             estimatedItemSize={100}
             data={chatlist}
             contentContainerStyle={{
@@ -1349,6 +1353,7 @@ console.log("getPrevChats")
             keyboardShouldPersistTaps={
               Platform.OS == "android" ? "always" : "never"
             }
+            // keyboardShouldPersistTaps={"never"}
             renderItem={renderItem}
             keyExtractor={(_, index) => index}
             bouncesZoom={false}
@@ -1476,6 +1481,7 @@ console.log("getPrevChats")
               <View
                 style={{
                   ...styles.messageInputCont,
+                  bottom:0,
                   paddingVertical: rspH(Platform.OS == "ios" ? 1 : 0),
                 }}
               >

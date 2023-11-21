@@ -41,7 +41,7 @@ const Navigation = () => {
   );
 
   useLayoutEffect(() => {
-    console.log("current_screen",current_screen)
+    
     if (current_screen == "Swiper") {
       dispatch(setProfileRefresh(!profile_refresh));
     }

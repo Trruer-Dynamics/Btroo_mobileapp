@@ -176,6 +176,10 @@ const styles = StyleSheet.create({
     fontSize: rspF(2.02),
     textAlign: "center",
     fontFamily: fontFamily.regular,
+    lineHeight: rspF(2.2),
+    paddingVertical: 0,
+
+
   },
   item: {
     flexDirection: "row",

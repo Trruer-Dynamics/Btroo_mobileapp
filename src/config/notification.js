@@ -138,12 +138,12 @@ const NotificationController = (props) => {
   }, []);
  
   useLayoutEffect(() => {
-    console.log("current_screen ot",current_screen)
+
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
 
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
-     console.log("not data",data)
+   
       setnot_data(data);
  
       setrefresh(!refresh);
@@ -168,8 +168,7 @@ const NotificationController = (props) => {
 
 
       }
-      console.log("current_screen it",current_screen)
-      console.log("c_scrn",c_scrn.current)
+      
       if (data?.type == 'Reveal') {
         PushNotification.localNotification(notifObj); 
       }

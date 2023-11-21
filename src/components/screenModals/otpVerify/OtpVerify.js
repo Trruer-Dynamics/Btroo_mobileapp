@@ -265,7 +265,7 @@ const OtpVerify = ({
       let status_code = response.data.code;
 
       setloading(false);
-
+console.log("login status_code",status_code)
       if (status_code == 400) {
         Alert.alert(
           "",
@@ -342,15 +342,15 @@ const OtpVerify = ({
         );
 
         // Sets Prompts Filling status locally
-        dispatch(
-          setPromptFillingStart(user_data.userprofile.is_promptsfillingstarted)
-        );
+        // dispatch(
+        //   setPromptFillingStart(user_data.userprofile.is_promptsfillingstarted)
+        // );
 
-        dispatch(
-          setPromptFillingComplete(
-            user_data.userprofile.is_promptsfillingcomplete
-          )
-        );
+        // dispatch(
+        //   setPromptFillingComplete(
+        //     user_data.userprofile.is_promptsfillingcomplete
+        //   )
+        // );
 
         // Set Tutorials booleans values
         dispatch(setSwipeTut(!user_data.userprofile.is_swapping_tutorial_view));
@@ -376,7 +376,11 @@ const OtpVerify = ({
           nav_to = "PicUpload";
         } else if (!usr_prf.is_photoverified) {
           nav_to = "PhotoVerification";
-        } else {
+        } 
+        else if (!user_data.userprofile.is_promptsfillingcomplete) {
+          nav_to="Prompts"
+        }
+        else {
           dispatch(setUserLoggined(true));
           navigation.navigate("BottomTab", {
             screen: "Swiper",
@@ -406,7 +410,7 @@ const OtpVerify = ({
           mobile: "+" + ph_code + "" + ph_no,
         })
       );
-
+        console.log("Here2")
       if (action == "login") {
         userLogin(); // if action is login call login api
       } else {

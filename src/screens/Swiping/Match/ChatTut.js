@@ -267,9 +267,9 @@ const [show_alert, setshow_alert] = useState(false)
                   <TouchableOpacity
                     style={{ position: "absolute", right: 0, top: rspH(-1) }}
                     onPress={() => {
-                      navigation.navigate("MatchProfile", {
-                        profile: profile,
-                      });
+                      // navigation.navigate("MatchProfile", {
+                      //   profile: profile,
+                      // });
                     }}
                   >
                     <FastImage source={rvlimage} style={styles.profilePhoto} />

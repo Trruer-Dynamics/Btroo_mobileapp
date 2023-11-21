@@ -143,6 +143,7 @@ const ProfileRevealed = ({ route }) => {
               onPress={() => {
                 navigation.navigate("MatchProfile", {
                   profile: updated_prof,
+                  fromchat: true,
                 });
               }}
             />

@@ -18,6 +18,7 @@ import Splash from "../../screens/Splash";
 import { useSelector } from "react-redux";
 import Info from "../../components/screenComponents/settingScreen/Info";
 import ChatStack from "../../screens/Swiping/Match/ChatStack";
+import Prompts from "../../screens/SignUp/Prompts";
 
 const Stack = createStackNavigator();
 
@@ -55,6 +56,10 @@ const StackNav = () => {
         <Stack.Screen
           name="PhotoVerificationFinal"
           component={PhotoVerificationFinal}
+        />
+        <Stack.Screen
+        name="Prompts"
+        component={Prompts}
         />
 
         {/* Tutorial */}

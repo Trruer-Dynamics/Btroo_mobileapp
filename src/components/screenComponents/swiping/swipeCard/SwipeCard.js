@@ -1043,6 +1043,7 @@ getItemLayout={(data, index) => ({
               {/* Profile Details Area */}
 
               <ScrollView
+              decelerationRate={0.9}
                 style={styles.profileDetailsCont}
                 bounces={false}
                 showsVerticalScrollIndicator={false}
@@ -1201,6 +1202,7 @@ getItemLayout={(data, index) => ({
                       </Text>
                       <TouchableWithoutFeedback>
                         <ScrollView
+                        decelerationRate={0.9}
                           bounces={false}
                           style={{ marginTop: rspH(0.8) }}
                           horizontal
@@ -1243,13 +1245,14 @@ getItemLayout={(data, index) => ({
                           width: rspW(39.5),
                           marginLeft: rspW(2),
                           alignSelf: "flex-start",
-                          marginBottom: rspH(0.6),
+                          marginBottom: rspH(1.6),
                         }}
                       >
                         <Text style={styles.profileDetailContHeading}>
                           Pets
                         </Text>
                         <ScrollView
+                        decelerationRate={0.9}
                           bounces={false}
                           style={{ marginTop: rspH(0.8) }}
                           horizontal

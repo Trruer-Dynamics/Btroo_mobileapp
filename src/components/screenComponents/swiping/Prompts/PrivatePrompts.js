@@ -36,6 +36,10 @@ const PrivatePrompts = ({
   const [prp_blr, setprp_blr] = useState(false);
   const [error, seterror] = useState("");
 
+  const is_network_connected = useSelector(
+    (state) => state.authentication.is_network_connected
+  );
+
   const [private_prompt1_blr, setprivate_prompt1_blr] = useState(false);
   const [private_prompt1_q_id, setprivate_prompt1_q_id] = useState(0);
   const [private_prompt1_q_blr, setprivate_prompt1_q_blr] = useState(false);
@@ -85,6 +89,8 @@ const PrivatePrompts = ({
             {/*Form  Header */}
 
             <FormHeader
+            left_icon={true}
+            onPress={()=> setpromptStep(2)}
               title="Private Prompts"
               para={`Your Private Place. ${"\n"}${"\n"}This is more exclusive. The prompts ${"\n"}in this section will be visible only to ${"\n"}the people who you've been matched ${"\n"}with.`}
             />
@@ -215,12 +221,17 @@ const PrivatePrompts = ({
             <FooterBtn
               title={"Next"}
               disabled={
+                !is_network_connected ||
                 private_prompt1_q == "" ||
                 private_prompt1_a.length < 3 ||
                 private_prompt2_q == "" ||
                 private_prompt2_a.length < 3
               }
-              onPress={onNextPress}
+              onPress={()=> {
+                if (is_network_connected) {
+                  onNextPress()  
+                } 
+              }}
             />
           </FormWrapperFooter>
         </FormWrapper>

@@ -610,6 +610,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
           {/* Profile Details Area */}
           <ScrollView
+          decelerationRate={0.9}
             style={styles.profileDetailsCont}
             bounces={false}
             showsVerticalScrollIndicator={false}
@@ -735,6 +736,7 @@ const SwiperTut = ({ repeat_tut }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Interests</Text>
                 <ScrollView
+                decelerationRate={0.9}
                   style={{
                     marginTop: rspH(0.8),
                   }}
@@ -834,6 +836,7 @@ const SwiperTut = ({ repeat_tut }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Pets</Text>
                 <ScrollView
+                decelerationRate={0.9}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
@@ -1150,6 +1153,7 @@ const SwiperTut = ({ repeat_tut }) => {
                     }}
                   >
                     <ScrollView
+                    decelerationRate={0.9}
                       bounces={false}
                       showsVerticalScrollIndicator={true}
                       style={{
@@ -1283,6 +1287,7 @@ const SwiperTut = ({ repeat_tut }) => {
                             Interests
                           </Text>
                           <ScrollView
+                          decelerationRate={0.9}
                             style={{ marginTop: rspH(0.8) }}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -1367,6 +1372,7 @@ const SwiperTut = ({ repeat_tut }) => {
                             Pets
                           </Text>
                           <ScrollView
+                          decelerationRate={0.9}
                             style={{ marginTop: rspH(0.8) }}
                             horizontal
                             showsHorizontalScrollIndicator={false}

@@ -50,6 +50,10 @@ const SettingsScreen = ({ navigation, route }) => {
     (state) => state.authentication.is_network_connected
   );
 
+  const is_session_expired = useSelector(
+    (state) => state.authentication.is_session_expired
+  );
+
   const access_token = useSelector(
     (state) => state.authentication.access_token
   );
@@ -108,6 +112,7 @@ const SettingsScreen = ({ navigation, route }) => {
   const [contact, setcontact] = useState("");
 
   const updateShowProfile = async () => {
+    setshow_my_profile(!show_my_profile);
     const url =
       apiUrl + `show_profile_notification_update/${profile_data.user.id}`;
 
@@ -129,7 +134,7 @@ const SettingsScreen = ({ navigation, route }) => {
       let status = resp.data.status;
 
       if (resp.data.code == 200) {
-        setshow_my_profile(!show_my_profile);
+        // setshow_my_profile(!show_my_profile);
 
         let update_prof = {
           ...profile_data,
@@ -142,11 +147,16 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
+        
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 
   const updateKeepMatching = async () => {
+    setkeep_matching(!keep_matching);
+
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
 
@@ -168,7 +178,7 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        setkeep_matching(!keep_matching);
+        // setkeep_matching(!keep_matching);
 
         let update_prof = {
           ...profile_data,
@@ -181,11 +191,18 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
+     
+
       }
-    } catch (error) {}
+    } catch (error) {
+
+
+    }
   };
 
   const updateNewMessage = async () => {
+    setnew_message(!new_message);
+
     const url =
       apiUrl + `new_message_notification_update/${profile_data.user.id}`;
 
@@ -207,7 +224,7 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        setnew_message(!new_message);
+        // setnew_message(!new_message);
 
         let update_prof = {
           ...profile_data,
@@ -221,10 +238,14 @@ const SettingsScreen = ({ navigation, route }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 
   const updateNewMatch = async () => {
+    setnew_match(!new_match);
+
     const url =
       apiUrl + `new_match_notification_update/${profile_data.user.id}`;
 
@@ -244,9 +265,10 @@ const SettingsScreen = ({ navigation, route }) => {
       );
 
       let code = resp.data.code;
-
+     
       if (code == 200) {
-        setnew_match(!new_match);
+   
+        // setnew_match(!new_match);
 
         let update_prof = {
           ...profile_data,
@@ -259,11 +281,15 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
+
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 
   const updateProfileReveal = async () => {
+    setprofile_reveal(!profile_reveal);
     const url =
       apiUrl + `profile_reveal_notification_update/${profile_data.user.id}`;
 
@@ -285,7 +311,7 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        setprofile_reveal(!profile_reveal);
+        // setprofile_reveal(!profile_reveal);
 
         let update_prof = {
           ...profile_data,
@@ -297,11 +323,15 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
+        
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 
   const updateOthers = async () => {
+    setothers(!others);
     const url = apiUrl + `other_notification_update/${profile_data.user.id}`;
 
     const headers = {
@@ -322,7 +352,7 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        setothers(!others);
+        // setothers(!others);
 
         let update_prof = {
           ...profile_data,
@@ -335,8 +365,11 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
+        
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 
   const getContact = async () => {
@@ -354,11 +387,14 @@ const SettingsScreen = ({ navigation, route }) => {
       .catch((err) => {});
   };
 
+
   const showConfirmDialog = () => {
+    console.log("showConfirmDialog")
     return Alert.alert("Are You Sure?", "You want to logout", [
       {
         text: "Yes",
         onPress: () => {
+          console.log("here", is_session_expired)
           dispatch(setSessionExpired(true));
         },
       },
@@ -489,6 +525,7 @@ const SettingsScreen = ({ navigation, route }) => {
             }}
           >
             <ScrollView
+            decelerationRate={0.9}
               ref={scrollViewRef}
               showsVerticalScrollIndicator={false}
               style={{
@@ -610,6 +647,8 @@ const SettingsScreen = ({ navigation, route }) => {
                         onValueChange={() => {
                           updateShowProfile();
                         }}
+                        
+                        changeValueImmediately={true}
                         disabled={!is_network_connected}
                         circleSize={18}
                         barHeight={24}
@@ -618,7 +657,7 @@ const SettingsScreen = ({ navigation, route }) => {
                         backgroundInactive={colors.grey}
                         circleActiveColor={"#fff"}
                         circleInActiveColor={"#fff"}
-                        changeValueImmediately={true}
+                       
                         innerCircleStyle={{
                           alignItems: "center",
                           justifyContent: "center",
@@ -631,6 +670,8 @@ const SettingsScreen = ({ navigation, route }) => {
                         switchWidthMultiplier={2.5}
                         switchBorderRadius={12}
                       />
+
+                      
                     </View>
                     <View style={{ marginTop: rspH(1.8) }}>
                       <Text style={styles.para}>
@@ -842,6 +883,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       circleActiveColor={"#fff"}
                       circleInActiveColor={"#fff"}
                       changeValueImmediately={true}
+
                       innerCircleStyle={{
                         alignItems: "center",
                         justifyContent: "center",
