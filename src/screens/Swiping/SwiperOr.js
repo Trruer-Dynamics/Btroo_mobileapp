@@ -575,9 +575,6 @@ const SwiperOr = ({}) => {
         let resp_code = resp.data.code;
         
         let tmp =[...profiles]
-console.log("getFilterProfiles resp code", resp_code)
-        
-
         if (resp_code == 204) {
           setempty_profile_call(true);  
           if (profiles.length === 0) {
@@ -597,10 +594,7 @@ console.log("getFilterProfiles resp code", resp_code)
           let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
           
           if (new_profiles.length > 0) {
-            console.log("getFilterProfiles new profiles", new_profiles.length)
             
-            
-
             setloading2(false);
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
@@ -684,8 +678,6 @@ console.log("getFilterProfiles resp code", resp_code)
     if (profiles.length > 0) {
       let tmp = [...profiles]
       let rmv_prof = tmp[tmp.length - 1]
-      // console.log("Profile remove", rmv_prof)
-      console.log("Profile remove ","prf_id :",rmv_prof.id,"|| prf name : ",rmv_prof.name," || status",rmv_prof.profilestatus.profilestatus)
       tmp.splice(tmp.length - 1,1)
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
       if (tmp.length < 3 && !empty_profile_call) { 
@@ -732,38 +724,9 @@ console.log("getFilterProfiles resp code", resp_code)
       else{
         setwarn_step(2);
         setloading2(true);
-      }
-     
-    }
+      }}
    
   }, [profiles]);
-
-
-
- 
-
-
-  useEffect(() => {
-    console.log(Platform.OS,"\n prof length", profiles.length)
-    if (!loading2) {
-      for (let i = 0; i < profiles.length; i++) {
-        const prf = profiles[i];
-        let a_st = prf.profilestatus.profilestatus
-        let prf_status = 
-        a_st == 1 ? 'superliked' :
-        a_st == 2 ? 'new' :
-        a_st == 3 ? 'indemand' :
-        a_st == 4 ? 'liked' : 'Others'
-         
-
-        console.log("prf_id :",prf.id,"|| prf name : ",prf.name," || status",prf.profilestatus.profilestatus," - ",prf_status)
-      }  
-    }
-    
-  
-    
-  }, [profiles])
-  
 
   // save location data in frontend
   useLayoutEffect(() => {
@@ -984,14 +947,13 @@ const keyExtractor = (itm, index) => itm.created_on + index
           >
             <FlatList
               pagingEnabled
-              // getItemLayout={(data, index) => (
-              //   {
-              //     length: scrn_width, 
-              //     offset: scrn_width * index,
-              //     index
-              //   }
-              // )}
-
+              getItemLayout={(data, index) => (
+                {
+                  length: scrn_width, 
+                  offset: scrn_width * index,
+                  index
+                }
+              )}
               onLayout={()=>{
                 console.log("onLayout")
               }}

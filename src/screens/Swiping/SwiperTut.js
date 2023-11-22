@@ -375,7 +375,7 @@ const SwiperTut = ({ repeat_tut }) => {
 
   // Main Carosel Item Render Function
   const renderItem = ({ item }) => {
-    console.log("item",item)
+
     return(
     <Item item={item} masked={masked} setmodalVisible={setmodalVisible} />
     )
@@ -457,10 +457,7 @@ const SwiperTut = ({ repeat_tut }) => {
           {/* Profile Images Carousel */}
           <View style={styles.imageCont}>
             <FlatList
-            onLayout={()=> {
-              console.log("FlatList 1 layout")
-              console.log("pref_type",pref_type)
-            }}
+            
               data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}

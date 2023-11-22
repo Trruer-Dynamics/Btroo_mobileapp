@@ -43,11 +43,11 @@ const Prompts = () => {
         
         setloading(false);
         let resp_data = resp.data;
-        console.log("prompts resp.data.code",resp.data.code)
+
         if (resp.data.code == 200) {
           let act_prompts = resp_data.data.filter((c) => c.is_active == true);
           let act_promptsm = act_prompts.map((c) => [c.id, c.prompts]);
-          console.log("act_promptsm",act_promptsm.length)
+
           setall_prompts(act_prompts)
           dispatch(setAllPrompts(act_promptsm));
         } else if (resp.data.code == 401) {

@@ -19,7 +19,6 @@ const ChatStack = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      console.log("Chat Focus")
       c_scrn.current = 'Chat'
 
       dispatch(setCurrentScreen("Chat"));

@@ -388,12 +388,11 @@ const SettingsScreen = ({ navigation, route }) => {
 
 
   const showConfirmDialog = () => {
-    console.log("showConfirmDialog")
+
     return Alert.alert("Are You Sure?", "You want to logout", [
       {
         text: "Yes",
         onPress: () => {
-          console.log("here", is_session_expired)
           dispatch(setSessionExpired(true));
         },
       },

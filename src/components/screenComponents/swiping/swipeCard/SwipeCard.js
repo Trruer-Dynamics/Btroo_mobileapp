@@ -385,14 +385,10 @@ const SwipeCard = ({
     setmodalVisible(false)
     rightX.setValue(1);
     setactionType("Pass");
-    // Animated.timing(iconTranslateY, {
-    //   toValue: 1,
-    //   duration: 800,
-    //                         useNativeDriver: true,
-    //                       }).start();
+    
   }
   const PassPress = () =>{
-    console.log("Pass Pressed")
+
     setmodalVisible(false)
     handleChoiceButtons(0);
     swipeProfile(false, false);
@@ -422,7 +418,7 @@ const SwipeCard = ({
                           // }).start();
   }
   const SoftPress = () =>{
-    console.log("Softspot Pressed")
+    
     setmodalVisible(false)
     handleChoiceButtons(0);
                           swipeProfile(true, true);
@@ -451,7 +447,7 @@ const SwipeCard = ({
                           // }).start();
   }
   const FancyPress = () =>{
-    console.log("FancyPress")
+    
     setmodalVisible(false)
     handleChoiceButtons(0);
                           swipeProfile(true, false);
@@ -488,8 +484,6 @@ const SwipeCard = ({
       });
       let resp_data = response.data;
 
-      console.log("\nswappinguser resp_data",resp_data)
-
       // setloading(false);
       if (resp_data.code == 200) {
         setswippingcount(resp_data.data.swappingcountvalue);
@@ -498,7 +492,7 @@ const SwipeCard = ({
       }
 
     } catch (error) {
-      console.log("nswappinguser error",error)
+
       // setloading(false);
       if (is_network_connected) {
         dispatch(setSessionExpired(true));
@@ -571,9 +565,6 @@ const SwipeCard = ({
       setsuper_liked_profile(true);
     }
 
-    // console.log("\n\ncard_itm.image")
-
-
     let sorted_images = card_itm.image.sort((a, b) => {
       let pos1 = a.position;
       let pos2 = b.position;
@@ -582,10 +573,7 @@ const SwipeCard = ({
       return 0;
     });
 
-    for (let i = 0; i < sorted_images.length; i++) {
-      const pic = card_itm.image[i];
-      // console.log("\n",i+1,pic, card_itm.name)
-    }
+    
   }, []);
 
   return (
@@ -855,29 +843,11 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
-                       
-                          // rightX.setValue(1);
-                          // setactionType("Pass");
-                          // Animated.timing(iconTranslateY, {
-                          //   toValue: 1,
-                          //   duration: 800,
-                          //   useNativeDriver: true,
-                          // }).start();
-
-                          debouncePassPressIn()
-                          // PassPressIn()
-                        
-
+                      debouncePassPressIn()
                         }}
                         onPress={() => {
-
-                          //   console.log("Pass Pressed")
-                          // handleChoiceButtons(0);
-                          // swipeProfile(false, false);
-                          // setreport("");
                           debouncePassPress()
-                          // PassPress()
-                          
+          
                         }}
                       >
                         <FastImage
@@ -893,27 +863,12 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
-                      
-
-                          //   console.log("Softspot Pressed")
-                          // upY.setValue(1);
-                          // setactionType("Softspot");
-
-                          // Animated.timing(iconTranslateY, {
-                          //   toValue: 1,
-                          //   duration: 500,
-                          //   useNativeDriver: true,
-                          // }).start();
+                
                           debounceSoftPressIn()
                         
                         }}
                         onPress={() => {
-
-                          // handleChoiceButtons(0);
-                          // swipeProfile(true, true);
-                          // setreport("");
                           debounceSoftPress()
-                          
                         }}
                       >
                         <FastImage
@@ -929,15 +884,6 @@ const SwipeCard = ({
                       <TouchableOpacity
                         onPressIn={() => {
                           
-   
-                          //   console.log("Fancy Pressed")
-                          // leftX.setValue(1);
-                          // setactionType("Fancy");
-                          // Animated.timing(iconTranslateY, {
-                          //   toValue: 1,
-                          //   duration: 500,
-                          //   useNativeDriver: true,
-                          // }).start();
                           debounceFancyPressIn()
                         
                         }}

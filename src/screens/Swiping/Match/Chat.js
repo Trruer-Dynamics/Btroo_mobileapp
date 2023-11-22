@@ -266,7 +266,7 @@ const ChatItem = ({
                 let rply_itm_indx = chatlist.indexOf(rply_itm);
                 setrply_item_indx(rply_itm_indx);
                 let tmp_lis = [...chatlist];
-                console.log("here5")
+
                 setchatlist(tmp_lis);
                 setrply_animation(true);
                 scrollViewRef.current.scrollToIndex({
@@ -417,7 +417,7 @@ const ChatItem = ({
                 animation2.value = 0;
                 setrply_item_indx(null);
                 let tmp_lis = [...chatlist];
-                console.log("here8")
+
                 setchatlist(tmp_lis);
                 setrply_animation(false);
               }, 1800);
@@ -621,7 +621,7 @@ const Chat = ({ profile }) => {
 
   const getPrevChats = async (list = []) => {
     // setloading(true);
-console.log("getPrevChats")
+
     let url = apiUrl + "chat_history/" + profile.chat_id + "/";
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -678,19 +678,14 @@ console.log("getPrevChats")
           // remove messages with  null id
           let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
 
-          // for (let i = 0; i < tmp_lis.length; i++) {
-          //   const ele = tmp_lis[i];
-          //   console.log("ele",ele)
-          // }
-
           // if new message avalable load chats from backend or from local storage
           if (tmps.length > tmp_lis.length) {
             let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id);
-         console.log("here4")
+
             setchatlist(tmp);
             chatlist_ref.current = tmp;
           } else {
-            console.log("here3")
+            
             setchatlist(tmp_lis);
             chatlist_ref.current = tmp_lis;
           }
@@ -722,7 +717,6 @@ console.log("getPrevChats")
   };
 
   const connectSocket = async () => {
-    console.log("connectSocket", Platform.OS)
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
     ws.current.onopen = (e) => {
       console.log("Open");
@@ -765,7 +759,7 @@ console.log("getPrevChats")
             .trim();
 
           let day_t = !chatlist_ref.current.map((v) => v[6]).includes(day_tmp);
-          console.log("here2")
+
           setchatlist((prv) => [
             [
               data.message,
@@ -913,7 +907,6 @@ console.log("getPrevChats")
   }, [chatlist]);
 
   useEffect(() => {
-    console.log("connectSocketS",connectSocketS)
 
     if (connectSocketS) {
       connectSocket();
@@ -982,7 +975,6 @@ console.log("getPrevChats")
         tmpR[indx][4] = itm[4];
       }
       let tmp3 = tmpR.reverse();
-      console.log("here")
       setchatlist(tmp3);
 
       chatlist_ref.current = tmp;
@@ -1083,12 +1075,6 @@ console.log("getPrevChats")
 
           let ttact = false;
 
-          console.log("\navg_min",avg_min)
-          console.log("mymsgs",mymsgs.length)
-          console.log("othmsgs",othmsgs.length)
-          console.log("mycount",mycount)
-          console.log("othcount",othcount)
-
           if (
             avg_min <= 5 &&
             mymsgs.length >= 25 &&
@@ -1180,25 +1166,17 @@ console.log("getPrevChats")
     c_scrn.current = 'Chat'
     let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
  
-    // for (const itm of tmp) {
-      // console.log("itm",itm)
-    // }
     if (!is_network_connected && tmp.length > 0) {
-      console.log("here7")
       setchatlist(tmp);
       setloading(false);
     }
-    console.log("here34")
+
     if (is_network_connected &&
       socket_con.current != true
       // && drafts_msgs.length > 0
       ) {
-        console.log("Here")
       getPrevChats()
     }
-
-    console.log("socket_con.current",socket_con.current)
-    
 
   }, [is_network_connected]);
 
@@ -1533,7 +1511,7 @@ onPress={() => {
       profile.chat_id,
     ];
     tmp_lis.unshift(nitm);
-    console.log("here6")
+
     setchatlist(tmp_lis);
     chatlist_ref.current = tmp_lis;
     setreplySet(false);

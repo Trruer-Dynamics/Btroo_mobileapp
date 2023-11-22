@@ -79,7 +79,7 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const clearData = async () => {
-    console.log("clearData is_session_expired",is_session_expired)
+
     if (is_session_expired == true && user_loggined) {
       await resetNav();
       await removeToken();

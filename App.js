@@ -26,6 +26,7 @@ import NetInfo from "@react-native-community/netinfo";
 import _ from "lodash";
 import { setNetworkConnect } from "./src/store/reducers/authentication/authentication";
 import Test from "./Test";
+import messaging from '@react-native-firebase/messaging'
 
 AntDesign.loadFont()
   .then()
@@ -125,6 +126,8 @@ const App = () => {
       backHandler.remove();
     };
   }, []);
+
+
 
   const handleNetworkChange = (state) => {
     if (state.isConnected) {

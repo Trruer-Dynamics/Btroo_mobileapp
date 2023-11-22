@@ -91,7 +91,8 @@ const Draggable = ({
             (key) => positions.value[key] === newOrder
           );
 
-          // to dragging item overlap other grid list item
+          try {
+            // to dragging item overlap other grid list item
           if (idToSwap) {
             let actV = pic_list[idToSwap][1] != "";
             if (actV) {
@@ -187,6 +188,10 @@ const Draggable = ({
               }
             }
           }
+          } catch (error) {
+
+          }
+          
         }
       }
     },

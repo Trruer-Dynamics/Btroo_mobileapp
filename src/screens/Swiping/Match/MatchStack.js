@@ -18,7 +18,6 @@ const MatchStack = ({ route }) => {
   useFocusEffect(
 
     React.useCallback(() => {
-      console.log("Match Focused")
       c_scrn.current = 'Match'
       dispatch(setCurrentScreen("MatchScreen"));
 
