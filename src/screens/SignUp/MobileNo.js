@@ -176,8 +176,8 @@ console.log("Here3")
       // show Loader
       setloading(true);
 
-      // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      // setconfirm(confirmation);
+      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+      setconfirm(confirmation);
 
       setOtpShowBox(true);
 

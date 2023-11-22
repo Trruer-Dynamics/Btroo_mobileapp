@@ -135,6 +135,7 @@ const DATA2 = [
 ];
 
 const Item = ({ item, setmodalVisible, masked }) => {
+  
   const [img_load, setimg_load] = useState(false);
   return (
     <View style={{ ...styles.item, position: "relative" }}>
@@ -233,6 +234,7 @@ const SwiperTut = ({ repeat_tut }) => {
   const swipe_tut = useSelector((state) => state.tutorial.swipe_tut);
   const [swipe_tut_l, setswipe_tut_l] = useState(swipe_tut || repeat_tut);
   const [step, setstep] = useState(0);
+  const all_genders = useSelector((state) => state.allData.all_genders);
 
   const is_network_connected = useSelector(
     (state) => state.authentication.is_network_connected
@@ -362,14 +364,22 @@ const SwiperTut = ({ repeat_tut }) => {
         }
       })
       .catch((err) => {
+   
+        if (all_genders.length > 0) {
+          setgender_lis(all_genders);
+        }
+
         // setloading(false);
       });
   };
 
   // Main Carosel Item Render Function
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }) => {
+    console.log("item",item)
+    return(
     <Item item={item} masked={masked} setmodalVisible={setmodalVisible} />
-  );
+    )
+  }
 
   const renderItem2 = ({ item }) => (
     <Item2 item={item} setmodalVisible={setmodalVisible} />
@@ -381,7 +391,7 @@ const SwiperTut = ({ repeat_tut }) => {
         let w_gen = gender_lis.find((v) => v[1] == "Woman");
 
         let w_pref = profile_data.userpreferances.filter((v) => v == w_gen[0]);
-
+       
         if (w_pref.length > 0) {
           setpref_type("Woman");
         } else {
@@ -447,6 +457,10 @@ const SwiperTut = ({ repeat_tut }) => {
           {/* Profile Images Carousel */}
           <View style={styles.imageCont}>
             <FlatList
+            onLayout={()=> {
+              console.log("FlatList 1 layout")
+              console.log("pref_type",pref_type)
+            }}
               data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}

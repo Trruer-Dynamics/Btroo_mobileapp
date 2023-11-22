@@ -565,6 +565,7 @@ const SwiperOr = ({}) => {
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
+
     await axios
       .get(apiUrl + "filter_user/" + profile_data.user.id, {
         headers,
@@ -597,6 +598,9 @@ console.log("getFilterProfiles resp code", resp_code)
           
           if (new_profiles.length > 0) {
             console.log("getFilterProfiles new profiles", new_profiles.length)
+            
+            
+
             setloading2(false);
             setempty_profile_call(false);
             setprofiles((prevState) => [...new_profiles,...prevState]);
@@ -909,6 +913,7 @@ console.log("getFilterProfiles resp code", resp_code)
     }
 
   }
+
 
   useFocusEffect(
     React.useCallback(() => {

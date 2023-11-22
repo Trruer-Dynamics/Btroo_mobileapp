@@ -928,11 +928,12 @@ console.log("getPrevChats")
     };
   }, [connectSocketS]);
 
-  // useEffect(() => {
-  //   if (socket_con.current == false) {
-  //     connectSocket();
-  //   }
-  // }, [socket_con.current]);
+  useEffect(() => {
+    console.log("socket_con.current n",socket_con.current)
+    // if (socket_con.current == false) {
+    //   connectSocket();
+    // }
+  }, [socket_con.current, chats_msgs, chatlist]);
 
   
 
@@ -1178,20 +1179,21 @@ console.log("getPrevChats")
     dispatch(setCurrentScreen("Chat"));
     c_scrn.current = 'Chat'
     let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
-    console.log("tmp",tmp.length)
+ 
     // for (const itm of tmp) {
-    //   console.log("itm",itm)
+      // console.log("itm",itm)
     // }
     if (!is_network_connected && tmp.length > 0) {
       console.log("here7")
       setchatlist(tmp);
       setloading(false);
     }
-
+    console.log("here34")
     if (is_network_connected &&
-      socket_con.current == false
+      socket_con.current != true
       // && drafts_msgs.length > 0
       ) {
+        console.log("Here")
       getPrevChats()
     }
 

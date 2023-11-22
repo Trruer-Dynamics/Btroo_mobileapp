@@ -112,7 +112,7 @@ const SettingsScreen = ({ navigation, route }) => {
   const [contact, setcontact] = useState("");
 
   const updateShowProfile = async () => {
-    setshow_my_profile(!show_my_profile);
+    // setshow_my_profile(!show_my_profile);
     const url =
       apiUrl + `show_profile_notification_update/${profile_data.user.id}`;
 
@@ -155,7 +155,6 @@ const SettingsScreen = ({ navigation, route }) => {
   };
 
   const updateKeepMatching = async () => {
-    setkeep_matching(!keep_matching);
 
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
@@ -201,7 +200,7 @@ const SettingsScreen = ({ navigation, route }) => {
   };
 
   const updateNewMessage = async () => {
-    setnew_message(!new_message);
+
 
     const url =
       apiUrl + `new_message_notification_update/${profile_data.user.id}`;
@@ -244,7 +243,7 @@ const SettingsScreen = ({ navigation, route }) => {
   };
 
   const updateNewMatch = async () => {
-    setnew_match(!new_match);
+    
 
     const url =
       apiUrl + `new_match_notification_update/${profile_data.user.id}`;
@@ -289,7 +288,7 @@ const SettingsScreen = ({ navigation, route }) => {
   };
 
   const updateProfileReveal = async () => {
-    setprofile_reveal(!profile_reveal);
+
     const url =
       apiUrl + `profile_reveal_notification_update/${profile_data.user.id}`;
 
@@ -331,7 +330,7 @@ const SettingsScreen = ({ navigation, route }) => {
   };
 
   const updateOthers = async () => {
-    setothers(!others);
+    
     const url = apiUrl + `other_notification_update/${profile_data.user.id}`;
 
     const headers = {
@@ -645,6 +644,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       <Switch
                         value={show_my_profile}
                         onValueChange={() => {
+                          setshow_my_profile(!show_my_profile)
                           updateShowProfile();
                         }}
                         
@@ -693,6 +693,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       <Switch
                         value={keep_matching}
                         onValueChange={() => {
+                          setkeep_matching(!keep_matching);
                           updateKeepMatching();
                         }}
                         disabled={!is_network_connected}
@@ -761,6 +762,7 @@ const SettingsScreen = ({ navigation, route }) => {
                     <Switch
                       value={new_message}
                       onValueChange={() => {
+                        setnew_message(!new_message);
                         updateNewMessage();
                       }}
                       disabled={!is_network_connected}
@@ -798,6 +800,7 @@ const SettingsScreen = ({ navigation, route }) => {
                     <Switch
                       value={new_match}
                       onValueChange={() => {
+                        setnew_match(!new_match);
                         updateNewMatch();
                       }}
                       disabled={!is_network_connected}
@@ -835,6 +838,7 @@ const SettingsScreen = ({ navigation, route }) => {
                     <Switch
                       value={profile_reveal}
                       onValueChange={() => {
+                        setprofile_reveal(!profile_reveal);
                         updateProfileReveal();
                       }}
                       disabled={!is_network_connected}
@@ -872,6 +876,7 @@ const SettingsScreen = ({ navigation, route }) => {
                     <Switch
                       value={others}
                       onValueChange={() => {
+                        setothers(!others);
                         updateOthers();
                       }}
                       disabled={!is_network_connected}

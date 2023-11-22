@@ -570,6 +570,22 @@ const SwipeCard = ({
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
     }
+
+    // console.log("\n\ncard_itm.image")
+
+
+    let sorted_images = card_itm.image.sort((a, b) => {
+      let pos1 = a.position;
+      let pos2 = b.position;
+      if (pos1 < pos2) return -1;
+      if (pos1 > pos2) return 1;
+      return 0;
+    });
+
+    for (let i = 0; i < sorted_images.length; i++) {
+      const pic = card_itm.image[i];
+      // console.log("\n",i+1,pic, card_itm.name)
+    }
   }, []);
 
   return (
@@ -1245,7 +1261,7 @@ getItemLayout={(data, index) => ({
                           width: rspW(39.5),
                           marginLeft: rspW(2),
                           alignSelf: "flex-start",
-                          marginBottom: rspH(1.6),
+                          marginBottom: Platform.OS == 'ios'? rspH(1.6): rspH(2.6),
                         }}
                       >
                         <Text style={styles.profileDetailContHeading}>
