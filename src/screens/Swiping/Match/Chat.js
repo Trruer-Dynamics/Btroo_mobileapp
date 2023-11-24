@@ -787,6 +787,7 @@ const Chat = ({ profile }) => {
             ],
             ...chatlist_ref.current,
           ];
+          SeenMe();
         } catch (error) {}
       } else {
         // IF message send by user
@@ -1481,7 +1482,9 @@ const Chat = ({ profile }) => {
 
 <TouchableOpacity
 onPress={() => {
+
   if (msg.length > 0) {
+  setmsg("")  
     seticebreaker("");
 
     let ung_id = Math.random().toString(36).slice(2);
@@ -1538,7 +1541,7 @@ onPress={() => {
       ws.current.send(JSON.stringify(data));
     }
 
-    setmsg("");
+    // setmsg("");
     setactreplyID(null);
   }
 }}

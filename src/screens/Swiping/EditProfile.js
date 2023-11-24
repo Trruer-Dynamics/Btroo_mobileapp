@@ -732,7 +732,7 @@ const EditProfile = ({ navigation }) => {
 
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
+           Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",

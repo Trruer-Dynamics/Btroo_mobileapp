@@ -16,6 +16,7 @@ const FormHeader = ({
   title = "",
   para = "",
   fontSize = 2.7,
+  paraTp = 1.4,
   left_icon = false,
   iconColor = colors.blue,
   rightComp = null,
@@ -77,7 +78,9 @@ const FormHeader = ({
  
         {rightComp != null && rightComp()}
       </View>
-      <View style={{ paddingTop: rspH(1.4) }}>
+      <View style={{ 
+        paddingTop: rspH(paraTp) 
+        }}>
         <Text
           style={{
             ...styles.headerPara,

@@ -119,7 +119,7 @@ const Match = () => {
   };
 
   const getMatches = async () => {
-
+console.log("getMatches")
     const url = apiUrl + `activechatroomlist/`;
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -312,7 +312,7 @@ return a.position - b.position
 
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
+           Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",

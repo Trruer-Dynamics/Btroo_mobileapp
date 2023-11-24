@@ -66,7 +66,9 @@ const BottomTab = () => {
             // Border And Height of Bottom Tab is manage according to Platform android / ios
             marginTop: Platform.OS == "android" ? rspH(-1) : 0,
             paddingBottom: Platform.OS == "android" ? rspH(1) : rspH(2),
-            height: Platform.OS == "android" ? rspH(9) : rspF(9.26),
+            // height: Platform.OS == "android" ? rspH(9) : rspF(9.26),
+            height: Platform.OS == "android" ? rspH(9) : rspF(8),
+
             borderTopLeftRadius: Platform.OS == "ios" ? 0 : rspW(3.6),
             borderTopRightRadius: Platform.OS == "ios" ? 0 : rspW(3.6),
           },
@@ -93,7 +95,9 @@ const BottomTab = () => {
                     source={require("../../assets/images/BottomTab/Settings.jpg")}
                     tintColor={"#fff"}
                     // style={{ width: 33, height: 33 }}
-                    style={{ width: 31, height: 31 }}
+                    style={{ width: rspH(3.5), height: rspH(3.5) }}
+                    // style={{ width: 20, height: 20 }}
+
 
                   />
                 );
@@ -102,7 +106,10 @@ const BottomTab = () => {
                   <FastImage
                     source={require("../../assets/images/BottomTab/Settings.jpg")}
                     // style={{ width: 33, height: 33 }}
-                    style={{ width: 31 , height: 31 }}
+                    // style={{ width: 31 , height: 31 }}
+                    // style={{ width: rspH(7.8) , height: rspH(7.8) }}
+                    style={{ width: rspH(3.5) , height: rspH(3.5) }}
+
                   />
                 );
               }
@@ -128,7 +135,9 @@ const BottomTab = () => {
                   <FastImage
                     source={require("../../assets/images/BottomTab/swiper_active.png")}
                     // style={{ width: 43, height: 33 }}
-                    style={{ width: 41, height: 31 }}
+                    // style={{ width: 41, height: rspH(3.5) }}
+                    style={{ width: rspH(4.5), height: rspH(3.5) }}
+
 
                     resizeMode="stretch"
                   />
@@ -138,7 +147,7 @@ const BottomTab = () => {
                   <FastImage
                     source={require("../../assets/images/BottomTab/swiper.png")}
                     // style={{ width: 43, height: 33 }}
-                    style={{ width: 41, height: 31 }}
+                    style={{ width: rspH(4.5), height: rspH(3.5) }}
                     resizeMode="stretch"
                   />
                 );
@@ -166,7 +175,7 @@ const BottomTab = () => {
                     tintColor={"#fff"}
                     source={require("../../assets/images/BottomTab/Chat.jpg")}
                     // style={{ width: 34, height: 33 }}
-                    style={{ width: 32, height: 31 }}
+                    style={{ width: rspH(3.6), height: rspH(3.5) }}
                     resizeMode="stretch"
                   />
                 );
@@ -175,7 +184,7 @@ const BottomTab = () => {
                   <FastImage
                     source={require("../../assets/images/BottomTab/Chat.jpg")}
                     // style={{ width: 34, height: 33 }}
-                    style={{ width: 32, height: 31 }}
+                    style={{ width: rspH(3.6), height: rspH(3.5) }}
 
                     resizeMode="stretch"
                   />
@@ -204,7 +213,7 @@ const BottomTab = () => {
                     tintColor={"#fff"}
                     source={require("../../assets/images/BottomTab/Profile.jpg")}
                     // style={{ width: 33, height: 33 }}
-                    style={{ width: 30 , height: 30 }}
+                    style={{ width: rspH(3.4) , height: rspH(3.4) }}
                     resizeMode="stretch"
                   />
                 );
@@ -213,7 +222,7 @@ const BottomTab = () => {
                   <FastImage
                     source={require("../../assets/images/BottomTab/Profile.jpg")}
                     // style={{ width: 33, height: 33 }}
-                    style={{ width: 30 , height: 30 }}
+                    style={{ width: rspH(3.4) , height: rspH(3.4) }}
                     resizeMode="stretch"
                   />
                 );

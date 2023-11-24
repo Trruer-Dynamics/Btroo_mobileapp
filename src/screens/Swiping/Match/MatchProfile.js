@@ -392,13 +392,15 @@ const MatchProfile = ({ route }) => {
               showsVerticalScrollIndicator={false}
               bounces={false}
               style={{
-                marginTop: rspH(2.16),
+                // marginTop: rspH(2.16),
+                marginTop: rspH(1.9),
+                // backgroundColor:'red',
               }}
             >
               <View
                 style={{
                   paddingTop: rspH(1.2),
-                  paddingBottom: rspH(profile.prof_rvl ? 5 : 1),
+                  paddingBottom: rspH(profile.prof_rvl ? 5 : 0),
                   width: scrn_width / 1.2,
                 }}
               >
@@ -744,7 +746,7 @@ const MatchProfile = ({ route }) => {
                     ...styles.profileDetailsSubCont2,
                     ...styles.boxShadowCont,
                     paddingBottom: rspH(1.67),
-                    marginBottom: rspH(2),
+                    // marginBottom: rspH(2),
                   }}
                 >
                   <Text style={styles.profileDetailContHeading}>Languages</Text>

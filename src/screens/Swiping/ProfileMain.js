@@ -84,6 +84,8 @@ const ProfileMain = ({ navigation }) => {
 
   const { appStateVisible } = useContext(UserContext);
 
+  const scrollViewRef = useRef();
+
 
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
@@ -241,7 +243,7 @@ const ProfileMain = ({ navigation }) => {
       
       if (resp_data.code == 400) {
 
-           Alert.alert("Your account deleted!", "Please Contact admin at contact@btrooapp.com.", [
+           Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
             
             {
               text: "OK",
@@ -263,7 +265,7 @@ const ProfileMain = ({ navigation }) => {
   useFocusEffect(
     React.useCallback(() => {
       // Do something when the screen is focused
-
+      scrollViewRef.current.scrollTo({ y: 0, animated: true });
       let dob = new Date(profile_data?.userprofile?.dob);
 
       var today = new Date();
@@ -404,6 +406,7 @@ const ProfileMain = ({ navigation }) => {
           </View>
 
           <ScrollView
+          ref={scrollViewRef}
           decelerationRate={0.9}
             showsVerticalScrollIndicator={false}
             bounces={false}

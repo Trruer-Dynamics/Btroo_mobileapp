@@ -92,7 +92,7 @@ const FormInputPhoneNumber = ({
           flexDirection: "row",
           alignItems: "center",
           // paddingTop: value.length > 0 ? rspH(Platform.OS == "ios" ? 0.6 : 0.4) : 0,
-          paddingTop: value.length > 0 ? rspH(1.56) : 0,
+          // paddingTop: value.length > 0 ? rspH(1.56) : 0,
           width: "100%",
         }}
       >
@@ -102,7 +102,7 @@ const FormInputPhoneNumber = ({
             width: inputwidth,
             textAlign: textAlign,
             ...styles.input,
-            // marginTop: value.length > 0 ? rspH(1.2) : 0,
+            marginTop: value.length > 0 ? rspH(1.5) : 0,
             paddingHorizontal: 0,
           }}
           maxLength={maxLength}

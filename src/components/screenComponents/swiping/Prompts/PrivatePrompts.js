@@ -87,13 +87,14 @@ const PrivatePrompts = ({
           {/* Main Form UI */}
           <View>
             {/*Form  Header */}
-
+            <View style={{marginHorizontal: rspW(-5)}}>
             <FormHeader
             left_icon={true}
             onPress={()=> setpromptStep(2)}
               title="Private Prompts"
               para={`Your Private Place. ${"\n"}${"\n"}This is more exclusive. The prompts ${"\n"}in this section will be visible only to ${"\n"}the people who you've been matched ${"\n"}with.`}
             />
+            </View>
 
             <View
               style={{
@@ -135,7 +136,7 @@ const PrivatePrompts = ({
                         private_prompt1_a !== "" ? colors.white : "#F8F8F8",
                       borderColor:
                       private_prompt1_blr ?
-                      private_prompt1_a.length < 2 ?
+                      private_prompt1_a.length < 3 ?
                       colors.error:
                       colors.blue
                       :
@@ -188,7 +189,7 @@ const PrivatePrompts = ({
                         private_prompt2_a !== "" ? colors.white : "#F8F8F8",
                       borderColor:
                       private_prompt2_blr ?
-                      private_prompt2_a.length < 2 ?
+                      private_prompt2_a.length < 3 ?
                       colors.error:
                       colors.blue
                       :

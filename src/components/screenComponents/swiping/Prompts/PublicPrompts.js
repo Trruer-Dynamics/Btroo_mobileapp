@@ -137,7 +137,7 @@ const PublicPrompts = ({
                         public_prompt1_a !== ""  ? colors.white : "#F8F8F8",
                       borderColor:
                       public_prompt1_blr ?
-                      public_prompt1_a.length < 2 ?
+                      public_prompt1_a.length < 3 ?
                       colors.error:
                       colors.blue
                       :
@@ -193,7 +193,7 @@ const PublicPrompts = ({
                       borderColor:
 
                       public_prompt2_blr ?
-                      public_prompt2_a.length < 2 ?
+                      public_prompt2_a.length < 3 ?
                       colors.error:
                       colors.blue
                       :

@@ -143,16 +143,16 @@ const ReferralCode = ({
             {/* Main Form UI */}
             <View>
               {/*Form  Header */}
-
+            <View style={{marginHorizontal: rspW(-5)}}>
               <FormHeader
               left_icon={true}
               onPress={()=> setpromptStep(3)}
                 title="Tell us know how you got here"
                 para={`Let us know if someone referred you \n to us. We would like to reward you \n both with some cool premium \n features.`}
-                fontSize={2.1}
+                fontSize={2.2}
                 
               />
-
+</View>
               {/* Inputs Container*/}
               <View style={styles.inputCont}>
                 <FormInput

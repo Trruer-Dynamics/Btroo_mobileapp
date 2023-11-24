@@ -9,6 +9,7 @@ import fontFamily from "../../../../styles/fontFamily";
 import FormWrapper from "../../../wrappers/formWrappers/FormWrapper";
 import FastImage from "react-native-fast-image";
 import { useSelector } from "react-redux";
+import FormHeader from "../../../wrappers/formWrappers/FormHeader";
 
 const PromptIntro = ({ setpromptStep }) => {
 
@@ -26,15 +27,29 @@ const PromptIntro = ({ setpromptStep }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FormWrapper statusBarColor={colors.white} barStyle={"light-content"}>
+
+      {/* <FormHeader
+              title="Your Place to Shine!"
+              para={`Use this space to tell people a bit \n more about your personality. \n Select questions and answer them \n to your heart’s content.`}
+              paraTp={3.2}
+            /> */}
+
         <View>
+
+<FormHeader
+              title="Your Place to Shine!"
+              para={`Use this space to tell people a bit \n more about your personality. \n Select questions and answer them \n to your heart’s content.`}
+              paraTp={3.2}
+            />
+
           {/* Top Para */}
 
-          <Text style={{ ...styles.para, fontFamily: fontFamily.bold }}>
+          {/* <Text style={{ ...styles.para, fontFamily: fontFamily.bold }}>
             If you want to continue and to {"\n"} meet some other amazing people{" "}
             {"\n"} they will have to know a little more {"\n"} about you.
-          </Text>
+          </Text> */}
 
-          <Text style={styles.heading}>Your Place to Shine!</Text>
+          {/* <Text style={styles.heading}>Your Place to Shine!</Text>
 
           <View style={{}}>
             <Text style={{ ...styles.para, fontFamily: fontFamily.regular }}>
@@ -42,7 +57,7 @@ const PromptIntro = ({ setpromptStep }) => {
               personality. {"\n"} Select questions and answer them {"\n"} to
               your heart’s content.
             </Text>
-          </View>
+          </View> */}
 
           <FastImage
             source={require("../../../../assets/images/Swiping/Prompts/onlineDatinglllutration.png")}
