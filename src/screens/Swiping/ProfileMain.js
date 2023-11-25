@@ -409,7 +409,7 @@ const ProfileMain = ({ navigation }) => {
           ref={scrollViewRef}
           decelerationRate={0.9}
             showsVerticalScrollIndicator={false}
-            bounces={false}
+            bounces={true}
             style={{
               marginVertical: rspH(2.16),
             }}
@@ -441,6 +441,8 @@ const ProfileMain = ({ navigation }) => {
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/City.png")}
+                      // source={require("../../assets/images/AllPets/Bird.png")}
+
                       style={{
                         width: rspW(6.75),
                         height: rspH(3),

@@ -40,10 +40,14 @@ const StackNav = () => {
         <Stack.Screen name="Splash" component={Splash} />
 
         <Stack.Screen
+
           name="Intro"
           component={Intro}
           options={{
+            animationEnabled: true,
+            presentation: 'modal',
             ...TransitionPresets.ModalSlideFromBottomIOS,
+            cardOverlayEnabled: true,
           }}
         />
 

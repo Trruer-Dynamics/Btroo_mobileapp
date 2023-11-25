@@ -152,7 +152,6 @@ const App = () => {
   return (
     <View style={[styles.container]}>
       <Navigation />
-      {/* <Test/> */}
     </View>
   );
 };

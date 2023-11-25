@@ -1306,7 +1306,7 @@ const EditProfile = ({ navigation }) => {
                 //  backgroundColor: "red",
                 width: scrn_width,
               }}
-              bounces={false}
+              bounces={true}
               showsVerticalScrollIndicator={false}
               horizontal={false}
             >

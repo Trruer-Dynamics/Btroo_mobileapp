@@ -530,7 +530,7 @@ const SettingsScreen = ({ navigation, route }) => {
                 width: "100%",
                 
               }}
-              bounces={false}
+              // bounces={true}
             >
               <View>
                 {/* Banner */}

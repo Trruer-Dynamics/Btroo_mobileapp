@@ -42,11 +42,12 @@ const Intro = ({ route }) => {
   return (
     <>
       {/* Load video only when screen properly load */}
-      {isReady && (
+      {/* {isReady && ( */}
         <View
           style={{
             // flex: 1,
             height: scrn_height,
+            // backgroundColor:'#000',
           }}
         >
           {/* Background Video */}
@@ -183,7 +184,7 @@ const Intro = ({ route }) => {
             </View>
           </View>
         </View>
-      )}
+      {/* )} */}
     </>
   );
 };
@@ -192,6 +193,7 @@ export default Intro;
 
 const styles = StyleSheet.create({
   backgroundVideo: {
+    backgroundColor:'#fff',
     height: '100%',
     position: "absolute",
     top:0,
