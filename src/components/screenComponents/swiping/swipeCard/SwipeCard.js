@@ -61,6 +61,10 @@ import {
 } from "../../../../store/reducers/authentication/authentication";
 import FastImage from "react-native-fast-image";
 import _ from "lodash";
+import * as icn from '../../../../assets'
+import { initialWindowMetrics } from "react-native-safe-area-context";
+const insets = initialWindowMetrics.insets;
+
 
 // Profile cropped image Carousel item
 const Item = ({ item, setmodalVisible, super_liked_profile, index }) => {
@@ -525,6 +529,7 @@ const SwipeCard = ({
     let usr_interest = card_itm?.interest.map((v) => [
       v.interestmaster.id,
       v.interestmaster.iconblue,
+      v.interestmaster.interest
     ]);
 
     setinterest_list(usr_interest);
@@ -532,6 +537,7 @@ const SwipeCard = ({
     let usr_pets = card_itm?.pets.map((v) => [
       v.petmaster.id,
       v.petmaster.iconblue,
+      v.petmaster.pets
     ]);
 
     setpets_list(usr_pets);
@@ -732,7 +738,10 @@ const SwipeCard = ({
           <View style={{ ...styles.container }}>
             <View
               style={{
-                paddingBottom: rspH(Platform.OS == "ios" ? 14.2 : 9),
+                // paddingBottom: rspH(Platform.OS == "ios" ? 14.2 : 9),
+                paddingBottom: Platform.OS == "ios" ? rspH(7.7)+ insets.top : rspH(9),
+
+                // backgroundColor:'red',
               }}
             >
               {/* Show this area if Bio not enlarge */}
@@ -1005,6 +1014,7 @@ getItemLayout={(data, index) => ({
               {/* Profile Details Area */}
 
               <ScrollView
+
               decelerationRate={0.9}
                 style={styles.profileDetailsCont}
                 bounces={false}
@@ -1172,10 +1182,17 @@ getItemLayout={(data, index) => ({
                           scrollEventThrottle={1}
                         >
                           {interest_list.map((img, idx) => {
+                            let img1 = img[2]
+                            if (img[2].split(' ').length > 1) {
+                              console.log("item",img[2].split(' '))
+                              let itmlis = img[2].split(' ')
+                               img1 = itmlis.join('')
+                            }
                             return (
                               <FastImage
                                 key={idx}
-                                source={{ uri: img[1] }}
+                                // source={{ uri: img[1] }}
+                                source={icn[`${img1}Blue`]}
                                 style={styles.interestImage}
                                 resizeMode="cover"
                               />
@@ -1222,10 +1239,17 @@ getItemLayout={(data, index) => ({
                           showsHorizontalScrollIndicator={false}
                         >
                           {pets_list.map((img, indx) => {
+                            let img1 = img[2]
+                            if (img[2].split(' ').length > 1) {
+                              console.log("item",img[2].split(' '))
+                              let itmlis = img[2].split(' ')
+                               img1 = itmlis.join('')
+                            }
                             return (
                               <FastImage
                                 key={indx}
-                                source={{ uri: img[1] }}
+                                // source={{ uri: img[1] }}
+                                source={icn[`${img1}Blue`]}
                                 style={styles.interestImage}
                                 resizeMode="cover"
                               />
@@ -1396,6 +1420,7 @@ const styles = StyleSheet.create({
     width: rspW(86),
     height: scrn_height,
     marginTop: rspH(3.4),
+
   },
   profileDetailsSubCont: {
     width: rspW(82),

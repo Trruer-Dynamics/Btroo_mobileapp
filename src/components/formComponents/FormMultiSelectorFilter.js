@@ -26,8 +26,18 @@ import ADIcon from "react-native-vector-icons/AntDesign";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import FooterBtn from "../Buttons/FooterBtn";
 import FastImage from "react-native-fast-image";
+import * as icn from '../../assets'
 
-const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
+const Item = ({ item, onPress, selected_list, selected_lis2, multi }) =>{ 
+  console.log("item",item[1])
+  let img1 = item[1]
+
+  if (item[1].split(' ').length > 1) {
+    console.log("item",item[1].split(' '))
+    let itmlis = item[1].split(' ')
+     img1 = itmlis.join('')
+  }
+  return(
   <TouchableOpacity
     onPress={onPress}
     style={{
@@ -41,9 +51,13 @@ const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
   >
     {multi && (
       <FastImage
-        source={{
-          uri: selected_lis2.indexOf(item[0]) > -1 ? item[2] : item[3],
-        }}
+        // source={{
+        //   uri: selected_lis2.indexOf(item[0]) > -1 ? item[2] : item[3],
+        // }}
+
+        source={selected_lis2.indexOf(item[0]) > -1 ?  icn[`${img1}Blue`] : icn[`${img1}Gray`]}
+  
+
         style={{
           width: rspW(5.1),
           height: rspW(5.1),
@@ -55,6 +69,7 @@ const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => (
     <Text style={[styles.title, { color: colors.black }]}>{item[1]}</Text>
   </TouchableOpacity>
 );
+}
 
 const FormMultiSelectorFilter = ({
   search = true,

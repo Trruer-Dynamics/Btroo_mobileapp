@@ -47,7 +47,7 @@ const Intro = ({ route }) => {
           style={{
             // flex: 1,
             height: scrn_height,
-            // backgroundColor:'#000',
+            backgroundColor:'#fff',
           }}
         >
           {/* Background Video */}

@@ -51,6 +51,7 @@ import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 import { UserContext } from "../../../context/user";
 import OffflineAlert from "../../../components/functions/OfflineAlert";
+import * as icn from '../../../assets'
 
 
 const Item2 = ({ item }) => {
@@ -218,6 +219,7 @@ const MatchProfile = ({ route }) => {
       let usr_interest = profile?.userprofile?.interest.map((v) => [
         v.id,
         v.interestmaster.iconblue,
+        v.interestmaster.interest
       ]);
 
       setinterest_list(usr_interest);
@@ -225,6 +227,7 @@ const MatchProfile = ({ route }) => {
       let usr_pets = profile?.userprofile?.pets.map((v) => [
         v.id,
         v.petmaster.iconblue,
+        v.petmaster.pets
       ]);
 
       setpets_list(usr_pets);
@@ -393,15 +396,16 @@ const MatchProfile = ({ route }) => {
               bounces={false}
               style={{
                 // marginTop: rspH(2.16),
-                marginTop: rspH(1.9),
+                marginTop: rspH(1.6),
                 // backgroundColor:'red',
               }}
             >
               <View
                 style={{
                   paddingTop: rspH(1.2),
-                  paddingBottom: rspH(profile.prof_rvl ? 5 : 0),
+                  paddingBottom: profile.prof_rvl ? rspH(5): rspH(0.5),
                   width: scrn_width / 1.2,
+                  // backgroundColor:'red',
                 }}
               >
                 <View
@@ -611,10 +615,16 @@ const MatchProfile = ({ route }) => {
                         showsHorizontalScrollIndicator={false}
                       >
                         {pets_list.map((img, indx) => {
+                          let img1 = img[2]
+                          if (img[2].split(' ').length > 1) {
+                            console.log("item",img[2].split(' '))
+                            let itmlis = img[2].split(' ')
+                             img1 = itmlis.join('')
+                          }
                           return (
                             <FastImage
                               key={indx}
-                              source={{ uri: img[1] }}
+                              source={icn[`${img1}Blue`]}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
@@ -653,10 +663,18 @@ const MatchProfile = ({ route }) => {
                     showsHorizontalScrollIndicator={false}
                   >
                     {interest_list.map((img, idx) => {
+                      let img1 = img[2]
+                      if (img[2].split(' ').length > 1) {
+                        console.log("item",img[2].split(' '))
+                        let itmlis = img[2].split(' ')
+                         img1 = itmlis.join('')
+                      }
                       return (
                         <FastImage
                           key={idx}
-                          source={{ uri: img[1] }}
+                          source={icn[`${img1}Blue`]}
+                          // source={{ uri: img[1] }}
+
                           style={styles.interestImage}
                           resizeMode="cover"
                         />

@@ -32,6 +32,8 @@ import {
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import MultiSliderC from "../../../formComponents/MultiSliderC";
 
+
+
 const Filters = ({
   filterRefresh = false,
   setfilterRefresh = null,

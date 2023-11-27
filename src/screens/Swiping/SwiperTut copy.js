@@ -1156,9 +1156,11 @@ const SwiperTut = ({ repeat_tut }) => {
                 {step == 4 && (
                   <View
                     style={{
-                      marginTop:  Platform.OS == 'ios'? rspH(47.1) + insets.top: rspH(48) + insets.bottom,
-                      // marginTop: rspH(52),
+                      // marginTop:  Platform.OS == 'ios'? rspH(48.5) + insets.bottom: rspH(48) + insets.bottom,
+                      marginTop:  Platform.OS == 'ios'? rspH(47.2) + insets.top: rspH(48) + insets.bottom,
 
+                      // marginTop: rspH(52),
+                      // bottom: 0,
                       alignSelf: "center",
                       ...styles.scrollModalCont,
                     }}
@@ -1169,6 +1171,7 @@ const SwiperTut = ({ repeat_tut }) => {
                       showsVerticalScrollIndicator={true}
                       style={{
                         ...styles.scrollModalCont,
+                        backgroundColor:'red'
                       }}
                     >
                       <View
@@ -1646,7 +1649,11 @@ const styles = StyleSheet.create({
   //Tutorial Scroll Modal
   scrollModalCont: {
     // height: rspH(38.74),
-    height: Platform.OS == 'ios'? rspH(42.6) - insets.bottom: rspH(43.1) - insets.bottom ,
+    // height: Platform.OS == 'ios'? rspH(42.6) - insets.bottom: rspH(43.1) - insets.bottom ,
+    height: Platform.OS == 'ios'? rspH(44) - insets.bottom: rspH(43.1) - insets.bottom ,
+    // height: Platform.OS == 'ios'? rspH(34.9) + insets.top: rspH(43.1) - insets.bottom ,
+
+
     width: rspW(91.8),
     borderRadius: rspW(4),
     backgroundColor: colors.white,

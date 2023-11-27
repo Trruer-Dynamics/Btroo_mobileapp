@@ -1156,7 +1156,7 @@ const SwiperTut = ({ repeat_tut }) => {
                 {step == 4 && (
                   <View
                     style={{
-                      marginTop:  Platform.OS == 'ios'? rspH(48.5) + insets.bottom: rspH(48) + insets.bottom,
+                      marginTop:  Platform.OS == 'ios'? rspH(48.5) + insets.top: rspH(48) + insets.bottom,
                       // marginTop: rspH(52),
 
                       alignSelf: "center",
@@ -1377,6 +1377,7 @@ const SwiperTut = ({ repeat_tut }) => {
                             ...styles.profileDetailsSubCont2,
                             ...styles.boxShadowCont,
                             width: rspW(39.5),
+                            // marginBottom: insets.top/3,
                           }}
                         >
                           <Text style={styles.profileDetailContHeading}>
@@ -1647,7 +1648,9 @@ const styles = StyleSheet.create({
   scrollModalCont: {
     // height: rspH(38.74),
     // height: Platform.OS == 'ios'? rspH(42.6) - insets.bottom: rspH(43.1) - insets.bottom ,
-    height: Platform.OS == 'ios'? rspH(44) - insets.bottom: rspH(43.1) - insets.bottom ,
+    // height: Platform.OS == 'ios'? rspH(42.7) - insets.bottom: rspH(43.1) - insets.bottom ,
+    height: Platform.OS == 'ios'? rspH(44) - insets.top: rspH(43.1) - insets.bottom ,
+
 
     width: rspW(91.8),
     borderRadius: rspW(4),

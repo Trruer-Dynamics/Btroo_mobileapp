@@ -24,6 +24,7 @@ import fontFamily from "../../styles/fontFamily";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Backward,
+  BirdBlue,
   DrinkingNo,
   DrinkingYes,
   MarijuanaNo,
@@ -31,6 +32,7 @@ import {
   SmokingNo,
   SmokingYes,
 } from "../../assets";
+import * as icn from '../../assets'
 import { useFocusEffect } from "@react-navigation/native";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import truncateStr from "../../components/functions/truncateStr";
@@ -85,6 +87,10 @@ const ProfileMain = ({ navigation }) => {
   const { appStateVisible } = useContext(UserContext);
 
   const scrollViewRef = useRef();
+  const scrollPetsRef = useRef();
+  const scrollInterestsRef = useRef();
+  const scrollLanguagesRef = useRef();
+
 
 
   const profile_data = useSelector(
@@ -266,6 +272,10 @@ const ProfileMain = ({ navigation }) => {
     React.useCallback(() => {
       // Do something when the screen is focused
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
+      scrollPetsRef.current.scrollTo({ y: 0, animated: true });
+      scrollInterestsRef.current.scrollTo({ y: 0, animated: true });
+      scrollLanguagesRef.current.scrollTo({ y: 0, animated: true });
+
       let dob = new Date(profile_data?.userprofile?.dob);
 
       var today = new Date();
@@ -283,9 +293,11 @@ const ProfileMain = ({ navigation }) => {
 
       setlanguages(lang_tmp);
 
+      // console.log(profile_data?.userpets.map(v => v))
       let usr_pets = profile_data?.userpets.map((v) => [
         v.petmaster.id,
         v.petmaster.iconblue,
+        v.petmaster.pets
       ]);
 
       setpets_list(usr_pets);
@@ -293,8 +305,9 @@ const ProfileMain = ({ navigation }) => {
       let usr_interest = profile_data?.userinterest.map((v) => [
         v.interestmaster.id,
         v.interestmaster.iconblue,
+        v.interestmaster.interest
       ]);
-
+     
       setinterest_list(usr_interest);
       let actv = profile_imgs.filter((v) => v[0] != "");
       setactive_prf_imgs(actv);
@@ -441,7 +454,7 @@ const ProfileMain = ({ navigation }) => {
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/City.png")}
-                      // source={require("../../assets/images/AllPets/Bird.png")}
+                      
 
                       style={{
                         width: rspW(6.75),
@@ -639,20 +652,32 @@ const ProfileMain = ({ navigation }) => {
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
+                    ref={scrollPetsRef}
                   >
                     {pets_list.map((img, indx) => {
+                      console.log("img",img[2])
+
+                      let img1 = img[2]
+                      if (img[2].split(' ').length > 1) {
+                        console.log("item",img[2].split(' '))
+                        let itmlis = img[2].split(' ')
+                         img1 = itmlis.join('')
+                      }
+
                       return (
                         <View key={indx}>
                           {Platform.OS == "ios" ? (
                             <Image
-                              source={{ uri: img[1] }}
+                              // source={{ uri: img[1] }}
+                              source={icn[`${img[2]}Blue`]}
+                              // source={BirdBlue}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
                           ) : (
                             <FastImage
                               useLastImageAsDefaultSource
-                              source={{ uri: img[1] }}
+                              source={{ uri: img1 }}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
@@ -690,13 +715,23 @@ const ProfileMain = ({ navigation }) => {
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
+                  ref={scrollInterestsRef}
                 >
                   {interest_list.map((img, idx) => {
+                    console.log("img",img[2])
+
+                    let img1 = img[2]
+                    if (img[2].split(' ').length > 1) {
+                      console.log("item",img[2].split(' '))
+                      let itmlis = img[2].split(' ')
+                       img1 = itmlis.join('')
+                    }
                     return (
                       <View key={idx}>
                         {Platform.OS == "ios" ? (
                           <Image
-                            source={{ uri: img[1] }}
+                            // source={{ uri: img[1] }}
+                            source={icn[`${img1}Blue`]}
                             style={styles.interestImage}
                             resizeMode="cover"
                           />
@@ -741,6 +776,7 @@ const ProfileMain = ({ navigation }) => {
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
+                  ref={scrollLanguagesRef}
                 >
                   {languages.map((lng, idx) => {
                     return (

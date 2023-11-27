@@ -45,9 +45,10 @@ const StackNav = () => {
           component={Intro}
           options={{
             animationEnabled: true,
-            presentation: 'modal',
+            presentation: 'transparentModal',
             ...TransitionPresets.ModalSlideFromBottomIOS,
             cardOverlayEnabled: true,
+          
           }}
         />
 

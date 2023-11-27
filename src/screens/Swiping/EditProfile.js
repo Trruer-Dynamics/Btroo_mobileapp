@@ -807,7 +807,7 @@ const EditProfile = ({ navigation }) => {
             v.iconblue,
             v.icongrey,
           ]);
-
+          console.log("tmp_lis",tmp_lis)
           setinterests_list(tmp_lis);
         } else {
           console.warn("Error occur while getInterests");
