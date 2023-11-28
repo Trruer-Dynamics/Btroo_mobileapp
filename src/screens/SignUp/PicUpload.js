@@ -156,7 +156,6 @@ const PicUpload = ({ navigation, route }) => {
     let tup = pic_list.filter((v) => v[0] != "").length;
     if (tup >= 3) {
       changeImgPosition();
-      // confirmImageUploads();
     }
   };
 
@@ -351,7 +350,6 @@ const PicUpload = ({ navigation, route }) => {
 
         setpic_list(tmp_lst);
         dispatch(setProfileImgs(tmp_lst));
-        // setrefresh(!refresh);
 
         setloading(false);
       } else if (code == 401) {
@@ -421,7 +419,6 @@ const PicUpload = ({ navigation, route }) => {
         setpic_list(tmp_lis);
 
         dispatch(setProfileImgs(tmp_lis));
-        // setrefresh(!refresh);
 
         setloading(false);
       } else if (code == 401) {

@@ -29,7 +29,7 @@ const FormHeaderChatN = ({
           position: "relative",
           justifyContent: "center",
           width: "100%",
-          // backgroundColor:'green',
+
         }}
       >
         {left_icon && (
@@ -42,16 +42,9 @@ const FormHeaderChatN = ({
               justifyContent: "center",
               top: -rspW(1),
               alignItems: "center",
-              // height: rspW(7.6),
-              // width: rspW(7.6),
-              // borderRadius: rspW(3.8),
-
               height: rspW(9.6),
               width: rspW(9.6),
-              // borderRadius: rspW(3.8),
               borderRadius: rspW(5.3),
-
-          // backgroundColor:'red',
 
             }}
             onPress={() => {

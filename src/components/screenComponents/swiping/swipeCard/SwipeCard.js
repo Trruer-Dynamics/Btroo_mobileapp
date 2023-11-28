@@ -109,7 +109,6 @@ const Item = ({ item, setmodalVisible, super_liked_profile, index }) => {
               <FastImage
                 source={require("../../../../assets/images/Swiping/Masked/Exclude_2.png")}
                 style={{
-                  // width: rspW(89),
                   width: rspW(88),
 
                   height: rspH(42.2),
@@ -414,12 +413,6 @@ const SwipeCard = ({
                           
                           upY.setValue(1);
                           setactionType("Softspot");
-
-                          // Animated.timing(iconTranslateY, {
-                          //   toValue: 1,
-                          //   duration: 500,
-                          //   useNativeDriver: true,
-                          // }).start();
   }
   const SoftPress = () =>{
     
@@ -444,11 +437,6 @@ const SwipeCard = ({
     setmodalVisible(false)
                           leftX.setValue(1);
                           setactionType("Fancy");
-                          // Animated.timing(iconTranslateY, {
-                          //   toValue: 1,
-                          //   duration: 500,
-                          //   useNativeDriver: true,
-                          // }).start();
   }
   const FancyPress = () =>{
     
@@ -487,8 +475,6 @@ const SwipeCard = ({
         headers,
       });
       let resp_data = response.data;
-
-      // setloading(false);
       if (resp_data.code == 200) {
         setswippingcount(resp_data.data.swappingcountvalue);
       } else if (resp_data.code == 401) {
@@ -496,8 +482,6 @@ const SwipeCard = ({
       }
 
     } catch (error) {
-
-      // setloading(false);
       if (is_network_connected) {
         dispatch(setSessionExpired(true));
       }
@@ -547,9 +531,7 @@ const SwipeCard = ({
     if (modalVisible) {
       dispatch(setStatusBarArgs({ barStyle: "light-content" }));
 
-      if (Platform.OS == "android") {
-        // StatusBar.setTranslucent(false);
-      }
+      
     } else {
       dispatch(
         setStatusBarArgs({ barStyle: "dark-content", backgroundColor: "#fff" })
@@ -738,10 +720,8 @@ const SwipeCard = ({
           <View style={{ ...styles.container }}>
             <View
               style={{
-                // paddingBottom: rspH(Platform.OS == "ios" ? 14.2 : 9),
-                paddingBottom: Platform.OS == "ios" ? rspH(7.7)+ insets.top : rspH(9),
 
-                // backgroundColor:'red',
+                paddingBottom: Platform.OS == "ios" ? rspH(7.7)+ insets.top : rspH(9),
               }}
             >
               {/* Show this area if Bio not enlarge */}
@@ -897,10 +877,6 @@ const SwipeCard = ({
                         
                         }}
                         onPress={() => {
-
-                          // handleChoiceButtons(0);
-                          // swipeProfile(true, false);
-                          // setreport("");
                           debounceFancyPress()
                           
                         }}
@@ -1184,14 +1160,13 @@ getItemLayout={(data, index) => ({
                           {interest_list.map((img, idx) => {
                             let img1 = img[2]
                             if (img[2].split(' ').length > 1) {
-                              console.log("item",img[2].split(' '))
                               let itmlis = img[2].split(' ')
                                img1 = itmlis.join('')
                             }
                             return (
                               <FastImage
                                 key={idx}
-                                // source={{ uri: img[1] }}
+        
                                 source={icn[`${img1}Blue`]}
                                 style={styles.interestImage}
                                 resizeMode="cover"
@@ -1241,14 +1216,12 @@ getItemLayout={(data, index) => ({
                           {pets_list.map((img, indx) => {
                             let img1 = img[2]
                             if (img[2].split(' ').length > 1) {
-                              console.log("item",img[2].split(' '))
                               let itmlis = img[2].split(' ')
                                img1 = itmlis.join('')
                             }
                             return (
                               <FastImage
                                 key={indx}
-                                // source={{ uri: img[1] }}
                                 source={icn[`${img1}Blue`]}
                                 style={styles.interestImage}
                                 resizeMode="cover"
@@ -1488,7 +1461,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1496,7 +1468,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
   habitsImage: {
     width: rspW(10.1),

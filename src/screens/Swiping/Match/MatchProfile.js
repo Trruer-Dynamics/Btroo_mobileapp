@@ -395,9 +395,7 @@ const MatchProfile = ({ route }) => {
               showsVerticalScrollIndicator={false}
               bounces={false}
               style={{
-                // marginTop: rspH(2.16),
                 marginTop: rspH(1.6),
-                // backgroundColor:'red',
               }}
             >
               <View
@@ -405,7 +403,6 @@ const MatchProfile = ({ route }) => {
                   paddingTop: rspH(1.2),
                   paddingBottom: profile.prof_rvl ? rspH(5): rspH(0.5),
                   width: scrn_width / 1.2,
-                  // backgroundColor:'red',
                 }}
               >
                 <View
@@ -617,7 +614,6 @@ const MatchProfile = ({ route }) => {
                         {pets_list.map((img, indx) => {
                           let img1 = img[2]
                           if (img[2].split(' ').length > 1) {
-                            console.log("item",img[2].split(' '))
                             let itmlis = img[2].split(' ')
                              img1 = itmlis.join('')
                           }
@@ -665,7 +661,6 @@ const MatchProfile = ({ route }) => {
                     {interest_list.map((img, idx) => {
                       let img1 = img[2]
                       if (img[2].split(' ').length > 1) {
-                        console.log("item",img[2].split(' '))
                         let itmlis = img[2].split(' ')
                          img1 = itmlis.join('')
                       }
@@ -673,8 +668,6 @@ const MatchProfile = ({ route }) => {
                         <FastImage
                           key={idx}
                           source={icn[`${img1}Blue`]}
-                          // source={{ uri: img[1] }}
-
                           style={styles.interestImage}
                           resizeMode="cover"
                         />
@@ -764,7 +757,6 @@ const MatchProfile = ({ route }) => {
                     ...styles.profileDetailsSubCont2,
                     ...styles.boxShadowCont,
                     paddingBottom: rspH(1.67),
-                    // marginBottom: rspH(2),
                   }}
                 >
                   <Text style={styles.profileDetailContHeading}>Languages</Text>
@@ -1032,7 +1024,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1040,7 +1031,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
 
   confirmBox: {
@@ -1065,7 +1055,6 @@ const styles = StyleSheet.create({
   habitsImage: {
     width: rspW(10.1),
     aspectRatio: 1,
-    // height: rspH(4.7),
   },
 
   dotsCont: {

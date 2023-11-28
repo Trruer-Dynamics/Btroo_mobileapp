@@ -141,9 +141,6 @@ const Item = ({ item, setmodalVisible, masked }) => {
     <View style={{ ...styles.item, position: "relative" }}>
       <TouchableOpacity
         activeOpacity={1}
-style={{
-  // height: Platform.OS == 'ios' ? rspH(42) : '100%',
-}}
         onPress={() => {
           setmodalVisible(true);
         }}
@@ -183,18 +180,12 @@ style={{
               />
             </>
           )}
-          {/* <View
-          style={{
-            backgroundColor:'red',
-            height:'100%',
-          }}
-          > */}
+          
           <FastImage
             source={item.image}
             style={{
               backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
               width: rspW(88),
-              // height: rspH(Platform.OS == 'ios' ?42 : 48),
               height: "100%",
               borderRadius: rspW(5.1),
 
@@ -346,7 +337,6 @@ const SwiperTut = ({ repeat_tut }) => {
   };
 
   const getGenders = async () => {
-    // setloading(true);
 
     await axios
       .get(apiUrl + "getactivegender/")
@@ -369,7 +359,6 @@ const SwiperTut = ({ repeat_tut }) => {
           setgender_lis(all_genders);
         }
 
-        // setloading(false);
       });
   };
 
@@ -400,9 +389,7 @@ const SwiperTut = ({ repeat_tut }) => {
       }
       setswipe_tut_l(swipe_tut || repeat_tut);
       setstep(0);
-      return () => {
-        // dispatch(setRepeatTut(false))
-      };
+      
     }, [gender_lis, profile_data])
   );
 
@@ -839,9 +826,7 @@ const SwiperTut = ({ repeat_tut }) => {
                   ...styles.boxShadowCont,
                   width: rspW(39.5),
                   marginLeft: rspW(1),
-                  // marginBottom: rspH(0.6),
                   marginBottom: rspH(3.6),
-
                   alignSelf: "flex-start",
                 }}
               >
@@ -940,8 +925,6 @@ const SwiperTut = ({ repeat_tut }) => {
                         <FastImage
                           source={require("../../assets/images/Swiping/Actions/Pass.png")}
                           style={{
-                            // width: rspW(8.46),
-                            // height: rspH(4.3),
                             width: rspW(8.695),
                             height: rspH(4),
                           }}
@@ -957,8 +940,6 @@ const SwiperTut = ({ repeat_tut }) => {
                     style={{
                       position: "absolute",
                       top: Platform.OS == 'ios' ? rspH(1.7) + insets.top : rspH(2),
-                      
-                      // rspH(Platform.OS == "ios" ? 7.4 : 2),
                       left: rspW(3.8),
                       zIndex: 5,
                     }}
@@ -1157,8 +1138,6 @@ const SwiperTut = ({ repeat_tut }) => {
                   <View
                     style={{
                       marginTop:  Platform.OS == 'ios'? rspH(48.5) + insets.top: rspH(48) + insets.bottom,
-                      // marginTop: rspH(52),
-
                       alignSelf: "center",
                       ...styles.scrollModalCont,
                     }}
@@ -1377,7 +1356,6 @@ const SwiperTut = ({ repeat_tut }) => {
                             ...styles.profileDetailsSubCont2,
                             ...styles.boxShadowCont,
                             width: rspW(39.5),
-                            // marginBottom: insets.top/3,
                           }}
                         >
                           <Text style={styles.profileDetailContHeading}>
@@ -1438,26 +1416,18 @@ const styles = StyleSheet.create({
   imageCont: {
     zIndex: 5,
     width: rspW(89),
-    // height: rspH(42),
     height: Platform.OS == 'ios' ?  rspH(42): rspH(42) + insets.bottom,
     borderRadius: rspW(5.3),
-    // backgroundColor:'red',
   },
 
   item: {
-    // borderRadius: rspW(5.1),
-    // width: rspW(89),
-    
     alignSelf: "center",
     borderRadius: rspW(5.1),
     width: rspW(88),
-
     marginRight: rspW(0.8),
     marginLeft: rspW(0.2),
     zIndex: 5,
 
-    // marginRight: rspW(1),
-    // marginLeft: rspW(1),
   },
 
   actionsCont: {
@@ -1544,7 +1514,6 @@ const styles = StyleSheet.create({
   // Prompt
   promptContainer: {
     width: rspW(82),
-    // height: rspH(12.9),
     marginTop: rspH(2.35),
     marginBottom: rspH(-1.7),
     paddingHorizontal: rspW(2.5),
@@ -1559,7 +1528,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(1.96),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -1567,7 +1535,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
 
   mainTutCont: {
@@ -1585,8 +1552,6 @@ const styles = StyleSheet.create({
     height: rspW(15.2),
     borderRadius: rspW(7.52),
     backgroundColor: "#ffffffa3",
-    // backgroundColor: "#ffffff7d",
-
     alignItems: "center",
     justifyContent: "center",
   },
@@ -1604,12 +1569,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     position: "absolute",
     height: Platform.OS == 'ios' ? rspH(28.85) :  rspH(28.85) ,
-    // height: Platform.OS =='ios'? rspH(28.85) : rspH(20) + insets,
-
     width: rspW(86),
     borderRadius: rspW(3),
     backgroundColor: colors.white,
-    // top: rspH(Platform.OS == "ios" ? 53.6 : 55),
     top: Platform.OS == 'ios' ? rspH(48) + insets.top : rspH(48.4) + insets.bottom,
 
     paddingHorizontal: rspW(4.6),
@@ -1646,12 +1608,8 @@ const styles = StyleSheet.create({
 
   //Tutorial Scroll Modal
   scrollModalCont: {
-    // height: rspH(38.74),
-    // height: Platform.OS == 'ios'? rspH(42.6) - insets.bottom: rspH(43.1) - insets.bottom ,
-    // height: Platform.OS == 'ios'? rspH(42.7) - insets.bottom: rspH(43.1) - insets.bottom ,
+
     height: Platform.OS == 'ios'? rspH(44) - insets.top: rspH(43.1) - insets.bottom ,
-
-
     width: rspW(91.8),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -1659,7 +1617,6 @@ const styles = StyleSheet.create({
 
   carouselHighlightCont: {
     width: rspW(92.4),
-    // height: rspH(Platform.OS == "ios" ? 43.6 : 50),
     height: Platform.OS == 'ios' ? rspH(44) : rspH(44) + insets.bottom,
     borderRadius: rspW(6.4),
     position: "relative",

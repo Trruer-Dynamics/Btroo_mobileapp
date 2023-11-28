@@ -22,8 +22,6 @@ const PhotoVerification = ({ navigation, route }) => {
 
   const onNextPress = () => {
     navigation.navigate("PhotoVerifyCamera");
-    // dispatch(setUserLoggined(true));
-    // navigation.navigate('Pledge');
   };
 
   useFocusEffect(
@@ -48,7 +46,6 @@ const PhotoVerification = ({ navigation, route }) => {
             <FastImage
               source={require("../../assets/images/PicVerifyBL.png")}
               style={styles.poseImage}
-              // resizeMode="contain"
             />
           </View>
 

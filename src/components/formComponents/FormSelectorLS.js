@@ -200,18 +200,7 @@ const FormSelectorLS = ({
                   data={search_value !=='' ? filterdatalist : []}
                   renderItem={renderItem}
                   keyExtractor={(item) => item[0]}
-                  // onEndReached={() => {
-                  //   // Change data page and get data from backend
-                  //   if (pull_refresh) {
-                  //     if (!end_reach) {
-                  //       onRefresh(page + 1);
-
-                  //       setend_reach(true);
-                  //       setpage(page + 1);
-                  //     }
-                  //   }
-                  // }}
-                  // onMomentumScrollBegin={() => setend_reach(false)}
+                 
                   />
               </View>
             </View>

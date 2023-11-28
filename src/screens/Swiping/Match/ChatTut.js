@@ -267,9 +267,7 @@ const [show_alert, setshow_alert] = useState(false)
                   <TouchableOpacity
                     style={{ position: "absolute", right: 0, top: rspH(-1) }}
                     onPress={() => {
-                      // navigation.navigate("MatchProfile", {
-                      //   profile: profile,
-                      // });
+                      
                     }}
                   >
                     <FastImage source={rvlimage} style={styles.profilePhoto} />
@@ -302,7 +300,6 @@ const [show_alert, setshow_alert] = useState(false)
               paddingBottom: rspH(1),
               justifyContent: "center",
               alignItems: "center",
-              // backgroundColor:'red',
             }}
           >
             {/* Messsage Input Area */}
@@ -640,12 +637,9 @@ const styles = StyleSheet.create({
   },
   
   nameHighCont: {
-    // top: rspH(Platform.OS == "ios" ? 7.7 : 2.4),
     top: Platform.OS == 'ios' ? rspH(1.8) + insets.top :  scrn_height * 0.018,
-
     left: rspW(32),
     width: rspW(36),
-    // height: rspH(3.8),
     height: rspH(4),
     paddingTop: rspH(0.6),
     alignItems: "center",

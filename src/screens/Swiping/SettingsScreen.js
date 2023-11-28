@@ -112,7 +112,6 @@ const SettingsScreen = ({ navigation, route }) => {
   const [contact, setcontact] = useState("");
 
   const updateShowProfile = async () => {
-    // setshow_my_profile(!show_my_profile);
     const url =
       apiUrl + `show_profile_notification_update/${profile_data.user.id}`;
 
@@ -134,7 +133,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let status = resp.data.status;
 
       if (resp.data.code == 200) {
-        // setshow_my_profile(!show_my_profile);
 
         let update_prof = {
           ...profile_data,
@@ -177,8 +175,7 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        // setkeep_matching(!keep_matching);
-
+        
         let update_prof = {
           ...profile_data,
           userprofile: {
@@ -223,7 +220,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        // setnew_message(!new_message);
 
         let update_prof = {
           ...profile_data,
@@ -266,8 +262,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
      
       if (code == 200) {
-   
-        // setnew_match(!new_match);
 
         let update_prof = {
           ...profile_data,
@@ -310,8 +304,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        // setprofile_reveal(!profile_reveal);
-
         let update_prof = {
           ...profile_data,
           userprofile: {
@@ -351,7 +343,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        // setothers(!others);
 
         let update_prof = {
           ...profile_data,
@@ -424,13 +415,11 @@ const SettingsScreen = ({ navigation, route }) => {
 
     let url_path = 'isacountavialable/'
 
-    // setloading(true);
     const data = {
       user_id: profile_data.user.id,
     };
 
     const headers = {
-      // Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
     };
 
@@ -516,7 +505,6 @@ const SettingsScreen = ({ navigation, route }) => {
           <SafeAreaView
             style={{
               height: Platform.OS == 'ios'? rspH(74) + insets.bottom : rspH(80) ,
-              // paddingBottom: rspH(10) + insets.bottom,
               paddingHorizontal: rspW(10),
               alignItems: "center",
               backgroundColor: colors.white,
@@ -530,7 +518,6 @@ const SettingsScreen = ({ navigation, route }) => {
                 width: "100%",
                 
               }}
-              // bounces={true}
             >
               <View>
                 {/* Banner */}
@@ -1243,7 +1230,6 @@ const styles = StyleSheet.create({
 
   bannerCont: {
     width: rspW(78),
-    // height: rspH(Platform.OS == "ios" ? 15 : 16),
     height: Platform.OS == "ios" ? rspH(14)  : rspH(10) + insets.top,
     borderRadius: rspW(10),
     backgroundColor: "#6B9DFF",
@@ -1254,7 +1240,6 @@ const styles = StyleSheet.create({
   },
   bannerTxt: {
     fontFamily: fontFamily.bold,
-    // fontSize: rspF(Platform.OS == "ios" ? 2.5 : 2.5),
     fontSize: Platform.OS == "ios" ? rspF(2.5) : scrn_height * 0.027,
 
     lineHeight: rspF(2.7),

@@ -249,7 +249,6 @@ const Filters = ({
             style={{
               ...styles.container,
               height: safe_height / 1.1,
-              // height: safe_height,
             }}
           >
             <View>

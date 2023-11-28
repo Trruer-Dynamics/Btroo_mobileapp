@@ -30,61 +30,40 @@ import messaging from '@react-native-firebase/messaging'
 
 AntDesign.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 Ionicons.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 Feather.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 Entypo.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 EvilIcons.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
+
 // FontAwesome5.loadFont().then();
 FontAwesome.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 // FontAwesome5Pro.loadFont().then();
 Fontisto.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 Foundation.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 MaterialCommunityIcons.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 MaterialIcons.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 Octicons.loadFont()
   .then()
-  .catch((error) => {
-    // console.info(error);
-  });
+  .catch((error) => {});
 
 const App = () => {
   const dispatch = useDispatch();

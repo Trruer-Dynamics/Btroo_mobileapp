@@ -383,7 +383,6 @@ const SwiperOr = ({}) => {
           let profile_appr = filter_data.is_profile_approved;
 
           setreports_count(report_count);
-          // setprofile_approved(profile_appr);
 
           let distance = filter_data.distance;
           let languages =
@@ -452,9 +451,7 @@ const SwiperOr = ({}) => {
         }
       })
       .catch((err) => {
-        // if (is_network_connected) {
-        //   dispatch(setSessionExpired(true));  
-        // }
+        
         setloading(false);
         
       });
@@ -584,10 +581,7 @@ const SwiperOr = ({}) => {
           else if (profiles.length === 0 && warn_step !== 2) {
             setloading2(false)
           }
-          // else{
-          //   setloading2(false)
-          //   console.log("load6")
-          // }
+          
           
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
@@ -836,13 +830,11 @@ const SwiperOr = ({}) => {
 
     let url_path = 'isacountavialable/'
 
-    // setloading(true);
     const data = {
       user_id: profile_data.user.id,
     };
 
     const headers = {
-      // Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
     };
 
@@ -955,7 +947,7 @@ const keyExtractor = (itm, index) => itm.created_on + index
                 }
               )}
               onLayout={()=>{
-                console.log("onLayout")
+                
               }}
               contentContainerStyle={{
                 flexGrow: 1,

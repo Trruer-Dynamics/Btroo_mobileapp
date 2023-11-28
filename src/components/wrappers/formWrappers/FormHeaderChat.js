@@ -22,9 +22,7 @@ const FormHeaderChat = ({
         justifyContent: "space-between",
         alignItems: "center",
         height: srn_height * 0.06,
-        // marginBottom: rspH(1.4),
         backgroundColor:'#fff',
-        // backgroundColor:'green',
         width: "100%",
         
       }}
@@ -33,13 +31,8 @@ const FormHeaderChat = ({
         style={{
           justifyContent: "center",
           alignItems: "center",
-          // backgroundColor:'red',
-          // height: rspW(7.6),
-          // width: rspW(7.6),
-          // borderRadius: rspW(3.8),
           height: rspW(9.6),
           width: rspW(9.6),
-          // borderRadius: rspW(3.8),
           borderRadius: rspW(5.3),
         }}
         onPress={() => {

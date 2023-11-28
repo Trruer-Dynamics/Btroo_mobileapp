@@ -363,7 +363,6 @@ const MobileNo = ({ navigation, route }) => {
             style={{
               width: rspW(86),
               backgroundColor: "#fff",
-              // borderRadius: rspW(4),
               borderRadius: rspW(4),
             }}
           >

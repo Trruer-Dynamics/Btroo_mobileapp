@@ -20,7 +20,6 @@ const OffflineAlert = ({offAlert=false}) => {
     <SafeAreaView style={styles.mainContainer}>
  
       <View style={styles.messageBox}
-      // entering={FadeInUp}
       >
        <Text style={styles.messageBoxHeader}>No connection</Text>
        
@@ -41,33 +40,23 @@ export default OffflineAlert;
 const styles = StyleSheet.create({
   mainContainer: {
     width: scrn_width,
-    // height: rspH(31.16),
     height: rspH(2.2),
     backgroundColor: "#0000008a",
-    // justifyContent: "center",
-    // alignItems: "center",
   },
   messageBox: {
-    // width: rspW(76.5),
     width: scrn_width,
-    // height: rspH(31.16),
     height: rspH(2.2),
     backgroundColor: '#e54b4b',
-    // borderRadius: rspW(5.1),
-    // paddingHorizontal: rspW(4),
     alignItems: "center",
     justifyContent: "center",
-    // marginTop: rspH(17),
   },
   messageBoxHeaderCont: {
     marginBottom: rspH(3),
   },
   messageBoxHeader: {
     fontFamily: fontFamily.bold,
-    // fontSize: rspF(3),
     fontSize: rspF(1.4),
     color: colors.white,
-    // lineHeight: rspH(3.1),
     lineHeight: rspH(2.1),
     textAlign: "center",
   },

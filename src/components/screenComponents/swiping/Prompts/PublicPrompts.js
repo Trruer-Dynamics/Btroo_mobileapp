@@ -100,7 +100,6 @@ const PublicPrompts = ({
               style={{
                 alignSelf: "center",
                 width: "100%",
-                // backgroundColor:'red',
                 marginTop: rspH(2.2),
               }}
             >

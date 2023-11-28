@@ -46,9 +46,7 @@ const SearchInputBackend = ({
           setplaceholder("Search");
         }}
         onChangeText={(text) => {
-          // if (!refreshing) {
           setsearch(text);
-          // }
         }}
         value={search}
         placeholder={placeholder}

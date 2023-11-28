@@ -29,11 +29,10 @@ import FastImage from "react-native-fast-image";
 import * as icn from '../../assets'
 
 const Item = ({ item, onPress, selected_list, selected_lis2, multi }) =>{ 
-  console.log("item",item[1])
+
   let img1 = item[1]
 
   if (item[1].split(' ').length > 1) {
-    console.log("item",item[1].split(' '))
     let itmlis = item[1].split(' ')
      img1 = itmlis.join('')
   }
@@ -51,10 +50,6 @@ const Item = ({ item, onPress, selected_list, selected_lis2, multi }) =>{
   >
     {multi && (
       <FastImage
-        // source={{
-        //   uri: selected_lis2.indexOf(item[0]) > -1 ? item[2] : item[3],
-        // }}
-
         source={selected_lis2.indexOf(item[0]) > -1 ?  icn[`${img1}Blue`] : icn[`${img1}Gray`]}
   
 

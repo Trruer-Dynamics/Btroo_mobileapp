@@ -45,7 +45,6 @@ const Intro = ({ route }) => {
       {/* {isReady && ( */}
         <View
           style={{
-            // flex: 1,
             height: scrn_height,
             backgroundColor:'#fff',
           }}

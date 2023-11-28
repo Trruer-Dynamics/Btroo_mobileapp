@@ -111,18 +111,13 @@ const OtpVerify = ({
         active_user_location_details.longitude != ""
           ? active_user_location_details.longitude
           : 0.0,
-
       latitude:
         active_user_location_details.latitude != ""
           ? active_user_location_details.latitude
           : 0.0,
-
       location: active_user_location_details.location,
-
       action: action,
-
       ip: active_user_location_details.ip,
-      // is_introduceyourselfcompleted: true,
     };
 
     try {
@@ -131,9 +126,9 @@ const OtpVerify = ({
       let user_code = response.data.code;
 
       setloading(false);
-      // setModalVisible(false);
+
       if (user_code == 400) {
-        //
+        
         setModalVisible(false);
 
         setTimeout(() => {
@@ -341,16 +336,7 @@ const OtpVerify = ({
           user_data?.token?.access
         );
 
-        // Sets Prompts Filling status locally
-        // dispatch(
-        //   setPromptFillingStart(user_data.userprofile.is_promptsfillingstarted)
-        // );
-
-        // dispatch(
-        //   setPromptFillingComplete(
-        //     user_data.userprofile.is_promptsfillingcomplete
-        //   )
-        // );
+        
 
         // Set Tutorials booleans values
         dispatch(setSwipeTut(!user_data.userprofile.is_swapping_tutorial_view));
@@ -662,7 +648,6 @@ const OtpVerify = ({
         {/* Validate Btn */}
         <FormWrapperFooter
           containerStyle={{
-            // bottom: -16,
             bottom: -rspH(1.8),
           }}
         >
@@ -740,12 +725,8 @@ const styles = StyleSheet.create({
     marginBottom: rspH(4.64),
   },
   otp_input: {
-    // height: rspW(12.76),
     height: rspW(12.8),
-    // width: rspW(12.8),
     width: "100%",
-
-    // textAlign: "center",
     borderWidth: 1,
     backgroundColor: "#F8F8F8",
     borderRadius: rspW(1.5),

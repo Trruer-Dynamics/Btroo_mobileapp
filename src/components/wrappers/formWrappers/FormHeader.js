@@ -32,26 +32,19 @@ const FormHeader = ({
           position: "relative",
           justifyContent: "center",
           width: "100%",
-          // height: '18%',
-          // backgroundColor:'green',
         }}
       >
         {left_icon && (
           <TouchableOpacity
             style={{
               position: "absolute",
-              // backgroundColor:"red",
               left: 0,
               top: -rspW(1),
               alignSelf: "center",
               justifyContent: "center",
               alignItems: "center",
-              // height: rspW(7.6),
-              // width: rspW(7.6),
-              // aspectRatio:1,
               height: rspW(9.6),
               width: rspW(9.6),
-              // borderRadius: rspW(3.8),
               borderRadius: rspW(5.3),
  
             }}
@@ -88,7 +81,6 @@ const FormHeader = ({
         >
           {
             para
-            // + ' '
           }
         </Text>
       </View>

@@ -21,7 +21,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigationRef = useRef();
   useLayoutEffect(() => {
-    // CallNot()
+
     const safe_height =
       scrn_height - (Platform.OS == "android" ? 0 : insets.bottom + insets.top);
 

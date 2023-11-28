@@ -225,13 +225,11 @@ const ProfileMain = ({ navigation }) => {
 
     let url_path = 'isacountavialable/'
 
-    // setloading(true);
     const data = {
       user_id: profile_data.user.id,
     };
 
     const headers = {
-      // Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
     };
 
@@ -245,8 +243,6 @@ const ProfileMain = ({ navigation }) => {
       );
       let resp_data = response.data;
 
-      // setloading(false);
-      
       if (resp_data.code == 400) {
 
            Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
@@ -293,7 +289,6 @@ const ProfileMain = ({ navigation }) => {
 
       setlanguages(lang_tmp);
 
-      // console.log(profile_data?.userpets.map(v => v))
       let usr_pets = profile_data?.userpets.map((v) => [
         v.petmaster.id,
         v.petmaster.iconblue,
@@ -655,11 +650,9 @@ const ProfileMain = ({ navigation }) => {
                     ref={scrollPetsRef}
                   >
                     {pets_list.map((img, indx) => {
-                      console.log("img",img[2])
 
                       let img1 = img[2]
                       if (img[2].split(' ').length > 1) {
-                        console.log("item",img[2].split(' '))
                         let itmlis = img[2].split(' ')
                          img1 = itmlis.join('')
                       }
@@ -668,9 +661,7 @@ const ProfileMain = ({ navigation }) => {
                         <View key={indx}>
                           {Platform.OS == "ios" ? (
                             <Image
-                              // source={{ uri: img[1] }}
                               source={icn[`${img[2]}Blue`]}
-                              // source={BirdBlue}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
@@ -718,11 +709,9 @@ const ProfileMain = ({ navigation }) => {
                   ref={scrollInterestsRef}
                 >
                   {interest_list.map((img, idx) => {
-                    console.log("img",img[2])
 
                     let img1 = img[2]
                     if (img[2].split(' ').length > 1) {
-                      console.log("item",img[2].split(' '))
                       let itmlis = img[2].split(' ')
                        img1 = itmlis.join('')
                     }
@@ -730,7 +719,6 @@ const ProfileMain = ({ navigation }) => {
                       <View key={idx}>
                         {Platform.OS == "ios" ? (
                           <Image
-                            // source={{ uri: img[1] }}
                             source={icn[`${img1}Blue`]}
                             style={styles.interestImage}
                             resizeMode="cover"
@@ -844,13 +832,12 @@ const ProfileMain = ({ navigation }) => {
               height: rspW(7.6),
               width: rspW(7.6),
               borderRadius: rspW(3.8),
-              // backgroundColor:'green'
             }}
             onPress={() => {
               setmodalVisible(false);
             }}
           >
-            {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
+            
             <Image
                   source={Backward}        
                   style={{width: '80%', height:'70%'}}
@@ -990,7 +977,6 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.1),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
@@ -998,13 +984,11 @@ const styles = StyleSheet.create({
     color: colors.black,
     lineHeight: rspF(2.18),
     letterSpacing: 1,
-    // textAlign: "justify",
   },
 
   habitsImage: {
     width: rspW(10.1),
     aspectRatio: 1,
-    // height: rspH(4.7),
   },
 
   // modal conatainer

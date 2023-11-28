@@ -619,9 +619,7 @@ const EditProfile = ({ navigation }) => {
           setcity_refresh(false);
 
           let f_list = [];
-          // if (onpage) {
-          //   f_list = [...city_list];
-          // }
+          
           let tmp_cities = [];
 
           if (resp.data.data.city.length > 0) {
@@ -708,13 +706,11 @@ const EditProfile = ({ navigation }) => {
   
     let url_path = 'isacountavialable/'
 
-    // setloading(true);
     const data = {
       user_id: profile_data.user.id,
     };
 
     const headers = {
-      // Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
     };
 
@@ -727,8 +723,6 @@ const EditProfile = ({ navigation }) => {
         }
       );
       let resp_data = response.data;
-
-      // setloading(false);
 
       if (resp_data.code == 400) {
 
@@ -745,7 +739,6 @@ const EditProfile = ({ navigation }) => {
       }
       
     } catch (error) {
-      // setloading(false);
       return false;
 
     }
@@ -807,7 +800,7 @@ const EditProfile = ({ navigation }) => {
             v.iconblue,
             v.icongrey,
           ]);
-          console.log("tmp_lis",tmp_lis)
+          
           setinterests_list(tmp_lis);
         } else {
           console.warn("Error occur while getInterests");
@@ -960,9 +953,7 @@ const EditProfile = ({ navigation }) => {
           updatePrompts(user_prof_data);
         } else {
           savePrompts(user_prof_data);
-          //   setloading(false);
-          //   dispatch(setProfiledata(user_prof_data));
-          //   navigation.navigate("ProfileMain");
+     
         }
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
@@ -1292,10 +1283,7 @@ const EditProfile = ({ navigation }) => {
                 setcurrent_pos(y);
               }}
               enableOnAndroid={true}
-              // extraScrollHeight={Platform.OS == "ios" ? 0 : scrn_height / 6}
-              // extraHeight={Platform.OS == "ios" ? scrn_height / 6 : 0}
-
-              // extraScrollHeight={Platform.OS == "ios" ? 0 : 0}
+              
               extraScrollHeight={Platform.OS == "ios" ? -scrn_height * 0.22 : 0}
               extraHeight={
                 Platform.OS == "ios" ? scrn_height * 0.38 : scrn_height * 0.23
@@ -1303,7 +1291,6 @@ const EditProfile = ({ navigation }) => {
               style={{
                 flex: 1,
                 backgroundColor: "#fff",
-                //  backgroundColor: "red",
                 width: scrn_width,
               }}
               bounces={true}
@@ -1313,8 +1300,7 @@ const EditProfile = ({ navigation }) => {
               <View
                 style={{
                   paddingHorizontal: rspW(10),
-                  // width: '100%',
-                  // backgroundColor:'green'
+                 
                 }}
               >
                 {/* Inputs Container*/}
@@ -1371,8 +1357,7 @@ const EditProfile = ({ navigation }) => {
                       width={"100%"}
                       list={lcl_locations}
                       selectedValue={city[1]}
-                      // refreshing={city_refresh}
-                      // reshing={setcity_refresh}
+                      
                       setchanges_made={setchanges_made}
                     />
                   </FormInputContainer>
@@ -2002,7 +1987,7 @@ const EditProfile = ({ navigation }) => {
                     private_prompt1_a.length < 3 ||
                     private_prompt2_q_id == 0 ||
                     private_prompt2_a.length < 3
-                    // )
+                    
                   }
                   onPress={() => {
                     let smok = habits_list[0][1]
@@ -2044,7 +2029,7 @@ const EditProfile = ({ navigation }) => {
          
                     } 
                     else {
-                      // if (profile_data?.userprivateprompts?.length > 0) {
+                      
                       if (public_prompt1_q_id == 0) {
                         pup_q1_ref.current.measure(
                           (x, y, width, height, pageX, pageY) => {
@@ -2171,8 +2156,7 @@ const EditProfile = ({ navigation }) => {
                       if (private_prompt2_a.length < 3) {
                         setprivate_prompt2_blr(true);
                       }
-                      // }
-                    // }
+                      
                     }
                   }}
                 />

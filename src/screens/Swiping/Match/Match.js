@@ -79,7 +79,6 @@ const Match = () => {
   const matches_imgs = useSelector((state) => state.chats.matches_imgs);
 
   const updateKeepMatching = async () => {
-    // setloading(true);
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
 
@@ -98,7 +97,6 @@ const Match = () => {
         }
       );
 
-      // setloading(false);
 
       if (resp.data.code == 200) {
         setkeep_matching(!keep_matching);
@@ -119,7 +117,6 @@ const Match = () => {
   };
 
   const getMatches = async () => {
-console.log("getMatches")
     const url = apiUrl + `activechatroomlist/`;
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -132,7 +129,6 @@ console.log("getMatches")
 
     try {
       const resp = await axios.post(url, data, { headers });
-      // setloading(false);
 
       let code = resp.data.code;
       let resp_data = resp.data.data;
@@ -290,13 +286,11 @@ return a.position - b.position
   const userExist = async () =>{
     let url_path = 'isacountavialable/'
 
-    // setloading(true);
     const data = {
       user_id: profile_data.user.id,
     };
 
     const headers = {
-      // Authorization: `Bearer ${access_token}`,
       "Content-Type": "application/json",
     };
 
@@ -390,7 +384,6 @@ return a.position - b.position
               style={{
                 ...styles.bottomCont,
                 position: "absolute",
-                // top: rspH(Platform.OS == "ios" ? 66 : 69) + insets.top,
                 top:Platform.OS == "ios"? rspH(77) - insets.top: rspH(78)  - insets.top,
                 alignSelf: "center",
               }}
@@ -448,7 +441,6 @@ export default Match;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor:'red',
     height: scrn_height,
     width: scrn_width,
     justifyContent: "space-between",

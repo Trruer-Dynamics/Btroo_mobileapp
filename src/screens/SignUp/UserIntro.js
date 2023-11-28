@@ -493,9 +493,7 @@ const UserIntro = ({ navigation, route }) => {
           setcity_refresh(false);
 
           let f_list = [];
-          // if (onpage) {
-          //   f_list = [...city_list];
-          // }
+          
           let tmp_cities = [];
 
           if (resp.data.data.city.length > 0) {
@@ -510,7 +508,6 @@ const UserIntro = ({ navigation, route }) => {
 
           f_list.push(...tmp_cities);
 
-          // setcity_list(f_list);
           dispatch(setLocations(f_list))
         } else {
           setcity_refresh(false);
@@ -905,7 +902,6 @@ const UserIntro = ({ navigation, route }) => {
                           <Text
                             style={{
                               ...styles.radioBtnLabel,
-                              //  backgroundColor:'red',
                               marginRight: rspW(1),
                             }}
                           >
@@ -1074,7 +1070,7 @@ const UserIntro = ({ navigation, route }) => {
               <ErrorContainer
                 error_msg={
                   step == 1
-                    ? // && step1blr
+                    ? 
                       user_intro_err
                     : step == 2
                     ? user_intro_err2

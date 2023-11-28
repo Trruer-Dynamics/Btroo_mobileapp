@@ -488,7 +488,7 @@ const styles = StyleSheet.create({
     borderRadius: rspW(2.5),
   },
   timeHighCont: {
-    // top: Platform.OS == "android" ? rspH(11) + insets.top : srn_height / 5.1,
+
     top: Platform.OS == "android" ?
      rspH(14.7) + insets.bottom /3 
      : rspH(14.6) + insets.top,
@@ -511,7 +511,6 @@ const styles = StyleSheet.create({
 
   item: {
     position: "relative",
-    // width: rspW(81.3),
     width: rspW(81.3),
     height: rspH(9.64),
     borderRadius: rspW(2.5),
@@ -521,8 +520,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: rspW(2.5),
     backgroundColor: "#fff",
-    // marginBottom: rspH(2.9),
-
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

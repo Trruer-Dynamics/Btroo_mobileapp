@@ -25,7 +25,7 @@ const Item = ({ item, onPress, selected_lis2, multi }) => {
 
   let img1 = item[1]
   if (item[1].split(' ').length > 1) {
-    console.log("item",item[1].split(' '))
+
     let itmlis = item[1].split(' ')
      img1 = itmlis.join('')
   }
@@ -46,11 +46,7 @@ return(
     {multi && (
       <FastImage
         source={selected_lis2.indexOf(item[0]) > -1 ?  icn[`${img1}Blue`] : icn[`${img1}Gray`]}
-      //   {
-      //     {
-      //     // uri: selected_lis2.indexOf(item[0]) > -1 ? item[2] : item[3],       
-      //   }
-      // }
+      
         style={{
           width: rspW(5.1),
           height: rspW(5.1),

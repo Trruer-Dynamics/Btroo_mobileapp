@@ -102,7 +102,6 @@ const ChatItem = ({
 }) => {
   // To set reply id
   const vibtr = async () => {
-    // await Vibration.vibrate(50);
     await setactreplyID(item[4]);
     await setreplySet(true);
   };
@@ -206,9 +205,6 @@ const ChatItem = ({
     <Animated.View
       style={{
         flex: 1,
-        // position: "relative",
-        // backgroundColor:'red',
-        // paddingVertical: rspH(0.1),
         marginBottom: rspH(btmMarg),
       }}
     >
@@ -251,8 +247,6 @@ const ChatItem = ({
               
               backgroundColor: item[1] == 1 ? colors.blue : "#F5F5F5",
               alignSelf: item[1] == 0 ? "flex-start" : "flex-end",
-
-              // position: "relative",
             },
             animatedStyle,
           ]}
@@ -374,7 +368,6 @@ const ChatItem = ({
              transform:[{
               scaleY: -1
             }],
-            //  top: 0,
              left: rspW(-4.8),
                width: rspW(10.24),
                height: rspH(3.7),
@@ -390,7 +383,6 @@ const ChatItem = ({
          style={{
             position: "absolute",
          zIndex: -1,
-        //  top: -10,
         transform:[{
           scaleY: -1
         }],
@@ -550,8 +542,6 @@ const Chat = ({ profile }) => {
       if (resp_data.code == 200) {
         setshow_rvl_tut(false);
         dispatch(setChatRevealTut(false));
-      } else if (resp_data.code == 401) {
-        // dispatch(setSessionExpired(true));
       }
     } catch (error) {
       setloading(false);
@@ -582,8 +572,6 @@ const Chat = ({ profile }) => {
 
       if (resp_data.code == 200) {
         setrvl_click(true);
-      } else if (resp_data.code == 401) {
-        // dispatch(setSessionExpired(true));
       }
     } catch (error) {
       setloading(false);
@@ -620,8 +608,6 @@ const Chat = ({ profile }) => {
   };
 
   const getPrevChats = async (list = []) => {
-    // setloading(true);
-
     let url = apiUrl + "chat_history/" + profile.chat_id + "/";
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -629,8 +615,7 @@ const Chat = ({ profile }) => {
     await axios
       .get(url, { headers })
       .then((resp) => {
-        // setloading(false);
-
+    
         let resp_data = resp.data.data;
         let code = resp.data.code;
 
@@ -719,7 +704,6 @@ const Chat = ({ profile }) => {
   const connectSocket = async () => {
     ws.current = new WebSocket(webSocketUrl + "chat/" + profile.chat_id);
     ws.current.onopen = (e) => {
-      console.log("Open");
       socket_con.current = true;
       SeenMe();
 
@@ -733,7 +717,6 @@ const Chat = ({ profile }) => {
     };
 
     ws.current.onclose = (e) => {
-      console.log(Platform.OS, "Close");
       c_scrn.current = ''
       sckop.current = false;
       socket_con.current = false;
@@ -743,7 +726,6 @@ const Chat = ({ profile }) => {
     };
 
     ws.current.onerror = (e) => {
-      console.log("onError", e);
       dispatch(setSocketClose(true));
     };
 
@@ -852,7 +834,6 @@ const Chat = ({ profile }) => {
                 alignSelf: "center",
                 backgroundColor: "#CCCCCC",
                 marginBottom: rspH(1.83),
-                // marginBottom: rspH(1.5),
               }}
             >
               <Text
@@ -903,7 +884,7 @@ const Chat = ({ profile }) => {
       let all_lmsgs = [ ...newmsgs,...chats_msgs]
       dispatch(setChatMsgs(all_lmsgs));
     }
-    // dispatch(setChatMsgs([]));
+
 
   }, [chatlist]);
 
@@ -922,12 +903,7 @@ const Chat = ({ profile }) => {
     };
   }, [connectSocketS]);
 
-  useEffect(() => {
-    console.log("socket_con.current n",socket_con.current)
-    // if (socket_con.current == false) {
-    //   connectSocket();
-    // }
-  }, [socket_con.current, chats_msgs, chatlist]);
+
 
   
 
@@ -1113,12 +1089,6 @@ const Chat = ({ profile }) => {
     }
   }, [rvl_activate]);
 
-  // useLayoutEffect(() => {
-  //   // if user start chatting
-  //   if (profile?.matchType == "New Match") {
-  //     setmsg("Hi!");
-  //   }
-  // }, []);
 
   // load icebreaker according network status
   useLayoutEffect(() => {
@@ -1174,7 +1144,6 @@ const Chat = ({ profile }) => {
 
     if (is_network_connected &&
       socket_con.current != true
-      // && drafts_msgs.length > 0
       ) {
       getPrevChats()
     }
@@ -1334,7 +1303,6 @@ const Chat = ({ profile }) => {
             keyboardShouldPersistTaps={
               Platform.OS == "android" ? "always" : "never"
             }
-            // keyboardShouldPersistTaps={"never"}
             renderItem={renderItem}
             keyExtractor={(_, index) => index}
             bouncesZoom={false}
@@ -1374,7 +1342,6 @@ const Chat = ({ profile }) => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                // position:'relative',
               }}
             >
               {replySet && actreplyID && (
@@ -1389,13 +1356,9 @@ const Chat = ({ profile }) => {
                         : "#4986CA",
                     borderLeftWidth: rspW(1),
                     borderLeftColor: "#000",
-           
-                    // paddingVertical: rspH(1.2),
                     paddingVertical: rspH(0.8),
-                    // paddingHorizontal: rspW(5.8),
                     paddingLeft: rspW(1.8),
                     paddingRight: rspW(2.4),
-                    // marginTop: 10,
                     marginTop: rspH(0.7),
                     width: rspW(90),
            
@@ -1414,7 +1377,6 @@ const Chat = ({ profile }) => {
                             ? colors.black
                             : colors.white,
                         fontWeight: "600",
-                        // lineHeight: rspF(2.4),
                         paddingBottom: rspH(0.2),
                       }}
                     >
@@ -1503,7 +1465,6 @@ onPress={() => {
     let nitm = [
 
       msg.replace(/^\s+|\s+$/g,'').trim(),
-      // .replace(/\s+/g, " ").trim(),
       1,
       new Date(),
       profile_data.user.id,
@@ -1522,7 +1483,6 @@ onPress={() => {
     let data = {
       message:
       msg.replace(/^\s+|\s+$/g,'').trim(),
-      // .replace(/\s+/g, " ").trim(),
       sender: profile_data.user.id,
       datetime: new Date(),
       chat_id: profile.chat_id,
@@ -1540,8 +1500,6 @@ onPress={() => {
     if (SocketOpen) {
       ws.current.send(JSON.stringify(data));
     }
-
-    // setmsg("");
     setactreplyID(null);
   }
 }}
@@ -1581,8 +1539,7 @@ onPress={() => {
       </SafeAreaView>
 
       {show_rvl_tut && (
-      // {true && (
-
+     
         <>
           <View style={styles.mainTutCont}>
             <View style={styles.centralModalContMatch}>
@@ -1647,20 +1604,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   chatCont: {
-    // paddingVertical: rspH(1.9),
     paddingTop: rspH(1),
     paddingBottom: rspH(1.4),
-    // paddingHorizontal: rspW(4),
     paddingHorizontal: rspW(2), 
     borderRadius: rspW(5.1),
     borderRadius: rspW(2),
-    // marginHorizontal: rspW(4),
-    // marginHorizontal: rspW(1),
   },
   chatMsgTxt: {
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
-    // lineHeight: rspF(2.1),
     lineHeight: rspF(Platform.OS  == 'android' ? 2.12 : 2.33),
     textAlign: "justify",
     minWidth: rspW(24),
@@ -1747,9 +1699,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
     height: rspH(36),
-
-    // height: Platform.OS == 'ios'? rspH(31) + insets.top: rspH(36) + insets.bottom,
-    
   },
 
   // Tutorial Main Container
@@ -1765,8 +1714,6 @@ const styles = StyleSheet.create({
     marginTop: rspH(3),
   },
   centralModalText: {
-    // fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
-    // lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 2.98),
     fontSize: rspF(Platform.OS == "ios" ? 2.485 : 2.5),
     lineHeight: rspF(Platform.OS == "ios" ? 3.56 : 3.5),
     fontFamily: fontFamily.bold,
@@ -1800,7 +1747,6 @@ const styles = StyleSheet.create({
   },
 
   profilePhotoHighCont: {
-    // top: rspH(Platform.OS == "ios" ? 5.6 : 0.3),
     top: Platform.OS == "ios" ? rspH(0.2) + insets.top : rspH(0.3),
     right: rspW(3),
     width: rspW(16),
