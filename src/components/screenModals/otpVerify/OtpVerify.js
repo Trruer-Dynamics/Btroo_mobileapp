@@ -389,14 +389,12 @@ const OtpVerify = ({
 
     // if (otp1 == "000000") {
     //   setotperr(false);
-
     //   dispatch(
     //     setActiveUserLocationDetails({
     //       ...active_user_location_details,
     //       mobile: "+" + ph_code + "" + ph_no,
     //     })
     //   );
-   
     //   if (action == "login") {
     //     userLogin(); // if action is login call login api
     //   } else {

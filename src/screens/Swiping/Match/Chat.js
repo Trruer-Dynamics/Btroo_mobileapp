@@ -1052,6 +1052,14 @@ const Chat = ({ profile }) => {
 
           let ttact = false;
 
+          // console.log("avg_min",avg_min)
+          // console.log("mymsgs.length",mymsgs.length)
+          // console.log("othmsgs.length",othmsgs.length)
+          // console.log("mycount",mycount)
+          // console.log("othcount",othcount)
+
+
+
           if (
             avg_min <= 5 &&
             mymsgs.length >= 25 &&
