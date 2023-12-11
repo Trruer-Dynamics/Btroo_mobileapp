@@ -628,7 +628,7 @@ const PicUpload = ({ navigation, route }) => {
                 onPress={() => {
                   if (is_network_connected) {
                   Linking.openURL(
-                    "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
+                    "https://btrooapp.com/index.php/photo-guidelines/"
                   );
                 }
                 }}

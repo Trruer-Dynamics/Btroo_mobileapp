@@ -908,7 +908,7 @@ const SettingsScreen = ({ navigation, route }) => {
                 onPress={() => {
                   if (is_network_connected) {
                     Linking.openURL(
-                      "https://btroo.midnightpoha.com/index.php/faqs/"
+                      "https://btrooapp.com/index.php/faqs/"
                     );  
                   }
                   
@@ -1021,7 +1021,7 @@ const SettingsScreen = ({ navigation, route }) => {
                 onPress={() => {
                   if (is_network_connected) {
                     Linking.openURL(
-                      "https://btroo.midnightpoha.com/index.php/community-guidelines/"
+                      "https://btrooapp.com/index.php/community-guidelines/"
                     );  
                   }
                   
@@ -1041,7 +1041,7 @@ const SettingsScreen = ({ navigation, route }) => {
                 onPress={() => {
                   if (is_network_connected) {
                     Linking.openURL(
-                      "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
+                      "https://btrooapp.com/index.php/photo-guidelines/"
                     );  
                   }
                   
