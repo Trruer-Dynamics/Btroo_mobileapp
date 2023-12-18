@@ -112,8 +112,8 @@ const UserProvider = ({ children, navigationRef }) => {
 
   // Disable Screenshot
   useLayoutEffect(() => {
-    RNScreenshotPrevent.enabled(false);
-    RNScreenshotPrevent.enableSecureView();
+    // RNScreenshotPrevent.enabled(false);
+    // RNScreenshotPrevent.enableSecureView();
   }, []);
 
   useEffect(() => {

@@ -623,14 +623,29 @@ const EditProfile = ({ navigation }) => {
           let tmp_cities = [];
 
           if (resp.data.data.city.length > 0) {
-            tmp_cities = resp.data.data.city.map((v) => [
-              v.id,
-              v?.city_name +
-                ", " +
-                v?.state?.state_name +
-                ", " +
-                v?.state?.country?.country_name,
-            ]);
+            tmp_cities = resp.data.data.city.map((v) => 
+            
+            {
+
+              let city = v?.city_name
+              let state =  v?.state?.state_name != 'nan' ? v?.state?.state_name +  ", " : ''
+              let country =  v?.state?.country?.country_name
+              let loc = city +  ", " + state  + country
+
+              return(
+                [
+                  v.id,
+                  // v?.city_name +
+                  //   ", " +
+                  //   v?.state?.state_name
+                  //   +
+                  //   ", " +
+                  //   v?.state?.country?.country_name,
+                  loc
+                ]
+              )
+            }
+            );
           }
 
           f_list.push(...tmp_cities);

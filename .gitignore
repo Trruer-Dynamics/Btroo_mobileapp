@@ -2,3 +2,4 @@ node_modules
 android/.gradle/
 ios/Pods/
 vendor/bundle/
+android/app/build/intermediates/

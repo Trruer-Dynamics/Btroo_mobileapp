@@ -668,7 +668,8 @@ const ProfileMain = ({ navigation }) => {
                           ) : (
                             <FastImage
                               useLastImageAsDefaultSource
-                              source={{ uri: img1 }}
+                              // source={{ uri: img1 }}
+                              source={icn[`${img[2]}Blue`]}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
