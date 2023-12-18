@@ -618,12 +618,29 @@ const MatchProfile = ({ route }) => {
                              img1 = itmlis.join('')
                           }
                           return (
-                            <FastImage
-                              key={indx}
+                            // <FastImage
+                            //   key={indx}
+                            //   source={icn[`${img1}Blue`]}
+                            //   style={styles.interestImage}
+                            //   resizeMode="cover"
+                            // />
+                            <View key={indx}>
+                          {Platform.OS == "ios" ? (
+                            <Image
                               source={icn[`${img1}Blue`]}
                               style={styles.interestImage}
                               resizeMode="cover"
                             />
+                          ) : (
+                            <FastImage
+                              useLastImageAsDefaultSource
+                              // source={{ uri: img1 }}
+                              source={icn[`${img1}Blue`]}
+                              style={styles.interestImage}
+                              resizeMode="cover"
+                            />
+                          )}
+                        </View>
                           );
                         })}
                       </ScrollView>
