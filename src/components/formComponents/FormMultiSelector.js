@@ -30,6 +30,8 @@ const Item = ({ item, onPress, selected_lis2, multi }) => {
      img1 = itmlis.join('')
   }
 
+  console.log("img1",img1)
+
 return(
   <TouchableOpacity
     onPress={onPress}
@@ -110,6 +112,7 @@ const FormMultiSelector = ({
   }, [code_press]);
 
   const renderItem = ({ item }) => {
+    console.log("item",item)
     return (
       <Item
         multi={multi}

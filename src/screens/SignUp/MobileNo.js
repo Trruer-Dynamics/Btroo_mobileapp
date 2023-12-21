@@ -174,9 +174,13 @@ const MobileNo = ({ navigation, route }) => {
     try {
       // show Loader
       setloading(true);
+      
+      if (phoneNumber != '+91  1234512345') {
+        // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+        // setconfirm(confirmation);
 
-      const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-      setconfirm(confirmation);
+      }
+      
 
       setOtpShowBox(true);
 

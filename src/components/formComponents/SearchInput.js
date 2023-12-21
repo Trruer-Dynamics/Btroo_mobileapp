@@ -48,12 +48,25 @@ const SearchInput = ({
           setplaceholder("Search");
         }}
         onChangeText={(text) => {
+
+          // Get last character type
+          let last = text.charAt(text.length - 1);
+          let as_code = last.charCodeAt();
+
+          // Add validation to allow / disallow character 
+          let alphabet_con =
+            (as_code > 64 && as_code < 91) ||
+            (as_code > 96 && as_code < 123);
+
+          if ((alphabet_con || as_code == 32) || text.length == 0) {
+
           setsearch(text);
           setfilterdatalist(
             datalist.filter((v) =>
               String(v[1]).toUpperCase().startsWith(String(text.toUpperCase()))
             )
           );
+          }
         }}
         value={search}
         placeholder={placeholder}

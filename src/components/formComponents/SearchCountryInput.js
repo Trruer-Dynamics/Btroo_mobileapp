@@ -45,21 +45,36 @@ const SearchCountryInput = ({
           setplaceholder("Search");
         }}
         onChangeText={(text) => {
-          setsearch(text);
-          setfilterdatalist(
-            datalist.filter(
-              (v) =>
-                String(v.label)
-                  .toUpperCase()
-                  .startsWith(String(text.toUpperCase())) ||
-                String(v.phone)
-                  .toUpperCase()
-                  .startsWith(String(text.toUpperCase())) ||
-                String("+" + v.phone)
-                  .toUpperCase()
-                  .startsWith(String(text.toUpperCase()))
-            )
-          );
+          // Get last character type
+          let last = text.charAt(text.length - 1);
+          let as_code = last.charCodeAt();
+
+          // Add validation to allow / disallow character or numbers
+          let number_con = as_code > 47 && as_code < 58;
+
+          let alphabet_con =
+            (as_code > 64 && as_code < 91) ||
+            (as_code > 96 && as_code < 123);
+
+          if ((number_con || alphabet_con || as_code == 32 || as_code == 43) || text.length == 0) {
+         
+            setsearch(text);
+            setfilterdatalist(
+              datalist.filter(
+                (v) =>
+                  String(v.label)
+                    .toUpperCase()
+                    .startsWith(String(text.toUpperCase())) ||
+                  String(v.phone)
+                    .toUpperCase()
+                    .startsWith(String(text.toUpperCase())) ||
+                  String("+" + v.phone)
+                    .toUpperCase()
+                    .startsWith(String(text.toUpperCase()))
+              )
+            );
+          }
+          
         }}
         value={search}
         placeholder={placeholder}
