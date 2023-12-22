@@ -97,7 +97,6 @@ const OtpVerify = ({
   // To register mobile number
   const sendActiveUserDetails = async () => {
     setloading(true);
-
     //  Israel Number validations
     let up_ph_no =
       selected_ph_code.code == "IL" && ph_no.startsWith("0")
