@@ -791,9 +791,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F8F8F8",
     borderRadius: rspW(1.5),
     paddingHorizontal: rspW(4),
-
     fontFamily: fontFamily.regular,
-
     fontSize: rspF(1.9),
     lineHeight: rspF(2),
     color: colors.black,
