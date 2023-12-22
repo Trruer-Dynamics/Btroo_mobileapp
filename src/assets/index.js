@@ -118,7 +118,7 @@ export { default as TheaterBlue} from './images/FinalIcons/Interests/InterestsBl
 export { default as TravelingBlue} from './images/FinalIcons/Interests/InterestsBlue/Travel.png'
 export { default as VolleyballBlue} from './images/FinalIcons/Interests/InterestsBlue/Volleyball.png'
 export { default as WatchingTVBlue} from './images/FinalIcons/Interests/InterestsBlue/WatchingTV.png'
-export { default as WaterskiingBlue} from './images/FinalIcons/Interests/InterestsBlue/Waterski.png'
+export { default as WaterSkiingBlue} from './images/FinalIcons/Interests/InterestsBlue/Waterski.png'
 export { default as WritingBlue} from './images/FinalIcons/Interests/InterestsBlue/Writing.png'
 export { default as YogaBlue} from './images/FinalIcons/Interests/InterestsBlue/Yoga.png'
 
@@ -185,7 +185,7 @@ export { default as TheaterGray} from './images/FinalIcons/Interests/InterestsGr
 export { default as TravelingGray} from './images/FinalIcons/Interests/InterestsGray/Travel.png'
 export { default as VolleyballGray} from './images/FinalIcons/Interests/InterestsGray/Volleyball.png'
 export { default as WatchingTVGray} from './images/FinalIcons/Interests/InterestsGray/WatchingTV.png'
-export { default as WaterskiingGray} from './images/FinalIcons/Interests/InterestsGray/Waterski.png'
+export { default as WaterSkiingGray} from './images/FinalIcons/Interests/InterestsGray/Waterski.png'
 export { default as WritingGray} from './images/FinalIcons/Interests/InterestsGray/Writing.png'
 export { default as YogaGray} from './images/FinalIcons/Interests/InterestsGray/Yoga.png'
 
