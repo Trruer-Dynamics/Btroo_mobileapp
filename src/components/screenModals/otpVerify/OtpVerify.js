@@ -111,15 +111,13 @@ const OtpVerify = ({
         //getting the Latitude from the location json
         const currentLatitude = JSON.stringify(position.coords.latitude);
 
-        console.log("currentLongitude",currentLongitude)
-        console.log("currentLatitude",currentLatitude)
-        
+    
         setcurrent_long(currentLongitude);
         setcurrent_lat(currentLatitude);
 
       },
       (err) => {
-        console.log("Location err",err)
+        
       },
 
       {
@@ -450,26 +448,20 @@ const OtpVerify = ({
     
 
     try {
-      // setloading(true);
+      setloading(true);
       
-      
-
-
       let mobile_no = "+" + ph_code + "" + ph_no
       
-       if (mobile_no == '+911234512345' && otp1 != '211223') {
-        console.log("Demo user wit hw ot3")
-      setotperr(true);
-
-      }
-      else if (mobile_no != '+911234512345') {
-          console.log("N User") 
-            //  await confirm.confirm(otp1);
+      
+      if (mobile_no != '+911234512345') {
+             await confirm.confirm(otp1);
             setotperr(false);
       }
+      else  if (mobile_no == '+911234512345' && otp1 != '211223') {  
+        setotperr(true);
+        }
       else{
         setotperr(false);
-        console.log("Demo user")
       }
       
 
