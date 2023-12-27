@@ -428,60 +428,60 @@ const OtpVerify = ({
   // To verify sent otp
   const verifyOtp = async () => {
 
-    // if (otp1 == "000000") {
-    //   setotperr(false);
-    //   dispatch(
-    //     setActiveUserLocationDetails({
-    //       ...active_user_location_details,
-    //       mobile: "+" + ph_code + "" + ph_no,
-    //     })
-    //   );
-    //   if (action == "login") {
-    //     userLogin(); // if action is login call login api
-    //   } else {
-    //     sendActiveUserDetails(); // if action is signup call signup api
-    //   }
-    // } else {
-    //   setotperr(true); // if otp is invalid
-    // }
-
-    
-
-    try {
-      setloading(true);
-      
-      let mobile_no = "+" + ph_code + "" + ph_no
-      
-      
-      if (mobile_no != '+911234512345') {
-             await confirm.confirm(otp1);
-            setotperr(false);
-      }
-      else  if (mobile_no == '+911234512345' && otp1 != '211223') {  
-        setotperr(true);
-        }
-      else{
-        setotperr(false);
-      }
-      
-
-
+    if (otp1 == "000000") {
+      setotperr(false);
       dispatch(
         setActiveUserLocationDetails({
           ...active_user_location_details,
           mobile: "+" + ph_code + "" + ph_no,
         })
       );
-
       if (action == "login") {
-        userLogin();
+        userLogin(); // if action is login call login api
       } else {
-        sendActiveUserDetails();
+        sendActiveUserDetails(); // if action is signup call signup api
       }
-    } catch (error) {
-      setloading(false);
-      setotperr(true);
+    } else {
+      setotperr(true); // if otp is invalid
     }
+
+    
+
+    // try {
+    //   setloading(true);
+      
+    //   let mobile_no = "+" + ph_code + "" + ph_no
+      
+      
+    //   if (mobile_no != '+911234512345') {
+    //          await confirm.confirm(otp1);
+    //         setotperr(false);
+    //   }
+    //   else  if (mobile_no == '+911234512345' && otp1 != '211223') {  
+    //     setotperr(true);
+    //     }
+    //   else{
+    //     setotperr(false);
+    //   }
+      
+
+
+    //   dispatch(
+    //     setActiveUserLocationDetails({
+    //       ...active_user_location_details,
+    //       mobile: "+" + ph_code + "" + ph_no,
+    //     })
+    //   );
+
+    //   if (action == "login") {
+    //     userLogin();
+    //   } else {
+    //     sendActiveUserDetails();
+    //   }
+    // } catch (error) {
+    //   setloading(false);
+    //   setotperr(true);
+    // }
     
   };
 

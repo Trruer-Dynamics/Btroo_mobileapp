@@ -1,4 +1,4 @@
-package com.btroo;
+package com.btroo.dev;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

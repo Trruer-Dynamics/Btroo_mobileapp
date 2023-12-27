@@ -1,4 +1,4 @@
-package com.btroo;
+package com.btroo.dev;
 import android.os.Bundle;
 import android.view.WindowManager;
 import com.facebook.react.ReactActivity;

@@ -176,8 +176,8 @@ const MobileNo = ({ navigation, route }) => {
       setloading(true);
       
       if (phoneNumber != '+91  1234512345') {
-        const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-        setconfirm(confirmation);
+        // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+        // setconfirm(confirmation);
 
       }
       
@@ -187,6 +187,7 @@ const MobileNo = ({ navigation, route }) => {
       // hide Loader
       setloading(false);
     } catch (error) {
+      console.log("error",error)
       setloading(false);
 
       setTimeout(() => {

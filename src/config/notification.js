@@ -88,7 +88,7 @@ const NotificationController = (props) => {
     // Must be outside of any component LifeCycle (such as `componentDidMount`).
     PushNotification.createChannel(
       {
-        channelId: "com.btroo", // (required)
+        channelId: "com.btroo.dev", // (required)
         channelName: "My channel", // (required)
         channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
         playSound: true, // (optional) default: true
@@ -115,7 +115,7 @@ const NotificationController = (props) => {
         notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
  
-      channelId: "com.btroo",
+      channelId: "com.btroo.dev",
  
       onAction: function (notification) {},
  
@@ -149,7 +149,7 @@ const NotificationController = (props) => {
       setrefresh(!refresh);
  
       let notifObj = {
-        channelId: "com.btroo",
+        channelId: "com.btroo.dev",
         message: body,
         title: title,
         body: data,

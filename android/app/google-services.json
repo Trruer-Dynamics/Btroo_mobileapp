@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "724344904966",
-    "project_id": "btroo-2023",
-    "storage_bucket": "btroo-2023.appspot.com"
+    "project_number": "121738525909",
+    "project_id": "btroo-47968",
+    "storage_bucket": "btroo-47968.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:724344904966:android:fa41bd429b236686635287",
+        "mobilesdk_app_id": "1:121738525909:android:97c1ff98e33197cd85765c",
         "android_client_info": {
-          "package_name": "com.btroo"
+          "package_name": "com.btroo.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "724344904966-jl3haceqc1ltcrr3cdt14viag6gb9e7b.apps.googleusercontent.com",
+          "client_id": "121738525909-bodhvg8ca0udoo9tbjfkopn4i1vvni7l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCEjj8jYskqnyth09uQXOdQWZI3CGB21-s"
+          "current_key": "AIzaSyDFGHQuVoMDEogGZnbEpN0pzzzkuAJztV8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "724344904966-jl3haceqc1ltcrr3cdt14viag6gb9e7b.apps.googleusercontent.com",
+              "client_id": "121738525909-bodhvg8ca0udoo9tbjfkopn4i1vvni7l.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "724344904966-67h6bulj9493h9bdn7lig905d1nr0u1d.apps.googleusercontent.com",
+              "client_id": "121738525909-jgco4n55disl7p0ntr1i3b04oijv3ojs.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.btroo"
+                "bundle_id": "com.TrruerDynamics.bTroo"
               }
             }
           ]
