@@ -17,7 +17,6 @@ import { StackActions, useFocusEffect } from "@react-navigation/native";
 import { setCurrentScreen } from "../../store/reducers/screen/screen";
 
 const Pledge = ({ navigation, route }) => {
-
   const is_network_connected = useSelector(
     (state) => state.authentication.is_network_connected
   );
@@ -68,12 +67,15 @@ const Pledge = ({ navigation, route }) => {
             {/* Error Show Here */}
             <ErrorContainer error_msg="" />
             {/* Next Btn To Navigate to Next Form Components */}
-            <FooterBtn title={"Ok"} disabled={!is_network_connected} onPress={() => {
-              if (is_network_connected) {
-                onNextPress()  
-              }
-              
-            }} />
+            <FooterBtn
+              title={"Ok"}
+              disabled={!is_network_connected}
+              onPress={() => {
+                if (is_network_connected) {
+                  onNextPress();
+                }
+              }}
+            />
           </FormWrapperFooter>
         </FormWrapper>
       </SafeAreaView>

@@ -87,13 +87,13 @@ const PrivatePrompts = ({
           {/* Main Form UI */}
           <View>
             {/*Form  Header */}
-            <View style={{marginHorizontal: rspW(-5)}}>
-            <FormHeader
-            left_icon={true}
-            onPress={()=> setpromptStep(2)}
-              title="Private Prompts"
-              para={`Your Private Place. ${"\n"}${"\n"}This is more exclusive. The prompts ${"\n"}in this section will be visible only to ${"\n"}the people who you've been matched ${"\n"}with.`}
-            />
+            <View style={{ marginHorizontal: rspW(-5) }}>
+              <FormHeader
+                left_icon={true}
+                onPress={() => setpromptStep(2)}
+                title="Private Prompts"
+                para={`Your Private Place. ${"\n"}${"\n"}This is more exclusive. The prompts ${"\n"}in this section will be visible only to ${"\n"}the people who you've been matched ${"\n"}with.`}
+              />
             </View>
 
             <View
@@ -134,17 +134,15 @@ const PrivatePrompts = ({
                       ...styles.promptsInput,
                       backgroundColor:
                         private_prompt1_a !== "" ? colors.white : "#F8F8F8",
-                      borderColor:
-                      private_prompt1_blr ?
-                      private_prompt1_a.length < 3 ?
-                      colors.error:
-                      colors.blue
-                      :
-                        private_prompt1_a !== ""
-                          ? colors.blue
-                          : colors.grey,
+                      borderColor: private_prompt1_blr
+                        ? private_prompt1_a.length < 3
+                          ? colors.error
+                          : colors.blue
+                        : private_prompt1_a !== ""
+                        ? colors.blue
+                        : colors.grey,
                       textAlignVertical: "top",
-                      paddingTop: rspH(1.4),  
+                      paddingTop: rspH(1.4),
                     }}
                     value={private_prompt1_a}
                     onChangeText={(val) => {
@@ -187,18 +185,15 @@ const PrivatePrompts = ({
                       ...styles.promptsInput,
                       backgroundColor:
                         private_prompt2_a !== "" ? colors.white : "#F8F8F8",
-                      borderColor:
-                      private_prompt2_blr ?
-                      private_prompt2_a.length < 3 ?
-                      colors.error:
-                      colors.blue
-                      :
-
-                      private_prompt2_a !== "" 
-                          ? colors.blue
-                          : colors.grey,
+                      borderColor: private_prompt2_blr
+                        ? private_prompt2_a.length < 3
+                          ? colors.error
+                          : colors.blue
+                        : private_prompt2_a !== ""
+                        ? colors.blue
+                        : colors.grey,
                       textAlignVertical: "top",
-                      paddingTop: rspH(1.4),  
+                      paddingTop: rspH(1.4),
                     }}
                     value={private_prompt2_a}
                     onChangeText={(val) => {
@@ -228,10 +223,10 @@ const PrivatePrompts = ({
                 private_prompt2_q == "" ||
                 private_prompt2_a.length < 3
               }
-              onPress={()=> {
+              onPress={() => {
                 if (is_network_connected) {
-                  onNextPress()  
-                } 
+                  onNextPress();
+                }
               }}
             />
           </FormWrapperFooter>

@@ -13,13 +13,13 @@ const ChatStack = ({ route }) => {
 
   const chat_tut = useSelector((state) => state.tutorial.chat_tut);
   const repeat_tut = useSelector((state) => state.tutorial.repeat_tut);
-  const { sckop,c_scrn } = useContext(UserContext);
+  const { sckop, c_scrn } = useContext(UserContext);
 
   const dispatch = useDispatch();
 
   useFocusEffect(
     React.useCallback(() => {
-      c_scrn.current = 'Chat'
+      c_scrn.current = "Chat";
 
       dispatch(setCurrentScreen("Chat"));
       return () => {
@@ -30,9 +30,7 @@ const ChatStack = ({ route }) => {
 
   return (
     <View>
-      {chat_tut || repeat_tut ? 
-
-    (
+      {chat_tut || repeat_tut ? (
         <ChatTut profile={profile} repeat_tut={repeat_tut} />
       ) : (
         <Chat profile={profile} reveal={reveal} />

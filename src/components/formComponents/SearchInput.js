@@ -36,9 +36,12 @@ const SearchInput = ({
         style={{
           width: "90%",
           fontSize: rspF(1.9),
-          paddingHorizontal: rspW(4),
+          // paddingHorizontal: rspW(4),
+          paddingRight: rspW(4),
+          paddingLeft: rspW(1),
           fontFamily: fontFamily.regular,
           color: "#000",
+          // backgroundColor:'red',
           lineHeight: rspF(2.2),
         }}
         onFocus={() => {

@@ -85,18 +85,15 @@ const MobileNo = ({ navigation, route }) => {
         setshow_alert(true);
       }
     } catch (error) {
-
       setloading(false);
     }
   };
 
-
   useEffect(() => {
-   if (!is_network_connected) {
-    setOtpShowBox(false)
-   }
-  }, [is_network_connected])
-  
+    if (!is_network_connected) {
+      setOtpShowBox(false);
+    }
+  }, [is_network_connected]);
 
   useEffect(() => {
     // Phone Number Validations
@@ -125,7 +122,6 @@ const MobileNo = ({ navigation, route }) => {
 
   // To confirm to verify phone number
   const showConfirmDialog = async () => {
-
     return Alert.alert(
       "Verify Phone Number?",
       `+${selected_ph_code?.phone}  ${
@@ -162,7 +158,6 @@ const MobileNo = ({ navigation, route }) => {
         if (route.params.action != "signup") {
           await checkUserAvailable();
         } else {
-   
           await showConfirmDialog();
         }
       }
@@ -174,24 +169,25 @@ const MobileNo = ({ navigation, route }) => {
     try {
       // show Loader
       setloading(true);
-      
-      if (phoneNumber != '+91  1234512345') {
+
+      if (phoneNumber != "+91  1234512345") {
         // const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
         // setconfirm(confirmation);
-
       }
-      
 
       setOtpShowBox(true);
 
       // hide Loader
       setloading(false);
     } catch (error) {
-      console.log("error",error)
+      console.log("error", error);
       setloading(false);
 
       setTimeout(() => {
-        Alert.alert("Error", "You have requested too many OTPs. Please try after some time.");
+        Alert.alert(
+          "Error",
+          "You have requested too many OTPs. Please try after some time."
+        );
       }, 100);
     }
   };
@@ -209,9 +205,13 @@ const MobileNo = ({ navigation, route }) => {
     <>
       {loading && <Loader />}
 
-      <SafeAreaView style={{ height: "100%",
-      
-      backgroundColor: "#fff" }}>
+      <SafeAreaView
+        style={{
+          height: "100%",
+
+          backgroundColor: "#fff",
+        }}
+      >
         {/* To Autoscroll Input Field on keyboard appear */}
         <KeyboardAwareScrollView
           enableOnAndroid={true}
@@ -224,9 +224,9 @@ const MobileNo = ({ navigation, route }) => {
           keyboardShouldPersistTaps={"always"}
         >
           {/* To Wrap all Form for constant paddings , bg color , margins etc */}
-          <FormWrapper >
+          <FormWrapper>
             {/* Main Form UI */}
-            <View >
+            <View>
               <FormHeader
                 title="Phone Number"
                 left_icon={true}
@@ -320,7 +320,6 @@ const MobileNo = ({ navigation, route }) => {
                 title={"Next"}
                 disabled={
                   !is_network_connected ||
-
                   (clickBtn
                     ? selected_ph_code_id == "IL" && ph_no.startsWith("0")
                       ? !(

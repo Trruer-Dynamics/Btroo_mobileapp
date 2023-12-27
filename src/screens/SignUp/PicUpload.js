@@ -474,9 +474,8 @@ const PicUpload = ({ navigation, route }) => {
       path: img,
       width: 300,
       height: 300,
-      cropperStatusBarColor: 'black', // don't add 3 digit color code like '#000'
+      cropperStatusBarColor: "black", // don't add 3 digit color code like '#000'
       cropperActiveWidgetColor: colors.blue,
-      
     }).then((image) => {
       let crp_img = image.path;
       finalLoad(img, crp_img);
@@ -523,14 +522,11 @@ const PicUpload = ({ navigation, route }) => {
     }
   }, []);
 
-
-
-
   useEffect(() => {
     if (!is_network_connected) {
-     setmodalVisible(false)
+      setmodalVisible(false);
     }
-   }, [is_network_connected])
+  }, [is_network_connected]);
 
   useEffect(() => {
     if (!galler_per) {
@@ -627,10 +623,10 @@ const PicUpload = ({ navigation, route }) => {
                 style={{ textDecorationLine: "underline" }}
                 onPress={() => {
                   if (is_network_connected) {
-                  Linking.openURL(
-                    "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
-                  );
-                }
+                    Linking.openURL(
+                      "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
+                    );
+                  }
                 }}
               >
                 {" "}
@@ -660,7 +656,10 @@ const PicUpload = ({ navigation, route }) => {
               }
               onPress={() => {
                 setpic_blr(true);
-                if (pic_list.filter((v) => v[0] != "").length >= 3 && is_network_connected) {
+                if (
+                  pic_list.filter((v) => v[0] != "").length >= 3 &&
+                  is_network_connected
+                ) {
                   onNextPress();
                 }
               }}

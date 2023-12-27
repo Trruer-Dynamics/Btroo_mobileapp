@@ -61,10 +61,9 @@ import {
 } from "../../../../store/reducers/authentication/authentication";
 import FastImage from "react-native-fast-image";
 import _ from "lodash";
-import * as icn from '../../../../assets'
+import * as icn from "../../../../assets";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
-
 
 // Profile cropped image Carousel item
 const Item = ({ item, setmodalVisible, super_liked_profile, index }) => {
@@ -122,39 +121,38 @@ const Item = ({ item, setmodalVisible, super_liked_profile, index }) => {
             </>
           )}
 
-
-          { Platform.OS == 'ios' ?
-
+          {Platform.OS == "ios" ? (
             <Image
-            source={{ uri: imageUri }}
-            style={{
-              backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
-              width: "100%",
-              height: "100%",
-              borderRadius: rspW(5.1),
-              alignSelf: "center",
-            }}
-            resizeMode="cover"
-            onLoad={() => {
-              setimg_load(true);
-            }}           
+              source={{ uri: imageUri }}
+              style={{
+                backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
+                width: "100%",
+                height: "100%",
+                borderRadius: rspW(5.1),
+                alignSelf: "center",
+              }}
+              resizeMode="cover"
+              onLoad={() => {
+                setimg_load(true);
+              }}
             />
-:
+          ) : (
             <FastImage
-          useLastImageAsDefaultSource
-            source={{ uri: imageUri }}
-            style={{
-              backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
-              width: "100%",
-              height: "100%",
-              borderRadius: rspW(5.1),
-              alignSelf: "center",
-            }}
-            resizeMode="cover"
-            onLoad={() => {
-              setimg_load(true);
-            }}
-          />}
+              useLastImageAsDefaultSource
+              source={{ uri: imageUri }}
+              style={{
+                backgroundColor: !img_load ? "#b1b1b1" : "#00000000",
+                width: "100%",
+                height: "100%",
+                borderRadius: rspW(5.1),
+                alignSelf: "center",
+              }}
+              resizeMode="cover"
+              onLoad={() => {
+                setimg_load(true);
+              }}
+            />
+          )}
         </>
       </TouchableOpacityB>
     </View>
@@ -209,7 +207,7 @@ const SwipeCard = ({
     (state) => state.authentication.is_network_connected
   );
 
-  const [enable_swipe, setenable_swipe] = useState(true)
+  const [enable_swipe, setenable_swipe] = useState(true);
   const dispatch = useDispatch();
   //Filter
   const [showFilter, setshowFilter] = useState(false);
@@ -232,25 +230,20 @@ const SwipeCard = ({
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
 
-
-  const scrollTo = async (large = false) =>{
+  const scrollTo = async (large = false) => {
     // slidesRef2
-    
+
     if (large) {
-    if (currentIndex <  card_itm.image.length ) {
-      slidesRef2.current.scrollToIndex({ index : currentIndex })
+      if (currentIndex < card_itm.image.length) {
+        slidesRef2.current.scrollToIndex({ index: currentIndex });
+      }
+    } else {
+      if (currentIndex2 < card_itm.image.length) {
+        setcurrentIndex(currentIndex2);
+        slidesRef.current.scrollToIndex({ index: currentIndex2 });
+      }
     }
-    }
-    else{
-
-        if (currentIndex2 <  card_itm.image.length ) {
-      setcurrentIndex(currentIndex2)
-      slidesRef.current.scrollToIndex({ index : currentIndex2 })
-    }}
-    
-  }
-
-
+  };
 
   // To set current Item index to show active carousel item
   const viewableItemsChanged = useRef(({ viewableItems }) => {
@@ -266,9 +259,7 @@ const SwipeCard = ({
   const slidesRef2 = useRef(null);
 
   const viewableItemsChanged2 = useRef(({ viewableItems }) => {
-
     setcurrentIndex2(viewableItems[0]?.index);
-    
   }).current;
 
   const viewConfig2 = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
@@ -383,82 +374,75 @@ const SwipeCard = ({
     }
   };
 
-  
-  const PassPressIn = () =>{
-    setmodalVisible(false)
+  const PassPressIn = () => {
+    setmodalVisible(false);
     rightX.setValue(1);
     setactionType("Pass");
-    
-  }
-  const PassPress = () =>{
-
-    setmodalVisible(false)
+  };
+  const PassPress = () => {
+    setmodalVisible(false);
     handleChoiceButtons(0);
     swipeProfile(false, false);
     setreport("");
-  }
+  };
 
   const debouncePassPressIn = _.debounce(PassPressIn, 200, {
-   leading: false,
+    leading: false,
     trailing: true,
   });
 
   const debouncePassPress = _.debounce(PassPress, 200, {
-   leading: false,
+    leading: false,
     trailing: true,
   });
 
-  const SoftPressIn = () =>{
-    setmodalVisible(false)
-                          
-                          upY.setValue(1);
-                          setactionType("Softspot");
-  }
-  const SoftPress = () =>{
-    
-    setmodalVisible(false)
+  const SoftPressIn = () => {
+    setmodalVisible(false);
+
+    upY.setValue(1);
+    setactionType("Softspot");
+  };
+  const SoftPress = () => {
+    setmodalVisible(false);
     handleChoiceButtons(0);
-                          swipeProfile(true, true);
-                          setreport("");
-  }
+    swipeProfile(true, true);
+    setreport("");
+  };
 
   const debounceSoftPressIn = _.debounce(SoftPressIn, 200, {
-   leading: false,
+    leading: false,
     trailing: true,
   });
 
   const debounceSoftPress = _.debounce(SoftPress, 200, {
-   leading: false,
+    leading: false,
     trailing: true,
   });
 
-
-  const FancyPressIn = () =>{
-    setmodalVisible(false)
-                          leftX.setValue(1);
-                          setactionType("Fancy");
-  }
-  const FancyPress = () =>{
-    
-    setmodalVisible(false)
+  const FancyPressIn = () => {
+    setmodalVisible(false);
+    leftX.setValue(1);
+    setactionType("Fancy");
+  };
+  const FancyPress = () => {
+    setmodalVisible(false);
     handleChoiceButtons(0);
-                          swipeProfile(true, false);
-                          setreport("");
-  }
+    swipeProfile(true, false);
+    setreport("");
+  };
 
   const debounceFancyPressIn = _.debounce(FancyPressIn, 200, {
-   leading: false,
+    leading: false,
     trailing: true,
   });
 
   const debounceFancyPress = _.debounce(FancyPress, 200, {
-   leading: false,
+    leading: false,
     trailing: true,
   });
 
   // To send swipe action in backend
   const swipeProfile = async (action, superlikestatus) => {
-
     const data = {
       userprofile1: profile_data.userprofile.id,
       userprofile2: card_itm.id,
@@ -480,7 +464,6 @@ const SwipeCard = ({
       } else if (resp_data.code == 401) {
         dispatch(setSessionExpired(true));
       }
-
     } catch (error) {
       if (is_network_connected) {
         dispatch(setSessionExpired(true));
@@ -495,17 +478,11 @@ const SwipeCard = ({
     }
   }, [report]);
 
-
-  
-
-
   useEffect(() => {
-    
     if (!is_network_connected) {
-      setshowFilter(false)
+      setshowFilter(false);
     }
-  }, [is_network_connected])
-  
+  }, [is_network_connected]);
 
   useLayoutEffect(() => {
     setprompts(card_itm.publicprompts);
@@ -513,7 +490,7 @@ const SwipeCard = ({
     let usr_interest = card_itm?.interest.map((v) => [
       v.interestmaster.id,
       v.interestmaster.iconblue,
-      v.interestmaster.interest
+      v.interestmaster.interest,
     ]);
 
     setinterest_list(usr_interest);
@@ -521,7 +498,7 @@ const SwipeCard = ({
     let usr_pets = card_itm?.pets.map((v) => [
       v.petmaster.id,
       v.petmaster.iconblue,
-      v.petmaster.pets
+      v.petmaster.pets,
     ]);
 
     setpets_list(usr_pets);
@@ -530,8 +507,6 @@ const SwipeCard = ({
   useEffect(() => {
     if (modalVisible) {
       dispatch(setStatusBarArgs({ barStyle: "light-content" }));
-
-      
     } else {
       dispatch(
         setStatusBarArgs({ barStyle: "dark-content", backgroundColor: "#fff" })
@@ -540,12 +515,10 @@ const SwipeCard = ({
   }, [modalVisible]);
 
   useEffect(() => {
-
     if (currentIndex !== currentIndex2 && modalVisible) {
-      scrollTo()
+      scrollTo();
     }
-  }, [currentIndex,currentIndex2])
-  
+  }, [currentIndex, currentIndex2]);
 
   useLayoutEffect(() => {
     // To show blue circular mask if loaded profile already superliked loggined user
@@ -560,8 +533,6 @@ const SwipeCard = ({
       if (pos1 > pos2) return 1;
       return 0;
     });
-
-    
   }, []);
 
   return (
@@ -720,8 +691,8 @@ const SwipeCard = ({
           <View style={{ ...styles.container }}>
             <View
               style={{
-
-                paddingBottom: Platform.OS == "ios" ? rspH(7.7)+ insets.top : rspH(9),
+                paddingBottom:
+                  Platform.OS == "ios" ? rspH(7.7) + insets.top : rspH(9),
               }}
             >
               {/* Show this area if Bio not enlarge */}
@@ -832,11 +803,10 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
-                      debouncePassPressIn()
+                          debouncePassPressIn();
                         }}
                         onPress={() => {
-                          debouncePassPress()
-          
+                          debouncePassPress();
                         }}
                       >
                         <FastImage
@@ -852,12 +822,10 @@ const SwipeCard = ({
                       <TouchableOpacity
                         style={styles.actionCont}
                         onPressIn={() => {
-                
-                          debounceSoftPressIn()
-                        
+                          debounceSoftPressIn();
                         }}
                         onPress={() => {
-                          debounceSoftPress()
+                          debounceSoftPress();
                         }}
                       >
                         <FastImage
@@ -872,13 +840,10 @@ const SwipeCard = ({
                       {/* Action */}
                       <TouchableOpacity
                         onPressIn={() => {
-                          
-                          debounceFancyPressIn()
-                        
+                          debounceFancyPressIn();
                         }}
                         onPress={() => {
-                          debounceFancyPress()
-                          
+                          debounceFancyPress();
                         }}
                         style={styles.actionCont}
                       >
@@ -903,97 +868,99 @@ const SwipeCard = ({
               )}
 
               {/* FullScreen Image Carousel */}
-              
 
-<Modal animationType="slide" transparent={true} visible={modalVisible}>
-        {
-          modalVisible &&
-          <View style={{ flex: 1, backgroundColor: "#000" }}>
-          <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
-            {/* {children} */}
-         
-                <View style={styles.imageCont2}>
-                  {/* Back Btn Modal Closed */}
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+              >
+                {modalVisible && (
+                  <View style={{ flex: 1, backgroundColor: "#000" }}>
+                    <SafeAreaView style={{ flex: 1, backgroundColor: "#000" }}>
+                      {/* {children} */}
 
-                  <TouchableOpacity
-                    style={{
-                      position: "absolute",
-                      zIndex: 2,
-                      top: rspH(3),
-                      left: rspW(8),
-                      alignSelf: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: rspW(7.6),
-                      width: rspW(7.6),
-                      borderRadius: rspW(3.8),
-                    }}
-                    onPress={() => {
-                      setmodalVisible(false);
-                    }}
-                  >
-                    
-                    {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
-                    <Image
-                  source={Backward}        
-                  style={{width: '80%', height:'70%'}}
-                  resizeMode="contain"
+                      <View style={styles.imageCont2}>
+                        {/* Back Btn Modal Closed */}
+
+                        <TouchableOpacity
+                          style={{
+                            position: "absolute",
+                            zIndex: 2,
+                            top: rspH(3),
+                            left: rspW(8),
+                            alignSelf: "center",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: rspW(7.6),
+                            width: rspW(7.6),
+                            borderRadius: rspW(3.8),
+                          }}
+                          onPress={() => {
+                            setmodalVisible(false);
+                          }}
+                        >
+                          {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
+                          <Image
+                            source={Backward}
+                            style={{ width: "80%", height: "70%" }}
+                            resizeMode="contain"
                           />
-                  </TouchableOpacity>
+                        </TouchableOpacity>
 
-                  {/*  FullScreen Carousel */}
+                        {/*  FullScreen Carousel */}
 
-                  <FlatList
-                    initialScrollIndex={currentIndex}
-                    onLayout={()=>{
-                   
-                      setcurrentIndex2(currentIndex)
-                      scrollTo(true)
-                    }}
+                        <FlatList
+                          initialScrollIndex={currentIndex}
+                          onLayout={() => {
+                            setcurrentIndex2(currentIndex);
+                            scrollTo(true);
+                          }}
+                          getItemLayout={(data, index) => ({
+                            length: scrn_width,
+                            offset: scrn_width * index,
+                            index,
+                          })}
+                          data={card_itm.image}
+                          renderItem={renderItem2}
+                          keyExtractor={(item) => item.id}
+                          horizontal
+                          showsHorizontalScrollIndicator={false}
+                          pagingEnabled
+                          bounces={false}
+                          onScroll={Animated.event(
+                            [
+                              {
+                                nativeEvent: { contentOffset: { x: scrollX2 } },
+                              },
+                            ],
+                            {
+                              useNativeDriver: false,
+                            }
+                          )}
+                          scrollEventThrottle={32}
+                          onViewableItemsChanged={viewableItemsChanged2}
+                          viewabilityConfig={viewConfig2}
+                          ref={slidesRef2}
+                        />
 
-
-getItemLayout={(data, index) => ({
-          length: scrn_width,
-          offset: scrn_width * index ,
-          index,
-        })}
-                    data={card_itm.image}
-                    renderItem={renderItem2}
-                    keyExtractor={(item) => item.id}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled
-                    bounces={false}
-                    onScroll={Animated.event(
-                      [{ nativeEvent: { contentOffset: { x: scrollX2 } } }],
-                      {
-                        useNativeDriver: false,
-                      }
-                    )}
-                    scrollEventThrottle={32}
-                    onViewableItemsChanged={viewableItemsChanged2}
-                    viewabilityConfig={viewConfig2}
-                    ref={slidesRef2}
-                  />
-
-                  <Paginator
-                    data={card_itm.image}
-                    scrollX={scrollX2}
-                    currentIndex={currentIndex2}
-                  />
-                </View>
-                </SafeAreaView>
-        </View>}
-      </Modal>
+                        <Paginator
+                          data={card_itm.image}
+                          scrollX={scrollX2}
+                          currentIndex={currentIndex2}
+                        />
+                      </View>
+                    </SafeAreaView>
+                  </View>
+                )}
+              </Modal>
               {/* </FullModal> */}
 
               {/* Profile Details Area */}
 
               <ScrollView
-
-              decelerationRate={0.9}
+                decelerationRate={0.9}
                 style={styles.profileDetailsCont}
-                bounces={false}
+                bounces={true}
                 showsVerticalScrollIndicator={false}
                 scrollEventThrottle={300}
               >
@@ -1044,12 +1011,10 @@ getItemLayout={(data, index) => ({
                             style={styles.profileDetailContNText}
                             numberOfLines={1}
                           >
-                            {card_itm?.city
-                            ?.split(",")[0]?.length > 11
+                            {card_itm?.city?.split(",")[0]?.length > 11
                               ? card_itm?.city.split(",")[0]?.substring(0, 9) +
                                 "..."
-                              : card_itm?.city.split(",")[0]
-                              }
+                              : card_itm?.city.split(",")[0]}
                           </Text>
                         </View>
 
@@ -1150,23 +1115,22 @@ getItemLayout={(data, index) => ({
                       </Text>
                       <TouchableWithoutFeedback>
                         <ScrollView
-                        decelerationRate={0.9}
-                          bounces={false}
+                          decelerationRate={0.9}
+                          bounces={true}
                           style={{ marginTop: rspH(0.8) }}
                           horizontal
                           showsHorizontalScrollIndicator={false}
                           scrollEventThrottle={1}
                         >
                           {interest_list.map((img, idx) => {
-                            let img1 = img[2]
-                            if (img[2].split(' ').length > 1) {
-                              let itmlis = img[2].split(' ')
-                               img1 = itmlis.join('')
+                            let img1 = img[2];
+                            if (img[2].split(" ").length > 1) {
+                              let itmlis = img[2].split(" ");
+                              img1 = itmlis.join("");
                             }
                             return (
                               <FastImage
                                 key={idx}
-        
                                 source={icn[`${img1}Blue`]}
                                 style={styles.interestImage}
                                 resizeMode="cover"
@@ -1199,25 +1163,26 @@ getItemLayout={(data, index) => ({
                           width: rspW(39.5),
                           marginLeft: rspW(2),
                           alignSelf: "flex-start",
-                          marginBottom: Platform.OS == 'ios'? rspH(1.6): rspH(2.6),
+                          marginBottom:
+                            Platform.OS == "ios" ? rspH(1.6) : rspH(2.6),
                         }}
                       >
                         <Text style={styles.profileDetailContHeading}>
                           Pets
                         </Text>
                         <ScrollView
-                        decelerationRate={0.9}
-                          bounces={false}
+                          decelerationRate={0.9}
+                          bounces={true}
                           style={{ marginTop: rspH(0.8) }}
                           horizontal
                           scrollEventThrottle={1}
                           showsHorizontalScrollIndicator={false}
                         >
                           {pets_list.map((img, indx) => {
-                            let img1 = img[2]
-                            if (img[2].split(' ').length > 1) {
-                              let itmlis = img[2].split(' ')
-                               img1 = itmlis.join('')
+                            let img1 = img[2];
+                            if (img[2].split(" ").length > 1) {
+                              let itmlis = img[2].split(" ");
+                              img1 = itmlis.join("");
                             }
                             return (
                               <FastImage
@@ -1393,7 +1358,6 @@ const styles = StyleSheet.create({
     width: rspW(86),
     height: scrn_height,
     marginTop: rspH(3.4),
-
   },
   profileDetailsSubCont: {
     width: rspW(82),

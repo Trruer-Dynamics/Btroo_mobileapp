@@ -26,45 +26,46 @@ import ADIcon from "react-native-vector-icons/AntDesign";
 import FormWrapperFooter from "../wrappers/formWrappers/FormWrapperFooter";
 import FooterBtn from "../Buttons/FooterBtn";
 import FastImage from "react-native-fast-image";
-import * as icn from '../../assets'
+import * as icn from "../../assets";
 
-const Item = ({ item, onPress, selected_list, selected_lis2, multi }) =>{ 
+const Item = ({ item, onPress, selected_list, selected_lis2, multi }) => {
+  let img1 = item[1];
 
-  let img1 = item[1]
-
-  if (item[1].split(' ').length > 1) {
-    let itmlis = item[1].split(' ')
-     img1 = itmlis.join('')
+  if (item[1].split(" ").length > 1) {
+    let itmlis = item[1].split(" ");
+    img1 = itmlis.join("");
   }
-  return(
-  <TouchableOpacity
-    onPress={onPress}
-    style={{
-      ...styles.item,
-      width: rspW(75.9),
-      backgroundColor:
-        selected_lis2.indexOf(item[0]) > -1
-          ? colors.lightBlue + "46" // for opacity
-          : colors.lightGrey,
-    }}
-  >
-    {multi && (
-      <FastImage
-        source={selected_lis2.indexOf(item[0]) > -1 ?  icn[`${img1}Blue`] : icn[`${img1}Gray`]}
-  
-
-        style={{
-          width: rspW(5.1),
-          height: rspW(5.1),
-          marginRight: rspW(2.5),
-        }}
-        resizeMode="contain"
-      />
-    )}
-    <Text style={[styles.title, { color: colors.black }]}>{item[1]}</Text>
-  </TouchableOpacity>
-);
-}
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        ...styles.item,
+        width: rspW(75.9),
+        backgroundColor:
+          selected_lis2.indexOf(item[0]) > -1
+            ? colors.lightBlue + "46" // for opacity
+            : colors.lightGrey,
+      }}
+    >
+      {multi && (
+        <FastImage
+          source={
+            selected_lis2.indexOf(item[0]) > -1
+              ? icn[`${img1}Blue`]
+              : icn[`${img1}Gray`]
+          }
+          style={{
+            width: rspW(5.1),
+            height: rspW(5.1),
+            marginRight: rspW(2.5),
+          }}
+          resizeMode="contain"
+        />
+      )}
+      <Text style={[styles.title, { color: colors.black }]}>{item[1]}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const FormMultiSelectorFilter = ({
   search = true,

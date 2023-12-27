@@ -21,7 +21,6 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigationRef = useRef();
   useLayoutEffect(() => {
-
     const safe_height =
       scrn_height - (Platform.OS == "android" ? 0 : insets.bottom + insets.top);
 
@@ -41,18 +40,14 @@ const Navigation = () => {
   );
 
   useLayoutEffect(() => {
-    
     if (current_screen == "Swiper") {
       dispatch(setProfileRefresh(!profile_refresh));
     }
 
-    
     if (!is_network_connected) {
       if (
-        current_screen != "MatchScreen" 
-        &&
-        current_screen != "Chat" 
-        &&
+        current_screen != "MatchScreen" &&
+        current_screen != "Chat" &&
         current_screen != "Intro" &&
         current_screen != "Swiper" &&
         current_screen != "SettingsScreen" &&
@@ -61,15 +56,11 @@ const Navigation = () => {
         current_screen != "MatchProfile" &&
         current_screen != ""
       ) {
-
         setoffAlert(true);
-      }
-      else{
+      } else {
         setoffAlert(false);
       }
-     
-    } 
-    else {
+    } else {
       setoffAlert(false);
     }
 
@@ -82,8 +73,7 @@ const Navigation = () => {
           })
         );
       }
-    } 
-    else {
+    } else {
       dispatch(
         setStatusBarArgs({
           barStyle: "dark-content",
@@ -91,10 +81,7 @@ const Navigation = () => {
         })
       );
     }
-
   }, [is_network_connected, current_screen]);
-
-
 
   return (
     <NavigationContainer ref={navigationRef}>

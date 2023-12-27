@@ -22,9 +22,8 @@ const FormHeaderChat = ({
         justifyContent: "space-between",
         alignItems: "center",
         height: srn_height * 0.06,
-        backgroundColor:'#fff',
+        backgroundColor: "#fff",
         width: "100%",
-        
       }}
     >
       <TouchableOpacity

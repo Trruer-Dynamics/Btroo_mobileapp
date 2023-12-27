@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { Alert, Platform } from "react-native";
 import messaging from "@react-native-firebase/messaging";
@@ -7,27 +6,27 @@ import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import { UserContext } from "../context/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
- 
+
 const NotificationController = (props) => {
-  const { sckop, newMsgRefresh, setnewMsgRefresh, c_scrn } = useContext(UserContext);
+  const { sckop, newMsgRefresh, setnewMsgRefresh, c_scrn } =
+    useContext(UserContext);
   const user_loggined = useSelector(
     (state) => state.authentication.user_loggined
   );
   const matches = useSelector((state) => state.chats.matches);
- 
+
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
- 
- 
+
   const current_screen = useSelector((state) => state.screen.current_screen);
- 
+
   const [user_interact, setuser_interact] = useState(false);
   const [type, settype] = useState("");
   const [not_data, setnot_data] = useState(null);
   const [refresh, setrefresh] = useState(false);
   const navigation = useNavigation();
- 
+
   useEffect(() => {
     if (
       not_data?.type == "Chat" ||
@@ -36,15 +35,15 @@ const NotificationController = (props) => {
     ) {
       setnewMsgRefresh(!newMsgRefresh);
     }
- 
+
     if (not_data?.type == "Reveal" && user_loggined) {
       setuser_interact(false);
- 
+
       let dt = JSON.parse(not_data.data);
       let expiry_date = dt.expiry_datetime;
- 
+
       let mth = {};
- 
+
       mth.id = dt.chatroom_id;
       mth.chat_id = dt.chat_id;
       mth.no_of_extend = dt.number_of_extend;
@@ -58,7 +57,7 @@ const NotificationController = (props) => {
         profile: mth,
       });
     }
- 
+
     if (not_data?.type != "" && user_interact && user_loggined) {
       if (not_data?.type == "Match") {
         setuser_interact(false);
@@ -66,9 +65,9 @@ const NotificationController = (props) => {
       } else if (not_data?.type == "Chat") {
         setuser_interact(false);
         let dt = not_data;
-  
+
         let cht_id = dt.chatroom_id;
- 
+
         if (matches.length > 0) {
           let c_user_match = matches.filter(
             (v) =>
@@ -83,7 +82,7 @@ const NotificationController = (props) => {
       }
     }
   }, [refresh, user_interact, not_data]);
- 
+
   useLayoutEffect(() => {
     // Must be outside of any component LifeCycle (such as `componentDidMount`).
     PushNotification.createChannel(
@@ -98,11 +97,11 @@ const NotificationController = (props) => {
       },
       (created) => {} // (optional) callback returns whether the channel was created, false means it already existed.
     );
- 
+
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {},
- 
+
       onNotification: function (notification) {
         setuser_interact(notification.userInteraction);
         if (notification.userInteraction) {
@@ -111,43 +110,41 @@ const NotificationController = (props) => {
             setrefresh(!refresh);
           }
         }
- 
+
         notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
- 
+
       channelId: "com.btroo.dev",
- 
+
       onAction: function (notification) {},
- 
+
       // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
       onRegistrationError: function (err) {
         console.error(err.message, err);
       },
- 
+
       // IOS ONLY (optional): default: all - Permissions to register.
       permissions: {
         alert: true,
         badge: true,
         sound: true,
       },
- 
+
       popInitialNotification: true,
- 
+
       requestPermissions: false,
     });
   }, []);
- 
+
   useLayoutEffect(() => {
-
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-
       const { title, body } = remoteMessage.notification;
       data = remoteMessage.data;
-   
+
       setnot_data(data);
- 
+
       setrefresh(!refresh);
- 
+
       let notifObj = {
         channelId: "com.btroo.dev",
         message: body,
@@ -159,30 +156,30 @@ const NotificationController = (props) => {
         notifObj = {
           ...notifObj,
           // actions: ["Yes", "No"],
- 
+
           // largeIcon: '',
           // (optional) default: "ic_launcher". Use "" for no large icon.
           //   smallIcon: 'ic_notification',
           color: "#1c2143",
         };
-
-
       }
-      
-      if (data?.type == 'Reveal') {
-        PushNotification.localNotification(notifObj); 
-      }
-else
-      if (user_loggined && !sckop.current && data?.type != "Hidden" && c_scrn.current != 'Chat') {
+
+      if (data?.type == "Reveal") {
+        PushNotification.localNotification(notifObj);
+      } else if (
+        user_loggined &&
+        !sckop.current &&
+        data?.type != "Hidden" &&
+        c_scrn.current != "Chat"
+      ) {
         PushNotification.localNotification(notifObj);
       }
     });
- 
+
     return unsubscribe;
   }, [user_loggined]);
- 
+
   return null;
 };
- 
+
 export default NotificationController;
- 

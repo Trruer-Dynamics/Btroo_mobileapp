@@ -33,8 +33,7 @@ const ReferralCode = ({
   private_prompt2_a,
   setpromptStep,
 }) => {
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [referral_code, setreferral_code] = useState("");
   const [referral_code_blr, setreferral_code_blr] = useState(false);
   const profile_data = useSelector(
@@ -51,8 +50,6 @@ const ReferralCode = ({
   const [loading, setloading] = useState(false);
 
   const dispatch = useDispatch();
-
- 
 
   const savePrompts = async () => {
     setloading(true);
@@ -111,9 +108,8 @@ const ReferralCode = ({
         };
         dispatch(setPromptFillingComplete(true));
         dispatch(setProfiledata(user_prof_datap));
-        dispatch(setUserLoggined(true))
-        navigation.navigate('Pledge')
-
+        dispatch(setUserLoggined(true));
+        navigation.navigate("Pledge");
       } else if (status == 401) {
         dispatch(setSessionExpired(true));
       }
@@ -124,9 +120,8 @@ const ReferralCode = ({
 
   const onNextPress = () => {
     if (is_network_connected) {
-      savePrompts();      
+      savePrompts();
     }
-
   };
 
   return (
@@ -143,16 +138,15 @@ const ReferralCode = ({
             {/* Main Form UI */}
             <View>
               {/*Form  Header */}
-            <View style={{marginHorizontal: rspW(-5)}}>
-              <FormHeader
-              left_icon={true}
-              onPress={()=> setpromptStep(3)}
-                title="Tell us know how you got here"
-                para={`Let us know if someone referred you \n to us. We would like to reward you \n both with some cool premium \n features.`}
-                fontSize={2.2}
-                
-              />
-</View>
+              <View style={{ marginHorizontal: rspW(-5) }}>
+                <FormHeader
+                  left_icon={true}
+                  onPress={() => setpromptStep(3)}
+                  title="Tell us know how you got here"
+                  para={`Let us know if someone referred you \n to us. We would like to reward you \n both with some cool premium \n features.`}
+                  fontSize={2.2}
+                />
+              </View>
               {/* Inputs Container*/}
               <View style={styles.inputCont}>
                 <FormInput

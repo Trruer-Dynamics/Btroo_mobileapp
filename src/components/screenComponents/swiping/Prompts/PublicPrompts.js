@@ -133,20 +133,16 @@ const PublicPrompts = ({
                     style={{
                       ...styles.promptsInput,
                       backgroundColor:
-                        public_prompt1_a !== ""  ? colors.white : "#F8F8F8",
-                      borderColor:
-                      public_prompt1_blr ?
-                      public_prompt1_a.length < 3 ?
-                      colors.error:
-                      colors.blue
-                      :
-                        public_prompt1_a !== "" 
-                          ? 
-                          colors.blue
-                          : colors.grey
-                      ,
+                        public_prompt1_a !== "" ? colors.white : "#F8F8F8",
+                      borderColor: public_prompt1_blr
+                        ? public_prompt1_a.length < 3
+                          ? colors.error
+                          : colors.blue
+                        : public_prompt1_a !== ""
+                        ? colors.blue
+                        : colors.grey,
                       textAlignVertical: "top",
-                      paddingTop: rspH(1.4),  
+                      paddingTop: rspH(1.4),
                     }}
                     value={public_prompt1_a}
                     onChangeText={(val) => {
@@ -189,18 +185,15 @@ const PublicPrompts = ({
                       ...styles.promptsInput,
                       backgroundColor:
                         public_prompt2_a !== "" ? colors.white : "#F8F8F8",
-                      borderColor:
-
-                      public_prompt2_blr ?
-                      public_prompt2_a.length < 3 ?
-                      colors.error:
-                      colors.blue
-                      :
-                        public_prompt2_a !== ""
-                          ? colors.blue
-                          : colors.grey,
+                      borderColor: public_prompt2_blr
+                        ? public_prompt2_a.length < 3
+                          ? colors.error
+                          : colors.blue
+                        : public_prompt2_a !== ""
+                        ? colors.blue
+                        : colors.grey,
                       textAlignVertical: "top",
-                      paddingTop: rspH(1.4),  
+                      paddingTop: rspH(1.4),
                     }}
                     value={public_prompt2_a}
                     onChangeText={(val) => {
@@ -232,9 +225,8 @@ const PublicPrompts = ({
               }
               onPress={() => {
                 if (is_network_connected) {
-                  onNextPress()  
+                  onNextPress();
                 }
-                
               }}
             />
           </FormWrapperFooter>

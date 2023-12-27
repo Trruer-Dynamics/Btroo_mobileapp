@@ -40,15 +40,14 @@ const StackNav = () => {
         <Stack.Screen name="Splash" component={Splash} />
 
         <Stack.Screen
-
           name="Intro"
           component={Intro}
           options={{
-            animationEnabled: true,
-            presentation: 'transparentModal',
-            ...TransitionPresets.ModalSlideFromBottomIOS,
+            // animationEnabled: true,
+            // presentation: 'transparentModal',
+            // ...TransitionPresets.ModalSlideFromBottomIOS,
+            ...TransitionPresets.ModalFadeTransition,
             cardOverlayEnabled: true,
-          
           }}
         />
 
@@ -62,10 +61,7 @@ const StackNav = () => {
           name="PhotoVerificationFinal"
           component={PhotoVerificationFinal}
         />
-        <Stack.Screen
-        name="Prompts"
-        component={Prompts}
-        />
+        <Stack.Screen name="Prompts" component={Prompts} />
 
         {/* Tutorial */}
         <Stack.Screen name="Pledge" component={Pledge} />

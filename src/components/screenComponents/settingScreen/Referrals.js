@@ -122,9 +122,7 @@ const Referrals = ({ modalVisible, setModalVisible }) => {
 
               Share.open(options)
                 .then((res) => {})
-                .catch((err) => {
-               
-                });
+                .catch((err) => {});
             }}
           />
         </View>

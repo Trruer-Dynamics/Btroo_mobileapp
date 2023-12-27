@@ -13,12 +13,10 @@ const MatchStack = ({ route }) => {
 
   const { c_scrn } = useContext(UserContext);
 
-
   const dispatch = useDispatch();
   useFocusEffect(
-
     React.useCallback(() => {
-      c_scrn.current = 'Match'
+      c_scrn.current = "Match";
       dispatch(setCurrentScreen("MatchScreen"));
 
       return () => {};

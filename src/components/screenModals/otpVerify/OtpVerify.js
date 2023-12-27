@@ -85,8 +85,6 @@ const OtpVerify = ({
     (state) => state.authentication.is_network_connected
   );
 
-  
-
   const [loading, setloading] = useState(false);
 
   const [otp1, setotp1] = useState(otp[0] == "0" ? "" : otp);
@@ -100,7 +98,6 @@ const OtpVerify = ({
   const [btnClick, setbtnClick] = useState(false);
   const [keyboard_hgt, setkeyboard_hgt] = useState(0);
 
-
   const getOneTimeLocation = async () => {
     Geolocation.getCurrentPosition(
       //Will give you the current location
@@ -111,14 +108,10 @@ const OtpVerify = ({
         //getting the Latitude from the location json
         const currentLatitude = JSON.stringify(position.coords.latitude);
 
-    
         setcurrent_long(currentLongitude);
         setcurrent_lat(currentLatitude);
-
       },
-      (err) => {
-        
-      },
+      (err) => {},
 
       {
         enableHighAccuracy: true,
@@ -126,9 +119,8 @@ const OtpVerify = ({
     );
   };
 
-
-   // To get Location Permission
-   const getLocation = async () => {
+  // To get Location Permission
+  const getLocation = async () => {
     getOneTimeLocation();
     return () => {
       Geolocation.clearWatch(watchID);
@@ -169,7 +161,6 @@ const OtpVerify = ({
       setloading(false);
 
       if (user_code == 400) {
-        
         setModalVisible(false);
 
         setTimeout(() => {
@@ -377,8 +368,6 @@ const OtpVerify = ({
           user_data?.token?.access
         );
 
-        
-
         // Set Tutorials booleans values
         dispatch(setSwipeTut(!user_data.userprofile.is_swapping_tutorial_view));
         dispatch(setMatchTut(!user_data.userprofile.is_matching_tutorial_view));
@@ -403,11 +392,9 @@ const OtpVerify = ({
           nav_to = "PicUpload";
         } else if (!usr_prf.is_photoverified) {
           nav_to = "PhotoVerification";
-        } 
-        else if (!user_data.userprofile.is_promptsfillingcomplete) {
-          nav_to="Prompts"
-        }
-        else {
+        } else if (!user_data.userprofile.is_promptsfillingcomplete) {
+          nav_to = "Prompts";
+        } else {
           dispatch(setUserLoggined(true));
           navigation.navigate("BottomTab", {
             screen: "Swiper",
@@ -427,7 +414,6 @@ const OtpVerify = ({
 
   // To verify sent otp
   const verifyOtp = async () => {
-
     if (otp1 == "000000") {
       setotperr(false);
       dispatch(
@@ -445,26 +431,21 @@ const OtpVerify = ({
       setotperr(true); // if otp is invalid
     }
 
-    
-
     // try {
     //   setloading(true);
-      
+
     //   let mobile_no = "+" + ph_code + "" + ph_no
-      
-      
+
     //   if (mobile_no != '+911234512345') {
     //          await confirm.confirm(otp1);
     //         setotperr(false);
     //   }
-    //   else  if (mobile_no == '+911234512345' && otp1 != '211223') {  
+    //   else  if (mobile_no == '+911234512345' && otp1 != '211223') {
     //     setotperr(true);
     //     }
     //   else{
     //     setotperr(false);
     //   }
-      
-
 
     //   dispatch(
     //     setActiveUserLocationDetails({
@@ -482,7 +463,6 @@ const OtpVerify = ({
     //   setloading(false);
     //   setotperr(true);
     // }
-    
   };
 
   // To resend OTP after 30 seconds
@@ -497,18 +477,13 @@ const OtpVerify = ({
   const listenOtp = async () => {
     try {
       startOtpListener((message) => {
-
         try {
           const otp = /(\d{6})/g.exec(message)[1];
           setotp1(otp);
           setotp1blr(true);
-        } catch (err) {
-
-        }
+        } catch (err) {}
       });
-    } catch (err) {
-  
-    }
+    } catch (err) {}
   };
 
   // 30 seconds timer
@@ -543,7 +518,7 @@ const OtpVerify = ({
 
   useLayoutEffect(() => {
     // getLocation()
-  }, [])
+  }, []);
 
   return (
     <KeyboardAwareScrollView
@@ -720,15 +695,11 @@ const OtpVerify = ({
           />
           <FooterBtn
             title={"Validate"}
-            disabled={
-              !is_network_connected
-              ||
-              otp1.length < 6 ||
-              otperr
-            }
+            disabled={!is_network_connected || otp1.length < 6 || otperr}
             onPress={() => {
               if (
-                otp1.length == 6 && is_network_connected
+                otp1.length == 6 &&
+                is_network_connected
                 //  && otp2 && otp3 && otp4 && otp5 && otp6
               ) {
                 verifyOtp();

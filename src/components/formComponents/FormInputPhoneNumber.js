@@ -60,7 +60,7 @@ const FormInputPhoneNumber = ({
       activeOpacity={1}
       style={{
         ...styles.input_cont,
-        height:  rspH(5.8),
+        height: rspH(5.8),
         width: width,
         backgroundColor: value.length > 0 ? "#fff" : "#F8F8F8",
         borderColor: invalid
@@ -74,7 +74,7 @@ const FormInputPhoneNumber = ({
       <View
         style={{
           position: "absolute",
-          top:Platform.OS == 'ios' ?  rspH(0.7) : rspH(0.7) ,
+          top: Platform.OS == "ios" ? rspH(0.7) : rspH(0.7),
           paddingHorizontal: rspW(4),
         }}
       >

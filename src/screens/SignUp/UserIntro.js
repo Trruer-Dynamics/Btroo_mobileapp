@@ -63,11 +63,7 @@ const UserIntro = ({ navigation, route }) => {
     (state) => state.authentication.is_network_connected
   );
 
-
-  const lcl_locations = useSelector(
-    (state) => state.authentication.locations
-  );
-
+  const lcl_locations = useSelector((state) => state.authentication.locations);
 
   const dispatch = useDispatch();
 
@@ -195,7 +191,6 @@ const UserIntro = ({ navigation, route }) => {
 
   // Blur all inputs in step 1 next button click
   useEffect(() => {
-
     if (step1blr) {
       setname_blr(true);
       setdob_blr(true);
@@ -281,7 +276,6 @@ const UserIntro = ({ navigation, route }) => {
 
   const onNextPress = () => {
     let val = false;
-
 
     // Check validation of all inputs in active step
     if (step == 1) {
@@ -476,7 +470,7 @@ const UserIntro = ({ navigation, route }) => {
   // get Cities Data on Search
   const getLocation = async (page, onpage = false) => {
     setcity_refresh(true);
-    let url = `GetLocation/`
+    let url = `GetLocation/`;
 
     let data = {
       location: city_search,
@@ -493,7 +487,7 @@ const UserIntro = ({ navigation, route }) => {
           setcity_refresh(false);
 
           let f_list = [];
-          
+
           let tmp_cities = [];
 
           if (resp.data.data.city.length > 0) {
@@ -508,7 +502,7 @@ const UserIntro = ({ navigation, route }) => {
 
           f_list.push(...tmp_cities);
 
-          dispatch(setLocations(f_list))
+          dispatch(setLocations(f_list));
         } else {
           setcity_refresh(false);
           console.warn("Error occur while getting Location");
@@ -667,7 +661,7 @@ const UserIntro = ({ navigation, route }) => {
       setdob(new Date(mxdate_f));
     }
     // Call all Required Form Data
-    getLocation(1)
+    getLocation(1);
     getGenders();
     getEducation();
     getInterests();
@@ -763,7 +757,7 @@ const UserIntro = ({ navigation, route }) => {
 
                   <FormInputContainer label="City">
                     {/* Single Data selector */}
-                    
+
                     <FormSelectorLS
                       setSelectedEntry={setcity}
                       selectedId={city_id}
@@ -775,9 +769,8 @@ const UserIntro = ({ navigation, route }) => {
                       placeholder={"Select"}
                       width={"100%"}
                       list={lcl_locations}
-                      selectedValue={city[1]}           
+                      selectedValue={city[1]}
                     />
-
                   </FormInputContainer>
 
                   <View style={styles.multiInputContainer}>
@@ -1070,8 +1063,7 @@ const UserIntro = ({ navigation, route }) => {
               <ErrorContainer
                 error_msg={
                   step == 1
-                    ? 
-                      user_intro_err
+                    ? user_intro_err
                     : step == 2
                     ? user_intro_err2
                     : step == 3
@@ -1088,9 +1080,9 @@ const UserIntro = ({ navigation, route }) => {
                   (step == 2 && !step2_all_fill) ||
                   (step == 3 && !step3_all_fill)
                 }
-                onPress={()=>{
+                onPress={() => {
                   if (is_network_connected) {
-                    onNextPress()
+                    onNextPress();
                   }
                 }}
               />

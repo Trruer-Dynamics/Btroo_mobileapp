@@ -33,7 +33,6 @@ const UserProvider = ({ children, navigationRef }) => {
   const sckop = useRef(false);
   const c_scrn = useRef(false);
 
-
   const access_token = useSelector(
     (state) => state.authentication.access_token
   );
@@ -79,7 +78,6 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const clearData = async () => {
-
     if (is_session_expired == true && user_loggined) {
       await resetNav();
       await removeToken();
@@ -88,7 +86,6 @@ const UserProvider = ({ children, navigationRef }) => {
   };
 
   const removeToken = async () => {
-
     const url = apiUrl + "token_remove/";
 
     const headers = {
@@ -100,7 +97,6 @@ const UserProvider = ({ children, navigationRef }) => {
       profile_id: profile_data.userprofile.id,
       token: DeviceToken,
     };
-
 
     try {
       const resp = await axios.post(url, data, { headers });
@@ -128,11 +124,7 @@ const UserProvider = ({ children, navigationRef }) => {
   }, []);
 
   useEffect(() => {
-
- 
-      clearData();      
-
-
+    clearData();
   }, [is_session_expired]);
 
   useLayoutEffect(() => {

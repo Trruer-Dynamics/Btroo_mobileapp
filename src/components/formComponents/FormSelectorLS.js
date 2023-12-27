@@ -52,7 +52,7 @@ const FormSelectorLS = ({
   blr_value = null,
   setblr_value = null,
   placeholder,
-  firstBlr=true,
+  firstBlr = true,
   list,
   selectedId,
   setSelectedId,
@@ -129,8 +129,6 @@ const FormSelectorLS = ({
     }
   };
 
-  
-
   return (
     <>
       <TouchableOpacity
@@ -153,7 +151,6 @@ const FormSelectorLS = ({
           if (firstBlr) {
             setblr_value(true);
           }
-
         }}
       >
         <View style={styles.inp_title_cont}>
@@ -177,14 +174,13 @@ const FormSelectorLS = ({
               {search ? (
                 <>
                   {/* Use Search Component according to search type */}
-                  
-                    <SearchInput
-                      search={search_value}
-                      setsearch={setsearch_value}
-                      datalist={list}
-                      setfilterdatalist={setfilterdatalist}
-                    />
-                  
+
+                  <SearchInput
+                    search={search_value}
+                    setsearch={setsearch_value}
+                    datalist={list}
+                    setfilterdatalist={setfilterdatalist}
+                  />
                 </>
               ) : (
                 // Empty conponent to add Empty Space above items
@@ -197,11 +193,10 @@ const FormSelectorLS = ({
               >
                 {/* To Render Items  */}
                 <FlatList
-                  data={search_value !=='' ? filterdatalist : []}
+                  data={search_value !== "" ? filterdatalist : []}
                   renderItem={renderItem}
                   keyExtractor={(item) => item[0]}
-                 
-                  />
+                />
               </View>
             </View>
           </FormComponentsWrapper>

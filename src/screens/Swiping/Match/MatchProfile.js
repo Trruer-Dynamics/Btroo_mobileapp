@@ -51,8 +51,7 @@ import FastImage from "react-native-fast-image";
 import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 import { UserContext } from "../../../context/user";
 import OffflineAlert from "../../../components/functions/OfflineAlert";
-import * as icn from '../../../assets'
-
+import * as icn from "../../../assets";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item.image);
@@ -153,7 +152,7 @@ const MatchProfile = ({ route }) => {
       .catch((err) => {});
   };
 
-  const { sckop,c_scrn } = useContext(UserContext);
+  const { sckop, c_scrn } = useContext(UserContext);
 
   const unmatchProfile = async () => {
     const headers = {
@@ -219,7 +218,7 @@ const MatchProfile = ({ route }) => {
       let usr_interest = profile?.userprofile?.interest.map((v) => [
         v.id,
         v.interestmaster.iconblue,
-        v.interestmaster.interest
+        v.interestmaster.interest,
       ]);
 
       setinterest_list(usr_interest);
@@ -227,7 +226,7 @@ const MatchProfile = ({ route }) => {
       let usr_pets = profile?.userprofile?.pets.map((v) => [
         v.id,
         v.petmaster.iconblue,
-        v.petmaster.pets
+        v.petmaster.pets,
       ]);
 
       setpets_list(usr_pets);
@@ -268,7 +267,7 @@ const MatchProfile = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      c_scrn.current = 'MatchProfile'
+      c_scrn.current = "MatchProfile";
       dispatch(setCurrentScreen(route.name));
       return () => {};
     }, [])
@@ -277,7 +276,7 @@ const MatchProfile = ({ route }) => {
   return (
     <>
       {loading && <Loader />}
-      <OffflineAlert  offAlert={!is_network_connected}/>
+      <OffflineAlert offAlert={!is_network_connected} />
       <View style={{ height: scrn_height, backgroundColor: "#fff" }}>
         <SafeAreaView style={{ flex: 1 }}>
           <View
@@ -391,9 +390,9 @@ const MatchProfile = ({ route }) => {
             </View>
 
             <ScrollView
-            decelerationRate={0.9}
+              decelerationRate={0.9}
               showsVerticalScrollIndicator={false}
-              bounces={false}
+              bounces={true}
               style={{
                 marginTop: rspH(1.6),
               }}
@@ -401,7 +400,7 @@ const MatchProfile = ({ route }) => {
               <View
                 style={{
                   paddingTop: rspH(1.2),
-                  paddingBottom: profile.prof_rvl ? rspH(5): rspH(0.5),
+                  paddingBottom: profile.prof_rvl ? rspH(5) : rspH(0.5),
                   width: scrn_width / 1.2,
                 }}
               >
@@ -441,8 +440,6 @@ const MatchProfile = ({ route }) => {
                               .split(",")[0]
                               .substring(0, 9) + "..."
                           : profile?.userprofile?.city.split(",")[0]}
-
-                          
                       </Text>
                     </View>
 
@@ -605,17 +602,17 @@ const MatchProfile = ({ route }) => {
                     >
                       <Text style={styles.profileDetailContHeading}>Pets</Text>
                       <ScrollView
-                      decelerationRate={0.9}
-                        bounces={false}
+                        decelerationRate={0.9}
+                        bounces={true}
                         style={{ marginTop: rspH(0.8) }}
                         horizontal
                         showsHorizontalScrollIndicator={false}
                       >
                         {pets_list.map((img, indx) => {
-                          let img1 = img[2]
-                          if (img[2].split(' ').length > 1) {
-                            let itmlis = img[2].split(' ')
-                             img1 = itmlis.join('')
+                          let img1 = img[2];
+                          if (img[2].split(" ").length > 1) {
+                            let itmlis = img[2].split(" ");
+                            img1 = itmlis.join("");
                           }
                           return (
                             // <FastImage
@@ -625,22 +622,22 @@ const MatchProfile = ({ route }) => {
                             //   resizeMode="cover"
                             // />
                             <View key={indx}>
-                          {Platform.OS == "ios" ? (
-                            <Image
-                              source={icn[`${img1}Blue`]}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                          ) : (
-                            <FastImage
-                              useLastImageAsDefaultSource
-                              // source={{ uri: img1 }}
-                              source={icn[`${img1}Blue`]}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                          )}
-                        </View>
+                              {Platform.OS == "ios" ? (
+                                <Image
+                                  source={icn[`${img1}Blue`]}
+                                  style={styles.interestImage}
+                                  resizeMode="cover"
+                                />
+                              ) : (
+                                <FastImage
+                                  useLastImageAsDefaultSource
+                                  // source={{ uri: img1 }}
+                                  source={icn[`${img1}Blue`]}
+                                  style={styles.interestImage}
+                                  resizeMode="cover"
+                                />
+                              )}
+                            </View>
                           );
                         })}
                       </ScrollView>
@@ -669,17 +666,17 @@ const MatchProfile = ({ route }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Interests</Text>
                   <ScrollView
-                  decelerationRate={0.9}
-                    bounces={false}
+                    decelerationRate={0.9}
+                    bounces={true}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                   >
                     {interest_list.map((img, idx) => {
-                      let img1 = img[2]
-                      if (img[2].split(' ').length > 1) {
-                        let itmlis = img[2].split(' ')
-                         img1 = itmlis.join('')
+                      let img1 = img[2];
+                      if (img[2].split(" ").length > 1) {
+                        let itmlis = img[2].split(" ");
+                        img1 = itmlis.join("");
                       }
                       return (
                         <FastImage
@@ -778,8 +775,8 @@ const MatchProfile = ({ route }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Languages</Text>
                   <ScrollView
-                  decelerationRate={0.9}
-                    bounces={false}
+                    decelerationRate={0.9}
+                    bounces={true}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -825,10 +822,9 @@ const MatchProfile = ({ route }) => {
                     </Text>
                   </View>
                 )}
-       
-                {/* {profile.matchType == "New Match" && !profile.prof_rvl && ( */}
-                {!route.params?.fromchat  && (
 
+                {/* {profile.matchType == "New Match" && !profile.prof_rvl && ( */}
+                {!route.params?.fromchat && (
                   <FormWrapperFooter
                     containerStyle={{
                       marginTop: rspH(2.5),
@@ -918,12 +914,11 @@ const MatchProfile = ({ route }) => {
               setmodalVisible(false);
             }}
           >
-
             <Image
-                  source={Backward}        
-                  style={{width: '80%', height:'70%'}}
-                  resizeMode="contain"
-                          />
+              source={Backward}
+              style={{ width: "80%", height: "70%" }}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
 
           {/*  FullScreen Carousel */}

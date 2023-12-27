@@ -1,4 +1,3 @@
-
 import {
   Platform,
   StyleSheet,
@@ -11,7 +10,7 @@ import fontFamily from "../../../styles/fontFamily";
 import colors from "../../../styles/colors";
 import { rspF, rspH, rspW } from "../../../styles/responsiveSize";
 import ADIcon from "react-native-vector-icons/AntDesign";
- 
+
 const FormHeader = ({
   title = "",
   para = "",
@@ -25,7 +24,7 @@ const FormHeader = ({
   onRightPress = null,
 }) => {
   return (
-    <View style={{ alignItems: "center",  }}>
+    <View style={{ alignItems: "center" }}>
       <View
         style={{
           flexDirection: "row",
@@ -46,7 +45,6 @@ const FormHeader = ({
               height: rspW(9.6),
               width: rspW(9.6),
               borderRadius: rspW(5.3),
- 
             }}
             onPress={() => {
               onPress();
@@ -68,28 +66,28 @@ const FormHeader = ({
             {title}
           </Text>
         )}
- 
+
         {rightComp != null && rightComp()}
       </View>
-      <View style={{ 
-        paddingTop: rspH(paraTp) 
-        }}>
+      <View
+        style={{
+          paddingTop: rspH(paraTp),
+        }}
+      >
         <Text
           style={{
             ...styles.headerPara,
           }}
         >
-          {
-            para
-          }
+          {para}
         </Text>
       </View>
     </View>
   );
 };
- 
+
 export default memo(FormHeader);
- 
+
 const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: fontFamily.bold,
@@ -106,4 +104,3 @@ const styles = StyleSheet.create({
     lineHeight: rspF(2.2),
   },
 });
- 

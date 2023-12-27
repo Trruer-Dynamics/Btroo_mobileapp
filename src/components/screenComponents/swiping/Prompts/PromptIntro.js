@@ -12,35 +12,31 @@ import { useSelector } from "react-redux";
 import FormHeader from "../../../wrappers/formWrappers/FormHeader";
 
 const PromptIntro = ({ setpromptStep }) => {
-
   const is_network_connected = useSelector(
     (state) => state.authentication.is_network_connected
   );
-  
+
   const onNextPress = () => {
     if (is_network_connected) {
-      setpromptStep(2);      
+      setpromptStep(2);
     }
   };
-
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FormWrapper statusBarColor={colors.white} barStyle={"light-content"}>
-
-      {/* <FormHeader
+        {/* <FormHeader
               title="Your Place to Shine!"
               para={`Use this space to tell people a bit \n more about your personality. \n Select questions and answer them \n to your heart’s content.`}
               paraTp={3.2}
             /> */}
 
         <View>
-
-<FormHeader
-              title="Your Place to Shine!"
-              para={`Use this space to tell people a bit \n more about your personality. \n Select questions and answer them \n to your heart’s content.`}
-              paraTp={3.2}
-            />
+          <FormHeader
+            title="Your Place to Shine!"
+            para={`Use this space to tell people a bit \n more about your personality. \n Select questions and answer them \n to your heart’s content.`}
+            paraTp={3.2}
+          />
 
           {/* Top Para */}
 
@@ -83,7 +79,11 @@ const PromptIntro = ({ setpromptStep }) => {
           <ErrorContainer error_msg="" />
 
           {/* Next Btn To Navigate to Next Form Components */}
-          <FooterBtn title={"Next"} disabled={!is_network_connected} onPress={onNextPress} />
+          <FooterBtn
+            title={"Next"}
+            disabled={!is_network_connected}
+            onPress={onNextPress}
+          />
         </FormWrapperFooter>
       </FormWrapper>
     </SafeAreaView>

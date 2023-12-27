@@ -9,9 +9,21 @@ import {
   Linking,
   Platform,
 } from "react-native";
-import React, { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
-import { rspF, rspH, rspW, scrn_height, scrn_width } from "../../styles/responsiveSize";
+import {
+  rspF,
+  rspH,
+  rspW,
+  scrn_height,
+  scrn_width,
+} from "../../styles/responsiveSize";
 import colors from "../../styles/colors";
 import fontFamily from "../../styles/fontFamily";
 import FormInputContainer from "../../components/formComponents/FormInputContainer";
@@ -73,10 +85,9 @@ const SettingsScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     if (is_network_connected && referral) {
-      setreferral(false)
+      setreferral(false);
     }
-  }, [is_network_connected])
-  
+  }, [is_network_connected]);
 
   const dispatch = useDispatch();
 
@@ -133,7 +144,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let status = resp.data.status;
 
       if (resp.data.code == 200) {
-
         let update_prof = {
           ...profile_data,
           userprofile: {
@@ -145,15 +155,11 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (resp.data.code == 401) {
         dispatch(setSessionExpired(true));
-        
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const updateKeepMatching = async () => {
-
     const url =
       apiUrl + `keep_matching_notification_update/${profile_data.user.id}`;
 
@@ -175,7 +181,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-        
         let update_prof = {
           ...profile_data,
           userprofile: {
@@ -187,18 +192,11 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-     
-
       }
-    } catch (error) {
-
-
-    }
+    } catch (error) {}
   };
 
   const updateNewMessage = async () => {
-
-
     const url =
       apiUrl + `new_message_notification_update/${profile_data.user.id}`;
 
@@ -220,7 +218,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-
         let update_prof = {
           ...profile_data,
           userprofile: {
@@ -233,14 +230,10 @@ const SettingsScreen = ({ navigation, route }) => {
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const updateNewMatch = async () => {
-    
-
     const url =
       apiUrl + `new_match_notification_update/${profile_data.user.id}`;
 
@@ -260,9 +253,8 @@ const SettingsScreen = ({ navigation, route }) => {
       );
 
       let code = resp.data.code;
-     
-      if (code == 200) {
 
+      if (code == 200) {
         let update_prof = {
           ...profile_data,
           userprofile: {
@@ -274,15 +266,11 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const updateProfileReveal = async () => {
-
     const url =
       apiUrl + `profile_reveal_notification_update/${profile_data.user.id}`;
 
@@ -314,15 +302,11 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-        
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const updateOthers = async () => {
-    
     const url = apiUrl + `other_notification_update/${profile_data.user.id}`;
 
     const headers = {
@@ -343,7 +327,6 @@ const SettingsScreen = ({ navigation, route }) => {
       let code = resp.data.code;
 
       if (code == 200) {
-
         let update_prof = {
           ...profile_data,
           userprofile: {
@@ -355,11 +338,8 @@ const SettingsScreen = ({ navigation, route }) => {
         dispatch(setProfiledata(update_prof));
       } else if (code == 401) {
         dispatch(setSessionExpired(true));
-        
       }
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   const getContact = async () => {
@@ -377,9 +357,7 @@ const SettingsScreen = ({ navigation, route }) => {
       .catch((err) => {});
   };
 
-
   const showConfirmDialog = () => {
-
     return Alert.alert("Are You Sure?", "You want to logout", [
       {
         text: "Yes",
@@ -411,9 +389,8 @@ const SettingsScreen = ({ navigation, route }) => {
       .catch((err) => {});
   };
 
-  const userExist = async () =>{
-
-    let url_path = 'isacountavialable/'
+  const userExist = async () => {
+    let url_path = "isacountavialable/";
 
     const data = {
       user_id: profile_data.user.id,
@@ -424,36 +401,29 @@ const SettingsScreen = ({ navigation, route }) => {
     };
 
     try {
-      const response = await axios.post(
-        apiUrl + url_path,
-        data,
-        {
-          headers,
-        }
-      );
+      const response = await axios.post(apiUrl + url_path, data, {
+        headers,
+      });
       let resp_data = response.data;
 
       if (resp_data.code == 400) {
-
-           Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
-            
+        Alert.alert(
+          "Your account has been deleted!",
+          "Please Contact admin at contact@btrooapp.com.",
+          [
             {
               text: "OK",
               onPress: () => {
-                dispatch(setSessionExpired(true))
+                dispatch(setSessionExpired(true));
               },
             },
-          ]);
-        
+          ]
+        );
       }
-      
     } catch (error) {
       return false;
-
     }
-
-  }
-
+  };
 
   useLayoutEffect(() => {
     getContact();
@@ -461,7 +431,6 @@ const SettingsScreen = ({ navigation, route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-   
       dispatch(setCurrentScreen("SettingsScreen"));
       // Do something when the screen is focused
       setphone_number(profile_data?.user?.username);
@@ -470,21 +439,16 @@ const SettingsScreen = ({ navigation, route }) => {
   );
 
   useFocusEffect(
-    React.useCallback(
-      () => {
-        if (appStateVisible == 'active') {
-          userExist()
-        }
-      },
-      [appStateVisible],
-    )
-    
-  )
+    React.useCallback(() => {
+      if (appStateVisible == "active") {
+        userExist();
+      }
+    }, [appStateVisible])
+  );
 
-  
   return (
     <>
-   <OffflineAlert offAlert={!is_network_connected} />
+      <OffflineAlert offAlert={!is_network_connected} />
       {/* {loading && <Loader />} */}
       <SafeAreaView
         style={{
@@ -504,20 +468,21 @@ const SettingsScreen = ({ navigation, route }) => {
 
           <SafeAreaView
             style={{
-              height: Platform.OS == 'ios'? rspH(74) + insets.bottom : rspH(80) ,
+              height:
+                Platform.OS == "ios" ? rspH(74) + insets.bottom : rspH(80),
               paddingHorizontal: rspW(10),
               alignItems: "center",
               backgroundColor: colors.white,
             }}
           >
             <ScrollView
-            decelerationRate={0.9}
+              decelerationRate={0.9}
               ref={scrollViewRef}
               showsVerticalScrollIndicator={false}
               style={{
                 width: "100%",
-                
               }}
+              bounces={true}
             >
               <View>
                 {/* Banner */}
@@ -534,13 +499,12 @@ const SettingsScreen = ({ navigation, route }) => {
                     if (is_network_connected) {
                       setreferral(true);
                     }
-           
                   }}
                 >
                   <View
                     style={{
                       position: "absolute",
-                      bottom:  0,
+                      bottom: 0,
                       right: -rspW(2),
                     }}
                   >
@@ -549,9 +513,7 @@ const SettingsScreen = ({ navigation, route }) => {
                       resizeMode="contain"
                       style={{
                         width: scrn_width * 0.32,
-                        height: 
-                        rspW(22),
-                        
+                        height: rspW(22),
                       }}
                     />
                   </View>
@@ -630,10 +592,9 @@ const SettingsScreen = ({ navigation, route }) => {
                       <Switch
                         value={show_my_profile}
                         onValueChange={() => {
-                          setshow_my_profile(!show_my_profile)
+                          setshow_my_profile(!show_my_profile);
                           updateShowProfile();
                         }}
-                        
                         changeValueImmediately={true}
                         disabled={!is_network_connected}
                         circleSize={18}
@@ -643,7 +604,6 @@ const SettingsScreen = ({ navigation, route }) => {
                         backgroundInactive={colors.grey}
                         circleActiveColor={"#fff"}
                         circleInActiveColor={"#fff"}
-                       
                         innerCircleStyle={{
                           alignItems: "center",
                           justifyContent: "center",
@@ -656,8 +616,6 @@ const SettingsScreen = ({ navigation, route }) => {
                         switchWidthMultiplier={2.5}
                         switchBorderRadius={12}
                       />
-
-                      
                     </View>
                     <View style={{ marginTop: rspH(1.8) }}>
                       <Text style={styles.para}>
@@ -874,7 +832,6 @@ const SettingsScreen = ({ navigation, route }) => {
                       circleActiveColor={"#fff"}
                       circleInActiveColor={"#fff"}
                       changeValueImmediately={true}
-
                       innerCircleStyle={{
                         alignItems: "center",
                         justifyContent: "center",
@@ -909,9 +866,8 @@ const SettingsScreen = ({ navigation, route }) => {
                   if (is_network_connected) {
                     Linking.openURL(
                       "https://btroo.midnightpoha.com/index.php/faqs/"
-                    );  
+                    );
                   }
-                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -924,11 +880,8 @@ const SettingsScreen = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => {
-                  
-                    dispatch(setRepeatTut(true));
-                    navigation.navigate("Swiper");
-                  
-                 
+                  dispatch(setRepeatTut(true));
+                  navigation.navigate("Swiper");
                 }}
                 style={{
                   flexDirection: "row",
@@ -950,7 +903,6 @@ const SettingsScreen = ({ navigation, route }) => {
                     if (is_network_connected) {
                       Linking.openURL(`mailto:${contact}`);
                     }
-    
                   }}
                   style={{
                     flexDirection: "row",
@@ -982,9 +934,8 @@ const SettingsScreen = ({ navigation, route }) => {
                   if (is_network_connected) {
                     navigation.navigate("Info", {
                       heading: "Terms of Service",
-                    });  
+                    });
                   }
-                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -1002,9 +953,8 @@ const SettingsScreen = ({ navigation, route }) => {
                   if (is_network_connected) {
                     navigation.navigate("Info", {
                       heading: "Privacy Policy",
-                    });  
+                    });
                   }
-                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -1022,9 +972,8 @@ const SettingsScreen = ({ navigation, route }) => {
                   if (is_network_connected) {
                     Linking.openURL(
                       "https://btroo.midnightpoha.com/index.php/community-guidelines/"
-                    );  
+                    );
                   }
-                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -1042,9 +991,8 @@ const SettingsScreen = ({ navigation, route }) => {
                   if (is_network_connected) {
                     Linking.openURL(
                       "https://btroo.midnightpoha.com/index.php/photo-guidelines/"
-                    );  
+                    );
                   }
-                  
                 }}
                 style={{
                   flexDirection: "row",
@@ -1084,14 +1032,11 @@ const SettingsScreen = ({ navigation, route }) => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={() => 
-                  {
-                    if (is_network_connected) {
-                      setcmodal(true) 
-                    }
-
-                }
-                }
+                onPress={() => {
+                  if (is_network_connected) {
+                    setcmodal(true);
+                  }
+                }}
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -1230,13 +1175,13 @@ const styles = StyleSheet.create({
 
   bannerCont: {
     width: rspW(78),
-    height: Platform.OS == "ios" ? rspH(14)  : rspH(10) + insets.top,
+    height: Platform.OS == "ios" ? rspH(14) : rspH(10) + insets.top,
     borderRadius: rspW(10),
     backgroundColor: "#6B9DFF",
     paddingLeft: rspW(5),
     paddingVertical: rspH(2.4),
     alignSelf: "center",
-    position:'relative',
+    position: "relative",
   },
   bannerTxt: {
     fontFamily: fontFamily.bold,
@@ -1248,7 +1193,7 @@ const styles = StyleSheet.create({
   },
   bannerSubTxt: {
     fontFamily: fontFamily.bold,
-    fontSize: Platform.OS =='ios'?rspF(1.9) : scrn_height * 0.021,
+    fontSize: Platform.OS == "ios" ? rspF(1.9) : scrn_height * 0.021,
     lineHeight: Platform.OS == "ios" ? rspF(1.84) : rspH(2),
     color: colors.white,
     letterSpacing: 0,

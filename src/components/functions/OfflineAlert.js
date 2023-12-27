@@ -1,42 +1,31 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { rspF, rspH, rspW, scrn_height, scrn_width } from "../../styles/responsiveSize";
+import {
+  rspF,
+  rspH,
+  rspW,
+  scrn_height,
+  scrn_width,
+} from "../../styles/responsiveSize";
 import fontFamily from "../../styles/fontFamily";
 import colors from "../../styles/colors";
 
- 
-const OffflineAlert = ({offAlert=false}) => {
-
-  
+const OffflineAlert = ({ offAlert = false }) => {
   return (
-   
-    <SafeAreaView
-    style={{position:'absolute', 
-    zIndex: 1000}}
-    >
-   
-   {
-    offAlert &&
-    <SafeAreaView style={styles.mainContainer}>
- 
-      <View style={styles.messageBox}
-      >
-       <Text style={styles.messageBoxHeader}>No connection</Text>
-       
-      </View>
+    <SafeAreaView style={{ position: "absolute", zIndex: 1000 }}>
+      {offAlert && (
+        <SafeAreaView style={styles.mainContainer}>
+          <View style={styles.messageBox}>
+            <Text style={styles.messageBoxHeader}>No connection</Text>
+          </View>
+        </SafeAreaView>
+      )}
     </SafeAreaView>
-  }
-    </SafeAreaView>
-  
-
-
-
-
   );
 };
- 
+
 export default OffflineAlert;
- 
+
 const styles = StyleSheet.create({
   mainContainer: {
     width: scrn_width,
@@ -46,7 +35,7 @@ const styles = StyleSheet.create({
   messageBox: {
     width: scrn_width,
     height: rspH(2.2),
-    backgroundColor: '#e54b4b',
+    backgroundColor: "#e54b4b",
     alignItems: "center",
     justifyContent: "center",
   },

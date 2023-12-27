@@ -98,14 +98,10 @@ const PhotoVerifyCamera = ({ route }) => {
   };
 
   useEffect(() => {
-    if (!is_network_connected
-       && current_screen == 'PhotoVerifyCamera'
-       ) {
-    
-      navigation.goBack()
+    if (!is_network_connected && current_screen == "PhotoVerifyCamera") {
+      navigation.goBack();
     }
-  }, [is_network_connected])
-  
+  }, [is_network_connected]);
 
   useFocusEffect(
     React.useCallback(() => {

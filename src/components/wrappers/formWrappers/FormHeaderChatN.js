@@ -29,7 +29,6 @@ const FormHeaderChatN = ({
           position: "relative",
           justifyContent: "center",
           width: "100%",
-
         }}
       >
         {left_icon && (
@@ -45,7 +44,6 @@ const FormHeaderChatN = ({
               height: rspW(9.6),
               width: rspW(9.6),
               borderRadius: rspW(5.3),
-
             }}
             onPress={() => {
               onPress();

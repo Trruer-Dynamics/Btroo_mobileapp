@@ -43,146 +43,134 @@ const Intro = ({ route }) => {
     <>
       {/* Load video only when screen properly load */}
       {/* {isReady && ( */}
-        <View
-          style={{
-            height: scrn_height,
-            backgroundColor:'#fff',
-          }}
-        >
-          {/* Background Video */}
+      <View
+        style={{
+          height: scrn_height,
+          backgroundColor: "#fff",
+        }}
+      >
+        {/* Background Video */}
 
-          <Video
-            source={require(`../assets/videos/whitebtroo.mp4`)}
-            style={styles.backgroundVideo}
-            muted={true}
-            repeat={true}
-            resizeMode={"cover"}
-            rate={1.0}
-            ignoreSilentSwitch={"obey"}
-            onError={(err) => {}}
+        <Video
+          source={require(`../assets/videos/whitebtroo.mp4`)}
+          style={styles.backgroundVideo}
+          muted={true}
+          repeat={true}
+          resizeMode={"cover"}
+          rate={1.0}
+          ignoreSilentSwitch={"obey"}
+          onError={(err) => {}}
+        />
+
+        {/* Logo Area */}
+        <View style={styles.logoArea}>
+          <FastImage
+            style={styles.logo}
+            source={require("../assets/images/WelcomeScreen/btroo_logo.jpg")}
+            resizeMode="contain"
           />
+        </View>
 
-          {/* Logo Area */}
-          <View style={styles.logoArea}>
-            <FastImage
-              style={styles.logo}
-              source={require("../assets/images/WelcomeScreen/btroo_logo.jpg")}
-              resizeMode="contain"
-            />
+        {/* Para Area */}
+        <View style={styles.paraContainer}>
+          {/* Privact Policy & Terms and Condition */}
+          <View style={styles.termsCont}>
+            <Text style={styles.termsText}>
+              By signing up for bTroo, you agree to {"\n"}our{" "}
+              <Text
+                style={[styles.termsText, { textDecorationLine: "underline" }]}
+                onPress={() => {
+                  if (is_network_connected) {
+                    navigation.navigate("Info", {
+                      heading: "Terms of Service",
+                    });
+                  }
+                }}
+              >
+                Terms of service.
+              </Text>{" "}
+              Learn how we {"\n"}process your data in our{" "}
+              <Text
+                style={[styles.termsText, { textDecorationLine: "underline" }]}
+                onPress={() => {
+                  if (is_network_connected) {
+                    navigation.navigate("Info", {
+                      heading: "Privacy Policy",
+                    });
+                  }
+                }}
+              >
+                Privacy {`\n`}Policy
+              </Text>{" "}
+              and
+              <Text
+                style={[styles.termsText, { textDecorationLine: "underline" }]}
+                onPress={() => {
+                  if (is_network_connected) {
+                    navigation.navigate("Info", {
+                      heading: "Cookies Policy",
+                    });
+                  }
+                }}
+              >
+                {" "}
+                Cookies Policy.
+              </Text>
+            </Text>
           </View>
 
-          {/* Para Area */}
-          <View style={styles.paraContainer}>
-            {/* Privact Policy & Terms and Condition */}
-            <View style={styles.termsCont}>
-              <Text style={styles.termsText}>
-                By signing up for bTroo, you agree to {"\n"}our{" "}
-                <Text
-                  style={[
-                    styles.termsText,
-                    { textDecorationLine: "underline" },
-                  ]}
-                  onPress={() => {
-                    if (is_network_connected) {
-                      navigation.navigate("Info", {
-                        heading: "Terms of Service",
-                      });  
-                    }
-                    
-                  }}
-                >
-                  Terms of service.
-                </Text>{" "}
-                Learn how we {"\n"}process your data in our{" "}
-                <Text
-                  style={[
-                    styles.termsText,
-                    { textDecorationLine: "underline" },
-                  ]}
-                  onPress={() => {
-                    if (is_network_connected) {
-                      navigation.navigate("Info", {
-                        heading: "Privacy Policy",
-                      });  
-                    }
-                    
-                  }}
-                >
-                  Privacy {`\n`}Policy
-                </Text>{" "}
-                and
-                <Text
-                  style={[
-                    styles.termsText,
-                    { textDecorationLine: "underline" },
-                  ]}
-                  onPress={() => {
-                    if (is_network_connected) {
-                      navigation.navigate("Info", {
-                        heading: "Cookies Policy",
-                      });  
-                    }
-                    
-                  }}
-                >
-                  {" "}
-                  Cookies Policy.
-                </Text>
+          {/* Button Container */}
+          <View style={styles.buttonContainer}>
+            {/* Authentication Buttons */}
+            <TouchableOpacity
+              style={[
+                styles.button,
+                styles.btn_shadow,
+                {
+                  backgroundColor: "#3C75B5",
+                  justifyContent: "center",
+                  marginBottom: rspH(1.4),
+                },
+              ]}
+              onPress={() => {
+                dispatch(
+                  setActiveUserLocationDetails({
+                    ...active_user_loc_det,
+                    action: "signup",
+                  })
+                );
+                navigation.navigate("MobileNo", { action: "signup" });
+              }}
+            >
+              <Text style={styles.button_txt}>Create Account</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(
+                  setActiveUserLocationDetails({
+                    ...active_user_loc_det,
+                    action: "login",
+                  })
+                );
+                navigation.navigate("MobileNo", { action: "login" });
+              }}
+              style={[
+                styles.button,
+                {
+                  borderWidth: 1,
+                  justifyContent: "center",
+                  borderColor: colors.blue,
+                },
+              ]}
+            >
+              <Text style={{ ...styles.button_txt, color: colors.blue }}>
+                Login
               </Text>
-            </View>
-
-            {/* Button Container */}
-            <View style={styles.buttonContainer}>
-              {/* Authentication Buttons */}
-              <TouchableOpacity
-                style={[
-                  styles.button,
-                  styles.btn_shadow,
-                  {
-                    backgroundColor: "#3C75B5",
-                    justifyContent: "center",
-                    marginBottom: rspH(1.4),
-                  },
-                ]}
-                onPress={() => {
-                  dispatch(
-                    setActiveUserLocationDetails({
-                      ...active_user_loc_det,
-                      action: "signup",
-                    })
-                  );
-                  navigation.navigate("MobileNo", { action: "signup" });
-                }}
-              >
-                <Text style={styles.button_txt}>Create Account</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch(
-                    setActiveUserLocationDetails({
-                      ...active_user_loc_det,
-                      action: "login",
-                    })
-                  );
-                  navigation.navigate("MobileNo", { action: "login" });
-                }}
-                style={[
-                  styles.button,
-                  {
-                    borderWidth: 1,
-                    justifyContent: "center",
-                    borderColor: colors.blue,
-                  },
-                ]}
-              >
-                <Text style={{ ...styles.button_txt, color: colors.blue }}>
-                  Login
-                </Text>
-              </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
+      </View>
       {/* )} */}
     </>
   );
@@ -192,10 +180,10 @@ export default Intro;
 
 const styles = StyleSheet.create({
   backgroundVideo: {
-    backgroundColor:'#fff',
-    height: '100%',
+    backgroundColor: "#fff",
+    height: "100%",
     position: "absolute",
-    top:0,
+    top: 0,
     left: 0,
     alignItems: "stretch",
     bottom: 0,

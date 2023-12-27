@@ -82,7 +82,6 @@ import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
 
-
 // Chat Bubble item
 const ChatItem = ({
   item,
@@ -141,8 +140,8 @@ const ChatItem = ({
       }
       if (animation.value >= 38) {
         runOnJS(vibtr)();
-        animation.value = withTiming(0,{
-          easing: Easing.linear
+        animation.value = withTiming(0, {
+          easing: Easing.linear,
         });
       }
     },
@@ -191,51 +190,51 @@ const ChatItem = ({
   let btmMarg =
     index == 0 ? 1.6 : chatlist[index - 1][1] == chatlist[index][1] ? 0.5 : 1.6;
 
-  let show_tailc = index < chatlist.length - 1 
-  ? chatlist[index + 1][1] == chatlist[index][1] ? false : true : true;
+  let show_tailc =
+    index < chatlist.length - 1
+      ? chatlist[index + 1][1] == chatlist[index][1]
+        ? false
+        : true
+      : true;
 
-  let show_tail = show_tailc
-
+  let show_tail = show_tailc;
 
   return (
-    <PanGestureHandler
-        onGestureEvent={gestureHandler}
-        activeOffsetX={[-5, 5]}
-      >
-    <Animated.View
-      style={{
-        flex: 1,
-        marginBottom: rspH(btmMarg),
-      }}
-    >
+    <PanGestureHandler onGestureEvent={gestureHandler} activeOffsetX={[-5, 5]}>
       <Animated.View
-        style={[
-          {
-            position: "absolute",
-            height: 20,
-            width: 40,
-            left: -40,
-            zIndex: 100,
-            height: "100%",
-            justifyContent: "center",
-          },
-          animatedIconLeft,
-        ]}
+        style={{
+          flex: 1,
+          marginBottom: rspH(btmMarg),
+        }}
       >
-        <View
-          style={{
-            alignSelf: "center",
-            backgroundColor: colors.grey,
-            padding: 4,
-            alignItems: "center",
-            borderRadius: 40,
-            height: 30,
-            width: 30,
-          }}
+        <Animated.View
+          style={[
+            {
+              position: "absolute",
+              height: 20,
+              width: 40,
+              left: -40,
+              zIndex: 100,
+              height: "100%",
+              justifyContent: "center",
+            },
+            animatedIconLeft,
+          ]}
         >
-          <ETIcon name="reply" size={20} color={"#fff"} />
-        </View>
-      </Animated.View>
+          <View
+            style={{
+              alignSelf: "center",
+              backgroundColor: colors.grey,
+              padding: 4,
+              alignItems: "center",
+              borderRadius: 40,
+              height: 30,
+              width: 30,
+            }}
+          >
+            <ETIcon name="reply" size={20} color={"#fff"} />
+          </View>
+        </Animated.View>
 
         <Animated.View
           ref={boxRef}
@@ -244,7 +243,7 @@ const ChatItem = ({
               ...styles.chatCont,
               flexDirection: "column",
               zIndex: 1,
-              
+
               backgroundColor: item[1] == 1 ? colors.blue : "#F5F5F5",
               alignSelf: item[1] == 0 ? "flex-start" : "flex-end",
             },
@@ -305,7 +304,7 @@ const ChatItem = ({
                     color: item[1] == 0 ? colors.black : colors.white,
                   }}
                 >
-                  {chatlist.find((v) => v[4] == item[5])[0].split('\n')[0]}
+                  {chatlist.find((v) => v[4] == item[5])[0].split("\n")[0]}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -326,9 +325,6 @@ const ChatItem = ({
               {item[0]}
             </Text>
           </View>
-          
-        
-
 
           <View
             style={{
@@ -356,80 +352,73 @@ const ChatItem = ({
             </View>
           </View>
 
-          { show_tail &&
-  <>
-        {item[1] == 0 ? (
-           
-           <FastImage
-             source={require("../../../assets/images/Matching/Message/LeftCut2.png")}
-             style={{
-                position: "absolute",
-             zIndex: -1,
-             transform:[{
-              scaleY: -1
-            }],
-             left: rspW(-4.8),
-               width: rspW(10.24),
-               height: rspH(3.7),
-
-             }}
-           />
-
-       ) : (
-         
-         <FastImage
-
-         source={require("../../../assets/images/Matching/Message/RightCut2.png")}
-         style={{
-            position: "absolute",
-         zIndex: -1,
-        transform:[{
-          scaleY: -1
-        }],
-         right: rspW(-4.8),
-           width: rspW(10.24),
-           height: rspH(3.7),
-
-         }}
-       />
-       
-        
-       )}
-</>}
+          {show_tail && (
+            <>
+              {item[1] == 0 ? (
+                <FastImage
+                  source={require("../../../assets/images/Matching/Message/LeftCut2.png")}
+                  style={{
+                    position: "absolute",
+                    zIndex: -1,
+                    transform: [
+                      {
+                        scaleY: -1,
+                      },
+                    ],
+                    left: rspW(-4.8),
+                    width: rspW(10.24),
+                    height: rspH(3.7),
+                  }}
+                />
+              ) : (
+                <FastImage
+                  source={require("../../../assets/images/Matching/Message/RightCut2.png")}
+                  style={{
+                    position: "absolute",
+                    zIndex: -1,
+                    transform: [
+                      {
+                        scaleY: -1,
+                      },
+                    ],
+                    right: rspW(-4.8),
+                    width: rspW(10.24),
+                    height: rspH(3.7),
+                  }}
+                />
+              )}
+            </>
+          )}
         </Animated.View>
 
-       
+        {index === rply_item_indx && (
+          <Animated.View
+            onLayout={() => {
+              fadeIn().then(() => {
+                setTimeout(() => {
+                  animation2.value = 0;
+                  setrply_item_indx(null);
+                  let tmp_lis = [...chatlist];
 
-
-      {index === rply_item_indx && (
-        <Animated.View
-          onLayout={() => {
-            fadeIn().then(() => {
-              setTimeout(() => {
-                animation2.value = 0;
-                setrply_item_indx(null);
-                let tmp_lis = [...chatlist];
-
-                setchatlist(tmp_lis);
-                setrply_animation(false);
-              }, 1800);
-            });
-          }}
-          style={[
-            {
-              paddingVertical: rspH(0.4),
-              position: "absolute",
-              left: rspW(-3.5),
-              width: scrn_width * 0.95,
-              height: "100%",
-              backgroundColor: "#2364aa4e",
-            },
-            animatedBox,
-          ]}
-        />
-      )}
-
-    </Animated.View>
+                  setchatlist(tmp_lis);
+                  setrply_animation(false);
+                }, 1800);
+              });
+            }}
+            style={[
+              {
+                paddingVertical: rspH(0.4),
+                position: "absolute",
+                left: rspW(-3.5),
+                width: scrn_width * 0.95,
+                height: "100%",
+                backgroundColor: "#2364aa4e",
+              },
+              animatedBox,
+            ]}
+          />
+        )}
+      </Animated.View>
     </PanGestureHandler>
   );
 };
@@ -438,7 +427,7 @@ const Chat = ({ profile }) => {
   const chat_reveal_tut = useSelector(
     (state) => state.tutorial.chat_reveal_tut
   );
-  const { sckop,c_scrn } = useContext(UserContext);
+  const { sckop, c_scrn } = useContext(UserContext);
 
   const [replySet, setreplySet] = useState(false);
   const [actreplyID, setactreplyID] = useState(null);
@@ -496,7 +485,6 @@ const Chat = ({ profile }) => {
   const [icebreaker_list, seticebreaker_list] = useState([]);
 
   const getIceBreaker = async () => {
-
     await axios
       .get(apiUrl + "getactiveicebreaker/")
       .then((resp) => {
@@ -519,7 +507,6 @@ const Chat = ({ profile }) => {
   };
 
   const chatRvlTutDone = async () => {
-
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
@@ -550,7 +537,6 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfile = async () => {
-   
     setloading(true);
 
     const headers = {
@@ -580,7 +566,6 @@ const Chat = ({ profile }) => {
   };
 
   const revealProfileTime = async () => {
-
     setloading(true);
 
     const api = apiUrl + "sendnotificationforprofilereveal/";
@@ -600,7 +585,6 @@ const Chat = ({ profile }) => {
       });
       setloading(false);
       let resp_data = response.data;
-
     } catch (error) {
       setloading(false);
       return false;
@@ -615,7 +599,6 @@ const Chat = ({ profile }) => {
     await axios
       .get(url, { headers })
       .then((resp) => {
-    
         let resp_data = resp.data.data;
         let code = resp.data.code;
 
@@ -661,7 +644,9 @@ const Chat = ({ profile }) => {
           }
 
           // remove messages with  null id
-          let tmps = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
+          let tmps = chats_msgs
+            .filter((v) => v[8] == profile.chat_id)
+            .filter((v) => v[4] != null);
 
           // if new message avalable load chats from backend or from local storage
           if (tmps.length > tmp_lis.length) {
@@ -670,7 +655,6 @@ const Chat = ({ profile }) => {
             setchatlist(tmp);
             chatlist_ref.current = tmp;
           } else {
-            
             setchatlist(tmp_lis);
             chatlist_ref.current = tmp_lis;
           }
@@ -717,11 +701,11 @@ const Chat = ({ profile }) => {
     };
 
     ws.current.onclose = (e) => {
-      c_scrn.current = ''
+      c_scrn.current = "";
       sckop.current = false;
       socket_con.current = false;
       setSocketOpen(false);
-      setconnectSocketS(false)
+      setconnectSocketS(false);
       dispatch(setSocketClose(true));
     };
 
@@ -778,7 +762,6 @@ const Chat = ({ profile }) => {
     };
   };
 
-
   const sentDraftMesg = () => {
     for (let l = 0; l < drafts_msgs.length; l++) {
       const et = drafts_msgs[l];
@@ -789,34 +772,28 @@ const Chat = ({ profile }) => {
   };
 
   const updateHiStatus = async () => {
-
     setloading(true);
-    const mainUrl = apiUrl + 'sayhistatusupdate/'
+    const mainUrl = apiUrl + "sayhistatusupdate/";
     const headers = {
       Authorization: `Bearer ${access_token}`,
     };
 
     const data = {
-      chat_room_id : profile?.id,
+      chat_room_id: profile?.id,
       user_id: profile_data?.user?.id,
     };
 
     try {
-      const response = await axios.post(
-        mainUrl,
-        data,
-        {
-          headers,
-        }
-      );
+      const response = await axios.post(mainUrl, data, {
+        headers,
+      });
       setloading(false);
       let resp_data = response.data;
-      
     } catch (error) {
       setloading(false);
       return false;
-    } 
-  }
+    }
+  };
 
   const renderItem = useCallback(
     ({ item, index }) => {
@@ -871,25 +848,19 @@ const Chat = ({ profile }) => {
     [chatlist]
   );
 
-
   // save chats locally
   useEffect(() => {
+    let onlY_id = chats_msgs.map((k) => k[4]);
 
-
-    let onlY_id= chats_msgs.map(k => k[4])
-
-    let newmsgs = chatlist.filter(v => !onlY_id.includes(v[4]))    
+    let newmsgs = chatlist.filter((v) => !onlY_id.includes(v[4]));
 
     if (newmsgs.length > 0) {
-      let all_lmsgs = [ ...newmsgs,...chats_msgs]
+      let all_lmsgs = [...newmsgs, ...chats_msgs];
       dispatch(setChatMsgs(all_lmsgs));
     }
-
-
   }, [chatlist]);
 
   useEffect(() => {
-
     if (connectSocketS) {
       connectSocket();
     }
@@ -902,10 +873,6 @@ const Chat = ({ profile }) => {
       }
     };
   }, [connectSocketS]);
-
-
-
-  
 
   // To set id of sent message by user
   useEffect(() => {
@@ -1052,9 +1019,6 @@ const Chat = ({ profile }) => {
 
           let ttact = false;
 
-
-
-
           if (
             avg_min <= 5 &&
             mymsgs.length >= 25 &&
@@ -1091,7 +1055,6 @@ const Chat = ({ profile }) => {
       revealProfileTime();
     }
   }, [rvl_activate]);
-
 
   // load icebreaker according network status
   useLayoutEffect(() => {
@@ -1137,20 +1100,19 @@ const Chat = ({ profile }) => {
   // load chat message according to network status
   useEffect(() => {
     dispatch(setCurrentScreen("Chat"));
-    c_scrn.current = 'Chat'
-    let tmp = chats_msgs.filter((v) => v[8] == profile.chat_id).filter(v => v[4] != null);
- 
+    c_scrn.current = "Chat";
+    let tmp = chats_msgs
+      .filter((v) => v[8] == profile.chat_id)
+      .filter((v) => v[4] != null);
+
     if (!is_network_connected && tmp.length > 0) {
       setchatlist(tmp);
       setloading(false);
     }
 
-    if (is_network_connected &&
-      socket_con.current != true
-      ) {
-      getPrevChats()
+    if (is_network_connected && socket_con.current != true) {
+      getPrevChats();
     }
-
   }, [is_network_connected]);
 
   useLayoutEffect(() => {
@@ -1180,20 +1142,19 @@ const Chat = ({ profile }) => {
   }, [chatlist]);
 
   useLayoutEffect(() => {
-    
     if (!profile.first_visit_done) {
-      updateHiStatus()
+      updateHiStatus();
     }
-    
+
     if (profile.user_prof_rvl) {
-      setrvl_click(true)
+      setrvl_click(true);
     }
-  }, [])
+  }, []);
 
   return (
     <>
       {loading && <Loader />}
-      <OffflineAlert offAlert={!is_network_connected}/>
+      <OffflineAlert offAlert={!is_network_connected} />
       <SafeAreaView style={{ height: scrn_height, backgroundColor: "#fff" }}>
         <KeyboardAvoidingView
           style={{
@@ -1206,7 +1167,6 @@ const Chat = ({ profile }) => {
           <View style={{ paddingHorizontal: rspW(5), paddingTop: rspH(2) }}>
             {/* {false ? ( */}
             {profile.prof_rvl ? (
-
               <FormHeaderChat
                 title={truncateStr(
                   profile?.userprofile?.name.split(" ")[0],
@@ -1229,7 +1189,7 @@ const Chat = ({ profile }) => {
                   });
                 }}
               />
-             ) : (
+            ) : (
               <FormHeaderChatN
                 title={truncateStr(
                   profile?.userprofile?.name.split(" ")[0],
@@ -1289,12 +1249,12 @@ const Chat = ({ profile }) => {
                   );
                 }}
               />
-            )} 
+            )}
           </View>
 
           <FlashList
-          decelerationRate={0.9}
-            keyboardDismissMode='none'
+            decelerationRate={0.9}
+            keyboardDismissMode="none"
             estimatedItemSize={100}
             data={chatlist}
             contentContainerStyle={{
@@ -1320,7 +1280,6 @@ const Chat = ({ profile }) => {
               alignItems: "center",
             }}
           >
-           
             <View style={styles.messageInputArea}>
               {/* Icebraker Container */}
               <TouchableOpacity
@@ -1337,7 +1296,6 @@ const Chat = ({ profile }) => {
               </TouchableOpacity>
             </View>
             <Animated.View
-           
               style={{
                 borderColor: colors.grey,
                 borderRadius: rspW(3.2),
@@ -1348,11 +1306,8 @@ const Chat = ({ profile }) => {
               }}
             >
               {replySet && actreplyID && (
-                
                 <Animated.View
-      
                   style={{
-                    
                     backgroundColor:
                       chatlist.find((v) => v[4] == actreplyID)[1] == 0
                         ? "#e6e8eb"
@@ -1364,11 +1319,10 @@ const Chat = ({ profile }) => {
                     paddingRight: rspW(2.4),
                     marginTop: rspH(0.7),
                     width: rspW(90),
-           
+
                     borderRadius: rspW(2),
                     flexDirection: "row",
                     justifyContent: "space-between",
-                  
                   }}
                 >
                   <View style={{ width: "96%" }}>
@@ -1421,13 +1375,12 @@ const Chat = ({ profile }) => {
                     />
                   </TouchableOpacity>
                 </Animated.View>
-
               )}
 
               <View
                 style={{
                   ...styles.messageInputCont,
-                  bottom:0,
+                  bottom: 0,
                   paddingVertical: rspH(Platform.OS == "ios" ? 1 : 0),
                 }}
               >
@@ -1438,88 +1391,81 @@ const Chat = ({ profile }) => {
                   style={styles.messageInput}
                   value={msg}
                   onChangeText={(val) => {
-                    
                     setmsg(val);
                   }}
                   maxHeight={rspH(12.5)}
                 />
-                {SocketOpen  && msg != "" ? (
+                {SocketOpen && msg != "" ? (
+                  <TouchableOpacity
+                    onPress={() => {
+                      if (msg.length > 0) {
+                        setmsg("");
+                        seticebreaker("");
 
-<TouchableOpacity
-onPress={() => {
+                        let ung_id = Math.random().toString(36).slice(2);
 
-  if (msg.length > 0) {
-  setmsg("")  
-    seticebreaker("");
+                        let day_tmp = moment(new Date())
+                          .calendar()
+                          .split(" at")[0]
+                          .trim();
 
-    let ung_id = Math.random().toString(36).slice(2);
+                        let day_t = !chatlist
+                          .map((v) => v[6])
+                          .includes(day_tmp);
 
-    let day_tmp = moment(new Date())
-      .calendar()
-      .split(" at")[0]
-      .trim();
+                        let tmp_lis = [...chatlist];
 
-    let day_t = !chatlist
-      .map((v) => v[6])
-      .includes(day_tmp);
+                        let nitm = [
+                          msg.replace(/^\s+|\s+$/g, "").trim(),
+                          1,
+                          new Date(),
+                          profile_data.user.id,
+                          null,
+                          actreplyID != null ? actreplyID : null,
+                          day_t ? day_tmp : "",
+                          ung_id,
+                          profile.chat_id,
+                        ];
+                        tmp_lis.unshift(nitm);
 
-    let tmp_lis = [...chatlist];
+                        setchatlist(tmp_lis);
+                        chatlist_ref.current = tmp_lis;
+                        setreplySet(false);
 
-    let nitm = [
+                        let data = {
+                          message: msg.replace(/^\s+|\s+$/g, "").trim(),
+                          sender: profile_data.user.id,
+                          datetime: new Date(),
+                          chat_id: profile.chat_id,
+                          seen_by_user_id: null,
+                          reply_msg_id: actreplyID != null ? actreplyID : null,
+                          unique_id: ung_id,
+                        };
 
-      msg.replace(/^\s+|\s+$/g,'').trim(),
-      1,
-      new Date(),
-      profile_data.user.id,
-      null,
-      actreplyID != null ? actreplyID : null,
-      day_t ? day_tmp : "",
-      ung_id,
-      profile.chat_id,
-    ];
-    tmp_lis.unshift(nitm);
+                        let all_drafts_msgs = [...drafts_msgs];
 
-    setchatlist(tmp_lis);
-    chatlist_ref.current = tmp_lis;
-    setreplySet(false);
+                        all_drafts_msgs.push(data);
 
-    let data = {
-      message:
-      msg.replace(/^\s+|\s+$/g,'').trim(),
-      sender: profile_data.user.id,
-      datetime: new Date(),
-      chat_id: profile.chat_id,
-      seen_by_user_id: null,
-      reply_msg_id: actreplyID != null ? actreplyID : null,
-      unique_id: ung_id,
-    };
-
-    let all_drafts_msgs = [...drafts_msgs];
-
-    all_drafts_msgs.push(data);
-
-
-    dispatch(setDraftMsgs(all_drafts_msgs));
-    if (SocketOpen) {
-      ws.current.send(JSON.stringify(data));
-    }
-    setactreplyID(null);
-  }
-}}
->
-<FastImage
-  source={require("../../../assets/images/Matching/Message/sendMsgActive.png")}
-  style={styles.sendBtn}
-  resizeMode="contain"
-/>
-</TouchableOpacity>
-
+                        dispatch(setDraftMsgs(all_drafts_msgs));
+                        if (SocketOpen) {
+                          ws.current.send(JSON.stringify(data));
+                        }
+                        setactreplyID(null);
+                      }
+                    }}
+                  >
+                    <FastImage
+                      source={require("../../../assets/images/Matching/Message/sendMsgActive.png")}
+                      style={styles.sendBtn}
+                      resizeMode="contain"
+                    />
+                  </TouchableOpacity>
                 ) : (
                   <FastImage
-                  source={require("../../../assets/images/Matching/Message/sendMsg.png")}
-                  style={styles.sendBtn}
-                  resizeMode="contain"
-                />
+                    source={require("../../../assets/images/Matching/Message/sendMsg.png")}
+                    style={styles.sendBtn}
+                    resizeMode="contain"
+                  />
                 )}
               </View>
             </Animated.View>
@@ -1542,7 +1488,6 @@ onPress={() => {
       </SafeAreaView>
 
       {show_rvl_tut && (
-     
         <>
           <View style={styles.mainTutCont}>
             <View style={styles.centralModalContMatch}>
@@ -1581,10 +1526,9 @@ onPress={() => {
           >
             <FastImage
               source={
-                profile?.userprofile?.gender == "Man" ?
-                require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")
-              :
-              require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage2.png")
+                profile?.userprofile?.gender == "Man"
+                  ? require("../../../assets/images/Matching/PhotoReveal/MalePhotoRevalStage2.png")
+                  : require("../../../assets/images/Matching/PhotoReveal/FemalePhotoRevalStage2.png")
               }
               style={styles.profilePhoto}
             />
@@ -1609,14 +1553,14 @@ const styles = StyleSheet.create({
   chatCont: {
     paddingTop: rspH(1),
     paddingBottom: rspH(1.4),
-    paddingHorizontal: rspW(2), 
+    paddingHorizontal: rspW(2),
     borderRadius: rspW(5.1),
     borderRadius: rspW(2),
   },
   chatMsgTxt: {
     fontSize: rspF(1.8),
     fontFamily: fontFamily.medium,
-    lineHeight: rspF(Platform.OS  == 'android' ? 2.12 : 2.33),
+    lineHeight: rspF(Platform.OS == "android" ? 2.12 : 2.33),
     textAlign: "justify",
     minWidth: rspW(24),
     maxWidth: rspW(80),

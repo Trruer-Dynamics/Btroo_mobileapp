@@ -11,7 +11,7 @@ import {
   StatusBar,
 } from "react-native";
 
-import React, { useRef, useState, useLayoutEffect,useEffect } from "react";
+import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import colors from "../../styles/colors";
 import {
   rspF,
@@ -28,7 +28,13 @@ import FAIcon from "react-native-vector-icons/FontAwesome";
 import Paginator from "../../components/screenComponents/swiping/Paginator";
 import fontFamily from "../../styles/fontFamily";
 import { useDispatch, useSelector } from "react-redux";
-import { Backward, DrinkingNo, MarijuanaNo, SmokingNo, SmokingYes } from "../../assets";
+import {
+  Backward,
+  DrinkingNo,
+  MarijuanaNo,
+  SmokingNo,
+  SmokingYes,
+} from "../../assets";
 import { setSwipeTut } from "../../store/reducers/tutorial/tutorial";
 import { apiUrl } from "../../constants";
 import axios from "axios";
@@ -40,7 +46,6 @@ import { setAllGenders } from "../../store/reducers/allData/allData";
 import { setSessionExpired } from "../../store/reducers/authentication/authentication";
 import { initialWindowMetrics } from "react-native-safe-area-context";
 const insets = initialWindowMetrics.insets;
-
 
 const DATA = [
   {
@@ -88,7 +93,6 @@ const DATA = [
     image: require("../../assets/images/Tutorial/WomanPhotos/SmallPhotos/9.jpeg"),
     image2: require("../../assets/images/Tutorial/WomanPhotos/EnlargedPhotos/9.jpeg"),
   },
-
 ];
 
 const DATA2 = [
@@ -135,7 +139,6 @@ const DATA2 = [
 ];
 
 const Item = ({ item, setmodalVisible, masked }) => {
-  
   const [img_load, setimg_load] = useState(false);
   return (
     <View style={{ ...styles.item, position: "relative" }}>
@@ -180,7 +183,7 @@ const Item = ({ item, setmodalVisible, masked }) => {
               />
             </>
           )}
-          
+
           <FastImage
             source={item.image}
             style={{
@@ -231,7 +234,7 @@ const SwiperTut = ({ repeat_tut }) => {
     (state) => state.authentication.is_network_connected
   );
 
-  const [hide_tut, sethide_tut] = useState(false)
+  const [hide_tut, sethide_tut] = useState(false);
 
   const [instruction_list, setinstruction_list] = useState([
     "Fancy someone you think \nyou can click with. If they \nlike you back you could \nspeak later on. ",
@@ -271,9 +274,6 @@ const SwiperTut = ({ repeat_tut }) => {
   }).current;
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-
-  
-
   //Full Page Carousel
   const [modalVisible, setmodalVisible] = useState(false);
   const [currentIndex2, setcurrentIndex2] = useState(0);
@@ -284,25 +284,21 @@ const SwiperTut = ({ repeat_tut }) => {
   }).current;
   const viewConfig2 = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-
-  const scrollTo = async (large = false) =>{
-
-    let prof_data = pref_type == "Woman" ? DATA : DATA2
+  const scrollTo = async (large = false) => {
+    let prof_data = pref_type == "Woman" ? DATA : DATA2;
     // slidesRef2
-   
-    if (large) {
-    if (currentIndex <  prof_data.length ) {
-      slidesRef2.current.scrollToIndex({ index : currentIndex })
-    }
-    }
-    else{
 
-        if (currentIndex2 <  prof_data.length ) {
-      setcurrentIndex(currentIndex2)
-      slidesRef.current.scrollToIndex({ index : currentIndex2 })
-    }}
-    
-  }
+    if (large) {
+      if (currentIndex < prof_data.length) {
+        slidesRef2.current.scrollToIndex({ index: currentIndex });
+      }
+    } else {
+      if (currentIndex2 < prof_data.length) {
+        setcurrentIndex(currentIndex2);
+        slidesRef.current.scrollToIndex({ index: currentIndex2 });
+      }
+    }
+  };
 
   const swipeTutDone = async () => {
     setloading(true);
@@ -337,7 +333,6 @@ const SwiperTut = ({ repeat_tut }) => {
   };
 
   const getGenders = async () => {
-
     await axios
       .get(apiUrl + "getactivegender/")
       .then((resp) => {
@@ -354,21 +349,18 @@ const SwiperTut = ({ repeat_tut }) => {
         }
       })
       .catch((err) => {
-   
         if (all_genders.length > 0) {
           setgender_lis(all_genders);
         }
-
       });
   };
 
   // Main Carosel Item Render Function
   const renderItem = ({ item }) => {
-
-    return(
-    <Item item={item} masked={masked} setmodalVisible={setmodalVisible} />
-    )
-  }
+    return (
+      <Item item={item} masked={masked} setmodalVisible={setmodalVisible} />
+    );
+  };
 
   const renderItem2 = ({ item }) => (
     <Item2 item={item} setmodalVisible={setmodalVisible} />
@@ -380,7 +372,7 @@ const SwiperTut = ({ repeat_tut }) => {
         let w_gen = gender_lis.find((v) => v[1] == "Woman");
 
         let w_pref = profile_data.userpreferances.filter((v) => v == w_gen[0]);
-       
+
         if (w_pref.length > 0) {
           setpref_type("Woman");
         } else {
@@ -389,7 +381,6 @@ const SwiperTut = ({ repeat_tut }) => {
       }
       setswipe_tut_l(swipe_tut || repeat_tut);
       setstep(0);
-      
     }, [gender_lis, profile_data])
   );
 
@@ -399,19 +390,15 @@ const SwiperTut = ({ repeat_tut }) => {
 
   useEffect(() => {
     if (currentIndex !== currentIndex2 && modalVisible) {
-      scrollTo()
+      scrollTo();
     }
-  }, [currentIndex,currentIndex2])
-
+  }, [currentIndex, currentIndex2]);
 
   useEffect(() => {
     if (is_network_connected && hide_tut) {
-      sethide_tut(false)
+      sethide_tut(false);
     }
-   
-  }, [is_network_connected])
-
-  
+  }, [is_network_connected]);
 
   return (
     <>
@@ -444,7 +431,6 @@ const SwiperTut = ({ repeat_tut }) => {
           {/* Profile Images Carousel */}
           <View style={styles.imageCont}>
             <FlatList
-            
               data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
@@ -541,17 +527,16 @@ const SwiperTut = ({ repeat_tut }) => {
 
               <TouchableOpacity
                 style={{
-
                   position: "absolute",
-                      zIndex: 2,
-                      top: rspH(3),
-                      left: rspW(8),
-                      alignSelf: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: rspW(7.6),
-                      width: rspW(7.6),
-                      borderRadius: rspW(3.8),
+                  zIndex: 2,
+                  top: rspH(3),
+                  left: rspW(8),
+                  alignSelf: "center",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: rspW(7.6),
+                  width: rspW(7.6),
+                  borderRadius: rspW(3.8),
                 }}
                 onPress={() => {
                   setmodalVisible(false);
@@ -559,20 +544,19 @@ const SwiperTut = ({ repeat_tut }) => {
               >
                 {/* <ADIcon size={20} name="left" color={"#fff"} /> */}
                 <Image
-                  source={Backward}        
-                  style={{width: '80%', height:'70%'}}
+                  source={Backward}
+                  style={{ width: "80%", height: "70%" }}
                   resizeMode="contain"
-                          />
+                />
               </TouchableOpacity>
 
               {/*  FullScreen Carousel */}
               <FlatList
-              initialScrollIndex={currentIndex}
+                initialScrollIndex={currentIndex}
                 data={pref_type ? (pref_type == "Woman" ? DATA : DATA2) : []}
-                onLayout={()=>{
-
-                  setcurrentIndex2(currentIndex)
-                  scrollTo(true)
+                onLayout={() => {
+                  setcurrentIndex2(currentIndex);
+                  scrollTo(true);
                 }}
                 renderItem={renderItem2}
                 keyExtractor={(item) => item.id}
@@ -582,7 +566,7 @@ const SwiperTut = ({ repeat_tut }) => {
                 bounces={false}
                 getItemLayout={(data, index) => ({
                   length: scrn_width,
-                  offset: scrn_width * index ,
+                  offset: scrn_width * index,
                   index,
                 })}
                 onScroll={Animated.event(
@@ -595,7 +579,6 @@ const SwiperTut = ({ repeat_tut }) => {
                 onViewableItemsChanged={viewableItemsChanged2}
                 viewabilityConfig={viewConfig2}
                 ref={slidesRef2}
-
               />
 
               <Paginator
@@ -608,9 +591,9 @@ const SwiperTut = ({ repeat_tut }) => {
 
           {/* Profile Details Area */}
           <ScrollView
-          decelerationRate={0.9}
+            decelerationRate={0.9}
             style={styles.profileDetailsCont}
-            bounces={false}
+            bounces={true}
             showsVerticalScrollIndicator={false}
           >
             {/* Profile Details Sub Container */}
@@ -734,13 +717,13 @@ const SwiperTut = ({ repeat_tut }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Interests</Text>
                 <ScrollView
-                decelerationRate={0.9}
+                  decelerationRate={0.9}
                   style={{
                     marginTop: rspH(0.8),
                   }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  bounces={false}
+                  bounces={true}
                 >
                   <FastImage
                     source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
@@ -832,11 +815,11 @@ const SwiperTut = ({ repeat_tut }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Pets</Text>
                 <ScrollView
-                decelerationRate={0.9}
+                  decelerationRate={0.9}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  bounces={false}
+                  bounces={true}
                 >
                   <FastImage
                     source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
@@ -849,186 +832,107 @@ const SwiperTut = ({ repeat_tut }) => {
           </ScrollView>
         </View>
 
-       {
-        !hide_tut &&
-        <>
-          {swipe_tut_l && (
-            <SafeAreaView style={styles.mainTutCont}>
-              {/* Highligted Action */}
-              <View
-                style={{
-                  position: "relative",
-                }}
-              >
-                {step == 0 && (
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: 
-                      Platform.OS == 'ios' ? 
-                      rspH(35.5) + insets.top 
-                      :
-                      rspH(35.5) + insets.bottom/1.2,
-                      left: rspW(66.8),
-                    }}
-                  >
-                    <View style={{ ...styles.actionHighlightCont }}>
-                      <View style={styles.actionCont}>
-                        <FastImage
-                          source={require("../../assets/images/Swiping/Actions/Fancy.png")}
-                          style={{
-                            width: rspW(8.46),
-                            height: rspH(4.4),
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                )}
-
-                {step == 1 && (
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: 
-                      Platform.OS == 'ios' ? rspH(35.5) + insets.top :
-                      rspH(35.5) + insets.bottom/1.2,
-                      left: rspW(42.1),
-                    }}
-                  >
-                    <View style={{ ...styles.actionHighlightCont }}>
-                      <View style={styles.actionCont}>
-                        <FastImage
-                          source={require("../../assets/images/Swiping/Actions/Softspot.png")}
-                          style={{
-                            width: rspW(8.9),
-                            height: rspH(4.4),
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                )}
-
-                {step == 2 && (
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: 
-                      Platform.OS == 'ios' ? rspH(35.5) + insets.top :
-                      rspH(35.5) + insets.bottom/1.2,
-                      left: rspW(18),
-                    }}
-                  >
-                    <View style={{ ...styles.actionHighlightCont }}>
-                      <View style={styles.actionCont}>
-                        <FastImage
-                          source={require("../../assets/images/Swiping/Actions/Pass.png")}
-                          style={{
-                            width: rspW(8.695),
-                            height: rspH(4),
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                )}
-
-                {/* Highlighted Carousel */}
-                {step == 3 && (
-                  <View
-                    style={{
-                      position: "absolute",
-                      top: Platform.OS == 'ios' ? rspH(1.7) + insets.top : rspH(2),
-                      left: rspW(3.8),
-                      zIndex: 5,
-                    }}
-                  >
-                    <View style={{ ...styles.carouselHighlightCont }}>
-                      <View style={styles.imageCont}>
-                        <FlatList
-                          data={
-                            pref_type
-                              ? pref_type == "Woman"
-                                ? DATA
-                                : DATA2
-                              : []
-                          }
-                          
-                          renderItem={renderItem}
-                          keyExtractor={(item) => item.id}
-                          horizontal
-                          showsHorizontalScrollIndicator={false}
-                          pagingEnabled
-                          bounces={false}
-                          onScroll={Animated.event(
-                            [
-                              {
-                                nativeEvent: { contentOffset: { x: scrollX } },
-                              },
-                            ],
-                            {
-                              useNativeDriver: false,
-                            }
-                          )}
-                          scrollEventThrottle={32}
-                          onViewableItemsChanged={viewableItemsChanged}
-                          viewabilityConfig={viewConfig}
-                          ref={slidesRef}
-                        />
-
-                        {/* Filter */}
-                        <TouchableOpacity
-                          style={styles.filterCont}
-                          onPress={() => {}}
-                        >
-                          
+        {!hide_tut && (
+          <>
+            {swipe_tut_l && (
+              <SafeAreaView style={styles.mainTutCont}>
+                {/* Highligted Action */}
+                <View
+                  style={{
+                    position: "relative",
+                  }}
+                >
+                  {step == 0 && (
+                    <View
+                      style={{
+                        position: "absolute",
+                        top:
+                          Platform.OS == "ios"
+                            ? rspH(35.5) + insets.top
+                            : rspH(35.5) + insets.bottom / 1.2,
+                        left: rspW(66.8),
+                      }}
+                    >
+                      <View style={{ ...styles.actionHighlightCont }}>
+                        <View style={styles.actionCont}>
                           <FastImage
-                            source={require("../../assets/images/Swiping/Filter3.png")}
-                            style={{ width: 26, height: 26 }}
+                            source={require("../../assets/images/Swiping/Actions/Fancy.png")}
+                            style={{
+                              width: rspW(8.46),
+                              height: rspH(4.4),
+                            }}
                           />
-                        </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View>
+                  )}
 
-                        {/* Features Container */}
-                        <View style={styles.featuresCont}>
-                          {/* Action Container */}
-                          <View style={styles.actionsCont}>
-                            {/* Action */}
-                            <TouchableOpacity style={styles.actionCont}>
-                              <FastImage
-                                source={require("../../assets/images/Swiping/Actions/Pass.png")}
-                                style={{
-                                  width: rspW(8.695),
-                                  height: rspH(4),
-                                }}
-                              />
-                            </TouchableOpacity>
+                  {step == 1 && (
+                    <View
+                      style={{
+                        position: "absolute",
+                        top:
+                          Platform.OS == "ios"
+                            ? rspH(35.5) + insets.top
+                            : rspH(35.5) + insets.bottom / 1.2,
+                        left: rspW(42.1),
+                      }}
+                    >
+                      <View style={{ ...styles.actionHighlightCont }}>
+                        <View style={styles.actionCont}>
+                          <FastImage
+                            source={require("../../assets/images/Swiping/Actions/Softspot.png")}
+                            style={{
+                              width: rspW(8.9),
+                              height: rspH(4.4),
+                            }}
+                          />
+                        </View>
+                      </View>
+                    </View>
+                  )}
 
-                            {/* Action */}
-                            <TouchableOpacity style={styles.actionCont}>
-                              <FastImage
-                                source={require("../../assets/images/Swiping/Actions/Softspot.png")}
-                                style={{
-                                  width: rspW(8.9),
-                                  height: rspH(4.4),
-                                }}
-                              />
-                            </TouchableOpacity>
+                  {step == 2 && (
+                    <View
+                      style={{
+                        position: "absolute",
+                        top:
+                          Platform.OS == "ios"
+                            ? rspH(35.5) + insets.top
+                            : rspH(35.5) + insets.bottom / 1.2,
+                        left: rspW(18),
+                      }}
+                    >
+                      <View style={{ ...styles.actionHighlightCont }}>
+                        <View style={styles.actionCont}>
+                          <FastImage
+                            source={require("../../assets/images/Swiping/Actions/Pass.png")}
+                            style={{
+                              width: rspW(8.695),
+                              height: rspH(4),
+                            }}
+                          />
+                        </View>
+                      </View>
+                    </View>
+                  )}
 
-                            {/* Action */}
-                            <TouchableOpacity style={styles.actionCont}>
-                              <FastImage
-                                source={require("../../assets/images/Swiping/Actions/Fancy.png")}
-                                style={{
-                                  width: rspW(8.46),
-                                  height: rspH(4.4),
-                                }}
-                              />
-                            </TouchableOpacity>
-                          </View>
-
-                          {/* Main Carousel Pagintors / Dots */}
-                          <Paginator
+                  {/* Highlighted Carousel */}
+                  {step == 3 && (
+                    <View
+                      style={{
+                        position: "absolute",
+                        top:
+                          Platform.OS == "ios"
+                            ? rspH(1.7) + insets.top
+                            : rspH(2),
+                        left: rspW(3.8),
+                        zIndex: 5,
+                      }}
+                    >
+                      <View style={{ ...styles.carouselHighlightCont }}>
+                        <View style={styles.imageCont}>
+                          <FlatList
                             data={
                               pref_type
                                 ? pref_type == "Woman"
@@ -1036,353 +940,442 @@ const SwiperTut = ({ repeat_tut }) => {
                                   : DATA2
                                 : []
                             }
-                            scrollX={scrollX}
-                            currentIndex={currentIndex}
+                            renderItem={renderItem}
+                            keyExtractor={(item) => item.id}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            pagingEnabled
+                            bounces={false}
+                            onScroll={Animated.event(
+                              [
+                                {
+                                  nativeEvent: {
+                                    contentOffset: { x: scrollX },
+                                  },
+                                },
+                              ],
+                              {
+                                useNativeDriver: false,
+                              }
+                            )}
+                            scrollEventThrottle={32}
+                            onViewableItemsChanged={viewableItemsChanged}
+                            viewabilityConfig={viewConfig}
+                            ref={slidesRef}
                           />
+
+                          {/* Filter */}
+                          <TouchableOpacity
+                            style={styles.filterCont}
+                            onPress={() => {}}
+                          >
+                            <FastImage
+                              source={require("../../assets/images/Swiping/Filter3.png")}
+                              style={{ width: 26, height: 26 }}
+                            />
+                          </TouchableOpacity>
+
+                          {/* Features Container */}
+                          <View style={styles.featuresCont}>
+                            {/* Action Container */}
+                            <View style={styles.actionsCont}>
+                              {/* Action */}
+                              <TouchableOpacity style={styles.actionCont}>
+                                <FastImage
+                                  source={require("../../assets/images/Swiping/Actions/Pass.png")}
+                                  style={{
+                                    width: rspW(8.695),
+                                    height: rspH(4),
+                                  }}
+                                />
+                              </TouchableOpacity>
+
+                              {/* Action */}
+                              <TouchableOpacity style={styles.actionCont}>
+                                <FastImage
+                                  source={require("../../assets/images/Swiping/Actions/Softspot.png")}
+                                  style={{
+                                    width: rspW(8.9),
+                                    height: rspH(4.4),
+                                  }}
+                                />
+                              </TouchableOpacity>
+
+                              {/* Action */}
+                              <TouchableOpacity style={styles.actionCont}>
+                                <FastImage
+                                  source={require("../../assets/images/Swiping/Actions/Fancy.png")}
+                                  style={{
+                                    width: rspW(8.46),
+                                    height: rspH(4.4),
+                                  }}
+                                />
+                              </TouchableOpacity>
+                            </View>
+
+                            {/* Main Carousel Pagintors / Dots */}
+                            <Paginator
+                              data={
+                                pref_type
+                                  ? pref_type == "Woman"
+                                    ? DATA
+                                    : DATA2
+                                  : []
+                              }
+                              scrollX={scrollX}
+                              currentIndex={currentIndex}
+                            />
+                          </View>
                         </View>
                       </View>
                     </View>
-                  </View>
-                )}
+                  )}
 
-                {/* Central Modal View */}
-                {step < 4 && (
-                  <View style={styles.centralModalCont}>
-                    {/* Tut Text */}
-                    <View style={styles.centralModalTextCont}>
-                      <Text style={styles.centralModalText}>
-                        {instruction_list[step]}
-                      </Text>
-                    </View>
-
-                    <View>
-                      {/* hr */}
-                      <View
-                        style={{
-                          borderBottomColor: colors.grey,
-                          borderBottomWidth: rspH(0.24),
-                        }}
-                      />
-
-                      {/* Next Btn */}
-                      <TouchableOpacity
-                        onPress={() => {
-                          if (step < 4) {
-                            setstep(step + 1);
-                          }
-                        }}
-                        style={styles.centralModalTextNextCont}
-                      >
-                        <Text style={styles.centralModalTextNext}>Next</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                )}
-
-                {/* Central Modal View 2 */}
-                {step == 4 && (
-                  <View
-                    style={{
-                      ...styles.centralModalCont,
-                      top: Platform.OS == 'ios' ? rspH(14) + insets.top : rspH(14)+ insets.bottom,
-                    }}
-                  >
-                    {/* Tut Text */}
-                    <View style={styles.centralModalTextCont}>
-                      <Text
-                        style={styles.centralModalText}
-                        numberOfLines={3}
-                        adjustsFontSizeToFit
-                      >
-                        {instruction_list[step]}
-                      </Text>
-                    </View>
-
-                    <View>
-                      {/* hr */}
-                      <View
-                        style={{
-                          borderBottomColor: colors.grey,
-                          borderBottomWidth: rspH(0.24),
-                        }}
-                      />
-
-                      {/* Next Btn */}
-                      <TouchableOpacity
-                        onPress={() => {
-                          setswipe_tut_l(false);
-
-                          if (repeat_tut) {
-                            navigation.navigate("Match");
-                          } else {
-                            if (is_network_connected) {
-                              swipeTutDone();  
-                            }
-                            else{
-                              sethide_tut(true)
-                            }
-                          }
-                        }}
-                        style={styles.centralModalTextNextCont}
-                      >
-                        <Text style={styles.centralModalTextNext}>
-                          Let's Start!
+                  {/* Central Modal View */}
+                  {step < 4 && (
+                    <View style={styles.centralModalCont}>
+                      {/* Tut Text */}
+                      <View style={styles.centralModalTextCont}>
+                        <Text style={styles.centralModalText}>
+                          {instruction_list[step]}
                         </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                )}
+                      </View>
 
-                {/* Scroll Modal View */}
-                {step == 4 && (
-                  <View
-                    style={{
-                      marginTop:  Platform.OS == 'ios'? rspH(48.5) + insets.top: rspH(48) + insets.bottom,
-                      alignSelf: "center",
-                      ...styles.scrollModalCont,
-                    }}
-                  >
-                    <ScrollView
-                    decelerationRate={0.9}
-                      bounces={false}
-                      showsVerticalScrollIndicator={true}
+                      <View>
+                        {/* hr */}
+                        <View
+                          style={{
+                            borderBottomColor: colors.grey,
+                            borderBottomWidth: rspH(0.24),
+                          }}
+                        />
+
+                        {/* Next Btn */}
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (step < 4) {
+                              setstep(step + 1);
+                            }
+                          }}
+                          style={styles.centralModalTextNextCont}
+                        >
+                          <Text style={styles.centralModalTextNext}>Next</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  )}
+
+                  {/* Central Modal View 2 */}
+                  {step == 4 && (
+                    <View
                       style={{
+                        ...styles.centralModalCont,
+                        top:
+                          Platform.OS == "ios"
+                            ? rspH(14) + insets.top
+                            : rspH(14) + insets.bottom,
+                      }}
+                    >
+                      {/* Tut Text */}
+                      <View style={styles.centralModalTextCont}>
+                        <Text
+                          style={styles.centralModalText}
+                          numberOfLines={3}
+                          adjustsFontSizeToFit
+                        >
+                          {instruction_list[step]}
+                        </Text>
+                      </View>
+
+                      <View>
+                        {/* hr */}
+                        <View
+                          style={{
+                            borderBottomColor: colors.grey,
+                            borderBottomWidth: rspH(0.24),
+                          }}
+                        />
+
+                        {/* Next Btn */}
+                        <TouchableOpacity
+                          onPress={() => {
+                            setswipe_tut_l(false);
+
+                            if (repeat_tut) {
+                              navigation.navigate("Match");
+                            } else {
+                              if (is_network_connected) {
+                                swipeTutDone();
+                              } else {
+                                sethide_tut(true);
+                              }
+                            }
+                          }}
+                          style={styles.centralModalTextNextCont}
+                        >
+                          <Text style={styles.centralModalTextNext}>
+                            Let's Start!
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  )}
+
+                  {/* Scroll Modal View */}
+                  {step == 4 && (
+                    <View
+                      style={{
+                        marginTop:
+                          Platform.OS == "ios"
+                            ? rspH(48.5) + insets.top
+                            : rspH(48) + insets.bottom,
+                        alignSelf: "center",
                         ...styles.scrollModalCont,
                       }}
                     >
-                      <View
+                      <ScrollView
+                        decelerationRate={0.9}
+                        bounces={true}
+                        showsVerticalScrollIndicator={true}
                         style={{
-                          alignSelf: "center",
-                          paddingVertical: rspH(1.8),
+                          ...styles.scrollModalCont,
                         }}
                       >
-                        {/* Profile Details Sub Container */}
-                        <View style={styles.profileDetailsSubCont}>
-                          {/* Profile Detail Container */}
-                          <View
-                            style={{
-                              ...styles.profileDetailCont,
-                              ...styles.boxShadowCont,
-                              paddingHorizontal: rspW(3.2),
-                              justifyContent: "center",
-                            }}
-                          >
-                            <View
-                              style={{
-                                flexDirection: "row",
-                                alignItems: "baseline",
-                              }}
-                            >
-                              <FastImage
-                                source={require("../../assets/images/Swiping/BioIcons/City.png")}
-                                style={{
-                                  width: rspW(6.75),
-                                  height: rspH(3),
-                                  marginRight: rspW(2),
-                                }}
-                              />
-                              <Text style={styles.profileDetailContNText}>
-                                Tel Aviv
-                              </Text>
-                            </View>
-
-                            <View
-                              style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                width: "100%",
-                              }}
-                            >
-                              <FastImage
-                                source={require("../../assets/images/Swiping/BioIcons/Education.png")}
-                                style={{
-                                  width: rspW(6.75),
-                                  height: rspH(3),
-                                  marginRight: rspW(2),
-                                }}
-                              />
-                              <Text style={styles.profileDetailContNText}>
-                                Graduate
-                              </Text>
-                            </View>
-                          </View>
-
-                          <View
-                            style={{
-                              ...styles.profileDetailCont,
-                              ...styles.boxShadowCont,
-                              paddingHorizontal: rspW(3.2),
-                              justifyContent: "center",
-                            }}
-                          >
-                            <View
-                              style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <FastImage
-                                source={DrinkingNo}
-                                style={{
-                                  ...styles.habitsImage,
-                                }}
-                                resizeMode="contain"
-                              />
-                              <FastImage
-                                source={SmokingNo}
-                                style={{
-                                  ...styles.habitsImage,
-                                }}
-                                resizeMode="contain"
-                              />
-                              <FastImage
-                                source={MarijuanaNo}
-                                style={{
-                                  ...styles.habitsImage,
-                                }}
-                                resizeMode="contain"
-                              />
-                            </View>
-                          </View>
-                        </View>
-
-                        {/* Public Prompt */}
-                        <View style={styles.promptContainer}>
-                          <View style={styles.promptQuestionContainer}>
-                            <Text style={styles.promptQuestion}>
-                              The sign of a great first date
-                            </Text>
-                          </View>
-                          <Text style={styles.promptAnswer}>
-                            A great first date is when you feel like you’ve met
-                            your soulmate, and you can’t believe how lucky you
-                            are. It’s when you make each other laugh so hard
-                            that your stomach hurts, and you tease each other
-                            with playful banter. It’s when you open up about
-                            your hopes, fears, and secrets, and you feel a deep
-                            bond. It’s when you kiss goodnight, and you feel
-                            butterflies in your stomach. A great first date is
-                            when you text each other right after, and you can’t
-                            wait for the next one. 😉
-                          </Text>
-                        </View>
-
                         <View
                           style={{
-                            ...styles.profileDetailsSubCont2,
-                            ...styles.boxShadowCont,
+                            alignSelf: "center",
+                            paddingVertical: rspH(1.8),
                           }}
                         >
-                          <Text style={styles.profileDetailContHeading}>
-                            Interests
-                          </Text>
-                          <ScrollView
-                          decelerationRate={0.9}
-                            style={{ marginTop: rspH(0.8) }}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            bounces={false}
-                          >
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bowling.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/Basketball.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/Boating.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bicycling.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/AmericanFootball.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/AnimalCare.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Interests/InterestsBlue/Baking.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                          </ScrollView>
-                        </View>
+                          {/* Profile Details Sub Container */}
+                          <View style={styles.profileDetailsSubCont}>
+                            {/* Profile Detail Container */}
+                            <View
+                              style={{
+                                ...styles.profileDetailCont,
+                                ...styles.boxShadowCont,
+                                paddingHorizontal: rspW(3.2),
+                                justifyContent: "center",
+                              }}
+                            >
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "baseline",
+                                }}
+                              >
+                                <FastImage
+                                  source={require("../../assets/images/Swiping/BioIcons/City.png")}
+                                  style={{
+                                    width: rspW(6.75),
+                                    height: rspH(3),
+                                    marginRight: rspW(2),
+                                  }}
+                                />
+                                <Text style={styles.profileDetailContNText}>
+                                  Tel Aviv
+                                </Text>
+                              </View>
 
-                        {/* Public Prompt */}
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  width: "100%",
+                                }}
+                              >
+                                <FastImage
+                                  source={require("../../assets/images/Swiping/BioIcons/Education.png")}
+                                  style={{
+                                    width: rspW(6.75),
+                                    height: rspH(3),
+                                    marginRight: rspW(2),
+                                  }}
+                                />
+                                <Text style={styles.profileDetailContNText}>
+                                  Graduate
+                                </Text>
+                              </View>
+                            </View>
 
-                        <View style={styles.promptContainer}>
-                          <View style={styles.promptQuestionContainer}>
-                            <Text style={styles.promptQuestion}>
-                              What's your favorite way to spend a rainy weekend
-                              at home by yourself
+                            <View
+                              style={{
+                                ...styles.profileDetailCont,
+                                ...styles.boxShadowCont,
+                                paddingHorizontal: rspW(3.2),
+                                justifyContent: "center",
+                              }}
+                            >
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <FastImage
+                                  source={DrinkingNo}
+                                  style={{
+                                    ...styles.habitsImage,
+                                  }}
+                                  resizeMode="contain"
+                                />
+                                <FastImage
+                                  source={SmokingNo}
+                                  style={{
+                                    ...styles.habitsImage,
+                                  }}
+                                  resizeMode="contain"
+                                />
+                                <FastImage
+                                  source={MarijuanaNo}
+                                  style={{
+                                    ...styles.habitsImage,
+                                  }}
+                                  resizeMode="contain"
+                                />
+                              </View>
+                            </View>
+                          </View>
+
+                          {/* Public Prompt */}
+                          <View style={styles.promptContainer}>
+                            <View style={styles.promptQuestionContainer}>
+                              <Text style={styles.promptQuestion}>
+                                The sign of a great first date
+                              </Text>
+                            </View>
+                            <Text style={styles.promptAnswer}>
+                              A great first date is when you feel like you’ve
+                              met your soulmate, and you can’t believe how lucky
+                              you are. It’s when you make each other laugh so
+                              hard that your stomach hurts, and you tease each
+                              other with playful banter. It’s when you open up
+                              about your hopes, fears, and secrets, and you feel
+                              a deep bond. It’s when you kiss goodnight, and you
+                              feel butterflies in your stomach. A great first
+                              date is when you text each other right after, and
+                              you can’t wait for the next one. 😉
                             </Text>
                           </View>
-                          <Text style={styles.promptAnswer}>
-                            My favorite way to spend a rainy weekend at home by
-                            myself is to enjoy some quality me-time. I like to
-                            watch TV and catch up on my favorite shows or
-                            movies, or maybe discover something new. I also love
-                            to read books and immerse myself in different worlds
-                            and stories. I find reading very relaxing and
-                            stimulating at the same time. And of course, I like
-                            to cook something delicious and healthy for myself,
-                            or maybe try a new recipe. Cooking is a great way to
-                            express my creativity and have fun. A rainy weekend
-                            at home by myself is a perfect opportunity to do the
-                            things I love and pamper myself.
-                          </Text>
-                        </View>
 
-                        <View
-                          style={{
-                            ...styles.profileDetailsSubCont2,
-                            ...styles.boxShadowCont,
-                            width: rspW(39.5),
-                          }}
-                        >
-                          <Text style={styles.profileDetailContHeading}>
-                            Pets
-                          </Text>
-                          <ScrollView
-                          decelerationRate={0.9}
-                            style={{ marginTop: rspH(0.8) }}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            bounces={false}
+                          <View
+                            style={{
+                              ...styles.profileDetailsSubCont2,
+                              ...styles.boxShadowCont,
+                            }}
                           >
-                            <FastImage
-                              source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                          </ScrollView>
+                            <Text style={styles.profileDetailContHeading}>
+                              Interests
+                            </Text>
+                            <ScrollView
+                              decelerationRate={0.9}
+                              style={{ marginTop: rspH(0.8) }}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              bounces={true}
+                            >
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bowling.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Basketball.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Boating.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bicycling.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/AmericanFootball.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/AnimalCare.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Baking.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                            </ScrollView>
+                          </View>
+
+                          {/* Public Prompt */}
+
+                          <View style={styles.promptContainer}>
+                            <View style={styles.promptQuestionContainer}>
+                              <Text style={styles.promptQuestion}>
+                                What's your favorite way to spend a rainy
+                                weekend at home by yourself
+                              </Text>
+                            </View>
+                            <Text style={styles.promptAnswer}>
+                              My favorite way to spend a rainy weekend at home
+                              by myself is to enjoy some quality me-time. I like
+                              to watch TV and catch up on my favorite shows or
+                              movies, or maybe discover something new. I also
+                              love to read books and immerse myself in different
+                              worlds and stories. I find reading very relaxing
+                              and stimulating at the same time. And of course, I
+                              like to cook something delicious and healthy for
+                              myself, or maybe try a new recipe. Cooking is a
+                              great way to express my creativity and have fun. A
+                              rainy weekend at home by myself is a perfect
+                              opportunity to do the things I love and pamper
+                              myself.
+                            </Text>
+                          </View>
+
+                          <View
+                            style={{
+                              ...styles.profileDetailsSubCont2,
+                              ...styles.boxShadowCont,
+                              width: rspW(39.5),
+                            }}
+                          >
+                            <Text style={styles.profileDetailContHeading}>
+                              Pets
+                            </Text>
+                            <ScrollView
+                              decelerationRate={0.9}
+                              style={{ marginTop: rspH(0.8) }}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              bounces={true}
+                            >
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                            </ScrollView>
+                          </View>
                         </View>
-                      </View>
-                    </ScrollView>
-                  </View>
-                )}
-              </View>
-            </SafeAreaView>
-          )}
-        </>}
+                      </ScrollView>
+                    </View>
+                  )}
+                </View>
+              </SafeAreaView>
+            )}
+          </>
+        )}
       </SafeAreaView>
     </>
   );
@@ -1416,7 +1409,7 @@ const styles = StyleSheet.create({
   imageCont: {
     zIndex: 5,
     width: rspW(89),
-    height: Platform.OS == 'ios' ?  rspH(42): rspH(42) + insets.bottom,
+    height: Platform.OS == "ios" ? rspH(42) : rspH(42) + insets.bottom,
     borderRadius: rspW(5.3),
   },
 
@@ -1427,7 +1420,6 @@ const styles = StyleSheet.create({
     marginRight: rspW(0.8),
     marginLeft: rspW(0.2),
     zIndex: 5,
-
   },
 
   actionsCont: {
@@ -1568,11 +1560,12 @@ const styles = StyleSheet.create({
   centralModalCont: {
     alignSelf: "center",
     position: "absolute",
-    height: Platform.OS == 'ios' ? rspH(28.85) :  rspH(28.85) ,
+    height: Platform.OS == "ios" ? rspH(28.85) : rspH(28.85),
     width: rspW(86),
     borderRadius: rspW(3),
     backgroundColor: colors.white,
-    top: Platform.OS == 'ios' ? rspH(48) + insets.top : rspH(48.4) + insets.bottom,
+    top:
+      Platform.OS == "ios" ? rspH(48) + insets.top : rspH(48.4) + insets.bottom,
 
     paddingHorizontal: rspW(4.6),
     justifyContent: "space-between",
@@ -1608,8 +1601,8 @@ const styles = StyleSheet.create({
 
   //Tutorial Scroll Modal
   scrollModalCont: {
-
-    height: Platform.OS == 'ios'? rspH(44) - insets.top: rspH(43.1) - insets.bottom ,
+    height:
+      Platform.OS == "ios" ? rspH(44) - insets.top : rspH(43.1) - insets.bottom,
     width: rspW(91.8),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -1617,7 +1610,7 @@ const styles = StyleSheet.create({
 
   carouselHighlightCont: {
     width: rspW(92.4),
-    height: Platform.OS == 'ios' ? rspH(44) : rspH(44) + insets.bottom,
+    height: Platform.OS == "ios" ? rspH(44) : rspH(44) + insets.bottom,
     borderRadius: rspW(6.4),
     position: "relative",
     backgroundColor: "#ffffff",

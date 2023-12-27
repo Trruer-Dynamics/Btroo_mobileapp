@@ -63,12 +63,15 @@ const PhotoVerification = ({ navigation, route }) => {
           <ErrorContainer error_msg="" />
 
           {/* Next Btn To Navigate to Next Form Components */}
-          <FooterBtn title={"Next"} disabled={is_network_connected ? false : true} onPress={()=>{
-            if (is_network_connected) {
-              onNextPress()  
-            }
-            
-            }} />
+          <FooterBtn
+            title={"Next"}
+            disabled={is_network_connected ? false : true}
+            onPress={() => {
+              if (is_network_connected) {
+                onNextPress();
+              }
+            }}
+          />
         </FormWrapperFooter>
       </FormWrapper>
     </SafeAreaView>

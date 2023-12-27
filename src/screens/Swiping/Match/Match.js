@@ -51,7 +51,8 @@ const insets = initialWindowMetrics.insets;
 const Match = () => {
   const dispatch = useDispatch();
 
-  const { newMsgRefresh, setnewMsgRefresh ,appStateVisible} = useContext(UserContext);
+  const { newMsgRefresh, setnewMsgRefresh, appStateVisible } =
+    useContext(UserContext);
 
   const access_token = useSelector(
     (state) => state.authentication.access_token
@@ -97,7 +98,6 @@ const Match = () => {
         }
       );
 
-
       if (resp.data.code == 200) {
         setkeep_matching(!keep_matching);
 
@@ -126,22 +126,17 @@ const Match = () => {
       userprofileid: profile_data.userprofile.id,
     };
 
-
     try {
       const resp = await axios.post(url, data, { headers });
 
       let code = resp.data.code;
       let resp_data = resp.data.data;
-      
 
       if (code == 200) {
         let match_tmp = [];
         let matchs_imgs = [];
         if (resp_data.length > 0) {
-
           for (let p = 0; p < resp_data.length; p++) {
-
-            
             let mth = {};
             let id = resp_data[p].id;
             let lastMessage = resp_data[p].last_message?.content
@@ -159,14 +154,19 @@ const Match = () => {
                 ? user_2
                 : user_1;
 
-              let userprv_rvl =
-               user_1.userprofile.id == profile_data.userprofile.id ? resp_data[p].user1_profile_reveal  : resp_data[p].user2_profile_reveal
+            let userprv_rvl =
+              user_1.userprofile.id == profile_data.userprofile.id
+                ? resp_data[p].user1_profile_reveal
+                : resp_data[p].user2_profile_reveal;
 
-            let prof_rev =  resp_data[p].user1_profile_reveal && resp_data[p].user2_profile_reveal
-            
-            let first_visit_user = user_1.userprofile.id == profile_data.userprofile.id
-            ? resp_data[p].user1_SayHii_status
-            : resp_data[p].user2_SayHii_status;
+            let prof_rev =
+              resp_data[p].user1_profile_reveal &&
+              resp_data[p].user2_profile_reveal;
+
+            let first_visit_user =
+              user_1.userprofile.id == profile_data.userprofile.id
+                ? resp_data[p].user1_SayHii_status
+                : resp_data[p].user2_SayHii_status;
 
             let seen_by =
               resp_data[p].last_message != null
@@ -194,18 +194,17 @@ const Match = () => {
             mth.for_user_id = profile_data.userprofile.id;
             mth.prof_img = prf_img?.cropedimage;
             mth.prof_rvl = prof_rev;
-            mth.user_prof_rvl = userprv_rvl
-          
+            mth.user_prof_rvl = userprv_rvl;
+
             mth.publicprompts = mth_user.userprofile.publicprompts;
             mth.privateprompts = mth_user.userprofile.privateprompts;
             mth.tut = false;
 
-            mth.first_visit_done = first_visit_user
+            mth.first_visit_done = first_visit_user;
             match_tmp.push(mth);
-            mth.all_images = mth_user.userprofile.image.sort((a,b)=>{
-return a.position - b.position
-            })
-            
+            mth.all_images = mth_user.userprofile.image.sort((a, b) => {
+              return a.position - b.position;
+            });
 
             matchs_imgs.push([
               id,
@@ -214,8 +213,6 @@ return a.position - b.position
             ]);
           }
         }
-
-
 
         setmatch_list(match_tmp);
         dispatch(setMatches(match_tmp));
@@ -233,7 +230,6 @@ return a.position - b.position
         : item.userprofile.gender == "Man"
         ? MaleAvatar
         : FemaleAvatar;
-
 
       return (
         <MatchItem
@@ -283,8 +279,8 @@ return a.position - b.position
     setkeep_matching(kp_mtch);
   }, [kp_mtch]);
 
-  const userExist = async () =>{
-    let url_path = 'isacountavialable/'
+  const userExist = async () => {
+    let url_path = "isacountavialable/";
 
     const data = {
       user_id: profile_data.user.id,
@@ -295,37 +291,30 @@ return a.position - b.position
     };
 
     try {
-      const response = await axios.post(
-        apiUrl + url_path,
-        data,
-        {
-          headers,
-        }
-      );
+      const response = await axios.post(apiUrl + url_path, data, {
+        headers,
+      });
       let resp_data = response.data;
 
       if (resp_data.code == 400) {
-
-           Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
-            
+        Alert.alert(
+          "Your account has been deleted!",
+          "Please Contact admin at contact@btrooapp.com.",
+          [
             {
               text: "OK",
               onPress: () => {
-                dispatch(setSessionExpired(true))
+                dispatch(setSessionExpired(true));
               },
             },
-          ]);
-        
+          ]
+        );
       }
-      
     } catch (error) {
       setloading(false);
       return false;
-
     }
-
-  }
-
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -344,18 +333,16 @@ return a.position - b.position
           setmatch_list(c_user_matches);
         }
       }
-    }, [newMsgRefresh, is_network_connected,appStateVisible])
+    }, [newMsgRefresh, is_network_connected, appStateVisible])
   );
 
   useFocusEffect(
     React.useCallback(() => {
-      if (appStateVisible == 'active') {
-        userExist()
+      if (appStateVisible == "active") {
+        userExist();
       }
     }, [appStateVisible])
   );
-
-
 
   return (
     <>
@@ -384,7 +371,10 @@ return a.position - b.position
               style={{
                 ...styles.bottomCont,
                 position: "absolute",
-                top:Platform.OS == "ios"? rspH(77) - insets.top: rspH(78)  - insets.top,
+                top:
+                  Platform.OS == "ios"
+                    ? rspH(77) - insets.top
+                    : rspH(78) - insets.top,
                 alignSelf: "center",
               }}
             >

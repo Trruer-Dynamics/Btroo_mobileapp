@@ -150,7 +150,7 @@ const ChatTut = ({ profile, repeat_tut }) => {
     (state) => state.authentication.is_network_connected
   );
 
-const [show_alert, setshow_alert] = useState(false)
+  const [show_alert, setshow_alert] = useState(false);
 
   const [loading, setloading] = useState(false);
 
@@ -229,19 +229,15 @@ const [show_alert, setshow_alert] = useState(false)
   );
 
   useEffect(() => {
-    
     if (is_network_connected) {
-      setshow_alert(false)
+      setshow_alert(false);
     }
-  }, [is_network_connected])
-
-  
-
+  }, [is_network_connected]);
 
   return (
     <>
       {loading && <Loader />}
-         <OffflineAlert offAlert={show_alert} />
+      <OffflineAlert offAlert={show_alert} />
       <SafeAreaView style={{ height: scrn_height, backgroundColor: "#FFF" }}>
         <SafeAreaView
           style={{
@@ -266,9 +262,7 @@ const [show_alert, setshow_alert] = useState(false)
                 return (
                   <TouchableOpacity
                     style={{ position: "absolute", right: 0, top: rspH(-1) }}
-                    onPress={() => {
-                      
-                    }}
+                    onPress={() => {}}
                   >
                     <FastImage source={rvlimage} style={styles.profilePhoto} />
                   </TouchableOpacity>
@@ -290,7 +284,7 @@ const [show_alert, setshow_alert] = useState(false)
         <View
           style={{
             position: "absolute",
-            top: Platform.OS == 'ios' ? rspH(85.8) : rspH(80) + insets.top,
+            top: Platform.OS == "ios" ? rspH(85.8) : rspH(80) + insets.top,
             alignSelf: "center",
           }}
         >
@@ -361,8 +355,8 @@ const [show_alert, setshow_alert] = useState(false)
             setModalVisible={setmodalVisible}
           />
         </FullModal>
-       
-          <>
+
+        <>
           <View style={styles.mainTutCont}>
             <View style={styles.centralModalContMatch}>
               <View style={styles.centralModalTextCont}>
@@ -387,15 +381,11 @@ const [show_alert, setshow_alert] = useState(false)
                         dispatch(setRepeatTut(false));
                         navigation.navigate("SettingsScreen");
                       } else {
-                        
                         if (is_network_connected) {
                           chatTutDone();
+                        } else {
+                          setshow_alert(true);
                         }
-                        else{
-                          setshow_alert(true)
-                        }
-                        
-                        
                       }
                     }
                   }}
@@ -618,7 +608,8 @@ const styles = StyleSheet.create({
   // Match Chat Tut
   centralModalContMatch: {
     position: "absolute",
-    height: Platform.OS == 'ios'? rspH(31) + insets.top: rspH(36) + insets.bottom,
+    height:
+      Platform.OS == "ios" ? rspH(31) + insets.top : rspH(36) + insets.bottom,
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
@@ -631,13 +622,13 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white  + 'ff',
+    backgroundColor: colors.white + "ff",
     alignItems: "center",
     justifyContent: "center",
   },
-  
+
   nameHighCont: {
-    top: Platform.OS == 'ios' ? rspH(1.8) + insets.top :  scrn_height * 0.018,
+    top: Platform.OS == "ios" ? rspH(1.8) + insets.top : scrn_height * 0.018,
     left: rspW(32),
     width: rspW(36),
     height: rspH(4),
@@ -650,11 +641,11 @@ const styles = StyleSheet.create({
     fontSize: rspF(2.7),
     color: colors.black,
     lineHeight: rspF(2.8),
-    textAlign:'center',
+    textAlign: "center",
   },
 
   iceBreakerHighCont: {
-    top: Platform.OS == 'ios'? rspH(87) : rspH(81.2) + insets.top,
+    top: Platform.OS == "ios" ? rspH(87) : rspH(81.2) + insets.top,
     alignSelf: "center",
     width: rspW(94),
     height: rspH(3.6),

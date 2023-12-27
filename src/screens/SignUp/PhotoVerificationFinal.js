@@ -179,9 +179,8 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
             <TouchableOpacity
               onPress={() => {
                 if (is_network_connected) {
-                  navigation.navigate("PhotoVerifyCamera"); 
+                  navigation.navigate("PhotoVerifyCamera");
                 }
-             
               }}
               style={{ ...styles.btn }}
             >
@@ -190,9 +189,9 @@ const PhotoVerificationFinal = ({ navigation, route }) => {
             <FooterBtn
               title={"Confirm"}
               disabled={!is_network_connected}
-              onPress={()=>{
+              onPress={() => {
                 if (is_network_connected) {
-                  verifyPhoto()
+                  verifyPhoto();
                 }
               }}
             />

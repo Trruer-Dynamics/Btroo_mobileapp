@@ -35,8 +35,7 @@ const ProfileRevealed = ({ route }) => {
   const [rvl_img, setrvl_img] = useState("");
 
   const [updated_prof, setupdated_prof] = useState(null);
-  const { sckop,c_scrn } = useContext(UserContext);
-
+  const { sckop, c_scrn } = useContext(UserContext);
 
   const getRvlProfData = async () => {
     const data = {
@@ -77,8 +76,7 @@ const ProfileRevealed = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-
-      c_scrn.current = 'ProfileRevealed'
+      c_scrn.current = "ProfileRevealed";
       dispatch(setCurrentScreen(route.name));
 
       let tmplist = [...matches_imgs];

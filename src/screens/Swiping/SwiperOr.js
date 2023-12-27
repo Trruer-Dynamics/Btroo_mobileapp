@@ -77,7 +77,6 @@ import { setPromptFillingStart } from "../../store/reducers/authentication/authe
 import { UserContext } from "../../context/user";
 import FastImage from "react-native-fast-image";
 
-
 const SwiperOr = ({}) => {
   const navigation = useNavigation();
 
@@ -94,7 +93,7 @@ const SwiperOr = ({}) => {
 
   const current_screen = useSelector((state) => state.screen.current_screen);
 
-  const [net_conn, setnet_conn] = useState(true)
+  const [net_conn, setnet_conn] = useState(true);
 
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
@@ -120,13 +119,11 @@ const SwiperOr = ({}) => {
     (state) => state.authentication.access_token
   );
 
- 
   const [reports_count, setreports_count] = useState(0);
   const [location_added, setlocation_added] = useState(false);
   const [screen_loaded, setscreen_loaded] = useState(false);
 
   const [filter_data_get, setfilter_data_get] = useState(false);
-
 
   const [loading, setloading] = useState(true);
   const [loading2, setloading2] = useState(true);
@@ -164,20 +161,19 @@ const SwiperOr = ({}) => {
     ],
     [
       "You are offline",
-      " Please check your internet \nconnection and try again."
-    ]
+      " Please check your internet \nconnection and try again.",
+    ],
   ]);
 
   const [warn_step, setwarn_step] = useState(0);
   const [redirect_to_setting, setredirect_to_setting] = useState(false);
   const [promptStep, setpromptStep] = useState(1);
   const [profiles, setprofiles] = useState([]);
-  const [profile_remove_refh, setprofile_remove_refh] = useState(false)
+  const [profile_remove_refh, setprofile_remove_refh] = useState(false);
   const [empty_profile_call, setempty_profile_call] = useState(false);
 
   //Filter
   const [showFilter, setshowFilter] = useState(false);
-
 
   const [swippingcount, setswippingcount] = useState(0);
 
@@ -208,7 +204,6 @@ const SwiperOr = ({}) => {
 
   // Scale Swipe Card from 80% to 100% height
   const actionAnimation = () => {
-
     Animated.timing(traYValue, {
       fromValue: scrn_height,
       toValue: 0,
@@ -223,7 +218,7 @@ const SwiperOr = ({}) => {
 
   // Remove card on action perform
   const removeCard = useCallback(() => {
-    removeItemfromList()
+    removeItemfromList();
     scaleValue.setValue(0.9);
     iconRotate.setValue(0);
     iconTranslateX.setValue(0);
@@ -232,7 +227,6 @@ const SwiperOr = ({}) => {
     rightX.setValue(0);
     upY.setValue(0);
 
-   
     swipe.setValue({ x: 0, y: 0 });
     traYValue.setValue(scrn_height);
 
@@ -241,9 +235,6 @@ const SwiperOr = ({}) => {
       setpromptTime(true);
     }
   }, [swipe, swippingcount, profiles]);
-
-
-
 
   const handleChoiceButtons = useCallback(
     (direction) => {
@@ -260,7 +251,6 @@ const SwiperOr = ({}) => {
         setactionEnd(true);
         actionAnimation();
       });
-
     },
 
     [removeCard, swipe.x]
@@ -325,7 +315,6 @@ const SwiperOr = ({}) => {
 
   // Save Current location Data in backend
   const addLocation = async () => {
-
     const data = {
       user_id: profile_data.user.id,
       longitude: current_long,
@@ -364,7 +353,6 @@ const SwiperOr = ({}) => {
 
   // Get User Profiles Filter Data
   const getFilterData = async () => {
-
     setloading(true);
 
     const headers = {
@@ -437,12 +425,9 @@ const SwiperOr = ({}) => {
 
             if (location_added && profiles.length < 3) {
               getFilterProfiles();
+            } else if (profiles.length > 0) {
+              setloading2(false);
             }
-            else
-            if (profiles.length > 0) {
-              setloading2(false)
-            }
-            
           }
 
           setfilter_data_get(true);
@@ -451,14 +436,11 @@ const SwiperOr = ({}) => {
         }
       })
       .catch((err) => {
-        
         setloading(false);
-        
       });
   };
 
   const getGenders = async () => {
-
     setloading(true);
 
     await axios
@@ -481,7 +463,6 @@ const SwiperOr = ({}) => {
   };
 
   const getInterests = async () => {
-
     setloading(true);
 
     await axios
@@ -511,7 +492,6 @@ const SwiperOr = ({}) => {
   };
 
   const getLanguages = async () => {
-
     setloading(true);
 
     await axios
@@ -534,12 +514,10 @@ const SwiperOr = ({}) => {
   };
 
   const getPrompts = async () => {
-
     setloading(true);
     await axios
       .get(apiUrl + "getactiveprompts/")
       .then((resp) => {
-        
         setloading(false);
         let resp_data = resp.data;
 
@@ -557,7 +535,6 @@ const SwiperOr = ({}) => {
 
   // Get Swiping Profiles
   const getFilterProfiles = async () => {
- 
     setprofile_call(true);
     const headers = {
       Authorization: `Bearer ${access_token}`,
@@ -570,33 +547,29 @@ const SwiperOr = ({}) => {
       .then((resp) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
-        
-        let tmp =[...profiles]
+
+        let tmp = [...profiles];
         if (resp_code == 204) {
-          setempty_profile_call(true);  
+          setempty_profile_call(true);
           if (profiles.length === 0) {
             setwarn_step(2);
             setloading2(true);
+          } else if (profiles.length === 0 && warn_step !== 2) {
+            setloading2(false);
           }
-          else if (profiles.length === 0 && warn_step !== 2) {
-            setloading2(false)
-          }
-          
-          
         } else if (resp_code == 200) {
           let active_profiles = resp_data.filter((v) => v.active == true);
-          let new_profiles = active_profiles.filter(v => !tmp.map(g => g.id).includes(v.id))
-          
+          let new_profiles = active_profiles.filter(
+            (v) => !tmp.map((g) => g.id).includes(v.id)
+          );
+
           if (new_profiles.length > 0) {
-            
             setloading2(false);
             setempty_profile_call(false);
-            setprofiles((prevState) => [...new_profiles,...prevState]);
-          }
-          else if (profiles.length > 0) {
+            setprofiles((prevState) => [...new_profiles, ...prevState]);
+          } else if (profiles.length > 0) {
             setloading2(false);
           }
-         
         } else if (resp_code == 401) {
           dispatch(setSessionExpired(true));
         } else {
@@ -633,7 +606,6 @@ const SwiperOr = ({}) => {
   };
 
   const startFillingPrompts = async () => {
-
     setloading(true);
     const data = {
       user_id: profile_data.user.id,
@@ -667,22 +639,20 @@ const SwiperOr = ({}) => {
     }
   };
 
-  const removeItemfromList = () =>{
-    
+  const removeItemfromList = () => {
     if (profiles.length > 0) {
-      let tmp = [...profiles]
-      let rmv_prof = tmp[tmp.length - 1]
-      tmp.splice(tmp.length - 1,1)
+      let tmp = [...profiles];
+      let rmv_prof = tmp[tmp.length - 1];
+      tmp.splice(tmp.length - 1, 1);
       setprofiles((prevState) => prevState.slice(0, prevState.length - 1));
-      if (tmp.length < 3 && !empty_profile_call) { 
-        getFilterProfiles()
+      if (tmp.length < 3 && !empty_profile_call) {
+        getFilterProfiles();
       }
     }
-  }
+  };
 
   // To Refresh page After changing location or permission from app setting
   useEffect(() => {
-    
     if (
       appStateVisible == "active" &&
       permission_denied &&
@@ -692,44 +662,36 @@ const SwiperOr = ({}) => {
       getData();
       dispatch(setProfileRefresh(!profile_refresh));
     }
-
   }, [appStateVisible]);
 
   useEffect(() => {
-
     if (!is_network_connected) {
-      setnet_conn(false)
-      setshowFilter(false)
-
-    }
-    else if (!net_conn && current_screen == 'Swiper') {
-      setnet_conn(true)
+      setnet_conn(false);
+      setshowFilter(false);
+    } else if (!net_conn && current_screen == "Swiper") {
+      setnet_conn(true);
       dispatch(setProfileRefresh(!profile_refresh));
     }
-  }, [is_network_connected])
+  }, [is_network_connected]);
 
   // recall getFilterProfiles after all profile swipe
   useEffect(() => {
-    
     if (profiles.length == 0) {
       if (!empty_profile_call) {
         dispatch(setProfileRefresh(!profile_refresh));
-      }
-      else{
+      } else {
         setwarn_step(2);
         setloading2(true);
-      }}
-   
+      }
+    }
   }, [profiles]);
 
   // save location data in frontend
   useLayoutEffect(() => {
-
-    if (Platform.OS == 'ios') {
-      const locale = NativeModules.SettingsManager.settings
+    if (Platform.OS == "ios") {
+      const locale = NativeModules.SettingsManager.settings;
     }
-  
-    
+
     if (current_lat && current_long && current_address) {
       dispatch(
         setActiveUserLocationDetails({
@@ -779,16 +741,14 @@ const SwiperOr = ({}) => {
 
     // load all data only after screen load sucessfully
     if (screen_loaded && is_network_connected) {
-
       getGenders();
       getInterests();
       getLanguages();
       getFilterData();
       getPrompts();
-    }
-    else if (!is_network_connected) {
-      setwarn_step(6)
-      setloading2(true)
+    } else if (!is_network_connected) {
+      setwarn_step(6);
+      setloading2(true);
     }
   }, [profile_refresh]);
 
@@ -826,9 +786,8 @@ const SwiperOr = ({}) => {
     }
   };
 
-  const userExist = async () =>{
-
-    let url_path = 'isacountavialable/'
+  const userExist = async () => {
+    let url_path = "isacountavialable/";
 
     const data = {
       user_id: profile_data.user.id,
@@ -839,36 +798,29 @@ const SwiperOr = ({}) => {
     };
 
     try {
-      const response = await axios.post(
-        apiUrl + url_path,
-        data,
-        {
-          headers,
-        }
-      );
+      const response = await axios.post(apiUrl + url_path, data, {
+        headers,
+      });
       let resp_data = response.data;
 
       if (resp_data.code == 400) {
-
-           Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
-            
+        Alert.alert(
+          "Your account has been deleted!",
+          "Please Contact admin at contact@btrooapp.com.",
+          [
             {
               text: "OK",
               onPress: () => {
-                dispatch(setSessionExpired(true))
+                dispatch(setSessionExpired(true));
               },
             },
-          ]);
-        
+          ]
+        );
       }
-      
     } catch (error) {
       return false;
-
     }
-
-  }
-
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -881,24 +833,19 @@ const SwiperOr = ({}) => {
     }, [prf_apprv_refh])
   );
 
-
   useFocusEffect(
     React.useCallback(() => {
-      if (appStateVisible == 'active') {
-        userExist()
+      if (appStateVisible == "active") {
+        userExist();
       }
     }, [appStateVisible])
   );
 
-
-
-  
-const renderItem = ({ item, index })=>{
-  const isFirst = index == profiles.length - 1;
+  const renderItem = ({ item, index }) => {
+    const isFirst = index == profiles.length - 1;
 
     return (
       <SwipeCard
-
         key={index}
         actionEnd={actionEnd}
         actionType={actionType}
@@ -919,10 +866,9 @@ const renderItem = ({ item, index })=>{
         setswippingcount={setswippingcount}
       />
     );
-}
+  };
 
-const keyExtractor = (itm, index) => itm.created_on + index
-
+  const keyExtractor = (itm, index) => itm.created_on + index;
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -931,7 +877,7 @@ const keyExtractor = (itm, index) => itm.created_on + index
           height: scrn_height,
         }}
       >
-        {!loading && !loading2  ? (
+        {!loading && !loading2 ? (
           <SafeAreaView
             style={{
               flex: 1,
@@ -939,16 +885,12 @@ const keyExtractor = (itm, index) => itm.created_on + index
           >
             <FlatList
               pagingEnabled
-              getItemLayout={(data, index) => (
-                {
-                  length: scrn_width, 
-                  offset: scrn_width * index,
-                  index
-                }
-              )}
-              onLayout={()=>{
-                
-              }}
+              getItemLayout={(data, index) => ({
+                length: scrn_width,
+                offset: scrn_width * index,
+                index,
+              })}
+              onLayout={() => {}}
               contentContainerStyle={{
                 flexGrow: 1,
                 borderWidth: 1,
@@ -965,14 +907,13 @@ const keyExtractor = (itm, index) => itm.created_on + index
           <View style={{ ...styles.container, alignItems: "center" }}>
             <View style={styles.loadingCont}>
               {/* Filter */}
-              {warn_step !=  6 && warn_step != 4 && warn_step != 0 && (
+              {warn_step != 6 && warn_step != 4 && warn_step != 0 && (
                 <TouchableOpacity
                   style={{
                     ...styles.filterCont,
                   }}
                   onPress={() => {
-                setshowFilter(!showFilter);
-                  
+                    setshowFilter(!showFilter);
                   }}
                 >
                   <FastImage
@@ -1025,8 +966,6 @@ const keyExtractor = (itm, index) => itm.created_on + index
             </View>
           </View>
         )}
-
-        
 
         {/* Filter Modal */}
         <FullModal modalVisible={showFilter} setModalVisible={setshowFilter}>

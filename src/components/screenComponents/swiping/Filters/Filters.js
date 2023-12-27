@@ -29,10 +29,8 @@ import {
   setSelectedInterests,
   setSelectedLanguages,
 } from "../../../../store/reducers/filter/filter";
-import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import MultiSliderC from "../../../formComponents/MultiSliderC";
-
-
 
 const Filters = ({
   filterRefresh = false,
@@ -59,7 +57,7 @@ const Filters = ({
     (state) => state.authentication.access_token
   );
 
-  const [sliderValues, setSliderValues] = useState([18,  71]);
+  const [sliderValues, setSliderValues] = useState([18, 71]);
 
   const handleValuesChange = (values) => {
     // You can perform any logic here with the updated slider values
@@ -221,10 +219,7 @@ const Filters = ({
     if (screen_loaded && changes_made == false) {
       setchanges_made(true);
     }
-
   }, [distance, minage, maxage, minheight, maxheight]);
-
-
 
   return (
     <>
@@ -309,19 +304,18 @@ const Filters = ({
               {/* hr */}
               <View style={styles.hr} />
 
-      <MultiSliderC
-      label={"Age"}
-      value={minage}
-      setvalue={setminage}
-      value2={maxage}
-      setvalue2={setmaxage}
-      multi={true}
-      unit={""}
-      min={18}
-      max={71}
-      rightUnit={"+"}
-      
-      />
+              <MultiSliderC
+                label={"Age"}
+                value={minage}
+                setvalue={setminage}
+                value2={maxage}
+                setvalue2={setmaxage}
+                multi={true}
+                unit={""}
+                min={18}
+                max={71}
+                rightUnit={"+"}
+              />
 
               {/* hr */}
               <View style={styles.hr} />

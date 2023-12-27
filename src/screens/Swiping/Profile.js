@@ -24,7 +24,7 @@ const Profile = ({ route }) => {
 
   return (
     <>
-     <OffflineAlert  offAlert={!is_network_connected}/>
+      <OffflineAlert offAlert={!is_network_connected} />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="ProfileMain" component={ProfileMain} />
         <Stack.Screen name="EditProfile" component={EditProfile} />

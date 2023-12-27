@@ -178,8 +178,6 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.regular,
     lineHeight: rspF(2.2),
     paddingVertical: 0,
-
-
   },
   item: {
     flexDirection: "row",

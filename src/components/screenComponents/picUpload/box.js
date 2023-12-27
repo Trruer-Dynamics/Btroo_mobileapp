@@ -28,7 +28,6 @@ const Box = ({
   up_img_len = 9,
   pos2,
 }) => {
-
   const is_network_connected = useSelector(
     (state) => state.authentication.is_network_connected
   );
@@ -85,9 +84,8 @@ const Box = ({
               activeOpacity={0.8}
               onPress={() => {
                 if (is_network_connected) {
-                  deleteProfileImage(index);  
+                  deleteProfileImage(index);
                 }
-                
               }}
               style={{
                 position: "absolute",

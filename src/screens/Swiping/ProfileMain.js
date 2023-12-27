@@ -32,7 +32,7 @@ import {
   SmokingNo,
   SmokingYes,
 } from "../../assets";
-import * as icn from '../../assets'
+import * as icn from "../../assets";
 import { useFocusEffect } from "@react-navigation/native";
 import FormHeader from "../../components/wrappers/formWrappers/FormHeader";
 import truncateStr from "../../components/functions/truncateStr";
@@ -91,8 +91,6 @@ const ProfileMain = ({ navigation }) => {
   const scrollInterestsRef = useRef();
   const scrollLanguagesRef = useRef();
 
-
-
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
   );
@@ -103,7 +101,6 @@ const ProfileMain = ({ navigation }) => {
   const is_network_connected = useSelector(
     (state) => state.authentication.is_network_connected
   );
-
 
   const [active_prf_imgs, setactive_prf_imgs] = useState([]);
   const [modalVisible, setmodalVisible] = useState(false);
@@ -202,7 +199,6 @@ const ProfileMain = ({ navigation }) => {
               user_data.userprofile.profilerevealnotification,
           };
 
-
           let user_prof_data = {
             ...profile_data,
             user: profile_data.user,
@@ -214,16 +210,13 @@ const ProfileMain = ({ navigation }) => {
             userprivateprompts: act_promptsm2,
           };
           dispatch(setProfiledata(user_prof_data));
-
         }
       })
       .catch((err) => {});
   };
 
-
-  const userExist = async () =>{
-
-    let url_path = 'isacountavialable/'
+  const userExist = async () => {
+    let url_path = "isacountavialable/";
 
     const data = {
       user_id: profile_data.user.id,
@@ -234,35 +227,29 @@ const ProfileMain = ({ navigation }) => {
     };
 
     try {
-      const response = await axios.post(
-        apiUrl + url_path,
-        data,
-        {
-          headers,
-        }
-      );
+      const response = await axios.post(apiUrl + url_path, data, {
+        headers,
+      });
       let resp_data = response.data;
 
       if (resp_data.code == 400) {
-
-           Alert.alert("Your account has been deleted!", "Please Contact admin at contact@btrooapp.com.", [
-            
+        Alert.alert(
+          "Your account has been deleted!",
+          "Please Contact admin at contact@btrooapp.com.",
+          [
             {
               text: "OK",
               onPress: () => {
-                dispatch(setSessionExpired(true))
+                dispatch(setSessionExpired(true));
               },
             },
-          ]);
-        
+          ]
+        );
       }
-      
     } catch (error) {
       return false;
-
     }
-
-  }
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -292,7 +279,7 @@ const ProfileMain = ({ navigation }) => {
       let usr_pets = profile_data?.userpets.map((v) => [
         v.petmaster.id,
         v.petmaster.iconblue,
-        v.petmaster.pets
+        v.petmaster.pets,
       ]);
 
       setpets_list(usr_pets);
@@ -300,17 +287,17 @@ const ProfileMain = ({ navigation }) => {
       let usr_interest = profile_data?.userinterest.map((v) => [
         v.interestmaster.id,
         v.interestmaster.iconblue,
-        v.interestmaster.interest
+        v.interestmaster.interest,
       ]);
-     
+
       setinterest_list(usr_interest);
       let actv = profile_imgs.filter((v) => v[0] != "");
       setactive_prf_imgs(actv);
 
-      setprof_refs(true)
+      setprof_refs(true);
 
       return () => {
-        setprof_refs(false)
+        setprof_refs(false);
         // Do something when the screen is unfocused
       };
     }, [profile_data])
@@ -320,13 +307,13 @@ const ProfileMain = ({ navigation }) => {
     React.useCallback(() => {
       // Do something when the screen is focused
       if (prof_refs) {
-        getData();  
+        getData();
       }
-      
+
       return () => {
         // Do something when the screen is unfocused
       };
-    }, [prof_refs,is_network_connected])
+    }, [prof_refs, is_network_connected])
   );
 
   // Full Screen Carosel Item Render Function
@@ -336,8 +323,8 @@ const ProfileMain = ({ navigation }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      if (appStateVisible == 'active') {
-        userExist()
+      if (appStateVisible == "active") {
+        userExist();
       }
     }, [appStateVisible])
   );
@@ -403,19 +390,21 @@ const ProfileMain = ({ navigation }) => {
             <TouchableOpacity
               onPress={() => {
                 if (is_network_connected) {
-                  navigation.navigate("EditProfile");  
+                  navigation.navigate("EditProfile");
                 }
-                
               }}
-              style={{...styles.editBtn, opacity: is_network_connected? 1 : 0.4}}
+              style={{
+                ...styles.editBtn,
+                opacity: is_network_connected ? 1 : 0.4,
+              }}
             >
               <Text style={styles.editBtnTxt}>Edit My Profile</Text>
             </TouchableOpacity>
           </View>
 
           <ScrollView
-          ref={scrollViewRef}
-          decelerationRate={0.9}
+            ref={scrollViewRef}
+            decelerationRate={0.9}
             showsVerticalScrollIndicator={false}
             bounces={true}
             style={{
@@ -449,8 +438,6 @@ const ProfileMain = ({ navigation }) => {
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <FastImage
                       source={require("../../assets/images/Swiping/BioIcons/City.png")}
-                      
-
                       style={{
                         width: rspW(6.75),
                         height: rspH(3),
@@ -466,11 +453,12 @@ const ProfileMain = ({ navigation }) => {
                           "..."
                         : profile_data?.userprofile?.city} */}
 
-{profile_data?.userprofile?.city.split(",")[0]?.length > 11
-                          ? profile_data?.userprofile?.city
-                              .split(",")[0]
-                              .substring(0, 9) + "..."
-                          : profile_data?.userprofile?.city.split(",")[0]}
+                      {profile_data?.userprofile?.city.split(",")[0]?.length >
+                      11
+                        ? profile_data?.userprofile?.city
+                            .split(",")[0]
+                            .substring(0, 9) + "..."
+                        : profile_data?.userprofile?.city.split(",")[0]}
                     </Text>
                   </View>
 
@@ -642,19 +630,18 @@ const ProfileMain = ({ navigation }) => {
                 >
                   <Text style={styles.profileDetailContHeading}>Pets</Text>
                   <ScrollView
-                  decelerationRate={0.9}
-                    bounces={false}
+                    decelerationRate={0.9}
+                    bounces={true}
                     style={{ marginTop: rspH(0.8) }}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     ref={scrollPetsRef}
                   >
                     {pets_list.map((img, indx) => {
-
-                      let img1 = img[2]
-                      if (img[2].split(' ').length > 1) {
-                        let itmlis = img[2].split(' ')
-                         img1 = itmlis.join('')
+                      let img1 = img[2];
+                      if (img[2].split(" ").length > 1) {
+                        let itmlis = img[2].split(" ");
+                        img1 = itmlis.join("");
                       }
 
                       return (
@@ -702,19 +689,18 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Interests</Text>
                 <ScrollView
-                decelerationRate={0.9}
-                  bounces={false}
+                  decelerationRate={0.9}
+                  bounces={true}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   ref={scrollInterestsRef}
                 >
                   {interest_list.map((img, idx) => {
-
-                    let img1 = img[2]
-                    if (img[2].split(' ').length > 1) {
-                      let itmlis = img[2].split(' ')
-                       img1 = itmlis.join('')
+                    let img1 = img[2];
+                    if (img[2].split(" ").length > 1) {
+                      let itmlis = img[2].split(" ");
+                      img1 = itmlis.join("");
                     }
                     return (
                       <View key={idx}>
@@ -760,8 +746,8 @@ const ProfileMain = ({ navigation }) => {
               >
                 <Text style={styles.profileDetailContHeading}>Languages</Text>
                 <ScrollView
-                decelerationRate={0.9}
-                  bounces={false}
+                  decelerationRate={0.9}
+                  bounces={true}
                   style={{ marginTop: rspH(0.8) }}
                   horizontal
                   showsHorizontalScrollIndicator={false}
@@ -838,12 +824,11 @@ const ProfileMain = ({ navigation }) => {
               setmodalVisible(false);
             }}
           >
-            
             <Image
-                  source={Backward}        
-                  style={{width: '80%', height:'70%'}}
-                  resizeMode="contain"
-                          />
+              source={Backward}
+              style={{ width: "80%", height: "70%" }}
+              resizeMode="contain"
+            />
           </TouchableOpacity>
 
           <FlatList

@@ -76,16 +76,14 @@ const MatchTut = ({ repeat_tut }) => {
     (state) => state.authentication.is_network_connected
   );
 
-  
-
   const [loading, setloading] = useState(false);
 
   const [keep_matching, setkeep_matching] = useState(true);
 
   const [extendVisible, setextendVisible] = useState(false);
 
-  const [show_alert, setshow_alert] = useState(false)
-  
+  const [show_alert, setshow_alert] = useState(false);
+
   const [match_tut_para, setmatch_tut_para] = useState([
     `Matches are created each \nmorning if someone you \nfancy has also fancied you \nback. You can talk to up to \nthree matches at any \ngiven time. Don’t worry, \nyou won’t lose any of the \nother matches.`,
     `Any conversation lasts 72 \nhours. However, you can \nalways extend it by \nclicking here if you feel \nthat you and your match \nneed some more time.`,
@@ -178,15 +176,13 @@ const MatchTut = ({ repeat_tut }) => {
 
   useEffect(() => {
     if (is_network_connected) {
-      setshow_alert(false)
+      setshow_alert(false);
     }
-  }, [is_network_connected])
-  
-  
+  }, [is_network_connected]);
 
   return (
     <>
-   <OffflineAlert offAlert={show_alert} />
+      <OffflineAlert offAlert={show_alert} />
       {loading && <Loader />}
       <SafeAreaView
         style={{ flex: 1, backgroundColor: "#fff" }}
@@ -214,7 +210,10 @@ const MatchTut = ({ repeat_tut }) => {
             style={{
               ...styles.bottomCont,
               position: "absolute",
-              top:Platform.OS == "ios"? rspH(86) - insets.top: rspH(80) + insets.top,
+              top:
+                Platform.OS == "ios"
+                  ? rspH(86) - insets.top
+                  : rspH(80) + insets.top,
               alignSelf: "center",
             }}
           >
@@ -260,15 +259,19 @@ const MatchTut = ({ repeat_tut }) => {
 
         {/* Match Chat Tutorial */}
 
-          <>
+        <>
           <View style={styles.mainTutCont}>
             <View
               style={{
                 ...styles.centralModalContMatch,
                 height:
                   match_tut_step == 0
-                    ? Platform.OS == "ios"  ? rspH(41) : rspH(40) + insets.bottom
-                    : Platform.OS == 'ios' ? rspH(36) : rspH(36) + insets.bottom,
+                    ? Platform.OS == "ios"
+                      ? rspH(41)
+                      : rspH(40) + insets.bottom
+                    : Platform.OS == "ios"
+                    ? rspH(36)
+                    : rspH(36) + insets.bottom,
               }}
             >
               <View style={{ ...styles.centralModalTextCont }}>
@@ -299,12 +302,10 @@ const MatchTut = ({ repeat_tut }) => {
                         });
                       } else {
                         if (is_network_connected) {
-                          matchTutDone();  
+                          matchTutDone();
+                        } else {
+                          setshow_alert(true);
                         }
-                       else{
-                        setshow_alert(true)
-                       }
-                        
                       }
                     }
                   }}
@@ -447,7 +448,7 @@ const styles = StyleSheet.create({
     marginHorizontal: rspW(3.1),
     paddingHorizontal: 13.2,
     marginVertical: rspH(1.4),
-    height:  rspH(4.6),
+    height: rspH(4.6),
     width: rspW(69.6),
     letterSpacing: 1,
   },
@@ -466,7 +467,8 @@ const styles = StyleSheet.create({
     width: rspW(87),
     borderRadius: rspW(4),
     backgroundColor: colors.white,
-    top: Platform.OS == "ios" ? rspH(36) + insets.top : rspH(40) - insets.bottom,
+    top:
+      Platform.OS == "ios" ? rspH(36) + insets.top : rspH(40) - insets.bottom,
     alignSelf: "center",
     paddingHorizontal: rspW(7.4),
     justifyContent: "space-between",
@@ -475,23 +477,25 @@ const styles = StyleSheet.create({
   // Match Chat
   highCont: {
     position: "absolute",
-    backgroundColor: colors.white 
-    + 'ff',
+    backgroundColor: colors.white + "ff",
     alignItems: "center",
     justifyContent: "center",
   },
   matchitem_cont: {
-    top: Platform.OS == "android" ? rspH(8.3) + insets.bottom/3  : rspH(8.2) + insets.top,
+    top:
+      Platform.OS == "android"
+        ? rspH(8.3) + insets.bottom / 3
+        : rspH(8.2) + insets.top,
     width: rspW(86),
     height: rspH(11.6),
     alignSelf: "center",
     borderRadius: rspW(2.5),
   },
   timeHighCont: {
-
-    top: Platform.OS == "android" ?
-     rspH(14.7) + insets.bottom /3 
-     : rspH(14.6) + insets.top,
+    top:
+      Platform.OS == "android"
+        ? rspH(14.7) + insets.bottom / 3
+        : rspH(14.6) + insets.top,
     right: rspW(12),
     width: rspW(22.2),
     height: rspH(2.75),

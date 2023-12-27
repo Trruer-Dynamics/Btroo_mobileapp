@@ -72,12 +72,10 @@ const FormInput = ({
         ...styles.input_cont,
         height: multiline ? rspH(11.6) : rspH(5.8),
         width: width,
-        backgroundColor: value !== ""  && !disabled ? "#fff" : "#F8F8F8",
+        backgroundColor: value !== "" && !disabled ? "#fff" : "#F8F8F8",
         borderColor: invalid
           ? colors.error
-          : (value_blr
-             && value !== "" 
-             ) || disabled
+          : (value_blr && value !== "") || disabled
           ? colors.blue
           : "#DCDCDC",
       }}

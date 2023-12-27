@@ -23,7 +23,7 @@ const FormWrapper = ({ children, containerStyle = {} }) => {
       <View
         style={{
           ...styles.container,
-          height: Platform.OS == 'android' ? scrn_height *0.992 : safe_height,
+          height: Platform.OS == "android" ? scrn_height * 0.992 : safe_height,
           ...containerStyle,
         }}
       >
