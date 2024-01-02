@@ -228,6 +228,7 @@ const OtpVerify = ({
 
     const token = await messaging().getToken();
 
+    console.log("token",token)
     setDeviceToken(token);
 
     return token;
