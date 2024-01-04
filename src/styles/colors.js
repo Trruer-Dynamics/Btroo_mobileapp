@@ -1,5 +1,6 @@
 export default {
   white: "#ffffff",
+  dimWhite: "#fbfbfb",
   black: "#001923",
   blue: "#3C75B5",
   darkBlue: "#002b5d",

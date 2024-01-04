@@ -38,7 +38,6 @@ export default memo(FormWrapper);
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-
     paddingHorizontal: rspW(10),
     paddingTop: rspH(3),
     justifyContent: "space-between",

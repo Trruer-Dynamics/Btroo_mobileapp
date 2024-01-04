@@ -29,25 +29,8 @@ import Paginator from "../../components/screenComponents/swiping/Paginator";
 import fontFamily from "../../styles/fontFamily";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  AnimalCareBlue,
-  AntBlue,
   Backward,
-  BaseballBlue,
-  BasketballBlue,
-  BeachBlue,
-  BicyclingBlue,
-  BoatingBlue,
-  BowlingBlue,
-  BoxingBlue,
-  CampingBlue,
-  ChessBlue,
-  CookingBlue,
-  DancingBlue,
   DrinkingNo,
-  DrivingBlue,
-  DrumsBlue,
-  HamsterBlue,
-  LangIcon,
   MarijuanaNo,
   SmokingNo,
   SmokingYes,
@@ -62,9 +45,6 @@ import FastImage from "react-native-fast-image";
 import { setAllGenders } from "../../store/reducers/allData/allData";
 import { setSessionExpired } from "../../store/reducers/authentication/authentication";
 import { initialWindowMetrics } from "react-native-safe-area-context";
-import HScroller from "../../components/formComponents/HScroller";
-import HScrollerMulti from "../../components/formComponents/HScrollerMulti";
-import HScrollerWS from "../../components/formComponents/HScrollerWS";
 const insets = initialWindowMetrics.insets;
 
 const DATA = [
@@ -400,7 +380,7 @@ const SwiperTut = ({ repeat_tut }) => {
         }
       }
       setswipe_tut_l(swipe_tut || repeat_tut);
-      setstep(4);
+      setstep(0);
     }, [gender_lis, profile_data])
   );
 
@@ -518,15 +498,11 @@ const SwiperTut = ({ repeat_tut }) => {
                   style={styles.actionCont}
                 >
                   <FastImage
-                    source={require("../../assets/images/Swiping/Actions/FancyU.png")}
+                    source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                     style={{
-                      
                       width: rspW(8.46),
-                      // height: rspH(4.4),
-                      height: rspH(4.6),
-
+                      height: rspH(4.4),
                     }}
-                    resizeMode="contain"
                   />
                 </TouchableOpacity>
               </View>
@@ -622,21 +598,101 @@ const SwiperTut = ({ repeat_tut }) => {
           >
             {/* Profile Details Sub Container */}
             <View style={{ alignItems: "center" }}>
-              
-                <HScroller
+              <View
+                style={{
+                  ...styles.profileDetailsSubCont,
+                  paddingTop: rspH(0.25),
+                }}
+              >
+                {/* Profile Detail Container */}
+                <View
+                  style={{
+                    ...styles.profileDetailCont,
+                    ...styles.boxShadowCont,
 
-                lis={[[require("../../assets/images/Swiping/BioIcons/City.png"),'Madrid'],
-              [require("../../assets/images/Swiping/BioIcons/Education.png"),'Undergraduate'],
-              [require("../../assets/images/Swiping/BioIcons/Politics.png"),'Conservative']
-              ]}/>
-      
+                    paddingHorizontal: rspW(3.2),
+
+                    justifyContent: "center",
+                  }}
+                >
+                  <View
+                    style={{ flexDirection: "row", alignItems: "baseline" }}
+                  >
+                    <FastImage
+                      source={require("../../assets/images/Swiping/BioIcons/City.png")}
+                      style={{
+                        width: rspW(6.75),
+                        height: rspH(3),
+                        marginRight: rspW(2),
+                      }}
+                    />
+                    <Text style={styles.profileDetailContNText}>Tel Aviv</Text>
+                  </View>
+
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <FastImage
+                      source={require("../../assets/images/Swiping/BioIcons/Education.png")}
+                      style={{
+                        width: rspW(6.75),
+                        height: rspH(3),
+                        marginRight: rspW(2),
+                      }}
+                    />
+                    <Text style={styles.profileDetailContNText}>Graduate</Text>
+                  </View>
+                </View>
+
+                <View
+                  style={{
+                    ...styles.profileDetailCont,
+                    ...styles.boxShadowCont,
+                    paddingHorizontal: rspW(3.2),
+                    justifyContent: "center",
+                  }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <FastImage
+                      source={DrinkingNo}
+                      style={{
+                        ...styles.habitsImage,
+                      }}
+                      resizeMode="contain"
+                    />
+                    <FastImage
+                      source={SmokingNo}
+                      style={{
+                        ...styles.habitsImage,
+                      }}
+                      resizeMode="contain"
+                    />
+                    <FastImage
+                      source={MarijuanaNo}
+                      style={{
+                        ...styles.habitsImage,
+                      }}
+                      resizeMode="contain"
+                    />
+                  </View>
+                </View>
+              </View>
 
               {/* Public Prompt */}
               {showPrompts && (
                 <View style={styles.promptContainer}>
                   <View style={styles.promptQuestionContainer}>
                     <Text style={styles.promptQuestion}>
-                       The sign of a great first date
+                      The sign of a great first date
                     </Text>
                   </View>
                   <Text style={styles.promptAnswer}>
@@ -652,32 +708,75 @@ const SwiperTut = ({ repeat_tut }) => {
                   </Text>
                 </View>
               )}
-            
-<View style={{marginTop: rspH(0.6)}}>
-            <HScrollerMulti
-                
-                lis={[
-                  {title: 'Pets', values: [HamsterBlue,AntBlue]},
-                  {title: 'Interests', values: [
-                    BeachBlue
-                    ,BaseballBlue,
-                  AnimalCareBlue,
-                  BasketballBlue,
-                  BicyclingBlue,
-                  BoatingBlue,
-                  BowlingBlue,
-                  BoxingBlue,
-                  CampingBlue,
-                  CookingBlue,
-                  ChessBlue,
-                  DancingBlue,
-                  DrivingBlue,
-                  DrumsBlue,
 
-                  ]},
-              ]}/>
-
-</View>
+              <View
+                style={{
+                  ...styles.profileDetailsSubCont2,
+                  ...styles.boxShadowCont,
+                }}
+              >
+                <Text style={styles.profileDetailContHeading}>Interests</Text>
+                <ScrollView
+                  decelerationRate={0.9}
+                  style={{
+                    marginTop: rspH(0.8),
+                  }}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  bounces={true}
+                >
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Cooking.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Dancing.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Driving.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Football.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Gaming.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Gym.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Guitar.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Listening_to_Music.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Interests/InterestsBlue/Movies.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                </ScrollView>
+              </View>
 
               {/* Public Prompt */}
               {showPrompts && (
@@ -704,45 +803,31 @@ const SwiperTut = ({ repeat_tut }) => {
                 </View>
               )}
 
-<View style={{marginTop: rspH(0.6),
-marginBottom: 
-Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
-}}>
-                <HScroller
-                title={'Habits'}
-                lis={[[DrinkingNo,'Not Drinking'],
-              [SmokingNo,'Not Smoking'],
-              [MarijuanaNo,'No Drugs']
-              ]}/>
-
-</View>
-        
-
-            
-              
-     
-
-             
-                {/* <HScrollerWS
-                title={'Languages'}
-                lis={[[LangIcon,'English'],
-              [LangIcon,'Hebrew'],
-              [LangIcon,'Hindi'],
-              [LangIcon,'French'],
-              [LangIcon,'Chinese'],
-              ]}/> */}
-   
-              
-
-              
-
-              
-
-              
-
-              
-
-              
+              <View
+                style={{
+                  ...styles.profileDetailsSubCont2,
+                  ...styles.boxShadowCont,
+                  width: rspW(39.5),
+                  marginLeft: rspW(1),
+                  marginBottom: rspH(3.6),
+                  alignSelf: "flex-start",
+                }}
+              >
+                <Text style={styles.profileDetailContHeading}>Pets</Text>
+                <ScrollView
+                  decelerationRate={0.9}
+                  style={{ marginTop: rspH(0.8) }}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  bounces={true}
+                >
+                  <FastImage
+                    source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
+                    style={styles.interestImage}
+                    resizeMode="cover"
+                  />
+                </ScrollView>
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -763,23 +848,19 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                         position: "absolute",
                         top:
                           Platform.OS == "ios"
-                            ? rspH(34.2) + insets.top
-                            : rspH(34.3) + insets.bottom / 1.2,
+                            ? rspH(35.5) + insets.top
+                            : rspH(35.5) + insets.bottom / 1.2,
                         left: rspW(66.8),
                       }}
                     >
                       <View style={{ ...styles.actionHighlightCont }}>
                         <View style={styles.actionCont}>
                           <FastImage
-                            source={require("../../assets/images/Swiping/Actions/FancyU.png")}
+                            source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                             style={{
-                      
                               width: rspW(8.46),
-                              // height: rspH(4.4),
-                              height: rspH(4.6),
-        
+                              height: rspH(4.4),
                             }}
-                            resizeMode="contain"
                           />
                         </View>
                       </View>
@@ -792,10 +873,8 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                         position: "absolute",
                         top:
                           Platform.OS == "ios"
-                            // ? rspH(35.5) + insets.top
-                            // : rspH(35.5) + insets.bottom / 1.2,
-                            ? rspH(34.2) + insets.top
-                            : rspH(34.3) + insets.bottom / 1.2,
+                            ? rspH(35.5) + insets.top
+                            : rspH(35.5) + insets.bottom / 1.2,
                         left: rspW(42.1),
                       }}
                     >
@@ -819,10 +898,8 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                         position: "absolute",
                         top:
                           Platform.OS == "ios"
-                            // ? rspH(35.5) + insets.top
-                            // : rspH(35.5) + insets.bottom / 1.2,
-                            ? rspH(34.2) + insets.top
-                            : rspH(34.3) + insets.bottom / 1.2,
+                            ? rspH(35.5) + insets.top
+                            : rspH(35.5) + insets.bottom / 1.2,
                         left: rspW(18),
                       }}
                     >
@@ -927,16 +1004,11 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                               {/* Action */}
                               <TouchableOpacity style={styles.actionCont}>
                                 <FastImage
-                                  source={require("../../assets/images/Swiping/Actions/FancyU.png")}
+                                  source={require("../../assets/images/Swiping/Actions/Fancy.png")}
                                   style={{
-                      
                                     width: rspW(8.46),
-                                    // height: rspH(4.4),
-                                    height: rspH(4.6),
-              
+                                    height: rspH(4.4),
                                   }}
-                                  resizeMode="contain"
-                                  
                                 />
                               </TouchableOpacity>
                             </View>
@@ -1075,65 +1147,175 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                             paddingVertical: rspH(1.8),
                           }}
                         >
-                         
+                          {/* Profile Details Sub Container */}
+                          <View style={styles.profileDetailsSubCont}>
+                            {/* Profile Detail Container */}
+                            <View
+                              style={{
+                                ...styles.profileDetailCont,
+                                ...styles.boxShadowCont,
+                                paddingHorizontal: rspW(3.2),
+                                justifyContent: "center",
+                              }}
+                            >
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "baseline",
+                                }}
+                              >
+                                <FastImage
+                                  source={require("../../assets/images/Swiping/BioIcons/City.png")}
+                                  style={{
+                                    width: rspW(6.75),
+                                    height: rspH(3),
+                                    marginRight: rspW(2),
+                                  }}
+                                />
+                                <Text style={styles.profileDetailContNText}>
+                                  Tel Aviv
+                                </Text>
+                              </View>
 
-                          <HScroller
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  width: "100%",
+                                }}
+                              >
+                                <FastImage
+                                  source={require("../../assets/images/Swiping/BioIcons/Education.png")}
+                                  style={{
+                                    width: rspW(6.75),
+                                    height: rspH(3),
+                                    marginRight: rspW(2),
+                                  }}
+                                />
+                                <Text style={styles.profileDetailContNText}>
+                                  Graduate
+                                </Text>
+                              </View>
+                            </View>
 
-                lis={[[require("../../assets/images/Swiping/BioIcons/City.png"),'Madrid'],
-              [require("../../assets/images/Swiping/BioIcons/Education.png"),'Undergraduate'],
-              [require("../../assets/images/Swiping/BioIcons/Politics.png"),'Conservative']
-              ]}/>
+                            <View
+                              style={{
+                                ...styles.profileDetailCont,
+                                ...styles.boxShadowCont,
+                                paddingHorizontal: rspW(3.2),
+                                justifyContent: "center",
+                              }}
+                            >
+                              <View
+                                style={{
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <FastImage
+                                  source={DrinkingNo}
+                                  style={{
+                                    ...styles.habitsImage,
+                                  }}
+                                  resizeMode="contain"
+                                />
+                                <FastImage
+                                  source={SmokingNo}
+                                  style={{
+                                    ...styles.habitsImage,
+                                  }}
+                                  resizeMode="contain"
+                                />
+                                <FastImage
+                                  source={MarijuanaNo}
+                                  style={{
+                                    ...styles.habitsImage,
+                                  }}
+                                  resizeMode="contain"
+                                />
+                              </View>
+                            </View>
+                          </View>
 
+                          {/* Public Prompt */}
+                          <View style={styles.promptContainer}>
+                            <View style={styles.promptQuestionContainer}>
+                              <Text style={styles.promptQuestion}>
+                                The sign of a great first date
+                              </Text>
+                            </View>
+                            <Text style={styles.promptAnswer}>
+                              A great first date is when you feel like you’ve
+                              met your soulmate, and you can’t believe how lucky
+                              you are. It’s when you make each other laugh so
+                              hard that your stomach hurts, and you tease each
+                              other with playful banter. It’s when you open up
+                              about your hopes, fears, and secrets, and you feel
+                              a deep bond. It’s when you kiss goodnight, and you
+                              feel butterflies in your stomach. A great first
+                              date is when you text each other right after, and
+                              you can’t wait for the next one. 😉
+                            </Text>
+                          </View>
 
-
- {/* Public Prompt */}
- {showPrompts && (
-                <View style={styles.promptContainer}>
-                  <View style={styles.promptQuestionContainer}>
-                    <Text style={styles.promptQuestion}>
-                       The sign of a great first date
-                    </Text>
-                  </View>
-                  <Text style={styles.promptAnswer}>
-                    A great first date is when you feel like you’ve met your
-                    soulmate, and you can’t believe how lucky you are. It’s when
-                    you make each other laugh so hard that your stomach hurts,
-                    and you tease each other with playful banter. It’s when you
-                    open up about your hopes, fears, and secrets, and you feel a
-                    deep bond. It’s when you kiss goodnight, and you feel
-                    butterflies in your stomach. A great first date is when you
-                    text each other right after, and you can’t wait for the next
-                    one. 😉
-                  </Text>
-                </View>
-              )}
-                          
-
-                          <View style={{marginTop: rspH(0.6)}}>
-            <HScrollerMulti
-                
-                lis={[
-                  {title: 'Pets', values: [HamsterBlue,AntBlue]},
-                  {title: 'Interests', values: [
-                    BeachBlue
-                    ,BaseballBlue,
-                  AnimalCareBlue,
-                  BasketballBlue,
-                  BicyclingBlue,
-                  BoatingBlue,
-                  BowlingBlue,
-                  BoxingBlue,
-                  CampingBlue,
-                  CookingBlue,
-                  ChessBlue,
-                  DancingBlue,
-                  DrivingBlue,
-                  DrumsBlue,
-
-                  ]},
-              ]}/>
-
-</View>
+                          <View
+                            style={{
+                              ...styles.profileDetailsSubCont2,
+                              ...styles.boxShadowCont,
+                            }}
+                          >
+                            <Text style={styles.profileDetailContHeading}>
+                              Interests
+                            </Text>
+                            <ScrollView
+                              decelerationRate={0.9}
+                              style={{ marginTop: rspH(0.8) }}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              bounces={true}
+                            >
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Beach.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bowling.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Basketball.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Boating.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Bicycling.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/AmericanFootball.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/AnimalCare.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Interests/InterestsBlue/Baking.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                            </ScrollView>
+                          </View>
 
                           {/* Public Prompt */}
 
@@ -1161,17 +1343,30 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                             </Text>
                           </View>
 
-                          <View style={{marginTop: rspH(0.6)
-}}>
-                <HScroller
-                title={'Habits'}
-                lis={[[SmokingNo,'Not Drinking'],
-              [SmokingNo,'Not Smoking'],
-              [MarijuanaNo,'No Drugs']
-              ]}/>
-
-</View>
-
+                          <View
+                            style={{
+                              ...styles.profileDetailsSubCont2,
+                              ...styles.boxShadowCont,
+                              width: rspW(39.5),
+                            }}
+                          >
+                            <Text style={styles.profileDetailContHeading}>
+                              Pets
+                            </Text>
+                            <ScrollView
+                              decelerationRate={0.9}
+                              style={{ marginTop: rspH(0.8) }}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              bounces={true}
+                            >
+                              <FastImage
+                                source={require("../../assets/images/Swiping/Pets/PetsBlue/Dog.png")}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                            </ScrollView>
+                          </View>
                         </View>
                       </ScrollView>
                     </View>
@@ -1233,9 +1428,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // marginBottom: rspH(1.1),
-    marginBottom: rspH(1.5),
-
+    marginBottom: rspH(1.1),
   },
 
   // Full Page Carousel
@@ -1256,10 +1449,8 @@ const styles = StyleSheet.create({
   // Profile Details
   profileDetailsCont: {
     alignSelf: "center",
-    width: rspW(88),
-    // marginTop: rspH(3.4),
-    marginTop: rspH(2.5),
-
+    width: rspW(86),
+    marginTop: rspH(3.4),
   },
   profileDetailsSubCont: {
     width: rspW(82),
@@ -1314,34 +1505,27 @@ const styles = StyleSheet.create({
 
   // Prompt
   promptContainer: {
-    // width: rspW(82),
-    width: rspW(85),
-    // marginTop: rspH(2.35),
-    marginVertical: rspH(1.4),
-    // marginBottom: rspH(-1.7),
+    width: rspW(82),
+    marginTop: rspH(2.35),
+    marginBottom: rspH(-1.7),
     paddingHorizontal: rspW(2.5),
     paddingVertical: rspH(0.6),
-
   },
   promptQuestionContainer: {
-    // marginBottom: rspH(0.6),
-    marginBottom: rspH(2.1),
-
+    marginBottom: rspH(0.6),
   },
   promptQuestion: {
     fontFamily: fontFamily.bold,
-    fontSize: rspF(2),
-    // fontSize: rspF(2),
+    fontSize: rspF(1.9),
     color: colors.black,
-    lineHeight: rspF(2.1),
+    lineHeight: rspF(1.96),
     letterSpacing: 1,
   },
   promptAnswer: {
     fontFamily: fontFamily.light,
-    // fontSize: rspF(1.66),
-    fontSize: rspF(2),
+    fontSize: rspF(1.66),
     color: colors.black,
-    lineHeight: rspF(2.8),
+    lineHeight: rspF(2.18),
     letterSpacing: 1,
   },
 
@@ -1360,8 +1544,6 @@ const styles = StyleSheet.create({
     height: rspW(15.2),
     borderRadius: rspW(7.52),
     backgroundColor: "#ffffffa3",
-    // backgroundColor: "#ffffff3d",
-
     alignItems: "center",
     justifyContent: "center",
   },
@@ -1441,9 +1623,7 @@ const styles = StyleSheet.create({
   featuresCont: {
     position: "absolute",
     alignSelf: "center",
-    // bottom: rspH(0.6),
-    bottom: rspH(1.6),
-
+    bottom: rspH(0.6),
   },
 
   filterCont: {

@@ -187,3 +187,11 @@ export { default as WatchingTVGray } from "./images/FinalIcons/Interests/Interes
 export { default as WaterSkiingGray } from "./images/FinalIcons/Interests/InterestsGray/Waterski.png";
 export { default as WritingGray } from "./images/FinalIcons/Interests/InterestsGray/Writing.png";
 export { default as YogaGray } from "./images/FinalIcons/Interests/InterestsGray/Yoga.png";
+
+
+export { default as LangIcon } from "./images/FinalIcons/Language/LangIcon.png";
+
+export { default as City } from "./images/FinalIcons/BioIcons/City.png";
+export { default as Education } from "./images/FinalIcons/BioIcons/Education.png";
+export { default as Politics } from "./images/FinalIcons/BioIcons/Politics.png";
+

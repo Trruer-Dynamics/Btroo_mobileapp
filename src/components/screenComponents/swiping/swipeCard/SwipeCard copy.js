@@ -63,8 +63,6 @@ import FastImage from "react-native-fast-image";
 import _ from "lodash";
 import * as icn from "../../../../assets";
 import { initialWindowMetrics } from "react-native-safe-area-context";
-import HScroller from "../../../formComponents/HScroller";
-import HScrollerMulti from "../../../formComponents/HScrollerMulti";
 const insets = initialWindowMetrics.insets;
 
 // Profile cropped image Carousel item
@@ -222,12 +220,6 @@ const SwipeCard = ({
   const [promptsmodalVisible, setpromptsmodalVisible] = useState(false);
 
   const [pets_list, setpets_list] = useState([]);
-
-  const [lis1, setlis1] = useState([])
-  const [lis2, setlis2] = useState([])
-  const [lis3, setlis3] = useState([])
-  
-
   const [interest_list, setinterest_list] = useState([]);
 
   // Carousel States and Function
@@ -493,92 +485,23 @@ const SwipeCard = ({
   }, [is_network_connected]);
 
   useLayoutEffect(() => {
-
-    console.log("card",card_itm)
-
-    
-
-let tmp_lis1 = [[icn.City,card_itm?.city.split(",")[0]],
-[icn.Education,card_itm?.education],
-]
-
-if (card_itm?.politics) {
-  tmp_lis1.push([icn.Politics,card_itm?.politics])
-}
-
-console.log("tmp_lis1",tmp_lis1)
-setlis1(tmp_lis1)
-
-let usr_pets = card_itm?.pets.map((v) => [
-  v.petmaster.id,
-  v.petmaster.iconblue,
-  v.petmaster.pets,
-]);
-
-
-let usr_pets2 = []
-
-for (const pet of usr_pets) {
-  let img1 = pet[2];
-  if (pet[2].split(" ").length > 1) {
-    let itmlis = pet[2].split(" ");
-    img1 = itmlis.join("");
-  }
-
-  let imgt = icn[`${img1}Blue`]
-
-  usr_pets2.push(imgt)
-
-}
-
-let tmp_lis2 = []
-if (usr_pets2.length > 0) {
-  let petitm =  {title: 'Pets', values: usr_pets2}
-  tmp_lis2.push(petitm)
-}
-
-let usr_interest = card_itm?.interest.map((v) => [
-  v.interestmaster.id,
-  v.interestmaster.iconblue,
-  v.interestmaster.interest,
-]);
-
-
-
-let usr_ints2 = []
-
-for (const pet of usr_interest) {
-  let img2 = pet[2];
-  if (pet[2].split(" ").length > 1) {
-    let itmlis = pet[2].split(" ");
-    img2 = itmlis.join("");
-  }
-
-  let imgt2 = icn[`${img2}Blue`]
-
-  usr_ints2.push(imgt2)
-
-}
-
-
-let interestitm =   {title: 'Interests', values: usr_ints2}
-
-tmp_lis2.push(interestitm)
-
-setlis2(tmp_lis2)
-
-
-let tmp_lis3 =[[DrinkingNo,card_itm?.drinking ? 'Drinking' : 'Not Drinking'],
-              [SmokingNo,card_itm?.smoking ? 'Smoking' : 'Not Smoking'],
-              [MarijuanaNo,card_itm?.marijuana? 'Drugs' : 'No Drugs']
-              ]
-
-setlis3(tmp_lis3)
-
-
-    
     setprompts(card_itm.publicprompts);
 
+    let usr_interest = card_itm?.interest.map((v) => [
+      v.interestmaster.id,
+      v.interestmaster.iconblue,
+      v.interestmaster.interest,
+    ]);
+
+    setinterest_list(usr_interest);
+
+    let usr_pets = card_itm?.pets.map((v) => [
+      v.petmaster.id,
+      v.petmaster.iconblue,
+      v.petmaster.pets,
+    ]);
+
+    setpets_list(usr_pets);
   }, []);
 
   useEffect(() => {
@@ -599,10 +522,6 @@ setlis3(tmp_lis3)
 
   useLayoutEffect(() => {
     // To show blue circular mask if loaded profile already superliked loggined user
-    
-
-
-
     if (card_itm.profilestatus.profilestatus == 1) {
       setsuper_liked_profile(true);
     }
@@ -660,14 +579,11 @@ setlis3(tmp_lis3)
             >
               <View style={[styles.actionSetCont]}>
                 <FastImage
-                  source={require("../../../../assets/images/Swiping/Actions/FancyU.png")}
+                  source={require("../../../../assets/images/Swiping/Actions/Fancy.png")}
                   style={{
-                    // width: rspW(24),
-                    width: rspW(32),
-
+                    width: rspW(24),
                     height: rspH(12.5),
                   }}
-                  resizeMode="contain"
                 />
               </View>
             </Animated.View>
@@ -932,14 +848,11 @@ setlis3(tmp_lis3)
                         style={styles.actionCont}
                       >
                         <FastImage
-                          source={require("../../../../assets/images/Swiping/Actions/FancyU.png")}
+                          source={require("../../../../assets/images/Swiping/Actions/Fancy.png")}
                           style={{
                             width: rspW(8.46),
-                            // height: rspH(4.3),
-                      height: rspH(4.6),
-
+                            height: rspH(4.3),
                           }}
-                          resizeMode='contain'
                         />
                       </TouchableOpacity>
                     </View>
@@ -1062,7 +975,119 @@ setlis3(tmp_lis3)
                       alignItems: "center",
                     }}
                   >
-                              <HScroller lis={lis1}/>
+                    {/* Profile Details Sub Container */}
+                    <View
+                      style={{
+                        ...styles.profileDetailsSubCont,
+
+                        paddingTop: rspH(0.25),
+                      }}
+                    >
+                      {/* Profile Detail Container */}
+                      <View
+                        style={{
+                          ...styles.profileDetailCont,
+                          ...styles.boxShadowCont,
+                          paddingHorizontal: rspW(3.2),
+                          justifyContent: "center",
+                        }}
+                      >
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "baseline",
+                          }}
+                        >
+                          <FastImage
+                            source={require("../../../../assets/images/Swiping/BioIcons/City.png")}
+                            style={{
+                              width: rspW(6.75),
+                              height: rspH(3),
+                              marginRight: rspW(2),
+                            }}
+                          />
+
+                          <Text
+                            style={styles.profileDetailContNText}
+                            numberOfLines={1}
+                          >
+                            {card_itm?.city?.split(",")[0]?.length > 11
+                              ? card_itm?.city.split(",")[0]?.substring(0, 9) +
+                                "..."
+                              : card_itm?.city.split(",")[0]}
+                          </Text>
+                        </View>
+
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            width: "100%",
+                          }}
+                        >
+                          <FastImage
+                            source={require("../../../../assets/images/Swiping/BioIcons/Education.png")}
+                            style={{
+                              width: rspW(6.75),
+                              height: rspH(3),
+                              marginRight: rspW(2),
+                            }}
+                          />
+
+                          <Text
+                            numberOfLines={1}
+                            style={styles.profileDetailContNText}
+                          >
+                            {/* Undergraduate */}
+                            {card_itm?.education?.length > 11
+                              ? card_itm?.education?.substring(0, 9) + "..."
+                              : card_itm?.education}
+                          </Text>
+                        </View>
+                      </View>
+
+                      <View
+                        style={{
+                          ...styles.profileDetailCont,
+                          ...styles.boxShadowCont,
+                          paddingHorizontal: rspW(3.2),
+                          justifyContent: "center",
+                        }}
+                      >
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <FastImage
+                            source={
+                              card_itm?.drinking ? DrinkingYes : DrinkingNo
+                            }
+                            style={{
+                              ...styles.habitsImage,
+                            }}
+                            resizeMode="contain"
+                          />
+                          <FastImage
+                            source={card_itm?.smoking ? SmokingYes : SmokingNo}
+                            style={{
+                              ...styles.habitsImage,
+                            }}
+                            resizeMode="contain"
+                          />
+                          <FastImage
+                            source={
+                              card_itm?.marijuana ? MarijuanaYes : MarijuanaNo
+                            }
+                            style={{
+                              ...styles.habitsImage,
+                            }}
+                            resizeMode="contain"
+                          />
+                        </View>
+                      </View>
+                    </View>
 
                     {/* Public Prompt */}
                     {prompts.length > 0 && (
@@ -1078,25 +1103,43 @@ setlis3(tmp_lis3)
                       </View>
                     )}
 
-<View style={{marginTop: rspH(0.6)}}>
-            <HScrollerMulti
-                
-                lis={
-              //     [
-              //    {title: 'Pets', values: [icn.HamsterBlue,icn.AntBlue]},
-              //     {title: 'Interests', values: [
-              //       icn.BeachBlue
-              //       ,icn.BaseballBlue,
-              //       icn.AnimalCareBlue,
-                  
-              //     ]},
-              // ]
-              lis2
-              }/>
+                    <View
+                      style={{
+                        ...styles.profileDetailsSubCont2,
 
-</View>
-
-                    
+                        ...styles.boxShadowCont,
+                      }}
+                    >
+                      <Text style={styles.profileDetailContHeading}>
+                        Interests
+                      </Text>
+                      <TouchableWithoutFeedback>
+                        <ScrollView
+                          decelerationRate={0.9}
+                          bounces={true}
+                          style={{ marginTop: rspH(0.8) }}
+                          horizontal
+                          showsHorizontalScrollIndicator={false}
+                          scrollEventThrottle={1}
+                        >
+                          {interest_list.map((img, idx) => {
+                            let img1 = img[2];
+                            if (img[2].split(" ").length > 1) {
+                              let itmlis = img[2].split(" ");
+                              img1 = itmlis.join("");
+                            }
+                            return (
+                              <FastImage
+                                key={idx}
+                                source={icn[`${img1}Blue`]}
+                                style={styles.interestImage}
+                                resizeMode="cover"
+                              />
+                            );
+                          })}
+                        </ScrollView>
+                      </TouchableWithoutFeedback>
+                    </View>
 
                     {/* Public Prompt */}
                     {prompts.length > 0 && (
@@ -1111,11 +1154,6 @@ setlis3(tmp_lis3)
                         </Text>
                       </View>
                     )}
-
-<HScroller
-      title={'Habits'}
-      lis={lis3}
-          />
 
                     {pets_list.length > 0 && (
                       <View
@@ -1258,9 +1296,7 @@ const styles = StyleSheet.create({
   featuresCont: {
     position: "absolute",
     alignSelf: "center",
-    // bottom: rspH(0.6),
-    bottom: rspH(1.6),
-
+    bottom: rspH(0.6),
   },
 
   filterCont: {
@@ -1282,9 +1318,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // marginBottom: rspH(1.1),
-    marginBottom: rspH(1.5),
-
+    marginBottom: rspH(1.1),
   },
 
   actionCont: {
@@ -1378,44 +1412,25 @@ const styles = StyleSheet.create({
 
   // Prompt
   promptContainer: {
-    // width: rspW(82),
-    // marginBottom: rspH(3),
-    // paddingHorizontal: rspW(2.5),
-
-        // width: rspW(82),
-        width: rspW(85),
-        // marginTop: rspH(2.35),
-        marginVertical: rspH(1.4),
-        // marginBottom: rspH(-1.7),
-        paddingHorizontal: rspW(2.5),
-        paddingVertical: rspH(0.6),
+    width: rspW(82),
+    marginBottom: rspH(3),
+    paddingHorizontal: rspW(2.5),
   },
-
   promptQuestionContainer: {
-    // marginBottom: rspH(0.6),
-    marginBottom: rspH(2.1),
-
+    marginBottom: rspH(0.6),
   },
   promptQuestion: {
     fontFamily: fontFamily.bold,
-    fontSize: rspF(2),
-    // fontSize: rspF(2),
+    fontSize: rspF(1.9),
     color: colors.black,
-    lineHeight: rspF(2.1),
+    lineHeight: rspF(1.96),
     letterSpacing: 1,
   },
   promptAnswer: {
-    // fontFamily: fontFamily.light,
-    // fontSize: rspF(1.66),
-    // color: colors.black,
-    // lineHeight: rspF(2.18),
-    // letterSpacing: 1,
-
     fontFamily: fontFamily.light,
-    // fontSize: rspF(1.66),
-    fontSize: rspF(2),
+    fontSize: rspF(1.66),
     color: colors.black,
-    lineHeight: rspF(2.8),
+    lineHeight: rspF(2.18),
     letterSpacing: 1,
   },
   habitsImage: {
