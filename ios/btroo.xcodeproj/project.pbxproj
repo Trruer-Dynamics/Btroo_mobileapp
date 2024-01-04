@@ -538,7 +538,7 @@
 				CODE_SIGN_ENTITLEMENTS = btroo/btroo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_TEAM = ZT3K26AH82;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = btroo/Info.plist;
@@ -571,7 +571,7 @@
 				CODE_SIGN_ENTITLEMENTS = btroo/btroo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 104;
+				CURRENT_PROJECT_VERSION = 110;
 				DEVELOPMENT_TEAM = ZT3K26AH82;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = btroo/Info.plist;
