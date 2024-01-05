@@ -223,10 +223,9 @@ const SwipeCard = ({
 
   const [pets_list, setpets_list] = useState([]);
 
-  const [lis1, setlis1] = useState([])
-  const [lis2, setlis2] = useState([])
-  const [lis3, setlis3] = useState([])
-  
+  const [lis1, setlis1] = useState([]);
+  const [lis2, setlis2] = useState([]);
+  const [lis3, setlis3] = useState([]);
 
   const [interest_list, setinterest_list] = useState([]);
 
@@ -493,92 +492,90 @@ const SwipeCard = ({
   }, [is_network_connected]);
 
   useLayoutEffect(() => {
+    console.log("card", card_itm);
 
-    console.log("card",card_itm)
+    let tmp_lis1 = [
+      [icn.City, card_itm?.city.split(",")[0]],
+      [icn.Education, card_itm?.education],
+    ];
 
-    
-
-let tmp_lis1 = [[icn.City,card_itm?.city.split(",")[0]],
-[icn.Education,card_itm?.education],
-]
-
-if (card_itm?.politics) {
-  tmp_lis1.push([icn.Politics,card_itm?.politics])
-}
-
-console.log("tmp_lis1",tmp_lis1)
-setlis1(tmp_lis1)
-
-let usr_pets = card_itm?.pets.map((v) => [
-  v.petmaster.id,
-  v.petmaster.iconblue,
-  v.petmaster.pets,
-]);
+    if (card_itm?.politics) {
+      tmp_lis1.push([icn.Politics, card_itm?.politics]);
+    }
 
 
-let usr_pets2 = []
+    setlis1(tmp_lis1);
 
-for (const pet of usr_pets) {
-  let img1 = pet[2];
-  if (pet[2].split(" ").length > 1) {
-    let itmlis = pet[2].split(" ");
-    img1 = itmlis.join("");
-  }
+    let usr_pets = card_itm?.pets.map((v) => [
+      v.petmaster.id,
+      v.petmaster.iconblue,
+      v.petmaster.pets,
+    ]);
 
-  let imgt = icn[`${img1}Blue`]
+    let usr_pets2 = [];
 
-  usr_pets2.push(imgt)
+    for (const pet of usr_pets) {
+      let img1 = pet[2];
+      if (pet[2].split(" ").length > 1) {
+        let itmlis = pet[2].split(" ");
+        img1 = itmlis.join("");
+      }
 
-}
+      let imgt = icn[`${img1}Blue`];
 
-let tmp_lis2 = []
-if (usr_pets2.length > 0) {
-  let petitm =  {title: 'Pets', values: usr_pets2}
-  tmp_lis2.push(petitm)
-}
+      usr_pets2.push(imgt);
+    }
 
-let usr_interest = card_itm?.interest.map((v) => [
-  v.interestmaster.id,
-  v.interestmaster.iconblue,
-  v.interestmaster.interest,
-]);
+    let tmp_lis2 = [];
+    if (usr_pets2.length > 0) {
+      let petitm = { title: "Pets", values: usr_pets2 };
+      tmp_lis2.push(petitm);
+    }
 
+    let usr_interest = card_itm?.interest.map((v) => [
+      v.interestmaster.id,
+      v.interestmaster.iconblue,
+      v.interestmaster.interest,
+    ]);
 
+    let usr_ints2 = [];
 
-let usr_ints2 = []
+    for (const intr of usr_interest) {
+      let img2 = intr[2];
+      if (intr[2].split(" ").length > 1) {
+        let itmlis = intr[2].split(" ");
+        img2 = itmlis.join("");
+      }
 
-for (const pet of usr_interest) {
-  let img2 = pet[2];
-  if (pet[2].split(" ").length > 1) {
-    let itmlis = pet[2].split(" ");
-    img2 = itmlis.join("");
-  }
+      let imgt2 = icn[`${img2}Blue`];
 
-  let imgt2 = icn[`${img2}Blue`]
+      usr_ints2.push(imgt2);
+    }
 
-  usr_ints2.push(imgt2)
+    let interestitm = { title: "Interests", values: usr_ints2 };
 
-}
+    tmp_lis2.push(interestitm);
 
+    setlis2(tmp_lis2);
 
-let interestitm =   {title: 'Interests', values: usr_ints2}
+    let tmp_lis3 = [
+      [
+        card_itm?.drinking ? DrinkingYes : DrinkingNo,
+        card_itm?.drinking ? "Drinking" : "Not Drinking",
+      ],
+      [
+        card_itm?.smoking ? SmokingYes : SmokingNo,
+        card_itm?.smoking ? "Smoking" : "Not Smoking",
+      ],
+      [
+        card_itm?.marijuana ? MarijuanaYes : MarijuanaNo,
+        card_itm?.marijuana ? "Drugs" : "No Drugs",
+      ],
+    ];
 
-tmp_lis2.push(interestitm)
+    setlis3(tmp_lis3);
 
-setlis2(tmp_lis2)
-
-
-let tmp_lis3 =[[DrinkingNo,card_itm?.drinking ? 'Drinking' : 'Not Drinking'],
-              [SmokingNo,card_itm?.smoking ? 'Smoking' : 'Not Smoking'],
-              [MarijuanaNo,card_itm?.marijuana? 'Drugs' : 'No Drugs']
-              ]
-
-setlis3(tmp_lis3)
-
-
-    
     setprompts(card_itm.publicprompts);
-
   }, []);
 
   useEffect(() => {
@@ -599,7 +596,6 @@ setlis3(tmp_lis3)
 
   useLayoutEffect(() => {
     // To show blue circular mask if loaded profile already superliked loggined user
-    
 
 
 
@@ -936,10 +932,9 @@ setlis3(tmp_lis3)
                           style={{
                             width: rspW(8.46),
                             // height: rspH(4.3),
-                      height: rspH(4.6),
-
+                            height: rspH(4.6),
                           }}
-                          resizeMode='contain'
+                          resizeMode="contain"
                         />
                       </TouchableOpacity>
                     </View>
@@ -1062,7 +1057,7 @@ setlis3(tmp_lis3)
                       alignItems: "center",
                     }}
                   >
-                              <HScroller lis={lis1}/>
+                    <HScroller lis={lis1} />
 
                     {/* Public Prompt */}
                     {prompts.length > 0 && (
@@ -1078,25 +1073,22 @@ setlis3(tmp_lis3)
                       </View>
                     )}
 
-<View style={{marginTop: rspH(0.6)}}>
-            <HScrollerMulti
-                
-                lis={
-              //     [
-              //    {title: 'Pets', values: [icn.HamsterBlue,icn.AntBlue]},
-              //     {title: 'Interests', values: [
-              //       icn.BeachBlue
-              //       ,icn.BaseballBlue,
-              //       icn.AnimalCareBlue,
-                  
-              //     ]},
-              // ]
-              lis2
-              }/>
+                    <View style={{ marginTop: rspH(0.6) }}>
+                      <HScrollerMulti
+                        lis={
+                          //     [
+                          //    {title: 'Pets', values: [icn.HamsterBlue,icn.AntBlue]},
+                          //     {title: 'Interests', values: [
+                          //       icn.BeachBlue
+                          //       ,icn.BaseballBlue,
+                          //       icn.AnimalCareBlue,
 
-</View>
-
-                    
+                          //     ]},
+                          // ]
+                          lis2
+                        }
+                      />
+                    </View>
 
                     {/* Public Prompt */}
                     {prompts.length > 0 && (
@@ -1112,52 +1104,9 @@ setlis3(tmp_lis3)
                       </View>
                     )}
 
-<HScroller
-      title={'Habits'}
-      lis={lis3}
-          />
-
-                    {pets_list.length > 0 && (
-                      <View
-                        style={{
-                          ...styles.profileDetailsSubCont2,
-                          ...styles.boxShadowCont,
-                          width: rspW(39.5),
-                          marginLeft: rspW(2),
-                          alignSelf: "flex-start",
-                          marginBottom:
-                            Platform.OS == "ios" ? rspH(1.6) : rspH(2.6),
-                        }}
-                      >
-                        <Text style={styles.profileDetailContHeading}>
-                          Pets
-                        </Text>
-                        <ScrollView
-                          decelerationRate={0.9}
-                          bounces={true}
-                          style={{ marginTop: rspH(0.8) }}
-                          horizontal
-                          scrollEventThrottle={1}
-                          showsHorizontalScrollIndicator={false}
-                        >
-                          {pets_list.map((img, indx) => {
-                            let img1 = img[2];
-                            if (img[2].split(" ").length > 1) {
-                              let itmlis = img[2].split(" ");
-                              img1 = itmlis.join("");
-                            }
-                            return (
-                              <FastImage
-                                key={indx}
-                                source={icn[`${img1}Blue`]}
-                                style={styles.interestImage}
-                                resizeMode="cover"
-                              />
-                            );
-                          })}
-                        </ScrollView>
-                      </View>
-                    )}
+                    <View style={{ marginBottom: rspH(0.8) }}>
+                      <HScroller title={"Habits"} lis={lis3} />
+                    </View>
                   </View>
                 </TouchableOpacityB>
               </ScrollView>
@@ -1260,7 +1209,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // bottom: rspH(0.6),
     bottom: rspH(1.6),
-
   },
 
   filterCont: {
@@ -1284,7 +1232,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // marginBottom: rspH(1.1),
     marginBottom: rspH(1.5),
-
   },
 
   actionCont: {
@@ -1321,7 +1268,7 @@ const styles = StyleSheet.create({
 
   profileDetailsCont: {
     alignSelf: "center",
-    width: rspW(86),
+    width: rspW(88),
     height: scrn_height,
     marginTop: rspH(3.4),
   },
@@ -1382,19 +1329,18 @@ const styles = StyleSheet.create({
     // marginBottom: rspH(3),
     // paddingHorizontal: rspW(2.5),
 
-        // width: rspW(82),
-        width: rspW(85),
-        // marginTop: rspH(2.35),
-        marginVertical: rspH(1.4),
-        // marginBottom: rspH(-1.7),
-        paddingHorizontal: rspW(2.5),
-        paddingVertical: rspH(0.6),
+    // width: rspW(82),
+    width: rspW(85),
+    // marginTop: rspH(2.35),
+    marginVertical: rspH(1.4),
+    // marginBottom: rspH(-1.7),
+    paddingHorizontal: rspW(4.5),
+    paddingVertical: rspH(0.6),
   },
 
   promptQuestionContainer: {
     // marginBottom: rspH(0.6),
     marginBottom: rspH(2.1),
-
   },
   promptQuestion: {
     fontFamily: fontFamily.bold,

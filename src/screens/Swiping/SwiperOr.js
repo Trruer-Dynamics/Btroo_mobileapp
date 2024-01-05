@@ -548,6 +548,7 @@ const SwiperOr = ({}) => {
         let resp_data = resp.data.data;
         let resp_code = resp.data.code;
 
+        console.log("resp_data",resp_data)
         let tmp = [...profiles];
         if (resp_code == 204) {
           setempty_profile_call(true);

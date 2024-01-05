@@ -3,7 +3,7 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
+  // ScrollView,
   SafeAreaView,
   Platform,
   FlatList,
@@ -55,6 +55,10 @@ import {
   setSwipeTut,
 } from "../../store/reducers/tutorial/tutorial";
 import { UserContext } from "../../context/user";
+import { ScrollView } from "react-native-gesture-handler";
+import HScroller from "../../components/formComponents/HScroller";
+import HScrollerMulti from "../../components/formComponents/HScrollerMulti";
+import HScrollerWS from "../../components/formComponents/HScrollerWS";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item[0]);
@@ -82,14 +86,20 @@ const ProfileMain = ({ navigation }) => {
     "Urdu",
   ]);
 
+  const [lis1, setlis1] = useState([]);
+  const [lis2, setlis2] = useState([]);
+  const [lis3, setlis3] = useState([]);
+  const [lis4, setlis4] = useState([]);
+
   const dispatch = useDispatch();
 
   const { appStateVisible } = useContext(UserContext);
 
   const scrollViewRef = useRef();
-  const scrollPetsRef = useRef();
-  const scrollInterestsRef = useRef();
-  const scrollLanguagesRef = useRef();
+  const scrollLis1Ref = useRef();
+  const scrollLis2Ref = useRef();
+  const scrollLis3Ref = useRef();
+  const scrollLis4Ref = useRef();
 
   const profile_data = useSelector(
     (state) => state.authentication.profile_data
@@ -255,9 +265,10 @@ const ProfileMain = ({ navigation }) => {
     React.useCallback(() => {
       // Do something when the screen is focused
       scrollViewRef.current.scrollTo({ y: 0, animated: true });
-      scrollPetsRef.current.scrollTo({ y: 0, animated: true });
-      scrollInterestsRef.current.scrollTo({ y: 0, animated: true });
-      scrollLanguagesRef.current.scrollTo({ y: 0, animated: true });
+      scrollLis1Ref.current.scrollTo({ y: 0, animated: true });
+      scrollLis2Ref.current.scrollTo({ y: 0, animated: true });
+      scrollLis3Ref.current.scrollTo({ y: 0, animated: true });
+      scrollLis4Ref.current.scrollTo({ y: 0, animated: true });
 
       let dob = new Date(profile_data?.userprofile?.dob);
 
@@ -270,11 +281,16 @@ const ProfileMain = ({ navigation }) => {
       }
       setage(age);
 
-      let lang_tmp = profile_data?.userlanguages.map(
-        (v) => v?.languagemaster?.language
-      );
+      let tmp_lis1 = [
+        [icn.Cake, age],
+        [icn.City, profile_data?.userprofile?.city.split(",")[0]],
+        [icn.Education, profile_data?.userprofile?.education],
+        [icn.Occupation, profile_data?.userprofile?.occupation],
+        [icn.PHeight, profile_data?.userprofile?.height],
+        [icn.Politics, profile_data?.userprofile?.politicalinclination],
+      ];
 
-      setlanguages(lang_tmp);
+      setlis1(tmp_lis1);
 
       let usr_pets = profile_data?.userpets.map((v) => [
         v.petmaster.id,
@@ -282,7 +298,25 @@ const ProfileMain = ({ navigation }) => {
         v.petmaster.pets,
       ]);
 
-      setpets_list(usr_pets);
+      let usr_pets2 = [];
+
+      for (const pet of usr_pets) {
+        let img1 = pet[2];
+        if (pet[2].split(" ").length > 1) {
+          let itmlis = pet[2].split(" ");
+          img1 = itmlis.join("");
+        }
+
+        let imgt = icn[`${img1}Blue`];
+
+        usr_pets2.push(imgt);
+      }
+
+      let tmp_lis2 = [];
+      if (usr_pets2.length > 0) {
+        let petitm = { title: "Pets", values: usr_pets2 };
+        tmp_lis2.push(petitm);
+      }
 
       let usr_interest = profile_data?.userinterest.map((v) => [
         v.interestmaster.id,
@@ -291,6 +325,58 @@ const ProfileMain = ({ navigation }) => {
       ]);
 
       setinterest_list(usr_interest);
+
+      let usr_ints2 = [];
+
+      for (const intr of usr_interest) {
+        let img2 = intr[2];
+        if (intr[2].split(" ").length > 1) {
+          let itmlis = intr[2].split(" ");
+          img2 = itmlis.join("");
+        }
+
+        let imgt2 = icn[`${img2}Blue`];
+
+        usr_ints2.push(imgt2);
+      }
+
+      let interestitm = { title: "Interests", values: usr_ints2 };
+
+      tmp_lis2.push(interestitm);
+
+      setlis2(tmp_lis2);
+
+      let tmp_lis3 = [
+        [
+          profile_data?.userprofile?.drinking ? DrinkingYes : DrinkingNo,
+          profile_data?.userprofile?.drinking ? "Drinking" : "Not Drinking",
+        ],
+        [
+          profile_data?.userprofile?.smoking ? SmokingYes : SmokingNo,
+          profile_data?.userprofile?.smoking ? "Smoking" : "Not Smoking",
+        ],
+        [
+          profile_data?.userprofile?.marijuana ? MarijuanaYes : MarijuanaNo,
+          profile_data?.userprofile?.marijuana ? "Drugs" : "No Drugs",
+        ],
+      ];
+
+      setlis3(tmp_lis3);
+
+      let lang_tmp = profile_data?.userlanguages.map(
+        (v) => v?.languagemaster?.language
+      );
+
+      setlanguages(lang_tmp);
+
+      let tmp_lis4 = [];
+      for (const lng of lang_tmp) {
+        let lngitm = [icn.LangIcon, lng];
+        tmp_lis4.push(lngitm);
+      }
+
+      setlis4(tmp_lis4);
+
       let actv = profile_imgs.filter((v) => v[0] != "");
       setactive_prf_imgs(actv);
 
@@ -339,16 +425,16 @@ const ProfileMain = ({ navigation }) => {
         >
           <FormHeader
             title={
-              (profile_data?.userprofile?.name.split(" ")[0].length < 9
+              profile_data?.userprofile?.name.split(" ")[0].length < 12
                 ? profile_data?.userprofile?.name.split(" ")[0]
-                : truncateStr(
-                    profile_data?.userprofile?.name.split(" ")[0],
-                    8
-                  )) +
-              ", " +
-              age
+                : truncateStr(profile_data?.userprofile?.name.split(" ")[0], 11)
+              //      +
+              // ", " +
+              // age
             }
+            paraTp={0}
             para=""
+            
           />
         </View>
         <View
@@ -398,8 +484,23 @@ const ProfileMain = ({ navigation }) => {
                 opacity: is_network_connected ? 1 : 0.4,
               }}
             >
+              <Text style={styles.editBtnTxt}>Edit </Text>
+            </TouchableOpacity>
+
+            {/* <TouchableOpacity
+              onPress={() => {
+                if (is_network_connected) {
+                  navigation.navigate("EditProfile");
+                }
+              }}
+              style={{
+                ...styles.editBtn,
+                opacity: is_network_connected ? 1 : 0.4,
+              }}
+            >
               <Text style={styles.editBtnTxt}>Edit My Profile</Text>
             </TouchableOpacity>
+             */}
           </View>
 
           <ScrollView
@@ -416,131 +517,11 @@ const ProfileMain = ({ navigation }) => {
                 paddingTop: rspH(1.2),
                 paddingBottom: rspH(9.64),
 
-                width: scrn_width / 1.2,
+                // width: scrn_width / 1.2,
+                width: rspW(88),
               }}
             >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  paddingHorizontal: 1,
-                }}
-              >
-                {/* Profile Detail Container */}
-                <View
-                  style={{
-                    ...styles.profileDetailCont,
-                    ...styles.boxShadowCont,
-                    paddingHorizontal: rspW(3.2),
-                    justifyContent: "center",
-                  }}
-                >
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <FastImage
-                      source={require("../../assets/images/Swiping/BioIcons/City.png")}
-                      style={{
-                        width: rspW(6.75),
-                        height: rspH(3),
-                        marginRight: rspW(2),
-                      }}
-                    />
-                    <Text
-                      style={styles.profileDetailContNText}
-                      numberOfLines={1}
-                    >
-                      {/* {profile_data?.userprofile?.city?.length > 11
-                        ? profile_data?.userprofile?.city.substring(0, 8) +
-                          "..."
-                        : profile_data?.userprofile?.city} */}
-
-                      {profile_data?.userprofile?.city.split(",")[0]?.length >
-                      11
-                        ? profile_data?.userprofile?.city
-                            .split(",")[0]
-                            .substring(0, 9) + "..."
-                        : profile_data?.userprofile?.city.split(",")[0]}
-                    </Text>
-                  </View>
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      width: "100%",
-                    }}
-                  >
-                    <FastImage
-                      source={require("../../assets/images/Swiping/BioIcons/Education.png")}
-                      style={{
-                        width: rspW(6.75),
-                        height: rspH(3),
-                        marginRight: rspW(2),
-                      }}
-                    />
-                    <Text
-                      numberOfLines={1}
-                      style={styles.profileDetailContNText}
-                    >
-                      {profile_data?.userprofile?.education?.length > 11
-                        ? profile_data?.userprofile?.education?.substring(
-                            0,
-                            9
-                          ) + "..."
-                        : profile_data?.userprofile?.education}
-                    </Text>
-                  </View>
-                </View>
-
-                <View
-                  style={{
-                    ...styles.profileDetailCont,
-                    ...styles.boxShadowCont,
-                    paddingHorizontal: rspW(3.2),
-                    justifyContent: "center",
-                  }}
-                >
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <FastImage
-                      source={
-                        profile_data?.userprofile?.drinking
-                          ? DrinkingYes
-                          : DrinkingNo
-                      }
-                      style={{
-                        ...styles.habitsImage,
-                      }}
-                      resizeMode="contain"
-                    />
-                    <FastImage
-                      source={
-                        profile_data?.userprofile?.smoking
-                          ? SmokingYes
-                          : SmokingNo
-                      }
-                      style={{
-                        ...styles.habitsImage,
-                      }}
-                      resizeMode="contain"
-                    />
-                    <FastImage
-                      source={
-                        profile_data?.userprofile?.marijuana
-                          ? MarijuanaYes
-                          : MarijuanaNo
-                      }
-                      style={{
-                        ...styles.habitsImage,
-                      }}
-                      resizeMode="contain"
-                    />
-                  </View>
-                </View>
-              </View>
+              <HScroller lisref={scrollLis1Ref} lis={lis1} />
 
               {profile_data?.userpublicprompts?.length > 0 && (
                 <View style={styles.promptContainer}>
@@ -555,117 +536,8 @@ const ProfileMain = ({ navigation }) => {
                 </View>
               )}
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  paddingHorizontal: 1,
-                }}
-              >
-                <View
-                  style={{
-                    ...styles.profileDetailCont,
-                    ...styles.boxShadowCont,
-                    paddingHorizontal: rspW(3.2),
-                    justifyContent: "center",
-                    marginTop: rspH(2.9),
-                  }}
-                >
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      paddingBottom: rspH(0.4),
-                    }}
-                  >
-                    <FastImage
-                      source={require("../../assets/images/Swiping/BioIcons/Occupation.png")}
-                      style={{
-                        width: rspW(6.75),
-                        height: rspH(3),
-                        marginRight: rspW(2),
-                      }}
-                    />
-                    <Text
-                      style={{ ...styles.profileDetailContNText }}
-                      numberOfLines={1}
-                    >
-                      {profile_data?.userprofile?.occupation?.length > 11
-                        ? profile_data?.userprofile?.occupation.substring(
-                            0,
-                            9
-                          ) + "..."
-                        : profile_data?.userprofile?.occupation}
-                    </Text>
-                  </View>
-
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      width: "100%",
-                      alignItems: "center",
-                    }}
-                  >
-                    <FastImage
-                      source={require("../../assets/images/Swiping/BioIcons/Height.png")}
-                      style={{
-                        width: rspW(6.75),
-                        height: rspH(3),
-                        marginRight: rspW(2),
-                      }}
-                    />
-                    <Text style={{ ...styles.profileDetailContNText }}>
-                      {profile_data?.userprofile?.height} cms
-                    </Text>
-                  </View>
-                </View>
-
-                <View
-                  style={{
-                    ...styles.profileDetailsSubCont2,
-                    ...styles.boxShadowCont,
-                    width: rspW(39.5),
-                  }}
-                >
-                  <Text style={styles.profileDetailContHeading}>Pets</Text>
-                  <ScrollView
-                    decelerationRate={0.9}
-                    bounces={true}
-                    style={{ marginTop: rspH(0.8) }}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    ref={scrollPetsRef}
-                  >
-                    {pets_list.map((img, indx) => {
-                      let img1 = img[2];
-                      if (img[2].split(" ").length > 1) {
-                        let itmlis = img[2].split(" ");
-                        img1 = itmlis.join("");
-                      }
-
-                      return (
-                        <View key={indx}>
-                          {Platform.OS == "ios" ? (
-                            <Image
-                              source={icn[`${img1}Blue`]}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                          ) : (
-                            <FastImage
-                              useLastImageAsDefaultSource
-                              // source={{ uri: img1 }}
-                              source={icn[`${img1}Blue`]}
-                              style={styles.interestImage}
-                              resizeMode="cover"
-                            />
-                          )}
-                        </View>
-                      );
-                    })}
-                  </ScrollView>
-                </View>
+              <View style={{ marginTop: rspH(0.6) }}>
+                <HScrollerMulti lisref={scrollLis2Ref} lis={lis2} />
               </View>
 
               {profile_data?.userpublicprompts?.length > 0 && (
@@ -681,7 +553,7 @@ const ProfileMain = ({ navigation }) => {
                 </View>
               )}
 
-              <View
+              {/* <View
                 style={{
                   ...styles.profileDetailsSubCont2,
                   ...styles.boxShadowCont,
@@ -722,6 +594,10 @@ const ProfileMain = ({ navigation }) => {
                     );
                   })}
                 </ScrollView>
+              </View> */}
+
+              <View style={{ marginBottom: rspH(0.6) }}>
+                <HScroller lisref={scrollLis3Ref} title={"Habits"} lis={lis3} />
               </View>
 
               {profile_data?.userprivateprompts?.length > 0 && (
@@ -737,7 +613,7 @@ const ProfileMain = ({ navigation }) => {
                 </View>
               )}
 
-              <View
+              {/* <View
                 style={{
                   ...styles.profileDetailsSubCont2,
                   ...styles.boxShadowCont,
@@ -780,7 +656,13 @@ const ProfileMain = ({ navigation }) => {
                     );
                   })}
                 </ScrollView>
-              </View>
+              </View> */}
+
+              <HScrollerWS
+                lisref={scrollLis4Ref}
+                title={"Languages"}
+                lis={lis4}
+              />
 
               {profile_data?.userprivateprompts?.length > 0 && (
                 <View style={styles.promptContainer}>
@@ -874,7 +756,9 @@ const styles = StyleSheet.create({
 
   editBtn: {
     justifyContent: "center",
-    backgroundColor: colors.white,
+    backgroundColor: colors.blue,
+    paddingTop: rspH(0.1),
+    marginTop: rspH(0.4),
     paddingHorizontal: rspW(5),
     height: rspH(3),
     shadowOffset: {
@@ -882,19 +766,20 @@ const styles = StyleSheet.create({
       height: 2,
     },
 
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 6,
+    // shadowOpacity: 0.25,
+    // shadowRadius: 4,
+    // elevation: 6,
     borderRadius: rspW(3.1),
-    borderWidth: 1,
-    borderColor: colors.blue,
+    // borderWidth: 1,
+    // borderColor: colors.blue,
   },
   editBtnTxt: {
     textAlign: "center",
     fontFamily: fontFamily.bold,
-    color: colors.black,
+    color: colors.white,
     fontSize: rspF(1.76),
-    lineHeight: rspF(1.78),
+    // lineHeight: rspF(1.78),
+    lineHeight: rspF(2),
     letterSpacing: 1,
   },
 
@@ -947,28 +832,70 @@ const styles = StyleSheet.create({
   },
 
   // Prompt
+  // promptContainer: {
+  //   width: rspW(82),
+  //   marginTop: rspH(2.35),
+  //   marginBottom: rspH(-1.7),
+  //   paddingHorizontal: rspW(2.5),
+  //   paddingVertical: rspH(0.6),
+  // },
+  // promptQuestionContainer: {
+  //   marginBottom: rspH(0.6),
+  // },
+  // promptQuestion: {
+  //   fontFamily: fontFamily.bold,
+  //   fontSize: rspF(1.66),
+  //   color: colors.black,
+  //   lineHeight: rspF(2.1),
+  //   letterSpacing: 1,
+  // },
+  // promptAnswer: {
+  //   fontFamily: fontFamily.light,
+  //   fontSize: rspF(1.66),
+  //   color: colors.black,
+  //   lineHeight: rspF(2.18),
+  //   letterSpacing: 1,
+  // },
+
+  // Prompt
   promptContainer: {
-    width: rspW(82),
-    marginTop: rspH(2.35),
-    marginBottom: rspH(-1.7),
-    paddingHorizontal: rspW(2.5),
+    // width: rspW(82),
+    // marginBottom: rspH(3),
+    // paddingHorizontal: rspW(2.5),
+
+    // width: rspW(82),
+    width: rspW(85),
+    // marginTop: rspH(2.35),
+    marginVertical: rspH(1.4),
+    // marginBottom: rspH(-1.7),
+    paddingHorizontal: rspW(4.5),
     paddingVertical: rspH(0.6),
   },
+
   promptQuestionContainer: {
-    marginBottom: rspH(0.6),
+    // marginBottom: rspH(0.6),
+    marginBottom: rspH(2.1),
   },
   promptQuestion: {
     fontFamily: fontFamily.bold,
-    fontSize: rspF(1.66),
+    fontSize: rspF(2),
+    // fontSize: rspF(2),
     color: colors.black,
     lineHeight: rspF(2.1),
     letterSpacing: 1,
   },
   promptAnswer: {
+    // fontFamily: fontFamily.light,
+    // fontSize: rspF(1.66),
+    // color: colors.black,
+    // lineHeight: rspF(2.18),
+    // letterSpacing: 1,
+
     fontFamily: fontFamily.light,
-    fontSize: rspF(1.66),
+    // fontSize: rspF(1.66),
+    fontSize: rspF(2),
     color: colors.black,
-    lineHeight: rspF(2.18),
+    lineHeight: rspF(2.8),
     letterSpacing: 1,
   },
 

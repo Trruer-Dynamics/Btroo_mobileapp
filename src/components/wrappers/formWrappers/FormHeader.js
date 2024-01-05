@@ -22,9 +22,12 @@ const FormHeader = ({
   onPress = null,
   extraHeadingStyle = {},
   onRightPress = null,
+  showPara=true,
 }) => {
   return (
-    <View style={{ alignItems: "center" }}>
+    <View style={{ alignItems: "center" ,
+    
+    }}>
       <View
         style={{
           flexDirection: "row",

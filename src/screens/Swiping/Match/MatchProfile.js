@@ -52,6 +52,9 @@ import { setCurrentScreen } from "../../../store/reducers/screen/screen";
 import { UserContext } from "../../../context/user";
 import OffflineAlert from "../../../components/functions/OfflineAlert";
 import * as icn from "../../../assets";
+import HScroller from "../../../components/formComponents/HScroller";
+import HScrollerWS from "../../../components/formComponents/HScrollerWS";
+import HScrollerMulti from "../../../components/formComponents/HScrollerMulti";
 
 const Item2 = ({ item }) => {
   let imageUri = String(item.image);
@@ -71,6 +74,12 @@ const MatchProfile = ({ route }) => {
   const navigation = useNavigation();
   const { profile } = route.params;
   const [loading, setloading] = useState(false);
+
+  const [lis1, setlis1] = useState([]);
+  const [lis2, setlis2] = useState([]);
+  const [lis3, setlis3] = useState([]);
+  const [lis4, setlis4] = useState([]);
+
   const is_network_connected = useSelector(
     (state) => state.authentication.is_network_connected
   );
@@ -209,27 +218,105 @@ const MatchProfile = ({ route }) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      let lang_tmp = profile?.userprofile?.language.map(
-        (v) => v?.languagemaster?.language
-      );
+      let tmp_lis1 = [
+        [icn.Cake, profile_data?.userprofile?.age],
+        [icn.City, profile_data?.userprofile?.city.split(",")[0]],
+        [icn.Education, profile_data?.userprofile?.education],
+        [icn.Occupation, profile_data?.userprofile?.occupation],
+        [icn.PHeight, profile_data?.userprofile?.height],
+        [icn.Politics, profile_data?.userprofile?.politicalinclination],
+      ];
 
-      setlanguages(lang_tmp);
+      setlis1(tmp_lis1);
 
-      let usr_interest = profile?.userprofile?.interest.map((v) => [
-        v.id,
+      let usr_pets = profile_data?.userpets.map((v) => [
+        v.petmaster.id,
+        v.petmaster.iconblue,
+        v.petmaster.pets,
+      ]);
+
+      setpets_list(usr_pets);
+
+      let usr_pets2 = [];
+
+      if (profile.prof_rvl) {
+        for (const pet of usr_pets) {
+          let img1 = pet[2];
+          if (pet[2].split(" ").length > 1) {
+            let itmlis = pet[2].split(" ");
+            img1 = itmlis.join("");
+          }
+
+          let imgt = icn[`${img1}Blue`];
+
+          usr_pets2.push(imgt);
+        }
+      }
+
+      let tmp_lis2 = [];
+      if (usr_pets2.length > 0) {
+        let petitm = { title: "Pets", values: usr_pets2 };
+        tmp_lis2.push(petitm);
+      }
+
+      let usr_interest = profile_data?.userinterest.map((v) => [
+        v.interestmaster.id,
         v.interestmaster.iconblue,
         v.interestmaster.interest,
       ]);
 
       setinterest_list(usr_interest);
 
-      let usr_pets = profile?.userprofile?.pets.map((v) => [
-        v.id,
-        v.petmaster.iconblue,
-        v.petmaster.pets,
-      ]);
+      let usr_ints2 = [];
 
-      setpets_list(usr_pets);
+      for (const intr of usr_interest) {
+        let img2 = intr[2];
+        if (intr[2].split(" ").length > 1) {
+          let itmlis = intr[2].split(" ");
+          img2 = itmlis.join("");
+        }
+
+        let imgt2 = icn[`${img2}Blue`];
+
+        usr_ints2.push(imgt2);
+      }
+
+      let interestitm = { title: "Interests", values: usr_ints2 };
+
+      tmp_lis2.push(interestitm);
+
+      setlis2(tmp_lis2);
+
+      let tmp_lis3 = [
+        [
+          profile_data?.userprofile?.drinking ? DrinkingYes : DrinkingNo,
+          profile_data?.userprofile?.drinking ? "Drinking" : "Not Drinking",
+        ],
+        [
+          profile_data?.userprofile?.smoking ? SmokingYes : SmokingNo,
+          profile_data?.userprofile?.smoking ? "Smoking" : "Not Smoking",
+        ],
+        [
+          profile_data?.userprofile?.marijuana ? MarijuanaYes : MarijuanaNo,
+          profile_data?.userprofile?.marijuana ? "Drugs" : "No Drugs",
+        ],
+      ];
+
+      setlis3(tmp_lis3);
+
+      let lang_tmp = profile_data?.userlanguages.map(
+        (v) => v?.languagemaster?.language
+      );
+
+      setlanguages(lang_tmp);
+
+      let tmp_lis4 = [];
+      for (const lng of lang_tmp) {
+        let lngitm = [icn.LangIcon, lng];
+        tmp_lis4.push(lngitm);
+      }
+
+      setlis4(tmp_lis4);
 
       let pub_prompt = profile?.userprofile?.publicprompts;
       setpup_prmt(pub_prompt);
@@ -287,13 +374,14 @@ const MatchProfile = ({ route }) => {
           >
             <FormHeader
               title={
-                (profile?.userprofile?.name.split(" ")[0].length < 8
+                (profile?.userprofile?.name.split(" ")[0].length < 12
                   ? profile?.userprofile?.name.split(" ")[0]
-                  : truncateStr(profile?.userprofile?.name.split(" ")[0], 7)) +
-                ", " +
-                profile?.userprofile?.age
+                  : truncateStr(profile?.userprofile?.name.split(" ")[0], 11))
+                
               }
               para=""
+            paraTp={0}
+
               left_icon={true}
               onPress={() => {
                 if (!profile.prof_rvl) {
@@ -345,7 +433,13 @@ const MatchProfile = ({ route }) => {
               }}
             >
               <View>
-                <View style={{ alignSelf: "center" }}>
+                <View
+                  style={{
+                    alignSelf: "center",
+                    width: scrn_width,
+                    alignItems: "center",
+                  }}
+                >
                   {profile.prof_rvl ? (
                     <TouchableOpacity
                       onPress={() => {
@@ -370,12 +464,20 @@ const MatchProfile = ({ route }) => {
                     />
                   )}
                   <TouchableOpacity
+                    style={{ flexDirection: "row", alignItems: "center" }}
                     onPress={() => {
                       if (leftHrs < 24) {
                         setextendVisible(true);
                       }
                     }}
                   >
+                    <ADIcon
+                      style={{ marginRight: rspW(1.4) }}
+                      size={rspF(1.8)}
+                      name={"clockcircle"}
+                      color={colors.blue}
+                    />
+
                     <Text
                       style={{
                         ...styles.leftTime,
@@ -401,125 +503,19 @@ const MatchProfile = ({ route }) => {
                 style={{
                   paddingTop: rspH(1.2),
                   paddingBottom: profile.prof_rvl ? rspH(5) : rspH(0.5),
-                  width: scrn_width / 1.2,
+
+                  // width: scrn_width / 1.2,
+                  width: rspW(88),
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    paddingHorizontal: 1,
-                  }}
-                >
-                  {/* Profile Detail Container */}
-                  <View
-                    style={{
-                      ...styles.profileDetailCont,
-                      ...styles.boxShadowCont,
-                      paddingHorizontal: rspW(3.2),
-                      justifyContent: "center",
-                    }}
-                  >
-                    <View
-                      style={{ flexDirection: "row", alignItems: "center" }}
-                    >
-                      <FastImage
-                        source={require("../../../assets/images/Swiping/BioIcons/City.png")}
-                        style={{
-                          width: rspW(6.75),
-                          height: rspH(3),
-                          marginRight: rspW(2),
-                        }}
-                      />
-                      <Text
-                        style={styles.profileDetailContNText}
-                        numberOfLines={1}
-                      >
-                        {profile?.userprofile?.city.split(",")[0]?.length > 11
-                          ? profile?.userprofile?.city
-                              .split(",")[0]
-                              .substring(0, 9) + "..."
-                          : profile?.userprofile?.city.split(",")[0]}
-                      </Text>
-                    </View>
+                <HScroller lis={lis1} />
 
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        width: "100%",
-                      }}
-                    >
-                      <FastImage
-                        source={require("../../../assets/images/Swiping/BioIcons/Education.png")}
-                        style={{
-                          width: rspW(6.75),
-                          height: rspH(3),
-                          marginRight: rspW(2),
-                        }}
-                      />
-                      <Text
-                        numberOfLines={1}
-                        style={styles.profileDetailContNText}
-                      >
-                        {profile?.userprofile?.education?.length > 11
-                          ? profile?.userprofile?.education?.substring(0, 9) +
-                            "..."
-                          : profile?.userprofile?.education}
-                      </Text>
-                    </View>
-                  </View>
+                {!profile.prof_rvl && (
+                  <HScrollerWS title={"Languages"} lis={lis4} />
+                )}
 
-                  <View
-                    style={{
-                      ...styles.profileDetailCont,
-                      ...styles.boxShadowCont,
-                      paddingHorizontal: rspW(3.2),
-                      justifyContent: "center",
-                    }}
-                  >
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <FastImage
-                        source={
-                          profile?.userprofile?.drinking
-                            ? DrinkingYes
-                            : DrinkingNo
-                        }
-                        style={{
-                          ...styles.habitsImage,
-                        }}
-                        resizeMode="contain"
-                      />
-                      <FastImage
-                        source={
-                          profile?.userprofile?.smoking ? SmokingYes : SmokingNo
-                        }
-                        style={{
-                          ...styles.habitsImage,
-                        }}
-                        resizeMode="contain"
-                      />
-                      <FastImage
-                        source={
-                          profile?.userprofile?.marijuana
-                            ? MarijuanaYes
-                            : MarijuanaNo
-                        }
-                        style={{
-                          ...styles.habitsImage,
-                        }}
-                        resizeMode="contain"
-                      />
-                    </View>
-                  </View>
-                </View>
-
-                {prv_prmt?.length > 0 && (
+                {/* Private 1 */}
+                {!profile.prof_rvl && prv_prmt?.length > 0 && (
                   <View style={styles.promptContainer}>
                     <View style={styles.promptQuestionContainer}>
                       <Text style={styles.promptQuestion}>
@@ -532,119 +528,7 @@ const MatchProfile = ({ route }) => {
                   </View>
                 )}
 
-                {profile.prof_rvl && (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      paddingHorizontal: 1,
-                    }}
-                  >
-                    <View
-                      style={{
-                        ...styles.profileDetailCont,
-                        ...styles.boxShadowCont,
-                        paddingHorizontal: rspW(3.2),
-                        justifyContent: "center",
-                        marginTop: rspH(2.9),
-                      }}
-                    >
-                      <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
-                      >
-                        <FastImage
-                          source={require("../../../assets/images/Swiping/BioIcons/Occupation.png")}
-                          style={{
-                            width: rspW(6.75),
-                            height: rspH(3),
-                            marginRight: rspW(2),
-                          }}
-                        />
-                        <Text
-                          style={{ ...styles.profileDetailContNText }}
-                          numberOfLines={1}
-                        >
-                          {profile?.userprofile?.occupation?.length > 11
-                            ? profile?.userprofile?.occupation.substring(0, 9) +
-                              "..."
-                            : profile?.userprofile?.occupation}
-                        </Text>
-                      </View>
-
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          width: "100%",
-                          alignItems: "center",
-                        }}
-                      >
-                        <FastImage
-                          source={require("../../../assets/images/Swiping/BioIcons/Height.png")}
-                          style={{
-                            width: rspW(6.75),
-                            height: rspH(3),
-                            marginRight: rspW(2),
-                          }}
-                        />
-                        <Text style={{ ...styles.profileDetailContNText }}>
-                          {profile?.userprofile?.height} cms
-                        </Text>
-                      </View>
-                    </View>
-
-                    <View
-                      style={{
-                        ...styles.profileDetailsSubCont2,
-                        ...styles.boxShadowCont,
-                        width: rspW(39.5),
-                      }}
-                    >
-                      <Text style={styles.profileDetailContHeading}>Pets</Text>
-                      <ScrollView
-                        decelerationRate={0.9}
-                        bounces={true}
-                        style={{ marginTop: rspH(0.8) }}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                      >
-                        {pets_list.map((img, indx) => {
-                          let img1 = img[2];
-                          if (img[2].split(" ").length > 1) {
-                            let itmlis = img[2].split(" ");
-                            img1 = itmlis.join("");
-                          }
-                          return (
-                            // <FastImage
-                            //   key={indx}
-                            //   source={icn[`${img1}Blue`]}
-                            //   style={styles.interestImage}
-                            //   resizeMode="cover"
-                            // />
-                            <View key={indx}>
-                              {Platform.OS == "ios" ? (
-                                <Image
-                                  source={icn[`${img1}Blue`]}
-                                  style={styles.interestImage}
-                                  resizeMode="cover"
-                                />
-                              ) : (
-                                <FastImage
-                                  useLastImageAsDefaultSource
-                                  // source={{ uri: img1 }}
-                                  source={icn[`${img1}Blue`]}
-                                  style={styles.interestImage}
-                                  resizeMode="cover"
-                                />
-                              )}
-                            </View>
-                          );
-                        })}
-                      </ScrollView>
-                    </View>
-                  </View>
-                )}
-
+{/* Public 1 */}
                 {profile.prof_rvl && pup_prmt?.length > 0 && (
                   <View style={styles.promptContainer}>
                     <View style={styles.promptQuestionContainer}>
@@ -658,39 +542,12 @@ const MatchProfile = ({ route }) => {
                   </View>
                 )}
 
-                <View
-                  style={{
-                    ...styles.profileDetailsSubCont2,
-                    ...styles.boxShadowCont,
-                  }}
-                >
-                  <Text style={styles.profileDetailContHeading}>Interests</Text>
-                  <ScrollView
-                    decelerationRate={0.9}
-                    bounces={true}
-                    style={{ marginTop: rspH(0.8) }}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                  >
-                    {interest_list.map((img, idx) => {
-                      let img1 = img[2];
-                      if (img[2].split(" ").length > 1) {
-                        let itmlis = img[2].split(" ");
-                        img1 = itmlis.join("");
-                      }
-                      return (
-                        <FastImage
-                          key={idx}
-                          source={icn[`${img1}Blue`]}
-                          style={styles.interestImage}
-                          resizeMode="cover"
-                        />
-                      );
-                    })}
-                  </ScrollView>
+                <View style={{ marginTop: rspH(0.6) }}>
+                  <HScrollerMulti lis={lis2} />
                 </View>
 
-                {prv_prmt?.length > 0 && (
+{/* Private 2 */}
+                {!profile.prof_rvl && prv_prmt?.length > 0 && (
                   <View style={styles.promptContainer}>
                     <View style={styles.promptQuestionContainer}>
                       <Text style={styles.promptQuestion}>
@@ -703,114 +560,8 @@ const MatchProfile = ({ route }) => {
                   </View>
                 )}
 
-                {!profile.prof_rvl && (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      paddingHorizontal: 1,
-                    }}
-                  >
-                    <View
-                      style={{
-                        ...styles.profileDetailCont,
-                        ...styles.boxShadowCont,
-                        paddingHorizontal: rspW(3.2),
-                        justifyContent: "center",
-                        marginTop: rspH(2.9),
-                      }}
-                    >
-                      <View
-                        style={{ flexDirection: "row", alignItems: "center" }}
-                      >
-                        <FastImage
-                          source={require("../../../assets/images/Swiping/BioIcons/Occupation.png")}
-                          style={{
-                            width: rspW(6.75),
-                            height: rspH(3),
-                            marginRight: rspW(2),
-                          }}
-                        />
-                        <Text
-                          style={{ ...styles.profileDetailContNText }}
-                          numberOfLines={1}
-                        >
-                          {profile?.userprofile?.occupation?.length > 11
-                            ? profile?.userprofile?.occupation.substring(0, 9) +
-                              "..."
-                            : profile?.userprofile?.occupation}
-                        </Text>
-                      </View>
-
-                      <View
-                        style={{
-                          flexDirection: "row",
-                          alignItems: "center",
-                          width: "100%",
-                          alignItems: "center",
-                        }}
-                      >
-                        <FastImage
-                          source={require("../../../assets/images/Swiping/BioIcons/Height.png")}
-                          style={{
-                            width: rspW(6.75),
-                            height: rspH(3),
-                            marginRight: rspW(2),
-                          }}
-                        />
-                        <Text style={{ ...styles.profileDetailContNText }}>
-                          {profile?.userprofile?.height} cms
-                        </Text>
-                      </View>
-                    </View>
-                  </View>
-                )}
-
-                <View
-                  style={{
-                    ...styles.profileDetailsSubCont2,
-                    ...styles.boxShadowCont,
-                    paddingBottom: rspH(1.67),
-                  }}
-                >
-                  <Text style={styles.profileDetailContHeading}>Languages</Text>
-                  <ScrollView
-                    decelerationRate={0.9}
-                    bounces={true}
-                    style={{ marginTop: rspH(0.8) }}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                  >
-                    {languages.map((lng, idx) => {
-                      return (
-                        <View
-                          key={idx}
-                          style={{
-                            paddingHorizontal: 15,
-                            borderRadius: 5,
-                            marginRight: 10,
-                            backgroundColor: colors.lightBlue + "99",
-                            backgroundColor: colors.blue,
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Text
-                            style={{
-                              ...styles.profileDetailContHeading,
-                              color: colors.white,
-                              textAlign: "center",
-                            }}
-                          >
-                            {lng}
-                          </Text>
-                        </View>
-                      );
-                    })}
-                  </ScrollView>
-                </View>
-
-                {profile.prof_rvl && pup_prmt?.length > 0 && (
+{/* Public 2 */}
+{profile.prof_rvl && pup_prmt?.length > 0 && (
                   <View style={styles.promptContainer}>
                     <View style={styles.promptQuestionContainer}>
                       <Text style={styles.promptQuestion}>
@@ -823,7 +574,44 @@ const MatchProfile = ({ route }) => {
                   </View>
                 )}
 
-                {/* {profile.matchType == "New Match" && !profile.prof_rvl && ( */}
+                <View style={{ marginBottom: rspH(0.6) }}>
+                  <HScroller title={"Habits"} lis={lis3} />
+                </View>
+
+                {/* Private 1 */}
+                {profile.prof_rvl && prv_prmt?.length > 0 && (
+                  <View style={styles.promptContainer}>
+                    <View style={styles.promptQuestionContainer}>
+                      <Text style={styles.promptQuestion}>
+                        {prv_prmt[0].question}
+                      </Text>
+                    </View>
+                    <Text style={styles.promptAnswer}>
+                      {prv_prmt[0].answer}
+                    </Text>
+                  </View>
+                )}
+
+{profile.prof_rvl && (
+                  <HScrollerWS title={"Languages"} lis={lis4} />
+                )}
+
+                
+                {/* Private 2 */}
+                {profile.prof_rvl && prv_prmt?.length > 0 && (
+                  <View style={styles.promptContainer}>
+                    <View style={styles.promptQuestionContainer}>
+                      <Text style={styles.promptQuestion}>
+                        {prv_prmt[1].question}
+                      </Text>
+                    </View>
+                    <Text style={styles.promptAnswer}>
+                      {prv_prmt[1].answer}
+                    </Text>
+                  </View>
+                )}
+
+                
                 {!route.params?.fromchat && (
                   <FormWrapperFooter
                     containerStyle={{
@@ -1020,28 +808,70 @@ const styles = StyleSheet.create({
   },
 
   // Prompt
+  // promptContainer: {
+  //   width: rspW(82),
+  //   marginTop: rspH(2.35),
+  //   marginBottom: rspH(-1.7),
+  //   paddingHorizontal: rspW(2.5),
+  //   paddingVertical: rspH(0.6),
+  // },
+  // promptQuestionContainer: {
+  //   marginBottom: rspH(0.6),
+  // },
+  // promptQuestion: {
+  //   fontFamily: fontFamily.bold,
+  //   fontSize: rspF(1.66),
+  //   color: colors.black,
+  //   lineHeight: rspF(1.96),
+  //   letterSpacing: 1,
+  // },
+  // promptAnswer: {
+  //   fontFamily: fontFamily.light,
+  //   fontSize: rspF(1.66),
+  //   color: colors.black,
+  //   lineHeight: rspF(2.18),
+  //   letterSpacing: 1,
+  // },
+
+  // Prompt
   promptContainer: {
-    width: rspW(82),
-    marginTop: rspH(2.35),
-    marginBottom: rspH(-1.7),
-    paddingHorizontal: rspW(2.5),
+    // width: rspW(82),
+    // marginBottom: rspH(3),
+    // paddingHorizontal: rspW(2.5),
+
+    // width: rspW(82),
+    width: rspW(85),
+    // marginTop: rspH(2.35),
+    marginVertical: rspH(1.4),
+    // marginBottom: rspH(-1.7),
+    paddingHorizontal: rspW(4.5),
     paddingVertical: rspH(0.6),
   },
+
   promptQuestionContainer: {
-    marginBottom: rspH(0.6),
+    // marginBottom: rspH(0.6),
+    marginBottom: rspH(2.1),
   },
   promptQuestion: {
     fontFamily: fontFamily.bold,
-    fontSize: rspF(1.66),
+    fontSize: rspF(2),
+    // fontSize: rspF(2),
     color: colors.black,
-    lineHeight: rspF(1.96),
+    lineHeight: rspF(2.1),
     letterSpacing: 1,
   },
   promptAnswer: {
+    // fontFamily: fontFamily.light,
+    // fontSize: rspF(1.66),
+    // color: colors.black,
+    // lineHeight: rspF(2.18),
+    // letterSpacing: 1,
+
     fontFamily: fontFamily.light,
-    fontSize: rspF(1.66),
+    // fontSize: rspF(1.66),
+    fontSize: rspF(2),
     color: colors.black,
-    lineHeight: rspF(2.18),
+    lineHeight: rspF(2.8),
     letterSpacing: 1,
   },
 

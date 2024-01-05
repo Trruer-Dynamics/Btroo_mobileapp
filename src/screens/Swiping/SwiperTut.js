@@ -400,7 +400,7 @@ const SwiperTut = ({ repeat_tut }) => {
         }
       }
       setswipe_tut_l(swipe_tut || repeat_tut);
-      setstep(4);
+      setstep(0);
     }, [gender_lis, profile_data])
   );
 
@@ -520,11 +520,9 @@ const SwiperTut = ({ repeat_tut }) => {
                   <FastImage
                     source={require("../../assets/images/Swiping/Actions/FancyU.png")}
                     style={{
-                      
                       width: rspW(8.46),
                       // height: rspH(4.4),
                       height: rspH(4.6),
-
                     }}
                     resizeMode="contain"
                   />
@@ -622,21 +620,29 @@ const SwiperTut = ({ repeat_tut }) => {
           >
             {/* Profile Details Sub Container */}
             <View style={{ alignItems: "center" }}>
-              
-                <HScroller
-
-                lis={[[require("../../assets/images/Swiping/BioIcons/City.png"),'Madrid'],
-              [require("../../assets/images/Swiping/BioIcons/Education.png"),'Undergraduate'],
-              [require("../../assets/images/Swiping/BioIcons/Politics.png"),'Conservative']
-              ]}/>
-      
+              <HScroller
+                lis={[
+                  [
+                    require("../../assets/images/Swiping/BioIcons/City.png"),
+                    "Madrid",
+                  ],
+                  [
+                    require("../../assets/images/Swiping/BioIcons/Education.png"),
+                    "Undergraduate",
+                  ],
+                  [
+                    require("../../assets/images/Swiping/BioIcons/Politics.png"),
+                    "Conservative",
+                  ],
+                ]}
+              />
 
               {/* Public Prompt */}
               {showPrompts && (
                 <View style={styles.promptContainer}>
                   <View style={styles.promptQuestionContainer}>
                     <Text style={styles.promptQuestion}>
-                       The sign of a great first date
+                      The sign of a great first date
                     </Text>
                   </View>
                   <Text style={styles.promptAnswer}>
@@ -652,32 +658,33 @@ const SwiperTut = ({ repeat_tut }) => {
                   </Text>
                 </View>
               )}
-            
-<View style={{marginTop: rspH(0.6)}}>
-            <HScrollerMulti
-                
-                lis={[
-                  {title: 'Pets', values: [HamsterBlue,AntBlue]},
-                  {title: 'Interests', values: [
-                    BeachBlue
-                    ,BaseballBlue,
-                  AnimalCareBlue,
-                  BasketballBlue,
-                  BicyclingBlue,
-                  BoatingBlue,
-                  BowlingBlue,
-                  BoxingBlue,
-                  CampingBlue,
-                  CookingBlue,
-                  ChessBlue,
-                  DancingBlue,
-                  DrivingBlue,
-                  DrumsBlue,
 
-                  ]},
-              ]}/>
-
-</View>
+              <View style={{ marginTop: rspH(0.6) }}>
+                <HScrollerMulti
+                  lis={[
+                    { title: "Pets", values: [HamsterBlue, AntBlue] },
+                    {
+                      title: "Interests",
+                      values: [
+                        BeachBlue,
+                        BaseballBlue,
+                        AnimalCareBlue,
+                        BasketballBlue,
+                        BicyclingBlue,
+                        BoatingBlue,
+                        BowlingBlue,
+                        BoxingBlue,
+                        CampingBlue,
+                        CookingBlue,
+                        ChessBlue,
+                        DancingBlue,
+                        DrivingBlue,
+                        DrumsBlue,
+                      ],
+                    },
+                  ]}
+                />
+              </View>
 
               {/* Public Prompt */}
               {showPrompts && (
@@ -704,26 +711,24 @@ const SwiperTut = ({ repeat_tut }) => {
                 </View>
               )}
 
-<View style={{marginTop: rspH(0.6),
-marginBottom: 
-Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
-}}>
+              <View
+                style={{
+                  marginTop: rspH(0.6),
+                  marginBottom:
+                    Platform.OS == "ios" ? rspH(1) : insets.bottom / 1.5,
+                }}
+              >
                 <HScroller
-                title={'Habits'}
-                lis={[[DrinkingNo,'Not Drinking'],
-              [SmokingNo,'Not Smoking'],
-              [MarijuanaNo,'No Drugs']
-              ]}/>
+                  title={"Habits"}
+                  lis={[
+                    [DrinkingNo, "Not Drinking"],
+                    [SmokingNo, "Not Smoking"],
+                    [MarijuanaNo, "No Drugs"],
+                  ]}
+                />
+              </View>
 
-</View>
-        
-
-            
-              
-     
-
-             
-                {/* <HScrollerWS
+              {/* <HScrollerWS
                 title={'Languages'}
                 lis={[[LangIcon,'English'],
               [LangIcon,'Hebrew'],
@@ -731,18 +736,6 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
               [LangIcon,'French'],
               [LangIcon,'Chinese'],
               ]}/> */}
-   
-              
-
-              
-
-              
-
-              
-
-              
-
-              
             </View>
           </ScrollView>
         </View>
@@ -773,11 +766,9 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                           <FastImage
                             source={require("../../assets/images/Swiping/Actions/FancyU.png")}
                             style={{
-                      
                               width: rspW(8.46),
                               // height: rspH(4.4),
                               height: rspH(4.6),
-        
                             }}
                             resizeMode="contain"
                           />
@@ -792,9 +783,9 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                         position: "absolute",
                         top:
                           Platform.OS == "ios"
-                            // ? rspH(35.5) + insets.top
-                            // : rspH(35.5) + insets.bottom / 1.2,
-                            ? rspH(34.2) + insets.top
+                            ? // ? rspH(35.5) + insets.top
+                              // : rspH(35.5) + insets.bottom / 1.2,
+                              rspH(34.2) + insets.top
                             : rspH(34.3) + insets.bottom / 1.2,
                         left: rspW(42.1),
                       }}
@@ -819,9 +810,9 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                         position: "absolute",
                         top:
                           Platform.OS == "ios"
-                            // ? rspH(35.5) + insets.top
-                            // : rspH(35.5) + insets.bottom / 1.2,
-                            ? rspH(34.2) + insets.top
+                            ? // ? rspH(35.5) + insets.top
+                              // : rspH(35.5) + insets.bottom / 1.2,
+                              rspH(34.2) + insets.top
                             : rspH(34.3) + insets.bottom / 1.2,
                         left: rspW(18),
                       }}
@@ -929,14 +920,11 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                                 <FastImage
                                   source={require("../../assets/images/Swiping/Actions/FancyU.png")}
                                   style={{
-                      
                                     width: rspW(8.46),
                                     // height: rspH(4.4),
                                     height: rspH(4.6),
-              
                                   }}
                                   resizeMode="contain"
-                                  
                                 />
                               </TouchableOpacity>
                             </View>
@@ -1075,65 +1063,81 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                             paddingVertical: rspH(1.8),
                           }}
                         >
-                         
-
                           <HScroller
+                            lis={[
+                              [
+                                require("../../assets/images/Swiping/BioIcons/City.png"),
+                                "Madrid",
+                              ],
+                              [
+                                require("../../assets/images/Swiping/BioIcons/Education.png"),
+                                "Undergraduate",
+                              ],
+                              [
+                                require("../../assets/images/Swiping/BioIcons/Politics.png"),
+                                "Conservative",
+                              ],
+                            ]}
+                          />
 
-                lis={[[require("../../assets/images/Swiping/BioIcons/City.png"),'Madrid'],
-              [require("../../assets/images/Swiping/BioIcons/Education.png"),'Undergraduate'],
-              [require("../../assets/images/Swiping/BioIcons/Politics.png"),'Conservative']
-              ]}/>
+                          {/* Public Prompt */}
+                          {showPrompts && (
+                            <View
+                              style={{
+                                ...styles.promptContainer,
+                                paddingHorizontal: rspW(5),
+                              }}
+                            >
+                              <View style={styles.promptQuestionContainer}>
+                                <Text style={styles.promptQuestion}>
+                                  The sign of a great first date
+                                </Text>
+                              </View>
+                              <Text style={styles.promptAnswer}>
+                                A great first date is when you feel like you’ve
+                                met your soulmate, and you can’t believe how
+                                lucky you are. It’s when you make each other
+                                laugh so hard that your stomach hurts, and you
+                                tease each other with playful banter. It’s when
+                                you open up about your hopes, fears, and
+                                secrets, and you feel a deep bond. It’s when you
+                                kiss goodnight, and you feel butterflies in your
+                                stomach. A great first date is when you text
+                                each other right after, and you can’t wait for
+                                the next one. 😉
+                              </Text>
+                            </View>
+                          )}
 
-
-
- {/* Public Prompt */}
- {showPrompts && (
-                <View style={styles.promptContainer}>
-                  <View style={styles.promptQuestionContainer}>
-                    <Text style={styles.promptQuestion}>
-                       The sign of a great first date
-                    </Text>
-                  </View>
-                  <Text style={styles.promptAnswer}>
-                    A great first date is when you feel like you’ve met your
-                    soulmate, and you can’t believe how lucky you are. It’s when
-                    you make each other laugh so hard that your stomach hurts,
-                    and you tease each other with playful banter. It’s when you
-                    open up about your hopes, fears, and secrets, and you feel a
-                    deep bond. It’s when you kiss goodnight, and you feel
-                    butterflies in your stomach. A great first date is when you
-                    text each other right after, and you can’t wait for the next
-                    one. 😉
-                  </Text>
-                </View>
-              )}
-                          
-
-                          <View style={{marginTop: rspH(0.6)}}>
-            <HScrollerMulti
-                
-                lis={[
-                  {title: 'Pets', values: [HamsterBlue,AntBlue]},
-                  {title: 'Interests', values: [
-                    BeachBlue
-                    ,BaseballBlue,
-                  AnimalCareBlue,
-                  BasketballBlue,
-                  BicyclingBlue,
-                  BoatingBlue,
-                  BowlingBlue,
-                  BoxingBlue,
-                  CampingBlue,
-                  CookingBlue,
-                  ChessBlue,
-                  DancingBlue,
-                  DrivingBlue,
-                  DrumsBlue,
-
-                  ]},
-              ]}/>
-
-</View>
+                          <View style={{ marginTop: rspH(0.6) }}>
+                            <HScrollerMulti
+                              lis={[
+                                {
+                                  title: "Pets",
+                                  values: [HamsterBlue, AntBlue],
+                                },
+                                {
+                                  title: "Interests",
+                                  values: [
+                                    BeachBlue,
+                                    BaseballBlue,
+                                    AnimalCareBlue,
+                                    BasketballBlue,
+                                    BicyclingBlue,
+                                    BoatingBlue,
+                                    BowlingBlue,
+                                    BoxingBlue,
+                                    CampingBlue,
+                                    CookingBlue,
+                                    ChessBlue,
+                                    DancingBlue,
+                                    DrivingBlue,
+                                    DrumsBlue,
+                                  ],
+                                },
+                              ]}
+                            />
+                          </View>
 
                           {/* Public Prompt */}
 
@@ -1161,17 +1165,16 @@ Platform.OS == 'ios' ?  rspH(1): insets.bottom/1.5 ,
                             </Text>
                           </View>
 
-                          <View style={{marginTop: rspH(0.6)
-}}>
-                <HScroller
-                title={'Habits'}
-                lis={[[SmokingNo,'Not Drinking'],
-              [SmokingNo,'Not Smoking'],
-              [MarijuanaNo,'No Drugs']
-              ]}/>
-
-</View>
-
+                          <View style={{ marginTop: rspH(0.6) }}>
+                            <HScroller
+                              title={"Habits"}
+                              lis={[
+                                [SmokingNo, "Not Drinking"],
+                                [SmokingNo, "Not Smoking"],
+                                [MarijuanaNo, "No Drugs"],
+                              ]}
+                            />
+                          </View>
                         </View>
                       </ScrollView>
                     </View>
@@ -1235,7 +1238,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // marginBottom: rspH(1.1),
     marginBottom: rspH(1.5),
-
   },
 
   // Full Page Carousel
@@ -1259,7 +1261,6 @@ const styles = StyleSheet.create({
     width: rspW(88),
     // marginTop: rspH(3.4),
     marginTop: rspH(2.5),
-
   },
   profileDetailsSubCont: {
     width: rspW(82),
@@ -1319,14 +1320,12 @@ const styles = StyleSheet.create({
     // marginTop: rspH(2.35),
     marginVertical: rspH(1.4),
     // marginBottom: rspH(-1.7),
-    paddingHorizontal: rspW(2.5),
+    paddingHorizontal: rspW(4.5),
     paddingVertical: rspH(0.6),
-
   },
   promptQuestionContainer: {
     // marginBottom: rspH(0.6),
     marginBottom: rspH(2.1),
-
   },
   promptQuestion: {
     fontFamily: fontFamily.bold,
@@ -1443,7 +1442,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     // bottom: rspH(0.6),
     bottom: rspH(1.6),
-
   },
 
   filterCont: {

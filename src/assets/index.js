@@ -188,10 +188,11 @@ export { default as WaterSkiingGray } from "./images/FinalIcons/Interests/Intere
 export { default as WritingGray } from "./images/FinalIcons/Interests/InterestsGray/Writing.png";
 export { default as YogaGray } from "./images/FinalIcons/Interests/InterestsGray/Yoga.png";
 
-
 export { default as LangIcon } from "./images/FinalIcons/Language/LangIcon.png";
 
 export { default as City } from "./images/FinalIcons/BioIcons/City.png";
 export { default as Education } from "./images/FinalIcons/BioIcons/Education.png";
 export { default as Politics } from "./images/FinalIcons/BioIcons/Politics.png";
-
+export { default as Cake } from "./images/FinalIcons/BioIcons/Cake.png";
+export { default as Occupation } from "./images/FinalIcons/BioIcons/Occupation.png";
+export { default as PHeight } from "./images/FinalIcons/BioIcons/Height.png";
